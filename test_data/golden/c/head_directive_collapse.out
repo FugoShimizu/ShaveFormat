@@ -1,0 +1,12 @@
+/**
+ *
+ * @param d
+ * @param s
+ * @param a
+ */
+void f(char *d, const char *s, int a) {
+	// NOLINTNEXTLINE(clang-analyzer-security.insecureAPI.strcpy)
+	if(a) strcpy(d, s);
+	// NOLINTNEXTLINE
+	g(1, s);
+}

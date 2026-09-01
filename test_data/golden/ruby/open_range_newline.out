@@ -1,0 +1,11 @@
+#
+# @param o
+# @param p
+# @return
+def v(o, p)
+	return o * p..(o + 1) * p - 1
+end
+
+b = 1..5
+
+p v(1, 10), b

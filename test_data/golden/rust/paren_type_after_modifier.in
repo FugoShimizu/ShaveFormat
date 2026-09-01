@@ -1,0 +1,11 @@
+fn f<'a>(x: &'a (i32, i32), y: &'a mut (i32, i32), z: &'a ()) {
+    match x {
+        1 => println!("a"),
+        _ => println!("b"),
+    };
+    let v2: i32 = aaaaaaaaaaaaaaa + bbbbbbbbbbbbbbbbbbbbb + ccccccccccccccccccccc + ddddddddddddddddddddd + eeeeeeeeeeeeeeeeeeee + ffffffffff;
+    m!(a, |b| c);
+    m!(1, 2,);
+    let r = &[..=..][..];
+    let s = ..=..=.. ..;
+}

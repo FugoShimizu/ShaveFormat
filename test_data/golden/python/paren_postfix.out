@@ -1,0 +1,14 @@
+x = a[0][1] + "abc"[0]
+
+def f():
+	g
+	x = 1
+	h.i()
+	y = j
+	return x
+
+print(a not in b)
+x = a and b
+
+for i in xs:
+	pass

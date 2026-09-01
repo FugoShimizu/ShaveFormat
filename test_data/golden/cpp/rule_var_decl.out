@@ -1,0 +1,42 @@
+// === rule_var_decl_merge ===
+/**
+ *
+ */
+void Foo() {
+	const int A = 1, B = 2, C = 3;
+	const bool X = false, Y = true;
+}
+
+// === rule_var_decl_split ===
+/**
+ *
+ */
+void Foo() {
+	const int VeryLong11 = 1000, VeryLong22 = 2000, VeryLong33 = 3000, VeryLong44 = 4000, VeryLong55 = 5000, VeryLong66 = 6000;
+	const int VeryLong77 = 7000;
+}
+
+// === rule_var_decl_split_trailing ===
+/**
+ *
+ */
+void Foo() {
+	const int VeryLong11 = 1000, VeryLong22 = 2000, VeryLong33 = 3000, VeryLong44 = 4000, VeryLong55 = 5000, VeryLong66 = 6000;
+	const int VeryLong77 = 7000; // 説明
+}
+
+// === rule_var_decl_trailing_concat ===
+/**
+ *
+ */
+void Foo() {
+	const int A = 1, B = 2, C = 3; // first
+}
+
+// === rule_var_decl_trailing_multi ===
+/**
+ *
+ */
+void Foo() {
+	const int X = 1, Y = 2; // x // y
+}

@@ -1,0 +1,8 @@
+func f() {
+	if c {
+		g()
+	} else { // d1
+		// own
+		h()
+	}
+}

@@ -1,0 +1,13 @@
+x.each do |a|
+	next [a, 1] if a
+	break [a] if a
+	next a if a
+end
+
+#
+# @return
+def g
+	yield [1]
+	yield(1)
+	return super [1]
+end

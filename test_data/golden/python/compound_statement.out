@@ -1,0 +1,55 @@
+class C:
+	def f(self, x):
+		if x > 0:
+			return 1
+		elif x < 0:
+			return -1
+		else:
+			return 0
+
+	def g(self, items):
+		for i in items:
+			print(i)
+		while items:
+			items.pop()
+		with open("a") as fp:
+			fp.read()
+		try:
+			pass
+		except ValueError:
+			pass
+		finally:
+			pass
+		return len(items)
+
+	def h(self, a):
+		if a:
+			b = 1
+			c = 2
+		d = 1, 2
+		e = 4
+		return d
+
+def classify(x):
+	if x < 0:
+		return -1
+	elif x == 0:
+		return 0
+	elif x < 10:
+		return 1
+	return 2
+
+def safe_div(a, b):
+	try:
+		return a / b
+	except ZeroDivisionError:
+		return None
+	finally:
+		cleanup()
+
+class Box:
+	def __init__(self, value):
+		self.value = value
+
+	def double(self):
+		return self.value * 2

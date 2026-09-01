@@ -1,0 +1,15 @@
+class Registry {
+	/**
+	 *
+	 * @param sourceText
+	 * @param position
+	 * @param languageMode
+	 * @param handlers
+	 */
+	void register(String sourceText, int position, int languageMode, java.util.List<Integer> handlers) {
+		if(
+			position < sourceText.length() && sourceText.charAt(position) != '\n' &&
+			shouldBreakAfterExpandedBrace("\n}", sourceText.substring(position), languageMode)
+		) handlers.add(position);
+	}
+}

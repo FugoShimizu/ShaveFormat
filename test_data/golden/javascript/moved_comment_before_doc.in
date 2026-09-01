@@ -1,0 +1,7 @@
+function h() {
+	let a = 1; // x
+	let b = 2; /** b */
+
+	function g(p) { return p; }
+	return g(a + b);
+}

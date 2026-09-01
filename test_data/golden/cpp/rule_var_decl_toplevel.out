@@ -1,0 +1,33 @@
+int A;
+int B;
+int C;
+int D;
+
+namespace Ns {
+	int E;
+	int F;
+}
+
+namespace {
+	int G;
+	int H;
+}
+
+class K {
+	#ifdef Y
+
+	int P;
+	int Q;
+
+	#endif
+
+	int R;
+	int S;
+
+	/**
+	 *
+	 */
+	void M() {
+		const int X = 1, Y = 2;
+	}
+};

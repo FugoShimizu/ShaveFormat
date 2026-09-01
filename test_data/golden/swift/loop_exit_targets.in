@@ -1,0 +1,12 @@
+/// 外側のループから脱出する
+func outerExit()->Void{outer: while true{while true{break outer}}}
+/// 内側のループだけを脱出する
+func innerExit()->Void{while true{inner:while true{break inner}}}
+/// 外側のループを継続する
+func outerContinue()->Void{outer:while true{while true{continue outer}}}
+/// flag が真ならラベル付分岐を脱出する
+func bypass(_ flag:Bool)->Void{outer:if flag{if flag{break outer}
+// 終了
+return}else{
+// 終了
+return}}

@@ -1,0 +1,42 @@
+var x: Int? =
+1
+
+let y = 1
+
+x! = y
+
+let zs: [
+	Int
+]?? = [5]
+
+let e =
+zs??.first
+
+let d =
+zs??[0]
+
+let ws: [
+	Int
+]?! = [7]
+
+let g =
+ws?!.first
+
+let f =
+x! + 1
+
+let h =
+x! << 2
+
+let i =
+x! &<< 3
+
+print(
+	e as Any,
+	d as Any,
+	g as Any,
+	x ?? 0,
+	f,
+	h,
+	i
+)

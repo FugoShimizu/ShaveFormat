@@ -1,0 +1,11 @@
+a {
+	font: bold -apple-system; /* e */
+	b: a b; /* c */
+	c: red blue; /* c */
+	d: a -b; /* c */
+	e: bold /* e */ -apple-system;
+}
+
+b {
+	color: red;
+}

@@ -1,0 +1,9 @@
+/**
+ * 関数ポインタを返す
+ * @param Value 入力値
+ * @return 関数ポインタ
+ */
+void (*Select(int Value))(int Item) {
+	// 空のポインタを返す
+	return 0;
+}

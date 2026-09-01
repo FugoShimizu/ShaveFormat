@@ -1,0 +1,201 @@
+/**
+ * Deeply nested sample
+ * @param isReady branch flag
+ */
+function f(isReady: boolean): void {
+	let x = 0;
+	if(isReady) {
+		x = 0;
+		if(isReady) {
+			x = 1;
+			if(isReady) {
+				x = 2;
+				if(isReady) {
+					x = 3;
+					if(isReady) {
+						x = 4;
+						if(isReady) {
+							x = 5;
+							if(isReady) {
+								x = 6;
+								if(isReady) {
+									x = 7;
+									if(isReady) {
+										x = 8;
+										if(isReady) {
+											x = 9;
+											if(isReady) {
+												x = 10;
+												if(isReady) {
+													x = 11;
+													if(isReady) {
+														x = 12;
+														if(isReady) {
+															x = 13;
+															if(isReady) {
+																x = 14;
+																if(isReady) {
+																	x = 15;
+																	if(isReady) {
+																		x = 16;
+																		if(isReady) {
+																			x = 17;
+																			if(isReady) {
+																				x = 18;
+																				if(isReady) {
+																					x = 19;
+																					if(isReady) {
+																						x = 20;
+																						if(isReady) {
+																							x = 21;
+																							if(isReady) {
+																								x = 22;
+																								if(isReady) {
+																									x = 23;
+																									if(isReady) {
+																										x = 24;
+																										if(isReady) {
+																											x = 25;
+																											if(isReady) {
+																												x = 26;
+																												if(isReady) {
+																													x = 27;
+																													if(isReady) {
+																														x = 28;
+																														if(isReady) {
+																															x = 29;
+																															if(isReady) {
+																																x = 30;
+																																if(isReady) {
+																																	x = 31;
+																																	if(isReady) {
+																																		x = 32;
+																																		if(isReady) {
+																																			x = 33;
+																																			if(isReady) {
+																																				x = 34;
+																																				if(isReady) {
+																																					x = 35;
+																																					if(isReady) {
+																																						x = 36;
+																																						if(isReady) {
+																																							x = 37;
+																																							if(isReady) {
+																																								x = 38;
+																																								if(isReady) {
+																																									x = 39;
+																																									if(isReady) {
+																																										x = 40;
+																																										if(isReady) {
+																																											x = 41;
+																																											if(isReady) {
+																																												x = 42;
+																																												if(isReady) {
+																																													x = 43;
+																																													if(isReady) {
+																																														x = 44;
+																																														if(isReady) {
+																																															x = 45;
+																																															if(isReady) {
+																																																x = 46;
+																																																if(isReady) {
+																																																	x = 47;
+																																																	if(isReady) {
+																																																		x = 48;
+																																																		if(isReady) {
+																																																			x = 49;
+																																																			if(isReady) {
+																																																				x = 50;
+																																																				if(isReady) {
+																																																					x = 51;
+																																																					if(isReady) {
+																																																						x = 52;
+																																																						if(isReady) {
+																																																							x = 53;
+																																																							if(isReady) {
+																																																								x = 54;
+																																																								if(isReady) {
+																																																									x = 55;
+																																																									if(isReady) {
+																																																										x = 56;
+																																																										if(isReady) {
+																																																											x = 57;
+																																																											if(isReady) {
+																																																												x = 58;
+																																																												if(isReady) {
+																																																													x = 59;
+																																																													if(isReady) {
+																																																														x = 60;
+																																																														if(isReady) {
+																																																															x = 61;
+																																																															if(isReady) {
+																																																																x = 62;
+																																																																if(isReady) {
+																																																																	x = 63;
+																																																																	x = 1;
+																																																																}
+																																																															}
+																																																														}
+																																																													}
+																																																												}
+																																																											}
+																																																										}
+																																																									}
+																																																								}
+																																																							}
+																																																						}
+																																																					}
+																																																				}
+																																																			}
+																																																		}
+																																																	}
+																																																}
+																																															}
+																																														}
+																																													}
+																																												}
+																																											}
+																																										}
+																																									}
+																																								}
+																																							}
+																																						}
+																																					}
+																																				}
+																																			}
+																																		}
+																																	}
+																																}
+																															}
+																														}
+																													}
+																												}
+																											}
+																										}
+																									}
+																								}
+																							}
+																						}
+																					}
+																				}
+																			}
+																		}
+																	}
+																}
+															}
+														}
+													}
+												}
+											}
+										}
+									}
+								}
+							}
+						}
+					}
+				}
+			}
+		}
+	}
+	console.log(x);
+}

@@ -1,0 +1,14 @@
+class A {
+	int f(int n) {
+		int x = 0;
+		int y = switch (n) {
+			case 0 -> x++;
+			default -> 1;
+		};
+		switch (n) {
+			case 0 -> x++;
+			default -> {}
+		}
+		return x + y;
+	}
+}

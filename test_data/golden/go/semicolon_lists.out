@@ -1,0 +1,30 @@
+package p
+
+import (
+	"reflect"
+	"strconv"
+)
+
+const (
+	First = iota
+	Second
+)
+
+type Pair struct {
+	A int
+	B string `json:"b;key"`
+}
+
+type (
+	Number int
+	Text string
+)
+
+var (
+	Count = 1
+	Name = "value"
+)
+
+func Values() string {
+	return strconv.Itoa(Second) + reflect.TypeOf(Pair{}).Field(1).Tag.Get("json")
+}

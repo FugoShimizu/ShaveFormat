@@ -1,0 +1,71 @@
+/**
+ *
+ */
+void h() {
+	g(a / (b * c));
+	g(a % (b * c));
+	g(a * (b % c));
+	g(a - (b + c));
+	g(a - (b - c));
+	g(a - b * c);
+	g(a * (b + c));
+	g(a + b - c);
+	g(a * b % c);
+	g(a - (b + c) * d);
+	g(a / (b * c));
+	g(a + b);
+	g(a & b + c);
+	g(a | b + c);
+	g(a ^ b + c);
+	g(a & b * c);
+	g(a & (b | c));
+	g(a | b & c);
+	g(a << b + c);
+	g(a << (b >> c));
+	g(a + b & c);
+	g(a & b + c);
+	g(a & b < c);
+	g(a | b == c);
+	g(a < b + c);
+	g(a + (b < c));
+	g(a < b < c);
+	g(a < (b < c));
+	g(a & b == c);
+	g((a & b) < c);
+	g(a && (b || c));
+	g(a || b && c);
+	g(a && (b && c));
+	g(a || (b || c));
+	g(a && b && c);
+	g(a && (b || c) || d);
+	g(a && b || c);
+	g(-(-9));
+	g(y - -1);
+	g(y + +1);
+	g(((d *(b))-a) * 3);
+	g(((d)-a) * 2);
+	g((int)y);
+	g((char *)p);
+	g((T)(y));
+	g(p->x);
+	b -= c;
+	g((b) && c);
+	for(i = 0; i < n; ++i) (void)p;
+	g((double)(SUM) / 2);
+	g((long)-y + (long)!y + (long)*p);
+	g((void *)&y);
+}
+
+/**
+ *
+ * @param a
+ * @param b
+ * @param c
+ * @param p
+ * @return
+ */
+int f(int a, int b, int c, int *p) {
+	int x = (a + b) * c, y = p[b + c] * a, z = -p[b - c] + !p[b + c], w = a - 1;
+	if(x = f(a, b, c, p)) return 1;
+	return x;
+}

@@ -1,0 +1,32 @@
+"""Codec:
+  details
+""" # "
+
+import codecs
+
+class Codec:
+	"""Usage:
+    x
+    """
+
+	def f(self):
+		return 1
+
+def f():
+	s = """
+    indent stays 4 spaces
+        indent stays 8 spaces
+    end
+    """
+	return s
+
+def g():
+	"""Docstring line 1.
+
+    Para 2 with blank line above.
+
+    Para 3.
+    """
+	return None
+
+type Vector = list[float]

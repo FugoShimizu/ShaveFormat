@@ -1,0 +1,62 @@
+/**
+ * 件数計算関数
+ * @param IsReady 加算条件
+ * @return 計算後の件数
+ */
+fun CountSteps(IsReady: Boolean): Int {
+	var Count: Int = 0
+	if(IsReady) ++Count
+	for(Index: Int in 1..2) Count += Index
+	do --Count
+	while(Count > 2)
+	// 件数の返戻
+	return Count
+}
+
+/**
+ * 文字数選択関数
+ * @param IsReady 選択条件
+ * @return 選択した文字列の長さ
+ */
+fun SelectLength(IsReady: Boolean): Int {
+	val Value: Int = if(IsReady) "abc"
+	else {
+		"de"
+	}.length
+	// 文字数の返戻
+	return Value
+}
+
+/**
+ * ラムダ生成検証関数
+ * @param IsReady 生成条件
+ * @return 未変更の件数
+ */
+fun PreserveLambda(IsReady: Boolean): Int {
+	var Count: Int = 0
+	if(IsReady) {
+		Tag@ {
+			++Count
+		}
+	}
+	// 件数の返戻
+	return Count
+}
+
+/**
+ * 入子分岐検証関数
+ * @param IsReady 外側の条件
+ * @param IsSelected 内側の条件
+ * @return 選択値への加算結果
+ */
+fun NestedValue(IsReady: Boolean, IsSelected: Boolean): Int {
+	// 加算結果の返戻
+	return (
+		if(IsReady) {
+			(
+				if(IsSelected) 2
+				else 3
+			) + 10
+		} else 4
+	) + 1
+}

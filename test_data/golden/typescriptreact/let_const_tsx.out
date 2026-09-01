@@ -1,0 +1,10 @@
+/**
+ *
+ * @returns
+ */
+export function View(): JSX.Element {
+	const fixed: number = 1;
+	let changed: number = 2;
+	++changed;
+	return <span>{fixed + changed}</span>;
+}

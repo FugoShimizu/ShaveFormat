@@ -1,0 +1,12 @@
+package p
+
+// F はラベルに続くループを処理する
+func F() {
+Done:
+	x := 1
+	for i := 0; i < 3; i++ {
+		_ = x
+	}
+	_ = x
+	goto Done
+}

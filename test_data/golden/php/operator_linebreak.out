@@ -1,0 +1,24 @@
+<?php
+
+/**
+ *
+ * @param $alphaValue
+ * @param $bravoValue
+ * @param $charlieValue
+ * @param $deltaValue
+ * @param $echoValue
+ * @param $foxtrotValue
+ * @return
+ */
+function compute(int $alphaValue, int $bravoValue, int $charlieValue, int $deltaValue, int $echoValue, int $foxtrotValue): int {
+	$alphaValueTotal =
+	$alphaValue + $bravoValue + $charlieValue + $deltaValue + $echoValue + $foxtrotValue + $alphaValue + $bravoValue +
+	$charlieValue + $deltaValue + $echoValue + $foxtrotValue;
+	$alphaValueFlag =
+	$alphaValue > 0 && $bravoValue > 0 && $charlieValue > 0 && $deltaValue > 0 && $echoValue > 0 && $foxtrotValue > 0 &&
+	$alphaValue > 0 && $bravoValue > 0 && $charlieValue > 0;
+	$alphaValuePicked = $alphaValueFlag ?
+	$alphaValue + $bravoValue + $charlieValue + $deltaValue + $echoValue + $foxtrotValue :
+	$alphaValue + $bravoValue + $charlieValue + $deltaValue + $echoValue + $alphaValueTotal;
+	return $alphaValueTotal + $alphaValuePicked;
+}

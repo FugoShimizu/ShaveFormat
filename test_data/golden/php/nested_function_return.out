@@ -1,0 +1,11 @@
+<?php
+
+/**
+ *
+ */
+function outer() {
+	$f = function() {
+		return 1;
+	};
+	$f();
+}

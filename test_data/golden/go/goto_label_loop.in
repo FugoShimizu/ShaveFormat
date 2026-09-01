@@ -1,0 +1,11 @@
+package p
+
+// F は n を用いてラベル付ループを処理する
+func F(n int) {
+Retry:
+	for i := 0; i < 3; i++ {
+		if n < 2 {
+			goto Retry
+		}
+	}
+}

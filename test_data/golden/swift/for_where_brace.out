@@ -1,0 +1,3 @@
+for x in xs where p() {}
+
+while a > 0, b > 0 {}

@@ -1,0 +1,9 @@
+/**
+ *
+ * @param alpha
+ * @return
+ */
+// NOLINTNEXTLINE(readability-identifier-naming)
+int compute(int alpha) {
+	return alpha;
+}

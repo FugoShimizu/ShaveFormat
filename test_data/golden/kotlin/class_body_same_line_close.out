@@ -1,0 +1,45 @@
+class C {
+	val a = 1
+	val b = 2
+}
+
+interface I {
+	fun f()
+	fun g()
+}
+
+enum class E {
+	A,
+	B;
+
+	/**
+	 *
+	 */
+	fun f() {}
+}
+
+class D {
+	init {
+		x()
+	}
+
+	val a = 1
+}
+
+class F {
+	val a = 1 /* c */
+}
+
+object O {
+	val a = 1
+	val b = 2
+}
+
+val o = object : Runnable {
+	/**
+	 *
+	 */
+	override fun run() {}
+
+	val q = 1
+}

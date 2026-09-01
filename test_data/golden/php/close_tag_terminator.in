@@ -1,0 +1,16 @@
+<?php
+function f($d, $items) {
+	while ($d--) ?>W<?php echo "a";
+	if ($d) ?>X<?php echo "b";
+	for ($i = 0; $i < 2; $i++) ?>Y<?php echo "c";
+	foreach ($items as $v) ?>Z<?php echo "d";
+	if ($d) echo 1; else ?>E<?php echo "e";
+	if ($d) echo 1; elseif ($d > 1) ?>Q<?php echo "q";
+	if ($d) if ($d > 1) echo 1; elseif ($d > 2) echo 2 ?>R<?php echo "r";
+	$f = function() {} ?>S<?php echo "s";
+	if ($d): echo 3 ?>T<?php endif ?>U<?php echo "u" ?>
+<p><?= $d ?></p>
+<?php
+	foreach ($firstVeryLongCollectionName + $secondVeryLongCollectionName + $thirdVeryLongCollectionName + $fourthVeryLongCollectionName + $fifth as $value);
+	if ($d) firstVeryLongFunctionName($d, $items, $firstVeryLongCollectionName, $secondVeryLongCollectionName, $thirdVeryLongCollectionName, $fourth); elseif ($d > 1);
+}

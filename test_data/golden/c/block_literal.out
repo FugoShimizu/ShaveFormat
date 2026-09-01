@@ -1,0 +1,5 @@
+void Apply(void) {
+	Run(^(int a, int b) { return a + b; });
+	// 終了
+	return;
+}

@@ -1,0 +1,23 @@
+int (*p);
+int (*a)[3];
+int (*q) = 0;
+int (*fp)(int);
+int (*gp)(int) = 0;
+
+struct S {
+	int (*m)(int);
+};
+
+/**
+ *
+ * @param x
+ * @param h
+ */
+void g(int x, int (*h)(int)) {
+	int (*r)(int) = h;
+	int y = x++;
+	--x;
+	int z = x++ + y;
+	(void)r;
+	(void)z;
+}

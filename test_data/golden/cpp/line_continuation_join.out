@@ -1,0 +1,14 @@
+#define ADD(a, b) ((a) + (b))
+#define NAME value
+
+const char *Raw = R"(keep\
+this)";
+
+/**
+ *
+ * @param X
+ * @return
+ */
+int F(int X) {
+	return ADD(X, 1);
+}

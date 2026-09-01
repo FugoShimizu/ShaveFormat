@@ -1,0 +1,11 @@
+/**
+ * 条件付警告の検査関数
+ * @return 計算結果
+ */
+int Probe(void) {
+int Candidate = 1;
+long Mutable = 0;
+++Mutable;
+// 計算結果の返戻
+return Candidate + Mutable;
+}

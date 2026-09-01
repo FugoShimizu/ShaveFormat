@@ -1,0 +1,13 @@
+package p
+
+func f(clens []string) {
+	x := 1 // X
+	if cl, err := parse(clens[0]); err == nil {
+		use(cl)
+	} else {} // TODO: care? unlike http/1, it won't mess up our framing, so it's // more safe smuggling-wise to ignore.
+	if a {
+		b()
+	} else if c {} else {} // A // T1
+	/* T2 */
+	for {} // W1 // W2
+}

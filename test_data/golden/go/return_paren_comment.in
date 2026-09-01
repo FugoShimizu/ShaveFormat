@@ -1,0 +1,6 @@
+package main
+
+func f(a, b int) int {
+	return ( // c1
+		a + b)
+}

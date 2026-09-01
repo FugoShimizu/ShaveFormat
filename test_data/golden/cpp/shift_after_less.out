@@ -1,0 +1,31 @@
+template<int N> constexpr int v = N;
+
+/**
+ *
+ * @param i
+ * @param n
+ * @return
+ */
+bool f(int i, int n) {
+	return i < n >> 1;
+}
+
+/**
+ *
+ * @param i
+ * @param n
+ * @return
+ */
+bool g(int i, int n) {
+	return i < n >> 1;
+}
+
+/**
+ *
+ * @return
+ */
+bool h() {
+	return v<3> > 1;
+}
+
+std::vector<std::vector<int>> x;

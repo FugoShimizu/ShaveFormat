@@ -1,0 +1,53 @@
+#
+def m
+	..3
+end
+
+#
+# @param c
+def f(c)
+	not c ? 1 : 2
+end
+
+#
+# @param c
+def g(c)
+	not c
+end
+
+#
+# @param a
+# @return
+def f(a)
+	return -a
+end
+
+#
+# @param a
+# @return
+def g(a)
+	return(+a)
+end
+
+#
+# @param a
+# @return
+def h(a)
+	return -a ** 2
+end
+
+#
+# @param x
+# @return
+def foo(x) = "called #{x}"
+#
+# @return
+def bar = :BAR
+
+#
+# @return
+def f
+	return foo :bar
+end
+
+p f

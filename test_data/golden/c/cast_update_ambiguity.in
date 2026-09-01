@@ -1,0 +1,8 @@
+typedef long T;
+long f(long *p, long x, long y) {
+	long e = (T)++*p;
+	long g = (T)--(x);
+	long h = (x)++ + y;
+	long i = (x)++;
+	return e + g + h + i;
+}

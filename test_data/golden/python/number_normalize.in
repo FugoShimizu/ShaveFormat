@@ -1,0 +1,4 @@
+hex = 0xff
+exp = 1e5
+imag = 1j
+oct = 0o17

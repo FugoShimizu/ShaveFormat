@@ -1,0 +1,7 @@
+.x {
+	// leading comment
+	color: red;
+	background: blue; // trailing comment
+	// between statements
+	border: 1px solid;
+}

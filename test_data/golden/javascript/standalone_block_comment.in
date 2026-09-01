@@ -1,0 +1,28 @@
+// @ts-check
+/** 面積 */
+function area(
+	/** 幅 */
+	w,
+	h,
+) {
+	return w * h;
+}
+function find() {
+	const count = 1;
+	/** @type {HTMLElement | null} */
+	const el = document.getElementById("x");
+	return [count, el];
+}
+const store =
+	/*#__PURE__*/
+	createStore();
+const Page = lazy(() => import(
+	/* webpackChunkName: "page" */
+	/* @vite-ignore */
+	"./Page"
+));
+const o = {
+	/** @deprecated 旧 */
+	old: 1,
+	new1: 2,
+};

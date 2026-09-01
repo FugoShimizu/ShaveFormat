@@ -1,0 +1,9 @@
+def f():
+    try:  # t
+        g()
+    except E:  # e
+        h()
+    else:  # o
+        k()
+    finally:  # f
+        m()

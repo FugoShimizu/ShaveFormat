@@ -1,0 +1,8 @@
+/// ラベルとコメントを処理する
+func f() {
+outer:
+	/* note */
+	while true {
+		break outer
+	}
+}

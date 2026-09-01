@@ -1,0 +1,25 @@
+/**
+ *
+ * @param alphaValue
+ * @param bravoValue
+ * @param charlieValue
+ * @param deltaValue
+ * @param echoValue
+ * @param foxtrotValue
+ * @returns
+ */
+function compute(alphaValue, bravoValue, charlieValue, deltaValue, echoValue, foxtrotValue) {
+	const total =
+	alphaValue + bravoValue + charlieValue + deltaValue + echoValue + foxtrotValue + alphaValue + bravoValue + charlieValue +
+	deltaValue + echoValue + foxtrotValue;
+	const flag =
+	alphaValue > 0 && bravoValue > 0 && charlieValue > 0 && deltaValue > 0 && echoValue > 0 && foxtrotValue > 0 && alphaValue > 0 &&
+	bravoValue > 0 && charlieValue > 0;
+	const picked = flag ?
+	alphaValue + bravoValue + charlieValue + deltaValue + echoValue + foxtrotValue :
+	alphaValue + bravoValue + charlieValue + deltaValue + echoValue + total;
+	const chained =
+	repositoryInstance.findAllRecords().filterByStatus(flag).mapToViewModel().sortByCreatedAt().takeFirst(total).unwrapOrDefault()
+	.toSummaryLine();
+	return total + picked + chained;
+}

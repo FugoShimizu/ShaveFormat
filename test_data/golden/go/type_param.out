@@ -1,0 +1,14 @@
+package p
+
+type Pair[K comparable, V any] struct {
+	Key K
+	Val V
+}
+
+func Map[T any, U any](xs []T, f func(T) U) []U {
+	out := make([]U, 0, len(xs))
+	for _, x := range xs {
+		out = append(out, f(x))
+	}
+	return out
+}

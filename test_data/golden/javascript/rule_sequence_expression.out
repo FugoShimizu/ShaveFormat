@@ -1,0 +1,15 @@
+/**
+ *
+ * @param arr
+ * @param init
+ * @returns
+ */
+function reduce(arr, init) {
+	let accumulator = init, initAccum = true;
+	arr.forEach(
+		function(value) {
+			accumulator = initAccum ? (initAccum = false, value) : sum(accumulator, value);
+		}
+	);
+	return accumulator;
+}

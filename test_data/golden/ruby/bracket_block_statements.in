@@ -1,0 +1,10 @@
+ui.confirm(added.map do |d|
+  name = "'#{d.name}'"
+  group = ", group: #{d.groups.inspect}" if d.groups != [:default]
+  %(gem #{name}#{group})
+end.join("\n"))
+rows = [ scheme,
+  nil, # registry
+  (m["path-abempty"] ||
+   m["path-empty"]),
+  query ]

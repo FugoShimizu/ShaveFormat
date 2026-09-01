@@ -1,0 +1,23 @@
+func f(x: Bool, y: Int, xs: [Int]) {
+	if (x) { g() }
+	while (x) { g() }
+	guard (x) else { return }
+	switch (y) { default: g() }
+	repeat { g() } while (x)
+	if (xs.contains { $0 > 1 }) { g() }
+}
+func g() {}
+func h(a: [Int]?, b: [Int], c: Bool) {
+	for x in (a ?? b) { g() }
+	for x in (c ? b : []) { g() }
+}
+infix operator ^^
+func ^^ (l: Int, r: Int) -> Int { return l ^ r }
+let op: (Int, Int) -> Int = (^^)
+let table = [1: 2] as Any
+let dict = table as! [Int: Int]
+let maybe = table as? [Int: Int]
+func r(n: Int) {
+	for x in (0..<n) { g() }
+	let whole = (0..<n)
+}

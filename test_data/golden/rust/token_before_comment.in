@@ -1,0 +1,6 @@
+fn f(a: Vec<i32>, x: i32) -> usize {
+	let s = x /* c */ + 1;
+	a
+		/* m */
+		.len() + s as usize
+}

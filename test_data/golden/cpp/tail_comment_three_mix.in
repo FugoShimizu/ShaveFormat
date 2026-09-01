@@ -1,0 +1,15 @@
+int Sum(){
+const int A=1; // first
+const int B=2; // second
+const int C=3; /* third
+fourth */
+return A+B+C;
+}
+
+void Foo(void)
+{
+	const int A = 1; // a
+	const int B = 2; /* line1
+line2 */
+	return;
+}

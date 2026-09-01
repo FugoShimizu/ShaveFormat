@@ -1,0 +1,6 @@
+9:2: Consider `const` if mutation, type, and initialization behavior are unchanged
+11:2: If equivalent, prefer prefix `++x` when the result is unused
+12:2: If equivalent, prefer prefix `++x` when the result is unused
+13:17: If semantics are preserved, prefer `nullptr` to `NULL`
+14:21: If equivalent, prefer prefix `++x` when the result is unused
+17:67: If semantics are preserved, consider removing double unary plus `+(+x)`

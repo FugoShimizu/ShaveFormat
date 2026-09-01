@@ -1,0 +1,17 @@
+declare function x(): void;
+declare function h(v: string): void;
+function f(a: boolean, b: boolean) {
+	if (a) {
+		x();
+		// @ts-expect-error
+	} else if (b) { const bad: number = "s"; }
+	try {
+		x();
+		// @ts-ignore
+	} catch (e) {
+		h("1");
+		x();
+	}
+	/* @ts-expect-error 理由。二文目 */
+	const worse: number = "t";
+}

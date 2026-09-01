@@ -1,0 +1,19 @@
+/**
+ *
+ * @param a
+ */
+void f(int a) {
+	if(a == 1) {
+		const int x = 1;
+	}
+}
+
+/**
+ *
+ * @param a
+ */
+void g(int a) {
+	if(a == 1) {
+		using X = int;
+	}
+}

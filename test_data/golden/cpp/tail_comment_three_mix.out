@@ -1,0 +1,20 @@
+/**
+ *
+ * @return
+ */
+int Sum() {
+	const int A = 1, B = 2, C = 3; // first // second
+	/* third
+	fourth */
+	return A + B + C;
+}
+
+/**
+ *
+ */
+void Foo() {
+	const int A = 1, B = 2; // a
+	/* line1
+	line2 */
+	return;
+}

@@ -1,0 +1,9 @@
+class A {
+	int w = 1;
+	int /* 幅 */ h = 2;
+	int a = 1; // A
+	int b = 2; // B
+	int c = 1;
+	// D の説明
+	int d = 2;
+}

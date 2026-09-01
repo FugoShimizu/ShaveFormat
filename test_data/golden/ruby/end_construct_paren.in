@@ -1,0 +1,13 @@
+h = {
+  a: (if x
+    1
+  end),
+  b: (a +
+    b),
+}
+x = (if a
+  b
+end) + 1
+f((if a
+  b
+end), 2)

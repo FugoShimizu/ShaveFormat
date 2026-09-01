@@ -1,0 +1,6 @@
+function f() {
+	foo(/* c */);
+	bar();
+	const a = new A(/* d */);
+	baz();
+}

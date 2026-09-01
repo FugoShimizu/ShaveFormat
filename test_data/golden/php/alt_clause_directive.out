@@ -1,0 +1,7 @@
+<?php
+
+if($c):
+// phpcs:ignore
+else:
+	g();
+endif;

@@ -1,0 +1,3 @@
+#define PAIR 1, 2
+int main() { try { throw (PAIR); } catch(int E) { return E; } return 0; }
+bool f(unsigned D, unsigned long S) { return --D < 64 && S >> D & 1; }

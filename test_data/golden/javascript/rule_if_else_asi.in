@@ -1,0 +1,7 @@
+function f(props) {
+	if (props.element) {
+		this.element = props.element
+	} else {
+		this.element = new Other()
+	}
+}

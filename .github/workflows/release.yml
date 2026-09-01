@@ -1,0 +1,308 @@
+name: Release
+
+# v* タグの送信時だけ各環境の .vsix を作り，GitHub Release へ添付して Marketplace へ公開する
+on:
+  push:
+    tags: ["v*"]
+
+jobs:
+  # 各環境で配布する実行ファイル其の物へ整形の回帰（基準出力・意味保存・実行時・配置の独立）と CLI の経路の検査を掛け，通った環境だけ .vsix を作る
+  build:
+    name: ${{ matrix.target }}
+    runs-on: ${{ matrix.os }}
+    # 配布物を作るだけの工程で書込は要らない（既定の継承で余計な権限を持たない様に明示する）
+    permissions:
+      contents: read
+    strategy:
+      fail-fast: false
+      matrix:
+        include:
+          - target: darwin-x64
+            vsce_target: darwin-x64
+            os: macos-15-intel
+            bin_ext: ""
+          - target: darwin-arm64
+            vsce_target: darwin-arm64
+            os: macos-14
+            bin_ext: ""
+          - target: linux-x64
+            vsce_target: linux-x64
+            os: ubuntu-24.04
+            bin_ext: ""
+          - target: linux-arm64
+            vsce_target: linux-arm64
+            os: ubuntu-24.04-arm
+            bin_ext: ""
+          - target: win32-x64
+            vsce_target: win32-x64
+            os: windows-2022
+            bin_ext: ".exe"
+    # Windows の Python の既定の符号化では日本語を含む入出力を扱えない為，UTF-8 に固定する
+    env:
+      PYTHONUTF8: "1"
+    steps:
+      # Windows の取出しの CRLF 化で `tools/` の台本が動かなく為る為，リポジトリの内容の儘取り出す（基準出力は .gitattributes の `-text` で既に変換されない）
+      - name: Keep line endings (Windows)
+        if: runner.os == 'Windows'
+        run: git config --global core.autocrlf false;
+
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4
+        with:
+          submodules: recursive
+          # 同じ工程が vendor の文法の生成と走査器の構築を行う為，書込権限の認証情報を .git/config へ残さない
+          persist-credentials: false
+
+      # 基準出力は構文木に依り誤りの読みの回復の木の形が版で変わる為，全環境の実行時を開発環境と同じ版に固定して源から構築する
+      # 配布物は tree-sitter の入って居ない計算機で動く必要が有る為，静的な書庫にし，MSVC は本体と同じく C の実行時も静的に結合する
+      - name: Install tree-sitter
+        shell: bash
+        run: |
+          tmp="$RUNNER_TEMP";
+          if [ "$RUNNER_OS" = Windows ]; then tmp="$(cygpath -m "$tmp")"; fi
+          if ! command -v cmake > /dev/null; then sudo apt-get update && sudo apt-get install -y cmake; fi
+          # 版の札は付け替えられる為，v0.26.8 のコミットで固定して取得する
+          git init -q "$tmp/tree-sitter-runtime";
+          fetch_args=(
+            -C "$tmp/tree-sitter-runtime"
+            fetch -q --depth 1
+            https://github.com/tree-sitter/tree-sitter.git
+            cd5b087cd9f45ca6d93ab1954f6b7c8534f324d2
+          );
+          git "${fetch_args[@]}";
+          git -C "$tmp/tree-sitter-runtime" checkout -q FETCH_HEAD;
+          configure_args=(
+            -S "$tmp/tree-sitter-runtime"
+            -B "$tmp/tree-sitter-build"
+            -DCMAKE_BUILD_TYPE=Release
+            -DBUILD_SHARED_LIBS=OFF
+            -DCMAKE_INSTALL_LIBDIR=lib
+            -DCMAKE_POLICY_DEFAULT_CMP0091=NEW
+            -DCMAKE_MSVC_RUNTIME_LIBRARY=MultiThreaded
+          );
+          cmake "${configure_args[@]}";
+          cmake --build "$tmp/tree-sitter-build" --config Release --parallel;
+          cmake --install "$tmp/tree-sitter-build" --config Release --prefix "$tmp/tree-sitter-install";
+          echo "TREE_SITTER_ROOT=$tmp/tree-sitter-install" >> "$GITHUB_ENV";
+
+      - name: Setup Node.js
+        uses: actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020 # v4
+        with:
+          node-version: "22"
+
+      - name: Install tree-sitter CLI
+        uses: ./.github/actions/tree-sitter-cli
+
+      - name: Generate swift parser.c
+        shell: bash
+        run: |
+          cd vendor/tree-sitter-swift;
+          tree-sitter generate;
+
+      - name: Configure CMake
+        run: cmake -B build -S . -DCMAKE_BUILD_TYPE=Release;
+
+      - name: Build
+        run: cmake --build build --config Release --parallel;
+
+      - name: Verify file update conflicts
+        run: ctest --test-dir build -C Release --output-on-failure --no-tests=error;
+
+      - name: Setup Python
+        uses: actions/setup-python@a26af69be951a213d495a4c3e4e4022e16d87065 # v5
+        with:
+          python-version: "3.13"
+
+      - name: Install extension dependencies
+        working-directory: vscode-extension
+        # 鍵ファイルの固定を捨てて解決し直すと配布物の依存が黙って変わる為，失敗は其の儘失敗させる
+        # 導入時の台本（鍵ファイルで照合されない取得を行う物が有る）は包むのにも検査にも要らない為に走らせない
+        run: npm ci --ignore-scripts;
+
+      - name: Verify runtime and standard streams
+        run: python tools/verify_runtime.py build/shavefmt${{ matrix.bin_ext }};
+
+      - name: Golden test and semantic preservation
+        shell: bash
+        run: |
+          bash tools/golden_test.sh;
+          python tools/verify_semantic_preservation.py;
+
+      # 基準出力の期待値と意味の検査器は環境に依らない為，処理系の揃う１環境で確かめる
+      - name: Check golden outputs, semantics and node type names
+        if: matrix.target == 'darwin-arm64'
+        # 入力が処理系の構文検査を通る基準出力は期待値も通る事を確かめる（手元に無い処理系の言語は飛ばす）
+        run: |
+          python tools/verify_golden_syntax.py;
+          python tools/verify_semantic_preservation.py --self-test;
+          # 無名の字句と名前付の規則で同じ型名を持つ文法が有る為，型名だけで見分けて子を引く形が無いかを確かめる
+          python tools/verify_node_type_names.py;
+
+      - name: Verify layout independence
+        shell: bash
+        run: |
+          python tools/verify_space_random_ast.py;
+          MAX_CHARS=0 python tools/verify_space_random_ast.py;
+
+      - name: Self-format is a fixed point
+        shell: bash
+        # 要整形・処理失敗・見送の全てを終了コードへ集約させ，要約の文言に依存しない判定にする
+        # 警告は標準エラーへ出る為，０件も併せて見る（`| tee` は終了コードを遮蔽する為使わない）
+        run: |
+          formatter="build/shavefmt${{ matrix.bin_ext }}";
+          if ! "$formatter" --check --fail-on-skip src/ tools/ vscode-extension/src/ 2> "$RUNNER_TEMP/self.err"; then
+            cat "$RUNNER_TEMP/self.err";
+            exit 1;
+          fi
+          if grep -qE "^\[warn\]" "$RUNNER_TEMP/self.err"; then cat "$RUNNER_TEMP/self.err"; exit 1; fi
+
+      # ディレクトリの再帰の走査と名前に依る除外は此の段だけが通る（書戻・見送は verify_runtime.py も覆う）
+      - name: Directory scan and name exclusion
+        shell: bash
+        run: |
+          set -eu;
+          dir="$RUNNER_TEMP/cli";
+          if [ "$RUNNER_OS" = Windows ]; then dir="$(cygpath -m "$RUNNER_TEMP")/cli"; fi
+          rm -rf "$dir";
+          mkdir -p "$dir/node_modules" "$dir/.hidden";
+          # 要整形の検体（BOM 付）と，名前で除外する３通りの経路（ディレクトリ名・点で始まる名前・ファイル名）
+          cp test_data/golden/php/bom_preserved.in "$dir/a.php";
+          cp test_data/golden/php/bom_preserved.in "$dir/node_modules/excluded.php";
+          cp test_data/golden/php/bom_preserved.in "$dir/.hidden/excluded.php";
+          cp test_data/golden/php/bom_preserved.in "$dir/package-lock.json";
+          # 要整形は終了コード 1 で報告する
+          build/shavefmt${{ matrix.bin_ext }} --check --fail-on-skip "$dir" > "$RUNNER_TEMP/cli.pre" && code=0 || code=$?;
+          [ "$code" = 1 ];
+          grep -q "1 file(s) need formatting" "$RUNNER_TEMP/cli.pre";
+          # 書き戻しで BOM が残り，期待出力と一致する
+          build/shavefmt${{ matrix.bin_ext }} -w "$dir" 2> "$RUNNER_TEMP/cli.err";
+          cmp "$dir/a.php" test_data/golden/php/bom_preserved.out;
+          grep -q "File has a UTF-8 BOM" "$RUNNER_TEMP/cli.err";
+          # 名前で除外した経路は読まず書かず，丁度３件と数える
+          cmp "$dir/node_modules/excluded.php" test_data/golden/php/bom_preserved.in;
+          cmp "$dir/.hidden/excluded.php" test_data/golden/php/bom_preserved.in;
+          cmp "$dir/package-lock.json" test_data/golden/php/bom_preserved.in;
+          build/shavefmt${{ matrix.bin_ext }} --check --fail-on-skip "$dir" > "$RUNNER_TEMP/cli.out";
+          grep -qF ", 3 path(s) excluded by name." "$RUNNER_TEMP/cli.out";
+          # 在り得ない経路は終了コード 1 で報告する
+          build/shavefmt${{ matrix.bin_ext }} --check "$dir/does-not-exist.php" && code=0 || code=$?;
+          [ "$code" = 1 ];
+
+      - name: Stage binary in vscode-extension/bin (target-specific only)
+        shell: bash
+        run: |
+          rm -rf vscode-extension/bin;
+          mkdir -p vscode-extension/bin;
+          cp build/shavefmt${{ matrix.bin_ext }} vscode-extension/bin/shavefmt-${{ matrix.target }}${{ matrix.bin_ext }};
+          chmod +x vscode-extension/bin/shavefmt-${{ matrix.target }}${{ matrix.bin_ext }};
+
+      - name: Build extension TypeScript
+        working-directory: vscode-extension
+        run: npm run build;
+
+      - name: Verify extension process lifecycle
+        run: node tools/verifyExtension.cjs build/shavefmt${{ matrix.bin_ext }};
+
+      - name: Version consistency
+        shell: bash
+        # タグ・拡張機能の宣言・実行ファイルの三者が食い違うと，配布物が別の版を名乗る
+        run: |
+          TAG="${GITHUB_REF_NAME#v}";
+          PKG="$(node -p 'require("./vscode-extension/package.json").version')";
+          BIN="$(vscode-extension/bin/shavefmt-${{ matrix.target }}${{ matrix.bin_ext }} --version | tr -d "\r" | awk '{print $2;}')";
+          [ "$TAG" = "$PKG" ] && [ "$TAG" = "$BIN" ] || { echo "version mismatch: tag=$TAG pkg=$PKG bin=$BIN"; exit 1; }
+
+      - name: Package target-specific .vsix
+        working-directory: vscode-extension
+        # vsce は鍵ファイルで推移的な依存まで固定した開発依存を使う（公開の度に解決し直さない）
+        run: npx --no-install vsce package --target ${{ matrix.vsce_target }};
+
+      - name: Upload .vsix artifact
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4
+        with:
+          name: shavefmt-${{ matrix.target }}-vsix
+          path: vscode-extension/*.vsix
+          if-no-files-found: error
+          retention-days: 30
+
+  publish:
+    name: Publish to Marketplace
+    if: github.repository == 'FugoShimizu/ShaveFormat'
+    needs: build
+    runs-on: ubuntu-24.04
+    permissions:
+      contents: write
+    steps:
+      # 書込権限の token を .git/config へ残さない（後の工程で外部の npx パッケージを秘密情報と共に実行する為）
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4
+        with:
+          persist-credentials: false
+
+      - name: Download all .vsix artifacts
+        uses: actions/download-artifact@d3f86a106a0bac45b974a628896c90dbdf5c8093 # v4
+        with:
+          path: vsix
+          merge-multiple: true
+
+      - name: Verify target-specific .vsix artifacts
+        shell: bash
+        run: |
+          set -eu;
+          total=0;
+          for target in darwin-arm64 darwin-x64 linux-arm64 linux-x64 win32-x64; do
+            set -- vsix/*-"$target"-*.vsix;
+            if [ ! -e "$1" ] || [ "$#" -ne 1 ]; then
+              echo "::error::expected exactly one .vsix for $target";
+              exit 1;
+            fi;
+            total=$((total + 1));
+          done;
+          actual="$(find vsix -maxdepth 1 -type f -name '*.vsix' | wc -l)";
+          [ "$actual" -eq "$total" ] || { echo "::error::unexpected .vsix artifact count: $actual"; exit 1; }
+
+      # 公開の成否に依らず配布物を Release へ残す為，公開より先に添付する
+      - name: Attach .vsix to GitHub Release
+        # 書込権限と秘密情報を持つ工程の為，操作は公式の物も含めて版の札でなくコミットで固定する（版は行末の注記）
+        uses: softprops/action-gh-release@3bb12739c298aeb8a4eeaf626c5b8d85266b0e65 # v2
+        with:
+          files: vsix/*.vsix
+          # 全環境が失敗した時に配布物の無い Release を作らない
+          fail_on_unmatched_files: true
+
+      - name: Setup Node.js (for vsce)
+        uses: actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020 # v4
+        with:
+          node-version: "22"
+
+      # 秘密情報を渡す工程で実行する vsce は，鍵ファイルで推移的な依存まで固定し，導入時の台本も走らせない
+      - name: Install vsce from the lockfile
+        run: npm ci --ignore-scripts --prefix vscode-extension;
+
+      # Marketplace 側の拒否で残りを止めず，全件を試みて警告に留める
+      # 秘密情報の未設定は公開を試みずに失敗とし，原因を工程の要約へ出す
+      - name: Publish each .vsix to Marketplace
+        env:
+          VSCE_PAT: ${{ secrets.VSCE_PAT }}
+        run: |
+          if [ -z "$VSCE_PAT" ]; then
+            echo "::error::VSCE_PAT is not set; skipped publishing to Marketplace";
+            echo "Marketplace: skipped (VSCE_PAT is not set)" >> "$GITHUB_STEP_SUMMARY";
+            exit 1;
+          fi
+          total=0;
+          published=0;
+          skipped=0;
+          for vsix in vsix/*.vsix; do
+            : "$((++total))";
+            echo "Publishing $vsix";
+            log="$RUNNER_TEMP/vsce-$total.log";
+            if (cd vscode-extension && npx --no-install vsce publish --skip-duplicate --packagePath "../$vsix") > "$log" 2>&1; then
+              cat "$log";
+              : "$((++published))";
+            else
+              cat "$log";
+              echo "::warning::Marketplace skipped $vsix (already published or rejected)";
+              : "$((++skipped))";
+            fi
+          done
+          echo "Marketplace: published $published, skipped $skipped, total $total" >> "$GITHUB_STEP_SUMMARY";
+          [ "$total" -eq 5 ];

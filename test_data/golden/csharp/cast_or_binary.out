@@ -1,0 +1,26 @@
+class C {
+	unsafe void f() {
+		g((d - a) * 2);
+		g(d + a);
+		g(d * a);
+		g(d & a);
+		g(d ^ a);
+		g((int)-a);
+		g((d?)-a);
+		g((d)!a);
+		g(A.B - a * 2);
+		g(x * d - a);
+		g(-d - a);
+		g(d * a);
+		g(out d* a);
+		var t = (d * a, 1);
+		(int* p, int q) = (x, y);
+		h(x: d * a);
+		g(d[0] - a);
+		g(global::A.B - a);
+		g((global::A)-a);
+		g(A<int>.B - a);
+		g((A.B<int>)-a);
+		var (m, n) = (1, 2);
+	}
+}

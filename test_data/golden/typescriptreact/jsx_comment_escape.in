@@ -1,0 +1,8 @@
+export function A() {
+	return (
+		<div>{
+			// first
+			value
+		}</div>
+	);
+}

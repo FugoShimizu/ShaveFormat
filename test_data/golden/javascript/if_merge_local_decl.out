@@ -1,0 +1,12 @@
+/**
+ *
+ * @param a
+ * @param b
+ */
+function f(a, b) {
+	if(a) if(b) {
+		const x = read(), /* first */ y = read();
+		/* second */
+		use(x, y);
+	}
+}

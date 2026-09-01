@@ -1,0 +1,20 @@
+/**
+ * 数値リテラルの字面の識別関数
+ * @param Text 数値の字句列
+ * @return 字句列の識別値
+ */
+constexpr unsigned long long operator""_inspect(const char *Text) {
+unsigned long long Code = 0;
+for(; *Text; ++Text) Code = Code * 131 + static_cast<unsigned char>(*Text);
+// 字句列の識別値の返戻
+return Code;
+}
+
+/**
+ * 数値リテラルの字面の確認関数
+ * @return 字面に基付く合計値
+ */
+unsigned long long InspectSpelling() {
+// 字面に基付く合計値の返戻
+return .5_inspect + 0xff_inspect + 1e2_inspect + 1'000_inspect;
+}

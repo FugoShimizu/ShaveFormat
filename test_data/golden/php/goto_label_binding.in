@@ -1,0 +1,20 @@
+<?php
+
+/**
+ * 同じループへ戻る
+ */
+function restart(): void{
+Again:
+while(true) goto Again;
+}
+
+/**
+ * 同じラベルの表記を照合する
+ */
+function sameLabel(): void{
+while(true){
+goto Done;
+Done:
+;
+}
+}

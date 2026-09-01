@@ -1,0 +1,6 @@
+export function f() {
+  // eslint-disable-next-line no-debugger -- 理由の一文目。二文目
+  debugger;
+  // oxlint-disable-next-line no-debugger -- 理由の一文目。二文目
+  debugger;
+}

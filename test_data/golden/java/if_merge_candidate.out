@@ -1,0 +1,16 @@
+class Candidate {
+	/**
+	 * 統合候補関数
+	 * @param IsFirst 第一条件
+	 * @param IsSecond 第二条件
+	 */
+	void Merge(final boolean IsFirst, final boolean IsSecond) {
+		while(true) {
+			if(IsFirst) break;
+			if(IsSecond) break;
+			break;
+		}
+		// 終了
+		return;
+	}
+}

@@ -1,0 +1,9 @@
+/**
+ *
+ * @return
+ */
+int main(void) {
+	int a = 1, b = 2, x;
+	x = a + /* c2 */ b;
+	return f(a, /* c1 */ b);
+}

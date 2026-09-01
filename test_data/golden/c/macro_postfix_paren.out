@@ -1,0 +1,6 @@
+#include "n.h"
+
+extern int N;
+int r = (N)++;
+int s = (N)[0];
+int t = N;

@@ -1,0 +1,5 @@
+#include <typeinfo>
+int Count = 0;
+void Static(bool Flag) { if(Flag) { static const int X = ++Count; } else if(!Flag) { static const int X = ++Count; } }
+const std::type_info &Type(bool Flag) { if(Flag) { return typeid([]{}); } else if(!Flag) { return typeid([]{}); } return typeid(Flag); }
+int Nested(int Value) { if(Value == 1) return [] { static int N = 0; return ++N; }(); if(Value == 2) return [] { static int N = 0; return ++N; }(); return 0; }

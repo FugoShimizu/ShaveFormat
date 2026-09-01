@@ -1,0 +1,10 @@
+a = [1].map { |x| puts x; x } + [2]
+p a
+
+a = [1].map { |x| puts x; x }[0]
+p a
+
+LongVariableNameA=1
+LongVariableNameB=2
+a=[1].map{|x| x + LongVariableNameA + LongVariableNameB}[0]
+p a

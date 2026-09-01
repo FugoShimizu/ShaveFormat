@@ -1,0 +1,28 @@
+/**
+ *
+ */
+fun f() {
+	val r = when(n) {
+		1 -> if(a) g()
+		2 -> {
+			for(i in 0..2) g()
+		}
+		3 -> {
+			while(a) g()
+		}
+		else -> 0
+	}
+	val v = if(c) {
+		for(i in 0..2) g()
+	} else 0
+	val w = if(c) 0
+	else {
+		while(a) g()
+	}
+	when(n) {
+		1 -> for(i in 0..2) g()
+		else -> {}
+	}
+	if(c) for(i in 0..2) g()
+	else while(a) g()
+}

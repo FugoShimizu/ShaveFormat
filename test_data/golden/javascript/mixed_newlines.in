@@ -1,0 +1,7 @@
+const a = 1;
+const b = `x
+y
+z`;
+function f() {
+  return a;
+}

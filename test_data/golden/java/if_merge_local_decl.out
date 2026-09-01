@@ -1,0 +1,14 @@
+class C {
+	/**
+	 *
+	 * @param a
+	 * @param b
+	 */
+	void f(boolean a, boolean b) {
+		if(a) if(b) {
+			final int x = read(), /* first */ y = read();
+			/* second */
+			use(x, y);
+		}
+	}
+}

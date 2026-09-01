@@ -1,0 +1,81 @@
+<?php
+
+declare(strict_types=1);
+
+namespace App\Service;
+
+use App\Model\Item;
+use Psr\Log\LoggerInterface as Logger;
+
+interface Payable {
+	public function pay(float $amount): bool;
+}
+
+trait Loggable {
+	protected array $log = [];
+	/**
+	 *
+	 * @param $msg
+	 */
+	public function note(string $msg): void {
+		$this->log[] = $msg;
+	}
+}
+
+abstract class Base implements Payable {
+	use Loggable;
+
+	public const RATE = 0.08;
+
+	private static ?self $instance = null;
+
+	/**
+	 *
+	 * @param $name
+	 * @param $count
+	 */
+	public function __construct(private readonly string $name, protected int $count = 0) {}
+	abstract public function label(): string;
+
+	/**
+	 *
+	 * @param $n
+	 * @return
+	 */
+	public static function make(string $n): static {
+		return new static($n);
+	}
+}
+
+final class Cart extends Base {
+	/** @var array<int, Item> */
+	private array $items = [];
+
+	/**
+	 *
+	 * @return
+	 */
+	public function label(): string {
+		return "Cart:{$this->name}";
+	}
+
+	/**
+	 *
+	 * @param $item
+	 * @param $qty
+	 */
+	public function add(Item $item, int $qty = 1): void {
+		if($qty <= 0) return;
+		$this->items[] = $item;
+	}
+
+	/**
+	 *
+	 * @param $amount
+	 * @return
+	 */
+	public function pay(float $amount): bool {
+		$total = $amount + $amount * self::RATE;
+		return $total > 0;
+	}
+}

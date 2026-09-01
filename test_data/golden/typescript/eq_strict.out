@@ -1,0 +1,12 @@
+/**
+ *
+ * @param x
+ * @param kind
+ * @returns
+ */
+function f(x: any, kind: string) {
+	if(typeof x === "string") return 1;
+	if(typeof x == kind) return 4;
+	if(typeof x != new String("undefined")) return 5;
+	if(typeof x === typeof kind) return 6;
+}

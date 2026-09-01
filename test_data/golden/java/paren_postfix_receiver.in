@@ -1,0 +1,5 @@
+class C {
+	void f() {
+		x = (a.b).c + (g()).h + (a[0]).b + (this).x + (new A()).b + ("abc").length() + ((a.b)).c + (a.b).m() + (A.class).getName() + (this.a).b;
+	}
+}

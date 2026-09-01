@@ -1,0 +1,21 @@
+/**
+ *
+ */
+function f() {
+	if(a) {
+		g();
+		h();
+	} else { // d1
+		// own
+		k();
+		m();
+	}
+	try {
+		g();
+		h();
+	} catch(e) {
+		// before catch
+		k();
+		m();
+	}
+}

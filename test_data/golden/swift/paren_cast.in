@@ -1,0 +1,9 @@
+func f(a: Any, b: Int, c: Int) -> Int {
+	let x = (a as! Int) * 2
+	let p = (b &+ c) * 2
+	let q = b << (c + 1)
+	let r = b & (c + 1)
+	let y = (a as? Int) ?? 0
+	let z = (a as! Int) << 1
+	return x + p + q + r + y + z
+}

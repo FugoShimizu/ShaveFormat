@@ -1,0 +1,10 @@
+/**
+ * ラベル付ブロックを処理する
+ * @param isReady 分岐条件
+ */
+function f(isReady) {
+	blk: {
+		if(isReady) break blk;
+		g();
+	}
+}

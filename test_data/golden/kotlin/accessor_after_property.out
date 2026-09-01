@@ -1,0 +1,16 @@
+class J {
+	var b = 0
+	private set
+}
+
+class M {
+	var count = 0
+	private set
+
+	val q get() = 1
+
+	/**
+	 *
+	 */
+	fun f() {}
+}

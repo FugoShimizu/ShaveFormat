@@ -1,0 +1,30 @@
+def m
+  ..3
+end
+
+def f(c)
+  not c ? 1 : 2
+end
+
+def g(c)
+  not(c)
+end
+
+def f(a)
+  - a
+end
+
+def g(a)
+  + a
+end
+
+def h(a)
+  - (a ** 2)
+end
+
+def foo(x) = "called #{x}"
+def bar = :BAR
+def f
+  foo:bar
+end
+p f

@@ -1,0 +1,49 @@
+<?php
+
+/**
+ * 呼出先として使用する
+ */
+function observeGoto(): void{}
+
+/**
+ * 多重ループから脱出して終了する
+ */
+function outside(): void{
+while(true) while(true) goto Done;
+Done:
+// 終了
+return;
+}
+
+/**
+ * 多重ループ脱出後の終了を省略する
+ */
+function missing(): void{
+while(true) while(true) goto Done;
+Done:
+observeGoto();
+}
+
+/**
+ * 内側だけを脱出して外側を継続する
+ */
+function inside(): void{
+while(true){
+while(true) goto Next;
+Next:
+observeGoto();
+}
+}
+
+/**
+ * 無限ループ後の終了を検査する
+ */
+function unreachable(): void{
+while(true){
+while(true) goto Next;
+Next:
+observeGoto();
+}
+// 終了
+return;
+}

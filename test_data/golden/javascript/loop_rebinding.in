@@ -1,0 +1,5 @@
+let x = 0; for(x of [1,2]) {}
+let y = ""; for(y in {a:1}) {}
+let z = 0; for({z} of [{z:3}]) {}
+let object = {}; for(object.x of [1]) {}
+console.log(x,y,z,object.x);

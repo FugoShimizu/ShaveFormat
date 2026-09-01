@@ -1,0 +1,16 @@
+/**
+ * クロージャ内の切替文を処理する
+ * @param isReady 反復条件
+ * @param code 分岐値
+ */
+function f(isReady, code) {
+	outer: while(isReady) {
+		const g = () => {
+			switch(code) {
+			default:
+				break;
+			}
+		};
+		break outer;
+	}
+}

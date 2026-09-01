@@ -1,0 +1,11 @@
+int A = 1, B = 2 /* top */;
+class K {
+	int S = 1, T = 2 /* c1 */;
+	void M() {
+		int P = 1 /* c2 */;
+		int R = 2;
+		int Q = 3 // c3
+		;
+		int U = 4;
+	}
+}

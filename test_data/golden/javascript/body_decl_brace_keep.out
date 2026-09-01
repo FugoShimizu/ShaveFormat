@@ -1,0 +1,12 @@
+/**
+ *
+ * @param a
+ */
+function foo(a) {
+	if(a === 1) {
+		const x = 1;
+	}
+	if(a === 2) {
+		var y = 2;
+	}
+}

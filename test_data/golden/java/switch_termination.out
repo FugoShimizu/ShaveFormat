@@ -1,0 +1,76 @@
+class SwitchTermination {
+	/**
+	 * 全分岐から終了する
+	 * @param Code 分岐値
+	 * @param IsReady 条件値
+	 */
+	static void All(final int Code, final boolean IsReady) {
+		switch(Code) {
+		case 0:
+			return;
+		default:
+			return;
+		}
+	}
+
+	/**
+	 * 全分岐終端後の返戻を検査する
+	 * @param Code 分岐値
+	 * @param IsReady 条件値
+	 */
+	static void AllTail(final int Code, final boolean IsReady) {
+		switch(Code) {
+		case 0:
+			return;
+		default:
+			return;
+		}
+		// 終了
+		return;
+	}
+
+	/**
+	 * 矢印形式の全分岐から終了する
+	 * @param Code 分岐値
+	 * @param IsReady 条件値
+	 */
+	static void ArrowAll(final int Code, final boolean IsReady) {
+		switch(Code) {
+		case 0 -> {
+			return;
+		}
+		default -> {
+			return;
+		}
+		}
+	}
+
+	/**
+	 * 矢印形式の空の分岐から脱出する
+	 * @param Code 分岐値
+	 * @param IsReady 条件値
+	 */
+	static void ArrowExit(final int Code, final boolean IsReady) {
+		switch(Code) {
+		case 0 -> {}
+		default -> {
+			return;
+		}
+		}
+	}
+
+	/**
+	 * 連続したラベルの分岐から終了する
+	 * @param Code 分岐値
+	 * @param IsReady 条件値
+	 */
+	static void AdjacentLabels(final int Code, final boolean IsReady) {
+		switch(Code) {
+		case 0:
+		case 1:
+			return;
+		default:
+			return;
+		}
+	}
+}

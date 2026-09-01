@@ -1,0 +1,16 @@
+#
+# @return
+def f
+	begin # b
+		g
+	rescue # r
+		h
+	else i # e
+	ensure # en
+		j
+	end
+	case x when 1 then a else b end # o
+	return xs.each do # d
+		g
+	end
+end

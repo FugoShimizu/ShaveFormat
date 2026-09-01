@@ -1,0 +1,14 @@
+class M
+	#
+	def up
+		add_column :personalized_flower_stands,
+		:template_public_id,
+		:string,
+		comment: "焼き込み元テンプレート(CgObject)のpublic_id" unless column_exists?(:personalized_flower_stands, :template_public_id)
+		# 先に複合 unique を張る
+		add_index :personalized_flower_stands,
+		%i[order_vitem_id template_public_id],
+		unique: true,
+		name: COMPOSITE unless index_exists?(:personalized_flower_stands, %i[order_vitem_id template_public_id], name: COMPOSITE)
+	end
+end

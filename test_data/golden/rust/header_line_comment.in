@@ -1,0 +1,11 @@
+fn f() {
+	loop { // l
+		g();
+	}
+	unsafe { // u
+		g();
+	}
+	match a { // m
+		_ => h(),
+	}
+}

@@ -1,0 +1,30 @@
+const v0 = <p>
+  　全角空白で字下げした段落
+</p>;
+const v1 = <p>
+  foo　
+  {x}
+</p>;
+const v2 = <p>
+	&#32;leading entity
+</p>;
+const v3 = <p>
+	foo&#32;
+	{x}
+</p>;
+const v4 = <p>&#x20;foo{x}</p>;
+const v5 = <p>foo&#x20;{x}</p>;
+const v6 = <p>{x}&#x20;{y}</p>;
+const v7 = <p>{x}&#032;{y}</p>;
+const v8 = <p>a&#x9;{x}</p>;
+const v9 = <p>
+	a&#9;
+	{x}
+</p>;
+const v10 = <p>
+	 nbsp start
+</p>;
+const v11 = <p>foo bar</p>;
+const v12 = <p>Hello, {name}!</p>;
+const v13 = <p> hi </p>;
+const v14 = <p>a{" " /* c */}b</p>;

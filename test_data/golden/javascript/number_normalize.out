@@ -1,0 +1,7 @@
+const hex = 0XDEAD_BEEF;
+const bin = 0B1010;
+const oct = 0O17;
+const exp = 1E10;
+const small = 1.5E-3;
+const big = 123n;
+const hexBig = 0XFFn;

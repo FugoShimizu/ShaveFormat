@@ -1,0 +1,15 @@
+import java.util.function.Function;
+
+@Deprecated public class OptionalParen {
+	enum Kind { X, Y, Z {} }
+
+	/**
+	 *
+	 * @param Args
+	 */
+	public static void main(String[] Args) {
+		final Function<Integer, Integer> F = x -> x + 1, G = (Integer x) -> x;
+		final java.util.function.BinaryOperator<Integer> H = (x, y) -> x + y;
+		System.out.println(F.apply(1) + G.apply(2) + H.apply(3, 4) + Kind.X.ordinal());
+	}
+}

@@ -1,0 +1,9 @@
+#include <stdio.h>
+#define STR(x) #x
+#define XSTR(x) STR(x)
+int main(void) {
+	puts(STR({ x=a*b; }));
+	puts(XSTR(a+b));
+	puts(XSTR(c*d));
+	return 0;
+}

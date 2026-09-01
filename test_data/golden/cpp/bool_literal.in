@@ -1,0 +1,31 @@
+bool Ready = 1;
+bool Done = 0;
+bool First = 1, Second = 0;
+int Count = 1;
+bool Kept = 2;
+bool Already = true;
+
+bool G();
+void F() {
+	bool *Ptr = 0;
+	bool &Ref = G();
+	bool Arr[2] = {0};
+	const bool Flag = 1;
+	const bool Done = 0;
+}
+class A {
+public:
+
+	bool Member = 1;
+	bool *MemberPtr = 0;
+	int Count = 1;
+};
+
+struct S {
+	bool *P = 0, Q = 1;
+	bool R = 1, *T = 0;
+	bool Bit : 1;
+	bool Arr[1] = {0};
+	static bool Stat;
+};
+bool S::Stat = 1;

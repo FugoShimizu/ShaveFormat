@@ -1,0 +1,14 @@
+async fn f(x: Option<S>, a: S, b: u8) -> Option<u8> {
+	let y = x?.y;
+	let w = a.b?;
+	let v = g()?;
+	let u = (-a)?;
+	let t = (a.c + b)?;
+	let s = h().await;
+	let r = (&mut k).await;
+	let q = a.b as u8;
+	let p = (a.c + b) as u8;
+	let o = -b as u8;
+	let n = (a.f)();
+	None
+}

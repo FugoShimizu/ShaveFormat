@@ -1,0 +1,4 @@
+function f() {
+    const s = "abc
+    return s;
+}

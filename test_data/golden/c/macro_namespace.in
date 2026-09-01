@@ -1,0 +1,3 @@
+NS_BEGIN(demo)
+struct Point { int X; int Y; };
+NS_END

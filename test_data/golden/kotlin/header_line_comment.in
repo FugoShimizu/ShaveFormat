@@ -1,0 +1,20 @@
+fun f() {
+	try { // t
+		g()
+	} catch (e: Exception) { // c
+		h()
+	} finally { // f
+		k()
+	}
+	val r = when (n) {
+		1 -> 10
+		else -> { // 既定
+			20
+		}
+	}
+	if (a) { // 真
+		g()
+	} else { // 偽
+		h()
+	}
+}

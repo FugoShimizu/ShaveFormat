@@ -1,0 +1,32 @@
+function eventLoop() {
+	// 無限イベントループ
+	for(;;) {
+		const evt = queue.pop();
+		if(!evt) break;
+		dispatch(evt);
+	}
+}
+
+function labeled() {
+	// label 付き
+	outer: for(;;) {
+		for(const x of items) {
+			if(done(x)) break outer;
+		}
+	}
+}
+
+function existingWhile() {
+	// 既存の while(true) は不変
+	while(true) doWork();
+}
+
+function forOf(items) {
+	// for-of は対象外
+	for(const x of items) use(x);
+}
+
+function regularFor(n) {
+	// 通常 for は対象外
+	for(let i = 0; i < n; ++i) use(i);
+}

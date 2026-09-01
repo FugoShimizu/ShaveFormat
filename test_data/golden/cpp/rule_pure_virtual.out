@@ -1,0 +1,8 @@
+class A {
+public:
+
+	virtual ~A() = 0;
+
+	virtual void Foo() = 0;
+	virtual void Bar() const = 0;
+};

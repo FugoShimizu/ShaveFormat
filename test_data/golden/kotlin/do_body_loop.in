@@ -1,0 +1,14 @@
+/**
+ * do 本体のループを処理する
+ * @param N 初期値
+ */
+fun G(N: Int) {
+	var X = N
+	do {
+		while(X > 0) {
+			--X
+		}
+	} while(X > 0)
+	// 終了
+	return
+}

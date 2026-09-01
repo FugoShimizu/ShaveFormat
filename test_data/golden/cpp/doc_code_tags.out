@@ -1,0 +1,19 @@
+/**
+ * 加算
+ * ```text
+ * @param fake 甲。乙
+ * @return
+ * ```
+ * @param First 第一値
+ * ```text
+ * first-description
+ * ```
+ * @param Second 第二値
+ * ```text
+ * second-description
+ * ```
+ * @return 結果
+ */
+int Example(const int First, const int Second) {
+	return First + Second;
+}

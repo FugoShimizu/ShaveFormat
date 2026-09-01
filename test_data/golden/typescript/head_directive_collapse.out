@@ -1,0 +1,24 @@
+declare function foo(x: number): number;
+declare function bar(x: number, y: number): number;
+
+/**
+ *
+ * @param a
+ * @returns
+ */
+export function f(a: boolean): number {
+	let r = 0;
+	// @ts-expect-error
+	if(a) r = foo("s");
+	// @ts-expect-error
+	else r = foo("t");
+	r += foo("real bug");
+	// @ts-expect-error
+	for(const k of [1]) r += foo("u");
+	// @ts-expect-error
+	r = bar(1, "t");
+	r += foo("real bug 2");
+	const x = 1; // eslint-disable-next-line no-eval
+	eval("x");
+	return r;
+}

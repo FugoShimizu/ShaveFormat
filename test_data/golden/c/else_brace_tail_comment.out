@@ -1,0 +1,12 @@
+/**
+ *
+ */
+void f(void) {
+	if(a) g(); // c
+	else {
+		h();
+		i();
+	}
+	if(a) g(); // d
+	else h();
+}

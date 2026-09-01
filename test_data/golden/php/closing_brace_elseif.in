@@ -1,0 +1,5 @@
+<?php
+function classify($value) {
+	if ($value === 1) { firstOperationWithLongName($value); secondOperationWithLongName($value); thirdOperationName($value); } elseif ($value === 2) { fallbackOperation($value); finalOperation($value); }
+	return 0;
+}

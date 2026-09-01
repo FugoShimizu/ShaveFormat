@@ -1,0 +1,14 @@
+const a = (
+	<div>
+		{items.length > 0 ? (
+			items.map((item) => (
+				<div key={item}>
+					{c ? (
+						// eslint-disable-next-line jsx-a11y/no-static-element-interactions
+						<div onClick={f} onKeyDown={f}><span>a</span></div>
+					) : (<div>b</div>)}
+				</div>
+			))
+		) : (<p>none</p>)}
+	</div>
+);

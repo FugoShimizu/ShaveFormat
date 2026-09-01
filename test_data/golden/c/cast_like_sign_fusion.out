@@ -1,0 +1,10 @@
+/**
+ *
+ * @param a
+ * @param b
+ * @return
+ */
+int f(int a, int b) {
+	int r = (a)+ ++b, s = (a)- --b;
+	return r + s;
+}

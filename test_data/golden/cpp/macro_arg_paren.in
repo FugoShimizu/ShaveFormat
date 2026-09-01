@@ -1,0 +1,8 @@
+#define EXPECT_EQ(a, b) ((void)((a) == (b)))
+
+void Verify(void) {
+	EXPECT_EQ((Pair<int, long>{ 1, 2 }), other);
+	NormalCall((alpha + bravo));
+	// 終了
+	return;
+}

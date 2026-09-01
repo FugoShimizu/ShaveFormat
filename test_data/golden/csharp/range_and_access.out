@@ -1,0 +1,5 @@
+class Sample {
+	void Slice(int[] values, int alpha, int bravo, int charlie, int delta) {
+		var part = values[(alpha + bravo)..(charlie + delta)];
+	}
+}

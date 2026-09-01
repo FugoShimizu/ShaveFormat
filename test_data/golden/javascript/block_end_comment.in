@@ -1,0 +1,14 @@
+function f(x) {
+	if (x > 0) {
+		foo();
+		// 分岐の終わり
+	} else {
+		baz();
+		// 他方
+	}
+	bar();
+	for (;;) {
+		qux();
+		// 反復
+	}
+}

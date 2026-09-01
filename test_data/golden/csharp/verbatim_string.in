@@ -1,0 +1,25 @@
+class T {
+    static void Plain() {
+        var sql = @"SELECT *
+    FROM users
+        WHERE id = 1
+
+    ORDER BY Name";
+    }
+
+    static void Interp(string name) {
+        var s = $@"hello
+    {name}
+        nested 8sp
+
+end";
+    }
+
+    static string Hole(bool a, int b, int c, double v) {
+        return $"{(a ? b : c):D2} {v.ToString("F2")}";
+    }
+
+    static bool After() {
+        return false;
+    }
+}

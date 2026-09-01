@@ -1,0 +1,6 @@
+function foo() {
+	const a: number = 1;
+	const b: number = 2;
+	const c: string = "x";
+	const d: string = "y";
+}

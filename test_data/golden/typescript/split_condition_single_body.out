@@ -1,0 +1,38 @@
+/**
+ *
+ * @param sourceText
+ * @param position
+ * @param languageMode
+ * @param handlers
+ */
+function registerHandler(sourceText: string, position: number, languageMode: number, handlers: number[]): void {
+	if(
+		position < sourceText.length && sourceText[position] !== "\n" &&
+		shouldBreakAfterExpandedBrace("\n}", sourceText.substring(position), languageMode)
+	) handlers.push(position);
+	for(let lineIndex = sourceText.indexOf("\n"); lineIndex !== -1; lineIndex = sourceText.indexOf("\n", lineIndex + 1)) {
+		handlers.push(lineIndex + 1);
+	}
+	if(
+		position < sourceText.length && sourceText[position] !== "\n" &&
+		shouldBreakAfterExpandedBrace("\n}", sourceText.substring(position), languageMode)
+	) reportDiagnostic("the closing brace of an expanded block must not share its line with a following closing bracket", position);
+}
+
+/**
+ *
+ * @param sourceText
+ * @param position
+ * @param languageMode
+ */
+function reportHandler(sourceText: string, position: number, languageMode: number): void {
+	if(
+		position < sourceText.length && sourceText[position] !== "\n" &&
+		shouldBreakAfterExpandedBrace("\n}", sourceText.substring(position), languageMode)
+	) {
+		reportDiagnostic(
+			"the closing brace of an expanded block must not share its line with any following closing bracket token",
+			position
+		);
+	}
+}

@@ -1,0 +1,5 @@
+#define VALUE 1
+
+#define APPLY(x) (x)
+
+#define OTHER 2

@@ -1,0 +1,11 @@
+#
+# @param g
+# @return
+def f(
+	g = -> {
+		a
+		b
+	}
+)
+	return g.call
+end

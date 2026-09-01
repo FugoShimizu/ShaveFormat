@@ -1,0 +1,9 @@
+fun f(n: Int, a: Boolean): Any {
+    return when (n) {
+        1 -> if (a) "a"
+             else "b"
+        n + 1 -> if (a) "c" // c1
+            else "d" // c2
+        else -> 6
+    }
+}

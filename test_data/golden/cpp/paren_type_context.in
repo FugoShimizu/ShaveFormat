@@ -1,0 +1,5 @@
+int x = 1;
+decltype((x)) y = x;
+bool g(int i, int n) { return i < (n >> 1); }
+struct S { int v = x; int a = b, c = d; };
+void h(int c, int b, int d) { (c ? b : d) = 5; }

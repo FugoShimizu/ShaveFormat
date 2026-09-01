@@ -1,0 +1,3 @@
+#if defined(FEATURE_ALPHA_ENABLED) && defined(FEATURE_BETA_ENABLED) && defined(FEATURE_GAMMA_ENABLED) && !defined(FEATURE_DELTA_DISABLED)
+int Mode = 1;
+#endif

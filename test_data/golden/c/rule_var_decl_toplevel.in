@@ -1,0 +1,12 @@
+int A;
+int B;
+int C, D;
+
+#ifdef FEATURE
+int E, F;
+#endif
+
+void Foo(void) {
+	const int X = 1;
+	const int Y = 2;
+}

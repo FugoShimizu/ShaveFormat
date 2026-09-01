@@ -1,0 +1,23 @@
+fun f(enabled: Boolean, list: List<Int>) {
+    if (!enabled) return
+    (list as MutableList<*>).clear()
+    g()
+    (list).size
+    return
+    (list)
+}
+fun g(items: List<Int>, c: Boolean): Int {
+    var next = 0
+    items.forEach { next++ }
+    val a = items.map { next++ }
+    val r = if (c) { next++ } else { 0 }
+    val w = when (c) { true -> { next-- } else -> 0 }
+    lateinit var s: String
+    next++
+    return r + w + a.size
+}
+fun k(x: Any) = when (x) {
+    !is String -> 1
+    !in listOf(1) -> 2
+    else -> 3
+}

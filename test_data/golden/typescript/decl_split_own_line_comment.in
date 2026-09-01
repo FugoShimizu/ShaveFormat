@@ -1,0 +1,12 @@
+function f() {
+	const a = g(); // a の説明
+	// b の説明
+	const b = g();
+	/** c */
+	const c = g(); /* c2 */
+	/**
+	 * d
+	 */
+	const d = g();
+	return [a, b, c, d];
+}

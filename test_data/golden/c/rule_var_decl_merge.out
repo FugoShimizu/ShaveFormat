@@ -1,0 +1,7 @@
+/**
+ *
+ */
+void Foo(void) {
+	const int A = 1, B = 2, C = 3;
+	const float X = 1.0F, Y = 2.0F;
+}

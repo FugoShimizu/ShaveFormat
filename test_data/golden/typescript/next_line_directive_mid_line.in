@@ -1,0 +1,9 @@
+const p = [1].map((v) => {
+  return v;
+  // @ts-ignore
+}).filter((v: string) => v);
+const q: number = "s";
+if (a) {
+  x();
+  // @ts-expect-error
+} else { const bad: number = "s"; }

@@ -1,0 +1,32 @@
+func f(x: Int?, y: Int) -> Int {
+	switch y {
+	case (1):
+		return 1
+	default:
+		break
+	}
+	if case (let v?) = x {
+		return v
+	}
+	return 0
+}
+let x: Int? = 1
+if case .some(let v) = x { print(v) }
+if case (let w) = x { print(w as Any) }
+if case .some(1) = x { print(1) }
+if case (.some(let u)) = x { print(u) }
+switch x {
+case (.some(let k)):
+	print(k)
+case (nil):
+	break
+default:
+	break
+}
+switch p {
+case let (x, y):
+	print(x, y)
+default:
+	break
+}
+if case let (x, y) = p { print(x) }

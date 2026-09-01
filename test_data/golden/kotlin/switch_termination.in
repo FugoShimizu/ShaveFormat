@@ -1,0 +1,37 @@
+/**
+ * 全分岐から終了する
+ * @param Code 分岐値
+ * @param IsReady 条件値
+ */
+fun All(Code: Int, IsReady: Boolean){when(Code){0 -> return
+else -> return
+}}
+
+/**
+ * 全分岐終端後の返戻を検査する
+ * @param Code 分岐値
+ * @param IsReady 条件値
+ */
+fun AllTail(Code: Int, IsReady: Boolean){when(Code){0 -> return
+else -> return
+}
+// 終了
+return
+}
+
+/**
+ * 分岐から切替文の外へ脱出する
+ * @param Code 分岐値
+ * @param IsReady 条件値
+ */
+fun Exit(Code: Int, IsReady: Boolean){when(Code){0 -> {}
+else -> return
+}}
+
+/**
+ * 一致しない値は素通りする
+ * @param Code 分岐値
+ * @param IsReady 条件値
+ */
+fun NoDefault(Code: Int, IsReady: Boolean){when(Code){0 -> return
+}}

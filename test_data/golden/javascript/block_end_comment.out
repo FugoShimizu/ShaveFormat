@@ -1,0 +1,10 @@
+/**
+ *
+ * @param x
+ */
+function f(x) {
+	if(x > 0) foo(); // 分岐の終わり
+	else baz(); // 他方
+	bar();
+	while(true) qux(); // 反復
+}

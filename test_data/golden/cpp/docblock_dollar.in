@@ -1,0 +1,10 @@
+/**
+ * 計算する
+ * @param Cost 単価は $5 を基準にする
+ * @param Name 名前（`${Name}` の形で埋込む）
+ * @return 合計
+ */
+int Compute(int Cost, int Name) {
+	// 返戻する
+	return Cost + Name;
+}

@@ -1,0 +1,101 @@
+package main
+
+// G は段数の上限丁度の検体
+func G(a bool) {
+x := 0
+if a {
+x = 0
+if a {
+x = 1
+if a {
+x = 2
+if a {
+x = 3
+if a {
+x = 4
+if a {
+x = 5
+if a {
+x = 6
+if a {
+x = 7
+if a {
+x = 8
+if a {
+x = 9
+if a {
+x = 10
+if a {
+x = 11
+if a {
+x = 12
+if a {
+x = 13
+if a {
+x = 14
+if a {
+x = 15
+if a {
+x = 16
+if a {
+x = 17
+if a {
+x = 18
+if a {
+x = 19
+if a {
+x = 20
+if a {
+x = 21
+if a {
+x = 22
+if a {
+x = 23
+if a {
+x = 24
+if a {
+x = 25
+if a {
+x = 26
+if a {
+x = 27
+if a {
+x = 28
+if a {
+x = 29
+if a {
+x = 30
+x = 1
+}
+}
+}
+}
+}
+}
+}
+}
+}
+}
+}
+}
+}
+}
+}
+}
+}
+}
+}
+}
+}
+}
+}
+}
+}
+}
+}
+}
+}
+}
+}
+_ = x
+}

@@ -1,0 +1,38 @@
+name: Install tree-sitter CLI
+description: 版と検証値を固定した tree-sitter の CLI を GitHub Release から取得して PATH へ置く
+
+# npm の tree-sitter-cli は導入時の台本が取得した実行ファイルを照合しない為，Release の配布物を SHA-256 で照合して使う
+# 検証値は GitHub Release の v0.26.8 の各配布物の値（版を上げる時は全ての値を差し替える）
+runs:
+  using: composite
+  steps:
+    - name: Download and verify
+      shell: bash
+      run: |
+        case "$RUNNER_OS-$RUNNER_ARCH" in
+          Linux-X64) asset=tree-sitter-linux-x64; sum=9754a32800f0b970152782df177b4a47c711e34e651a7aceb384d8bd29fa136e ;;
+          Linux-ARM64) asset=tree-sitter-linux-arm64; sum=e339d6533b20830dd1666fe320aff85d301b3f59964a3836870b77f4827f9a17 ;;
+          macOS-X64) asset=tree-sitter-macos-x64; sum=d0daa279054c1d1cedb08f5ca784b451ceb1f0e6b083b112d07317958ae77fe0 ;;
+          macOS-ARM64) asset=tree-sitter-macos-arm64; sum=024e2cee34723524d62d41bde4d2b4af23c8bbe0236e116c79c0b37d9575889e ;;
+          Windows-X64) asset=tree-sitter-windows-x64; sum=28301a969412066bf4818c30c71d9c313091a9b9dc24b53a14ddda3a8e2cc2bb ;;
+          *) echo "::error::no pinned tree-sitter CLI for $RUNNER_OS-$RUNNER_ARCH"; exit 1 ;;
+        esac
+        dir="$RUNNER_TEMP/tree-sitter-cli";
+        mkdir -p "$dir";
+        url="https://github.com/tree-sitter/tree-sitter/releases/download/v0.26.8/$asset.gz";
+        curl_args=(-fsSL --proto "=https" --tlsv1.2 --retry 3);
+        curl_args+=(--connect-timeout 30 --max-time 300 --max-filesize 52428800);
+        curl "${curl_args[@]}" -o "$dir/cli.gz" "$url";
+        # Windows の経路の `\` で GNU の sha256sum が値の頭に `\` を付ける為，標準入力から求める
+        if command -v sha256sum > /dev/null; then
+          actual=$(sha256sum < "$dir/cli.gz");
+        else
+          actual=$(shasum -a 256 < "$dir/cli.gz");
+        fi
+        # 照合に失敗すれば展開も実行もせずに止める
+        [ "${actual%% *}" = "$sum" ] || { echo "::error::checksum mismatch for $asset.gz"; exit 1; }
+        exe=tree-sitter;
+        if [ "$RUNNER_OS" = Windows ]; then exe=tree-sitter.exe; fi
+        gunzip -c "$dir/cli.gz" > "$dir/$exe";
+        chmod +x "$dir/$exe";
+        echo "$dir" >> "$GITHUB_PATH";

@@ -1,0 +1,18 @@
+/**
+ *
+ * @param elems
+ * @param callback
+ * @returns
+ */
+function map(elems, callback) {
+	var i = 0, ret = [];
+	if(isArray) for(; i < elems.length; ++i) {
+		ret.push(callback(elems[i]));
+		++count;
+	// Go through every key on the object
+	} else for(i in elems) {
+		ret.push(callback(elems[i]));
+		++count;
+	}
+	return ret;
+}

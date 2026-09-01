@@ -1,0 +1,27 @@
+val a = f();
+
+(a as? String)?.length
+
+println(a);
+
+::println
+
+val l = listOf(1);
+
+[1, 2]
+
+fun g() {
+	a(); (b)
+}
+
+/**
+ *
+ */
+fun h() {
+	val a = g();
+	(0..3).forEach {
+		println(it)
+	}
+	val r = a;
+	::println
+}

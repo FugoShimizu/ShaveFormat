@@ -1,0 +1,11 @@
+func compute(alphaValue: Int, bravoValue: Int, charlieValue: Int, deltaValue: Int, echoValue: Int, foxtrotValue: Int) -> Int {
+	let total =
+	alphaValue + bravoValue + charlieValue + deltaValue + echoValue + foxtrotValue + alphaValue + bravoValue + charlieValue +
+	deltaValue + echoValue + foxtrotValue
+	let flag = alphaValue > 0 && bravoValue > 0 &&
+	charlieValue > 0 && deltaValue > 0 && echoValue > 0 && foxtrotValue > 0 && alphaValue > 0 && bravoValue > 0 && charlieValue > 0
+	let picked = flag ?
+	alphaValue + bravoValue + charlieValue + deltaValue + echoValue + foxtrotValue :
+	alphaValue + bravoValue + charlieValue + deltaValue + echoValue + total
+	return total + picked
+}

@@ -1,0 +1,3 @@
+@[JvmStatic JvmOverloads] fun compute(alpha: Int = 1): Int {
+	return alpha
+}

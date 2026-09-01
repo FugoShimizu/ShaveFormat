@@ -1,0 +1,10 @@
+<?php
+
+$item = 1;
+?>
+<li><?= $item; /* note */ ?></li>
+<li><?= $item; // line note ?></li>
+<li><?php echo $item; /* lead */ ?></li>
+<?php foreach([1] as $x): // loop ?>
+  <b><?= $x; ?></b>
+<?php endforeach; /* end */ ?>

@@ -1,0 +1,52 @@
+class SwitchTermination {
+/// <summary>全分岐から終了する</summary>
+/// <param name="Code">分岐値</param>
+/// <param name="IsReady">条件値</param>
+static void All(int Code,bool IsReady){switch(Code){case 0:return;default:return;}}
+
+/// <summary>全分岐終端後の返戻を検査する</summary>
+/// <param name="Code">分岐値</param>
+/// <param name="IsReady">条件値</param>
+static void AllTail(int Code,bool IsReady){switch(Code){case 0:return;default:return;}
+// 終了
+return;}
+
+/// <summary>次の分岐へ転送して終了する</summary>
+/// <param name="Code">分岐値</param>
+/// <param name="IsReady">条件値</param>
+static void GotoReturn(int Code,bool IsReady){switch(Code){case 0:goto default;default:return;}}
+
+/// <summary>次の分岐へ転送して脱出する</summary>
+/// <param name="Code">分岐値</param>
+/// <param name="IsReady">条件値</param>
+static void GotoBreak(int Code,bool IsReady){switch(Code){case 0:goto default;default:break;}}
+
+/// <summary>ループから次の分岐へ転送して終了する</summary>
+/// <param name="Code">分岐値</param>
+/// <param name="IsReady">条件値</param>
+static void GotoLoop(int Code,bool IsReady){switch(Code){case 0:while(true){goto default;}default:return;}}
+
+/// <summary>後で宣言した局所関数を呼出して終了する</summary>
+/// <param name="Code">分岐値</param>
+/// <param name="IsReady">条件値</param>
+static void LocalAfter(int Code,bool IsReady){switch(Code){case 0:Local();return;default:return;} 
+/// <summary>呼出元へ戻る</summary>
+void Local(){return;}}
+
+/// <summary>同じ分岐の局所関数を呼出して終了する</summary>
+/// <param name="Code">分岐値</param>
+/// <param name="IsReady">条件値</param>
+static void LocalInCase(int Code,bool IsReady){switch(Code){case 0:Local();return;
+/// <summary>呼出元へ戻る</summary>
+void Local(){return;}default:return;}}
+
+/// <summary>閉じた分岐間転送を繰返す</summary>
+/// <param name="Code">分岐値</param>
+/// <param name="IsReady">脱出条件</param>
+static void GotoCycle(int Code,bool IsReady){switch(Code){case 0:goto default;default:goto case 0;}}
+
+/// <summary>分岐間転送の途中で脱出する</summary>
+/// <param name="Code">分岐値</param>
+/// <param name="IsReady">脱出条件</param>
+static void GotoCycleExit(int Code,bool IsReady){switch(Code){case 0:if(IsReady)break;goto default;default:goto case 0;}}
+}

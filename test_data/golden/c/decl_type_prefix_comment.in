@@ -1,0 +1,6 @@
+void f() {
+	const /* c */ int a = 1;
+	const /* d */ int b = 2;
+	const int /* e */ c = 3;
+	const /* f */ int d = 4;
+}

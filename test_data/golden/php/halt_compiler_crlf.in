@@ -1,0 +1,5 @@
+<?php
+echo  1;
+__halt_compiler();
+DATA
+lineX

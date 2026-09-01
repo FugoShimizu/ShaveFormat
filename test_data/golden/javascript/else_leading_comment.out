@@ -1,0 +1,20 @@
+/**
+ *
+ * @param a
+ */
+function f(a) {
+	if(a) {
+		x();
+		z();
+		// before else
+	} else {
+		y();
+		w();
+	}
+	try {
+		x();
+		// before catch
+	} catch(e) {
+		y();
+	}
+}

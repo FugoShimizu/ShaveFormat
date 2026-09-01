@@ -1,0 +1,12 @@
+puts(items.map { |i| i * 2 }.sum)
+foo(a, b.each { |x| x })
+
+w = foo(-> { 1 })
+v = foo(->(&blk) { blk.call })
+
+u = foo(
+	items.map { |i|
+		a = i
+		a
+	}
+)

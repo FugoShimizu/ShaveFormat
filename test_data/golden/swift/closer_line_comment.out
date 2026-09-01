@@ -1,0 +1,12 @@
+func f() {
+	do {
+		try g()
+	} catch { // t1
+		h()
+	} // t2
+	if c {
+		g()
+	} else { // c1
+		h()
+	}
+}

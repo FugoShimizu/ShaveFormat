@@ -1,0 +1,32 @@
+/**
+ *
+ * @param a
+ * @param n
+ * @return
+ */
+fun f(a: Boolean, n: Int): Any {
+	var x = 0
+	val y = if(a) {
+		x = 1
+	} else 2
+	if(a) x = 2
+	when(n) {
+		1 -> foo()
+		2 -> x = 3
+		3 -> if(a) bar() else baz()
+		else -> {}
+	}
+	val z = when(n) {
+		1 -> "a"
+		2 -> {
+			x = 4
+		}
+		else -> "b"
+	}
+	listOf(1).forEach {
+		if(a) {
+			x = 5
+		}
+	}
+	return y
+}

@@ -1,0 +1,83 @@
+{
+	"name": "shavefmt",
+	"displayName": "ShaveFormat",
+	"description":
+	"Opinionated multi-language code formatter for 16 languages (C/C++/C#/Java/Go/Rust/Kotlin/Swift/PHP/JS/TS/Ruby/Python/JSON/HTML/CSS).",
+	"version": "0.1.0",
+	"publisher": "foogoo",
+	"license": "MIT",
+	"icon": "icon.png",
+	"galleryBanner": { "color": "#1e1e2e", "theme": "dark" },
+	"repository": { "type": "git", "url": "https://github.com/FugoShimizu/ShaveFormat.git" },
+	"bugs": { "url": "https://github.com/FugoShimizu/ShaveFormat/issues" },
+	"homepage": "https://github.com/FugoShimizu/ShaveFormat#readme",
+	"engines": { "vscode": "^1.80.0" },
+	"categories": ["Formatters", "Linters", "Programming Languages"],
+	"keywords": [
+		"formatter",
+		"format",
+		"code formatter",
+		"multi-language",
+		"opinionated",
+		"c",
+		"cpp",
+		"c++",
+		"csharp",
+		"java",
+		"go",
+		"rust",
+		"kotlin",
+		"swift",
+		"php",
+		"javascript",
+		"typescript",
+		"ruby",
+		"python",
+		"json",
+		"html",
+		"css",
+		"prettier-alternative",
+		"linter",
+		"lint",
+		"diagnostics",
+		"warnings"
+	],
+	"capabilities": {
+		"untrustedWorkspaces":
+		{ "supported": false, "description": "Runs the bundled formatter binary, so it works only in trusted workspaces" }
+	},
+	"activationEvents": [
+		"onLanguage:c",
+		"onLanguage:cpp",
+		"onLanguage:csharp",
+		"onLanguage:java",
+		"onLanguage:go",
+		"onLanguage:rust",
+		"onLanguage:kotlin",
+		"onLanguage:swift",
+		"onLanguage:php",
+		"onLanguage:javascript",
+		"onLanguage:javascriptreact",
+		"onLanguage:typescript",
+		"onLanguage:typescriptreact",
+		"onLanguage:ruby",
+		"onLanguage:python",
+		"onLanguage:json",
+		"onLanguage:jsonc",
+		"onLanguage:html",
+		"onLanguage:css",
+		"onLanguage:scss"
+	],
+	"main": "./out/extension.js",
+	"contributes": {
+		"configuration": {
+			"title": "ShaveFormat",
+			"properties": {
+				"shavefmt.chars":
+				{ "type": "integer", "default": 128, "minimum": 0, "description": "Maximum characters per line (0 = unlimited)" }
+			}
+		}
+	},
+	"scripts": { "build": "tsc -p .", "watch": "tsc -watch -p .", "vscode:prepublish": "npm run build" },
+	"devDependencies": { "@types/node": "^20.0.0", "@types/vscode": "^1.80.0", "@vscode/vsce": "3.9.2", "typescript": "^5.0.0" }
+}

@@ -1,0 +1,1 @@
+class C { void f(boolean a, boolean b) { if(a) { if(b) { int x = read(); /* first */ int y = read(); /* second */ use(x, y); } } } }

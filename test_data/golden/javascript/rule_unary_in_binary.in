@@ -1,0 +1,6 @@
+function f(e, r) {
+	return e[0] + "e" + (+e[1] + r);
+}
+function g(value) {
+	return "new/" + value + "/" + (++X.uniquifier);
+}

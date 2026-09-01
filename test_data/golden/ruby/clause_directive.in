@@ -1,0 +1,6 @@
+begin
+  a
+  # prettier-ignore
+rescue
+  b
+end

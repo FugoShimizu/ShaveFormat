@@ -1,0 +1,16 @@
+template<typename T>
+class Container {
+public:
+	Container() : Size(0) {}
+	void Add(const T &Item) {
+		if(Size < Capacity) Items[Size++] = Item;
+		else if(CanGrow()) {
+			Grow();
+			Items[Size++] = Item;
+		}
+	}
+private:
+	T Items[100];
+	int Size;
+	int Capacity = 100;
+};

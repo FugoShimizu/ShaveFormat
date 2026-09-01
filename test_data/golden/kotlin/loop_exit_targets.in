@@ -1,0 +1,22 @@
+/**
+ * 外側のループから脱出する
+ * @return 到達時の値
+ */
+fun OuterExit():Int{Outer@ while(true){println(0);while(true){println(1);break@Outer}}}
+/**
+ * 内側のループだけを脱出する
+ * @return 返戻しない
+ */
+fun InnerExit():Int{while(true){println(0);Inner@ while(true){println(1);break@Inner}}}
+/**
+ * 外側のループを継続する
+ * @return 返戻しない
+ */
+fun OuterContinue():Int{Outer@ while(true){println(0);while(true){println(1);continue@Outer}}}
+/**
+ * 外側脱出後に値を返す
+ * @return 定値 1
+ */
+fun Finished():Int{Outer@ while(true){println(0);while(true){println(1);break@Outer}}
+// 値の返戻
+return 1}

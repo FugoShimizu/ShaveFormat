@@ -1,0 +1,47 @@
+/**
+ * 呼出先として使用する
+ */
+void ObserveGoto() {}
+
+/**
+ * 多重ループから脱出して終了する
+ */
+void Outside() {
+	while(1) while(1) goto Done;
+Done:
+	// 終了
+	return;
+}
+
+/**
+ * 多重ループ脱出後の終了を省略する
+ */
+void Missing() {
+	while(1) while(1) goto Done;
+Done:
+	ObserveGoto();
+}
+
+/**
+ * 内側だけを脱出して外側を継続する
+ */
+void Inside() {
+	while(1) {
+		while(1) goto Next;
+	Next:
+		ObserveGoto();
+	}
+}
+
+/**
+ * 無限ループ後の終了を検査する
+ */
+void Unreachable() {
+	while(1) {
+		while(1) goto Next;
+	Next:
+		ObserveGoto();
+	}
+	// 終了
+	return;
+}

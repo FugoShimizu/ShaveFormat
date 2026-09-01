@@ -1,0 +1,38 @@
+// === rule_docgen_generate ===
+/**
+ *
+ * @param a
+ * @param b
+ * @returns
+ */
+function add(a: number, b: number): number {
+	return a + b;
+}
+
+/**
+ *
+ */
+function reset(): void {
+	state = 0;
+}
+
+/**
+ *
+ * @param value
+ * @returns
+ */
+function infer(value: string) {
+	return value.length;
+}
+
+// === rule_docgen_reconcile ===
+/**
+ * 範囲を切り詰める
+ * @param value 対象値
+ * @param lower
+ * @param upper
+ * @returns 切詰結果
+ */
+function clamp(value: number, lower: number, upper: number): number {
+	return Math.min(Math.max(value, lower), upper);
+}

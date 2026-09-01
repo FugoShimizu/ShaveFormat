@@ -1,0 +1,95 @@
+// === rule_if_merge_and ===
+int F(const int A, const int B, const int C) {
+	if(A) if(B) return 1;
+	if(A) if(B) if(C) return 2;
+	if(A) if(B || C) return 3;
+	return 0;
+}
+
+// === rule_if_merge_comments ===
+int F(const int A, const int B, const int C) {
+	// outer-A
+	if(A)
+		// inner-B
+		if(B)
+			// before-return
+			return 1;
+	// before-or-1
+	if(A) return 0;
+	// before-or-2
+	if(B) return 0;
+	// before-or-3
+	if(C) return 0;
+	// tail
+	return 9;
+}
+
+// === rule_if_merge_exit ===
+void F(const int A, const int B, const int C) {
+	for(int I = 0; I < 10; ++I) {
+		if(A) continue;
+		if(B) continue;
+		if(C) break;
+		if(A > 0) break;
+		if(I == 0) goto Done;
+		if(I == 1) goto Done;
+	}
+	if(A) goto Done;
+	if(B) goto Other;
+	return;
+Done:
+	return;
+Other:
+	return;
+}
+
+// === rule_if_merge_init ===
+int F(const int A, const int B) {
+	if(int X = 0; X) if(A) return 1;
+	if(int Y = A; Y) if(B) if(Y > 0) return 2;
+	if(A) if(B) if(int Z = 0; Z) return 3;
+	return 0;
+}
+
+// === rule_if_merge_or_return ===
+int F(const int A, const int B, const int C, const int D) {
+	if(A) return 1;
+	if(B) return 1;
+	if(C) return 1;
+	if(D) return 1;
+	if(A) return 2;
+	if(B) return 3;
+	if(A || B) return 4;
+	if(C) return 4;
+	return 0;
+}
+
+// === rule_if_merge_reject ===
+int F(const int A, const int B, const int C) {
+	if(A) if(int X = 1; X) return 1;
+	if(int Y = 0; Y) if(A) return 1;
+	if(A) if(B) return 1;
+	else return 2;
+	if(A) {
+		if(B) return 3;
+		if(C) return 4;
+	}
+	if(int Z = 0; Z) return 0;
+	if(A) return 0;
+	if(B) return 0;
+	if(A) return 4;
+	if(B) return 5;
+	return 0;
+}
+
+// === rule_if_merge_sideeffect ===
+int F() {
+	int A = 0, B = 0;
+	if(A++) if(B) return 1;
+	if(A) if(A++) return 2;
+	if(A++) return 3;
+	if(B) return 3;
+	if(A++) return 4;
+	if(A) return 4;
+	return 0;
+}

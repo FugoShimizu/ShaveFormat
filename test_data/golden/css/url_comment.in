@@ -1,0 +1,7 @@
+.a { background: url(http://x/*y*/z.png); }
+.b { background: URL(http://x/y.png); }
+.c { background: url(a/*b); }
+.d { color: red; }
+@media screen {
+.e { color: red; }
+}

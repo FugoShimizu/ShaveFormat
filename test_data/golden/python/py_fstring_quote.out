@@ -1,0 +1,4 @@
+x = f"{d['key']}"
+m = f"hi {n}"
+b = b"bytes"
+r = r"\d+"

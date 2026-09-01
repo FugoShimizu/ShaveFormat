@@ -1,0 +1,25 @@
+class A {
+	/**
+	 *
+	 * @param parameterNumberOne
+	 * @param parameterTwo
+	 * @param parameterThree
+	 * @return
+	 */
+	fun g(
+		parameterNumberOne: SomeLongType,
+		parameterTwo: AnotherType,
+		parameterThree: Third
+	): Boolean = true
+
+	/**
+	 *
+	 * @param p
+	 * @return
+	 */
+	private fun longFunctionNameThatIsVeryLongIndeedAndLongerStillAndEvenLongerThanThatOne(
+		p: SomeLongTypeName
+	): Boolean {
+		return true
+	}
+}

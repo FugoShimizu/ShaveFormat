@@ -1,0 +1,4 @@
+val hex = 0xff
+val exp = 1.5e3
+val long = 1L
+val float = 1.5f

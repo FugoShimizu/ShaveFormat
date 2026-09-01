@@ -1,0 +1,7 @@
+#define PTR char *
+void f(void) {
+	PTR a;
+	PTR b;
+	PTR const q = 0;
+	static int const s = 1;
+}

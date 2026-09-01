@@ -1,0 +1,2 @@
+// list
+{ "items": [1, 2], "child": { "value": 1 } } /* tail */

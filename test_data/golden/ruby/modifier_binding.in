@@ -1,0 +1,39 @@
+if (x = 1)
+  p x
+end
+unless (y = nil)
+  p y
+end
+
+def items
+	[]
+end
+
+def f(k)
+	if items.empty?
+		items = [2]
+	end
+	x = 1
+	if x > 0
+		x = 2
+	end
+	if k
+		k = 5
+	end
+	[1].each { m = 1 }
+	if m
+		m = 3
+	end
+	return [items, x, k]
+end
+
+x = 1
+if x
+  y = 1..
+end
+while false
+  m 1..
+end
+if x
+  p m a:
+end

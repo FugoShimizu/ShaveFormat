@@ -1,0 +1,17 @@
+#include <functional>
+
+void a();
+void b();
+
+/**
+ *
+ * @param g
+ */
+void f(
+	std::function<void()> g = [] {
+		a();
+		b();
+	}
+) {
+	g();
+}

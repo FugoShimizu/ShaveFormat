@@ -1,0 +1,6 @@
+void F() {
+struct S { int Value; } FirstObjectWithLongIdentifierToExerciseDeclarationWrappingWithoutDuplicatingTheType, SecondObjectWithLongIdentifierToExerciseDeclarationWrappingWithoutDuplicatingTheType;
+struct { int Value; } A;
+struct { int Value; } B;
+static_assert(!__is_same(decltype(A), decltype(B)));
+}

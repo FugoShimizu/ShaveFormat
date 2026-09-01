@@ -1,0 +1,1 @@
+void f(int a, int b) { if(a) { if(b) { int x = read(); /* first */ int y = read(); /* second */ use(x, y); } } }

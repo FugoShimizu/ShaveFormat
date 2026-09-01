@@ -1,0 +1,9 @@
+export const A = ({ id, onRequestDelete, ti, styles }) => (
+	<View style={styles.wrap}>
+		<Pressable
+			onPress={() => onRequestDelete && onRequestDelete(id)}
+			accessibilityLabel={ti("delete")}
+			style={styles.deleteButton}
+		>Text</Pressable>
+	</View>
+);

@@ -1,0 +1,27 @@
+def m_guard(x)
+	if x
+		return 1
+	end
+	2
+end
+
+def m_unless(x)
+	unless x
+		1
+	end
+end
+
+def m_while(x)
+	i = 0
+	while x && i < 3
+		i += 1
+	end
+	i
+end
+
+def m_value(x)
+	y = if x
+		1
+	end
+	y
+end

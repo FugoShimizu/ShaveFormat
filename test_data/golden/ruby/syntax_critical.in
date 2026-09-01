@@ -1,0 +1,24 @@
+def initialize(name:, age: 0, **opts)
+  @name = name
+  @age = age
+end
+
+def name=(value)
+  @name = value
+end
+
+def fetch
+  yield(row, dry_run) if block_given?
+  user&.id
+  obj&.method(arg)
+end
+
+def parse_datetime(value)
+  return nil if value.blank?
+  Time.zone.parse(value.to_s)
+rescue ArgumentError
+  nil
+end
+
+h = { name: "alice", age: 30 }
+proc = ->(x:, y: 1) { x + y }

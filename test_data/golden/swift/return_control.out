@@ -1,0 +1,66 @@
+enum Failure : Error {
+	case failed
+}
+
+/// 定値 1 を返す
+func returned() -> Int {
+	return 1
+}
+
+/// 失敗を送出する
+func thrown() throws -> Int {
+	throw Failure.failed
+}
+
+/// 定値 2 を出力する
+func omitted() -> Void {
+	print(2)
+}
+
+/// ループから脱出する
+func broken() -> Void {
+	while true {
+		break
+	}
+}
+
+/// 処理を繰返す
+func continued() -> Void {
+	while true {
+		continue
+	}
+}
+
+/// flag が真なら 1，偽なら 2 を返す
+func branched(_ flag: Bool) -> Int {
+	if flag {
+		return 1
+	} else {
+		return 2
+	}
+}
+
+/// flag が真の間，定値 3 を出力する
+func multiple(_ flag: Bool) -> Void {
+	while true, flag {
+		print(3)
+	}
+}
+
+/// 真の条件列で処理を繰返す
+func always() -> Void {
+	while true, true {
+		continue
+	}
+}
+
+/// a が真なら 1，b が真なら 2，其の他は 3 を返す
+func chained(_ a: Bool, _ b: Bool) -> Int {
+	if a {
+		return 1
+	} else if b {
+		return 2
+	} else {
+		return 3
+	}
+}

@@ -1,0 +1,13 @@
+/**
+ *
+ * @param sourceText
+ * @param position
+ * @param languageMode
+ * @param handlers
+ */
+fun register(sourceText: String, position: Int, languageMode: Int, handlers: MutableList<Int>) {
+	if(
+		position < sourceText.length && sourceText[position] != '\n' &&
+		shouldBreakAfterExpandedBrace("\n}", sourceText.substring(position), languageMode)
+	) handlers.add(position)
+}

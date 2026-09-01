@@ -1,0 +1,12 @@
+fn f(a: i32, bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb: i32, cccccccccccccccccccccccccccccccc: i32) -> i32 {
+	if a == 0 {
+		1
+	} else if bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb == cccccccccccccccccccccccccccccccc &&
+	aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa(bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb, cccccccccccccccccccccccccccccccc) {
+		2
+	} else if a == 3 {
+		3
+	} else {
+		4
+	}
+}

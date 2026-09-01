@@ -1,0 +1,7 @@
+/** ラベルの後のループを処理する */
+function f() {
+	lbl: console.log(1);
+	for(let k = 0; k < 3; k++) {
+		console.log(k);
+	}
+}

@@ -1,0 +1,1 @@
+6:2: Consider `const` if mutation, type, and initialization behavior are unchanged

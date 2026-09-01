@@ -1,0 +1,15 @@
+[Serializable()]
+class Point {
+	public int X;
+	void F() {
+		Func<int, int> f = (x) => x;
+		var g = async (x) => x;
+		var h = static (x) => x;
+		var k = [A] (x) => x;
+		var m = int (x) => x;
+		var n = async (x, y) => x;
+		var p = new Point() { X = 1 };
+		var q = new Point();
+		var r = new List<int>() { 1 };
+	}
+}

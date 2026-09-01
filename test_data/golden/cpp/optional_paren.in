@@ -1,0 +1,6 @@
+auto f = []() { return 1; };
+auto g = []() mutable { return 2; };
+auto h = []() -> int { return 3; };
+auto k = [&]() noexcept { return 4; };
+auto m = []<class T>() { return sizeof(T); };
+auto n = [](int x) { return x; };

@@ -1,0 +1,8 @@
+declare function foo(a: number, b: number): number | null;
+declare const items: { id: number }[];
+const v = foo(
+  1 ,2 )!;
+const item = items.find((x) => {
+        return x.id  ===  1;
+})!;
+const w = <any> foo( 1,2 );

@@ -1,0 +1,18 @@
+/**
+ * 同一本体の分岐を検査する関数
+ * @param a 条件 A
+ * @param b 条件 B
+ * @return 判定結果
+ */
+int Pick(const int a, const int b) {
+	// 同じ本体を持つ二分岐
+	if(a) {
+		const int x = 1;
+		return x;
+	} else if(b) {
+		const int x = 1;
+		return x;
+	}
+	// 既定の返戻
+	return 0;
+}

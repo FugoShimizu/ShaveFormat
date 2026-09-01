@@ -1,0 +1,31 @@
+/**
+ * 統合候補関数
+ * @param X 第一条件
+ * @param Y 第二条件
+ */
+void Merge(Flag X, Flag Y) {
+	while(true) {
+		if(X) if(Y) break;
+		break;
+	}
+	while(true) {
+		if(X) break;
+		if(Y) break;
+		break;
+	}
+	while(true) {
+		if(X) break;
+		else if(Y) break;
+		break;
+	}
+	while(true) {
+		if(X) break;
+		else {
+			Consume();
+			if(Y) break;
+		}
+		break;
+	}
+	// 終了
+	return;
+}

@@ -1,0 +1,15 @@
+%s{a{b}c}
+%s(a(b)c)
+%r{a{b}c}
+%r(a(b)c)
+x = %s{a}
+y = 2
+
+x = %w{ .. lib }
+y = %w{ foo bar }
+z = %i{ .. sym }
+p %w[>> [] []= ^]
+p %i[a (b) [c]]
+
+y = /a\) }b/
+z = /\} <b/

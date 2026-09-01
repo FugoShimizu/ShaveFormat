@@ -1,0 +1,1 @@
+<?php function f() { ?>a) }b {x} <b>y</b><?php } ?>

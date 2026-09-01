@@ -1,0 +1,55 @@
+// Markdown の装飾記号と C++ の型
+// 関数 (foo) を呼ぶ，型は {string} で，配列 xs[0] の値
+// 日本語の文，次（括弧）の後
+// 値 x を返す，UTF-8 の文字，16進の値，0x10 個
+// 型 (`int`) を返す，引用「a  b」は保つ
+// リンク[説明](https://example.com/a)の後
+// 第１章 基本方針と 8.6 スペースの入れ方，a → b
+// 例の区切り（注記） // TS x = 1
+/* 囲み注記 */
+/// <summary>要素の記法</summary>
+//go:generate  echo  a
+// TODO: 後で直す
+// 字下げの注記
+// 3回繰返す，vector<int> の要素，N個の値
+// 参照は https://example.com/a b と src/Pass/Edit.cpp の２つ
+// 文字列"a  b"と'c  d'を保つ，${x} の展開
+// - 箇条書き
+// 1. 番号付き
+// ❌  誤りの例
+// | 列1  | 列2 |
+// 前の値 (x) は [a] に入り {b} となる
+int x = 1;
+// カテゴリー (ドメイン) ごとの値，値 [要素] を返す，入子 (外 (内) 側) の値
+int y = 1; // 経路は C:\dir\。
+int z = 2;
+// café の値，α の係数，Сергей の名前，m² の面積
+// 한국어 설명을 読む，日本語と 한국어
+// response’s type, You’re a lie，起動“後”に実行，the“foo”option
+// ※注意※ Note，wait …，等…，30° の角，N°，x′ の値，y″ の値，5‰ の割合，50% の割合，$100 の価格，¥1000 の価格，€ 価格，£10 の価格，₹50 の価格，₩1000 の価格
+// A→B，C → D，E—F，✅ OK，🎉完了
+// 経路は src/a.cpp です，処理は src/Pass/Edit.cpp の関数，A/B テスト，and/or の意味
+// 値は 1/2の時，資料は docs/設計書.md を参照，記事は https://ja.wikipedia.org/wiki/日本語版 を参照
+// hyphen­ation，a⁠b，漢︎字，conﬁguration，ﬂow
+int w = 3;
+// noSpace
+// tooMany
+int MarkerSpacing = 1; // inlineNoSpace
+// tabAfter
+///doxygenStays
+//!doxygenStays
+// 資料は docs/設計書.md を参照
+// 資料は docs/仕様書.md にある
+// src/a.ts(旧版)を参照
+// on/off(既定)を切替
+// 値は x/y=座標
+// X 方向に床/天井，壁
+// 詳細は src/a.cpp です
+// 参考 https://www.google.com/search?q=東京 を見る
+// 詳細は https://ja.wikipedia.org/wiki/東京都#歴史 を参照
+// 日付は2024/01/01です
+// 操作 UI(停止/再生・ヒント)を
+// 拾う (解除済みでも) 点が肝
+// In‑App と Wi‐Fi の連結
+// ❤️ OK と❤ OK
+int PathSpacing;

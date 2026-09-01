@@ -1,0 +1,111 @@
+#pragma STDC FENV_ACCESS ON
+
+/**
+ * 浮動小数の変換結果の取得関数
+ * @return 変換結果
+ */
+float ReadNormal(void) {
+	const volatile float Value = 3.14;
+	// 変換結果の返戻
+	return Value;
+}
+
+/**
+ * 浮動小数の変換結果の取得関数
+ * @return 変換結果
+ */
+float ReadNegative(void) {
+	const volatile float Value = -3.14;
+	// 変換結果の返戻
+	return Value;
+}
+
+/**
+ * 浮動小数の変換結果の取得関数
+ * @return 変換結果
+ */
+float ReadBoundary(void) {
+	const volatile float Value = 1.000000059604644775390625000001;
+	// 変換結果の返戻
+	return Value;
+}
+
+/**
+ * 浮動小数の変換結果の取得関数
+ * @return 変換結果
+ */
+float ReadNegativeBoundary(void) {
+	const volatile float Value = -1.000000059604644775390625000001;
+	// 変換結果の返戻
+	return Value;
+}
+
+/**
+ * 浮動小数の変換結果の取得関数
+ * @return 変換結果
+ */
+float ReadSubnormal(void) {
+	const volatile float Value = 0X1P-150;
+	// 変換結果の返戻
+	return Value;
+}
+
+/**
+ * 浮動小数の変換結果の取得関数
+ * @return 変換結果
+ */
+float ReadNegativeSubnormal(void) {
+	const volatile float Value = -0X1P-150;
+	// 変換結果の返戻
+	return Value;
+}
+
+/**
+ * 浮動小数の変換結果の取得関数
+ * @return 変換結果
+ */
+float ReadZero(void) {
+	const volatile float Value = 0.0;
+	// 変換結果の返戻
+	return Value;
+}
+
+/**
+ * 浮動小数の変換結果の取得関数
+ * @return 変換結果
+ */
+float ReadNegativeZero(void) {
+	const volatile float Value = -0.0;
+	// 変換結果の返戻
+	return Value;
+}
+
+/**
+ * 浮動小数の変換結果の取得関数
+ * @return 変換結果
+ */
+float ReadExisting(void) {
+	const volatile float Value = 3.14F;
+	// 変換結果の返戻
+	return Value;
+}
+
+/**
+ * 浮動小数の変換結果の取得関数
+ * @return 変換結果
+ */
+float ReadPadded(void) {
+	const volatile float Value = 0.5;
+	// 変換結果の返戻
+	return Value;
+}
+
+/**
+ * 浮動小数の変換結果の取得関数
+ * @return 変換結果
+ */
+float ReadTrailing(void) {
+	const volatile float Value = 1.0;
+	// 変換結果の返戻
+	return Value;
+}

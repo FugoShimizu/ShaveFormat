@@ -1,0 +1,20 @@
+class Registry {
+	/**
+	 *
+	 * @returns
+	 */
+	[
+		someConfigurationObject.namespaceIdentifierWithAVeryLongName + someConfigurationObject.featureIdentifierWithAVeryLongName + "x"
+	]() {
+		return 3;
+	}
+
+	// note
+	/**
+	 *
+	 * @returns
+	 */
+	[k]() {
+		return 4;
+	}
+}

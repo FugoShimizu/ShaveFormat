@@ -1,0 +1,10 @@
+export const selectAndCropImage = async (options?: {
+	width?: number;
+	height?: number;
+	cropping?: boolean;
+	cropperCircleOverlay?: boolean;
+	/**
+	 */
+	freeStyleCropEnabled?: boolean;
+}): Promise<{uri: string; width: number; height: number} | null> => {
+};

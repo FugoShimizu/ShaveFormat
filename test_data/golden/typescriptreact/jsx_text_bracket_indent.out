@@ -1,0 +1,14 @@
+/**
+ *
+ * @returns
+ */
+function Guide() {
+	return (
+		<ol>
+			<li>Step 1) Install</li>
+			<li>Note (see below</li>
+			<li>Balanced (ok) here</li>
+			<li>Smiley :) end</li>
+		</ol>
+	);
+}

@@ -1,0 +1,14 @@
+#
+# @param s
+# @param e
+# @return
+def f(s, e)
+	case s
+	when "a" then return e # 一文目，二文目
+	when "b"
+		g
+		h
+	else e.destroy! # 三文目，四文目
+	end
+	return nil
+end

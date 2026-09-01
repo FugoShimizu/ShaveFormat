@@ -1,0 +1,8 @@
+/**
+ *
+ * @param p
+ */
+void f(int *p) {
+	// cppcheck-suppress nullPointer 理由，二文目
+	*p = 1;
+}

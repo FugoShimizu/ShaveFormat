@@ -1,0 +1,24 @@
+class Service {
+	public void Run() {
+		// 単純な無限ループ
+		for(;;) {
+			if(token.IsCancellationRequested) break;
+			Process();
+		}
+	}
+
+	public void Idempotent() {
+		// 既存の while(true) は不変
+		while(true) DoWork();
+	}
+
+	public void Foreach(int[] items) {
+		// foreach は別 AST 種別の為対象外
+		foreach(int x in items) Use(x);
+	}
+
+	public void RegularFor() {
+		// 通常の for は対象外
+		for(int i = 0; i < 10; ++i) Use(i);
+	}
+}

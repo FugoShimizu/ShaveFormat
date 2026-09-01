@@ -1,0 +1,61 @@
+// === rule_docgen_generate ===
+/**
+ *
+ * @param a
+ * @param b
+ * @return
+ */
+int Add(const int a, const int b) {
+	return a + b;
+}
+
+/**
+ *
+ * @param Message
+ */
+void Log(const std::string &Message) {
+	Write(Message);
+	return;
+}
+
+class Widget {
+public:
+
+	/**
+	 *
+	 * @param Id
+	 */
+	Widget(const int Id) {
+		this->Id = Id;
+	}
+
+	/**
+	 *
+	 * @param Key
+	 * @return
+	 */
+	int *Find(const int Key) const {
+		return Lookup(Key);
+	}
+};
+
+// === rule_docgen_reconcile ===
+/**
+ * 二点間の距離を求める
+ * @param a 始点
+ * @param b
+ * @param c
+ * @return 距離
+ */
+double Distance(const double a, const double b, const double c) {
+	return Hypot(a, b, c);
+}
+
+/**
+ * 状態を更新する
+ * @param value 新しい値
+ */
+void SetState(const int value) {
+	State = value;
+	return;
+}

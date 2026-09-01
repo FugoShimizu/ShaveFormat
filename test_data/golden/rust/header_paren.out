@@ -1,0 +1,42 @@
+#[derive(PartialEq)]
+struct S {
+	a: i32
+}
+
+fn f(x: S, y: i32, b: bool) {
+	if b {
+		g();
+	}
+	if x == (S { a: 1 }) {
+		g();
+	}
+	match y {
+		_ => {}
+	}
+	while b {
+		g();
+	}
+	if (S { a: 2 }) == x {
+		g();
+	}
+}
+
+fn g() {}
+
+fn f(x: bool) {
+	if x { // 条件
+		y();
+		z();
+	}
+}
+
+fn h(n: usize, v: &[i32]) {
+	for i in 0..n {
+		g();
+	}
+	for j in (0..) {
+		break;
+	}
+	let r = 0..;
+	let w = &v[1..];
+}

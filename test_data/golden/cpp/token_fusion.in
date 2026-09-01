@@ -1,0 +1,5 @@
+void h(int a, int b, int c, int d, int e) {
+	if(a || (b < c && d >= e)) return;
+	if(a || (b < c && d >> e)) return;
+	return;
+}

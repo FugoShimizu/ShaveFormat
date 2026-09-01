@@ -1,0 +1,44 @@
+/**
+ *
+ * @returns
+ */
+export function Panel() {
+	return (
+		<div className="a">
+			<img src="a.png" alt="x" />
+			<button
+				type="button"
+				title={t("editor.defaultColor")}
+				onClick={
+					() => {
+						applyInline(chain => chain.unsetColor());
+						setShowColors(false);
+					}
+				}
+			/>
+			<section
+				onClick={
+					() => {
+						go();
+						stop();
+					}
+				}
+			>
+				Text
+			</section>
+		</div>
+	);
+}
+
+const b =
+<AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA>
+	{" "}hi{" "}
+</AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA>;
+
+const c =
+<AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA />;
+
+const d =
+<AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+	x={1}
+/>;

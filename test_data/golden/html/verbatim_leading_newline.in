@@ -1,0 +1,9 @@
+<pre><!-- c -->
+abc</pre>
+<pre><!-- a --><!-- b -->
+def</pre>
+<pre>
+<!-- c -->ghi</pre>
+
+<svg><text xml:space="preserve"><!-- c -->
+  a</text></svg>

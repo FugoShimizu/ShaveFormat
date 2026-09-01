@@ -1,0 +1,25 @@
+#
+# @return
+def update
+	w
+	return transaction do
+		x
+		# y の説明
+		y
+	end
+rescue StandardError => e
+	return z
+end
+
+#
+# @return
+def update2
+	w
+	return items.each { |i|
+		x
+		# y2 の説明
+		y
+	}
+ensure
+	z
+end

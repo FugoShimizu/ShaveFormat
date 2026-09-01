@@ -1,0 +1,11 @@
+/**
+ *
+ * @param N
+ */
+void DoWhile(int N) {
+	int Idx = 0;
+	do ++Idx;
+	while(Idx < N);
+	do ++Idx;
+	while(Idx < N * 2);
+}

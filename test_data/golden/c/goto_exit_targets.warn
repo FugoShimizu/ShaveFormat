@@ -1,0 +1,2 @@
+19:1: Function is missing trailing return
+46:2: Unreachable `return` after terminating statement

@@ -1,0 +1,86 @@
+class PatternScope {
+	static readonly int Number = 7; // 局所変数と区別する値
+
+	/// <summary>内側の整数束縛を検査する</summary>
+	/// <param name="IsEnabled">検査を行うか</param>
+	/// <param name="Value">検査対象</param>
+	/// <returns>判定結果又は束縛された値</returns>
+	static int NestedScope(bool IsEnabled, object Value) {
+		System.Console.WriteLine(Number);
+		if(IsEnabled) if(Value is int Number) return Number;
+		// 不一致の返戻
+		return 0;
+	}
+
+	/// <summary>出力引数とフィールドの束縛を検査する</summary>
+	/// <returns>判定結果又は束縛された値</returns>
+	static int OutScope() {
+		if(true) if(int.TryParse("bad", out int Number)) return Number;
+		// フィールド値の返戻
+		return Number;
+	}
+
+	/// <summary>後続条件の束縛を検査する</summary>
+	/// <param name="IsEnabled">検査を行うか</param>
+	/// <param name="Value">検査対象</param>
+	/// <returns>判定結果又は束縛された値</returns>
+	static int AlternativeScope(bool IsEnabled, object Value) {
+		System.Console.WriteLine(Number);
+		if(IsEnabled) return 1;
+		else if(Value is int Number) return 1;
+		// 不一致の返戻
+		return 0;
+	}
+
+	/// <summary>再帰パターンの束縛を検査する</summary>
+	/// <param name="IsEnabled">検査を行うか</param>
+	/// <param name="Value">検査対象</param>
+	/// <returns>判定結果又は束縛された値</returns>
+	static int RecursiveScope(bool IsEnabled, object Value) {
+		System.Console.WriteLine(Number);
+		if(IsEnabled) if(Value is {} Number) return 1;
+		// 不一致の返戻
+		return 0;
+	}
+
+	/// <summary>リスト要素の束縛を検査する</summary>
+	/// <param name="IsEnabled">検査を行うか</param>
+	/// <param name="Value">検査対象</param>
+	/// <returns>判定結果又は束縛された値</returns>
+	static int ListScope(bool IsEnabled, int[] Value) {
+		System.Console.WriteLine(Number);
+		if(IsEnabled) if(Value is [int Number]) return Number;
+		// 不一致の返戻
+		return 0;
+	}
+
+	/// <summary>変数を宣言しない条件を検査する</summary>
+	/// <param name="IsEnabled">検査を行うか</param>
+	/// <param name="Value">検査対象</param>
+	/// <returns>判定結果又は束縛された値</returns>
+	static int ConstantPattern(bool IsEnabled, object Value) {
+		if(IsEnabled) if(Value is null) return 1;
+		// 不一致の返戻
+		return 0;
+	}
+
+	/// <summary>外側で宣言した整数を検査する</summary>
+	/// <param name="IsEnabled">検査を行うか</param>
+	/// <param name="Value">検査対象</param>
+	/// <returns>判定結果又は束縛された値</returns>
+	static int OuterDeclaration(bool IsEnabled, object Value) {
+		if(Value is int Number) if(IsEnabled) return Number;
+		// 不一致の返戻
+		return 0;
+	}
+
+	/// <summary>配列要素を判定する匿名関数を検査する</summary>
+	/// <param name="IsEnabled">検査を行うか</param>
+	/// <param name="Value">検査対象</param>
+	/// <returns>判定結果又は束縛された値</returns>
+	static int LambdaScope(bool IsEnabled, object Value) {
+		if(IsEnabled) if(System.Array.Exists(new object[] { Value }, Item => Item is int Number)) return 1;
+		// 不一致の返戻
+		return 0;
+	}
+}

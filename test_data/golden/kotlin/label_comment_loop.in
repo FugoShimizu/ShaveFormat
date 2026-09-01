@@ -1,0 +1,8 @@
+/** ラベルとコメントを処理する */
+fun F() {
+	outer@ /* note */ while(true) {
+		break@outer
+	}
+	// 終了
+	return
+}

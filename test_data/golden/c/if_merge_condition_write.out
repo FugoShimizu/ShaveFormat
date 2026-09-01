@@ -1,0 +1,11 @@
+/**
+ *
+ * @param x
+ * @return
+ */
+int f(int x) {
+	if(x) return 1;
+	if((x = 1) == 2) return 1;
+	if(x) return 1;
+	return 0;
+}

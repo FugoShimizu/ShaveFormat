@@ -1,0 +1,4 @@
+#include <functional>
+void a();
+void b();
+void f(std::function<void()> g = [] { a(); b(); }) { g(); }

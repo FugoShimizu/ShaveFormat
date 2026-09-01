@@ -1,0 +1,17 @@
+/**
+ *
+ */
+fun f() {
+	try {
+		g()
+	} catch(e: Exception) { // t1
+		h()
+	} finally { // t2
+		k()
+	}
+	try {
+		g()
+	} catch(e: Exception) {} finally { // c1
+		close()
+	}
+}

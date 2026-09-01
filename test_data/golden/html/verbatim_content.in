@@ -1,0 +1,10 @@
+<div><pre>a  
+b<!-- c -->c</pre></div>
+<pre><b  class="x">a</b>
+  <i >y</i ></pre>
+<textarea  rows="3" >  raw <!-- keep --> <b>x</b>
+  y  
+</textarea >
+<title>t <!-- lit --> u</title>
+<pre><code>foo
+</pre>

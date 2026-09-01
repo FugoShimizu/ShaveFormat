@@ -1,0 +1,6 @@
+/**
+使用例
+
+    const char *Value = "甲。乙";
+ */
+class Documentation {};

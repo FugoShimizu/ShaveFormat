@@ -1,0 +1,1 @@
+function foo(a) { if (a === 1) { let x = 1; } if (a === 2) { var y = 2; } }

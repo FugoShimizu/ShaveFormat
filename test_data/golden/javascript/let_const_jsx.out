@@ -1,0 +1,10 @@
+/**
+ *
+ * @returns
+ */
+export function View() {
+	const fixed = 1;
+	let changed = 2;
+	++changed;
+	return <span>{fixed + changed}</span>;
+}

@@ -1,0 +1,15 @@
+void g(
+	int,
+	int,
+	int
+);
+
+/**
+ *
+ */
+void f(void) {
+	int q = 2;
+	int r = 3; // c4
+	int s = 4;
+	g(q, r, s);
+}

@@ -1,0 +1,11 @@
+func r() -> String! {
+	return nil
+}
+
+var x: Int!
+
+func < <each Element: Comparable>(lhs: (repeat each Element), rhs: (repeat each Element)) -> Bool {}
+
+func == <T>(a: T, b: T) -> Bool {
+	return true
+}

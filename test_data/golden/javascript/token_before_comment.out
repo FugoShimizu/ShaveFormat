@@ -1,0 +1,5 @@
+foo() /* z */ .baz();
+
+const s = a /* c */ + b;
+const t = p /* m */ ?.q;
+const u = a /* n */ [0];

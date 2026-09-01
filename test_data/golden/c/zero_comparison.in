@@ -1,0 +1,31 @@
+/**
+ * ゼロ比較の警告対象を並べた検査用関数
+ * @param N 判定対象
+ * @return 判定結果
+ */
+int Probe(int N) {
+	// 制御条件の等値比較は !x を案内する
+	if(N == 0) return 0;
+	// 制御条件の非等値比較は x を案内する
+	while(N != 0) --N;
+	// 値文脈のゼロ比較は警告しない
+	const int Flag = N == 0;
+	// 返戻する
+	return Flag;
+}
+
+/**
+ * 値文脈を確認する
+ * @param N 判定値
+ * @return 判定結果
+ */
+int ProbeContexts(const int N) {
+switch(N != 0) {
+case 0: break;
+default: break;
+}
+for(int Index = N != 0; Index; Index = N != 0) break;
+const int Result = N ? N != 0 : 0;
+// 判定結果の返戻
+return Result;
+}

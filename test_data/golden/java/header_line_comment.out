@@ -1,0 +1,19 @@
+class A {
+	static { // s
+		g();
+	}
+
+	/**
+	 *
+	 * @param a
+	 */
+	void f(int a) {
+		try { // t
+			g();
+		} finally { // f
+			h();
+		}
+		if(a > 0) g(); // 真
+		else h(); // 偽
+	}
+}

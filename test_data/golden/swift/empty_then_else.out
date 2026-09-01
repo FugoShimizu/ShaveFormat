@@ -1,0 +1,6 @@
+func f(someVeryLongConditionValue: Int?, anotherExtremelyLongConditionValue: Int?, yetAnotherQuiteLongName: Int?) {
+	if let a = someVeryLongConditionValue, let b = anotherExtremelyLongConditionValue, let c = yetAnotherQuiteLongName {} else {
+		print("x")
+	} // 何もしない
+	if let a = someVeryLongConditionValue {} else {}
+}

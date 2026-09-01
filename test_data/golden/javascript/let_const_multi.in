@@ -1,0 +1,8 @@
+export function g() {
+	let p = 1, q = 2;
+	let r = 3;
+	let s = 4;
+	let t = 5, u = 6;
+	++t;
+	return p + q + r + s + t + u;
+}

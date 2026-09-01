@@ -1,0 +1,52 @@
+/// 全分岐から終了する，code は分岐値，isReady は条件値
+func all(_ code: Int, _ isReady: Bool) -> Void {
+	switch code {
+	case 0:
+		return
+	default:
+		return
+	}
+}
+
+/// 全分岐終端後の返戻を検査する，code は分岐値，isReady は条件値
+func allTail(_ code: Int, _ isReady: Bool) -> Void {
+	switch code {
+	case 0:
+		return
+	default:
+		return
+	}
+	// 終了
+	return
+}
+
+/// 分岐から切替文の外へ脱出する，code は分岐値，isReady は条件値
+func exit(_ code: Int, _ isReady: Bool) -> Void {
+	switch code {
+	case 0:
+		break
+	default:
+		return
+	}
+}
+
+/// 次の分岐へ進んで終了する，code は分岐値，isReady は条件値
+func switchFallthrough(_ code: Int, _ isReady: Bool) -> Void {
+	switch code {
+	case 0:
+		fallthrough
+	default:
+		return
+	}
+}
+
+/// 値を破棄して次の分岐へ進み終了する，code は分岐値，isReady は条件値
+func precededFallthrough(_ code: Int, _ isReady: Bool) -> Void {
+	switch code {
+	case 0:
+		_ = code
+		fallthrough
+	default:
+		return
+	}
+}

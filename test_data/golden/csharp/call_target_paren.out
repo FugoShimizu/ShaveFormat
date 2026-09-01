@@ -1,0 +1,85 @@
+class CallTarget {
+	/// <summary>警告抑止を介して取得した関数を呼出す</summary>
+	/// <param name="Factory">関数を取得する処理</param>
+	/// <returns>呼出結果</returns>
+	static int? InvokePostfix(System.Func<System.Func<int>> Factory) {
+		// 条件アクセス後の呼出結果の返戻
+		return (Factory?.Invoke())!();
+	}
+
+	/// <summary>条件付で取得した関数を呼出す</summary>
+	/// <param name="Factory">関数を取得する処理</param>
+	/// <returns>呼出結果</returns>
+	static int? InvokeConditionalAccess(System.Func<System.Func<int>> Factory) {
+		// 条件アクセス後の呼出結果の返戻
+		return (Factory?.Invoke())();
+	}
+
+	/// <summary>null 警告を抑止した関数を呼出す</summary>
+	/// <param name="Factory">関数を取得する処理</param>
+	/// <returns>呼出結果</returns>
+	static int? InvokeSuppressed(System.Func<System.Func<int>> Factory) {
+		// 条件アクセス後の呼出結果の返戻
+		return (Factory?.Invoke()!)();
+	}
+
+	/// <summary>非同期に取得した関数を呼出す</summary>
+	/// <param name="Value">関数を取得する処理</param>
+	/// <returns>呼出結果を返す処理</returns>
+	static async System.Threading.Tasks.Task<int> InvokeAwait(System.Threading.Tasks.Task<System.Func<int>> Value) {
+		// 取得した関数の呼出結果の返戻
+		return (await Value)();
+	}
+
+	/// <summary>パターンで選択した関数を呼出す</summary>
+	/// <param name="Number">照合対象</param>
+	/// <param name="Function">選択する関数</param>
+	/// <returns>呼出結果</returns>
+	static int InvokeSwitch(int Number, System.Func<int> Function) {
+		// 選択した関数の呼出結果の返戻
+		return (Number switch { _ => Function })();
+	}
+
+	/// <summary>指定した関数を呼出す</summary>
+	/// <param name="Function">呼出対象</param>
+	/// <returns>呼出結果</returns>
+	static int InvokePlain(System.Func<int> Function) {
+		// 呼出結果の返戻
+		return Function();
+	}
+
+	/// <summary>変換した関数を呼出す</summary>
+	/// <param name="Value">呼出対象</param>
+	/// <returns>呼出結果</returns>
+	static int InvokeCast(object Value) {
+		// 呼出結果の返戻
+		return ((System.Func<int>)Value)();
+	}
+
+	/// <summary>変換した匿名関数を呼出す</summary>
+	/// <param name="Number">匿名関数が返す値</param>
+	/// <returns>呼出結果</returns>
+	static int InvokeLambda(int Number) {
+		// 引数を返す匿名関数の呼出結果の返戻
+		return ((System.Func<int>)(() => Number))();
+	}
+
+	/// <summary>選択した関数を呼出す</summary>
+	/// <param name="IsFirst">先行関数を選ぶか</param>
+	/// <param name="First">先行関数</param>
+	/// <param name="Second">後続関数</param>
+	/// <returns>呼出結果</returns>
+	static int InvokeConditional(bool IsFirst, System.Func<int> First, System.Func<int> Second) {
+		// 選択した関数の呼出結果の返戻
+		return (IsFirst ? First : Second)();
+	}
+
+	/// <summary>結合した関数を呼出す</summary>
+	/// <param name="First">先行関数</param>
+	/// <param name="Second">後続関数</param>
+	/// <returns>後続関数の呼出結果</returns>
+	static int InvokeCombined(System.Func<int> First, System.Func<int> Second) {
+		// 結合した関数の呼出結果の返戻
+		return (First + Second)();
+	}
+}

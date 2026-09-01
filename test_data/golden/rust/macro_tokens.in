@@ -1,0 +1,3 @@
+fn m() {
+	let q = sql! { SELECT a, b FROM t WHERE x > 0 };
+}

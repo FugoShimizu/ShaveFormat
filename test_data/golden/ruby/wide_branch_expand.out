@@ -1,0 +1,35 @@
+#
+def f
+	if question
+		process_question_file_via_s3_copy!(
+			entry_form,
+			question_attachment_key,
+			uploaded_file_attributes,
+			extra_argument_one,
+			extra_argument_two
+		)
+	else
+		legacy_load_presigned_into_uploaded_file!(entry_form, legacy_attachment_key, uploaded_file_attributes, extra_argument_one) # 注記
+	end
+end
+
+x = if aaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+	bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb
+else
+	cccccccccccccccccccccccccccccccccccccccccccccccccc
+end
+
+if a
+	b
+elsif ccccccccccccccccccccccccccccccccccccccccc
+	dddddddddddddddddddddddddddddddddddddddddd
+else
+	eeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee
+end
+
+if aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+else
+	bbbbbbbbbbbbbbbbbbbbbbbbbbbbbb
+end
+
+y = if a then 1 else 2 end

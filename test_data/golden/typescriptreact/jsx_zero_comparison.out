@@ -1,0 +1,17 @@
+const C = ({ count, items, flag }) => {
+	// JSX 内のゼロ比較は !! を案内する
+	const a = <div>{count !== 0 && <span />}</div>;
+	console.log(a);
+	// JSX 内の等値比較は !x を案内する
+	const b = <div>{count === 0 && <span />}</div>;
+	console.log(b);
+	// JSX 外の制御条件は従来通り x を案内する
+	if(items.length !== 0) console.log(1);
+	// 比較を伴わない && は警告しない
+	const c = <div>{flag && <span />}</div>;
+	console.log(c);
+	// 数値の裸 && も警告しない（偽陽性を出さない）
+	const d = <div>{count && <span />}</div>;
+	// 返戻する
+	return [a, b, c, d];
+};

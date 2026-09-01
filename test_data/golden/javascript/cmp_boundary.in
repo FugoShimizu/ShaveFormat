@@ -1,0 +1,6 @@
+function f(x) {
+	if(x >= 10) return;
+	if(x <= 9007199254740990) return;
+	if(x >= 9007199254740993) return;
+	if(x <= 9007199254740992) return;
+}

@@ -1,0 +1,18 @@
+/**
+ *
+ */
+fun f() {
+	try { // t
+		g()
+	} catch(e: Exception) { // c
+		h()
+	} finally { // f
+		k()
+	}
+	val r = when(n) {
+		1 -> 10
+		else -> 20 // 既定
+	}
+	if(a) g() // 真
+	else h() // 偽
+}

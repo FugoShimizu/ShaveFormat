@@ -1,0 +1,12 @@
+package main
+
+func F[T any](s []T) T {
+	return s[0]
+}
+
+func m() {
+	d := (func() int {
+		return 3
+	})()
+	_ = d
+}

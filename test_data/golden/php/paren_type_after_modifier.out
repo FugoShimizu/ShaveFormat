@@ -1,0 +1,34 @@
+<?php
+
+class Test {
+	public (A&B)|C|null $prop;
+	private(set) (Foo&Bar)|null $foo;
+	public static (A&B)|null $r;
+
+	/**
+	 *
+	 * @param $x
+	 */
+	public function __construct(private (A&B)|null $x) {}
+}
+
+/**
+ *
+ * @param $b
+ */
+function test((Type&MoreTypes)|A|B &...$b) {}
+/**
+ *
+ * @param $b
+ * @param $c
+ * @param $d
+ */
+function test2(A|B|(Type&MoreTypes)|C &$b, &$c, int &$d) {}
+/**
+ *
+ */
+function &refReturn() {}
+
+$f = function &(array &$a) use(&$b) {
+	return $a;
+};

@@ -1,0 +1,10 @@
+/**
+ *
+ */
+void f() {
+	auto const x = 1;
+	auto const x2 = 1.5;
+	[[nodiscard]] const int y = 2;
+	decltype(auto) z = x;
+	decltype(auto) w = y;
+}

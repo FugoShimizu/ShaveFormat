@@ -1,0 +1,19 @@
+const a = <p>Hello, {name}!</p>;
+const b = <p> hi </p>;
+const c = <p>Hello, <b>x</b> world</p>;
+const d = <p> {name} </p>;
+const e = <p>a{" "}b</p>;
+const f = <p>
+	Hello,{" "}
+	{name}
+</p>;
+const g = <pre>a	{x}	b</pre>;
+const h = <p className="aaaaaaaaaaaaaa" id="bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb"> hi </p>;
+const i = <> hi {x} </>;
+const j = <p>&#32;{x}&#32;</p>;
+const k = <p>{a}{" "}{b}</p>;
+const l = <p>a{"\t"}{x}</p>;
+const m = <p>&amp; {x}</p>;
+const n = <ul>
+	<li>one</li> <li>two</li>
+</ul>;

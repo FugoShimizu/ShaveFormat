@@ -1,0 +1,32 @@
+#include <stdio.h>
+
+#define SWAP(a, b) \
+    do { \
+        int t = (a); \
+        (a) = (b); \
+        (b) = t; \
+    } while (0)
+
+#define STR(x) #x
+#define XSTR(x) STR(x)
+#define CAT(a, b) a ## \
+b
+
+#if defined(__STDC__) && \
+    __STDC__
+#define OK 1
+#else
+#define OK 0
+#endif
+
+static const char *s = "abc\
+def";
+
+int main(void) {
+    int x = 1, y = 2;
+    SWAP(x, y);
+    int CAT(v, w) = x + \
+        y;
+    printf("%d %d %d %s %s %d\n", x, y, vw, s, XSTR(SWAP(p, q)), OK);
+    return 0;
+}

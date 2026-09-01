@@ -1,0 +1,7 @@
+const a = <p><b>x</b>{" "}{" "}<i>y</i></p>;
+const e = <p><b>x</b>{"   "}<i>y</i></p>;
+const c = <p>{" "}{" "}</p>;
+const d2 = <p>a{" " /* c */}b</p>;
+const e2 = <p>a{" "}b</p>;
+const f2 = <p>a{// c
+" "}b</p>;

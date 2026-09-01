@@ -1,0 +1,21 @@
+enum E { A(1), B(2); private final int v; private int w; E(int v) { this.v = v; } int get() { return v; } }
+enum F { A, B; }
+enum G { A; }
+enum H { ; int x; }
+enum I {
+	A;
+	int x;
+	int y;
+}
+enum J { A { int f() { return 1; } }, B; abstract int f(); }
+enum K {
+	A,
+	B,
+	;
+	int x;
+}
+enum N { , ; int y; }
+enum O { A, ; }
+enum P { A; /* c */ int x; }
+
+enum E7 { ; }

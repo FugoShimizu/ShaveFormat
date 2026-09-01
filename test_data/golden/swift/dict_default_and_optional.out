@@ -1,0 +1,9 @@
+enum Kind {
+	case entry(_ meta: [String: String] = [:])
+}
+
+func Unwrap(opt: Int?) {
+	if case let value? = opt {
+		print(value)
+	}
+}

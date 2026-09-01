@@ -1,0 +1,8 @@
+/**
+ *
+ */
+function f() {
+	with(FBL) {
+		var x = 1, y = 2;
+	}
+}

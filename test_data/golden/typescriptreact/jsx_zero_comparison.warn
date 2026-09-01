@@ -1,0 +1,6 @@
+3:18: If equivalent, use `!!x` for nonzero in JSX condition
+3:18: Use `!=` if both operands have the same numeric type
+6:18: If equivalent, use `!x` for zero in control condition
+6:18: Use `==` if both operands have the same numeric type
+9:5: If equivalent, use `x` for nonzero in control condition
+9:5: Use `!=` if both operands have the same numeric type

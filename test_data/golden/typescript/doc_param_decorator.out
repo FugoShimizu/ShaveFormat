@@ -1,0 +1,7 @@
+class A {
+	/**
+	 *
+	 * @param y value
+	 */
+	m(@Inject() y: string) {}
+}

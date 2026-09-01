@@ -1,0 +1,7 @@
+function f() {
+	// c8
+	/* c9 */
+}
+function g() {
+	return 1;
+}

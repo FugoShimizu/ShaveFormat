@@ -1,0 +1,15 @@
+using System;
+
+class C {
+	/// <summary>ラベル付ループを処理する</summary>
+	/// <param name="N">反復回数</param>
+	void F(int N) {
+	Again:
+		while(true) {
+			if(N < 2) goto Again;
+			break;
+		}
+		// 終了
+		return;
+	}
+}

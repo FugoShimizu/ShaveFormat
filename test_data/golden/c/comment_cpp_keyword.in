@@ -1,0 +1,6 @@
+#include <stdio.h>
+/*
+class hierarchy is emulated with function pointers.
+*/
+void *Head = NULL;
+int Init(void) { return 0; }

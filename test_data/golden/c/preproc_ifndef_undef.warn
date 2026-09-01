@@ -1,0 +1,1 @@
+1:1: Consider `#pragma once` only if supported and semantics are preserved

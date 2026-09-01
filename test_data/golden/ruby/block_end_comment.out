@@ -1,0 +1,11 @@
+#
+# @return
+def f
+	b if a # c
+	x = 1
+	if a
+	# d
+	end
+	return y
+	# e
+end

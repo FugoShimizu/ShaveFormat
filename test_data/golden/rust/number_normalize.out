@@ -1,0 +1,8 @@
+fn main() {
+	let hex = 0xFF;
+	let typed = 0xDEAD_BEEFu32;
+	let float = 1.5E3;
+	let suffixed = 1.5f32;
+	let big = 100usize;
+	let bin = 0b1010;
+}

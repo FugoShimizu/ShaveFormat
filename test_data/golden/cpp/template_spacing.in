@@ -1,0 +1,15 @@
+void Widen(const int x, void *const q, const Tuple t) {
+	const int n = static_cast<int>(x);
+	const std::vector<int> V;
+	const HashMap<String, List<Integer>> Map;
+	const auto p = dynamic_cast<Base *>(q);
+	const auto r = reinterpret_cast<const unsigned char *>(q);
+	Call<int>(1);
+	Call<3>(x);
+	Call<N>(x);
+	const auto z = std::get<0>(t);
+	// 誤解析（`>=` が `>` と `=` へ割れる形）で括弧の外の比較は空白を保つ
+	Use(a || (b < c && d >= e));
+	// 終了
+	return;
+}

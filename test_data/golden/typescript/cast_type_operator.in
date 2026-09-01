@@ -1,0 +1,14 @@
+let a = 1;
+let m = (mode as number) & 1;
+let n = (x as any) < 2;
+declare function f(a: any, b: any): void;
+f((a < b), c > (-d));
+(<any>x) = 2;
+(x as number) = 3;
+let o = (mode as number) + 1;
+let p = x - (mode as number) * 2;
+let q = (x as boolean) ? 1 : 2;
+for ((x as any) in o) {}
+let r = a < (m as number) + n;
+let s = x - (m satisfies number) * 2;
+let t = (m satisfies number) + 1;

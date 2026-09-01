@@ -1,0 +1,7 @@
+14:2: Function is missing trailing return
+37:3: Unreachable `return` after terminating statement
+45:15: `goto` outside a multi-loop break; keep it only where other constructs would leak or duplicate cleanup
+51:4: `goto` outside a multi-loop break; keep it only where other constructs would leak or duplicate cleanup
+60:4: `goto` outside a multi-loop break; keep it only where other constructs would leak or duplicate cleanup
+69:4: `goto` outside a multi-loop break; keep it only where other constructs would leak or duplicate cleanup
+78:4: `goto` outside a multi-loop break; keep it only where other constructs would leak or duplicate cleanup

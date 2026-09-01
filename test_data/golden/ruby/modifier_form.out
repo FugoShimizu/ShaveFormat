@@ -1,0 +1,30 @@
+#
+# @param x
+# @return
+def m_guard(x)
+	return 1 if x
+	return 2
+end
+
+#
+# @param x
+def m_unless(x)
+	1 unless x
+end
+
+#
+# @param x
+# @return
+def m_while(x)
+	i = 0
+	i += 1 while x && i < 3
+	return i
+end
+
+#
+# @param x
+# @return
+def m_value(x)
+	y = if x then 1 end
+	return y
+end

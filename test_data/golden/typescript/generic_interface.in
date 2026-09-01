@@ -1,0 +1,14 @@
+interface Container<T> {
+	items: T[];
+	add(item: T): void;
+	first(): T | null;
+}
+class List<T> implements Container<T> {
+	items: T[] = [];
+	add(item: T): void {
+		this.items.push(item);
+	}
+	first(): T | null {
+		return this.items.length > 0 ? this.items[0] : null;
+	}
+}

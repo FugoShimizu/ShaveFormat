@@ -1,0 +1,6 @@
+int f(int a, int b) {
+	int c = 1; // i
+	return ( // 和
+		a + b
+	);
+}

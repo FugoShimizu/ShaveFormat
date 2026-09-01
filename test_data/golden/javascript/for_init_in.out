@@ -1,0 +1,44 @@
+const o = { x: 1 };
+
+for(var i = ("x" in o) ? 1 : 0; i < 2; ++i) console.log(i);
+for(var i2 = ("x" in o) ? 1 : 0;;) break;
+for(var k = f("x" in o);;) break;
+
+for(var f = () => ("x" in o);;) {
+	console.log(f());
+	break;
+}
+
+for(var h = (a = ("x" in o)) => a;;) {
+	console.log(h());
+	break;
+}
+
+for(var i = [("x" in o)];;) break;
+
+for(
+	var j = {
+		m(a = ("x" in o)) {
+			return a;
+		},
+		k: "x" in o,
+		["x" in o]: 1
+	};
+	;
+) break;
+
+for(
+	var C = class {
+		/**
+		 *
+		 * @param a
+		 * @returns
+		 */
+		m(a = ("x" in o)) {
+			return a;
+		}
+
+		x = "x" in o;
+	};
+	;
+) break;

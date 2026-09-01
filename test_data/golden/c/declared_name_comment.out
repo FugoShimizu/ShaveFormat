@@ -1,0 +1,19 @@
+/**
+ *
+ * @param K
+ * @return
+ */
+int g(int K) {
+	return K;
+}
+
+/* xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx */
+#include "k.h"
+
+/**
+ *
+ * @return
+ */
+int h(void) {
+	return (K) / 2;
+}

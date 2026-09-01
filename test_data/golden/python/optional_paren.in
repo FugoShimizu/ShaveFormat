@@ -1,0 +1,12 @@
+class A():
+    x = 1
+
+
+class B(A):
+    pass
+
+
+print(A().x, B().x)
+
+class A(): # c
+    pass

@@ -1,0 +1,6 @@
+int compute(int a, int b) {
+	int total = a + b;
+	if(total > 0) {
+		total = total * 2;
+	return total;
+}

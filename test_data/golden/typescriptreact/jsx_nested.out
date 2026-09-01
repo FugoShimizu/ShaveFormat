@@ -1,0 +1,23 @@
+interface Props { items: { id: number, name: string }[] }
+
+/**
+ *
+ * @param props
+ * @returns
+ */
+export function List(props: Props): JSX.Element {
+	return (
+		<ul className="list">
+			{
+				props.items.map(
+					item => (
+						<li key={item.id}>
+							<span>{item.name}</span>
+							{item.id > 0 ? <span className="positive">+</span> : <span className="zero">0</span>}
+						</li>
+					)
+				)
+			}
+		</ul>
+	);
+}

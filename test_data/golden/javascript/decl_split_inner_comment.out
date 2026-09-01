@@ -1,0 +1,6 @@
+var a = 1;
+
+var g = function(x) {
+	// step 1
+	return x; // ret
+};

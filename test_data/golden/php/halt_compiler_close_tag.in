@@ -1,0 +1,4 @@
+<?php
+echo json_encode(file_get_contents(__FILE__, false, null, __COMPILER_HALT_OFFSET__));
+__halt_compiler() ?>data
+  kept  

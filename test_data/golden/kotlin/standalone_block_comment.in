@@ -1,0 +1,13 @@
+/** 面積 */
+fun area(
+	/** 幅 */
+	w: Int,
+	h: Int,
+): Int {
+	return w * h
+}
+data class P(
+	/** 名前 */
+	val name: String,
+	val age: Int,
+)

@@ -1,0 +1,1 @@
+9:4: If semantics are preserved, consider merging consecutive conditions with `||`

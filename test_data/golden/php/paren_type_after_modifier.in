@@ -1,0 +1,11 @@
+<?php
+class Test {
+    public (A&B)|C|null $prop;
+    private(set) (Foo&Bar)|null $foo;
+    public static (A&B)|null $r;
+    public function __construct(private (A&B)|null $x) {}
+}
+function test((Type&MoreTypes)|A|B &... $b) {}
+function test2(A|B|(Type&MoreTypes)|C &$b, &$c, int & $d) {}
+function &refReturn() {}
+$f = function &(array &$a) use (&$b) { return $a; };

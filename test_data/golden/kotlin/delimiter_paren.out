@@ -1,0 +1,12 @@
+/**
+ *
+ * @param a
+ * @param xs
+ */
+fun m(a: Int, xs: List<Int>) {
+	if(a > 1) f()
+	while(a > 1) f()
+	for(x in xs) f()
+	val v = xs[a]
+	for(i in 0..a) f()
+}

@@ -1,0 +1,8 @@
+class Registry {
+	void Register(string SourceText, int Position, int LanguageMode, System.Collections.Generic.List<int> Handlers) {
+		if(
+			Position < SourceText.Length && SourceText[Position] != '\n' &&
+			ShouldBreakAfterExpandedBrace("\n}", SourceText.Substring(Position), LanguageMode)
+		) Handlers.Add(Position);
+	}
+}

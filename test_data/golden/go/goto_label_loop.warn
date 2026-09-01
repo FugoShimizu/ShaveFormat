@@ -1,0 +1,1 @@
+8:4: `goto` outside a multi-loop break; keep it only where other constructs would leak or duplicate cleanup

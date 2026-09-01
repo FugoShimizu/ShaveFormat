@@ -1,0 +1,15 @@
+/**
+ * x と同じ型で返す
+ * @return x
+ */
+decltype(x) F() {
+	return x;
+}
+
+/**
+ * y の型を保って返す
+ * @return y
+ */
+decltype(auto) G() {
+	return (y);
+}

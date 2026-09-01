@@ -1,0 +1,7 @@
+void Foo(void) {
+	const int A = 1;
+	const int B = 2;
+	const int C = 3;
+	const float X = 1.0F;
+	const float Y = 2.0F;
+}

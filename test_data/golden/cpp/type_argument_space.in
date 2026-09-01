@@ -1,0 +1,13 @@
+#include <map>
+#include <vector>
+
+/**
+ * 型引数の空白を検査する関数
+ * @param M 対象の写像
+ * @return 要素数
+ */
+template< typename T >
+size_t Count(const std::map< int, std::vector< T > > &M) {
+	// 要素数の返戻
+	return M.size();
+}

@@ -1,0 +1,25 @@
+def check(a, b, c, d):
+	if not (a and b):
+		return 1
+	if not a:
+		return 2
+	x = not (a or b) and c
+	y = not not (a and b)
+	z = a if not (b and c) else d
+	w = -(a + b)
+	v = ~(a | b)
+	u = a is not b
+	t = a not in (1, 2)
+	assert not (a and b), "m"
+	return x, y, z, w, v, u, t
+
+x = -(a ** 2)
+y = ~(a ** 2)
+z = +(a ** 2)
+w = not (a ** 2)
+v = (-a) ** 2
+u = -(a ** b ** 2)
+t = -(-(a ** 2))
+
+x, y = 5, 3
+print(-(-x), +(+x), ~(-x), not (-x), y - (-1), (-x) ** 2)

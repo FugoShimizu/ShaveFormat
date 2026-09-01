@@ -1,0 +1,10 @@
+def f(x):
+	if x:
+		return 1
+	return 0
+
+class C:
+	def g(self, a):
+		for i in a:
+			print(i)
+		return len(a)

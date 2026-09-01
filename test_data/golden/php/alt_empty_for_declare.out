@@ -1,0 +1,9 @@
+<?php
+
+for($i = 0; $i < 3; ++$i): endfor;
+
+declare(ticks=1): enddeclare;
+
+for($i = 0; $i < 3; ++$i): endfor; // c2
+
+echo "ok";

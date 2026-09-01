@@ -1,0 +1,15 @@
+const a = (
+	// show
+	<div>
+		{x /* c */}
+		<span>{y && (<B />)}</span>
+		{cond ? <A /> : null /* d */}
+	</div>
+);
+
+const a2 = <div>{x && (<B />)}</div>; // show
+const b = <div>{x /* c */}</div>;
+const c = <div>{cond ? <A /> : null /* c */}</div>;
+const d = <>{x /* e */}</>;
+// e
+const e = <A b={x /* c */} d={y} />;

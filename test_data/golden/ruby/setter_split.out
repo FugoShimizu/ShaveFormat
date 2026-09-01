@@ -1,0 +1,34 @@
+class Config
+	#
+	# @param seconds
+	def maximum_retry_interval=(seconds)
+		@maximum_retry_interval = seconds
+	end
+
+	#
+	# @param other
+	# @return
+	def ==(other)
+		return @maximum_retry_interval == other
+	end
+
+	#
+	# @param index
+	# @return
+	def [](index)
+		return @values[index]
+	end
+end
+
+class Cmp
+	#
+	# @param other
+	# @return
+	def <=>(other)
+		return other
+	end
+end
+
+a = 3r
+b = 1 + 2i
+m = [1r, 2i, 3.5r]

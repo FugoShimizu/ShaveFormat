@@ -1,0 +1,20 @@
+def f
+  begin # b
+    g
+  rescue # r
+    h
+  else # e
+    i
+  ensure # en
+    j
+  end
+  case x
+  when 1
+    a
+  else # o
+    b
+  end
+  xs.each do # d
+    g
+  end
+end

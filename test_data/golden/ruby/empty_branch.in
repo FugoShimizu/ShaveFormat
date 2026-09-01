@@ -1,0 +1,29 @@
+if a
+  1
+elsif b
+end
+
+if a then 1 elsif b then end
+
+if a
+  1
+  2
+elsif b
+elsif c
+end
+
+if a
+elsif b
+else
+  2
+end
+
+if x > 1
+else
+	puts 1
+end
+
+unless y
+else
+	puts 2
+end

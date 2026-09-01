@@ -1,0 +1,10 @@
+typedef int counter_t;
+
+void f(char *nptr, char *fallback_end, char *buf, char **endptr) {
+	counter_t min = (counter_t)-1;
+	if(endptr) *endptr = (char *)nptr + (fallback_end - buf);
+	const int x = (int)1234;
+	const int y = (a >> 5) + 1;
+	const int z = (a + b) - 1;
+	const int w = (uint8_t)~mask;
+}

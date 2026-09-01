@@ -1,0 +1,7 @@
+fun f() {
+	try { g() } // t1
+	catch (e: Exception) { h() } // t2
+	finally { k() }
+	try { g() } catch (e: Exception) { } // c1
+	finally { close() }
+}

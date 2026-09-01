@@ -1,0 +1,11 @@
+/**
+ *
+ */
+void compute(void) {
+	const float alpha = 3.14, beta = 1, gamma = 2.5F;
+	const double delta = 3.14;
+	(void)alpha;
+	(void)beta;
+	(void)gamma;
+	(void)delta;
+}

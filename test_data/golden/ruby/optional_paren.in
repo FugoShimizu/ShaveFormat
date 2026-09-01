@@ -1,0 +1,28 @@
+class A; def b(x = 10) = x; def c = [5, 6]; def d? = true; end
+def e()
+  1
+end
+def k() = 2
+def m() 3 end
+a = A.new()
+f = ->(x) { x + 1 }
+g = ->(x, y) { x + y }
+h = ->() { 4 }
+j = ->(&blk) { blk.call }
+p a.b(), a.b() -1, a.c() [1], a.c()[0], (a.b() ? 7 : 8), a.d?(), a&.b(), e(), k(), m(), f.(1), g.(1, 2), h.(), A::new().b
+p a.b() {}, a.b().to_s, (a.b()..12).to_a.size
+def t; yield(); end
+p(t { 9 })
+
+def f() # note
+  1
+end
+
+def first(x) x[0] end
+
+def pick(c) c ? 1 : 2 end
+
+x.y() # c
+q = (a.c) [1]
+r = (a.c()) [0]
+p q, r

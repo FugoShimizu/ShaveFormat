@@ -1,0 +1,9 @@
+fn f(x: i32, c: bool) -> i32 {
+	let a = --x;
+	let b = !!c;
+	if b {
+		a - -1
+	} else {
+		-!x
+	}
+}

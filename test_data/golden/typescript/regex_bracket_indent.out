@@ -1,0 +1,21 @@
+describe(
+	"入れ子の段を保つ",
+	() => {
+		it(
+			"正規表現内の括弧は深さに数えない",
+			() => {
+				expect(source).toMatch(/fillTextFitted\(\s*ctx,/);
+				expect(source).toMatch(/close\)only/);
+				expect(source).toMatch(/[({]class[})]/g);
+				expect(source).toBe(1);
+			}
+		);
+		it(
+			"除算は正規表現と取違えない",
+			() => {
+				const ratio = (width + margin) / (height - margin);
+				expect(ratio).toBeGreaterThan(0);
+			}
+		);
+	}
+);

@@ -1,0 +1,44 @@
+let a1 = x! /*a*/ - /*b*/ 1
+let a3 = y + /* b */ 1
+let a4 = y == /* b */ 1
+let a5 = /* b */ 1
+let a6 = y + 1 // b
+let a7 = y - /* b */ -1
+let a8 = y + /* a /* b */ c */ 1
+let b1 = y + /*c*/ 1 + /*d*/ 2
+let b2 = x! << 2
+
+func f() -> Int {
+	let s = y + /* it"s */ 1
+	let t = "p +/* q"
+	let b = y - /* two
+	lines */ 2
+	let c = y * 3 // three
+	return s + /* four */ b + c + t.count
+}
+
+infix operator +•
+
+let u = x! +• 1
+let v = y +• /* c */ 1
+
+func CommentOperator() {
+	let y = 2
+	// *
+	bump()
+	/// * doc
+	print(y, n)
+	let z = y + 1 // * c
+}
+
+let a = 1, b = 3
+let xs = [1, 2, 3]
+let c1 = a..<b /* c */
+let c2 = a..<b /* c */
+let c3 = a..<3 /* z */
+
+for i in 0...b { /* n */
+	print(i)
+}
+
+let c4 = xs[1..<2] /* c */

@@ -1,0 +1,8 @@
+func f(a: Int, b: Int) -> Int {
+	return ( // c1
+		a + b)
+}
+func g() -> () -> Int {
+	return { return ( // c2
+		a) }
+}

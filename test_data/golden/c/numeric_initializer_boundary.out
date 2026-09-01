@@ -1,0 +1,11 @@
+/**
+ * 数値初期値と配列長の確認関数
+ * @return 数値と配列長の合計
+ */
+double InspectNumbers(void) {
+	float Values[0XE0];
+	const float Hex = 0XE0, Other = 0X1E2, Negative = -0XE0, Exact = 0X1P2, Fraction = 0X1.8P1;
+	const double Signed = -0X1.AP0, Decimal = -0.5;
+	// 数値と配列長の合計の返戻
+	return Hex + Other + Negative + Exact + Fraction + Signed + Decimal + sizeof(Values) / sizeof(Values[0]);
+}

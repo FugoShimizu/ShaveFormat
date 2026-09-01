@@ -1,0 +1,11 @@
+class C {
+	void F(int a) {
+		if(a > 0) {
+			G();
+			G();
+		} else if(a < -1) { // 別の枝の説明
+			K();
+			K();
+		}
+	}
+}

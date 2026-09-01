@@ -1,0 +1,9 @@
+a = 3
+b = 1
+c = 2
+puts "#{(a)-b}"
+puts "#{(a)?b:c}"
+puts "#{a-b}"
+puts "#{(foo) -1}" if false
+puts "#{(a) %2}"
+puts "#{(a) /2}"

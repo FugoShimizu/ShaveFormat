@@ -1,0 +1,6 @@
+def compute(alpha_value, bravo_value, charlie_value, delta_value, echo_value, foxtrot_value)
+  total = alpha_value + bravo_value + charlie_value + delta_value + echo_value + foxtrot_value + alpha_value + bravo_value + charlie_value + delta_value + echo_value + foxtrot_value
+  flag = alpha_value > 0 && bravo_value > 0 && charlie_value > 0 && delta_value > 0 && echo_value > 0 && foxtrot_value > 0 && alpha_value > 0 && bravo_value > 0 && charlie_value > 0
+  picked = flag ? alpha_value + bravo_value + charlie_value + delta_value + echo_value + foxtrot_value : alpha_value + bravo_value + charlie_value + delta_value + echo_value + total
+  return total + picked
+end

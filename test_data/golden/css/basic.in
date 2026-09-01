@@ -1,0 +1,14 @@
+.card {
+	display: flex;
+	flex-direction: column;
+	padding: 12px 8px;
+}
+.card .title {
+	font-weight: bold;
+	color: #333;
+}
+@media (max-width: 600px) {
+	.card {
+		padding: 8px 4px;
+	}
+}

@@ -1,0 +1,4 @@
+<div class="wrap">
+<?php
+$title = "Page";
+echo $title;

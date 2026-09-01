@@ -1,0 +1,30 @@
+class Worker {
+	public void run() {
+		// 無限 worker ループ
+		for(;;) {
+			Job job = queue.take();
+			if(job == null) break;
+			process(job);
+		}
+	}
+
+	public void labeled() {
+		// label 付き無限 for - label 付けても変換後 break label は valid
+		outer:
+		for(;;) {
+			for(int i = 0; i < 10; ++i) {
+				if(done(i)) break outer;
+			}
+		}
+	}
+
+	public void enhancedFor(int[] items) {
+		// 拡張 for (foreach) は対象外
+		for(int x : items) use(x);
+	}
+
+	public void existing() {
+		// 既存の while(true) は不変
+		while(true) doWork();
+	}
+}

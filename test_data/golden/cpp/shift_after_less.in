@@ -1,0 +1,5 @@
+template<int N> constexpr int v = N;
+bool f(int i, int n) { return i < n >> 1; }
+bool g(int i, int n) { return i<n>> 1; }
+bool h() { return v<3> > 1; }
+std::vector<std::vector<int>> x;

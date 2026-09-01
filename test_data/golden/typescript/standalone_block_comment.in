@@ -1,0 +1,24 @@
+/** 面積 */
+function area(
+	/** 幅 */
+	w: number,
+	h: number,
+): number {
+	return w * h;
+}
+type T = {
+	/** a の説明 */
+	a: number;
+	/** b の説明 */
+	b: string;
+};
+const L = import(
+	/* webpackChunkName: "page" */
+	"./Page"
+);
+function g2() {
+	const a = g();
+	/** b の説明 */
+	const b = g();
+	return a + b;
+}

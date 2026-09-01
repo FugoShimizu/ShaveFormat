@@ -1,0 +1,18 @@
+/**
+ *
+ * @param props
+ * @returns
+ */
+function Card(props: { title: string, visible: boolean }): JSX.Element {
+	if(!props.visible) return <span />;
+	else if(!props.title) return <div className="empty" />;
+	return (
+		<div className="card">
+			<h2>{props.title}</h2>
+			<p>Body</p>
+		</div>
+	);
+}
+
+const Label = (props: { y: string, x: string }) => <p title={props.y}>{props.x}</p>;
+const Button = (props: { f: () => void }) => <b onClick={() => props.f()} />;

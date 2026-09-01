@@ -1,0 +1,71 @@
+<?php
+
+#[Attribute(Attribute::TARGET_CLASS)]
+final class Route
+{
+    public function __construct(public string $path = '/', public array $methods = ['GET'])
+    {
+    }
+}
+
+enum Status: string
+{
+    case Draft = 'draft';
+    case Sent = 'sent';
+
+    public function label(): string
+    {
+        return ucfirst($this->value);
+    }
+}
+
+function collect(int ...$ids): iterable
+{
+    $square = static fn (int $x): int => $x ** 2;
+    $ref = &$GLOBALS['cache'];
+    $order = $ids[0] <=> $ids[1];
+    $name = 'a';
+    $name .= 'b';
+    $fallback = $name ?: 'default';
+    $coalesce = $name ?? 'none';
+    $service = new class implements \Countable {
+        public function count(): int
+        {
+            return 0;
+        }
+    };
+    $len = $service?->count();
+    if ($service instanceof \Countable) {
+        yield from $ids;
+    }
+    ['a' => $x, 'b' => $y] = ['a' => 1, 'b' => 2];
+    foreach ($ids as $key => &$id) {
+        $id *= 2;
+    }
+    unset($id);
+    do {
+        $order--;
+    } while ($order > 0);
+    switch ($order) {
+        case 1:
+            echo 'one';
+            break;
+        default:
+            echo 'other';
+    }
+    try {
+        $len = strlen($name);
+    } catch (\RuntimeException | \LogicException $e) {
+        return [];
+    } finally {
+        $name = '';
+    }
+    return match (true) {
+        $order > 0, $order < -1 => 'edge',
+        default => throw new \LogicException('bad'),
+    };
+}
+
+$closure = function (int $a, int $b = 2) use (&$total): void {
+    $total += $a + $b;
+};

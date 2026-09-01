@@ -1,0 +1,18 @@
+#pragma once
+#if defined(__cplusplus)
+extern "C"{
+#endif
+  int  f(int a);
+struct S { int a; };
+#if defined(__cplusplus)
+} /* extern "C" */
+#endif
+#ifdef __cplusplus
+// C linkage
+  extern  "C"  {  // again
+#endif
+void g(void);
+#ifdef __cplusplus
+}
+#endif
+/* lead */ #define GLOB "src/*.c"

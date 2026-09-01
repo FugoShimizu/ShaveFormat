@@ -1,0 +1,18 @@
+class C {
+	void M(int a, int[] xs) {
+		if(a > 1) A();
+		while(a > 1) --a;
+		switch(a) {
+		default:
+			break;
+		}
+		foreach(var x in xs) A();
+		var v = xs[a];
+		foreach(var x in xs ?? ys) A();
+		var r = a switch { 1 => 2, _ => 3 };
+		var s = (a + 1) switch { _ => 0 };
+		var q = from x in xs ?? ys join y in ys ?? xs on x equals y select x;
+		var u = xs[1..];
+		var w = 1..;
+	}
+}

@@ -1,0 +1,9 @@
+// comment
+try {
+	foo()
+} catch(
+	e:
+	Exception
+) {} finally {
+	close()
+}

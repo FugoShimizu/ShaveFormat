@@ -1,0 +1,7 @@
+fun f(type: Int, c: Boolean): String {
+    return when (type) {
+        1 -> "wired"
+        2 -> if (c) "b" else "o"
+        else -> if (ok(type)) "bluetooth" else "other"
+    }
+}

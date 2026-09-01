@@ -1,0 +1,2 @@
+8:14: `goto` outside a multi-loop break; keep it only where other constructs would leak or duplicate cleanup
+16:3: `goto` outside a multi-loop break; keep it only where other constructs would leak or duplicate cleanup

@@ -1,0 +1,18 @@
+class A {
+	/**
+	 *
+	 * @param x
+	 */
+	void f(int x) {
+		switch(x) {
+		case 1:
+			break;
+		default:
+		// 既定
+		}
+		switch(x) {
+		case 2:
+		// 空の case
+		}
+	}
+}

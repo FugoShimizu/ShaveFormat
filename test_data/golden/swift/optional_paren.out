@@ -1,0 +1,31 @@
+let xs = [1, 2, 3]
+
+let a = xs.map { x in
+	x + 1
+}
+
+let b = xs.reduce(0) { s, x in
+	s + x
+}
+
+let c = xs.map { (x: Int) in
+	x
+}
+
+let d: (Int) -> Int = { x -> Int in
+	x
+}
+
+let e = xs.map {
+	$0 * 2
+}
+
+let f = xs.filter {
+	$0 > 1
+}.count
+
+let k = xs.map { _ in
+	0
+}
+
+print(a, b, c, d(4), e, f, k)

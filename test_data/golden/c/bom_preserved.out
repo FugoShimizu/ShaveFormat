@@ -1,0 +1,9 @@
+﻿/**
+ * 加算関数
+ * @param X 加える数
+ * @return 和
+ */
+int Add(const int X) {
+	// 和の返戻
+	return X + 1;
+}

@@ -1,0 +1,10 @@
+function foo() {
+	let a = 1;
+	let b = 2;
+	a += 1;
+	b += 1;
+	let c = 3;
+	let d = 4;
+	c += 1;
+	d += 1;
+}

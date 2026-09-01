@@ -1,0 +1,16 @@
+/* d */
+/* e */
+.a.b, a .b {
+	x: 1;
+}
+
+a {
+	margin: 1px/* c */-2px;
+	width: calc(1px + /* c */ 2px);
+	padding: 1px /* c */ .5px;
+}
+
+b {
+	margin: 0 auto; /* c */
+	width: 10%; /* d */
+}

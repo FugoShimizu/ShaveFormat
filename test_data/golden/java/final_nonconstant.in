@@ -1,0 +1,73 @@
+import java.util.function.IntSupplier;
+
+class Nonconstant {
+	/**
+	 * 実行時値の取得関数
+	 * @return 初期値
+	 */
+	static int Read() {
+		// 初期値の返戻
+		return 1;
+	}
+
+	/**
+	 * 仮引数を捕捉する関数
+	 * @param Input 入力値
+	 * @return 捕捉した値
+	 */
+	static int Capture(final int Input) {
+		IntSupplier Fetch = () -> {
+			int Copy = Input;
+			// 捕捉値の返戻
+			return Copy;
+		};
+		// 呼出結果の返戻
+		return Fetch.getAsInt();
+	}
+
+	/**
+	 * 括弧付の更新対象を保持する関数
+	 * @return 更新後の値
+	 */
+	static int Update() {
+		int Counter = Read();
+		(Counter)++;
+		++((Counter));
+		// 更新結果の返戻
+		return Counter;
+	}
+}
+
+class ConstantSemantics {
+	/**
+	 * 分岐結果の型名取得関数
+	 * @param IsEnabled 分岐条件
+	 * @return 型名
+	 */
+	static String Type(final boolean IsEnabled) {
+		int Number = 1;
+		Object Value = IsEnabled ? Number : (byte)2;
+		// 型名の返戻
+		return Value.getClass().getName();
+	}
+
+	/**
+	 * 文字列同一性の検査関数
+	 * @return 連結結果の同一性
+	 */
+	static boolean IsSame() {
+		String Prefix = "a", Copy = Prefix;
+		// 参照比較結果の返戻
+		return (Copy + "b") == "ab";
+	}
+
+	/**
+	 * 到達可能性の保持確認関数
+	 */
+	static void Reach() {
+		boolean IsRunning = false;
+		while(IsRunning) System.out.println("到達不可");
+		// 終了
+		return;
+	}
+}

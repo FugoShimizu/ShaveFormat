@@ -1,0 +1,14 @@
+def f(s, e)
+  case s
+  when 'a'
+    # 一文目。二文目
+    return e
+  when 'b'
+    g
+    h
+  else
+    # 三文目。四文目
+    e.destroy!
+  end
+  nil
+end

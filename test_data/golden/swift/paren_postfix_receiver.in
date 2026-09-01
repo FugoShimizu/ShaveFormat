@@ -1,0 +1,2 @@
+let x = (a.b).c + (g()).h + (a[0]).b + (f)(1) + (a.b)(2) + (self).x + (1).description + (a?.b).c + ((a.b)).c + (a!).b
+let y = (a * g()).signum() + (-(y)).advanced(by: 10) + (a + b[0]).d + (!g()).h

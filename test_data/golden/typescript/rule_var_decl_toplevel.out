@@ -1,0 +1,14 @@
+const a: number = 1;
+const b: number = 2;
+let c: number;
+let d: number;
+let e = 5;
+let f = 6;
+let g: number;
+
+/**
+ *
+ */
+function foo(): void {
+	const x = 1, y = 2;
+}

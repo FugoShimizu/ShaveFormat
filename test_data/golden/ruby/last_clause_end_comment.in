@@ -1,0 +1,32 @@
+def f(v)
+  case v
+  when 1
+    w
+    z
+    # when の注記
+  end
+  if v
+    a
+  elsif w
+    b
+    # elsif の注記
+  end
+  begin
+    c
+  rescue StandardError
+    d
+    # rescue の注記
+  end
+  case v
+  in Integer
+    e
+    # in の注記
+  end
+end
+
+def g
+  1
+rescue StandardError
+  2
+  # def の rescue の注記
+end

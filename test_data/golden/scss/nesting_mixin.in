@@ -1,0 +1,18 @@
+@use "sass:math" as *;
+
+$base: 8px;
+
+@mixin flex($dir: row) {
+	display: flex;
+	flex-direction: $dir;
+}
+
+.card {
+	@include flex(column);
+	padding: $base * 2;
+	> .title { font-weight: 700; }
+	&:hover { opacity: .8; }
+	.nested & { color: red; }
+}
+
+.a { &#top { color: red; } }

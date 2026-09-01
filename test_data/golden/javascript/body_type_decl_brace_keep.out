@@ -1,0 +1,15 @@
+/**
+ *
+ * @param a
+ */
+function f(a) {
+	if(a === 1) {
+		class C {}
+	}
+	if(a === 2) {
+		/**
+		 *
+		 */
+		function g() {}
+	}
+}

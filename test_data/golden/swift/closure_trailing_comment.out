@@ -1,0 +1,19 @@
+let xs = [1, 2]
+
+if (
+	xs.contains {
+		$0 > 1 /* c1 */
+	}
+) {
+	print(1)
+}
+
+let b = xs.map { x in
+	x + 1 /* c2 */
+}
+
+let a = xs.map { // c3
+	$0 + 1
+}
+
+print(a, b)

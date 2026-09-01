@@ -1,0 +1,8 @@
+class Calculator {
+	public int Compute(int alphaValue, int bravoValue, int charlieValue, int deltaValue, int echoValue, int foxtrotValue) {
+		int total = alphaValue + bravoValue + charlieValue + deltaValue + echoValue + foxtrotValue + alphaValue + bravoValue + charlieValue + deltaValue + echoValue + foxtrotValue;
+		boolean flag = alphaValue > 0 && bravoValue > 0 && charlieValue > 0 && deltaValue > 0 && echoValue > 0 && foxtrotValue > 0 && alphaValue > 0 && bravoValue > 0 && charlieValue > 0;
+		int picked = flag ? alphaValue + bravoValue + charlieValue + deltaValue + echoValue + foxtrotValue : alphaValue + bravoValue + charlieValue + deltaValue + echoValue + total;
+		return total + picked;
+	}
+}

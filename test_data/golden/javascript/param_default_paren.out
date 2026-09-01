@@ -1,0 +1,8 @@
+/**
+ *
+ * @param cb
+ */
+function g(cb = () => 2) {}
+
+const [z = () => 6] = [];
+const { w = () => 7 } = {};

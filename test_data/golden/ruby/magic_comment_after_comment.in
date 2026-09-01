@@ -1,0 +1,6 @@
+# c1
+# encoding: ascii-8bit
+def f
+  "e".length
+end
+p __ENCODING__, f

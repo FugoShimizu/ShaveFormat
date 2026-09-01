@@ -1,0 +1,31 @@
+async def f(a, b, c, p, x):
+	y = (a + b) * c
+	z = p[b - 1] / c
+	w = await (-x)
+	v = (3571).bit_length()
+	u = [q for q in p if (q if b else c)]
+	return y, z, w, v, u
+
+v = [a for a in range(3) if (1 if a else 2)]
+n = (3571).bit_length()
+d = 2 + 3
+
+async def f(x):
+	return await (-x)
+
+def g():
+	print((yield))
+	x = [(yield)]
+	y = { (yield from a) }
+
+c = True
+x = (y := 0 if c else 2)
+
+def f(a=(z := 1 if c else 2)):
+	return a
+
+print(x, y, f(), f"{(w := 3 if c else 4)}")
+f = lambda x: x
+g(lambda: 1, k=lambda: 2)
+d = { (lambda: 1): 2, 3: lambda: 4 }
+h = (lambda: 1)()

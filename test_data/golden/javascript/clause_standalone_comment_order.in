@@ -1,0 +1,20 @@
+function f() {
+	if (a) {
+		g();
+		h();
+	} // d1
+	// own
+	else {
+		k();
+		m();
+	}
+	try {
+		g();
+		h();
+	}
+	// before catch
+	catch (e) {
+		k();
+		m();
+	}
+}

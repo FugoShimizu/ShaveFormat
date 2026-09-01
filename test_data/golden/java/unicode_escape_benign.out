@@ -1,0 +1,65 @@
+public class A {
+	static String s = "caf\u00e9 \uD83D\uDE00";
+	static char c = '\u0041';
+	static String q = "\"quoted\"";
+	// comment \u00e9 fine
+	/* block */
+	static int hidden = 5; /* */
+
+	/**
+	 *
+	 * @return
+	 */
+	static boolean check() {
+		String text = "a";
+		//
+		return text + "b" == "ab";
+		return false;
+	}
+
+	/**
+	 *
+	 * @param args
+	 */
+	public static void main(String[] args) {
+		int ab = 3;
+		System.out.println(s + c + q + hidden + check() + ab);
+	}
+}
+
+class A {
+	String c = "\uD834\uDD1E";
+	char f = '\uD800';
+	String a = "caf\u00e9";
+	//
+	int a = 1;
+	int x = 1;
+}
+
+public class Cr {
+	/**
+	 *
+	 * @param args
+	 */
+	public static void main(String[] args) {
+		int x = 1;
+		// reset
+		x = 5;
+		int y = x;
+		System.out.println(y);
+	}
+}
+
+class T {
+	static int k = 0;
+
+	/**
+	 *
+	 * @param a
+	 */
+	public static void main(String[] a) {
+		// if (k == 0) { k++; k++; }
+		// keep \u002f here
+		System.out.println(k);
+	}
+}

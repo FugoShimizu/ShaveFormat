@@ -1,0 +1,13 @@
+y = [(a
+b), 2]
+def f = (a
+b)
+BEGIN { a = 1
+ b = 2 }
+@files ||= (
+  shortest = []
+  rest = paths.each_with_object([]) { |path, result|
+    result << path
+  }
+  shortest.sort! | rest
+)

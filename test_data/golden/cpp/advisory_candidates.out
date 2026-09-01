@@ -1,0 +1,18 @@
+#include <cstddef>
+
+/**
+ * 条件付警告の検査関数
+ * @param Tiny 小整数
+ * @return 計算結果
+ */
+int Probe(const char Tiny) {
+	int Candidate = 1;
+	long Mutable = 0;
+	Mutable++;
+	Mutable++;
+	int *Pointer = NULL;
+	for(; Mutable < 2; Mutable++) Pointer = nullptr;
+	const bool IsConsumed = Mutable++ == 2;
+	// 計算結果の返戻
+	return Candidate + Mutable + (Pointer == nullptr) + IsConsumed + +(+Tiny);
+}

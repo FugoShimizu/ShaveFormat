@@ -1,0 +1,35 @@
+function eventLoop(): void {
+	// 無限ループ
+	for(;;) {
+		const evt = queue.pop();
+		if(!evt) break;
+		dispatch(evt);
+	}
+}
+
+class Worker {
+	private running = true;
+
+	run(): void {
+		// クラスメソッド内の無限ループ
+		for(;;) {
+			if(!this.running) break;
+			this.tick();
+		}
+	}
+}
+
+function existingWhile(): void {
+	// 既存の while(true) は不変
+	while(true) doWork();
+}
+
+function forIn(obj: Record<string, number>): void {
+	// for-in は対象外
+	for(const k in obj) use(k);
+}
+
+function regularFor(n: number): void {
+	// 通常 for は対象外
+	for(let i = 0; i < n; ++i) use(i);
+}

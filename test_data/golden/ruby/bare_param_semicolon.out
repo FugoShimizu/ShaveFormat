@@ -1,0 +1,20 @@
+#
+def f2(*)
+	p :f2
+end
+
+#
+def f4(**)
+	p :f4
+end
+
+#
+def f5(&)
+	p :f5
+end
+
+#
+# @param a
+def f6(a, *)
+	p a
+end

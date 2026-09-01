@@ -1,0 +1,9 @@
+<svg />
+<p>after svg</p>
+<math />
+<p>after math</p>
+<SVG><path /></SVG>
+<MATH><mi /></MATH>
+<BR><img src="x">
+<PRE>  keep
+  spaces</PRE>

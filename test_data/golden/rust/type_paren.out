@@ -1,0 +1,6 @@
+fn f(x: u8, b: &(dyn A + Send), c: Box<dyn A + Send>, d: &u8) -> u8 {
+	let e: i32 = 1;
+	x
+}
+
+fn f(x: &(dyn A + Send), y: u8, z: (u8, u16)) {}

@@ -1,0 +1,12 @@
+if(x) { // 条件
+	f();
+	g();
+}
+
+/**
+ *
+ * @returns
+ */
+function h() { // 本体
+	return { a: 1 }; // 値
+}

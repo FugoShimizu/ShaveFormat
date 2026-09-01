@@ -1,0 +1,11 @@
+/// ラベル付ループを処理する，x は分岐値
+func f(x: Int) {
+	search: for i in 0..<10 {
+		switch x {
+		case 1:
+			break search
+		default:
+			break
+		}
+	}
+}

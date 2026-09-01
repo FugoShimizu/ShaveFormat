@@ -1,0 +1,13 @@
+/**
+ *
+ */
+function f() {} // c8
+
+/* c9 */
+/**
+ *
+ * @returns
+ */
+function g() {
+	return 1;
+}

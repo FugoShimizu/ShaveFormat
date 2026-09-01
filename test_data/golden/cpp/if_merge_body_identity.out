@@ -1,0 +1,43 @@
+#include <typeinfo>
+
+int Count = 0;
+
+/**
+ *
+ * @param Flag
+ */
+void Static(bool Flag) {
+	if(Flag) {
+		static const int X = ++Count;
+	} else if(!Flag) {
+		static const int X = ++Count;
+	}
+}
+
+/**
+ *
+ * @param Flag
+ * @return
+ */
+const std::type_info &Type(bool Flag) {
+	if(Flag) return typeid([] {});
+	else if(!Flag) return typeid([] {});
+	return typeid(Flag);
+}
+
+/**
+ *
+ * @param Value
+ * @return
+ */
+int Nested(int Value) {
+	if(Value == 1) return [] {
+		static int N = 0;
+		return ++N;
+	}();
+	if(Value == 2) return [] {
+		static int N = 0;
+		return ++N;
+	}();
+	return 0;
+}

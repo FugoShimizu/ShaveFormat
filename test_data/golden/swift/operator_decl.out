@@ -1,0 +1,15 @@
+func ==(lhs: Int, rhs: Int) -> Bool {
+	return true
+}
+
+func !=(lhs: Int, rhs: Int) -> Bool {
+	return false
+}
+
+func +(lhs: Int, rhs: Int) -> Int {
+	return 0
+}
+
+func compute(alpha: Int) -> Int {
+	return alpha
+}

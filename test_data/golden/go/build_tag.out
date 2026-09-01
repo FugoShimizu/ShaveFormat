@@ -1,0 +1,5 @@
+//go:build linux && amd64
+// +build linux,amd64
+
+// build tag 付き file
+package main

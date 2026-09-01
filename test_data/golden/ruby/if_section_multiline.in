@@ -1,0 +1,16 @@
+def f
+  if c # X
+    a
+  else
+    b.chdir(d) do
+      e
+    end
+  end
+end
+case x
+when 1 then a
+when 2 then b.each do
+  c
+end
+end
+x = if c then a else b end

@@ -1,0 +1,11 @@
+declare function f<T>(x: T): T;
+declare let o: any;
+declare let a: any;
+const s1 = (f<number>) >= o;
+const s2 = (f<number>) > o;
+const s3 = (f<number>) < o;
+const s5 = (f<number>) >> o;
+const s6 = (f<number>) == o;
+const s7 = (f<number>)!;
+const s8 = (a + f<number>) > o;
+const s9 = (f<number>) != o;

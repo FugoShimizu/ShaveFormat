@@ -1,0 +1,7 @@
+const value: unknown = null;
+const isEqual: boolean = value === null || value === undefined;
+const isDifferent: boolean = value !== null && value !== undefined;
+const otherValue: unknown = undefined;
+const isMixedSubject: boolean = value === null || otherValue === undefined;
+const isRepeatedNull: boolean = value === null || value === null;
+const isConjunctiveStrict: boolean = value === null && value === undefined;

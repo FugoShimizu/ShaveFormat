@@ -1,0 +1,15 @@
+<?php
+
+/**
+ *
+ * @param $sourceText
+ * @param $position
+ * @param $languageMode
+ * @param $handlers
+ */
+function register($sourceText, $position, $languageMode, &$handlers) {
+	if(
+		$position < strlen($sourceText) && $sourceText[$position] !== "\n" &&
+		shouldBreakAfterExpandedBrace("\n}", substr($sourceText, $position), $languageMode)
+	) $handlers[] = $position;
+}

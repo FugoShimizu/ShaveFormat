@@ -1,0 +1,13 @@
+package p
+
+func Kind(Value any, Items []int) int {
+	switch Copy := (Value).(type) {
+	case int:
+		return Copy
+	}
+	Total := 0
+	for _, Item := range (Items) {
+		Total += Item
+	}
+	return Total
+}

@@ -1,0 +1,36 @@
+do x();
+while(a);
+
+while(true) {
+	break;
+	continue;
+}
+
+debugger;
+
+class A {
+	x = 1;
+	y = 2;
+	z;
+}
+
+type T = string;
+
+export { A };
+export type { B };
+export default { a: 1 };
+
+function f(a: string): void;
+
+abstract class C {
+	abstract m(): void;
+
+	n(): void;
+}
+
+export default function() {}
+
+declare class D {
+	m(): number;
+	n(): string;
+}

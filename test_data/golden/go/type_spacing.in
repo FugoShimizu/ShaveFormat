@@ -1,0 +1,16 @@
+package main
+
+type I interface{ M() }
+type E interface{}
+type S struct{ A int }
+type Z struct{}
+
+func main() {
+	ch := make(chan struct{})
+	ch <- struct{}{}
+	var v interface{ M() }
+	var u interface{}
+	w := []struct{ A int }{{1}}
+	_ = struct{ A int }(func() struct{ A int } { return S{} }())
+	_, _, _ = v, u, w
+}

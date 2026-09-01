@@ -1,0 +1,8 @@
+puts DATA.read
+
+__END__
+line one
+	indented line  
+line two
+
+

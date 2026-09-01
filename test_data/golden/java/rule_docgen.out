@@ -1,0 +1,40 @@
+// === rule_docgen_generate ===
+class Calc {
+	/**
+	 *
+	 * @param a
+	 * @param b
+	 * @return
+	 */
+	public int add(final int a, final int b) {
+		return a + b;
+	}
+
+	/**
+	 *
+	 */
+	void reset() {
+		this.total = 0;
+	}
+
+	/**
+	 *
+	 * @param seed
+	 */
+	Calc(int seed) {
+		this.total = seed;
+	}
+}
+
+// === rule_docgen_reconcile ===
+class Geo {
+	/**
+	 * 面積を求める
+	 * @param width 幅
+	 * @param height
+	 * @return 面積
+	 */
+	double area(double width, double height) {
+		return width * height;
+	}
+}

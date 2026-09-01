@@ -1,0 +1,12 @@
+#define GLOB "src/*.c"
+#define CS "/*"
+#define CE "*/"
+#define T 1 + 1 /* y */
+
+#pragma omp parallel /* y */
+
+#define LIST X(a) X(b) /* first */ /* second */
+#define STR(error) #error
+
+const char *s = GLOB;
+int t = T;

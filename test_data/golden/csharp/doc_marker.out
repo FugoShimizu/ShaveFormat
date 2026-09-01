@@ -1,0 +1,14 @@
+/// <summary>文書の開始
+/// 文書の続き
+/// </summary>
+class Documentation {
+	/// <summary>! を含む説明
+	/// 後続へ追加しない
+	/// </summary>
+	static void Receive() {}
+}
+
+/// <summary>`"甲。乙、丙"` の例
+/// 続き</summary>
+/// <code><![CDATA[var s = "</code>甲。乙、丙";]]></code>
+class Documentation {}

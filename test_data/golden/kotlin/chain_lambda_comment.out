@@ -1,0 +1,11 @@
+/**
+ *
+ */
+fun main() {
+	// filter done
+	val x = listOf(1).filter {
+		it > 0
+	}.map {
+		it * 2
+	}.sorted() // map done
+}

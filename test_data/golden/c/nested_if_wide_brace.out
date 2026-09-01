@@ -1,0 +1,10 @@
+/**
+ *
+ */
+void f() {
+	if(aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa > 0) {
+		if(bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb > 0) {
+			if(cccccccccccccccccccccccccccccccccccccc > 0) g();
+		}
+	}
+}

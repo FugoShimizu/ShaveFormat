@@ -1,0 +1,7 @@
+<ul>
+<?php foreach ($items as $item): // 各項目 ?>
+  <li><?php echo $item; /* 名前 */ ?></li>
+  <li><?php echo $item; // 名前 ?></li>
+  <li><?php /* 前 */ echo $item; ?></li>
+<?php endforeach; ?>
+</ul>

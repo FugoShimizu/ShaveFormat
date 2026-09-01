@@ -1,0 +1,2 @@
+5:2: Function is missing trailing return
+22:3: Labeled statement outside a multi-loop break; extract the loop into a function instead

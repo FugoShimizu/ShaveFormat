@@ -1,0 +1,12 @@
+# 日本語の注記と Python の型
+def f(x):
+	if x:
+		return 1 # 値を返す
+	# 関数の終わり
+	# - 箇条書き
+
+x = f(1)
+# 参照は https://example.com/a b と src/a.py の２つ
+# noSpacePy
+# tooMany
+x = 1 # inlineNoSpace

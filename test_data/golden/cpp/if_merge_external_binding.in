@@ -1,0 +1,5 @@
+#include "binding.hpp"
+int External(int x) { { BIND(); if(x) { if(x) return 1; } } return 0; }
+int Included(int x) { {
+#include "binding.inc"
+if(x) { if(x) return 1; } } return 0; }

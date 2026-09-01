@@ -1,0 +1,3 @@
+#!/usr/bin/env swift
+
+let s = "\#(notInterp)"

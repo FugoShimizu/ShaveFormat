@@ -1,0 +1,1 @@
+void F() { struct S { int X; /** 解放処理 */ ~S() { X=0; } }; struct T { /** 更新処理 */ void G() { int X=1; ++X; } }; }

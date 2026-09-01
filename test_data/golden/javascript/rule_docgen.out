@@ -1,0 +1,49 @@
+// === rule_docgen_generate ===
+/**
+ *
+ * @param a
+ * @param b
+ * @returns
+ */
+function add(a, b) {
+	return a + b;
+}
+
+/**
+ *
+ * @param message
+ */
+function logMessage(message) {
+	console.log(message);
+}
+
+class Widget {
+	/**
+	 *
+	 * @param id
+	 */
+	constructor(id) {
+		this.id = id;
+	}
+
+	/**
+	 *
+	 * @param key
+	 * @returns
+	 */
+	find(key) {
+		return this.lookup(key);
+	}
+}
+
+// === rule_docgen_reconcile ===
+/**
+ * 合計を求める
+ * @param a 第一項
+ * @param b
+ * @param c
+ * @returns 合計
+ */
+function total(a, b, c) {
+	return a + b + c;
+}

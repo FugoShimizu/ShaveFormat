@@ -1,0 +1,11 @@
+#include <stdio.h>
+int g(int K) { return (K) / 2; }
+#include "k.h"
+int h(void) { return (K) / 2; }
+#ifndef M
+static const int M = 6;
+#endif
+int m(void) { return (M) / 2; }
+#undef N
+int n(int N) { return (N) / 2; }
+int p(int P) { return (P) / 2; }

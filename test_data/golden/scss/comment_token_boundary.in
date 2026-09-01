@@ -1,0 +1,6 @@
+$a: 1 -/* d */2;
+$b: 3 +/* e */4;
+.x { w: $a; v: $b; }
+.x/* c */.y { p1: 1px/* c */-2px; p2: $a/* c */-1px; p3: 1px/* c */+2px; p4: 1px /* c */-2px; }
+.p { &/* d */.q { b: 1; } }
+b { margin: 0/* c */auto; width: 10/* d */%; }

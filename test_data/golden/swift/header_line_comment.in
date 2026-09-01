@@ -1,0 +1,15 @@
+func f() {
+	do { // t
+		try g()
+	} catch { // c
+		h()
+	}
+	repeat { // r
+		g()
+	} while c
+	if c { // 真
+		g()
+	} else { // 偽
+		h()
+	}
+}

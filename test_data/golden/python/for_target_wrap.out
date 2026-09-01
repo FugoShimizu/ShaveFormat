@@ -1,0 +1,5 @@
+for (
+	key_name,
+	value_name
+) in dictionary_object.items():
+	pass

@@ -1,0 +1,1 @@
+function f(a: boolean, b: boolean): void { if(a) { if(b) { let x = read(); /* first */ let y = read(); /* second */ use(x, y); } } }

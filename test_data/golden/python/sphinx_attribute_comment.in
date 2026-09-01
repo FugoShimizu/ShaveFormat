@@ -1,0 +1,3 @@
+class A:
+    #: doc of x
+    x = 1

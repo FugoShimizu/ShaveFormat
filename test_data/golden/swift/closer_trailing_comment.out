@@ -1,0 +1,13 @@
+for x in xs {
+	a()
+	b()
+} // c
+
+next()
+
+if a {
+	x()
+} else {
+	y()
+	z()
+} // d

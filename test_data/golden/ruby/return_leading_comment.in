@@ -1,0 +1,20 @@
+def g(a)
+  x = 1
+  # describes the result
+  foo.each
+end
+
+def h(a)
+  foo.x
+  x = 1
+  # describes the call
+  foo.bar(a, # first
+    b)
+end
+
+def k
+  g
+rescue StandardError
+  # fallback
+  foo.z
+end

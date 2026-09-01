@@ -1,0 +1,7 @@
+let a = 1, b = 2, c = true, d = false
+let x = (a <= b) && c
+let y = (a >= b) == d
+let w = (b != 2)
+let v = (a != b) && c
+let u = (a + b) != 3
+let s = (a != b) != c

@@ -1,0 +1,11 @@
+*.o
+*.shavefmt-*.tmp
+.DS_Store
+.claude/
+.env
+.vscode/
+__pycache__/
+build/
+build_*/
+graphify-out/
+vscode-extension/bin/

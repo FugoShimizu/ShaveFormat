@@ -1,0 +1,3 @@
+class G { companion object { const val K = 1 }; val y = 2 }
+class K { val l = listOf(1).map { it + 1 } }
+fun f() = 1

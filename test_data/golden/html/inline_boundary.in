@@ -1,0 +1,14 @@
+<div><span>q</span><span>r</span></div>
+<div><span>q</span>
+<span>r</span></div>
+<p>x<b>y</b>z<i>w</i></p>
+<p>a<b> x</b>y<span> </span>z</p>
+<p>a<script>f()</script>b</p>
+<p>a <script>f()</script>b</p>
+<p>{x} <b>y</b> a) }b</p>
+<div>t<p>a</p>u</div>
+<p>a<span><div>x</div><div>y</div></span>b</p>
+<svg><g><rect/><rect/></g><text>a<tspan>b</tspan> c</text></svg>
+<p>a<b>x</b>c</p>
+Hello<b>x</b>
+<span>q</span><span>r</span>

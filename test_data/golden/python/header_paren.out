@@ -1,0 +1,26 @@
+if x:
+	pass
+elif y:
+	pass
+
+while x:
+	pass
+
+match y:
+	case 1:
+		pass
+
+for i in xs:
+	pass
+
+def f(a, y):
+	if a: # 条件の説明
+		x = 1
+		return y
+	for i in 1, 2: # 反復
+		pass
+
+def g(a, b, c):
+	for x in a or b:
+		pass
+	return [x for x in a or b], [x for x in (b if c else a)]

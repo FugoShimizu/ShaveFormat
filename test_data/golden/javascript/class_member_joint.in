@@ -1,0 +1,10 @@
+class A {
+	static
+	x = 1
+	get
+	v() { return 1; }
+	static
+	async f() {}
+	y = 2
+}
+console.log(A.x, new A().v, Object.keys(new A()));

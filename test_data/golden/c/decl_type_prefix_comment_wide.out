@@ -1,0 +1,8 @@
+/**
+ *
+ */
+void f() {
+	const /* c */ int aaaaaaaa = 1;
+	const int bbbbbbbbbbbb =
+	2;
+}

@@ -1,0 +1,15 @@
+#define DIV(e) 100/e
+#define twice(x) x * 2
+#define t2 twice
+#define TWICE(x) x * 2
+#define SQ(x) x * x
+int f(int a, int b, int c) {
+	g(DIV((a * b) + c));
+	g(DIV(c + (a * b)));
+	g(t2((1 + 2)));
+	g(lower((a * b) + c));
+	return 0;
+}
+int main(void) {
+	return TWICE((1 + 2)) + SQ((3 - 1));
+}

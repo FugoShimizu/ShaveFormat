@@ -1,0 +1,35 @@
+annotation class Marker
+
+@Marker class Shape {
+	/**
+	 *
+	 */
+	fun f() = listOf(1, 2).map {
+		it + 1
+	}
+}
+
+class Other() {
+	/**
+	 *
+	 * @param x
+	 */
+	constructor(x: Int) : this()
+}
+
+enum class Kind {
+	X,
+	Y
+}
+
+/**
+ *
+ * @return
+ */
+fun g(): () -> () -> Int = {
+	{
+		1
+	}
+}
+
+val h = g()() {}

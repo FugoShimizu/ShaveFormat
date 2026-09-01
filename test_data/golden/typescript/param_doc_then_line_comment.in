@@ -1,0 +1,13 @@
+/** 面積 */
+function area(
+	/** 幅 */
+	// TODO: 単位
+	w: number,
+	h: number,
+): number { return w * h; }
+
+interface Props {
+	/** @deprecated use key */
+	// TODO: rename
+	id: string
+}

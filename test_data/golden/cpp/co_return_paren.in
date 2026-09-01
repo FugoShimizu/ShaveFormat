@@ -1,0 +1,9 @@
+#define ONE 1
+task f() {
+	co_return (ONE);
+}
+task g() {
+	co_await (y);
+	co_return (a, b);
+	throw (ONE);
+}

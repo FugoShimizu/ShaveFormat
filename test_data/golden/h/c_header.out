@@ -1,0 +1,21 @@
+#ifndef C_HEADER_H
+
+#define C_HEADER_H
+
+struct Pair {
+	int a;
+	int b;
+};
+
+int sum(void);
+
+/**
+ *
+ * @param x
+ * @return
+ */
+static inline int twice(int x) {
+	return x * 2;
+}
+
+#endif

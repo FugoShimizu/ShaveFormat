@@ -1,0 +1,11 @@
+/**
+ * 関数ポインタ返戻の欠落を検査する
+ * @return 関数ポインタ
+ */
+void (*EmptyFunctionPointer())(){}
+
+/**
+ * 仮引数のポインタを戻値と区別する
+ * @param P 入力ポインタ
+ */
+void EmptyVoidPointer(void *P){}

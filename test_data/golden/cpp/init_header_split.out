@@ -1,0 +1,18 @@
+/**
+ *
+ * @return
+ */
+bool f() {
+	if(
+		auto Reason = aaaaaaa ?
+		bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb :
+		ccccccccccccccccccccccccccccccc;
+		!Reason.empty()
+	) return true;
+	for(
+		int iiiiiiiiiiiiiiiiiiiii = 0;
+		iiiiiiiiiiiiiiiiiiiii < nnnnnnnnnnnnnnnnnnnnnnn;
+		++iiiiiiiiiiiiiiiiiiiii
+	) g();
+	return false;
+}

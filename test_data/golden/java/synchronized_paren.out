@@ -1,0 +1,14 @@
+class A {
+	/**
+	 *
+	 * @param x
+	 */
+	void f(Object x) {
+		synchronized(x) {
+			g();
+		}
+		synchronized(x) {
+			g();
+		}
+	}
+}

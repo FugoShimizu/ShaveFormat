@@ -1,0 +1,13 @@
+#
+# @return
+def index
+	order_clause = case params[:sort]
+	when "play_count"
+		{ play_count: :desc }
+	when "like_count"
+		{ like_count: :desc }
+	else
+		{ created_at: :desc }
+	end
+	return order_clause
+end

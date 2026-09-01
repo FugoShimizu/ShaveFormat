@@ -1,0 +1,7 @@
+init(
+	// the config
+	config /* shared */
+);
+function g() {
+	return 1;
+}

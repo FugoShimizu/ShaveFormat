@@ -1,0 +1,2 @@
+fun where(f: (Int) -> Boolean = { true }) = f(1)
+fun a(f: () -> Int = { 1 }, g: Int = 2) = f() + g

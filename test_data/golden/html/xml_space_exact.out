@@ -1,0 +1,7 @@
+<svg>
+	<text xml:space="preserve">  keep
+  spaces </text>
+	<text xml:space="not-preserve"> format  spaces </text>
+	<text xml:space='preserved'> format too </text>
+	<text xml:space=preserve>  keep too </text>
+</svg>

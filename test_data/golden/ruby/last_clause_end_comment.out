@@ -1,0 +1,29 @@
+#
+# @param v
+def f(v)
+	case v
+	when 1
+		w
+		z
+		# when の注記
+	end
+	if v then a elsif w then b end # elsif の注記
+	begin
+		c
+	rescue StandardError
+		d
+		# rescue の注記
+	end
+	case v
+	in Integer then e # in の注記
+	end
+end
+
+#
+# @return
+def g
+	return 1
+rescue StandardError
+	return 2
+	# def の rescue の注記
+end

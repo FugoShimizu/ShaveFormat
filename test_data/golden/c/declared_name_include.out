@@ -1,0 +1,54 @@
+#include <stdio.h>
+
+/**
+ *
+ * @param K
+ * @return
+ */
+int g(int K) {
+	return K / 2;
+}
+
+#include "k.h"
+
+/**
+ *
+ * @return
+ */
+int h(void) {
+	return (K) / 2;
+}
+
+#ifndef M
+
+static const int M = 6;
+
+#endif
+
+/**
+ *
+ * @return
+ */
+int m(void) {
+	return (M) / 2;
+}
+
+#undef N
+
+/**
+ *
+ * @param N
+ * @return
+ */
+int n(int N) {
+	return (N) / 2;
+}
+
+/**
+ *
+ * @param P
+ * @return
+ */
+int p(int P) {
+	return P / 2;
+}

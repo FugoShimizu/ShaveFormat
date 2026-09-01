@@ -1,0 +1,42 @@
+public class A {
+    static String s = "caf\u00e9 \uD83D\uDE00";
+    static char c = '\u0041';
+    static String q = "\u005c\u0022quoted\u005c\u0022";
+    // comment \u00e9 fine
+    /* block \u002a/ static int hidden = 5; /* */
+    static boolean check() {
+        String text = "a";
+        // \u000a return (text + "b") == "ab";
+        return false;
+    }
+    public static void main(String[] args) {
+        int \u0061b = 3;
+        System.out.println(s + c + q + hidden + check() + ab);
+    }
+}
+
+class A {
+    String c = "\uuuuD834\uDD1E";
+    char f = '\uD800';
+    String a = "caf\u00e9";
+    // \u000a int \u0061 = 1;
+  int  x=1;
+}
+
+public class Cr {
+    public static void main(String[] args) {
+        int x = 1;
+        // reset \u000d x = 5;
+        int y = x;
+        System.out.println(y);
+    }
+}
+
+class T {
+	static int k = 0;
+	public static void main(String[] a) {
+		\u002f\u002f if (k == 0) { k++; k++; }
+		// keep \u002f here
+		System.out.println(k);
+	}
+}

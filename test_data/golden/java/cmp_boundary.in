@@ -1,0 +1,7 @@
+class C {
+	void f(int x, long y) {
+		if(x <= 100) return;
+		if(x <= 2147483647) return;
+		if(y <= 2147483646L) return;
+	}
+}

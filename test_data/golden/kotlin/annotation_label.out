@@ -1,0 +1,17 @@
+@Target(AnnotationTarget.EXPRESSION) @Retention(AnnotationRetention.SOURCE) annotation class Mark
+
+/**
+ * 注釈付ラベルから脱出する
+ * @return 定値 1
+ */
+fun Annotated(): Int {
+	Outer@ @Mark while(true) {
+		println(0)
+		while(true) {
+			println(1)
+			break@Outer
+		}
+	}
+	// 値の返戻
+	return 1
+}

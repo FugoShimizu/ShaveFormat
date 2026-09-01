@@ -1,0 +1,6 @@
+/// ラベル付ループの値を破棄する
+fn f() {
+	'outer: loop {
+		break 'outer loop { break; };
+	}
+}

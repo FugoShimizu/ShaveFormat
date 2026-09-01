@@ -1,0 +1,9 @@
+del (
+	first_long_variable_name,
+	second_long_variable_name
+)
+
+assert (
+	first_long_variable_name ==
+	second_long_variable_name
+), "message text"

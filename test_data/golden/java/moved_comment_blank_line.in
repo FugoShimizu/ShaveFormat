@@ -1,0 +1,7 @@
+class A {
+	void f() {
+		// c8
+		/* c9 */
+	}
+	void g() { x(); }
+}

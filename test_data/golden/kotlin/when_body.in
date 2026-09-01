@@ -1,0 +1,11 @@
+/**
+ * 分岐値に応じて順に出力する
+ * @param Code 分岐値
+ */
+fun PrintBranch(Code:Int){when(Code){
+0 -> {println(0);println(1)};
+1 -> when(Code){1 -> {println(2);println(3)};else -> println(4);};
+else -> run{println("else -> { text }; ");println(5)};
+}
+// 終了
+return}

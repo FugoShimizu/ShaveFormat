@@ -1,0 +1,9 @@
+class C {
+	void F(bool a, bool b) {
+		if(a) if(b) {
+			int x = Read(), /* first */ y = Read();
+			/* second */
+			Use(x, y);
+		}
+	}
+}

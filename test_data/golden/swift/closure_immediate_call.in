@@ -1,0 +1,4 @@
+func compute(a: Int) -> Int {
+	let computed: Int = { let firstValue = firstOperationWithLongName(a); let secondValue = secondOperationWithLong(a); return firstValue + secondValue }()
+	return computed
+}

@@ -1,0 +1,10 @@
+/**
+ *
+ * @param x
+ * @return
+ */
+int F(int x) {
+	/* note \
+	continued */
+	return x;
+}

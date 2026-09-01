@@ -1,0 +1,11 @@
+class A {
+	/**
+	 *
+	 * @param w
+	 * @param h
+	 * @return
+	 */
+	int area(/** 幅 */ int w, int h) { // TODO: 単位
+		return w * h;
+	}
+}

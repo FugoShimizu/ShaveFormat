@@ -1,0 +1,11 @@
+/**
+ *
+ * @param x
+ * @param p
+ */
+void f(int x, int *p) {
+	++x;
+	++*p;
+	++*p;
+	--p[0];
+}

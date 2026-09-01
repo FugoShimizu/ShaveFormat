@@ -1,0 +1,2 @@
+void f(int a) { if (a == 1) { const int x = 1; } }
+void g(int a) { if (a==1) { using X = int; } }

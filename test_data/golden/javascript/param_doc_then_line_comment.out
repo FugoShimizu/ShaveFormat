@@ -1,0 +1,9 @@
+/**
+ * 面積
+ * @param w
+ * @param h
+ * @returns
+ */
+function area(/** 幅 */ w, h) { // TODO: 単位
+	return w * h;
+}

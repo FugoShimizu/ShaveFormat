@@ -1,0 +1,8 @@
+config = load()
+setup()
+run()
+result = compute()
+
+import os
+
+x = 1

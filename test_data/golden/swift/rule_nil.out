@@ -1,0 +1,15 @@
+// === rule_nil_coalescing_array ===
+let x: [Int] = processors ?? []
+let y: [Int] = items ?? [1, 2, 3]
+
+// === rule_nil_only_case ===
+func encode(_ data: Data) throws -> String? {
+	switch self {
+	case .deferredToData:
+		nil
+	case .base64:
+		data.base64EncodedString()
+	case let .custom(encoding):
+		try encoding(data)
+	}
+}

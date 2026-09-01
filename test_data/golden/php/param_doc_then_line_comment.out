@@ -1,0 +1,10 @@
+<?php
+
+class A {
+	/**
+	 *
+	 * @param $w
+	 * @param $h
+	 */
+	public function __construct(/** 幅 */ private int $w, private int $h) {} // TODO: 単位
+}

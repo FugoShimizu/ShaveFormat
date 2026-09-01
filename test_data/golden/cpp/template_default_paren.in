@@ -1,0 +1,6 @@
+template <int N = (1 > 2)> struct S {};
+template <int N = (1 < 2), typename T = X<(3 > 2)>> struct U {};
+void h() {
+	int v = (a > b);
+	f<(3 > 2)>(5);
+}

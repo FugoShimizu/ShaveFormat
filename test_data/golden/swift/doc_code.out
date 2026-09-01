@@ -1,0 +1,14 @@
+/// 使用例
+/// 値を保持
+///
+///     let value = "甲。乙、丙"
+///
+/// ~~~swift
+/// let other = "甲。乙、丙"
+/// ~~~
+/// `value` の説明
+/// 続き
+func example() -> Void {}
+/// 値を受取る
+/// code は分岐値
+func receive(_ code: Int) -> Void {}

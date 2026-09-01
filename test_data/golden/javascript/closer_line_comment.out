@@ -1,0 +1,12 @@
+/**
+ *
+ */
+function f() {
+	try {
+		g();
+	} catch(e) { // t1
+		h();
+	} finally { // t2
+		k();
+	}
+}

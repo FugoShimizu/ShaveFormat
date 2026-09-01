@@ -1,0 +1,9 @@
+const a = 1;
+const b = 2;
+let c, d;
+let e = 5, f = 6;
+
+function foo() {
+	let x = 1;
+	let y = 2;
+}

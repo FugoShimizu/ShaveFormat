@@ -1,0 +1,7 @@
+#pragma once
+#if __has_include(<vector>)
+int a;
+#endif
+#if __has_include(<stdio.h>) && 1
+int b;
+#endif

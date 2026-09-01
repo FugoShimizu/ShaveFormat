@@ -1,0 +1,5 @@
+// tail note
+const A = (value: string) => (<div>{value}</div>);
+// head note
+const B = (value: string) => (<div>{value}</div>);
+const C = (value: string) => (<>{value /* block note */}</>);

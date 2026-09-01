@@ -1,0 +1,25 @@
+// === rule_docgen_generate ===
+class Calc {
+	public int add(final int a, final int b) {
+		return a + b;
+	}
+	void reset() {
+		this.total = 0;
+	}
+	Calc(int seed) {
+		this.total = seed;
+	}
+}
+
+// === rule_docgen_reconcile ===
+class Geo {
+	/**
+	 * 面積を求める
+	 * @param width 幅
+	 * @param stale 余分な引数
+	 * @return 面積
+	 */
+	double area(double width, double height) {
+		return width * height;
+	}
+}

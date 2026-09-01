@@ -1,0 +1,9 @@
+/**
+ *
+ * @param a
+ */
+fun f(a: Int) {
+	if(a == 1) {
+		val x = 1
+	}
+}

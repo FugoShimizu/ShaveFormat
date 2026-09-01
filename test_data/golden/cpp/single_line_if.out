@@ -1,0 +1,11 @@
+/**
+ *
+ * @param X
+ */
+void Single(int X) {
+	if(X) Y = 1;
+	if(X) Y = 1;
+	if(X) Y = 1;
+	for(int Idx = 0; Idx < X; ++Idx) Sum += Idx;
+	while(X) --X;
+}

@@ -1,0 +1,19 @@
+fn compute(
+	alpha_value: i32,
+	bravo_value: i32,
+	charlie_value: i32,
+	delta_value: i32,
+	echo_value: i32,
+	foxtrot_value: i32
+) -> i32 {
+	let total = alpha_value + bravo_value + charlie_value + delta_value + echo_value + foxtrot_value + alpha_value + bravo_value +
+	charlie_value + delta_value + echo_value + foxtrot_value;
+	let flag = alpha_value > 0 && bravo_value > 0 && charlie_value > 0 && delta_value > 0 && echo_value > 0 && foxtrot_value > 0 &&
+	alpha_value > 0 && bravo_value > 0 && charlie_value > 0;
+	let picked = if flag {
+		alpha_value + bravo_value + charlie_value + delta_value + echo_value + foxtrot_value
+	} else {
+		alpha_value + bravo_value + charlie_value + delta_value + echo_value + total
+	};
+	total + picked
+}

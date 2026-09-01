@@ -1,0 +1,8 @@
+/**
+ *
+ * @param n
+ */
+void f(int n) {
+	if(n >= 60) return;
+	if(n <= 5) return;
+}

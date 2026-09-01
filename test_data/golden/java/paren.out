@@ -1,0 +1,52 @@
+class K {
+	/**
+	 *
+	 */
+	void h() {
+		g(a / (b * c));
+		g(a % (b * c));
+		g(a * (b % c));
+		g(a - (b + c));
+		g(a - (b - c));
+		g(a - b * c);
+		g(a * (b + c));
+		g(a + b - c);
+		g(a * b % c);
+		g(a - (b + c) * d);
+		g(a / (b * c));
+		g(a + b);
+		g(a & b + c);
+		g(a | b + c);
+		g(a ^ b + c);
+		g(a & b * c);
+		g(a & (b | c));
+		g(a | b & c);
+		g(a << b + c);
+		g(a << (b >> c));
+		g(a + b & c);
+		g(a & b + c);
+		g(a && (b || c));
+		g(a || b && c);
+		g(a && (b && c));
+		g(a || (b || c));
+		g(a && b && c);
+		g(a && (b || c) || d);
+		g(a && b || c);
+		g((a - b).m());
+	}
+}
+
+class A {
+	/**
+	 *
+	 * @param a
+	 * @param b
+	 * @param c
+	 * @param p
+	 * @return
+	 */
+	int f(int a, int b, int c, int[] p) {
+		final int x = (a + b) * c, y = p[b + c] * a;
+		return a > b ? x : y;
+	}
+}

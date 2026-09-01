@@ -1,0 +1,22 @@
+def f1; x = 1; - 1.abs; end
+def f2; x = 1; + 1.to_s; end
+def f3; x = 1; - 2 ** 2; end
+def f4; x = 1; - 1; end
+def f5; x = 1; - x.abs; end
+def f6; x = 1; -1.abs; end
+def f7; x = 1; - 1.5.floor; end
+def f8; x = 1; + 1.abs; end
+def g1; x = 1; - x + 1; end
+def g2; x = 1; + 1.to_s; end
+def g3; x = 1; - x.abs + 1; end
+def g4; x = 1; + x; end
+def g5; x = 1; -x + 1; end
+def g6; x = 1; + x * 2; end
+def g7; x = 1; - 1.abs + 1; end
+def g8; x = 1; + 1 + 2; end
+def h1; x = 1; + 1.to_s.freeze.frozen?; rescue NoMethodError; :err; end
+def h2; x = 1; +1.to_s.freeze.frozen?; end
+def h3; x = 1; y = + 1[0]; y; end
+def h4; x = 1; + 1.0.floor; end
+def h5; x = 1; - 1[0] + 2; end
+p [f1, f2, f3, f4, f5, f6, f7, f8, g1, g2, g3, g4, g5, g6, g7, g8, h1, h2, h3, h4, h5]

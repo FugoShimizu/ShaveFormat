@@ -1,0 +1,5 @@
+package main
+
+func f() {
+	x = a.b.c + g().h + a[0].b + f(1) + a.b(2) + a.(T).c + T{ c: 1 }.c + a.b.c
+}

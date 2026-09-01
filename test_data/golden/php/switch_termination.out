@@ -1,0 +1,91 @@
+<?php
+
+declare(strict_types=1);
+
+/**
+ * 全分岐から終了する
+ * @param $code 分岐値
+ * @param $isReady 条件値
+ */
+function all(int $code, bool $isReady): void {
+	switch($code) {
+	case 0:
+		return;
+	default:
+		return;
+	}
+}
+
+/**
+ * 全分岐終端後の返戻を検査する
+ * @param $code 分岐値
+ * @param $isReady 条件値
+ */
+function allTail(int $code, bool $isReady): void {
+	switch($code) {
+	case 0:
+		return;
+	default:
+		return;
+	}
+	// 終了
+	return;
+}
+
+/**
+ * 分岐から切替文の外へ脱出する
+ * @param $code 分岐値
+ * @param $isReady 条件値
+ */
+function switchExit(int $code, bool $isReady): void {
+	switch($code) {
+	case 0:
+		break;
+	default:
+		return;
+	}
+}
+
+/**
+ * 継続先が切替文の場合に脱出する
+ * @param $code 分岐値
+ * @param $isReady 条件値
+ */
+function continueSwitch(int $code, bool $isReady): void {
+	switch($code) {
+	case 0:
+		if($isReady) continue;
+		return;
+	default:
+		return;
+	}
+}
+
+/**
+ * 指定した段数の切替文から脱出する
+ * @param $code 分岐値
+ * @param $isReady 条件値
+ */
+function continueLevels(int $code, bool $isReady): void {
+	switch($code) {
+	case 0:
+		while(true) continue 2;
+		return;
+	default:
+		return;
+	}
+}
+
+/**
+ * 継続先が外側のループの場合に繰返す
+ * @param $code 分岐値
+ * @param $isReady 条件値
+ */
+function continueLoopCycle(int $code, bool $isReady): void {
+	while(true) switch($code) {
+	case 0:
+		continue 2;
+	default:
+		return;
+	}
+}

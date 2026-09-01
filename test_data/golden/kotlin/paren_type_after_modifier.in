@@ -1,0 +1,7 @@
+@Composable
+fun Screen(content: @Composable () -> Unit, other: @Composable RowScope.() -> Unit, block: suspend () -> Unit) {
+    val a = b();
+    { 1 }()
+    super<Polygon>.draw()
+    super<Rectangle>@Square.draw()
+}

@@ -1,0 +1,24 @@
+package main
+
+type T struct {
+	a int
+}
+
+func f(x bool, y int, t T) {
+	if x {
+		g()
+	}
+	switch y {}
+	if t == (T{ a: 1 }) {
+		g()
+	}
+}
+
+func g() {}
+
+func f(x bool) {
+	if x { // 条件
+		y()
+		z()
+	}
+}

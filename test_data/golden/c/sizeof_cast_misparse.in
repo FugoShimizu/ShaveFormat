@@ -1,0 +1,4 @@
+struct hdr { int a; };
+char b[sizeof(int)+1];
+int c = sizeof (struct hdr)-1;
+int d = sizeof (char)*2;

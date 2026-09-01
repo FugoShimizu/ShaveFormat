@@ -1,0 +1,55 @@
+# === case_in_pattern ===
+# @param node
+def match_pattern(node)
+	case node
+	in { type: "leaf", value: } then handle_leaf(value)
+	in { type: "branch", left:, right: } then handle_branch(left, right)
+	else handle_unknown(node)
+	end
+end
+
+short = case x
+in 1 then :a
+in 2 then :b
+else :c
+end
+
+# === case_nested_when ===
+# @param outer
+# @param inner
+def nested(outer, inner)
+	case outer
+	when :a
+		case inner when 1 then :a1 when 2 then :a2 else :ax end
+	when :b
+		case inner
+		when 1
+			perform_long_named_action_one(inner)
+		when 2
+			perform_long_named_action_two(inner)
+		else
+			perform_long_named_default(inner)
+		end
+	end
+end
+
+# === case_when_wrap ===
+# @param value
+def classify(value)
+	case value when 1 then "one" when 2 then "two" when 3 then "three" else "other" end
+end
+
+#
+# @param v
+def small(v)
+	case v when 1 then :a when 2 then :b else :c end
+end
+
+result = case status
+when :ok
+	perform_success_action_with_long_name(payload)
+when :err
+	perform_error_action_with_long_name(payload)
+else
+	perform_default_action_with_long_name(payload)
+end

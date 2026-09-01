@@ -1,0 +1,13 @@
+class C {
+	void F(bool ok) {
+		if(ok) {
+			Run(); // done
+			Audit();
+		}
+		var s = @"a b";
+		/* c d */
+		int a = 1; // n
+		a = 5;
+		int b = a;
+	}
+}

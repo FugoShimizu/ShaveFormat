@@ -1,0 +1,15 @@
+let z = 0;
+/* a */ /* b */
+let y = 1;
+/* c */ // d
+let w = 2;
+function f(x) {
+	switch (x) {
+		case 1:
+			g();
+			break;
+		default:
+			h();
+			// last
+	}
+}

@@ -1,0 +1,3 @@
+function f(cb = () => { a(); b(); }) { cb(); }
+function a() {}
+function b() {}

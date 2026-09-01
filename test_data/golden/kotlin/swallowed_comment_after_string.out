@@ -1,0 +1,34 @@
+/**
+ *
+ * @param flag
+ * @param b
+ */
+fun g(flag: Boolean, b: String) {
+	val url = "https://api.example.com/${b}"
+	/* dispatch */
+	when(b) {
+		"x" -> println(url)
+	}
+	val q = "SELECT * FROM t"
+	/* guard */
+	!flag
+	println(q)
+	val r = """raw"""
+	/* after raw */
+	when(r) {
+		else -> println(r)
+	}
+}
+
+enum class Color {
+	RED,
+	GREEN
+} // colors
+
+/** KDoc */
+abstract class Shape
+
+val name = "abc"
+
+/** KDoc2 */
+abstract class Shape2

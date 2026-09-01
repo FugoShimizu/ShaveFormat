@@ -1,0 +1,27 @@
+#
+# @param a
+# @return
+def g(a)
+	x = 1
+	# describes the result
+	return foo.each
+end
+
+#
+# @param a
+# @return
+def h(a)
+	foo.x
+	x = 1
+	# describes the call
+	return foo.bar(a, b) # first
+end
+
+#
+# @return
+def k
+	return g
+rescue StandardError
+	# fallback
+	return foo.z
+end

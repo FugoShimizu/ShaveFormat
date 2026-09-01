@@ -1,0 +1,15 @@
+/**
+ *
+ * @param a
+ */
+function f(a: number) {
+	if(a === 1) {
+		type T = number;
+	}
+	if(a === 2) {
+		interface I {}
+	}
+	if(a === 3) {
+		enum E { A }
+	}
+}

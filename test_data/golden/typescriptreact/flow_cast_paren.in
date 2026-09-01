@@ -1,0 +1,2 @@
+const range = (document: any).selection.createRange()
+const n = (x: any) + 1

@@ -1,0 +1,7 @@
+void f(char *d, const char *s, int a) {
+	if (a) { // NOLINTNEXTLINE(clang-analyzer-security.insecureAPI.strcpy)
+		strcpy(d, s);
+	}
+	g(1, // NOLINTNEXTLINE
+		s);
+}

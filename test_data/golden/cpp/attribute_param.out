@@ -1,0 +1,8 @@
+/**
+ *
+ * @param x
+ * @param y
+ */
+void f([[maybe_unused]] int x, int y) {
+	return;
+}

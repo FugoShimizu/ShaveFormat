@@ -1,0 +1,13 @@
+class K {
+	private static int A;
+	private static int B;
+	[Obsolete] public int C;
+	[Obsolete] public int D;
+	public const int E = 1;
+	public const int F = 2;
+
+	void G() {
+		const int X = 1, Y = 2;
+		System.Console.WriteLine(X + Y);
+	}
+}

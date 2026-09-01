@@ -1,0 +1,17 @@
+const a = <p>
+	<b>x</b>
+	{"  "}
+	<i>y</i>
+</p>;
+
+const e = <p>
+	<b>x</b>
+	{"   "}
+	<i>y</i>
+</p>;
+
+const c = <p>  </p>;
+const d2 = /* c */ <p>a b</p>;
+const e2 = <p>a b</p>;
+// c
+const f2 = <p>a b</p>;

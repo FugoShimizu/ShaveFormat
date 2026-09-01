@@ -1,0 +1,38 @@
+abstract class Foo {
+	val bar = 1
+
+	/**
+	 * Returns the thing.
+	 */
+	abstract fun thing(): Int
+
+	/** Kinds. */
+	enum class Kind {
+		A,
+		B
+	}
+
+	/**
+	 * Plain override.
+	 */
+	override fun toString() = "Foo"
+}
+
+/**
+ *
+ * @param flag
+ */
+fun g(flag: Boolean) {
+	val x = 1
+	/* w */
+	when(x) {
+		1 -> println(1)
+		else -> {}
+	}
+	/* bang */
+	!flag
+	/* as-ish */
+	assert(flag)
+	/* e */
+	emit()
+}

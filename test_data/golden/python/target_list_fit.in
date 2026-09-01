@@ -1,0 +1,3 @@
+total_number_of_processed_input_records, total_number_of_skipped_input_records = self.process_all_of_the_records_at_once(input_records, options_value)
+for key_name, value_name in dictionary_object.items():
+    pass

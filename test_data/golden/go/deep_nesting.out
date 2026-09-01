@@ -1,0 +1,104 @@
+package main
+
+// F は isReady を用いる深いネストの検体
+func F(isReady bool) {
+	x := 0
+	if isReady {
+		x = 0
+		if isReady {
+			x = 1
+			if isReady {
+				x = 2
+				if isReady {
+					x = 3
+					if isReady {
+						x = 4
+						if isReady {
+							x = 5
+							if isReady {
+								x = 6
+								if isReady {
+									x = 7
+									if isReady {
+										x = 8
+										if isReady {
+											x = 9
+											if isReady {
+												x = 10
+												if isReady {
+													x = 11
+													if isReady {
+														x = 12
+														if isReady {
+															x = 13
+															if isReady {
+																x = 14
+																if isReady {
+																	x = 15
+																	if isReady {
+																		x = 16
+																		if isReady {
+																			x = 17
+																			if isReady {
+																				x = 18
+																				if isReady {
+																					x = 19
+																					if isReady {
+																						x = 20
+																						if isReady {
+																							x = 21
+																							if isReady {
+																								x = 22
+																								if isReady {
+																									x = 23
+																									if isReady {
+																										x = 24
+																										if isReady {
+																											x = 25
+																											if isReady {
+																												x = 26
+																												if isReady {
+																													x = 27
+																													if isReady {
+																														x = 28
+																														if isReady {
+																															x = 29
+																															if isReady {
+																																x = 30
+																																if isReady {
+																																	x = 31
+																																	x = 1
+																																}
+																															}
+																														}
+																													}
+																												}
+																											}
+																										}
+																									}
+																								}
+																							}
+																						}
+																					}
+																				}
+																			}
+																		}
+																	}
+																}
+															}
+														}
+													}
+												}
+											}
+										}
+									}
+								}
+							}
+						}
+					}
+				}
+			}
+		}
+	}
+	_ = x
+}

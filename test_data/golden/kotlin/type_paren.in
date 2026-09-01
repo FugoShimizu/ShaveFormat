@@ -1,0 +1,12 @@
+val a: (Int) = 1
+val b: (() -> Unit)? = null
+val c: List<(Int)> = listOf()
+val d: ((Int) -> Int) = { it }
+val e: (Int)? = null
+val f: (A?).() -> Unit = {}
+val g: (A).() -> Unit = {}
+fun h(x: (Int)): (Int) = x
+typealias T = (Int)
+
+val f: ((() -> Unit))? = null
+val g: ((Int)) = 1

@@ -1,0 +1,41 @@
+x = (1, 2)
+(a, b) = x
+for (c, d) in [x]:
+    pass
+for e in (1, 2):
+    pass
+y = [f for (f, g) in [x]]
+del (a, b)
+z = {}
+z[(1, 2)] = 3
+w = (1,)
+v = print((1, 2))
+u = lambda: (1, 2)
+def h():
+    yield (1, 2)
+    yield from (3, 4)
+    return (3, 4)
+(5, 6)
+t = (w := 1, 2)
+l = (lambda: 1, 2)
+
+x = ((a, b))
+for ((p, q)) in xs:
+    pass
+def f():
+    return ((a, b))
+print(((a, b)))
+
+v = d[(a)] + d[((a, b))]
+w = d[((a, b)), c]
+
+def f(a):
+    return (*a, 1)
+
+
+def g(a):
+    yield (*a, 1)
+
+
+def h(a):
+    return (a, 1)

@@ -1,0 +1,11 @@
+class NumericInitializers {
+	/// <summary>数値初期値と配列長の確認関数</summary>
+	/// <returns>数値と配列長の合計</returns>
+	public static double InspectNumbers() {
+		float[] Values = new float[0XE0];
+		const float Hex = 0XE0, Other = 0X1E2, Negative = -0XE0, HexTail = 0XE0F, Fraction = 0.5F, Exponent = 1E-2F;
+		const double Decimal = -0.5;
+		// 数値と配列長の合計の返戻
+		return Hex + Other + Negative + HexTail + Fraction + Exponent + Decimal + Values.Length;
+	}
+}

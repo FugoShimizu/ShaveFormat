@@ -1,0 +1,14 @@
+async function f(x) {
+	await (x);
+	const y = await (g());
+	await (a || b);
+	return (y);
+}
+function* h() { yield (1); yield (a, b); }
+function t() { throw (new Error("e")); }
+function u() { return (
+	a && b
+); }
+const d = new (Date)(0), e = new (a.B)(), g = new (a.b())(), k = new (a?.b)();
+const m = new (a["B"])(), n = new (a.arr[0])();
+for (k in (a = o)) {}

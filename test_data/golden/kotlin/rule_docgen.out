@@ -1,0 +1,36 @@
+// === rule_docgen_generate ===
+/**
+ *
+ * @param a
+ * @param b
+ * @return
+ */
+fun add(a: Int, b: Int): Int {
+	return a + b
+}
+
+/**
+ *
+ */
+fun reset() {
+	total = 0
+}
+
+// === rule_docgen_reconcile ===
+/**
+ * 値を倍にする
+ * @param value 入力値
+ * @return 倍化結果
+ */
+fun double(value: Int): Int {
+	return value * 2
+}
+
+/**
+ *
+ * @param alpha
+ * @return
+ */
+fun compute(alpha: List<Int> = listOf(1)): Int {
+	return alpha.size
+}

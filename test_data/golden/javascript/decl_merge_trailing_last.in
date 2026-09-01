@@ -1,0 +1,6 @@
+function f() {
+	let q = 2, r = 3; // c4
+	let s = 4;
+	q++; r++; s++;
+	return q + r + s;
+}

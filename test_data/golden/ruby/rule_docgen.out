@@ -1,0 +1,23 @@
+# === rule_docgen_generate ===
+# @param a
+# @param b
+# @return
+def add(a, b)
+	return a + b
+end
+
+#
+# @param message
+def log_message(message)
+	puts message
+end
+
+# === rule_docgen_reconcile ===
+# 合計を求める
+# @param a 第一項
+# @param b
+# @param c
+# @return 合計
+def total(a, b, c)
+	return a + b + c
+end

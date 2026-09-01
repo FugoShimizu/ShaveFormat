@@ -1,0 +1,5 @@
+declare const a: unknown, b: number, n: number | null;
+
+const x = (a as boolean) ? -b : 2;
+const y = n as number | null ?? 3;
+const z = a as boolean && b;

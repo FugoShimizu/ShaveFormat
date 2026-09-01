@@ -1,0 +1,15 @@
+class T {
+	void F(int a) {
+		if(a == 1) {
+			int x = 1;
+		}
+	}
+}
+
+class T {
+	void F(int a) {
+		if(a == 1) {
+			void Local() {}
+		}
+	}
+}

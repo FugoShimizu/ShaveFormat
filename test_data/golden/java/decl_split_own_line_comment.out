@@ -1,0 +1,7 @@
+class A {
+	int c = 1;
+	/** D の説明 */
+	int d = 2;
+	int e = 1;
+	int /* E */ f = 2;
+}

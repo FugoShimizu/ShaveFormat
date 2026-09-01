@@ -1,0 +1,7 @@
+#define MAX 10
+static const int M = 3;
+enum { N = 4 };
+int f(int X) { return (X) % 2; }
+int g(void) { return (M) / 3 + (N) % 2; }
+int h(void) { return (MAX); }
+int k(void) { return (MAX) / 2 + (N) * 2; }

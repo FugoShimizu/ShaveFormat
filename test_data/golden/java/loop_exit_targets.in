@@ -1,0 +1,8 @@
+class LoopExits {
+/** 外側のループから脱出する */
+static void OuterExit(){Outer:while(true){System.out.print(0);while(true){System.out.print(1);break Outer;}}}
+/** 内側のループだけを脱出する */
+static void InnerExit(){while(true){System.out.print(0);Inner:while(true){System.out.print(1);break Inner;}}}
+/** 外側のループを継続する */
+static void OuterContinue(){Outer:while(true){System.out.print(0);while(true){System.out.print(1);continue Outer;}}}
+}

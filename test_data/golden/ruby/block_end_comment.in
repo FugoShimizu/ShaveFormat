@@ -1,0 +1,12 @@
+def f
+  if a
+    b
+    # c
+  end
+  x = 1
+  if a
+    # d
+  end
+  y
+  # e
+end

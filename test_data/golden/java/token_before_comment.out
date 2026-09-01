@@ -1,0 +1,12 @@
+class A {
+	/**
+	 *
+	 * @param b
+	 * @param a
+	 * @return
+	 */
+	int f(B b, int a) {
+		final int s = a /* c */ + 1;
+		return b /* z */ .baz();
+	}
+}

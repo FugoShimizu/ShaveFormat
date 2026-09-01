@@ -1,0 +1,36 @@
+<?php
+
+$rows = [['a' => 1], ['a' => 2]];
+
+/**
+ *
+ * @param $s
+ * @return
+ */
+function h($s) {
+	return htmlspecialchars((string)$s, ENT_QUOTES);
+}
+?>
+<table>
+<?php foreach($rows as $i => $row): ?>
+  <?php if($i % 2 === 0): ?>
+    <tr class="even"><td><?= h($row['a']); ?></td></tr>
+  <?php else: ?>
+    <tr class="odd"><td><?php echo h($row['a']); ?></td></tr>
+  <?php endif; ?>
+<?php endforeach; ?>
+</table>
+<?php // a comment ?>
+<?php /* block */ ?>
+<p><?php echo '<?xml version="1.0"?>'; ?></p>
+<?php
+$text = <<<EOT
+  heredoc
+    body
+EOT;
+
+echo $text;
+?>
+<footer>end</footer>
+
+

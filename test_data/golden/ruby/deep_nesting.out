@@ -1,0 +1,198 @@
+x = 0
+
+if x == 0
+	x = 1
+	if x == 1
+		x = 2
+		if x == 2
+			x = 3
+			if x == 3
+				x = 4
+				if x == 4
+					x = 5
+					if x == 5
+						x = 6
+						if x == 6
+							x = 7
+							if x == 7
+								x = 8
+								if x == 8
+									x = 9
+									if x == 9
+										x = 10
+										if x == 10
+											x = 11
+											if x == 11
+												x = 12
+												if x == 12
+													x = 13
+													if x == 13
+														x = 14
+														if x == 14
+															x = 15
+															if x == 15
+																x = 16
+																if x == 16
+																	x = 17
+																	if x == 17
+																		x = 18
+																		if x == 18
+																			x = 19
+																			if x == 19
+																				x = 20
+																				if x == 20
+																					x = 21
+																					if x == 21
+																						x = 22
+																						if x == 22
+																							x = 23
+																							if x == 23
+																								x = 24
+																								if x == 24
+																									x = 25
+																									if x == 25
+																										x = 26
+																										if x == 26
+																											x = 27
+																											if x == 27
+																												x = 28
+																												if x == 28
+																													x = 29
+																													if x == 29
+																														x = 30
+																														if x == 30
+																															x = 31
+																															if x == 31
+																																x = 32
+																																if x == 32
+																																	x = 33
+																																	if x == 33
+																																		x = 34
+																																		if x == 34
+																																			x = 35
+																																			if x == 35
+																																				x = 36
+																																				if x == 36
+																																					x = 37
+																																					if x == 37
+																																						x = 38
+																																						if x == 38
+																																							x = 39
+																																							if x == 39
+																																								x = 40
+																																								if x == 40
+																																									x = 41
+																																									if x == 41
+																																										x = 42
+																																										if x == 42
+																																											x = 43
+																																											if x == 43
+																																												x = 44
+																																												if x == 44
+																																													x = 45
+																																													if x == 45
+																																														x = 46
+																																														if x == 46
+																																															x = 47
+																																															if x == 47
+																																																x = 48
+																																																if x == 48
+																																																	x = 49
+																																																	if x == 49
+																																																		x = 50
+																																																		if x == 50
+																																																			x = 51
+																																																			if x == 51
+																																																				x = 52
+																																																				if x == 52
+																																																					x = 53
+																																																					if x == 53
+																																																						x = 54
+																																																						if x == 54
+																																																							x = 55
+																																																							if x == 55
+																																																								x = 56
+																																																								if x == 56
+																																																									x = 57
+																																																									if x == 57
+																																																										x = 58
+																																																										if x == 58
+																																																											x = 59
+																																																											if x == 59
+																																																												x = 60
+																																																												if x == 60
+																																																													x = 61
+																																																													if x == 61
+																																																														x = 62
+																																																														if x == 62
+																																																															x = 63
+																																																															if x == 63
+																																																																x = 64
+																																																																if x == 64
+																																																																	x = 65
+																																																																	x = 1
+																																																																end
+																																																															end
+																																																														end
+																																																													end
+																																																												end
+																																																											end
+																																																										end
+																																																									end
+																																																								end
+																																																							end
+																																																						end
+																																																					end
+																																																				end
+																																																			end
+																																																		end
+																																																	end
+																																																end
+																																															end
+																																														end
+																																													end
+																																												end
+																																											end
+																																										end
+																																									end
+																																								end
+																																							end
+																																						end
+																																					end
+																																				end
+																																			end
+																																		end
+																																	end
+																																end
+																															end
+																														end
+																													end
+																												end
+																											end
+																										end
+																									end
+																								end
+																							end
+																						end
+																					end
+																				end
+																			end
+																		end
+																	end
+																end
+															end
+														end
+													end
+												end
+											end
+										end
+									end
+								end
+							end
+						end
+					end
+				end
+			end
+		end
+	end
+end

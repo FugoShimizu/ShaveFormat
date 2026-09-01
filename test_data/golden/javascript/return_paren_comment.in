@@ -1,0 +1,12 @@
+function f(a, b) {
+	if (a) g();
+	return ( // 和
+		a + b
+	);
+}
+function h(a) {
+	g();
+	return [ // 要素
+		a
+	];
+}

@@ -1,0 +1,11 @@
+/**
+ * 面積
+ * @param w
+ * @param h
+ * @returns
+ */
+function area(/** 幅 */ w: number, h: number): number { // TODO: 単位
+	return w * h;
+}
+
+interface Props { /** @deprecated use key */ id: string } // TODO: rename

@@ -1,0 +1,22 @@
+declare function f<T>(x: T): T;
+declare const o: any;
+
+const a = f<number> * o;
+const b = f<number> / o;
+const c = (f<number>) + o;
+const d = (f<number>) - o;
+const e = (f<number>) >= o;
+const g = f<number> === o;
+const h = f<number> && o;
+const i = (f<number>)(1);
+const j = (f<number>).name;
+const k = (f<number>)[0];
+const l = [f<number>, o];
+const m = f<number> ?? o;
+const n = f<number> % o;
+const p = f<number> ** o;
+const q = (f<number>)`x`;
+const r = (f<number>)?.name;
+const s = -f<number>;
+const t = f<number> as any;
+const u = f<number> ? 1 : 2;

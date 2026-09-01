@@ -1,0 +1,23 @@
+def m_if(x)
+	if x
+		1
+	end + 3
+end
+
+def m_unless(x)
+	unless x
+		1
+	end
+end
+
+def m_case(x)
+	case x
+	when 1 then 2
+	end
+end
+
+def m_while(x)
+	while x
+		break
+	end
+end

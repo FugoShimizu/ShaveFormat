@@ -1,0 +1,5 @@
+class C {
+	void F() {
+		x = a.b.c + g().h + a[0].b + this.x + new A().b + 1.ToString() + (a?.b).c + "abc".Length + a.b.c;
+	}
+}

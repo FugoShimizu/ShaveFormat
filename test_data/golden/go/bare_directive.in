@@ -1,0 +1,22 @@
+package main
+
+//export goCallback
+func goCallback() {}
+
+//extern sqrt
+func sqrt(x float64) float64
+
+//go:noescape
+func noescape()
+
+//nolint
+func lint1() {}
+
+//nolint:errcheck
+func lint2() {}
+
+//line gen.go:7
+func lined() {}
+
+//comment
+func normal() {}

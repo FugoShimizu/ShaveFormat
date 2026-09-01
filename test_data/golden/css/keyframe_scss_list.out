@@ -1,0 +1,7 @@
+$tone: #ABC;
+
+@keyframes fade {
+	from, 0.5%, to {
+		color: $tone;
+	}
+}

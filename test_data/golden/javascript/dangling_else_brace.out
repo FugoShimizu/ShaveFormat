@@ -1,0 +1,19 @@
+/**
+ *
+ * @param a
+ * @param b
+ * @param c
+ */
+function f(a, b, c) {
+	if(a) {
+		if(b) x();
+		else if(c) y();
+	} else z();
+	if(a) {
+		while(true) if(b) y();
+	} else z();
+	if(true);
+	;
+	if(a) x(); // explains the else
+	else y();
+}

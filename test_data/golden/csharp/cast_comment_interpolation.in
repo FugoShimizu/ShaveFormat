@@ -1,0 +1,19 @@
+class C {
+	int M() {
+		var x = (d) /* c */ - a;
+		return (d) // c
+			- a;
+	}
+	void N() {
+		var s = $"{(x == @"\" ? 1 : 2)}";
+		var t = $"{(a ? b : c)}";
+		var u = $"{(f(a ? b : c))}";
+		G((x => x));
+	}
+}
+
+class T {
+	static string F(int n) {
+		return $"{(global::System.Math.PI):F2} {(n > 0 ? 1 : 2)} {(n + 1)}";
+	}
+}

@@ -1,0 +1,7 @@
+export const Greeting = <span
+	className="greeting-message"
+	id="main-greeting"
+	data-testid="greeting-span"
+>
+	{" "}Hello, world! Welcome back to the dashboard.
+</span>;

@@ -1,0 +1,24 @@
+declare function x(): void;
+declare function h(v: string): void;
+
+/**
+ *
+ * @param a
+ * @param b
+ */
+function f(a: boolean, b: boolean) {
+	if(a) x();
+	else if(b) {
+		// @ts-expect-error
+		const bad: number = "s";
+	}
+	try {
+		x();
+	// @ts-ignore
+	} catch(e) {
+		h("1");
+		x();
+	}
+	/* @ts-expect-error 理由，二文目 */
+	const worse: number = "t";
+}

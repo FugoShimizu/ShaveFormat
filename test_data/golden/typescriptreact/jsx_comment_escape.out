@@ -1,0 +1,8 @@
+/**
+ *
+ * @returns
+ */
+export function A() {
+	// first
+	return (<div>{value}</div>);
+}

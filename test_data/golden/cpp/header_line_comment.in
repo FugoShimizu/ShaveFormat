@@ -1,0 +1,17 @@
+void f(int a) {
+	{ // bare
+		g();
+	}
+	do { // d
+		g();
+	} while(a);
+	if (a) { // 真
+		g();
+	} else { // 偽
+		h();
+	}
+	switch (a) {
+	default: // 他
+		h();
+	}
+}

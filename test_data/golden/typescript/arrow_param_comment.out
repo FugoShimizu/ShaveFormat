@@ -1,0 +1,6 @@
+items.forEach(
+	item => { // 各要素を処理
+		console.log(item);
+		++count;
+	}
+);

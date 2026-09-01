@@ -1,0 +1,3 @@
+<?php
+$value = (int) $raw;
+$other = (integer) $source;

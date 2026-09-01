@@ -1,0 +1,27 @@
+#include "a.h"
+
+#ifdef __APPLE__
+#include <pthread.h>
+#endif
+
+#ifdef DEBUG
+void Foo() {
+	DoA();
+}
+void Bar() {
+	DoB();
+}
+#endif
+
+#if defined(WIN32)
+int Counter = 0;
+const int MaxCount = 100;
+#elif defined(LINUX)
+int Counter = 1;
+#else
+int Counter = 2;
+#endif
+
+void Main() {
+	Run();
+}

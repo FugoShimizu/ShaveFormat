@@ -1,0 +1,9 @@
+/**
+ *
+ * @param w
+ * @param h
+ * @return
+ */
+fun area(/** 幅 */ w: Int, h: Int): Int { // TODO: 単位
+	return w * h
+}

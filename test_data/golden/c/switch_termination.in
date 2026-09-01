@@ -1,0 +1,45 @@
+/**
+ * 全分岐から終了する
+ * @param Code 分岐値
+ * @param IsReady 条件値
+ */
+void All(const int Code,const int IsReady){switch(Code){case 0:return;default:return;}}
+
+/**
+ * 全分岐終端後の返戻を検査する
+ * @param Code 分岐値
+ * @param IsReady 条件値
+ */
+void AllTail(const int Code,const int IsReady){switch(Code){case 0:return;default:return;}
+// 終了
+return;}
+
+/**
+ * 分岐から切替文の外へ脱出する
+ * @param Code 分岐値
+ * @param IsReady 条件値
+ */
+void Exit(const int Code,const int IsReady){switch(Code){case 0:break;default:return;}}
+
+/**
+ * 文の内側のラベルから末尾へ到達する
+ * @param Code 分岐値
+ * @param IsReady 条件値
+ */
+void NestedCase(const int Code,const int IsReady){switch(Code){default:return;{case 0:;}}}
+
+/**
+ * 文の内側のラベルから到達して終了する
+ * @param Code 分岐値
+ * @param IsReady 条件値
+ */
+void NestedCaseTail(const int Code,const int IsReady){switch(Code){default:return;{case 0:;}}
+// 終了
+return;}
+
+/**
+ * 内側の切替文だけを脱出して終了する
+ * @param Code 分岐値
+ * @param IsReady 条件値
+ */
+void InnerSwitch(const int Code,const int IsReady){switch(Code){case 0:switch(Code){default:break;}return;default:return;}}

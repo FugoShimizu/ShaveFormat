@@ -1,0 +1,12 @@
+class C {
+	/**
+	 *
+	 */
+	void f() {
+		try {
+			g();
+		} catch(Exception e) { // 例外の説明
+			h();
+		}
+	}
+}

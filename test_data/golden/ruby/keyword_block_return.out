@@ -1,0 +1,23 @@
+#
+# @param x
+def m_if(x)
+	if x then 1 end + 3
+end
+
+#
+# @param x
+def m_unless(x)
+	1 unless x
+end
+
+#
+# @param x
+def m_case(x)
+	case x when 1 then 2 end
+end
+
+#
+# @param x
+def m_while(x)
+	break while x
+end

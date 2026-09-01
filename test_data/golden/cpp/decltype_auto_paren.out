@@ -1,0 +1,59 @@
+int x = 3;
+
+struct S {
+	int m = 1;
+} s;
+
+/**
+ *
+ * @return
+ */
+decltype(auto) f() {
+	return (x);
+}
+
+/**
+ *
+ * @return
+ */
+auto g() -> decltype(auto) {
+	return (s.m);
+}
+
+/**
+ *
+ * @return
+ */
+int h() {
+	return x + 1;
+}
+
+/**
+ *
+ * @return
+ */
+int main() {
+	decltype(auto) r = (x);
+	decltype(auto) q = (s.m);
+	decltype(auto) v = x + 1;
+	auto w = x;
+	auto l = []() -> decltype(auto) {
+		return (x);
+	};
+	return r + q + v + w + h() + l();
+}
+
+struct A {
+	int m;
+} ga;
+
+/**
+ *
+ * @return
+ */
+decltype(auto) Get() {
+	return (ga.m);
+}
+
+decltype(auto) v = (ga.m);
+constexpr auto r = [: ^^int :];

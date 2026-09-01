@@ -1,0 +1,11 @@
+class Foo {
+	/**
+	 *
+	 */
+	void bar() {
+		final int a = 1, b = 2, c = 3;
+	}
+
+	int x = 10;
+	int y = 20;
+}

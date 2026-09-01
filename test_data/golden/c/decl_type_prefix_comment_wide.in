@@ -1,0 +1,3 @@
+void f() {
+	const /* c */ int aaaaaaaa = 1, bbbbbbbbbbbb = 2;
+}

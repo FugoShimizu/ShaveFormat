@@ -1,0 +1,6 @@
+/**
+ * ループ本体のラベルを処理する
+ */
+function f() {
+	for(let i = 0; i < 3; ++i) lbl: console.log(i);
+}

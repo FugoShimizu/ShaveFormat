@@ -1,0 +1,11 @@
+<?php
+
+$x = (
+	function() {
+		return 1;
+	}
+)();
+
+$y = ($obj->handler)(2);
+$u = ($a ?: $b)();
+$w = (strlen)("x");

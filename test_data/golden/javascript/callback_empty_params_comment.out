@@ -1,0 +1,25 @@
+describe(
+	"suite",
+	() => { // group
+		it(
+			"works",
+			() => { // check
+				expect(1).toBe(1);
+			}
+		);
+	}
+);
+
+useEffect(
+	() => { // init
+		start();
+	},
+	[]
+);
+
+setTimeout(
+	() => { // later
+		done();
+	},
+	10
+);

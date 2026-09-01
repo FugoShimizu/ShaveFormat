@@ -1,0 +1,18 @@
+/**
+ * 同じループへ戻る
+ */
+void Restart() {
+Again:
+	while(1) goto Again;
+}
+
+/**
+ * 同じラベルの表記を照合する
+ */
+void UnicodeLabel() {
+	while(1) {
+		goto \u00E9;
+	é:
+		;
+	}
+}

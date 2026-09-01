@@ -1,0 +1,4 @@
+extern "C" int aaaaaaaaaaaa, bbbbbbbbbbbbbbbb;
+extern "C" {
+int cccccccccccc, dddddddddddddddd;
+}

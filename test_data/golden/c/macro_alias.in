@@ -1,0 +1,16 @@
+#include <stdio.h>
+#define STR(x) #x
+#define SS STR
+#define SWAP(a, b) t = a; a = b; b = t
+#define SWAP2 SWAP
+#define M 0 || 5
+#define N M
+int main(void) {
+	int t, a = 1, b = 2, x = 0;
+	puts(SS(a + b));
+	if(a) {
+		SWAP2(a, b);
+	}
+	printf("%d\n", x && (N > 2));
+	return 0;
+}

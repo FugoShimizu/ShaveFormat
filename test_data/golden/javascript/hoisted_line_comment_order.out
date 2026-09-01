@@ -1,0 +1,10 @@
+// the config
+init(config); /* shared */
+
+/**
+ *
+ * @returns
+ */
+function g() {
+	return 1;
+}

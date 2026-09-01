@@ -1,0 +1,10 @@
+func f(a: Bool, c: Bool) {
+	do {
+		try g()
+	} catch let e as MyError {
+		h(e)
+	} catch {} // C1 // C2
+	if a {
+		g()
+	} else if c {} else {} // A // T1 // T2
+}

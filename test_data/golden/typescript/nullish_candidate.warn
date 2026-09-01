@@ -1,0 +1,2 @@
+2:26: Consider `== null` only if nullish semantics, reads, and bindings are preserved
+3:30: Consider `!= null` only if nullish semantics, reads, and bindings are preserved

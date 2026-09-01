@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<!-- top -->
+<html>
+	<head>
+		<!-- in head -->
+		<title>T<!-- t --></title>
+		<!-- before meta -->
+		<meta charset="utf-8"><!-- after meta -->
+		<style>/* s */ a { color: red; } <!-- x --></style>
+	</head>
+	<body>
+		<p>Text <!-- inline --> more <b>bold<!-- b --></b> end</p>
+		<ul>
+			<!-- list -->
+			<li>a</li>
+			<!-- between -->
+			<li>b</li>
+		</ul>
+		<div><!-- own line --><span>x</span><!-- trailing --></div>
+		<pre>
+<!-- in pre -->
+</pre>
+		<textarea><!-- ta --></textarea>
+		<table><!-- t1 --><tr><!-- t2 --><td>1</td></tr></table>
+		<script>// js
+var a = 1; <!-- html comment in script
+		</script>
+	</body>
+	<!-- after body -->
+</html>
+<!-- end -->
+<p>Text <!-- own --> more</p>
+<p>a<!-- tight -->b</p>
+<div><span>x</span><!-- trailing --></div>
+<p>x&amp;<!-- c -->y</p>
+<p>a<!-- c --><b>x</b></p>
+<div>
+	<p>a</p>
+	<!-- between -->
+	<p>b</p>
+</div>

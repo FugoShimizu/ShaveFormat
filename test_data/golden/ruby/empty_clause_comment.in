@@ -1,0 +1,44 @@
+if a
+  # 本体の空の if
+end
+def m(a)
+  # 一文目。二文目
+  # 三文目
+end
+begin
+  g
+rescue ArgumentError => e
+  # 一文目。二文目
+  # 三文目。
+rescue
+  # 例外を略した rescue
+else
+  # 空の else
+ensure
+  # 空の ensure
+end
+case x
+when 1
+  # 空の when
+when 2
+  y
+end
+if a
+  x
+elsif b
+  # 空の elsif
+else
+  z
+end
+class A < B
+  # 空の class
+end
+while a
+  # 空の while
+end
+begin
+  # 空の begin
+end
+foo do |x|
+  # 空の do
+end

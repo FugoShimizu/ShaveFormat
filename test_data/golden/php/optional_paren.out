@@ -1,0 +1,29 @@
+<?php
+
+#[Attribute] class A {
+	public $v = 1;
+
+	/**
+	 *
+	 * @return
+	 */
+	public function m() {
+		return 2;
+	}
+}
+
+$a = new A;
+$b = (new A())->m();
+$c = new A()->m();
+
+$d = new class {
+	public $w = 3;
+};
+
+$e = [new A, new A];
+$f = new A instanceof A;
+
+echo $a->v, $b, $c, $d->w, count($e), $f ? 'y' : 'n', "\n";
+
+if(false) exit;
+if(false) die;

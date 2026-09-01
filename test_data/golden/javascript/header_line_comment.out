@@ -1,0 +1,33 @@
+/**
+ *
+ * @returns
+ */
+function f() {
+	x();
+	{ // bare
+		y();
+	}
+	try { // t
+		g();
+	} catch(e) { // c
+		k();
+	} finally { // f
+		m();
+	}
+	do g(); // d
+	while(c);
+	while(true) g(); // e
+	if(a === 1) g(); // 一
+	else if(a === 2) h(); // 二
+	else i(); // 他
+	switch(a) {
+	case 1:
+		g();
+		break;
+	default: // 他
+		h();
+	}
+	const o = { a: 1, b: 2 }; // obj
+	foo(a, { x: 1 }); // arg
+	return aaaa + bbbb; // ret
+}

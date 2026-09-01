@@ -1,0 +1,17 @@
+/**
+ *
+ * @returns
+ */
+function h() {
+	const a = 1, b = 2; // x
+	/** b */
+	/**
+	 *
+	 * @param p
+	 * @returns
+	 */
+	function g(p) {
+		return p;
+	}
+	return g(a + b);
+}

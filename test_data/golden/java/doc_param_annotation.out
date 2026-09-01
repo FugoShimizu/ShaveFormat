@@ -1,0 +1,17 @@
+class A {
+	/**
+	 *
+	 * @param id the user id
+	 * @param verbose flag
+	 * @return the user
+	 */
+	User find(@PathVariable("id") long id, boolean verbose) {
+		return null;
+	}
+
+	/**
+	 *
+	 * @param xs values
+	 */
+	void g(@Nonnull final String... xs) {}
+}

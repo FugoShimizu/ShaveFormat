@@ -1,0 +1,10 @@
+/// <reference path='./a  b.d.ts' />
+/**
+ * 値を返す  関数
+ * @param {'a  b'} x  引数の値
+ * @returns 文字列"a  b"
+ */
+function f(x: string): string {
+	return x;
+	// 関数の終わり
+}

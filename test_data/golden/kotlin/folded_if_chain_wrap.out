@@ -1,0 +1,35 @@
+/**
+ *
+ * @param n
+ * @param a
+ * @return
+ */
+fun f(n: Int, a: Int): String {
+	return when(n) {
+		1 -> if(a == 1) {
+			"oneoneoneoneoneoneone"
+		} else if(a == 2) {
+			"twotwotwotwotwotwotwotwo"
+		} else if(a == 3) {
+			"threethreethreethreethree"
+		} else if(a == 4) {
+			"fourfourfourfourfour"
+		} else {
+			"otherotherother"
+		}
+		else -> "x"
+	}
+}
+
+val g = xs.map { a ->
+	if(a == 1) "oneoneoneoneoneoneoneoneoneoneone" else if(a == 2) "twotwotwotwotwotwotwotwotwotwo" else "otherotherotherotherother"
+}
+
+/**
+ *
+ * @param n
+ */
+fun h(n: Int) = when(n) {
+	1 -> if(flagflagflagflag) "yesyesyesyesyesyesyesyesyesyesyesyes" else "nonononononononononononononononononono"
+	else -> "x"
+}

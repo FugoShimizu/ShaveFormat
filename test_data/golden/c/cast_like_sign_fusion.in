@@ -1,0 +1,5 @@
+int f(int a, int b) {
+	int r = (a) + ++b;
+	int s = (a) - --b;
+	return r + s;
+}

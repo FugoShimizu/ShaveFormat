@@ -1,0 +1,4 @@
+fn f() {
+	if [a].is_empty() {}
+	while [a][0] {}
+}

@@ -1,0 +1,4 @@
+int C;
+int D = 2; /* note3 */
+int E = 1;
+int G = 2; // note4

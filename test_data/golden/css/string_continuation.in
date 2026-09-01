@@ -1,0 +1,6 @@
+.a {
+  content: "a\
+    b";
+  grid-template-areas: "x y"
+      "z w";
+}

@@ -1,0 +1,17 @@
+/**
+ *
+ * @param b
+ * @param c
+ * @param d
+ * @param e
+ */
+void f(bool b, bool c, bool d, int e) {
+	const bool decl = b < c && d >> e;
+	bool assign;
+	assign = b < c && d >> e;
+	(void)decl;
+	(void)assign;
+}
+
+template<int N> constexpr bool flag = true;
+template<int N> constexpr bool flag<N + 1> = true;

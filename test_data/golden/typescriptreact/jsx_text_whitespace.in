@@ -1,0 +1,7 @@
+const x = <pre>a	b</pre>;
+const y = <pre>a	{/* c */}	b</pre>;
+const z = <span>foo 
+　bar</span>;
+const w = <span>😀
+{/* c */}
+😠</span>;

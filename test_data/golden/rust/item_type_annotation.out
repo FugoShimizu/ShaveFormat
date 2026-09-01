@@ -1,0 +1,28 @@
+const COUNT: usize = 2;
+
+trait Limit {
+	const REQUIRED: usize;
+	const DEFAULT: usize = 3;
+}
+
+struct Value;
+
+impl Limit for Value {
+	const REQUIRED: usize = COUNT;
+}
+
+static TEXT: &str = "x: y";
+static mut TOTAL: i32 = 4;
+
+fn main() {
+	let before = unsafe {
+		TOTAL
+	};
+	unsafe {
+		TOTAL += 1;
+	}
+	let after = unsafe {
+		TOTAL
+	};
+	println!("{}|{}|{}|{}|{}",Value::REQUIRED,Value::DEFAULT,TEXT,before,after);
+}

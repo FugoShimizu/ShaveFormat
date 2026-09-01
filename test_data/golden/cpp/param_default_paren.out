@@ -1,0 +1,11 @@
+#include <functional>
+
+/**
+ *
+ * @param g
+ */
+void f(
+	std::function<int()> g = [] {
+		return 1;
+	}
+) {}

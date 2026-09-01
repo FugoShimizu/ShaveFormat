@@ -1,0 +1,63 @@
+import {
+	clearHologramPatternCache,
+	createHologramSurfaces,
+	disposeHologramTextures,
+	type HologramOptions,
+	type HologramSettings
+} from "./acrylicHologram";
+
+/**
+ *
+ * @param color
+ * @param size
+ * @returns
+ */
+function createSqCanvas(color: string = "#000000", size: number = 512): {
+	canvas: OffscreenCanvas,
+	ctx: OffscreenCanvasRenderingContext2D
+} {
+	const canvas = new OffscreenCanvas(size, size), ctx = canvas.getContext("2d", { willReadFrequently: true });
+	if(!ctx) throw new Error("Canvas context is not available");
+	return { canvas, ctx };
+}
+
+const {
+	alphaValueWithLongName,
+	betaValueWithLongName,
+	gammaValueWithLongName,
+	deltaValueWithLongName,
+	epsilonValueWithLongName,
+	zetaValue
+} = sourceObject;
+
+const mergedValue = {
+	alphaValueWithLongName: 1,
+	betaValueWithLongName: 2,
+	gammaValueWithLongName: 3,
+	deltaValueWithLongName: 4,
+	epsilonValueWithLongName: 5
+} || fallbackValue;
+
+const castedValue = {
+	alphaValueWithLongName: 1,
+	betaValueWithLongName: 2,
+	gammaValueWithLongName: 3,
+	deltaValueWithLongName: 4,
+	epsilonValueWithLongName: 5
+} as const;
+
+const pickedValue = {
+	alphaValueWithLongName: 1,
+	betaValueWithLongName: 2,
+	gammaValueWithLongName: 3,
+	deltaValueWithLongName: 4,
+	epsilonValueWithLongName: 5
+}[keyName];
+
+const accessValue = {
+	alphaValueWithLongName: 1,
+	betaValueWithLongName: 2,
+	gammaValueWithLongName: 3,
+	deltaValueWithLongName: 4,
+	epsilonValueWithLongName: 5
+}.alphaValueWithLongName;

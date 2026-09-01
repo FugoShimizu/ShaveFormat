@@ -1,0 +1,14 @@
+/**
+ *
+ * @param x
+ */
+function f(x) {
+	switch(x) {
+	case 1:
+		a();
+	case 2:
+	// b
+	default:
+	// c
+	}
+}

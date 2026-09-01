@@ -1,0 +1,5 @@
+#import <foo  bar.h>
+#import "a  b.h"
+#include_next <c  d.h>
+
+int x;

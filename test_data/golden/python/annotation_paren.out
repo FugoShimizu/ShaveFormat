@@ -1,0 +1,10 @@
+(value): bool = 1
+(value): int
+(value): int = 2
+a.b: int = 1
+a[0]: int = 1
+value = 3
+type Alias = (int)
+type Plain = int
+Value = int
+type(mock_driver).page_source = PropertyMock(side_effect=fn)

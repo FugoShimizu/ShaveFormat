@@ -1,0 +1,8 @@
+#define S(x) #x
+
+const char *const Text =
+S(({ int VeryLongNameA = 1, VeryLongNameB = 2; VeryLongNameA; }));
+
+const char *const Control =
+S(({ if(Flag) Do(
+	1); }));

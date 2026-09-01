@@ -1,0 +1,7 @@
+const value = null;
+const isEqual = value === null || value === undefined;
+const isDifferent = value !== null && value !== undefined;
+const otherValue = undefined;
+const isMixedSubject = value === null || otherValue === undefined;
+const isRepeatedNull = value === null || value === null;
+const isConjunctiveStrict = value === null && value === undefined;

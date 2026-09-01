@@ -1,0 +1,10 @@
+/**
+ * 境界の比較関数
+ * @param Value 比較する値
+ * @return 境界を超えて居れば真
+ */
+int Compare(const int Value) {
+	// 規約 4.11 例外
+	// 境界の比較結果の返戻
+	return Value > 59;
+}

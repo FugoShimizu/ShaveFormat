@@ -1,0 +1,22 @@
+/**
+ *
+ * @param r
+ * @param xv
+ */
+void g(std::meta::info r, X<false> xv) {
+	r == (^^int) && true;
+	r == ^^int;
+	(^^X) < xv;
+	constexpr std::meta::info a = ^^int;
+	f(^^int, ^^X);
+}
+
+constexpr auto a = ^^int;
+constexpr auto b = ^^x;
+constexpr auto c = ^^::std;
+constexpr auto d = ^^MyClass;
+constexpr auto e = ^^int;
+
+using T = [: r :];
+
+typename [: s :] v;

@@ -1,0 +1,60 @@
+#include <type_traits>
+
+/**
+ *
+ * @return
+ */
+template<class T> int Outer() {
+	if constexpr(false) if(T::Missing) return 1;
+	return 0;
+}
+
+/**
+ *
+ * @param B
+ * @return
+ */
+template<class T> int Inner(bool B) {
+	if(B) if constexpr(false) return T::Missing;
+	return 0;
+}
+
+/**
+ *
+ * @return
+ */
+template<class T> int Siblings() {
+	if constexpr(false) return T::Missing;
+	if constexpr(false) return T::Missing;
+	return 0;
+}
+
+/**
+ *
+ * @return
+ */
+template<class T> int Alternatives() {
+	if constexpr(false) return T::Missing;
+	else if constexpr(false) return T::Missing;
+	return 0;
+}
+
+/**
+ *
+ * @param A
+ * @param B
+ * @return
+ */
+int Inside(bool A, bool B) {
+	if constexpr(true) if(A) if(B) return 1;
+	return 0;
+}
+
+/**
+ *
+ * @return
+ */
+int Evaluation() {
+	if constexpr(std::is_constant_evaluated()) if(true) return 1;
+	return 0;
+}

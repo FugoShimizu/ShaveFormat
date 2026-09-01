@@ -1,0 +1,18 @@
+class C {
+	/**
+	 * ラベル付ループを処理する
+	 * @param Code 分岐値
+	 */
+	void F(final int Code) {
+		Search: for(int I = 0; I < 10; I++) {
+			switch(Code) {
+			case 1:
+				break Search;
+			default:
+				break;
+			}
+		}
+		// 終了
+		return;
+	}
+}

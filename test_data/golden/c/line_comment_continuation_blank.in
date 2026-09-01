@@ -1,0 +1,10 @@
+int open_file(int authorized) {
+	// Allowed dir: C:\data\
+
+	if(!authorized) return -1;
+	int x = 0; // note \  
+	int y = 1;
+	return x;
+}
+#define A 1 \ 
+int z;

@@ -1,0 +1,10 @@
+const Config = { name: "test", values: [1, 2, 3], nested: { a: true, b: false } };
+
+/**
+ *
+ * @param Items
+ * @returns
+ */
+function Map(Items) {
+	return Items.map(X => X.id).filter(X => X > 0);
+}

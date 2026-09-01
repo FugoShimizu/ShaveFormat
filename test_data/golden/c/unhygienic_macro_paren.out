@@ -1,0 +1,14 @@
+#define M 0 || 5
+#define SQ(x) x * x
+#define P (1 + 2)
+
+/**
+ *
+ * @param x
+ * @param a
+ * @return
+ */
+int f(int x, int a) {
+	int r = x && (M > 2), s = 2 / (SQ(a)), t = (P) * 2 + (a + 1) * 3;
+	return r + s + t;
+}

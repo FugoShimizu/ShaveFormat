@@ -1,0 +1,11 @@
+int Outer(int A, bool B) { if(int X = A) if(B) return X; return 0; }
+
+int Inner(int A, bool B) { if(B) if(int X{A}) return X; return 0; }
+
+int Siblings(int A, int B) { if(int X = A) return X; if(int X = B) return X; return 0; }
+
+int Alternatives(int A, int B) { if(int X = A) return X; else if(int X = B) return X; return 0; }
+
+int Inside(int A, bool B, bool C) { if(int X = A) if(B) if(C) return X; return 0; }
+
+int Initialized(int A, bool B) { if(int X = A; X) if(B) return X; return 0; }

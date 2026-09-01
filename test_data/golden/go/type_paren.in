@@ -1,0 +1,15 @@
+package p
+
+var x (int)
+var y [](*T)
+var z chan (<-chan int)
+var w *(chan int)
+var v chan (int)
+var u = (int)(x)
+var t = (*T)(nil)
+var s = ([]byte)("a")
+
+var c chan ((<-chan int))
+var x = ((interface{}))(nil)
+var y = ((*int))(nil)
+var z ((int))

@@ -1,0 +1,13 @@
+class Routes
+	#
+	# @return
+	def call
+		post :play, to: "games#play"
+		validates :name, presence: true, length: { maximum: 30 }
+		return resources :items, param: :public_id, only: %i[index show] do
+			member do
+				post :like
+			end
+		end
+	end
+end

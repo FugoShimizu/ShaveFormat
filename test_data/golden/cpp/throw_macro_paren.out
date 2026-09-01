@@ -1,0 +1,24 @@
+#define PAIR 1, 2
+
+/**
+ *
+ * @return
+ */
+int main() {
+	try {
+		throw (PAIR);
+	} catch(int E) {
+		return E;
+	}
+	return 0;
+}
+
+/**
+ *
+ * @param D
+ * @param S
+ * @return
+ */
+bool f(unsigned D, unsigned long S) {
+	return --D < 64 && S >> D & 1;
+}

@@ -1,0 +1,3 @@
+#define S R"(a\
+b)"
+const char *s = S;

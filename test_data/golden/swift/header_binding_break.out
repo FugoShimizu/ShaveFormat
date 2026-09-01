@@ -1,0 +1,16 @@
+func t() {
+	if let a = f(
+		x: {
+			1
+		}
+	), let b = g(y) {
+		print(a, b)
+	}
+	guard let a = f(
+		x: {
+			1
+		}
+	), let b = g(y) else {
+		return
+	}
+}

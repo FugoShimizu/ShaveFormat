@@ -1,0 +1,4 @@
+2:1: Function is missing trailing return
+14:2: Labeled statement outside a multi-loop break; extract the loop into a function instead
+32:1: Function is missing trailing return
+33:1: Labeled statement outside a multi-loop break; extract the loop into a function instead

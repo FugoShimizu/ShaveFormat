@@ -1,0 +1,3 @@
+void Register(const char *SourceText, unsigned Position, unsigned SourceSize, unsigned LanguageMode, unsigned *Handlers) {
+	if(Position < SourceSize && SourceText[Position] != '\n' && ShouldBreakAfterExpandedBrace("\n}", SourceText + Position, LanguageMode)) Handlers[0] = Position;
+}

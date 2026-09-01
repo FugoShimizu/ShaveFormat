@@ -1,0 +1,11 @@
+var let = {};
+
+globalThis.key = "k";
+(let)[key] = [5];
+
+for((let).x of [3]);
+
+(let)[key] = [6];
+console.log(let.k, let.x);
+++let[key];
+++{}.x;

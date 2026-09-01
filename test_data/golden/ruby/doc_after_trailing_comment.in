@@ -1,0 +1,4 @@
+y = 1 # 末尾のコメント
+def twice(a)
+	return a * 2
+end

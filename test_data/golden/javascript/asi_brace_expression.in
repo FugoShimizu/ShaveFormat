@@ -1,0 +1,8 @@
+let x, c = 1;
+const foo = () => console.log("foo called");
+if (c) { x = function () { return 2 } }
+(c && foo)();
+if (c) { x = {} }
+[1, 2].forEach(foo);
+export const y = 1
+export default { a: 1 }

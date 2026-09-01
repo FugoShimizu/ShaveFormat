@@ -1,0 +1,14 @@
+struct P {
+	int b;
+};
+
+/**
+ *
+ * @param p
+ * @param a
+ * @return
+ */
+int f(struct P *p, int a) {
+	int s = a /* c */ + 1;
+	return p /* m */ ->b + s;
+}

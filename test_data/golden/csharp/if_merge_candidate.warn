@@ -1,0 +1,3 @@
+7:4: If semantics are preserved, consider merging nested conditions with `&&`
+11:4: If semantics are preserved, consider merging consecutive conditions with `||`
+16:4: If semantics are preserved, consider merging alternative conditions with `||`

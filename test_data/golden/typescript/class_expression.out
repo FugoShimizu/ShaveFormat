@@ -1,0 +1,11 @@
+const C = class A<T> {
+	/**
+	 *
+	 * @returns
+	 */
+	m(): T {
+		return this.x;
+	}
+};
+
+const D = class<T> extends B<T> implements I {};

@@ -1,0 +1,4 @@
+const a = { k: // c
+ <div>text</div> };
+const b = c && // d
+ <div>text</div>;

@@ -1,0 +1,5 @@
+x: bool = 1
+y: bool = 0
+count: int = 1
+already: bool = True
+print(type(x).__name__, str(x), x is True, type(y).__name__, str(y), y is False)

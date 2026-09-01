@@ -1,0 +1,29 @@
+def foo
+=begin
+  doc comment
+=end
+  return 1
+end
+
+=begin
+doc
+=end
+def f
+  1
+end
+# a
+=begin
+doc2
+=end
+def g(x) = x
+
+case line
+when /^=end/
+  if in_part # if in non-RD part
+=begin # not imported
+  part = parse(["=begin\n", "=end\n"])
+=ending is not a terminator
+=end
+  end
+end
+x = 1

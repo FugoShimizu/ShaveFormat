@@ -1,0 +1,13 @@
+const a = 1;
+const b = 2;
+let c;
+let d;
+let e = 5;
+let f = 6;
+
+/**
+ *
+ */
+function foo() {
+	const x = 1, y = 2;
+}

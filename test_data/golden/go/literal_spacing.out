@@ -1,0 +1,15 @@
+package p
+
+var Slice = []int{ 1, 2 }
+var Empty = []int{}
+var Grid = [][]int{ { 1, 2 }, { 3 }, {} }
+var Lookup = map[string]string{ "left": "{x}", "right": "y;z" }
+
+var Functions = []func() int{
+	func() int {
+		return 2
+	},
+	func() int {
+		return 3
+	},
+}

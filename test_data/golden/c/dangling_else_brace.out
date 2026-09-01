@@ -1,0 +1,29 @@
+/**
+ *
+ * @param a
+ * @param b
+ * @param c
+ */
+void f(int a, int b, int c) {
+	if(a) {
+		if(b) x();
+		else if(c) y();
+	} else z();
+	if(a) {
+		while(c) if(b) y();
+	} else z();
+	if(a) {
+	L:
+		if(b) x();
+	} else z();
+	if(a) {
+	M:
+		if(b) x();
+		else y();
+	} else z();
+	if(a) x();
+	else y();
+	if(a);
+	else;
+	while(a);
+}

@@ -1,0 +1,47 @@
+package p
+
+func h() {
+	g(a / (b * c))
+	g(a % (b * c))
+	g(a * (b % c))
+	g(a - (b + c))
+	g(a - (b - c))
+	g(a - (b * c))
+	g(a * (b + c))
+	g((a + b) - c)
+	g((a * b) % c)
+	g(a - (b + c) * d)
+	g(a / ((b * c)))
+	g((((a + b))))
+	g(a & (b + c))
+	g(a | (b + c))
+	g(a ^ (b + c))
+	g(a & (b * c))
+	g(a & (b | c))
+	g(a | (b & c))
+	g(a << (b + c))
+	g(a << (b >> c))
+	g((a + b) & c)
+	g(a & ((b + c)))
+	g(a & (b < c))
+	g(a | (b == c))
+	g(a < (b + c))
+	g(a + (b < c))
+	g((a < b) < c)
+	g(a < (b < c))
+	g(a & (b == c))
+	g((a & b) < c)
+	g(a && (b || c))
+	g(a || (b && c))
+	g(a && (b && c))
+	g(a || (b || c))
+	g((a && b) && c)
+	g(a && (b || c) || d)
+	g(((a && b)) || c)
+	g((a - b).M())
+}
+
+func Compare(alpha int, bravo int, charlie int) bool {
+	result := (alpha < bravo) != (charlie > 0)
+	return result
+}

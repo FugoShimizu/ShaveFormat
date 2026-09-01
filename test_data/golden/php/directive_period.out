@@ -1,0 +1,4 @@
+<?php
+
+// phpcs:ignore Generic.Files.LineLength -- 理由，二文目
+$a = 1;

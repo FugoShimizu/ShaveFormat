@@ -1,0 +1,28 @@
+#define BIND() Flag x
+#define BOUND Flag x
+
+/**
+ *
+ * @param x
+ * @return
+ */
+int Function(int x) {
+	{
+		BIND();
+		if(x) if(x) return 1;
+	}
+	return 0;
+}
+
+/**
+ *
+ * @param x
+ * @return
+ */
+int Object(int x) {
+	{
+		BOUND;
+		if(x) if(x) return 1;
+	}
+	return 0;
+}

@@ -1,0 +1,8 @@
+func f(c: Bool, z: Any) {
+	if c {
+		g()
+	} else {
+		// swiftlint:disable:next force_cast
+		let y = z as! Int
+	}
+}

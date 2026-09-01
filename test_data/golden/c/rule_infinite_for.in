@@ -1,0 +1,20 @@
+void f() {
+	for(;;) doThing();
+}
+
+void g() {
+	for ( ; ; ) {
+		doThing();
+		if(stop) break;
+	}
+}
+
+void h() {
+	// 既存の `while(true)` は不変
+	while(true) doThing();
+}
+
+void k() {
+	// 通常の for は対象外
+	for(int i = 0; i < 3; ++i) doThing(i);
+}

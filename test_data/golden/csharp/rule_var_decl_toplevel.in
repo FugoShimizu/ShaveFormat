@@ -1,0 +1,20 @@
+int A;
+int B;
+int C, D = 2;
+
+class Foo {
+	void Bar() {
+		int X = 1;
+		int Y = 2;
+	}
+}
+
+class Foo {
+	void Bar() {
+		int a = 1;
+		int b = 2;
+		int c = 3;
+	}
+	int X = 10;
+	int Y = 20;
+}

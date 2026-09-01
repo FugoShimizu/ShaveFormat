@@ -1,0 +1,8 @@
+class A {
+	void F() {
+		int Q = 2;
+		int R = 3; /* c4 */
+		int S = 4; /* c5 */
+		G(Q, R, S);
+	}
+}

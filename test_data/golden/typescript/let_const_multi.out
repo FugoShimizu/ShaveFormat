@@ -1,0 +1,10 @@
+/**
+ *
+ * @returns
+ */
+export function g() {
+	const p = 1, q = 2, r = 3, s = 4;
+	let t = 5, u = 6;
+	++t;
+	return p + q + r + s + t + u;
+}

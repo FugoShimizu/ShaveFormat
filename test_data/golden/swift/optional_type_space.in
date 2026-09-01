@@ -1,0 +1,5 @@
+func f(_ x: inout Int?, a: Any) -> Bool {
+    let b = (a as? Int) ?? 0
+    let c = (a as! Int) < 5
+    return a is Int?
+}

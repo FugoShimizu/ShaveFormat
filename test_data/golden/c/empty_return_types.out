@@ -1,0 +1,19 @@
+/**
+ * 空の void 関数
+ */
+void EmptyVoid() {}
+/**
+ * 空のポインタ返戻関数
+ * @return 戻値
+ */
+void *EmptyPointer() {}
+/**
+ * 空の整数返戻関数
+ * @return 戻値
+ */
+int EmptyValue() {}
+/**
+ * 空の起動関数
+ * @return 戻値
+ */
+int main() {}

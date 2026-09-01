@@ -1,0 +1,26 @@
+/**
+ * 検査関数
+ * @param a 値
+ * @return 結果
+ */
+int f(int a) {
+	int x = a;
+	x = x * 2;
+	#ifdef X
+	++x;
+	#endif
+	return x;
+}
+
+/**
+ * 検査関数
+ * @param a 値
+ * @return 結果
+ */
+int g(int a) {
+	int y = a;
+	y = y + 1;
+	/* 説明 */
+	y = y * 2; // 結果の返戻
+	return y;
+}

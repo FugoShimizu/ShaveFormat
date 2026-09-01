@@ -1,0 +1,15 @@
+class C {
+	/**
+	 * ラベル付ブロックを処理する
+	 * @param IsReady 分岐条件
+	 */
+	void F(final boolean IsReady) {
+	blk:
+		{
+			if(IsReady) break blk;
+			G();
+		}
+		// 終了
+		return;
+	}
+}

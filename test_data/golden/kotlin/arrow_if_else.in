@@ -1,0 +1,14 @@
+fun f(c: Boolean, d: Boolean, x: Int) {
+    val h = xs.map { x -> if (x > 0) "p" else "n" }
+    val a = when (x) {
+        1 ->
+            if (c) "a" else "b"
+        2 -> if (c) "a" else if (d) "b" else "c"
+        3 -> if (c) { "b" } else "o"
+        4 -> if (c) { "b" } else { "o" }
+        else -> if (c) {
+            "b"
+        } else "o"
+    }
+    val b = if (c) { "b" } else "o"
+}

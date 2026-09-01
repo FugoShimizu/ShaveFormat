@@ -1,0 +1,9 @@
+fn scan(text: &str) -> i32 {
+	if !text.is_empty() {
+		let open = '(';
+		let raw = r#"a " ("#;
+		let depth = 1;
+		return depth;
+	}
+	return 0;
+}

@@ -1,0 +1,12 @@
+package p
+
+// F は x を用いてラベル付ループを処理する
+func F(x int) {
+	Search:
+	for i := 0; i < 10; i++ {
+		switch x {
+		case 1:
+			break Search
+		}
+	}
+}
