@@ -1,0 +1,12 @@
+package p
+
+// f
+func f() {
+	var a, b func(
+		x struct {
+			f int
+		},
+	)
+	use(a, b)
+	return
+}

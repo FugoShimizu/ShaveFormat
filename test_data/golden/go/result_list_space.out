@@ -1,0 +1,16 @@
+package main
+
+type I interface {
+	M() (int, error)
+}
+
+var f func(int) (int, error)
+
+// main
+func main() {
+	h := func(x int) (int, error) {
+		return x, nil
+	}
+	_ = h
+	return
+}

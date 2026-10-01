@@ -1,0 +1,12 @@
+if a then 1 elsif b then end
+if a then 1 elsif b then end
+
+if a
+	1
+	2
+elsif b then elsif c then end
+
+if a then elsif b then else 2 end
+if x > 1 then else puts 1 end
+
+unless y then else puts 2 end

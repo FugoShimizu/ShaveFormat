@@ -1,0 +1,8 @@
+// Copyright 2024 Foo
+// All rights reserved
+// Use of this source code is governed by a BSD-style license
+//go:build linux
+// Package p does things
+package p
+
+var x int

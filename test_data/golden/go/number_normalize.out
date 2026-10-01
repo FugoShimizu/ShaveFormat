@@ -1,0 +1,8 @@
+package main
+
+var hex = 0XDEAD_BEEF
+var bin = 0B1010
+var oct = 0O17
+var exp = 1E10
+var hexfloat = 0X1P-2
+var imag = 3i

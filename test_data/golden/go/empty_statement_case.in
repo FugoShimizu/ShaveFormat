@@ -1,0 +1,9 @@
+package p
+func f(x int){switch x{case 1:
+// c
+; default:}}
+func g(c chan int){select{case <-c: /* d */ ; default:}}
+func h(v any){switch v.(type){case int:
+// e
+; default: ;}}
+func i(x int){switch x{case 1:; default: /* f */ ;}}

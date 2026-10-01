@@ -1,0 +1,6 @@
+for c in changes:
+  try:
+    company = Company.get(c[1])
+    company.save()
+  except:
+    print("error")

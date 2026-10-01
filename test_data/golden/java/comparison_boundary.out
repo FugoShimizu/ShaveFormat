@@ -1,0 +1,16 @@
+class C {
+	/**
+	 * 境界の比較
+	 * @param x 整数
+	 * @param y 長整数
+	 * @param z 実数
+	 */
+	void Check(int x, long y, double z) {
+		if(x <= 100) return;
+		if(x <= 2147483647) return;
+		if(y <= 2147483647) return;
+		if(y <= 2147483646L) return;
+		if(z >= 1) return;
+		return;
+	}
+}

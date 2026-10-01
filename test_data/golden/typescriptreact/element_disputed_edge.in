@@ -1,0 +1,52 @@
+const v0 = <p>
+  　全角空白で字下げした段落
+</p>;
+const v1 = <p>
+  foo　
+  {x}
+</p>;
+const v2 = <p>
+	&#32;leading entity
+</p>;
+const v3 = <p>
+	foo&#32;
+	{x}
+</p>;
+const v4 = <p>&#x20;foo{x}</p>;
+const v5 = <p>foo&#x20;{x}</p>;
+const v6 = <p>{x}&#x20;{y}</p>;
+const v8 = <p>a&#x9;{x}</p>;
+const v9 = <p>
+	a&#9;
+	{x}
+</p>;
+const v10 = <p>
+	 nbsp start
+</p>;
+const v11 = <p>foo bar</p>;
+const a = <p>Hello, {name}!</p>;
+const b = <p> hi </p>;
+const c = <p>Hello, <b>x</b> world</p>;
+const d = <p> {name} </p>;
+const e = <p>a{" "}b</p>;
+const f = <p>
+	Hello,{" "}
+	{name}
+</p>;
+const g = <pre>a	{x}	b</pre>;
+const h = <p className="aaaaaaaaaaaaaa" id="bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb"> hi </p>;
+const i = <> hi {x} </>;
+const j = <p>&#32;{x}&#32;</p>;
+const k = <p>{a}{" "}{b}</p>;
+const l = <p>a{"\t"}{x}</p>;
+const m = <p>&amp; {x}</p>;
+const n = <ul>
+	<li>one</li> <li>two</li>
+</ul>;
+
+const a = <p><b>x</b>{" "}{" "}<i>y</i></p>;
+const e = <p><b>x</b>{"   "}<i>y</i></p>;
+const c = <p>{" "}{" "}</p>;
+const d2 = <p>a{" " /* c */}b</p>;
+const f2 = <p>a{// c
+" "}b</p>;

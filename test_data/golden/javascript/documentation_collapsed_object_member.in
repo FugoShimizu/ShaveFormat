@@ -1,0 +1,5 @@
+const o = {
+	/** @deprecated 旧 */
+	old: 1,
+	new1: 2,
+};

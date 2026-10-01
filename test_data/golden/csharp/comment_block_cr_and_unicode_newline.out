@@ -1,0 +1,25 @@
+class A {
+	/* ab */
+	int X;
+	/* c d */
+	int Y;
+}
+
+class C {
+	/**
+	 * <summary></summary>
+	 * <param name="ok"></param>
+	 */
+	void F(bool ok) {
+		if(ok) {
+			Run(); // done
+			Audit();
+		}
+		var s = @"a b";
+		/* c d */
+		int a = 1; // n
+		a = 5;
+		int b = a;
+		return;
+	}
+}

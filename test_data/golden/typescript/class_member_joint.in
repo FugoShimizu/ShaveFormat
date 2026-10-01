@@ -1,0 +1,18 @@
+class A {
+	static
+	x = 1
+	get
+	v() { return 1; }
+	set
+	w(v: number) {}
+	accessor
+	r = 4
+}
+class B {
+	[k: string]: unknown
+	y = 2
+}
+class C {
+	[k: string]: unknown,
+	y = 2
+}

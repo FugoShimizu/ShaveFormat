@@ -1,0 +1,11 @@
+/**
+ * 面積
+ * 幅
+ * TODO: 単位
+ * @param w
+ * @param h
+ * @return
+ */
+function area(w: number, h: number): number {
+	return w * h;
+}

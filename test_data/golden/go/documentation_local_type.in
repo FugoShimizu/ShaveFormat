@@ -1,0 +1,18 @@
+package p
+
+// f は検体
+func f() {
+	// T doc
+	//
+	// more
+	type T struct {
+		X int
+	}
+	// A は別名
+	//
+	// 続き
+	type A = int
+	_ = T{}
+	var _ A
+	return
+}

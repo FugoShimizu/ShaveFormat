@@ -1,0 +1,2 @@
+template<int N> constexpr bool IsPositiveV<N + 1> = true;
+template<typename T> constexpr bool IsSameV<T, T> = true;

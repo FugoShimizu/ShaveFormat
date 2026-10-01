@@ -1,0 +1,10 @@
+class A {
+	/** 面積 */
+	int area(
+		/** 幅 */
+		int w,
+		int h
+	) {
+		return w * h;
+	}
+}

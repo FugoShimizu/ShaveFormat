@@ -1,0 +1,7 @@
+6:5: Review: Add an explicit return type to this function; verify type, external contract
+18:5: Review: Add an explicit return type to this function; verify type, external contract
+24:2: Violation: Remove the unreachable trailing `return`
+32:5: Review: Add an explicit return type to this function; verify type, external contract
+37:2: Violation: Add the required comment before this `return`
+45:5: Review: Determine whether the function needs an explicit trailing return; verify type, reachability
+45:5: Review: Add an explicit return type to this function; verify type, external contract

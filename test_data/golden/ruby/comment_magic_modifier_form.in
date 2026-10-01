@@ -1,0 +1,4 @@
+# frozen_string_literal: true
+if ARGV.empty?
+  puts "usage"
+end

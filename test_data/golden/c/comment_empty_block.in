@@ -1,0 +1,15 @@
+void f(void) {
+	if (a) {
+		// c
+	} else {
+		x();
+		y();
+	}
+	if (a) {
+		// d1
+		// d2
+	}
+	while (b) {
+		/* w */
+	}
+}

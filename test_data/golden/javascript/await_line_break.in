@@ -1,0 +1,8 @@
+const f = async () => {
+	await
+	g();
+};
+function h() {
+	await
+	g();
+}

@@ -1,0 +1,41 @@
+/** 読む
+ *
+ * # Returns
+ * 読んだ値
+ */
+fn read_value() -> std::io::Result<i32> {
+	return Ok(1);
+}
+
+/**
+ * 分ける
+ *
+ * # Arguments
+ * * `a` - 割られる数
+ * * `b` - 割る数
+ *
+ * # Returns
+ * 商
+ *
+ * # Panics
+ * `b` が 0 の場合
+ */
+fn divide(a: i32, b: i32) -> i32 {
+	assert!(b != 0);
+	return a / b;
+}
+
+/**
+ * 止める
+ */
+fn stop() {
+	let f = || panic!("x");
+	panic!("stop");
+}
+
+mod m {
+	//! 内側の文書
+
+	/** 何もしない */
+	fn g() {}
+}

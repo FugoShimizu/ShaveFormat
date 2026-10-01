@@ -1,0 +1,13 @@
+package main
+
+func f() {
+	for { // l
+		g()
+	}
+	switch { // s
+	case a:
+		g()
+	default: // d
+		h()
+	}
+}

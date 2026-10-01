@@ -1,0 +1,15 @@
+/**
+ *
+ * @param a
+ */
+void f(int a) {
+	if(a) {
+		g1();
+		g2();
+	// note
+	} else {
+		h1();
+		h2();
+	}
+	return;
+}

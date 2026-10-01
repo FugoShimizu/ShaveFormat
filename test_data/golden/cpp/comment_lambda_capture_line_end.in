@@ -1,0 +1,6 @@
+void f() {
+	const auto V = [ // c
+		&AaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaB,
+		&CcccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccD
+	](int x) { g(x); };
+}

@@ -1,0 +1,20 @@
+#include <vector>
+
+/**
+ * 数える
+ * @param p 位置
+ * @param v 値の並び
+ */
+void f(int *p, std::vector<int> &v) {
+	int i = 0;
+	unsigned n = 0;
+	std::size_t s = 0;
+	auto it = v.begin();
+	++i;
+	--n;
+	++s;
+	++p;
+	it++;
+	for(int k = 0; k < 3; ++k) g(k);
+	return;
+}

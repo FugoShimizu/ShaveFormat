@@ -1,0 +1,11 @@
+//go:build linux && cgo
+#include <stdio.h>
+
+/**
+ * go:buildx
+ * go:embed x
+ * @return
+ */
+int f(void) {
+	return 1;
+}

@@ -1,0 +1,2 @@
+@use "x" /*C*/ as y;
+@forward "z" /*D*/ show a;

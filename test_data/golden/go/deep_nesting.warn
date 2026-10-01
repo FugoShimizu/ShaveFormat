@@ -1,0 +1,3 @@
+69:34: Violation: Nesting depth 33 exceeds the limit of 32
+104:2: Violation: Add the required comment before this `return`
+205:2: Violation: Add the required comment before this `return`

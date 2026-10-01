@@ -1,0 +1,6 @@
+// +build linux darwin
+// +build amd64,!cgo
+
+package main
+
+func f() int { return 1 }

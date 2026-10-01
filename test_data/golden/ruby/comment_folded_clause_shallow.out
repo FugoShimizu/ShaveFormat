@@ -1,0 +1,6 @@
+#
+# @param a
+def f(a)
+	# shallow
+	if a then g elsif b then h end
+end

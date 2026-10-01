@@ -1,0 +1,4 @@
+interface A {
+	abstract: boolean;
+	readonly b: string;
+}

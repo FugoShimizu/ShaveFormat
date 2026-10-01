@@ -1,0 +1,7 @@
+<?php
+echo strlen(file_get_contents(__FILE__, false, null, __COMPILER_HALT_OFFSET__));
+  if(PHP_EOL === ""){b();}
+__halt_compiler();  if($x){y();}
+	data  
+
+

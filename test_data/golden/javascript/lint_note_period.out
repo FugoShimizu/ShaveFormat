@@ -1,0 +1,20 @@
+/**
+ *
+ */
+export function f() {
+	// eslint-disable-next-line no-debugger -- 理由の一文目
+	// 二文目
+	debugger;
+	// oxlint-disable-next-line no-debugger -- 理由の一文目
+	// 二文目
+	debugger;
+	return;
+}
+
+// eslint-disable
+// global foo
+const a = foo;
+const a = 1;
+// decoding: 手順を説明する
+// 二文目
+const b = 2;

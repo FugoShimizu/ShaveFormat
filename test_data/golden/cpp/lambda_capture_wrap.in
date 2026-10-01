@@ -1,0 +1,6 @@
+void f() {
+	const auto VisitNode = [&PushInteriorLineStarts, &VisitHeredoc, &IsError, SectionStartBytes, LeafOpenerLines, &Src, &LineStarts, RootHasError, ProgramRoot](const TSNode Node, LocalInfo &Local) {
+		g();
+	};
+	auto h = [=, &a, this, *this]() { return a; };
+}

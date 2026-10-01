@@ -1,0 +1,18 @@
+/**
+ * 境界の比較
+ * @param n 整数
+ * @param u 符号無の整数
+ * @param d 実数
+ * @param c 文字
+ */
+void Check(int n, unsigned int u, double d, char c) {
+	if(n >= 60) return;
+	if(n <= 5) return;
+	if(n >= 0) return;
+	if(u >= 0) return;
+	if(u <= 4294967295) return;
+	if(u <= 100) return;
+	if(d >= 60) return;
+	if(c >= 97) return;
+	return;
+}

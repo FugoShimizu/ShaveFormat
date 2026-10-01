@@ -1,0 +1,42 @@
+.nt-page :where(h1, h2, h3) {
+	margin: 0;
+}
+.card :is(.a, .b) {
+	color: red;
+}
+.c > :is(.d) {
+	x: 1;
+}
+.e ~ :not(.f) {
+	x: 1;
+}
+.g + :where(.h) {
+	x: 1;
+}
+.a:hover:focus {
+	x: 1;
+}
+.a:where(.b) {
+	x: 1;
+}
+a::before {
+	x: 1;
+}
+.i ::before {
+	x: 1;
+}
+.j > ::selection {
+	x: 1;
+}
+.k > :nth-child(2n) {
+	x: 1;
+}
+.l :where(.m) .n :is(.o) {
+	x: 1;
+}
+* :where(.r) {
+	x: 1;
+}
+.s :not(:hover) {
+	x: 1;
+}

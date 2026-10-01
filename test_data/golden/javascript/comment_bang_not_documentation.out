@@ -1,0 +1,8 @@
+/**
+ * ! ライセンス
+ * @param a
+ * @return
+ */
+function f(a) {
+	return a;
+}

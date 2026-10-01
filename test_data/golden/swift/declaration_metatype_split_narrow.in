@@ -1,0 +1,1 @@
+func f() { let a: (Int).Type = Int.self, b: (Int).Type = Int.self; print(a, b) }

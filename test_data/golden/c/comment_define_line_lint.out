@@ -1,0 +1,5 @@
+#define LIMIT 10 /* Upper bound. Inclusive. */
+
+#define MAX(a, b) ((a) > (b) ? (a) : (b)) // Larger. Of two.
+
+int x;

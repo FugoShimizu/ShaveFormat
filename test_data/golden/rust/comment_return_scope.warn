@@ -1,0 +1,2 @@
+7:4: Review: Add an explicit return type to this function; verify type, external contract
+18:2: Violation: Add the required comment before this `return`

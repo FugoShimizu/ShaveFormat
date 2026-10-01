@@ -1,0 +1,2 @@
+package p
+func f() { var alpha, beta func(veryLongFirstParameter int, veryLongSecondParameter int); use(alpha,beta) }

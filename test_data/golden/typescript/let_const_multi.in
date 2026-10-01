@@ -1,0 +1,23 @@
+export function g() {
+	let p = 1, q = 2;
+	let r = 3;
+	let s = 4;
+	let t = 5, u = 6;
+	++t;
+	return p + q + r + s + t + u;
+}
+export function h(r) {
+	let { a, b } = r, p = f(r);
+	let q = 1;
+	a = 2;
+	return a + b + p + q;
+}
+export function k(r) {
+	let [x, ...y] = r;
+	return x + y;
+}
+export function m(m) {
+	for (let [k, v] of m) { v = v + 1; g(k, v); }
+	for (let [k, v] of m) g(k, v);
+	for (let { x } of m) { x = 2; }
+}

@@ -1,0 +1,11 @@
+/**
+ * 呼出の例の関数
+ */
+void Example(void) {
+	Call(FirstArgument,
+		// about second
+		SecondArgument,
+		ThirdArgument
+		// after third
+	);		// after call
+}

@@ -1,0 +1,18 @@
+begin
+  x
+rescue E
+  if mode
+    # failed to chmod.
+  elsif uid
+    uid = nil
+    retry # gid
+  end
+end
+
+if a
+  b
+elsif c
+  # expression continues
+elsif d
+  e
+end

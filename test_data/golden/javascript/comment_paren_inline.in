@@ -1,0 +1,9 @@
+foo(a, (/* c1 */ b));
+x = y + (/* c2 */ z);
+const f = (/* c3 */ g);
+x = (/* c4 */ (g));
+x = /* c5 */ (a, b);
+y = (a) /* c6 */ + b;
+z = /* c7 */ (a);
+const s = /** @type {const} */ (["a"]);
+w = (/* c8 */ (a, b));

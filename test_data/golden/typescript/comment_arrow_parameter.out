@@ -1,0 +1,8 @@
+items.forEach(
+	item => { // 各要素を処理
+		console.log(item);
+		++count;
+	}
+);
+
+type A<K> = K extends symbol ? never : K;

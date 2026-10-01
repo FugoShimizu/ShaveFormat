@@ -1,0 +1,8 @@
+function reduce(arr, init) {
+	let accumulator = init;
+	let initAccum = true;
+	arr.forEach(function(value) {
+		accumulator = initAccum ? (initAccum = false, value) : sum(accumulator, value);
+	});
+	return accumulator;
+}

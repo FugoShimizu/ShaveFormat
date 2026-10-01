@@ -1,0 +1,15 @@
+def f(s)
+	if x
+		x, y = 1, 2
+	end
+	if z
+		/(?<z>a)/ =~ s
+	end
+	if q
+		(a, q), b = [1, 2], 3
+	end
+	if r
+		/(?<k>a)/ =~ s
+	end
+	return [x, y, z, a, q, b, k]
+end

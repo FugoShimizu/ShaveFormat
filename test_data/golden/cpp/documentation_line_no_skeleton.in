@@ -1,0 +1,15 @@
+class A {
+public:
+	/// 取得する
+	/// @param a 引数
+	/// @return 値
+	int Get(int a) { return a; }
+
+	//! 設定する
+	void Set(int a) { X = a; }
+
+	////////////////////
+	int Reset() { X = 0; return X; }
+
+	int X;
+};

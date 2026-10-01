@@ -1,0 +1,6 @@
+struct A {
+	int x; ///<   横の位置
+	long y; //!<	縦の位置
+	char z; /**<　奥行 */
+	short w; ///<幅
+};

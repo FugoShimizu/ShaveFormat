@@ -1,0 +1,2 @@
+const x = (a.b).c + (g()).h + (a[0]).b + (f)(1) + (a.b)(2) + (this).x + (1).x + (a?.b).c + (new A).b + (new A()).b + ("abc").length + ([1]).length + ((a.b)).c;
+const y = (/re/).test(s) + (import.meta).url + (f(a?.b)).c + (g("a?.b")).c + ({ a: 1 }).a;

@@ -1,0 +1,5 @@
+package p
+// #include <a.h>
+
+// not preamble
+import "C"

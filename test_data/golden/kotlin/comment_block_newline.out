@@ -1,0 +1,22 @@
+/**
+ *
+ * @param b
+ * @param c
+ * @return
+ */
+fun sub(b: Int, c: Int): Int {
+	val a = b /* x
+	 * y */ - c
+	return a
+}
+
+/**
+ *
+ * @param g
+ * @return
+ */
+fun call(g: (Int) -> Int): Int {
+	val r = g /* x
+	 * y */ (7)
+	return r
+}

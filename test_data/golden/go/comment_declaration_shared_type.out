@@ -1,0 +1,8 @@
+package p
+
+// f は変数を使う
+func f() {
+	var a, c, b /* 型の説明 */ int
+	use(a, b, c)
+	return
+}

@@ -1,0 +1,11 @@
+enum E {
+	case a
+	case b
+}
+
+enum F {
+	case a
+	case b
+	case c(Int)
+	case d
+}

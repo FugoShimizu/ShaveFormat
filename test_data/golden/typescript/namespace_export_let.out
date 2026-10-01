@@ -1,0 +1,9 @@
+namespace N {
+	export let x = 1;
+	const y = 2;
+	export const z = y;
+}
+
+N.x = 2;
+
+export const w = 3;

@@ -1,0 +1,83 @@
+class GotoExits{
+/// <summary>呼出先として使用する</summary>
+static void ObserveGoto(){}
+
+/// <summary>多重ループから脱出して終了する</summary>
+static void Outside(){
+while(true) while(true) goto Done;
+Done:
+// 終了
+return;
+}
+
+/// <summary>多重ループ脱出後の終了を省略する</summary>
+static void Missing(){
+while(true) while(true) goto Done;
+Done:
+ObserveGoto();
+}
+
+/// <summary>内側だけを脱出して外側を継続する</summary>
+static void Inside(){
+while(true){
+while(true) goto Next;
+Next:
+ObserveGoto();
+}
+}
+
+/// <summary>無限ループ後の終了を検査する</summary>
+static void Unreachable(){
+while(true){
+while(true) goto Next;
+Next:
+ObserveGoto();
+}
+// 終了
+return;
+}
+}
+
+class GotoLabels{
+/// <summary>同じループへ戻る</summary>
+static void Restart(){
+Again:
+while(true) goto Again;
+}
+
+/// <summary>同じラベルの表記を照合する</summary>
+static void VerbatimLabel(){
+while(true){
+goto @Done;
+Done:
+;
+}
+}
+
+/// <summary>同じラベルの表記を照合する</summary>
+static void UnicodeLabel(){
+while(true){
+goto D\u006Fne;
+Done:
+;
+}
+}
+
+/// <summary>同じラベルの表記を照合する</summary>
+static void FormatLabel(){
+while(true){
+goto D\u200Cone;
+Done:
+;
+}
+}
+
+/// <summary>同じラベルの表記を照合する</summary>
+static void RawFormatLabel(){
+while(true){
+goto D‌one;
+Done:
+;
+}
+}
+}

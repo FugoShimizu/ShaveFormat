@@ -1,0 +1,2 @@
+/*/ <reference path="a" /> */
+let a = 1;

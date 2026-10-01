@@ -1,0 +1,19 @@
+/**
+ * 分岐値に応じて処理する
+ *
+ * # Arguments
+ * * `code` - 分岐値
+ */
+fn dispatch(code: i32) {
+	let run = || {
+		return;
+	};
+	match code {
+		0 => {
+			run();
+			return;
+		}
+		_ => {}
+	}
+	return;
+}

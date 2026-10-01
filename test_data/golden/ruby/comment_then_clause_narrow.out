@@ -1,0 +1,9 @@
+if a then
+# c
+end
+
+if b
+# d
+else
+	x
+end

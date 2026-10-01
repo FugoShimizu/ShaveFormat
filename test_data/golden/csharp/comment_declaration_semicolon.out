@@ -1,0 +1,20 @@
+int A = 1;
+int B = 2 /* top */;
+
+class K {
+	int S = 1;
+	int T = 2 /* c1 */;
+
+	/**
+	 * <summary></summary>
+	 */
+	void M() {
+		int P = 1 /* c2 */, R = 2, Q = 3, U = 4; // c3
+		return;
+	}
+}
+
+int C;
+int D = 2; // note3
+int E = 1;
+int G = 2; // note4

@@ -1,0 +1,11 @@
+import { View, Text, StyleSheet } from "react-native";
+import { useState, useEffect } from "react";
+import {
+	zed,	// note
+	ant		// note
+} from "m";
+import {
+	yak,	// note
+	cat,		// note
+	bee			// note
+} from "n";

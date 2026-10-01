@@ -1,0 +1,9 @@
+/// Returns a */ b
+///
+/// x = f()
+/// Y = 2
+void g() {
+	h();
+	// 終了
+	return;
+}

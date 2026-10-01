@@ -1,0 +1,17 @@
+@mixin m {
+	color: red;
+}
+
+@mixin n($a) {
+	width: $a;
+}
+
+@function f() {
+	@return 1px;
+}
+
+.a {
+	@include m;
+	@include n(2px);
+	height: f();
+}

@@ -1,0 +1,12 @@
+/**
+ *
+ * @return
+ */
+function A() {
+	return (
+		// d
+		<div>
+			<Outer prop={<Inner>{y}</Inner>} />
+		</div>
+	);
+}

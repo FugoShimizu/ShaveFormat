@@ -1,0 +1,62 @@
+class LoopExits {
+	/**
+	 * 外側のループから脱出する
+	 */
+	static void OuterExit() {
+	Outer:
+		while(true) {
+			System.out.print(0);
+			while(true) {
+				System.out.print(1);
+				break Outer;
+			}
+		}
+		return;
+	}
+
+	/**
+	 * 内側のループだけを脱出する
+	 */
+	static void InnerExit() {
+		while(true) {
+			System.out.print(0);
+		Inner:
+			while(true) {
+				System.out.print(1);
+				break Inner;
+			}
+		}
+	}
+
+	/**
+	 * 外側のループを継続する
+	 */
+	static void OuterContinue() {
+	Outer:
+		while(true) {
+			System.out.print(0);
+			while(true) {
+				System.out.print(1);
+				continue Outer;
+			}
+		}
+	}
+}
+
+class C {
+	/**
+	 * ラベル付ループを処理する
+	 * @param Code 分岐値
+	 */
+	void F(final int Code) {
+	Search:
+		for(int I = 0; I < 10; ++I) switch(Code) {
+		case 1:
+			break Search;
+		default:
+			break;
+		}
+		// 終了
+		return;
+	}
+}

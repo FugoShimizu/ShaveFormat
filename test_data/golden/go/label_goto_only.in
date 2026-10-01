@@ -1,0 +1,44 @@
+package p
+
+func F() {
+Outer:
+	for {
+	Inner:
+		for {
+			break Outer
+		}
+		goto Inner
+	}
+}
+
+// F は x を用いてラベル付ループを処理する
+func F(x int) {
+	Search:
+	for i := 0; i < 10; i++ {
+		switch x {
+		case 1:
+			break Search
+		}
+	}
+}
+
+// F は n を用いてラベル付ループを処理する
+func F(n int) {
+Retry:
+	for i := 0; i < 3; i++ {
+		if n < 2 {
+			goto Retry
+		}
+	}
+}
+
+// F はラベルに続くループを処理する
+func F() {
+Done:
+	x := 1
+	for i := 0; i < 3; i++ {
+		_ = x
+	}
+	_ = x
+	goto Done
+}

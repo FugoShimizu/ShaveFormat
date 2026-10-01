@@ -1,0 +1,42 @@
+class Calc {
+	/**
+	 * <summary>足す</summary>
+	 * <param name="a"></param>
+	 * <param name="b"></param>
+	 * <param name="old">古い</param>
+	 * <returns></returns>
+	 */
+	int Add(int a, int b) {
+		return a + b;
+	}
+
+	/**
+	 * <inheritdoc/>
+	 */
+	public override string ToString() {
+		return "";
+	}
+
+	/**
+	 * <summary></summary>
+	 * <returns></returns>
+	 */
+	async System.Threading.Tasks.Task<int> LoadAsync() {
+		return await System.Threading.Tasks.Task.FromResult(1);
+	}
+
+	/**
+	 * <summary></summary>
+	 * <param name="n"></param>
+	 */
+	async System.Threading.Tasks.Task RunAsync(int n) {
+		await System.Threading.Tasks.Task.Delay(n);
+		return;
+	}
+
+	/**
+	 * <summary></summary>
+	 * <param name="seed"></param>
+	 */
+	Calc(int seed) {}
+}

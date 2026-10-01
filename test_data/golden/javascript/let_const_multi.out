@@ -1,0 +1,58 @@
+/**
+ *
+ * @return
+ */
+export function g() {
+	const p = 1, q = 2, r = 3, s = 4;
+	let t = 5;
+	const u = 6;
+	++t;
+	return p + q + r + s + t + u;
+}
+
+/**
+ *
+ * @param r
+ * @return
+ */
+export function h(r) {
+	let { a, b } = r;
+	const p = f(r), q = 1;
+	a = 2;
+	return a + b + p + q;
+}
+
+/**
+ *
+ * @param r
+ * @return
+ */
+export function k(r) {
+	let [x, ...y] = r;
+	return x + y;
+}
+
+/**
+ *
+ * @param m
+ */
+export function m(m) {
+	for(let [k, v] of m) {
+		v = v + 1;
+		g(k, v);
+	}
+	for(let [k, v] of m) g(k, v);
+	for(let { x } of m) x = 2;
+	return;
+}
+
+/**
+ *
+ * @return
+ */
+export function View() {
+	const fixed = 1;
+	let changed = 2;
+	++changed;
+	return <span>{fixed + changed}</span>;
+}

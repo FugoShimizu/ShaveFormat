@@ -1,0 +1,16 @@
+/**
+ *
+ * @param list
+ */
+fun foo(list: List<Int>) {
+	// CA
+	// CB
+	list.map {
+		it * 2
+	}
+	return
+}
+
+// p
+// q
+val x = obj as String

@@ -1,0 +1,13 @@
+const a = 1;
+
+const b = `x
+y
+z`;
+
+/**
+ *
+ * @return
+ */
+function f() {
+	return a;
+}

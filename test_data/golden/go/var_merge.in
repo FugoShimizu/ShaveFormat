@@ -1,0 +1,12 @@
+package p
+
+// f 変数の統合
+func f() {
+	// 先頭
+	var a int
+	var b int // 二番目
+	var c, d int
+	var e, g string
+	var h = 1
+	use(a, b, c, d, e, g, h)
+}

@@ -1,0 +1,4 @@
+var a = 1, g = function(x) {
+	// step 1
+	return x; // ret
+};

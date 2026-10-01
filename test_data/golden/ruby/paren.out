@@ -1,0 +1,69 @@
+g(a / (b * c))
+g(a % (b * c))
+g(a * (b % c))
+g(a - (b + c))
+g(a - (b - c))
+g(a - b * c)
+g(a * (b + c))
+g(a + b - c)
+g(a * b % c)
+g(a - (b + c) * d)
+g(a / (b * c))
+g(a + b)
+g(a & (b < c))
+g(a | (b == c))
+g(a < b + c)
+g(a + (b < c))
+g(a < b < c)
+g(a < (b < c))
+g(a & (b == c))
+g(a & b < c)
+g(a && (b || c))
+g(a || b && c)
+g(a && (b && c))
+g(a || (b || c))
+g(a && b && c)
+g(a && (b || c) || d)
+g(a && b || c)
+g((a ** b) ** c)
+g(a ** b ** c)
+g(a ** (b * c))
+g((a * b) ** c)
+g(a * b ** c)
+g(a ** b * c)
+g(a ** b ** c)
+g((a - b).to_s)
+g((a + b)[0])
+g((a - b).abs.to_s)
+g((a && b).to_s)
+g(a.b)
+
+x = (1..)
+y = 2
+z = -(2).abs
+w = (a + b) * c
+x = a.b[0]
+y = (a.b 1)[0]
+
+x = a and b
+y = a or b
+
+e = (x, y = h)
+s = (1 | 4) & 4
+d = 2 + 3
+a = 1
+b = 2
+total = a + b
+
+p total
+
+x = a ? (f 1) : c
+y = 1 + 2
+z = f(1)
+a = true
+b = 1
+c = 2
+x = a ? b : c
+y = a ? 1 : 2
+z = a.abs ? 1 : 2
+w = a.b ? x : y

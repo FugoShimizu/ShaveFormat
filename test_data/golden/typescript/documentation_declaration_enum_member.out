@@ -1,0 +1,11 @@
+enum Color {
+	/** 赤 */
+	RedColorValue,
+	GreenColorValue,
+	BlueColorValue,
+	YellowColorValue,
+	BlackColorValue,
+	WhiteColorValue,
+	PurpleColorValue,
+	OrangeColorValue
+}

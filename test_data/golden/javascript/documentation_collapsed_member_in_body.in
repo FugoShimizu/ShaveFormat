@@ -1,0 +1,12 @@
+/**
+ * 生成する
+ * @return 生成物
+ */
+function make() {
+	const o = {
+		/** 値 */
+		a: 1
+	};
+	// 生成物の返戻
+	return o;
+}

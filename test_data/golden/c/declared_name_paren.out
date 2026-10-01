@@ -1,0 +1,38 @@
+#define MAX 10
+
+static const int M = 3;
+
+enum { N = 4 };
+
+/**
+ *
+ * @param X
+ * @return
+ */
+int f(int X) {
+	return X % 2;
+}
+
+/**
+ *
+ * @return
+ */
+int g(void) {
+	return M / 3 + N % 2;
+}
+
+/**
+ *
+ * @return
+ */
+int h(void) {
+	return MAX;
+}
+
+/**
+ *
+ * @return
+ */
+int k(void) {
+	return (MAX) / 2 + (N) * 2;
+}

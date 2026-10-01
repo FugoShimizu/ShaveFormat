@@ -1,0 +1,9 @@
+let
+a = 1,
+b = 2;
+let // c
+/* d */ e = 3;
+let
+{ f } = { f: 4 };
+console.log(a, b, e, f);
+const g = () => (({ id: 1 }));

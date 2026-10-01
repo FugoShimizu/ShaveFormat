@@ -1,0 +1,9 @@
+fn h() -> i32 { 5 }
+fn f(x: i32) -> i32 {
+    ({ x }) & 1
+}
+fn g() -> i32 {
+    let v = (unsafe { h() }) + 1;
+    (loop { break 3 }) + v
+}
+fn main() { println!("{} {}", f(3), g()); }

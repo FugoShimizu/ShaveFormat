@@ -1,0 +1,46 @@
+/**
+ *
+ * @param c
+ * @param a
+ * @param b
+ * @return
+ */
+fun f(c: Boolean, a: Int, b: Int): Int {
+	val y = if(c) 1
+	else 0
+	g(
+		if(c) 1
+		else 0
+	)
+	val z = (
+		if(c) 1
+		else 0
+	) + 1
+	val s = a + b
+	return when(c) {
+		true -> 1
+		else -> 0
+	}
+}
+
+/**
+ *
+ * @param cond
+ * @param alpha
+ * @param beta
+ * @return
+ */
+fun compute(cond: Boolean, alpha: Int, beta: Int): Int {
+	val total = if(cond) 1
+	else 0
+	val mixed = alpha + (
+		if(cond) 1
+		else 0
+	) + beta
+	foo(
+		if(cond) 1
+		else 0
+	)
+	if(cond) return total
+	else return mixed
+}

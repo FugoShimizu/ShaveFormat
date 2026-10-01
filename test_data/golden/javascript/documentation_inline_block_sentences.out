@@ -1,0 +1,8 @@
+/**
+ *
+ * @param x
+ * @return
+ */
+function f(x) {
+	return /* First */ /* Second */ x;
+}

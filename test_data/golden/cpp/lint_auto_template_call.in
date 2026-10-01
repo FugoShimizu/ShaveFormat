@@ -1,0 +1,10 @@
+#include <memory>
+/**
+ * 値を返す
+ * @return 値
+ */
+int F() {
+	auto P = std::make_shared<int>(1);
+	// 値の返戻
+	return *P;
+}

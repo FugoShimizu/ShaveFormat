@@ -1,0 +1,13 @@
+void f(int x) {
+	for (;;) /* forever */ {
+		a();
+		b();
+	}
+	while (x) /* w */ {
+		a();
+	}
+	if (x) /* i */ {
+		a();
+		b();
+	}
+}

@@ -1,0 +1,11 @@
+def f(a: int) -> int:
+	""""""
+	return a
+
+def g(a: int) -> int:
+	"""   """
+	return a
+
+def h(a: int) -> int:
+	"""概要"""
+	return a

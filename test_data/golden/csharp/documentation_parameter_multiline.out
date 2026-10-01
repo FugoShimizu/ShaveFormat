@@ -1,0 +1,11 @@
+class A {
+	/**
+	 * <summary>足す</summary>
+	 * <param
+	 * name="a">値</param>
+	 * <returns>結果</returns>
+	 */
+	public int Add(int a) {
+		return a;
+	}
+}

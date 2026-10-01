@@ -1,0 +1,17 @@
+class Box<T> {
+	v?: T;
+}
+const a = (x) => x;
+const b = (x: number) => x;
+const c = <T>(x: T) => x;
+const d = (x): number => x;
+const e = (x?) => x;
+const f = (x = 1) => x;
+const g = (...x) => x;
+const h = ({ x }) => x;
+const k = new Box<number>();
+const m = new Box();
+const n = new Box()!;
+const p = new Box() as Box<number>;
+const q = (new Box()) < (new Box());
+console.log(a(1), b(2), c(3), d(4), e(5), f(), g(6), h({ x: 7 }), k.v, m.v, n.v, p.v, q);

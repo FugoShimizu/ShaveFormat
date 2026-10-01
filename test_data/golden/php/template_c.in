@@ -1,0 +1,7 @@
+<?php if (true): ?>A<?php endif; ?>B
+<?php
+for ($i = 0; $i < 2; $i++):
+    ?><span><?= $i ?></span><?php
+endfor;
+?>
+C

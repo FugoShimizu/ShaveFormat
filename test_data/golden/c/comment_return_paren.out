@@ -1,0 +1,10 @@
+/**
+ *
+ * @param a
+ * @param b
+ * @return
+ */
+int f(int a, int b) {
+	int c = 1; // i
+	return a + b; // 和
+}

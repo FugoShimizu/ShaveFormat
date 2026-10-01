@@ -1,0 +1,27 @@
+# Para
+#
+# code1
+# code2
+# @param x
+# @return
+def f(x)
+	return x
+end
+
+# Para
+# a = b
+#
+# Tail
+# @param x
+# @return
+def g(x)
+	return x
+end
+
+# a
+# b
+# @param x
+# @return
+def h(x)
+	return x
+end

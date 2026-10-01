@@ -1,0 +1,16 @@
+class C {
+	public init(options: WritingOptions = []) {
+		self.options = options
+	}
+	public init(items: [Int] = [1, 2, 3]) {
+		self.items = items
+	}
+}
+
+struct Config {
+	init(origin: (Int, Int) = (0, 0)) {}
+}
+
+enum Kind {
+	case entry(_ meta: [String: String] = [:])
+}

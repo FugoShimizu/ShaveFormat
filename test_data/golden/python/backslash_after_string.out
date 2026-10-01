@@ -1,0 +1,6 @@
+def f():
+	for s in "a", "b", "c", "d":
+		g(s)
+	y = "a", "b"
+	x = 1 + 2
+	return

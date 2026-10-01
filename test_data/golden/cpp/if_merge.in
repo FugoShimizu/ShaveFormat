@@ -1,0 +1,154 @@
+// === rule_if_merge_and ===
+int F(const int A, const int B, const int C) {
+	if(A) if(B) return 1;
+	if(A) if(B) if(C) return 2;
+	if(A) if(B || C) return 3;
+	return 0;
+}
+
+// === rule_if_merge_comments ===
+int F(const int A, const int B, const int C) {
+	// outer-A
+	if(A)
+		// inner-B
+		if(B)
+			// before-return
+			return 1;
+	// before-or-1
+	if(A) return 0;
+	// before-or-2
+	if(B) return 0;
+	// before-or-3
+	if(C) return 0;
+	// tail
+	return 9;
+}
+
+// === rule_if_merge_exit ===
+void F(const int A, const int B, const int C) {
+	for(int I = 0; I < 10; ++I) {
+		if(A) continue;
+		if(B) continue;
+		if(C) break;
+		if(A > 0) break;
+		if(I == 0) goto Done;
+		if(I == 1) goto Done;
+	}
+	if(A) goto Done;
+	if(B) goto Other;
+	return;
+Done:
+	return;
+Other:
+	return;
+}
+
+// === rule_if_merge_init ===
+int F(const int A, const int B) {
+	if(int X = 0; X) if(A) return 1;
+	if(int Y = A; Y) if(B) if(Y > 0) return 2;
+	if(A) if(B) if(int Z = 0; Z) return 3;
+	return 0;
+}
+
+// === rule_if_merge_or_return ===
+int F(const int A, const int B, const int C, const int D) {
+	if(A) return 1;
+	if(B) return 1;
+	if(C) return 1;
+	if(D) return 1;
+	if(A) return 2;
+	if(B) return 3;
+	if(A || B) return 4;
+	if(C) return 4;
+	return 0;
+}
+
+// === rule_if_merge_reject ===
+int F(const int A, const int B, const int C) {
+	if(A) if(int X = 1; X) return 1;
+	if(int Y = 0; Y) if(A) return 1;
+	if(A) if(B) return 1;
+	else return 2;
+	if(A) {
+		if(B) return 3;
+		if(C) return 4;
+	}
+	if(int Z = 0; Z) return 0;
+	if(A) return 0;
+	if(B) return 0;
+	if(A) return 4;
+	if(B) return 5;
+	return 0;
+}
+
+// === rule_if_merge_sideeffect ===
+int F() {
+	int A = 0, B = 0;
+	if(A++) if(B) return 1;
+	if(A) if(A++) return 2;
+	if(A++) return 3;
+	if(B) return 3;
+	if(A++) return 4;
+	if(A) return 4;
+	return 0;
+}
+
+#include <typeinfo>
+int Count = 0;
+void Static(bool Flag) { if(Flag) { static const int X = ++Count; } else if(!Flag) { static const int X = ++Count; } }
+const std::type_info &Type(bool Flag) { if(Flag) { return typeid([]{}); } else if(!Flag) { return typeid([]{}); } return typeid(Flag); }
+int Nested(int Value) { if(Value == 1) return [] { static int N = 0; return ++N; }(); if(Value == 2) return [] { static int N = 0; return ++N; }(); return 0; }
+
+int Outer(int A, bool B) { if(int X = A) if(B) return X; return 0; }
+
+int Inner(int A, bool B) { if(B) if(int X{A}) return X; return 0; }
+
+int Siblings(int A, int B) { if(int X = A) return X; if(int X = B) return X; return 0; }
+
+int Alternatives(int A, int B) { if(int X = A) return X; else if(int X = B) return X; return 0; }
+
+int Inside(int A, bool B, bool C) { if(int X = A) if(B) if(C) return X; return 0; }
+
+int Initialized(int A, bool B) { if(int X = A; X) if(B) return X; return 0; }
+
+#include <type_traits>
+
+template<class T> int Outer() { if constexpr(false) if(T::Missing) return 1; return 0; }
+
+template<class T> int Inner(bool B) { if(B) if constexpr(false) return T::Missing; return 0; }
+
+template<class T> int Siblings() { if constexpr(false) return T::Missing; if constexpr(false) return T::Missing; return 0; }
+
+template<class T> int Alternatives() { if constexpr(false) return T::Missing; else if constexpr(false) return T::Missing; return 0; }
+
+int Inside(bool A, bool B) { if constexpr(true) if(A) if(B) return 1; return 0; }
+
+int Evaluation() { if constexpr(std::is_constant_evaluated()) if(true) return 1; return 0; }
+
+#include "binding.hpp"
+int External(int x) { { BIND(); if(x) { if(x) return 1; } } return 0; }
+int Included(int x) { {
+#include "binding.inc"
+if(x) { if(x) return 1; } } return 0; }
+
+#define BIND() Flag x
+#define BOUND Flag x
+int Function(int x) { { BIND(); if(x) { if(x) return 1; } } return 0; }
+int Object(int x) { { BOUND; if(x) { if(x) return 1; } } return 0; }
+
+int siblings(volatile int *p) { if(*p) return 1; if(*p) return 1; return 0; }
+int alternatives(volatile int *p) { if(*p) return 1; else if(*p) return 1; return 0; }
+int literal(void) { if(0) return 1; if(0) return 1; return 0; }
+
+int siblings(Flag x, Flag y) { if(x) return 1; if(y) return 1; return 0; }
+int alternatives(Flag x, Flag y) { if(x) return 1; else if(y) return 1; return 0; }
+int nested(Flag x, Flag y) { if(x) { if(y) return 1; } return 0; }
+int shadowed(int x) { { Flag x; if(x) { if(x) return 1; } } return 0; }
+int temporary() { if(MakeFlag()) return 1; if(Released()) return 1; return 0; }
+namespace Names { using size_t = Flag; int alias(size_t x, size_t y) { if(x) return 1; if(y) return 1; return 0; } }
+int unicode(int é) { { Flag \u00E9; if(é) { if(é) return 1; } } return 0; }
+int local_class(int x) { struct Local { Flag x; int y = [this] { if(x) { if(x) return 1; } return 0; }(); }; return Local{}.y; }
+int paren_decl(int x) { { Flag(x); if(x) { if(x) return 1; } } return 0; }
+namespace Enums { enum E { x = 1 }; bool operator&&(E, E) { return false; } int imported(int x) { { using enum E; if(x) { if(x) return 1; } } return 0; } }
+int anonymous_union(int x) { { union { Flag x {}; }; if(x) { if(x) return 1; } } return 0; }

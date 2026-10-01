@@ -1,0 +1,9 @@
+5:5: Violation: Function is missing an explicit trailing return
+24:4: Review: Replace this jump with structured control flow; verify applicability, lifetime
+77:1: Violation: Documentation is missing a summary
+81:5: Review: Use PascalCase for function f; verify external contract
+81:5: Review: Add an explicit return type to this function; verify type, external contract
+81:7: Violation: Documentation is missing a description for parameter 'xs'
+86:2: Violation: Add the required comment before this `return`
+92:5: Review: Add an explicit return type to this function; verify type, external contract
+93:32: Review: Replace this jump with structured control flow; verify applicability, lifetime

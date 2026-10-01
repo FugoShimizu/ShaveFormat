@@ -1,0 +1,28 @@
+// === rule_docgen_generate ===
+function add(a, b) {
+	return a + b;
+}
+
+function logMessage(message) {
+	console.log(message);
+}
+
+class Widget {
+	constructor(id) {
+		this.id = id;
+	}
+	find(key) {
+		return this.lookup(key);
+	}
+}
+
+// === rule_docgen_reconcile ===
+/**
+ * 合計を求める
+ * @param a 第一項
+ * @param obsolete 余分な引数
+ * @returns 合計
+ */
+function total(a, b, c) {
+	return a + b + c;
+}

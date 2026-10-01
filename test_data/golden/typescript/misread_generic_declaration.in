@@ -1,0 +1,2 @@
+const d = f<typeof import("x"), B>(y);
+const q = 1, e = f<typeof import("x"), B>(y);

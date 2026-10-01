@@ -1,0 +1,7 @@
+f(a < b, c >> d);
+
+const v = [a < b, c >>= d];
+const w = (a < b, c >>> d);
+const r = f<typeof import("x")>("y");
+const s = f<typeof import("x")>(y)(z);
+const t = f<typeof import("x")>("y").z;

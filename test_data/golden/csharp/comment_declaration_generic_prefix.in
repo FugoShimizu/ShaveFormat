@@ -1,0 +1,7 @@
+class C {
+	void F() {
+		List</* c */int> a = null;
+		List</* d */int> b = null;
+		System.Console.WriteLine(a == b);
+	}
+}

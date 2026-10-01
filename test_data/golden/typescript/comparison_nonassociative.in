@@ -1,0 +1,12 @@
+const result = (alpha < bravo) > (charlie);
+const sequence = (alpha < bravo) > (charlie, delta);
+const logical = (alpha < bravo) > (charlie || delta);
+const tagged = (alpha < bravo) > `text`;
+const reversed = (alpha > bravo) > charlie;
+x = (alphaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa < bravooooooooooooooooooooooooooooooooooooooooooooooo) > charlieeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee;
+y = (alpha < bravo) > -charlie;
+z = (alpha < bravo) > [charlie];
+({ a } = obj);
+const g = (x << 2) < 3;
+const x = (a ?? b)<string>;
+const y = (a || b)<T>;

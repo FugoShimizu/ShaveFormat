@@ -1,0 +1,53 @@
+package p
+
+// line	bar.go:20
+func a() {}
+// export	Foo
+func b() {}
+// c
+//line
+func c() {}
+
+var x = f() // nolint:errcheck
+
+// Doc は文書
+//go:noinline
+func d() {}
+
+// go:Embed x
+var e string
+
+// x:Y
+func g() {}
+// nolint:errcheck // 理由，です
+func h() {}
+// goCallback
+//export goCallback
+func goCallback() {}
+//extern sqrt
+func sqrt(x float64) float64
+//go:noescape
+func noescape()
+// nolint
+func lint1() {}
+// nolint:errcheck
+func lint2() {}
+// lined
+//line gen.go:7
+func lined() {}
+// comment
+func normal() {}
+
+// go:noinline
+func b() int {
+	return 2
+}
+
+// c
+//go:noinline
+func c() int {
+	return 3
+}
+
+//go:linkname mt runtime.nanotime
+func mt() int64

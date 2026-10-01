@@ -1,0 +1,15 @@
+for(const x of xs) {
+	a();
+	b();
+} // c
+
+next();
+
+if(x) a(); // d
+
+class A {
+	/**
+	 *
+	 */
+	m() {}
+} // e

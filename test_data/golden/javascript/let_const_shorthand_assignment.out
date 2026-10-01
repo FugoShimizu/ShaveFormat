@@ -1,0 +1,6 @@
+{
+	let b = 1;
+	({ b } = o);
+	const c = 3;
+	console.log(b, c);
+}

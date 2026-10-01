@@ -1,0 +1,12 @@
+#define PTR char *
+
+/**
+ *
+ */
+void f(void) {
+	PTR a;
+	PTR b;
+	PTR const q = 0;
+	static const int s = 1;
+	return;
+}

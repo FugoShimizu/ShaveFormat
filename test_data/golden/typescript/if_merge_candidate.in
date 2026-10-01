@@ -1,0 +1,85 @@
+/**
+ * 統合候補関数
+ * @param isFirst 第一条件
+ * @param isSecond 第二条件
+ */
+function merge(isFirst: boolean, isSecond: boolean): void {
+	while(true) {
+		if(isFirst) break;
+		if(isSecond) break;
+		break;
+	}
+	// 終了
+	return;
+}
+
+/**
+ * 条件内で書換える関数
+ * @param x 条件値
+ * @returns 結果
+ */
+function conditionWrite(x) {
+	// 結果
+	if(x) return 1;
+	// 結果
+	if((x = true) && false) return 1;
+	// 結果
+	if(x) return 1;
+	// 結果
+	return 0;
+}
+
+/**
+ * 観測される読取を重ねる関数
+ * @param o 対象
+ * @returns 結果
+ */
+function siblings(o) {
+	// 結果
+	if(o.x) return 1;
+	// 結果
+	if(o.x) return 1;
+	// 結果
+	return 0;
+}
+
+/**
+ * 観測される読取を分岐で重ねる関数
+ * @param o 対象
+ * @returns 結果
+ */
+function alternatives(o) {
+	// 結果
+	if(o.x) return 1;
+	// 結果
+	else if(o.x) return 1;
+	// 結果
+	return 0;
+}
+
+/**
+ * 定数条件を重ねる関数
+ * @returns 結果
+ */
+function literal() {
+	// 結果
+	if(false) return 1;
+	// 結果
+	if(false) return 1;
+	// 結果
+	return 0;
+}
+
+/**
+ * 値の検査関数
+ * @param value 検査対象
+ * @param index 位置
+ */
+function check(value: unknown, index: number) {
+	// 未設定の場合の打切
+	if(value == null) return;
+	// 位置が外れる場合の打切
+	if(index == -1) return;
+	// 終了
+	return;
+}

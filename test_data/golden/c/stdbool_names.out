@@ -1,0 +1,12 @@
+#include <stdbool.h>
+
+/**
+ * 回す
+ */
+void f(void) {
+	bool b = true;
+	_Bool c = false;
+	int d = 1;
+	while(true) g(b, c, d);
+	while(true) h();
+}

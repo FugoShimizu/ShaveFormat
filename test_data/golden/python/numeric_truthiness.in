@@ -1,0 +1,6 @@
+def f(n, flag):
+	if n == 0:
+		return 1
+	if n != 0:
+		flag = not flag
+	return flag

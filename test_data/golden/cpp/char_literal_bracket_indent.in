@@ -1,0 +1,12 @@
+int Compute(const int Flag) {
+#define OPEN '('
+#define QUOTE '"'
+	if(Flag) {
+		const int Limit = 1'000;
+		const char Open = '(';
+		const char *Raw = R"(say "hi)";
+		Use(Limit, Open, Raw);
+		return Limit;
+	}
+	return 0;
+}

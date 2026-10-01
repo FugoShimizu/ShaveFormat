@@ -1,0 +1,5 @@
+match p:
+    case {"k": v, **rest}:
+        pass
+    case [1, *tail]:
+        pass

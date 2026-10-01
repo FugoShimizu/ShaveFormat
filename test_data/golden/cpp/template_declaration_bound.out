@@ -1,0 +1,14 @@
+namespace a {
+	template<class T> struct v {};
+}
+
+struct s {};
+
+/**
+ * 作る
+ */
+void F() {
+	a::v<a::v<a::v<s>>> M;
+	G(M);
+	return;
+}

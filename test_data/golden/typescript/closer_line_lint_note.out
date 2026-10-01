@@ -1,0 +1,64 @@
+declare function h(n: number): void;
+declare function g(a: number, b?: number): void;
+declare const s: string;
+declare let c: boolean;
+declare let n: number;
+
+/**
+ *
+ */
+function a(): void {}
+
+/**
+ *
+ */
+export function t1(): void {
+	while(c) a();
+	// @ts-ignore
+	h(s);
+	return;
+}
+
+/**
+ *
+ */
+export function t2(): void {
+	g(1); // @ts-ignore
+	h(s);
+	return;
+}
+
+/**
+ *
+ */
+export function t3(): void {
+	while(n--) h("1"); // @ts-expect-error
+	return;
+}
+
+/**
+ *
+ */
+export function t4(): void {
+	const x1 = 1; // @ts-expect-error
+	/**
+	 *
+	 * @param a
+	 */
+	function k(a: number = "s"): void {}
+	k(x1);
+	return;
+}
+
+/**
+ *
+ */
+export function t5(): void {
+	/**
+	 * @ts-expect-error
+	 * @param a
+	 */
+	function k2(a: number = "s"): void {}
+	k2(1);
+	return;
+}

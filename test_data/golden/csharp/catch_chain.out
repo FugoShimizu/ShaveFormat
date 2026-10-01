@@ -1,0 +1,9 @@
+try {
+	Open(path);
+} catch(ArgumentException e) {
+	Report(e);
+} catch(IOException e) {
+	Log(e);
+} finally {
+	Close();
+}

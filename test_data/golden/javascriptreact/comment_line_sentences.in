@@ -1,0 +1,7 @@
+const A = () => (
+	<div>
+		{// line comment. Two.
+		}
+		<b>x</b>
+	</div>
+);

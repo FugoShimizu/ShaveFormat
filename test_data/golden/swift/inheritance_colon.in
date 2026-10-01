@@ -1,0 +1,13 @@
+protocol Root{}
+protocol Derived:Root{}
+protocol ObjectOnly:AnyObject,Derived{}
+protocol Box{associatedtype Item:Equatable}
+class Base{}
+class Child:Base,ObjectOnly{}
+struct Value:Derived{}
+enum Choice:Int,Root{case first=1}
+extension Value:Equatable{}
+/// a と b を比較し，一致する場合に真を返す．
+func same<T:Equatable>(_ a:T,_ b:T)->Bool{return a==b}
+/// a と b を比較し，一致する場合に真を返す．
+func matches<T>(_ a:T,_ b:T)->Bool where T:Equatable{return a==b}

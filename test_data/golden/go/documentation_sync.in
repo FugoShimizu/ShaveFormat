@@ -1,0 +1,13 @@
+package p
+
+// Existing は既存の文書を持つ
+func Existing() {}
+
+//go:noinline
+func Hot(a int) int {
+	return a
+}
+
+type T struct{}
+
+func (t T) Method() {}

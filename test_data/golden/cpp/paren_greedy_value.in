@@ -1,0 +1,5 @@
+int main() {
+	auto f = ([](int x) { return x; });
+	int v = ([]() { return 1; })();
+	return f(v);
+}

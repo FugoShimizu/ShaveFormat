@@ -1,0 +1,10 @@
+function f() {
+	a();
+	;
+	/* s2 */ ;
+}
+
+function g() {
+	b();
+	/* s3 */ ;
+}

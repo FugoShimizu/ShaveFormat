@@ -1,0 +1,4 @@
+8:6: Review: Use PascalCase for function f; verify external contract
+12:2: Review: Use an explicit type instead of auto; verify applicability, type
+17:4: Review: Use prefix increment or decrement when the old value is unused; verify type, evaluation
+19:2: Violation: Add the required comment before this `return`

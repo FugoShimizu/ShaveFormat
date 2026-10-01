@@ -1,0 +1,6 @@
+/// 一覧を探す /* 注 */
+/// - Parameter p:
+func f(p: Int) {
+	g(p)
+	return
+}

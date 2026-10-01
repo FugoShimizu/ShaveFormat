@@ -1,0 +1,20 @@
+declare function foo(a: number, b: number): number|null;
+declare const items: { id: number }[];
+
+const v = foo(1, 2)!;
+
+const item = items.find(
+	x => {
+		return x.id === 1;
+	}
+)!;
+
+const w = <any>foo(1, 2);
+const d = (a - b!) / 1000;
+const e = (-a!).x;
+const g = a.b! * 2;
+const nn1 = (mm++)!;
+const nn2 = (a--)!;
+const nn3 = a.b!.c;
+
+g(f < typeof import("x"), B > (y));

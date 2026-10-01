@@ -1,0 +1,10 @@
+<?php
+function f($a, $b, $c, $d, $e, $p) {
+	$x = (($a + $b)) * $c;
+	$y = ($p[$b + $c]) * $a;
+	return $a ? $b : (($c ? $d : $e));
+	// function close
+}
+foreach (($a ?: $b) as $v) { echo $v; }
+foreach (($a) as $k => $v) { echo $k; }
+foreach (($a = $b) as $v) { echo $v; }

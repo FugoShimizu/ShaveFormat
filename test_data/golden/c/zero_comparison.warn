@@ -1,0 +1,6 @@
+7:5: Review: Describe the termination or returned value in the return comment; verify documentation, intent
+8:7: Review: Use the zero-test form required for this numeric type; verify type, value range
+10:10: Review: Use the zero-test form required for this numeric type; verify type, value range
+12:12: Review: Inline immediately returned variable Flag; verify type, binding, lifetime, intent
+13:5: Review: Describe the termination or returned value in the return comment; verify documentation, intent
+30:12: Review: Inline immediately returned variable Result; verify type, binding, lifetime, intent

@@ -1,0 +1,53 @@
+struct A {
+	/**
+	 * 作る
+	 */
+	A() {
+		x();
+		return;
+	}
+
+	/**
+	 * 壊す
+	 */
+	~A() {
+		y();
+		return;
+	}
+
+	/**
+	 * 変換する
+	 * @return 値
+	 */
+	operator int() {
+		return 1;
+	}
+};
+
+/**
+ * 後置の型で値を返さない
+ */
+auto f() -> void {
+	g();
+	return;
+}
+
+/**
+ * 戻らない
+ */
+[[noreturn]] void h() {
+	while(true) {}
+}
+
+/**
+ * 全ての枝で終わる
+ * @param v 値
+ */
+void t(int v) {
+	switch(v) {
+	case 1:
+		return;
+	default:
+		throw 1;
+	}
+}

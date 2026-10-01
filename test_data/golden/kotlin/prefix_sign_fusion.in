@@ -1,0 +1,3 @@
+fun f(a: Int, b: Boolean): Boolean {
+	return - -a > 0 && ! !b
+}

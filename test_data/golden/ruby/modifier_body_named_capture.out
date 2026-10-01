@@ -1,0 +1,9 @@
+#
+# @param s
+# @return
+def f(s)
+	if z then /(?'z'a)/ =~ s end
+	if 名 then /(?<名>a)/ =~ s end
+	/(?'k'a)/ =~ s if r
+	return [z, 名, k]
+end

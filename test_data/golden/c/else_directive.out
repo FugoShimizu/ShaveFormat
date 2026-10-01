@@ -1,0 +1,34 @@
+int f(int a, int b) {
+	if(a) {
+		if(b) return 1;
+	}
+	#if 1
+	else return 2;
+	#endif
+	return 0;
+}
+
+/**
+ *
+ * @param a
+ * @param b
+ * @return
+ */
+int g(int a, int b) {
+	int n = 0;
+	if(a) if(b) n = 1;
+	#if 1
+	else n = 2;
+	#endif
+	return n;
+}
+
+void h(int a, int b) {
+	if(a) {
+		if(b) h(0, 0);
+	}
+	#if 0
+	x();
+	#endif
+	else h(1, 1);
+}

@@ -1,0 +1,3 @@
+int a = __LINE__;
+int b =
+	__LINE__;

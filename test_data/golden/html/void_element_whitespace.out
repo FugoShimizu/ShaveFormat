@@ -1,0 +1,16 @@
+<div>
+	<p>
+		a<br>b
+		<i>c</i>
+	</p>
+	<p>
+		line1<br> line2
+		<b>x</b><br> tail
+	</p>
+	<pre>a<br>  b  
+  c</pre>
+	<p>x<img src="a.png"> y</p>
+</div>
+<p>hello world <meta name="m" content="c">hello world</p>
+<p>a <link rel="x">b</p>
+<p>a<meta name="m">b</p>

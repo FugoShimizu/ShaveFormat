@@ -1,0 +1,43 @@
+/**
+ *
+ * - Returns:
+ */
+@Builder func decorated() -> Int {
+	1
+}
+
+struct Conforming : P {
+	/**
+	 *
+	 * - Returns:
+	 */
+	func required() -> Int {
+		2
+	}
+}
+
+extension Conforming {
+	/**
+	 *
+	 * - Returns:
+	 */
+	func extended() -> Int {
+		3
+	}
+}
+
+struct Plain {
+	var property: Int {
+		4
+	}
+}
+
+@Tag struct DecoratedType {
+	/**
+	 *
+	 * - Returns:
+	 */
+	func value() -> Int {
+		6
+	}
+}

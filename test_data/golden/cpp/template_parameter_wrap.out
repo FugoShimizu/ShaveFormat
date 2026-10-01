@@ -1,0 +1,3 @@
+template<typename TVeryLongTypeParameterNameHere> class SomeExtremelyLongClassNameForTesting : public AbstractBaseClassWithName<TVeryLongTypeParameterNameHere> {
+	int memberField;
+};

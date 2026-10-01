@@ -1,0 +1,21 @@
+<?php
+
+if($c):
+// e4
+else:
+	g();
+endif;
+
+if($a):
+	g();
+elseif($b):
+// e7
+else:
+	h();
+endif;
+
+if($d):
+	g();
+else:
+// e8
+endif;

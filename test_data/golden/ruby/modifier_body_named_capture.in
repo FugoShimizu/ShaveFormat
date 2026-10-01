@@ -1,0 +1,12 @@
+def f(s)
+	if z
+		/(?'z'a)/ =~ s
+	end
+	if 名
+		/(?<名>a)/ =~ s
+	end
+	if r
+		/(?'k'a)/ =~ s
+	end
+	return [z, 名, k]
+end

@@ -1,0 +1,11 @@
+/**
+ * A widget
+ * Does things
+ */
+class W {
+	/**
+	 * The count
+	 * Must be positive
+	 */
+	int count;
+}

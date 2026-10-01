@@ -1,0 +1,32 @@
+def load(path):
+    (
+        header,
+        body,
+    ) = read(path)
+    return header
+
+
+def g(y):
+    ( a, b )
+    ( x ) = a
+    for (
+        i
+    ) in y:
+        pass
+    return (y, y,)
+
+
+label = ("off", "on")[enabled]
+print((1, 2)[1])
+d[(1, 2), 3]
+d[(1, 2),]
+d[(1, 2)]
+x = 1, 2,
+a, b, = f()
+for i, j, in k:
+    pass
+single = 1,
+t = (42,)
+lam = lambda a, b,: a
+lam2 = lambda a,: a
+del a, b,

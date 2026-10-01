@@ -1,0 +1,5 @@
+function f() {
+	try { g(); } // t1
+	catch(e) { h(); } // t2
+	finally { k(); }
+}

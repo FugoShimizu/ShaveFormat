@@ -1,0 +1,6 @@
+hex = 0XFF
+exp = 1E5
+oct = 0O17
+a = "x"
+b = "it's \#{y} \\ \\d \"q\" \#@v"
+c = %q(z)

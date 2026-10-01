@@ -1,0 +1,22 @@
+/**
+ * 呼ぶ
+ */
+function f() {
+	a()
+}
+
+/**
+ * 分ける
+ * @param x 値
+ * @returns 値
+ */
+function g(x) {
+	if (x) return 1;
+}
+
+/**
+ * 生成する
+ */
+function* h() {
+	yield 1;
+}

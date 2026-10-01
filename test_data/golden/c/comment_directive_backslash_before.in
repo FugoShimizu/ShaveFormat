@@ -1,0 +1,3 @@
+#define UNUSED_A x\ /* note */
+int g(void) { return 1; }
+int h(void) { return g() + 2; }

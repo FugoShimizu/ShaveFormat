@@ -1,0 +1,54 @@
+/**
+ * 呼ぶ
+ */
+function f(): void {
+	a();
+	return;
+}
+
+class A {
+	/**
+	 * 作る
+	 */
+	constructor() {
+		super();
+		return;
+	}
+
+	/**
+	 * 設定する
+	 * @param x 値
+	 */
+	set v(x) {
+		this._v = x;
+		return;
+	}
+
+	/**
+	 * 生成する
+	 */
+	*gen() {
+		yield 1;
+	}
+}
+
+const l = () => {
+	c();
+};
+
+/**
+ * 待つ
+ */
+async function p(): Promise<void> {
+	await q();
+	return;
+}
+
+/**
+ * 表明する
+ * @param x 値
+ */
+function r(x: unknown): asserts x {
+	check(x);
+	return;
+}

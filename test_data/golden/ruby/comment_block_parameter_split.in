@@ -1,0 +1,9 @@
+class A
+  for_formats(
+    :hash => [Representable::Hash, {"title" => "Wie Es Geht"}, {"title" => "Revolution"}],
+    # :xml => [Representable::XML],
+    # :yaml => [Representable::YAML]
+  ) do |format, mod, input, output|
+    x
+  end
+end

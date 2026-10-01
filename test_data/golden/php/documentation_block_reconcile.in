@@ -1,0 +1,20 @@
+<?php
+
+/**
+ * 取得する
+ * @param int $id 識別子
+ * @param string $name 名前
+ * @return array 結果
+ */
+function fetch(int $id, string $name): array {
+	return [];
+}
+
+/**
+ * 合算する
+ * @param $a 左辺
+ * @param $b 右辺
+ */
+function sum($a, $b) {
+	return $a + $b;
+}

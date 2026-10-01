@@ -1,0 +1,2 @@
+let x = 5, y = 3;
+console.log(typeof (-x), void (-x), -(-x), +(+x), !(!x), y - (-1), -(--y), +(++y));

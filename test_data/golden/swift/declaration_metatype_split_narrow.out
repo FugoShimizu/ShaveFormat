@@ -1,0 +1,9 @@
+/**
+ *
+ */
+func f() {
+	let a: Int.Type = Int.self
+	let b: Int.Type = Int.self
+	print(a, b)
+	return
+}

@@ -1,0 +1,31 @@
+/**
+ *
+ * @param f
+ */
+fun where(
+	f: (Int) -> Boolean = {
+		true
+	}
+) = f(1)
+
+/**
+ *
+ * @param f
+ * @param g
+ */
+fun a(
+	f: () -> Int = {
+		1
+	},
+	g: Int = 2
+) = f() + g
+
+/**
+ *
+ * @param g
+ */
+fun f(
+	g: () -> Int = {
+		1
+	}
+) {}

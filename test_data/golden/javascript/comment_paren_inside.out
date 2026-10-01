@@ -1,0 +1,1 @@
+const x = (/* inside */ a + b /* end */) * 2;

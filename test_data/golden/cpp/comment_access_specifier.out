@@ -1,0 +1,10 @@
+class A {
+public:
+
+	int a;
+
+// before private
+private:
+
+	int b;
+};

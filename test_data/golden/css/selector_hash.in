@@ -1,0 +1,15 @@
+div#main, li#item.active, a #b { color: red; }
+.x { fill: url(#grad1); mask: url(#fade); background: #abcdef url(#fade); }
+a{color:red !IMPORTANT}
+b{x: 5 % 3}
+d { --f: ; --x:; }
+
+@namespace svg url(http://www.w3.org/2000/svg);
+a:not(#cafe) { color: #cafe; }
+.x { @extend #cafe; }
+svg|a { color: red; }
+a[xlink|href] { color: blue; }
+*|b { x: y; }
+.a/**/.b { x: y; }
+.a/* x */ .b { x: y; }
+.a /* x */.b { x: y; }

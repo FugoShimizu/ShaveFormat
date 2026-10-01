@@ -1,0 +1,2 @@
+.b { background: URL(a/*b*/c.png); }
+.d { color: red; }

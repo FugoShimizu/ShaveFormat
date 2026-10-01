@@ -1,0 +1,7 @@
+/**
+ *
+ */
+fun f() {
+	val x = a in b
+	return
+}

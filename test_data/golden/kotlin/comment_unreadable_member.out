@@ -1,0 +1,5 @@
+class C {
+	val b = 1
+	// a
+	/* n */ val c = 2
+}

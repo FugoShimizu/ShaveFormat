@@ -1,0 +1,9 @@
+package p
+
+// f 短い変数宣言の統合
+func f(p int) int {
+	x, y := p + 1, "s" // 文字列
+	z, alphaValueWithLongName, bravoValueWithLongName := x * 2, computeSomethingWithLongName(1), computeSomethingWithLongName(2)
+	charlieValueWithLongName := computeSomethingWithLongName(3)
+	return x + len(y) + z + alphaValueWithLongName + bravoValueWithLongName + charlieValueWithLongName
+}

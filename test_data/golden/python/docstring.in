@@ -1,0 +1,8 @@
+def f(a):
+    f"""Not a docstring {a}"""
+    return a
+
+
+def g():
+    """Doc string.""" "continued"
+    return 1

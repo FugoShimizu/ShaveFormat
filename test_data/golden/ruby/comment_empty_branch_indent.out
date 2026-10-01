@@ -1,0 +1,10 @@
+#
+def f
+	if a
+		b = 1
+		z = 2
+	# Continue
+	elsif c then elsif d
+		b = 2
+	end
+end

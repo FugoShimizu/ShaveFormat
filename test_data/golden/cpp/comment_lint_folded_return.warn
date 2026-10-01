@@ -1,0 +1,3 @@
+6:6: Review: Use boolean-query naming for function F; verify external contract, intent
+7:2: Review: Merge the conditions of these identical branch bodies; verify lifetime
+15:4: Violation: Add the required comment before this `return`

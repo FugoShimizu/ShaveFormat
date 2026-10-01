@@ -1,0 +1,7 @@
+const /* c */ int a = 1;
+const int b = 2;
+
+struct S {
+	const /* e */ int x;
+	const int y;
+};

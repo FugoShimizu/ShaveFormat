@@ -1,0 +1,72 @@
+class Failure {
+	/**
+	 * 値を確かめる
+	 * @param value 値
+	 */
+	void Check(int value) {
+		if(value < 0) throw new IllegalArgumentException("negative");
+		return;
+	}
+
+	/**
+	 * 値を読む
+	 * @param value 値
+	 * @throws IllegalStateException
+	 */
+	void Read(int value) {
+		if(value < 0) throw new IllegalStateException("negative");
+		return;
+	}
+
+	/**
+	 * 捕捉する
+	 * @param value 値
+	 */
+	void Caught(int value) {
+		try {
+			if(value < 0) throw new IllegalArgumentException("negative");
+		} catch(IllegalArgumentException e) {
+			return;
+		}
+		return;
+	}
+
+	/**
+	 * 別の型を捕捉する
+	 * @param value 値
+	 */
+	void Unsure(int value) {
+		try {
+			if(value < 0) throw new IllegalArgumentException("negative");
+		} catch(IllegalStateException e) {
+			return;
+		}
+		return;
+	}
+
+	/**
+	 * 入れ子の関数
+	 * @return 処理
+	 */
+	Runnable Nested() {
+		// 送出する処理の返戻
+		return () -> {
+			throw new IllegalStateException("x");
+		};
+	}
+
+	/**
+	 * 宣言した送出
+	 * @throws java.io.IOException 読めない場合
+	 */
+	void Declared() throws java.io.IOException {
+		return;
+	}
+
+	/**
+	 * 宣言だけの送出
+	 */
+	void DeclaredOnly() throws java.io.IOException {
+		return;
+	}
+}

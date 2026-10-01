@@ -1,0 +1,26 @@
+/**
+ * 計算
+ */
+void Compute(void) {
+	// Read the cache
+	// Return the result
+	// Tolerance is 0.25
+	// See config.json for details
+	// Use e.g. a cache, etc.
+	// Then continue
+	// 1. First item
+	// Visit https://example.com/a.b now
+	// Is it done?
+	// Yes!
+	// Wait... then go
+	// Call f() (see A)
+	// (Then B) now
+	// 「、」と「。」は記号の例
+	Run(/* In */ /* Out */ 1);
+	Stop(); // One // Two
+	Halt(); // Only one
+	return;
+}
+
+int a = 1; // Alpha one // Beta two
+int b = 2; // Gamma three // Delta four

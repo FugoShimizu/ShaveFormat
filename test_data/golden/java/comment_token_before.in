@@ -1,0 +1,8 @@
+class A {
+	int f(B b, int a) {
+		int s = a /* c */ + 1;
+		return b
+			/* z */
+			.baz();
+	}
+}

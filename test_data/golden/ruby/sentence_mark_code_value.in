@@ -1,0 +1,8 @@
+# println! Next step. Done! Continue.
+# defined? Next step. Is it? Done!
+# x! を保持する。本当ですか? 続ける
+# a?.b と != と ?: を保持する。次へ進む
+# `f!()` を保持する。Done! Continue.
+# URL https://example.com/path? を保持する。次へ進む
+# Swift の as/as? の優先度を保つ。次へ進む
+x = 1

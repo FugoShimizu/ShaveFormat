@@ -1,0 +1,14 @@
+/**
+ * 括弧付の更新対象を保持する関数
+ * @returns {number} 更新後の値
+ */
+function countUpdates() {
+	let count = 0;
+	(count) += 2;
+	++(count);
+	(count)++;
+	let values = [count];
+	(values[0])++;
+	// 更新結果の返戻
+	return values[0];
+}

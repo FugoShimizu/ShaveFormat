@@ -1,0 +1,20 @@
+const A = (value: string) => (
+	<div>{
+		value
+		// tail note
+	}</div>
+);
+
+const B = (value: string) => (
+	<div>{
+		// head note
+		value
+	}</div>
+);
+
+const C = (value: string) => (
+	<>{
+		value
+		/* block note */
+	}</>
+);

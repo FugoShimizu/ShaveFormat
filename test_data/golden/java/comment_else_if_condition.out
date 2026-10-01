@@ -1,0 +1,16 @@
+class A {
+	/**
+	 *
+	 */
+	void f() {
+		if(x) {
+			y();
+			v();
+		// c
+		} else if(a && b) {
+			z();
+			w();
+		}
+		return;
+	}
+}

@@ -1,0 +1,17 @@
+/**
+ * 分岐値に応じて処理する
+ * - Parameter code: 分岐値
+ */
+func dispatch(code: Int) {
+	let run = { () -> Void in
+		return
+	}
+	switch code {
+	case 0:
+		run()
+		return
+	default:
+		break
+	}
+	return
+}

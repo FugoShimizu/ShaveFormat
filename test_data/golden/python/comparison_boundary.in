@@ -1,0 +1,12 @@
+def check(x: float, xs: list[int]) -> None:
+	"""境界の比較
+
+	Args:
+		x: 数
+		xs: 列
+	"""
+	if x >= 10:
+		return
+	if len(xs) >= 10:
+		return
+	return

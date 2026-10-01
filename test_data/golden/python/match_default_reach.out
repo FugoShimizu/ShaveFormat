@@ -1,0 +1,20 @@
+def f(x):
+	match x:
+		case 1:
+			return 1
+		case _:
+			return 2
+
+def g(x):
+	match x:
+		case 1:
+			return 1
+		case other:
+			return 2
+
+def h(x):
+	match x:
+		case 1:
+			return 1
+		case _ if x:
+			return 2

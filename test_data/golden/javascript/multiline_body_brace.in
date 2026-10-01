@@ -1,0 +1,5 @@
+function f(a, b) {
+	if(a) if(b) x(); else y();
+	while(a) do x(); while(b);
+	if(a) x(); else do y(); while(b);
+}

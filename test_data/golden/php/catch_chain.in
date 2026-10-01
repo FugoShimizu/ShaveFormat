@@ -1,0 +1,20 @@
+<?php
+/**
+ * 読む
+ * @param string $path 経路
+ */
+function read(string $path): void {
+	try {
+		open_file($path);
+	}
+	catch (InvalidArgumentException $e) {
+		report($e);
+	}
+	catch (RuntimeException $e) {
+		log_error($e);
+	}
+	finally {
+		close_file();
+	}
+	return;
+}

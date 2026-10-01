@@ -1,0 +1,7 @@
+package p
+
+type T struct{}
+
+type U struct {
+	// d
+}

@@ -1,0 +1,24 @@
+.a {
+	background: url(data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg"></svg>);
+	background-image: url(data:image/png;base64,iVBORw0KAA//BBgo=);
+	background: URL(data:image/gif;base64,AAA=);
+	background: url(a.png), url(data:image/gif;base64,BBB=);
+	background: url(http://a.example/x.png);
+	background: url(spaced.png);
+	mask: url(#mask);
+	src: local(My Font), url("fonts/a.woff2") format("woff2");
+	transform: translate(10px, 20px);
+	color: red;
+}
+
+$map: (icon: url(data:image/png;base64,AAA=));
+
+.a {
+	background: url(data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg"></svg>);
+	background: url(//cdn.example/c.png);
+	src: url(data:application/font-woff;charset=utf-8;base64,BBB=) format("woff");
+	background: image-set(url(data:image/png;base64,CCC=) 1x);
+	background: myurl(a; b, c);
+	transform: translate(10px, 20px);
+	color: red;
+}

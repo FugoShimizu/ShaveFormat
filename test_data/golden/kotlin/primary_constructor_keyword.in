@@ -1,0 +1,16 @@
+class A constructor(val x: Int) {
+}
+
+class B @Inject constructor(
+    val y: Int,
+    val z: Int
+) {
+    /**
+     * 空
+     */
+    fun f() {}
+}
+
+class C private constructor(val q: Int)
+
+class D @Inject constructor(val y: Int, val z: Int)

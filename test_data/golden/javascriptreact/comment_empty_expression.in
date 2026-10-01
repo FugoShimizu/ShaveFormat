@@ -1,0 +1,11 @@
+const A = () => (
+	<div>
+		{/* keep */}
+		{
+			// own line
+		}
+		{
+			// before div close
+		}
+	</div>
+);

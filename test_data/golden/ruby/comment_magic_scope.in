@@ -1,0 +1,8 @@
+module M
+  # shareable_constant_value: literal
+  A = [1, 2]
+
+  if $DEBUG
+    puts A
+  end
+end

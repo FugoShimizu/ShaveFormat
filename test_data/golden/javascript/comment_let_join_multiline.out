@@ -1,0 +1,9 @@
+let x = 1 /* a
+ * b */ + 2; // t
+
+console.log(x);
+
+class A {
+	static y = 1 /* c
+	 * d */ + 2; // s
+}

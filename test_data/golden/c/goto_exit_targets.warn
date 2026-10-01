@@ -1,0 +1,4 @@
+23:2: Violation: Add the required comment before this `return`
+31:12: Review: Replace this jump with structured control flow; verify applicability, lifetime
+42:12: Review: Replace this jump with structured control flow; verify applicability, lifetime
+47:2: Violation: Remove the unreachable trailing `return`

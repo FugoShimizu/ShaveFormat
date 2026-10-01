@@ -1,0 +1,3 @@
+<style>
+a::before { content: "\\"; } b::before { content: "/* x、y */"; }
+</style>

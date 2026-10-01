@@ -1,0 +1,15 @@
+const f = (x => x + 1);
+g((y) => y, (z => z));
+const o = { a: (x => x), b: (c ? 1 : 2) };
+const k = (x => x)(1);
+const m = a || (x => x);
+const n = [(x => x)];
+let /* a
+ b */
+x = 1;
+function* g() {
+	yield (x => x);
+	throw (x => x);
+}
+const t = c ? (x => x) : (y => y);
+export default (x => x);

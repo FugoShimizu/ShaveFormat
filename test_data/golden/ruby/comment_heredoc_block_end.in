@@ -1,0 +1,15 @@
+def f
+  puts <<~EOS
+    text
+  EOS
+  # c1
+end
+
+#: (Integer) -> String
+def g(x) = x.to_s
+
+# Doc
+#--
+# hidden
+#++
+def h(y) = y

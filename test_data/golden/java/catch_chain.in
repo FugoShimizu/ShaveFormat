@@ -1,0 +1,21 @@
+class Reader {
+	/**
+	 * 読む
+	 * @param path 経路
+	 */
+	void read(String path) {
+		try {
+			open(path);
+		}
+		catch (IllegalArgumentException e) {
+			report(e);
+		}
+		catch (IllegalStateException e) {
+			log(e);
+		}
+		finally {
+			close();
+		}
+		return;
+	}
+}

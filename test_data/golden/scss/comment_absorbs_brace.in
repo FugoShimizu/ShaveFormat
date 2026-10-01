@@ -1,0 +1,7 @@
+.card {
+	--card-bg: #{$brand};
+	// @deprecated use .panel instead
+	.card__title {
+		color: white;
+	}
+}

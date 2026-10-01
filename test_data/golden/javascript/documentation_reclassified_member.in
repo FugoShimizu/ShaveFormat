@@ -1,0 +1,6 @@
+function g() {
+	return {
+		/** 値 */
+		a: 1,
+	};
+}

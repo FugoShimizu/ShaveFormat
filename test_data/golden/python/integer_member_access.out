@@ -1,0 +1,6 @@
+def f(self):
+	self.assertEqual(6 .__index__(), 6)
+	self.assertEqual(-7 .__index__(), -7)
+	x = 0X10.real + 1E3.real + 1.5.hex().count("0")
+	a = b << c # note
+	return a

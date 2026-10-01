@@ -1,0 +1,13 @@
+def f(a):
+    '概要'
+    return a
+
+
+def g(a):
+    "概要"
+    return a
+
+
+x = '''a"'''
+y = r'''a"'''
+z = '''a"""b'''

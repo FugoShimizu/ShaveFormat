@@ -1,0 +1,13 @@
+package main
+
+/*
+static const char *m(void) { return "あ。い、"; }
+*/
+import "C"
+import "fmt"
+
+// main
+func main() {
+	fmt.Println(C.GoString(C.m()))
+	return
+}

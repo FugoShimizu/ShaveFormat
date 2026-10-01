@@ -1,0 +1,24 @@
+# 足す
+# @param a [Integer]
+# @return [Integer]
+def add(a)
+	return a
+end
+
+# Finds
+# @param a key
+# @return [String] when found
+# @return [nil] when missing
+def find(a)
+	return a
+end
+
+# Adds things
+# @param a first
+# @param x inner
+# @return [Integer] outer
+# @return [Integer] inner
+# @overload add(x)
+def over(a)
+	return a
+end

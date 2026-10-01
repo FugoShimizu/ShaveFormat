@@ -1,0 +1,6 @@
+fn f(c: bool) -> i32 {
+	let y = (if c { 1 } else { 0 });
+	let z = (match c { true => 1, false => 0 });
+	let w = (if c { 1 } else { 0 }) + 1;
+	y + z + w
+}

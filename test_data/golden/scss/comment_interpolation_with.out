@@ -1,0 +1,13 @@
+.subscription-gift-form {
+	--text-secondary: #{$gf-text-muted};
+	// ダークモード基調の global base.scss を流用しないため、テキスト系要素を明示的に黒寄りに上書き
+	input, textarea, select {
+		color: $gf-text;
+	}
+	&__field {
+		margin: 8px;
+	}
+	&--disabled {
+		opacity: 0.5;
+	}
+}

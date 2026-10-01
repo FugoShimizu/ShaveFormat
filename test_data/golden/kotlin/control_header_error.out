@@ -1,0 +1,5 @@
+fun m(r: () -> Unit, x: Boolean) {
+	if(x)(r)() else (r)()
+	while(x)(r)()
+	println(1)
+}

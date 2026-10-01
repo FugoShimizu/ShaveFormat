@@ -1,0 +1,10 @@
+x = bar, foo rescue 1
+
+#
+# @param options
+# @param name
+# @return
+def parse(options, name)
+	opt = options[name] and (options[name] = Integer(opt)) rescue nil
+	return options
+end

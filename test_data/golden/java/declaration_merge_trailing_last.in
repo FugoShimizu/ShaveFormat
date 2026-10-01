@@ -1,0 +1,7 @@
+class A {
+	void f() {
+		int q = 2, r = 3; // c4
+		int s = 4;
+		g(q, r, s);
+	}
+}

@@ -1,0 +1,4 @@
+package p
+
+// path C:\
+var x = 1

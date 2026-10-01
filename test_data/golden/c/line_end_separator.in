@@ -1,0 +1,31 @@
+#include <stdio.h>		// header
+#define LIMIT 10 	 // limit
+#define EMPTY	// empty
+#pragma once	 	// pragma
+/**
+ * 区切りの例
+ */
+void Example(void) {
+	First();// none
+	Second(); 	 // mixed
+	Third();		// two tabs
+	Fourth();	 	 	// three tabs
+	Fifth(1,	/* inline */	2); 	 // after inline
+	Sixth();	// same
+	Sixth();		// same
+		// own line
+	Seventh();	//	tabbed body
+}
+/**
+ * 統合の例
+ */
+void Merge(void) {
+	int first;		// first
+	int second; 	// second
+	int third;
+	Use(first, second, third);
+}
+
+int form_feed_a = 1;
+// own
+int form_feed_c = 3;

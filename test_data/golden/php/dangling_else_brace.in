@@ -1,0 +1,15 @@
+<?php
+if ($a) { if ($b) x(); } elseif ($c) y();
+if ($a) if ($b) x(); else { if ($c) y(); } else z();
+$r = function() {
+	if ($a) if ($b) if ($c) if ($d) { x(); } else if ($e) if ($f) y(); elseif ($g) { z(); } else w(); elseif ($h) v(); else { u(); }
+};
+if ($post) :
+	?>
+	<?php
+	if ( $open ) {
+		$attachment_id;
+	}
+	?>
+<?php
+endif;

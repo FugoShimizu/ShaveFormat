@@ -1,0 +1,9 @@
+/**
+ * 包む
+ * @param T 要素の型
+ * @param value 値
+ * @return 包んだ値
+ */
+fun <T> wrap(value: T): T {
+	return value
+}

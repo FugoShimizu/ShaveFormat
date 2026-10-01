@@ -1,0 +1,15 @@
+("a", "b"),
+
+def f(x):
+	match x:
+		case (0 as z) | (1 as z) if z == x % 2:
+			y = 0
+		case (0 as z) as w:
+			pass
+		case [1 as a, 2 | 3]:
+			pass
+		case 4 | 5 as b:
+			pass
+		case 7:
+			pass
+	return 1, 2

@@ -1,0 +1,13 @@
+1:1: Review: Avoid `using namespace`; qualify names explicitly; verify applicability
+4:2: Violation: Make private: explicit
+5:2: Review: Reorder this member according to its role and dependencies; verify lifetime, external contract
+8:11: Review: Use `constexpr` for this compile-time constant; verify applicability, type, external contract
+10:1: Review: Document the required usage constraints; verify applicability
+10:1: Review: Document the complexity and its input-size measure; verify applicability
+19:9: Review: Replace the C-style cast with the appropriate C++ cast; verify type, value range, intent
+26:2: Review: Reorder this member according to its role and dependencies; verify lifetime, external contract
+61:6: Review: Use getter naming for function Value; verify external contract
+70:7: Review: Use setter naming for function ChangeCount; verify external contract
+77:1: Violation: Document the complexity and its input-size measure
+90:1: Violation: Documentation is missing a summary
+90:5: Violation: Use @return for this documentation item

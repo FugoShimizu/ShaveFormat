@@ -1,0 +1,17 @@
+class C {
+	/**
+	 * <summary></summary>
+	 * <param name="a"></param>
+	 */
+	void F(int a) {
+		if(a > 0) {
+			G();
+			G();
+		// 別の枝の説明
+		} else if(a < -1) {
+			K();
+			K();
+		}
+		return;
+	}
+}

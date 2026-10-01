@@ -1,0 +1,5 @@
+enum E {
+	///<summary>赤</summary>
+	Red,
+	Blue
+}

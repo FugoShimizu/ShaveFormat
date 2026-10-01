@@ -1,0 +1,10 @@
+1:1: Violation: Documentation is missing a summary
+5:16: Violation: Documentation is missing a return-value description
+10:2: Violation: Documentation is missing a summary
+14:2: Violation: Make internal explicit
+14:18: Violation: Documentation is missing a return-value description
+19:1: Violation: Documentation is missing a summary
+23:18: Violation: Documentation is missing a return-value description
+27:1: Violation: Documentation is missing a summary
+31:6: Review: Determine whether the function needs an explicit trailing return; verify type, reachability
+31:27: Violation: Documentation is missing a return-value description

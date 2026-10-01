@@ -1,0 +1,57 @@
+class K {
+	/**
+	 * <summary></summary>
+	 */
+	void H() {
+		g(a / (b * c));
+		g(a % (b * c));
+		g(a * (b % c));
+		g(a - (b + c));
+		g(a - (b - c));
+		g(a - b * c);
+		g(a * (b + c));
+		g(a + b - c);
+		g(a * b % c);
+		g(a - (b + c) * d);
+		g(a / (b * c));
+		g(a + b);
+		g(a & b + c);
+		g(a | b + c);
+		g(a ^ b + c);
+		g(a & b * c);
+		g(a & (b | c));
+		g(a | b & c);
+		g(a << b + c);
+		g(a << (b >> c));
+		g(a + b & c);
+		g(a & b + c);
+		g(a && (b || c));
+		g(a || b && c);
+		g(a && (b && c));
+		g(a || (b || c));
+		g(a && b && c);
+		g(a && (b || c) || d);
+		g(a && b || c);
+		g((a - b).M);
+		g((a - b).M.N);
+		g((d - a) * 2);
+		g((d + a) * 2);
+		g((a ?? b) ?? c);
+		return;
+	}
+}
+
+class A {
+	/**
+	 * <summary></summary>
+	 * <param name="a"></param>
+	 * <param name="b"></param>
+	 * <param name="c"></param>
+	 * <param name="p"></param>
+	 * <returns></returns>
+	 */
+	int F(int a, int b, int c, int[] p) {
+		int x = (a + b) * c, y = p[b + c] * a;
+		return x ?? y;
+	}
+}

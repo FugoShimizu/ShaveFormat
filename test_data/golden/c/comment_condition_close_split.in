@@ -1,0 +1,7 @@
+int f(int a) {
+	if(
+		alphaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa(a) > 1 && bravoooooooooooooooooooooooooooooooooooooooooooooooooo(a) > 2
+		// 条件の閉じの前の注記
+	) return 1;
+	return 0;
+}

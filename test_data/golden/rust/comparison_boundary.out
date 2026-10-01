@@ -1,0 +1,22 @@
+/**
+ * 境界の比較
+ *
+ * # Arguments
+ * * `a` - 符号無の整数
+ * * `b` - 整数
+ */
+fn check(a: u8, b: i64) {
+	if a <= 254 {
+		return;
+	}
+	if a <= 255 {
+		return;
+	}
+	if b >= 0 {
+		return;
+	}
+	if b <= 9u8 as i64 {
+		return;
+	}
+	return;
+}

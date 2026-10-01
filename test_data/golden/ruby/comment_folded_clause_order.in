@@ -1,0 +1,10 @@
+def f(v)
+  if v
+    a
+    # before elsif
+  elsif w
+    b
+    # before end
+  end
+  z
+end

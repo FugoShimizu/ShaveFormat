@@ -1,0 +1,50 @@
+class C {
+	/**
+	 * <summary></summary>
+	 * <param name="a"></param>
+	 * <param name="xs"></param>
+	 */
+	void M(int a, int[] xs) {
+		if(a > 1) A();
+		while(a > 1) --a;
+		switch(a) {
+		default:
+			break;
+		}
+		foreach(var x in xs) A();
+		var v = xs[a];
+		foreach(var x in xs ?? ys) A();
+		var r = a switch { 1 => 2, _ => 3 };
+		var s = (a + 1) switch { _ => 0 };
+		var q = from x in xs ?? ys join y in ys ?? xs on x equals y select x;
+		var u = xs[1..];
+		var w = 1..;
+		return;
+	}
+}
+
+class Sample {
+	/**
+	 * <summary></summary>
+	 * <param name="values"></param>
+	 * <param name="alpha"></param>
+	 * <param name="bravo"></param>
+	 * <param name="charlie"></param>
+	 * <param name="delta"></param>
+	 */
+	void Slice(int[] values, int alpha, int bravo, int charlie, int delta) {
+		var part = values[(alpha + bravo)..(charlie + delta)];
+		return;
+	}
+}
+
+class A {
+	/**
+	 * <summary></summary>
+	 */
+	void f() {
+		var a = new[] { 1, 2 };
+		var c = new[,] { { 1 } };
+		return;
+	}
+}

@@ -1,0 +1,5 @@
+class A {
+    void F() {
+        var p = @"C:\tmp;
+    }
+}

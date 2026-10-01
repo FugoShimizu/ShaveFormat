@@ -1,0 +1,5 @@
+/**
+ *     example(1);
+ *     @see other
+ */
+function g(a) {}

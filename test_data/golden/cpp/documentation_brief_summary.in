@@ -1,0 +1,17 @@
+/**
+ * @brief 足す
+ * @param a 左
+ * @return 和
+ */
+int Add(int a) {
+	return a;
+}
+
+/**
+ * @param b the first
+ *   value to add
+ * @return the sum
+ */
+int Sub(int b) {
+	return b;
+}

@@ -1,0 +1,12 @@
+#include <array>
+#include <string>
+int main() {
+	std::array c{1, 2};
+	std::array d{3, 4, 5};
+	std::string s = "a";
+	std::string u;
+	std::string v;
+	std::array<int, 2> e{1, 2};
+	std::array<int, 2> f{3, 4};
+	return c.size() + d.size() + s.size() + u.size() + v.size() + e.size() + f.size();
+}

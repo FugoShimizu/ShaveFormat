@@ -1,0 +1,26 @@
+fn simple(x: i32) -> i32 { x + 1 }
+
+fn place(x: Data) -> i32 { x.value }
+
+fn borrowed_local(x: &String) -> usize { x.len() }
+
+fn borrowed() -> usize { (&String::from("x")).len() }
+
+fn projected() -> i32 { make().value }
+
+fn drop_order() -> i32 {
+	let guard = Guard::new();
+	make().value
+}
+
+fn compared() -> bool { String::from("a") == "a" }
+
+fn opaque() -> String { format!("{}", 1) }
+
+fn macro_scope(x: i32) -> i32 {
+	opaque!();
+	x
+}
+
+#[rewrite]
+fn attributed(x: i32) -> i32 { x }

@@ -1,0 +1,7 @@
+fun where(f: (Int) -> Boolean) = f(1)
+val w = 3
+where()
+fun g(w: Int) {
+	g(w)
+	where { it > 0 }
+}

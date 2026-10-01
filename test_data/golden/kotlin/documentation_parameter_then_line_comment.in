@@ -1,0 +1,6 @@
+fun area(
+	/** 幅 */
+	// TODO: 単位
+	w: Int,
+	h: Int,
+): Int { return w * h }

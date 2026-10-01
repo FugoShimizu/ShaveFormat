@@ -1,0 +1,11 @@
+1:12: Review: Add an explicit type to parameter #1; verify type, external contract
+3:8: Review: Add an explicit type to this declaration; verify type, external contract
+3:24: Review: Use `!!x` for nonzero in JSX condition; verify type, value range, evaluation
+6:8: Review: Add an explicit type to this declaration; verify type, external contract
+6:24: Review: Use the zero-test form required for this numeric type; verify type, value range
+9:18: Review: Use the zero-test form required for this numeric type; verify type, value range
+11:8: Review: Add an explicit type to this declaration; verify type, external contract
+14:8: Review: Add an explicit type to this declaration; verify type, external contract
+15:5: Review: Describe the termination or returned value in the return comment; verify documentation, intent
+19:3: Violation: Use numeric equality instead of strict equality for matching numeric types
+20:4: Violation: Use numeric equality instead of strict equality for matching numeric types

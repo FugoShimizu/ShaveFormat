@@ -1,0 +1,8 @@
+class A {
+	/// <summary>写す</summary>
+	/// <typeparam name="T">型</typeparam>
+	/// <param name="a">値</param>
+	T Map<T>(T a) {
+		return a;
+	}
+}

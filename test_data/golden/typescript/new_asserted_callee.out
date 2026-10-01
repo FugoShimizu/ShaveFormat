@@ -1,0 +1,4 @@
+a = new Foo<Bar>!();
+b = new Foo!();
+c = new Foo<Bar>!(1);
+d = new Foo;

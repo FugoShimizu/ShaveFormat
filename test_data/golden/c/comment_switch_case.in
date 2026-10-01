@@ -1,0 +1,10 @@
+void f(int x) {
+  switch (x) {
+    case 1:
+      a();
+      // before case 2
+    case 2:
+      b();
+      break;
+  }
+}

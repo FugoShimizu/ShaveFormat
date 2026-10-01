@@ -1,0 +1,9 @@
+<?php
+function f(): int {
+	static $a = 0;
+	static $b;
+	static $c = [1, 2]; // 既定
+	$b = 1;
+	static $d = 5;
+	return $a + $b + count($c) + $d;
+}

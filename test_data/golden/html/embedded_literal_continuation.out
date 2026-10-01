@@ -1,0 +1,13 @@
+<div>
+	<script>
+		const s = `a
+b
+  c`;
+	</script>
+	<style>
+		.a {
+			content: "x\
+y";
+		}
+	</style>
+</div>

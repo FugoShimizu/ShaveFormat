@@ -1,0 +1,23 @@
+/**
+ *
+ * @param x
+ * @param p
+ */
+void f(int x, int *p) {
+	++x;
+	++*p;
+	++*p;
+	--p[0];
+	return;
+}
+
+/**
+ * 数える
+ */
+void Count(void) {
+	int x = 0;
+	++x;
+	--x;
+	for(; x < 2; ++x) x = 1;
+	return;
+}

@@ -1,0 +1,19 @@
+class Dispatcher {
+	/**
+	 * 分岐値に応じて処理する
+	 * @param code 分岐値
+	 */
+	static void Dispatch(final int code) {
+		final Runnable run = () -> {
+			return;
+		};
+		switch(code) {
+		case 0:
+			run.run();
+			return;
+		default:
+			break;
+		}
+		return;
+	}
+}

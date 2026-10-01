@@ -1,0 +1,6 @@
+async function f() {
+	const actual = await vi.importActual<typeof import("@remix-run/react")>("@remix-run/react",
+	);
+	expect(screen.getByTestId("x")).toHaveTextContent("VoiceForm");
+	return actual;
+}

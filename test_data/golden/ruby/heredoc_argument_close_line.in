@@ -1,0 +1,101 @@
+def f
+  g(<<~EOS, 1
+    text
+  EOS
+  )
+end
+
+def nested(x)
+  if x
+    g(<<~EOS, 1
+      t
+    EOS
+    )
+  end
+  nil
+end
+
+def pair
+  g(<<~A, <<~B
+    a
+  A
+    b
+  B
+  )
+end
+
+result = g(<<~TOP, 1
+  top
+TOP
+)
+
+def f
+  g(<<~EOS, 1)
+    text
+  EOS
+end
+
+def nested(x)
+  if x
+    g(<<~EOS, 1)
+      t
+    EOS
+  end
+  nil
+end
+
+def pair
+  g(<<~A, <<~B)
+    a
+  A
+    b
+  B
+end
+
+result = g(<<~TOP, 1)
+  top
+TOP
+
+while cond(<<~C)
+  c
+C
+  z
+end
+
+if cond(<<~D
+  d
+D
+)
+  z
+end
+
+x = cond(<<~D).ok?
+  text
+D
+
+x = cond(<<~D
+  text
+D
+).ok?
+
+if cond(<<~D).ok?
+  text
+D
+  g
+end
+
+if cond(<<~D
+  text
+D
+).ok?
+  g
+end
+
+x = cond(<<~D) && ready
+  text
+D
+
+x = cond(<<~D
+  text
+D
+) && ready

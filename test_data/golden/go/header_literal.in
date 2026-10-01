@@ -1,0 +1,37 @@
+package p
+
+type T struct{ a int }
+
+func f(a, b, c int, p []int, x T) int {
+	y := ((a + b)) * c
+	z := (p[b+c]) * a
+	if ((T{})) == x {
+		return y
+	}
+	return ((z))
+}
+
+type T struct{ n int }
+
+type L struct{ xs []int }
+
+func main() {
+	var x T
+	for range ([]int{1, 2}) {
+	}
+	if ([]int{1})[0] == 1 {
+	}
+	if (T{}) == x {
+	}
+	for range (L{}.xs) {
+	}
+	for i := range (L{}.xs) {
+		_ = i
+	}
+	switch ([2]int{1, 2}) {
+	}
+	a := [...]int{1}
+	b := struct{}{}
+	c := map[string]struct{}{}
+	_, _, _ = a, b, c
+}

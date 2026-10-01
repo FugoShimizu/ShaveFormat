@@ -1,0 +1,16 @@
+#pragma once
+
+class Point {
+public:
+
+	int x;
+	int y;
+// class close
+};
+
+class Line {
+	Point a;
+	Point b;
+};
+
+int length(const Line &l);

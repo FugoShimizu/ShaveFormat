@@ -1,0 +1,8 @@
+/// 値の判定
+/// - Parameter n: 入力
+// 呼出側の都合で 0 を特別扱いする
+func check(_ n: Int) -> Bool {
+	let m = n
+	let k = m
+	return k > 0
+}

@@ -1,0 +1,20 @@
+class C {
+	/**
+	 * 送る
+	 * @param b 値
+	 * @return 結果
+	 */
+	@Post()
+	post(b: number): number {
+		return b;
+	}
+
+	/**
+	 *
+	 * @param a
+	 */
+	@Get()
+	handle(a: number): void {
+		return;
+	}
+}

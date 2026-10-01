@@ -1,0 +1,8 @@
+fun f(x: Int): Int {
+	if (x > 0) {
+		return 1
+		// 分岐の終わり
+	}
+	return 0
+	// 関数の終わり
+}

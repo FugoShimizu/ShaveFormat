@@ -1,0 +1,3 @@
+<?php
+/* Stop here. Then ?> ends. */
+$x = 1; /* one */	/* two ?> */

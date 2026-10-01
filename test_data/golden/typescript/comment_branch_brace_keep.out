@@ -1,0 +1,14 @@
+/**
+ *
+ * @param a
+ * @return
+ */
+function f(a: number) {
+	let n = 0;
+	if(a > 0) {
+		if(a) n = a;
+		else n = 0;
+	// 説明
+	} else n = 2;
+	return n;
+}

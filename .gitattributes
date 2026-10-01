@@ -1,0 +1,2 @@
+# golden の入力と期待出力は改行の様式も検査の対象の為，取出し・登録で改行を変換しない（Windows の取出しの CRLF 化，core.autocrlf=input の登録の LF 化）
+test_data/** -text

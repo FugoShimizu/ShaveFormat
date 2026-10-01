@@ -1,0 +1,5 @@
+<?php
+function f($g = (fn() => 1)) {}
+
+g((fn($x) => $x));
+$a = [(fn($x) => $x)];

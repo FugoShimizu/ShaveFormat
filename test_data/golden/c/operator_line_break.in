@@ -1,0 +1,6 @@
+int Compute(int AlphaValue, int BravoValue, int CharlieValue, int DeltaValue, int EchoValue, int FoxtrotValue) {
+	const int Total = AlphaValue + BravoValue + CharlieValue + DeltaValue + EchoValue + FoxtrotValue + AlphaValue + BravoValue + CharlieValue + DeltaValue + EchoValue + FoxtrotValue;
+	const int Flag = AlphaValue > 0 && BravoValue > 0 && CharlieValue > 0 && DeltaValue > 0 && EchoValue > 0 && FoxtrotValue > 0 && AlphaValue > 0 && BravoValue > 0 && CharlieValue > 0;
+	const int Picked = Flag ? AlphaValue + BravoValue + CharlieValue + DeltaValue + EchoValue + FoxtrotValue : AlphaValue + BravoValue + CharlieValue + DeltaValue + EchoValue + Total;
+	return Total + Flag + Picked;
+}

@@ -1,0 +1,94 @@
+using namespace std;
+
+class Box {
+	void Draw();
+	int Width;
+};
+
+const int Limit = 10;
+
+/**
+ * 整数への変換関数
+ * 制約：
+ * 計算量：
+ * @param Value 値
+ * @return 変換した整数
+ */
+int Convert(const double Value) {
+	// 整数へ変換した値の返戻
+	return (int)Value;
+}
+
+class Order {
+private:
+	int Value;
+	static int Count;
+};
+
+/**
+ * 正数を２倍にする
+ * 制約：入力は正数
+ * 計算量：O(1)（入力は単一値）
+ * @param Value 正数
+ * @returns ２倍の値
+ */
+int Double(const int Value) {
+	// ２倍の値の返戻
+	return Value * 2;
+}
+
+/**
+ * 値を其の儘返す
+ * 計算量：O(1)
+ * @param Value 値
+ * @return 値
+ */
+int Echo(const int Value) {
+	// 値の返戻
+	return Value;
+}
+
+class Accessor {
+private:
+
+	int Count;
+
+	/**
+	 * 件数を読む
+	 * @return 件数
+	 */
+	int Value() const {
+		// 件数の返戻
+		return this->Count;
+	}
+
+	/**
+	 * 件数を変更する
+	 * @param Value 新しい件数
+	 */
+	void ChangeCount(const int Value) {
+		this->Count = Value;
+		// 終了
+		return;
+	}
+};
+
+/**
+ * 指定した件数の整数を合計する
+ * 計算量：
+ * @param Count 合計する件数
+ * @return 合計
+ */
+int Sum(const int Count) {
+	int Total = 0;
+	for(int Index = 0; Index < Count; ++Index) {
+		Total += Index;
+	}
+	// 合計の返戻
+	return Total;
+}
+
+/** @returns 値 */ int Legacy() {
+	// 値の返戻
+	return 1;
+}

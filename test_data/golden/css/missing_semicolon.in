@@ -1,0 +1,16 @@
+.foo {
+	color: red
+	margin: 0;
+}
+.bar {
+	--x: }
+
+a { color: red; margin: 0 }
+
+.b {
+	padding: 1px
+}
+
+a { opacity:  opacity: 0.5; }
+
+.baz { --payload: alpha: beta; }

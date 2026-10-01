@@ -1,0 +1,8 @@
+class B extends A {
+	/**
+	 * {@inheritDoc}
+	 */
+	@Override int f(int a) {
+		return a;
+	}
+}

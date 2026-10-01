@@ -1,0 +1,4 @@
+struct S {
+	/** 値 */
+	value: i32
+}

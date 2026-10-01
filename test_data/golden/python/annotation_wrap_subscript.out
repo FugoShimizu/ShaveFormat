@@ -1,0 +1,23 @@
+type PairAlias = (
+	Receiver[int, str]
+)
+
+item: (
+	Receiver[int, str]
+)
+
+longer_name: (
+	Receiver[int, str]
+) = 1
+
+value = Receiver[
+	int,
+	str
+]
+
+item2: (
+	typing.Receiver[
+		int,
+		str
+	]
+)

@@ -1,0 +1,15 @@
+func f() {
+	a()
+}
+
+func g() -> Int { 1 }
+
+func h() -> Never {
+	fatalError()
+}
+
+class A {
+	init() { b() }
+	deinit { c() }
+	var w: Int { get { return 1 } set { v = newValue } }
+}

@@ -1,0 +1,13 @@
+struct A;
+
+/// First
+impl A {
+    /// Doc f
+    fn f() {}
+}
+
+/// Second
+impl A {
+    /// Doc g
+    fn g() {}
+}

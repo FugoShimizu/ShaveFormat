@@ -1,0 +1,29 @@
+/**
+ *
+ */
+function f() {
+	// c
+	if(a) {} else {
+		x();
+		y();
+	}
+	// d1
+	// d2
+	if(a) {} else x();
+	try {
+		g();
+	// e
+	} catch {}
+	try {
+		g();
+	// f1
+	// f2
+	} catch {}
+	// bare
+	{}
+	// obj
+	const o = {};
+	// arg
+	f();
+	return;
+}

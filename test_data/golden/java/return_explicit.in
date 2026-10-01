@@ -1,0 +1,44 @@
+class A {
+	static final boolean FLAG = true;
+	boolean running;
+
+	/**
+	 * 作る
+	 */
+	A() {
+		x();
+	}
+
+	/**
+	 * 後始末で包む
+	 */
+	void m() {
+		try {
+			return;
+		} finally {
+			f();
+		}
+	}
+
+	/**
+	 * 動く間繰り返す
+	 */
+	void n() {
+		while(running) g();
+	}
+
+	/**
+	 * 定数の間繰り返す
+	 */
+	void o() {
+		while(FLAG) g();
+	}
+
+	/**
+	 * 分岐する
+	 */
+	void p() {
+		if(running) return;
+		else throw new RuntimeException();
+	}
+}

@@ -1,0 +1,16 @@
+function A() {
+  return (
+    <div>
+      <Outer
+        prop={
+          <Inner>
+            {
+              // d
+              y
+            }
+          </Inner>
+        }
+      />
+    </div>
+  );
+}

@@ -1,0 +1,9 @@
+class C {
+	/**
+	 * 経路
+	 */
+	@Get({ path: "x" })
+	find(): void {
+		return;
+	}
+}

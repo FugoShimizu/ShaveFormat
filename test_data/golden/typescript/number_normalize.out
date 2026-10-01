@@ -1,0 +1,4 @@
+const hex: number = 0XAB;
+const exp = 2E10;
+const big: bigint = 9007199254740991n;
+const hexBig = 0XFFn;

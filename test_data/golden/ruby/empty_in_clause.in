@@ -1,0 +1,10 @@
+case x
+in [a]
+end
+case y
+in [b] if c
+end
+case z
+in [d]
+  e
+end

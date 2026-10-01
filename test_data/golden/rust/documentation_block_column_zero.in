@@ -1,0 +1,7 @@
+struct A;
+impl A {
+    /**
+Doc at column zero
+    */
+    fn f() {}
+}

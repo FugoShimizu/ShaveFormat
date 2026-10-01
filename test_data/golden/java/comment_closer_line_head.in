@@ -1,0 +1,11 @@
+class A {
+	void m() {
+		x(); // c2
+	}
+	/* c1 */ }
+
+class B {
+	void n() {
+		y();
+	/* c3 */ }
+}

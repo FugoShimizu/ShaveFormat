@@ -1,0 +1,6 @@
+import functools
+
+
+@functools.cache
+def compute(x):
+    return x

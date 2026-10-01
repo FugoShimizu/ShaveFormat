@@ -1,0 +1,81 @@
+package p
+
+type A struct{}
+type B struct{}
+
+// F
+func F[T any]() {}
+
+// G
+func G() {
+	F[
+		struct {
+			A
+			B
+		},
+	]()
+	F[
+		interface {
+			Read() int
+			Next() int
+		},
+	]()
+	return
+}
+
+// F
+func F[T any]() {}
+
+// G
+func G() {
+	F[
+		struct {
+			A int
+			B int
+		},
+	]()
+	return
+}
+
+type S struct {
+	X struct {
+		A int
+		B int
+	} `json:"x"`
+}
+
+type M map[struct {
+	A int
+	B int
+}]int
+
+// F
+func F() {
+	_ = struct {
+		A int
+		B int
+	}(struct {
+		A int
+		B int
+	}{})
+	return
+}
+
+type (
+	A struct {
+		X int
+		Y int
+	}
+	B struct {
+		Z int
+	}
+)
+
+var (
+	A = func() int {
+		return 1
+	}
+	B = func() int {
+		return 2
+	}
+)

@@ -1,0 +1,10 @@
+(
+	function(window) {
+		var class2type = {}, toString = class2type.toString, document = window.document, version = "2.1.1";
+		var jQuery = function(selector, context) {
+			return new jQuery.fn.init(selector, context);
+		};
+		var rtrim = /x/g;
+		jQuery.x = 1;
+	}
+)(window);

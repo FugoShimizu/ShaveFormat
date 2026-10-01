@@ -1,0 +1,9 @@
+package p
+type Next interface{Next() int}
+type Reader interface{Read() int;Next}
+type Scalar interface{~int|~string;comparable}
+type Empty interface{}
+func Same[T Scalar](A,B T)bool{return A==B}
+func AsReader(Value any) interface{Read() int;Next}{
+// 型表明の返戻
+return Value.(interface{Read() int;Next})}

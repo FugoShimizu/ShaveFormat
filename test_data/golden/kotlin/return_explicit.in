@@ -1,0 +1,26 @@
+/**
+ * 呼ぶ
+ */
+fun f() {
+	a()
+}
+
+class A {
+	init { b() }
+
+	/**
+	 * 作る
+	 * @param s 名前
+	 */
+	constructor(s: String) : this() { c() }
+
+	var w: Int = 0
+		set(value) { field = value }
+}
+
+/**
+ * 止める
+ */
+fun h(): Nothing {
+	TODO()
+}

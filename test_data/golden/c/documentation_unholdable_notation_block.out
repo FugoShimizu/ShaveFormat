@@ -1,0 +1,8 @@
+/**
+ * 処理
+ */
+void f(void) {
+	/* dir C:\ */
+	g();
+	return;
+}

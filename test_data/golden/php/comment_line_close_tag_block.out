@@ -1,0 +1,9 @@
+<?php
+
+$a = 1;
+
+if($a) echo "A"; // a
+
+echo "B";
+?>
+<p><?php echo max(1, 2); // a ?></p>

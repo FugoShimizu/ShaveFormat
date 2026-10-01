@@ -1,0 +1,8 @@
+/**
+ *
+ * @return
+ */
+function g() {
+	// 値
+	return { a: 1 };
+}

@@ -1,0 +1,68 @@
+#
+# @param x
+# @return
+def ret1(x)
+	return(+x)
+end
+
+#
+# @param x
+# @return
+def ret2(x)
+	return x + 1
+end
+
+#
+# @param x
+# @return
+def ret3(x)
+	return(+x + 1)
+end
+
+#
+# @param x
+# @return
+def ret4(x)
+	return(- 1.abs)
+end
+
+#
+# @param x
+# @return
+def ret5(x)
+	return(..x)
+end
+
+#
+# @param x
+# @return
+def ret6(x)
+	return [x]
+end
+
+#
+# @param x
+def ret7(x)
+	yield(+x)
+end
+
+x = foo(+1)
+
+p(foo(+1))
+p(foo(..1))
+p(foo(a) { 1 })
+
+foo = 10
+
+p(foo(-2))
+
+y = - 2.abs
+z = -(2).abs
+
+case [1, 2]
+in [q,] then p q
+end
+
+v = bar - 1
+w = foo + 1 ? 2 : 3
+u = foo + 1..5

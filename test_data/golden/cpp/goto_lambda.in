@@ -1,0 +1,11 @@
+void f() {
+	for(;;) {
+		for(;;) {
+			auto g = [] {
+				goto done;
+			done:
+				return;
+			};
+		}
+	}
+}

@@ -1,0 +1,37 @@
+/**
+ *
+ * - Returns:
+ */
+func free() -> Int {
+	return 1
+}
+
+struct Plain {
+	/**
+	 *
+	 * - Returns:
+	 */
+	func value() -> Int {
+		return 2
+	}
+}
+
+/**
+ *
+ * - Returns:
+ */
+func invoke() -> Int {
+	return free() + 3
+}
+
+/**
+ *
+ * - Returns:
+ */
+func closureArgument() -> Int {
+	evaluate(
+		{
+			5
+		}
+	)
+}

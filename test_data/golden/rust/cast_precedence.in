@@ -1,0 +1,14 @@
+fn f(x: u8, y: i32) -> i32 {
+	let a = (x as i32) + y;
+	let b = (x as i32) * 2;
+	let c = (x as i32) < y;
+	let d = y + (x as i32);
+	let e = -(x as i32);
+	let g = (x as i32).pow(2);
+	let h = ((x as u16) as u32) as i32;
+	let k = (x as i32) << 2;
+	let m = (-y) as u8;
+	a + b + d + e + g + h + k + m as i32 + c as i32
+}
+
+fn p(a: *const (u8, u8), b: *mut (u8, u8), c: &(u8, u8), d: &mut (u8, u8)) {}

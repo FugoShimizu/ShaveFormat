@@ -1,0 +1,12 @@
+<?php
+
+namespace App\Service;
+
+use App\Model\Item;
+use App\Model\Item as Alias;
+use App\{Delta, Charlie};
+use function App\Helper\{alpha, bravo};
+use const App\Config\{LIMIT, OFFSET};
+
+labelA:
+echo Item::class;

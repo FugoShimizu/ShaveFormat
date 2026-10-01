@@ -1,0 +1,5 @@
+=begin
+frozen_string_literal: true
+説明。 =begin 続き
+=end
+x = 1

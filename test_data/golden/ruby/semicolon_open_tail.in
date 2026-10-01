@@ -1,0 +1,11 @@
+def m(*a, **k, &b) = a
+def f(*, **, &)
+  m *; m **; m &; m 1, &; m
+end
+a = 1
+m a:; m 2
+x = 1..; p x
+y = (1..)
+p y
+z = m((2..))
+for i in 1..; p i; break; end

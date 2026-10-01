@@ -1,0 +1,13 @@
+for(const x of xs) {}
+for(const k in o) {}
+
+const v = a[i] + a[i + 1];
+
+for(k in o) {}
+for(let in o) {}
+for((let) of xs) {}
+for((async) of xs) {}
+for(const k in a ? o : {}) {}
+for(var y in "k" in o, o) {}
+for(const x of (xs, [9])) {}
+for(const x of xs) (a || b)();

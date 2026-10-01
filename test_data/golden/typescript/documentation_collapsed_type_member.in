@@ -1,0 +1,6 @@
+type T = {
+	/** a の説明 */
+	a: number;
+	/** b の説明 */
+	b: string;
+};

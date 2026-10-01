@@ -1,0 +1,17 @@
+class A {
+	/// <summary>
+	/// 一覧を探す
+	/// </summary>
+	/// <param name="Pattern">**/*.cs の形</param>
+	void F(string Pattern) {
+		G(Pattern);
+	}
+
+	/// <summary>
+	/// 別の一覧を探す
+	/// </summary>
+	/// <param name="Pattern">照合の形</param>
+	void H(string Pattern) {
+		G(Pattern);
+	}
+}

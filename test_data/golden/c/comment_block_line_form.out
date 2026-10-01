@@ -1,0 +1,11 @@
+/**
+ *
+ */
+void f(void) {
+	int b; // three // four
+	g();
+	return;
+}
+
+int x; /* dir C:\ */ // next
+int y;

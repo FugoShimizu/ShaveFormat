@@ -1,0 +1,9 @@
+# 説明
+# @param x
+# @return
+=begin
+frozen_string_literal: true
+=end
+def f(x)
+	return x
+end

@@ -1,0 +1,6 @@
+package p
+
+// 幅
+func F(w int) int {
+	return w
+}

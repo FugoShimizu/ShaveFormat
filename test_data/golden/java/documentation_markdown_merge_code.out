@@ -1,0 +1,11 @@
+class A {
+	/// Example:
+	///
+	/// int y = f(1);
+	/// Adds one
+	/// @param x
+	/// @return
+	int f(int x) {
+		return x + 1;
+	}
+}

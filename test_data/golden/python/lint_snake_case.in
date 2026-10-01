@@ -1,0 +1,13 @@
+def makeValue() -> int:
+	"""値の作成関数
+
+	Returns:
+		作成した値
+	"""
+	# 作成した値の返戻
+	return 1
+
+def café() -> int:
+	"""値を返す"""
+	# 値の返戻
+	return 1

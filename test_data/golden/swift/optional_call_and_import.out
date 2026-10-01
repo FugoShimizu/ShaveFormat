@@ -1,0 +1,11 @@
+import class SomeModule.SomeClass
+
+/**
+ *
+ * - Parameter target:
+ */
+func Invoke(target: Handler?) {
+	target.hello?("world")
+	target.list?[3]
+	return
+}

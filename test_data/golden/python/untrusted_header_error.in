@@ -1,0 +1,4 @@
+def f():
+    if x = = 1:
+        g()
+    return x

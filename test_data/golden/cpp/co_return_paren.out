@@ -1,0 +1,19 @@
+#define ONE 1
+
+/**
+ *
+ * @return
+ */
+task f() {
+	co_return ONE;
+}
+
+/**
+ *
+ * @return
+ */
+task g() {
+	co_await y;
+	co_return (a, b);
+	throw (ONE);
+}

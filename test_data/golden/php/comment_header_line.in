@@ -1,0 +1,11 @@
+<?php
+try { // t
+	g();
+} finally { // f
+	h();
+}
+if ($a) { // 真
+	g();
+} else { // 偽
+	h();
+}

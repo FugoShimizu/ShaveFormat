@@ -1,0 +1,9 @@
+func f(_ a: Int, _ b: Int, _ c: Int) -> Int {
+	let m = ~(1 << b)
+	let n = -(a >> b)
+	let o = (a << b) << c
+	let p = (a + b) << c
+	let q = a << (b + c)
+	let r = (a << b) & c
+	return m + n + o + p + q + r
+}

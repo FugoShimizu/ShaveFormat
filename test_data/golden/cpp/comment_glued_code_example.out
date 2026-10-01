@@ -1,0 +1,10 @@
+/**
+ * 呼ぶ
+ */
+void F() {
+	G();
+	// `x` is used
+	// a = b
+	H();
+	return;
+}

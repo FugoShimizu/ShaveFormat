@@ -1,0 +1,16 @@
+// Regression: cfb7cfb で iterative Walk が unnamed `else` を SectionStartBytes に混入させ，
+// `else if` インデントが 1 タブ過小になった．bc91d21 で修正．
+void Foo(int A, int B, int C) {
+	if(A) {
+		if(B) X = 1;
+		else if(C) Y = 2;
+	} else {
+		Z = 3;
+	}
+}
+int Bar(int X) {
+	if(X > 10) return 1;
+	else if(X > 5) return 2;
+	else if(X > 0) return 3;
+	return 0;
+}

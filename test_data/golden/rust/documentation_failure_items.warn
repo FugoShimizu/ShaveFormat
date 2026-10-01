@@ -1,0 +1,5 @@
+1:1: Violation: Document the failure types and conditions visible to callers
+28:1: Violation: Document the failure types and conditions visible to callers
+31:4: Review: Add an explicit return type to this function; verify type, external contract
+37:2: Violation: Use inner Rust block documentation for this documentation
+39:5: Review: Add an explicit return type to this function; verify type, external contract

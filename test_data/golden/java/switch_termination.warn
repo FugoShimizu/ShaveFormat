@@ -1,0 +1,2 @@
+29:3: Violation: Remove the unreachable trailing `return`
+60:3: Violation: Add the required comment before this `return`

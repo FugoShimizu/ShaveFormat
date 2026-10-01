@@ -1,0 +1,24 @@
+<div>
+<script>
+if (a) f(/* First. Second. */ x)
+// script close
+</script>
+<style>
+.a{color:red;
+/* rule close */
+}
+/* style close */
+</style>
+<SCRIPT>
+// 大文字タグ内
+f();
+</SCRIPT>
+<script type="application/ld+json">{"a":1}</script>
+<script type="text/template"><b>{{x}}</b></script>
+<script>
+  
+</script>
+<!-- div close -->
+</div>
+<script>let a=1; // 説明
+console.log(a);</script>

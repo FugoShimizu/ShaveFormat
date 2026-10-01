@@ -1,0 +1,4068 @@
+# プロジェクト共通コーディング規約
+
+本規約は，プロジェクトでコード及び文書を記述する際の共通規則を定める．適用条件と記述方法は本書内で完結する．
+
+各節は対象と強度を示した後，規則，必要な適用条件・例外，例の順に記述する．細目は規則内の見出で分類する．規則と例の適用方法は 1.2 に従う．
+
+---
+
+# 目次
+
+- **[第１章 基本方針](#第１章-基本方針)**
+	- [1.1 目的](#11-目的)
+	- [1.2 用語（強度定義）](#12-用語強度定義)
+	- [1.3 基本原則](#13-基本原則)
+	- [1.4 対象言語と適用範囲](#14-対象言語と適用範囲)
+- **[第２章 書式](#第２章-書式)**
+	- [2.1 文字コードと改行コード](#21-文字コードと改行コード)
+	- [2.2 インデント](#22-インデント)
+	- [2.3 行長と改行](#23-行長と改行)
+	- [2.4 空行](#24-空行)
+	- [2.5 本体と括弧の配置](#25-本体と括弧の配置)
+	- [2.6 ラベルのインデント](#26-ラベルのインデント)
+	- [2.7 アクセス修飾子の順序](#27-アクセス修飾子の順序)
+	- [2.8 数値リテラル](#28-数値リテラル)
+	- [2.9 字句間の空白](#29-字句間の空白)
+	- [2.10 const の位置](#210-const-の位置)
+	- [2.11 参照・ポインタの記号位置](#211-参照ポインタの記号位置)
+	- [2.12 sizeof の括弧](#212-sizeof-の括弧)
+	- [2.13 文字列の引用符](#213-文字列の引用符)
+	- [2.14 末尾カンマ](#214-末尾カンマ)
+	- [2.15 末尾セミコロン](#215-末尾セミコロン)
+	- [2.16 セミコロンとカンマの選択](#216-セミコロンとカンマの選択)
+- **[第３章 制御構文](#第３章-制御構文)**
+	- [3.1 制御語と括弧の間隔](#31-制御語と括弧の間隔)
+	- [3.2 波括弧](#32-波括弧)
+	- [3.3 条件分岐の平坦化](#33-条件分岐の平坦化)
+	- [3.4 else / else if](#34-else--else-if)
+	- [3.5 switch](#35-switch)
+	- [3.6 for / while / do-while](#36-for--while--do-while)
+	- [3.7 goto・ラベル付 break](#37-gotoラベル付-break)
+	- [3.8 Ruby 制御構文](#38-ruby-制御構文)
+- **[第４章 式・演算](#第４章-式演算)**
+	- [4.1 項の順序](#41-項の順序)
+	- [4.2 式の簡約](#42-式の簡約)
+	- [4.3 シフト演算と逆数乗算](#43-シフト演算と逆数乗算)
+	- [4.4 括弧](#44-括弧)
+	- [4.5 クランプ](#45-クランプ)
+	- [4.6 ０判定](#46-０判定)
+	- [4.7 真偽値リテラル](#47-真偽値リテラル)
+	- [4.8 真偽値の反転](#48-真偽値の反転)
+	- [4.9 増減演算](#49-増減演算)
+	- [4.10 三項演算子](#410-三項演算子)
+	- [4.11 比較演算子の選択](#411-比較演算子の選択)
+	- [4.12 比較演算子の使分](#412-比較演算子の使分)
+- **[第５章 変数・型](#第５章-変数型)**
+	- [5.1 変数化](#51-変数化)
+	- [5.2 制御文での即時束縛](#52-制御文での即時束縛)
+	- [5.3 一括宣言](#53-一括宣言)
+	- [5.4 型の明示と推論の制限](#54-型の明示と推論の制限)
+	- [5.5 整数型の符号選択](#55-整数型の符号選択)
+	- [5.6 引数無の void 省略](#56-引数無の-void-省略)
+	- [5.7 return の明示](#57-return-の明示)
+	- [5.8 不変束縛の優先](#58-不変束縛の優先)
+	- [5.9 コンパイル時定数](#59-コンパイル時定数)
+	- [5.10 遅延初期化・静的初期化](#510-遅延初期化静的初期化)
+	- [5.11 クラス設計](#511-クラス設計)
+	- [5.12 命名](#512-命名)
+- **[第６章 ファイル構成・言語固有機能](#第６章-ファイル構成言語固有機能)**
+	- [6.1 include / import の順序](#61-include--import-の順序)
+	- [6.2 ヘッダガード](#62-ヘッダガード)
+	- [6.3 宣言と定義の分離](#63-宣言と定義の分離)
+	- [6.4 キャスト](#64-キャスト)
+	- [6.5 マクロの使用制限](#65-マクロの使用制限)
+	- [6.6 using namespace](#66-using-namespace)
+	- [6.7 NULL と nullptr](#67-null-と-nullptr)
+	- [6.8 エラー処理](#68-エラー処理)
+	- [6.9 言語固有の必須事項](#69-言語固有の必須事項)
+	- [6.10 型ヒント・null 安全](#610-型ヒントnull-安全)
+	- [6.11 JSX 条件レンダリング](#611-jsx-条件レンダリング)
+	- [6.12 Ruby の式本体に依るメソッド定義](#612-ruby-の式本体に依るメソッド定義)
+	- [6.13 内包表記](#613-内包表記)
+	- [6.14 JSON](#614-json)
+	- [6.15 HTML 構造](#615-html-構造)
+	- [6.16 CSS / SCSS](#616-css--scss)
+- **[第７章 コメント](#第７章-コメント)**
+	- [7.1 コメントの基本](#71-コメントの基本)
+	- [7.2 コメント形式](#72-コメント形式)
+	- [7.3 重複・不要なコメントの禁止](#73-重複不要なコメントの禁止)
+	- [7.4 規約番号参照の禁止](#74-規約番号参照の禁止)
+	- [7.5 宣言グループ](#75-宣言グループ)
+	- [7.6 ステップコメント](#76-ステップコメント)
+	- [7.7 行末・文中コメント](#77-行末文中コメント)
+	- [7.8 文書化コメント](#78-文書化コメント)
+	- [7.9 区切コメント](#79-区切コメント)
+	- [7.10 返戻コメント](#710-返戻コメント)
+	- [7.11 useEffect コメント](#711-useeffect-コメント)
+	- [7.12 JSX コメント](#712-jsx-コメント)
+- **[第８章 表記統一](#第８章-表記統一)**
+	- [8.1 英単語の混入制限](#81-英単語の混入制限)
+	- [8.2 漢字表記](#82-漢字表記)
+	- [8.3 ら抜き言葉](#83-ら抜き言葉)
+	- [8.4 複合名詞の送仮名省略](#84-複合名詞の送仮名省略)
+	- [8.5 全角・半角の使分](#85-全角半角の使分)
+	- [8.6 空白の配置](#86-空白の配置)
+- **[第９章 例外の適用](#第９章-例外の適用)**
+	- [9.1 適用条件](#91-適用条件)
+	- [9.2 理由と記録](#92-理由と記録)
+- **[第１０章 運用](#第１０章-運用)**
+	- [10.1 適用と確認](#101-適用と確認)
+	- [10.2 規約の改訂](#102-規約の改訂)
+
+---
+
+# 第１章 基本方針
+
+## 1.1 目的
+
+**対象**：コード・文書の執筆・改訂・レビュー
+
+**強度**：必須 (`MUST`)
+
+### 規則
+
+コードの完全性・安全性・一貫性を始めとする品質を，1.3 の優先順位に従って追求する．
+
+## 1.2 用語（強度定義）
+
+**対象**：コード・文書の執筆・改訂・レビュー
+
+**強度**：必須 (`MUST`)
+
+### 規則
+
+| 強度 | 意味 |
+|---|---|
+| 必須 (`MUST`) | 適用条件を満たす対象では必ず守る．明示した例外以外の違反を認めない． |
+| 推奨 (`SHOULD`) | 原則として従う．根拠と範囲を説明出来る場合に限り例外を認める． |
+
+各節の強度は既定の強度を表す．本文で「必ず」「禁止」「必須」とした条件は必須，「推奨」とした条件は推奨として個別に適用する．1.3 の要求動作と安全性は，個別の推奨規則を適用しない理由で緩めない．
+
+例は当該節の規則だけを示す部分例とする．未定義名は外部から与える値・型・関数を表し，❌と✅は独立した対比である．実際に流用するコードには，全ての適用規則を満たす必要が有る．
+
+## 1.3 基本原則
+
+**対象**：コード・文書の執筆・改訂・レビュー
+
+**強度**：必須 (`MUST`)
+
+### 規則
+
+以下の優先順位でコードの品質を追求する．
+
+1. **完全性** — 仕様を満たし，正しく動作する事を最優先とする．
+2. **安全性** — バグを未然に防ぎ，型安全性を保つ．
+3. **汎用性** — 特定の環境に依存せず，再利用可能にする．
+4. **効率性** — 冗長な処理を排除し，高速に動作させる．
+5. **一貫性** — 書き方を統一し，読む負担を下げる．
+6. **簡潔性** — 冗長な記述を排除し，最小限のコードで表現する．
+7. **保守性** — 変更や拡張が容易な構造にする．
+8. **可読性** — 第三者が理解し易いコードにする．
+
+要求動作と安全性を満たした上で，各節の適用条件と明示した例外を適用する．其れでも複数の選択肢が残る場合に，上記の優先順位を用いる．最短の文字列を得る事だけを目的に，型・構造・文書化の明示規則を破ってはならない．理由や背景は，第７章に従ってコード外の説明で補う事を推奨する．
+
+記法の選択では，要求される値・型・評価順序と回数・副作用・例外・寿命・束縛・外部契約を満たす．数学的な等式だけで，実際の型・値域・評価方法でも同じ動作に為ると判断しない．
+
+許容誤差を用いる数値計算は，値域・許容範囲・効果を明示して検証する．要求動作又は外部契約の変更には，仕様変更としての承認を要する．
+
+行番号，呼出元情報又はソースの字面を値として利用するコードでは，記述位置・空白・改行も要求動作を満たす様に定める．此等を参照先に影響しない装飾として扱わない．
+
+## 1.4 対象言語と適用範囲
+
+**対象**：全言語共通
+
+**強度**：必須 (`MUST`)
+
+### 規則
+
+「全言語共通」は未列挙の言語も含む．其れ以外は対象欄に示す言語・構文に適用し，細目の対象は節の対象内に限る．対象内で認める例外は，適用条件と共に明記する．
+
+同じ構文上の役割には同じ規則を適用し，言語名・慣習だけを免除の理由にしない．言語のバージョンと実行対象はプロジェクトで固定する．
+
+JavaScript は JSX，TypeScript は TSX，JSON は JSONC，CSS は SCSS を其々含む．埋込コードには当該言語の規則を適用する．
+
+---
+
+# 第２章 書式
+
+## 2.1 文字コードと改行コード
+
+**対象**：全言語共通
+
+**強度**：必須 (`MUST`)
+
+### 規則
+
+| 対象 | 規則 |
+|---|---|
+| 符号化 | UTF-8，BOM 無 |
+| コードの改行 | LF (`\n`) |
+| 行末 | 意味を持たないスペース・タブを残さない． |
+| 非空の通常コードの終端 | 改行を正確に１つ置く． |
+| 空のファイル | 空の儘とし，改行だけを追加しない． |
+
+### 適用条件・例外
+
+**内容の記述**：リテラル，地の文，埋込データ等の改行・行末空白・終端は，要求する値を表す通りに記述する．内容を構成する空白とコードの書式を区別する．
+
+## 2.2 インデント
+
+**対象**：C, C++, C#, Java, Go, Rust, Kotlin, Swift, PHP, JavaScript, TypeScript, Ruby, Python, JSON, HTML, CSS の構文上のインデント
+
+**強度**：必須 (`MUST`)
+
+### 規則
+
+インデントにはタブを使用する．本文やリテラル内の空白は 2.1 に従う．
+
+| 対象言語 | 推奨表示幅 | ネストの上限 |
+|---|---|---|
+| C, C++, C#, Java, Go, Rust, Kotlin, Swift, PHP, Python | ４ | ３２段 |
+| JavaScript, TypeScript, Ruby, JSON, HTML, CSS | ２ | ６４段 |
+
+## 2.3 行長と改行
+
+**対象**：全言語共通
+
+**強度**：必須 (`MUST`)
+
+### 規則
+
+- １行は１２８文字以内とする．１文字は Unicode の１符号位置とし，全角・半角の表示幅を区別しない．UTF-8 のバイト数や表示桁数を文字数として用いない．
+- インデント，通常コメント・指示コメントの本文と記号，及びコメントを区切る為だけの空白は数えない．行内のコードを区切る空白は数える．
+- 文字列，文書の本文，埋込データ等，内容自体が値・表示・文書構造の一部である物は各行の内容を数える．其の内部のコメントに似た字面を，通常コメントとして計数から除かない．
+- JSX / HTML の属性間，CSS / SCSS の要素区切・演算等も，意味を保って折れる位置を行長規則の対象とする．言語全体を幅の制限から除外しない．
+- 改行は行の境界とし，幅に数えない．其の他の Unicode 一般カテゴリ `Cc` の制御文字も数えない．結合文字・異体字選択子等，`Cc` 以外の符号位置は１文字とする．非表示である事だけを除外の理由にしない．此の計数上の除外は，内容の削除又は制御文字の新規使用を許す規則ではない．
+- １２８文字を超える場合は，論理単位（引数の間，演算子の後等）で改行する．
+- 改行時，二項演算子・三項演算子・代入演算子は改行前（前行の末尾）に配置する．
+- メンバアクセス演算子 (`.` `?.` `->` `::`) は，直前で改行しても文が続く構文では次行の先頭に置く．Go の `.` は前行の末尾に置く．閉じ括弧 (`)` `]` `}`) は次行の先頭に置く．
+- 行継続（バックスラッシュ `\` + 改行）は禁止とする．改行が必要な場合は，括弧や演算子の位置で改行する．
+- **１２８文字以内に収まる場合は改行してはならない．** 関数呼出の引数，import 文，変数宣言，単一文の `if` 等，１行に纏めて１２８文字以内に収まる物は必ず１行で記述する．
+
+１行化に当たっては，本体・空行・閉じ波括弧の構造規則に従う．分割不能な字句や，改行に依って構文・値・式結合が変わる箇所では，行長制限よりも意味の保持を優先する．尚，改行位置のみを示す短い対比例は，実際には行長制限を超過した場合に適用する．
+
+### 適用条件・例外
+
+Go の自動セミコロン挿入で文が終わる位置では改行しない．閉じ括弧を行頭に置く場合の末尾カンマは 2.14 に従う．
+
+**構造規則 (Python)**：複合文の本体は単一文でも必ず次行へ展開し，１段インデントする．`if cond: stmt` の形へ１行化しない．関数・クラス・条件分岐・反復・例外処理・資源管理の本体に同じ規則を適用する．
+
+**式の継続 (Python)**：複数行の式は丸括弧・角括弧・波括弧の内側に記述する．其の構文の囲みだけでは継続出来ない場合は，合法な丸括弧を用いる．逆斜線に依る行継続は記述しない．
+
+**分割不能な内容**：文字列本文，URL，属性値，表示される本文等は，意味を保てる境界だけで折る．合法な改行位置が無い内容は，言語に依らず当該行の幅超過を許容する．行長を満たす為にリテラル内部へ逆斜線と改行を追加しない．
+
+### 例
+
+```cpp
+// ❌ 演算子が行頭
+int Result = LongVariableA
++ LongVariableB;
+bool Ok = ConditionA
+&& ConditionB;
+
+// ✅ 演算子が行末
+int Result = LongVariableA +
+LongVariableB;
+bool Ok = ConditionA &&
+ConditionB;
+
+// ✅ 三項演算子
+std::string Name = Condition ?
+"valueA" :
+"valueB";
+```
+
+```typescript
+// ❌ メンバアクセスが行末（連鎖の起点が読み取れない）
+const value = repository.
+findAll().
+filter(Predicate);
+
+// ✅ メンバアクセスは行頭
+const value = repository
+.findAll()
+.filter(Predicate);
+```
+
+```typescript
+// ✅ １行（１２８文字以内）
+const options = { willReadFrequently: true };
+
+// ✅ 複数行（１２８文字を超える場合）
+const offscreenRenderConfig = {
+	canvasWidthInPhysicalDevicePixelsForOffscreenRenderTargetTexture: 32,
+	canvasHeightInPhysicalDevicePixelsForOffscreenRenderTargetTexture: 16
+};
+```
+
+## 2.4 空行
+
+**対象**：全言語共通
+
+**強度**：必須 (`MUST`)
+
+### 規則
+
+空行は，コメントを除いたソースの構造だけから決める．通常コメント・文書化コメント・指示コメントの何れであっても，有無・内容・記法・位置を根拠に空行の有無・数・配置を変えてはならない．ファイル先頭，コメント同士の間及びコメントとコードの間にも同じ規則を適用し，指示記法を理由とする例外を設けない．
+
+空行は前後の構文を区切る位置に置く．独立したコメント行は空行の代わりにせず，構文間に必要な空行とは別に記述する．
+
+#### 最上位宣言間
+
+本節の構造種別は，対象言語・方言・版の文法に於ける宣言・指令全体の構文形式とする．内部の名前・型・初期値の違いだけでは区別せず，用途が同じでも異なる構文形式は別種別とする．前処理指令にも同じ基準を用いる．
+
+- 隣接する宣言の一方でも複数行に亘る場合は，間に１行の空行を挿入する．
+- 構造種別が異なる宣言間には，単一行同士でも１行の空行を挿入する．
+- 構造種別が同じで，両方とも単一行で完結する場合は，間に空行を挿入しない．
+
+#### クラス・ブロック内
+
+- クラス内のメンバ宣言間（メンバ関数定義，変数宣言，関数プロトタイプ等）の空行には，上記「最上位宣言間」と同一の規則を適用する．
+- アクセス修飾子 (`private:` `protected:` `public:`) の前後には，１行の空行を挿入する．但し，クラス本体の開始直後（`{` の直後）に在るアクセス修飾子の**前**には空行を挿入しない．
+
+#### 構文単位と内容の境界
+
+アクセス区画を持たない成員毎の修飾子には，区画前後の空行規則を適用しない．属性・注釈・デコレータと其の対象宣言は一つの構文単位とし，其の間へ空行を挿入しない．本文・リテラル等の値又は表示を構成する空白は，コードの空行ではなく 2.1 の内容の記述に従う．
+
+#### 禁止事項
+
+- ２行以上の連続した空行は禁止とする．
+- ファイルの先頭及び末尾への空行の挿入は禁止とする．
+
+### 例
+
+#### 最上位宣言間
+
+```cpp
+// 同一の宣言文（関数プロトタイプ／変数宣言／定数定義）の連続は空行無
+void Foo();
+void Bar();
+const int MaxCount = 100, MinCount = 0;
+
+// 構造種別が変わる箇所には空行を入れる
+class Status {};
+
+// 複数行関数定義は常に空行で区切る
+void Foo() {
+	DoA();
+}
+
+void Bar() {
+	DoB();
+}
+```
+
+```typescript
+import { A } from "a";
+import { B } from "b";
+
+const X = 1;
+
+function Foo(): number {
+	return 1;
+}
+
+function Bar(): number {
+	return 2;
+}
+```
+
+#### 前処理指令 (C, C++)
+
+```cpp
+#pragma once
+
+#include "Foo.hpp"
+#include <string>
+#include <vector>
+
+#define MAX 100
+#define MIN 0
+```
+
+#### クラス・ブロック内
+
+```cpp
+class Foo {
+private:
+
+	int Count;
+	int Total;
+
+	void ProcessSourceWithIndices(
+		const std::string &Source,
+		const std::vector<int> &Indices,
+		const std::map<std::string, int> &LookupTable,
+		std::vector<int> &Output
+	);
+
+	void HelperShort();
+
+public:
+
+	void DoWork();
+	void Reset();
+};
+```
+
+## 2.5 本体と括弧の配置
+
+**対象**：C, C++, C#, Java, Go, Rust, Kotlin, Swift, PHP, JavaScript, TypeScript, Ruby, Python, JSON, CSS の本体・リテラル・埋込式を囲む括弧
+
+**強度**：必須 (`MUST`)
+
+### 規則
+
+#### 本体と実引数の開始
+
+| 対象の構文 | 開始位置 |
+|---|---|
+| 制御・宣言の本体 | `{` は対応する見出と同じ行に置く． |
+| 開始の `{` を独立させて記述出来る複数行のオブジェクト・辞書等を実引数とする場合 | `{` を独立した行に置く．１行に収まる場合は 2.3 に従う． |
+| Go の複合リテラル等，型と `{` の密着を要する構文 | 型と `{` を同じ行に記述する． |
+| Kotlin の末尾ラムダ，Swift の末尾クロージャ等 | 関数本体の開始記号を呼出と同じ行に置く． |
+
+#### 宣言本体の配置
+
+文・宣言を並べる非空の宣言本体（関数・型の定義，CSS / SCSS の宣言ブロック等）は，内容が一つでも開始記号の次行から１段深く記述し，文・宣言毎に行を分ける．閉じ記号は見出と同じ深さの行頭に置く．列挙子・値の要素の並びと式本体の配置は 2.3 に従う．
+
+#### 閉じ括弧と後続字句
+
+複数行に展開した行頭の閉じ括弧 (`)` / `]` / `}`) の後に続く閉じ括弧は次行に配置し，其の他の字句は同一行に続ける．カンマ，セミコロン，`else`，`from`，本体の `{`，メンバアクセス及び演算子も同じとする．構文・式の結合を保つ改行位置を選ぶ．
+
+#### 同行の波括弧の内側
+
+| 対象の構文 | 空白 |
+|---|---|
+| 非空の本体・オブジェクト・辞書・集合等 | 開きの後と閉じの前にスペース１つを置く． |
+| 空の `{}` | 内側に空白を置かず，同じ行に記述する． |
+| JSX の埋込式・文字列の補間式 | 囲みと式を密着させる（`{expression}`, `${expression}`, `#{expression}` 等）． |
+
+### 例
+
+```cpp
+// ❌
+if(VeryLongConditionExpressionToPreventCollapseFromHundredTwentyEightCharacterLimit)
+{
+	PerformLongerOperationCallWithReasonablyDescriptiveName();
+}
+
+// ✅
+if(VeryLongConditionExpressionToPreventCollapseFromHundredTwentyEightCharacterLimit) {
+	PerformLongerOperationCallWithReasonablyDescriptiveName();
+}
+
+// ❌
+void Foo()
+{
+}
+
+// ✅
+void Foo() {}
+```
+
+```typescript
+// ❌ 関数呼出と同じ行に { を配置
+const screenStylesheetB = StyleSheet.create({
+	mainContainerWithReasonablyLongDescriptiveIdentifierName: {
+		flexGrowFactorForLayoutComputationEngineModule: 1
+	}
+});
+
+// ✅ 関数引数の { を独立した行に配置
+const screenStylesheetA = StyleSheet.create(
+	{
+		mainContainerWithReasonablyLongDescriptiveIdentifierName: {
+			flexGrowFactorForLayoutComputationEngineModule: 1
+		}
+	}
+);
+```
+
+```typescript
+// ❌ スペース無
+const options = {willReadFrequently: true};
+
+// ✅ 同一行の波括弧：内側にスペース
+const options = { willReadFrequently: true };
+const pair = { key: "a", value: 1 };
+
+// ✅ 空の本体はスペース不要
+function noop(): void {}
+```
+
+```typescript
+// ✅ 空の本体はスペース不要（catch の本体を空にする事は 6.8 が禁じる為，例には用いない）
+const Noop = (): void => {};
+```
+
+```tsx
+// ❌
+<Text>{ item.name }</Text>
+
+// ✅
+<Text>{item.name}</Text>
+const msg = `Hello ${name}`;
+```
+
+```ruby
+greeting = "Hello #{name}"
+```
+
+```css
+.item {
+	color: red;
+}
+
+.container {
+	width: 100%;
+	color: red;
+}
+```
+
+## 2.6 ラベルのインデント
+
+**対象**：C, C++, C#, Java, Go, Swift, PHP, JavaScript, TypeScript, Ruby の独立したラベル・節見出・アクセス区画
+
+**強度**：必須 (`MUST`)
+
+### 規則
+
+| 対象の構文 | 言語 | 配置 |
+|---|---|---|
+| `case` / `default` | C, C++, C#, Java, Go, Swift, PHP, JavaScript, TypeScript | `switch` の見出と同じ深さに置き，処理を１段深くする． |
+| goto ラベル | C, C++, C#, Go, PHP | 後続の処理より１段浅くする． |
+| `private:` / `protected:` / `public:` | C++ | クラスの見出と同じ深さに置き，成員を１段深くする． |
+| 独立行のループラベル | Java, Go, Swift, JavaScript, TypeScript | 対象ループの前に置き，ループより１段浅くする． |
+| `when` / `else` | Ruby の `case` | `case` と同じ深さに置く．単一文本体と改行は 3.8 に従う． |
+
+### 例
+
+```cpp
+// ❌ 悪い例（ラベルのインデントが深すぎる）
+switch(Status) {
+	case 1:
+		return "active";
+	default:
+		return "unknown";
+}
+
+// ✅ 良い例（ラベルは周囲より１段浅く，中身は通常インデント）
+switch(Status) {
+case 1:
+	return "active";
+case 2:
+	return "inactive";
+default:
+	return "unknown";
+}
+
+// ✅ goto ラベル（関数内）
+void Foo() {
+	for(int i = 0; i < h; ++i) for(int j = 0; j < w; ++j) if(Grid[i][j] == Target) goto Found;
+	return;
+Found:
+	Process();
+	return;
+}
+```
+
+```ruby
+case status when 200 then handle_successful_request_with_long_name(payload, headers)
+when 404 then handle_resource_not_found_with_long_name(payload, headers)
+else handle_unknown_status_code_with_long_name(payload, headers) end
+```
+
+## 2.7 アクセス修飾子の順序
+
+**対象**：C++, C#, Java, Kotlin, Swift, PHP, TypeScript
+
+**強度**：必須 (`MUST`)
+
+### 規則
+
+可視性は次の順に記述し，内部実装を先に，公開インタフェースを後に配置する．不要な区画は設けない．
+
+| 言語 | 可視性の順序 |
+|---|---|
+| C++, PHP, TypeScript | `private` → `protected` → `public` |
+| C# | `private` → `private protected` → `protected` → `internal` → `protected internal` → `public` |
+| Java | `private` → パッケージ非公開（修飾子無）→ `protected` → `public` |
+| Kotlin | `private` → `protected` → `internal` → `public`（既定） |
+| Swift | `private` → `fileprivate` → `internal`（既定）→ `package` → `public` → `open` |
+
+C++ のアクセス区画は上表の順に置き，`private` の成員が在る場合は `private:` を明記する．成員毎に修飾子を付ける構文では，成員を上表の順に並べる．Swift の既定の `internal` も明記する．
+
+### 適用条件・例外
+
+要求される公開範囲・初期化順序・メモリ配置・外部契約を満たした上で，同じ可視性内の順序は 5.11 に従う．アクセス区画の空行とインデントは 2.4, 2.6 に従う．
+
+### 例
+
+```cpp
+class Foo {
+private:
+
+	int Baz;
+
+protected:
+
+	void Qux();
+
+public:
+
+	void Bar();
+};
+```
+
+## 2.8 数値リテラル
+
+**対象**：C, C++, C#, Java, Go, Rust, Kotlin, Swift, PHP, JavaScript, TypeScript, Ruby, Python
+
+**強度**：必須 (`MUST`)
+
+### 規則
+
+#### 浮動小数点
+
+**対象**：C, C++, C#, Java, Kotlin
+
+`float` 型リテラルには `F` 接尾辞を付け，`double` 型リテラルには付けない．小数点の前後の `0` は省略しない．C# の `decimal` 型には `M` 接尾辞を付ける．
+
+#### 接頭辞・接尾辞・指数の英字は大文字
+
+大小の両方が構文上有効な数値リテラル内の英字は，大文字で記述する．
+
+| 対象 | 記述する形 |
+|---|---|
+| 接尾辞 | `F`, `L`, `U`, `UL`, `LL`, `ULL` 等 |
+| １６進接頭辞・桁 | `0X`, `0XFF` |
+| ２進・８進接頭辞 | `0B`, `0O` |
+| 指数 | `1.5E2`, `1.0E-3` |
+
+### 例
+
+#### 浮動小数点
+
+```cpp
+// ❌
+float Pi = 3.14;
+float Half = .5;
+float One = 1.;
+
+// ✅
+float Pi = 3.14F;
+float Half = 0.5F;
+float One = 1.0F;
+```
+
+#### 接頭辞・接尾辞・指数の英字は大文字
+
+```cpp
+// ❌
+long Big = 1234567890l;
+unsigned int Mask = 0xdeadbeef;
+unsigned long Flags = 0xffull;
+int Bits = 0b1010;
+float Exp = 1.5e2f;
+
+// ✅
+long Big = 1234567890L;
+unsigned int Mask = 0XDEADBEEF;
+unsigned long Flags = 0XFFULL;
+int Bits = 0B1010;
+float Exp = 1.5E2F;
+```
+
+## 2.9 字句間の空白
+
+**対象**：全言語共通
+
+**強度**：必須 (`MUST`)
+
+### 規則
+
+空白は記号の綴りだけでなく，言語と構文上の役割から決める．同行の区切りにはスペース１個を用い，別の字句への融合，文境界又は値の変更を起こさない．改行の可否は 2.3，波括弧の内側は 2.5 に従う．
+
+#### 演算・参照・型の合成
+
+| 役割 | 空白 | 対象・例 |
+|---|---|---|
+| 二項の算術 | 前後 | `+`，`-`，`*`，`/`，`%`，`**`，Python の `//` |
+| 比較 | 前後 | `==`, `!=`, `===`, `!==`, `<`, `>`, `<=`, `>=`, `<=>`, `=~`, `!~` |
+| 論理・ビット・シフト | 前後 | `&&`，`\|\|`，`&`，`\|`，`^`，`<<`，`>>`，`>>>`，語の演算子 |
+| 三項・合体・エルビス | 前後 | `?`, `:`, `??`, `?:`（一つの演算子の内部は分断しない） |
+| アロー | 前後 | ラムダ・分岐・戻値型等の `=>` / `->`（メンバ参照と区別する） |
+| 型・包含 | 前後 | `as`, `as?`, `as!`, `is`, `!is`, `in`, `!in`, `instanceof` |
+| 型の合併・交差 | 前後を密着 | `A\|B`, `A&B`, `(A&B)\|null`（型の構成要素を結ぶ記号とし，値のビット演算及び参照・借用の単項記号と区別する） |
+| 束縛・送信 | 前後 | Go の `:=` / 送信の `<-`，Python の代入式 `:=` |
+| 前置・後置の記号 | 被演算子へ密着 | `-x`, `!Flag`, `~Mask`, `*Ptr`, `&Value`, `++i`, `i++`, `...Items`, `expr?` |
+| 前置の語 | 後に空白 | `not x`, `await value`（専用構文の括弧は後述の規則に従う） |
+| メンバ参照・スコープ・安全呼出 | 前後を密着 | `Obj.Member`, `Ptr->Member`, `std::name`, `Obj?.Member`, `Obj&.Method`, `$obj?->member` |
+| 記号の範囲 | 前後を密着 | `a..b`, `a...b`, `a..<b`, `a..=b` |
+| C++ のメンバポインタ | 前後 | `Obj .* Ptr`, `Obj ->* Ptr` |
+| PHP の文字列連結 | 前後 | `$a . $b`（二項演算子の表記へ揃え，参照の `.` と区別する） |
+
+Go の受信 `<-Ch` とチャネル型 `chan<- int` / `<-chan int` は記号を密着させる．Kotlin のビット演算は中置関数 `and` / `or` / `xor` / `shl` / `shr` / `ushr` の前後を区切り，否定は `inv()` を用いる．語の範囲 `a until b` は語を区切る．演算子の有無と使用可否は言語別規則に従い，非 null 表明等の空白規則を使用許可と取り違えない (4.9, 6.10)．
+
+#### 等号の役割
+
+| 役割 | 空白 | 例 |
+|---|---|---|
+| 代入・初期化・仮引数の既定値 | 前後に１個 | `x = value`, `def f(x = 0, y: int = 1):` |
+| 複合代入 | 前後に１個 | `x += value`, `x ??= value` |
+| 呼出側のキーワード引数・名前付実引数 | 前後を密着 | `f(key=value)` |
+| キーワードパターン | 前後を密着 | `case C(x=1)` |
+| 属性値 | 前後を密着 | `name="value"` |
+| 指示文の設定値 | 前後を密着 | `declare(strict_types=1);`, `declare(ticks=1);` |
+
+#### コロンと区切り
+
+| 役割 | 前 | 後 | 例 |
+|---|---|---|---|
+| 型注釈・欄・仮引数・戻値型 | 密着 | 空白 | `x: T`, `fun F(): Int`, `pub x: i32` |
+| 辞書・オブジェクト・鍵付要素・名前付実引数 | 密着 | 空白 | `key: value`, `f(name: value)`, `[String: Int]` |
+| 型仮引数・関連型の制約 | 密着 | 空白 | `T: Protocol`, `associatedtype X: Y`, `T: Clone + Debug` |
+| 三項・継承・範囲反復・C++ 初期化子 | 空白 | 空白 | `c ? a : b`, `class A : B`, `for(int x : Values)`, `Foo() : Value(1)` |
+| ラベル・節見出 | 密着 | 本体の配置に従う． | `case 1:`, `Found:`, `public:` |
+| カンマ・セミコロン | 密着 | 同行に次の要素が続く時だけ空白 | `f(a, b)`, `for(;;)` |
+| Kotlin の注釈の適用先 | 密着 | 密着 | `@file:JvmName("Name")` |
+| PHP / Python の本体開始 | 密着 | 本体の配置に従う． | `if($x):`, `if x:`, `def f():` |
+| Ruby のキーワード仮引数 | 密着 | 値が続く時だけ空白 | `name:`, `age: 0` |
+| Python のラムダ | 密着 | 空白 | `lambda x: x` |
+
+Swift のクラス・プロトコルの継承はコロンの前後に空白を置き，型仮引数・関連型の制約とは区別する．区切りの直後が別の区切り・閉じ括弧・改行の場合は，要素の為の空白を加えない．非空の波括弧の内側の空白と重ねない．CSS の空白自体が値である宣言は，後述の内容の記述に従う．
+
+#### 丸括弧・角括弧と呼出
+
+`(` / `[` の直後と `)` / `]` の直前を密着させる．関数・メソッドの名前と実引数・仮引数の `(`，添字の対象と `[` も密着させる．型引数・型仮引数の `<` / `>` の内側も同じとする．括弧内部の字句同士に必要な空白は消さない．制御語は 3.1 に従う．
+
+`return`, `throw`, `yield`, `await`, `delete`, `new`, `case`, `of` 等と後続の式・型・照合は空白で区切る．括弧で始まる値でも同じとし，`return (a, b)` 等を用いる．但し C / C++ の `sizeof(X)`，C# の `typeof(T)`，Ruby の `defined?(x)` は専用構文の括弧へ密着させる．Ruby の `not` を囲む括弧は 4.4 に従う．
+
+### 適用条件・例外
+
+字句の融合を防ぐ包装は 4.4 に従う．Swift の演算子の前置・中置・後置，Ruby の括弧無呼出等，空白が構文を変える境界は其の意味を優先する．
+
+#### 宣言・型・式の言語固有の境界
+
+| 言語・文脈 | 記述する形・条件 |
+|---|---|
+| 属性・注釈の囲み | `[[nodiscard]]`, `#[Attribute(...)]`, `@file:JvmName(...)` 等の記号内部を分断しない． |
+| 型本体の開始 | `struct {}`, `interface {}`. 本体の内容の有無に依らず，前の語と `{` を空白１個で区切る． |
+| 可変長・展開・残余 | `*args`, `**kwargs`, `**opts`, `...rest` 等の記号を対象へ密着させる． |
+| C / C++ のポインタ・参照 | `int *Ptr`, `const int &Ref`. 記号を名前側へ付ける (2.11)． |
+| C / C++ の括弧付宣言子 | `int (*Ptr)`, `int (*Func)(int)`. 型と宣言子の括弧を区切る． |
+| C / C++ / C# / Java / PHP の型変換 | `(int)Value` 等，型を閉じる括弧と値を密着させる．C++ のキャストの選択は 6.4 に従う． |
+| C / Go の複合リテラル | `(T){ 1 }`, `T{ 1 }`. 型と `{` を密着させる． |
+| C# のラムダ | `async (x, y) => x`, `int (x) => x`, `[A] (x) => x`. 修飾・戻値型・属性と仮引数を区切る． |
+| C# の分解宣言・構築子制約 | `var (a, b)`, `where T : new()`. `var` の使用条件は 5.4 に従う． |
+| Java の可変長仮引数 | `T... Args`. `...` を型へ密着させ，名前との間を区切る． |
+| Go の関数の戻値の組 | `func(int) (int, error)`. 仮引数を閉じる括弧の後を区切る． |
+| Rust の借用・生存期間 | `&self`, `&mut Value`, `&'a (i32, i32)`, `dyn Trait`. 記号を密着させ，語の後を区切る． |
+| Rust のマクロ | `println!(...)`, `macro_rules! Name`. `!` をマクロ名へ密着させ，定義名との間を区切る． |
+| Kotlin の型位置の注釈 | `@Composable () -> Unit`, `suspend () -> Unit`. 注釈又は修飾語と型の括弧を区切る． |
+| Kotlin のラベル | `super<A>@O`, `return@Outer` の内部を分断しない． |
+| Swift の型・型変換 | `T?`, `T!`, `x as! [Int: Int]`, `x as? [T]`. 型の接尾記号を密着させ，型変換の語と型を区切る． |
+| Swift の照合・関数型 | `case let .foo(x)`, `@escaping (Int) -> Void`. 語・属性と後続を区切る． |
+| PHP の参照・名前空間 | `&$x`, `&...$x`, `function &f()`, `$ref = &$obj->cache`, `App\Service`. 記号と対象の内部を分断しない． |
+| JavaScript / TypeScript の生成器 | `function* gen()`. `*` は語へ密着させ，名前との間を区切る． |
+| JavaScript / TypeScript のタグ付テンプレート | タグとテンプレートの開始を密着させる． |
+| Ruby のブロック・ラムダ | `arr.map(&:to_s)`, `->(&b) {}`. `&` と対象，`->` と仮引数の括弧を密着させる． |
+| Ruby の分解 | `\|a,\|` の閉じの前へ空白を入れない． |
+
+Swift の前置・中置・後置演算子や Ruby の符号は，意図する構文・結合に必要な空白を記述する．Ruby の `p (1..6).to_a` の様に，括弧無呼出の最初の実引数が括弧で始まる場合は，呼出名の後を空白で区切る．
+
+JavaScript / TypeScript と Python では，小数点も指数も持たない十進整数の直後のメンバ参照の `.` を，数値の小数点と見誤らせない様に空白で区切る (`1 .toString()`, `6 .real`)．リテラル内部に空白を加える規則ではない．
+
+#### リテラルと補間
+
+リテラルの引用符，接頭辞・接尾辞，区切文字及び本文は，其の記法に従って連続して記述する．本文の空白は要求する値を表す物とし，字句間の空白と区別する (1.3, 2.13)．補間の式には通常の式と同じ規則を適用し，囲みの内側は 2.5 に従う．
+
+Ruby の `%w` / `%i` の要素は空白で区切る．`%w(a ,b ;c)` の `,b` / `;c` も独立した要素である．
+
+#### JSX / JSON / HTML
+
+JSON の鍵と値はコロン，要素はカンマで区切る．JSX / HTML のタグと属性には次の形を用い，属性の使用可否は 6.15 に従う．属性内にコードを記述する場合は埋込言語の規則も満たす．
+
+| 対象 | 記述する形・条件 |
+|---|---|
+| タグの開始 | `<` / `</` とタグ名を密着させる． |
+| 属性の並び | タグ名又は前の属性との間に空白を置く． |
+| 属性の代入 | `name="value"` の `=` の前後を密着させる． |
+| タグの閉じ | `>` の前を密着させる．JSX 又は意味上必要な `/>` の前は空白１個とする． |
+| 本文・属性値・文字参照 | 要求する値と表示を表す通りに記述する．内容の空白はタグ内部の区切空白と区別する． |
+| JSX の式 | `{value}` の内側を密着させる． |
+
+HTML コメントの記述は 7.2，空要素の `/` の可否は 6.15 に従う．JSX の本文の空白・改行も表示内容として扱う (2.3)．
+
+#### CSS / SCSS の空白
+
+| 役割 | 規則 |
+|---|---|
+| 識別子・色・単位 | `margin-top`, `--main-color`, `hue-rotate`, `.name`, `#name`, `#ABCDEF`, `10px`, `100%` の内部を分断しない． |
+| 擬似クラス・擬似要素 | `:hover`, `::before` の内部を密着させる． |
+| 特殊記法 | `unicode-range` の `U+`，`nth-child(-n+3)` 等の `An+B` を通常の二項演算として広げない． |
+| 子孫結合子 | `.a .b` の様に空白で区切る．同一要素を指定する `.a.b` と区別する． |
+| 子・隣接・後続の結合子 | `>` / `+` / `~` の前後へ空白を置く． |
+| 計算 | `calc()` の二項の `+` / `-` には両側の空白を置く．SCSS の演算も前後を区切る． |
+| 宣言・特性の条件 | `property: value`, `(prop: value)` の様にコロンの前は密着，後は空白とする． |
+| 要素区切・規則・優先指定 | カンマの後，`{` と `!important` の前へ必要な空白を置く． |
+| 条件・制御 | `@media (...) and (...)`，SCSS の `@if` / `@each` 等の語と式を区切る． |
+| 選択子を含む関数 | `:where()` / `:is()` / `:not()` / `:has()` の内部も，子孫結合子は空白で区切る． |
+| SCSS のプレースホルダ・親参照 | `%placeholder`, `&__x` 等の記号と名前の意味を保つ． |
+
+`--x: ;` の空白，引用符の無い `url()` の引数及び文字列本文は値の一部として記述する．通常の空白では意図する字句を分けれない境界には，説明本文を持たない `/**/` を用いる．`10/**/%` と `10%`，`1px/**/-2px` と `1px-2px` の字句を区別し，CSS / SCSS の対象方言の字句規則に従う．
+
+#### 前処理指令とマクロ
+
+C / C++ の指令名は `#define` の様に `#` と密着させる．関数形式マクロは名前と仮引数の `(` を密着させる．オブジェクト形式の定義では名前と置換リストを空白で区切る．仮引数のカンマ等は本節の区切り規則に従う．
+
+文字列化・字句連結の対象，`#include <a b.h>` の見出名及びリテラルは，必要な内容・区切りを正確に記述する．マクロの実引数と本体には，展開又は照合に必要な字句・囲み・区切りを用いる．Rust のマクロも同じとし，通常の式とは記法を区別する．
+
+### 例
+
+```cpp
+int Result = Left + Right;
+void Process(int Count = 0, bool Enabled = true);
+Func(a, b);
+Value = Items[i];
+std::vector<int> Values;
+```
+
+```python
+def f(x = 0, y: int = 1):
+	return x + y
+
+f(x=2, y=3)
+```
+
+## 2.10 const の位置
+
+**対象**：C, C++
+
+**強度**：必須 (`MUST`)
+
+### 規則
+
+基底の型を修飾する `const` は型名の前に配置する．ポインタ自体を修飾する `const` は，対応する `*` の後へ置く (`T *const Ptr`, `const T *const Ptr`)．修飾する対象を変えてはならない (5.8)．
+
+### 例
+
+```cpp
+// ❌ 型の後の const
+int const Value = 10;
+int const &Ref = Value;
+
+// ✅ 型の前の const
+const int Value = 10;
+const int &Ref = Value;
+```
+
+## 2.11 参照・ポインタの記号位置
+
+**対象**：C, C++
+
+**強度**：必須 (`MUST`)
+
+### 規則
+
+ポインタ記号 `*` は変数名側に付与する．C++ では参照記号 `&` も同様とする．
+
+### 例
+
+```cpp
+// ❌
+int* Ptr;
+const int& Ref = Value;
+void Func(const std::string& Name);
+
+// ✅
+int *Ptr;
+const int &Ref = Value;
+void Func(const std::string &Name);
+```
+
+## 2.12 sizeof の括弧
+
+**対象**：C, C++
+
+**強度**：必須 (`MUST`)
+
+### 規則
+
+`sizeof` には必ず括弧を付与する．式に対して括弧の記述が文法上任意であっても省略してはならない．
+
+### 例
+
+```cpp
+// ❌
+int n = sizeof LangTable / sizeof LangTable[0];
+
+// ✅
+int n = sizeof(LangTable) / sizeof(LangTable[0]);
+```
+
+## 2.13 文字列の引用符
+
+**対象**：C, C++, C#, Java, Go, Rust, Kotlin, Swift, PHP, JavaScript, TypeScript, Ruby, Python, JSON, HTML, CSS の文字列・属性値
+
+**強度**：必須 (`MUST`)
+
+### 規則
+
+通常の文字列と HTML の属性値は二重引用符で囲む．補間の有無では使分けず，意図する値に必要な逃避を記述する．Python の文書文字列には三重二重引用符を用いる．
+
+複数行・生文字列・正規表現・テンプレートには，各構文の区切り・接頭辞・補間記法を用いる．
+
+### 例
+
+```typescript
+// ❌
+const name = 'hello';
+
+// ✅
+const name = "hello";
+```
+
+## 2.14 末尾カンマ
+
+**対象**：C, C++, C#, Java, Go, Rust, Kotlin, Swift, PHP, JavaScript, TypeScript, Ruby, Python, JSON, CSS のカンマで区切る並び
+
+**強度**：必須 (`MUST`)
+
+### 規則
+
+並びの最後に，区切りだけを目的とするカンマは記述しない．型・値・構文の区別に必要なカンマは，次の条件で記述する．
+
+| 対象の構文 | カンマの役割 |
+|---|---|
+| Go の複数行のリテラル・引数・仮引数・型引数・型仮引数の並び | 閉じの前で改行する際に，自動セミコロン挿入を抑止する． |
+| Rust の単一要素タプル `(x,)` 及びタプル型 `(T,)` | 単一要素の組を表す． |
+| JavaScript / TypeScript の配列の空要素 | `[,]` / `[1,,]` 等の要素数を表す． |
+| TSX の制約・既定型を伴わない単一型仮引数 | `<T,>` を JSX タグの開始と区別する． |
+| Ruby のブロック仮引数 `\|a,\|` | 分解して受け取る形を指定する． |
+| Python の単一要素タプル | 単一要素の組を表す．括弧を用いない `x,` も同じとする． |
+| CSS の `var(--x,)` | 空のフォールバック値を表す． |
+
+### 例
+
+```go
+// ✅ Go の複数行では末尾カンマ必須
+items := []string{
+	"first item with a reasonably long description",
+	"second item with a reasonably long description",
+	"third item with a reasonably long description",
+}
+```
+
+```typescript
+// ❌
+const Colors = [
+	"firstColorOptionWithReasonablyLongDescription",
+	"secondColorOptionWithReasonablyLongDescription",
+	"thirdColorOptionWithReasonablyLongDescription",
+];
+
+// ✅
+const Colors = [
+	"firstColorOptionWithReasonablyLongDescription",
+	"secondColorOptionWithReasonablyLongDescription",
+	"thirdColorOptionWithReasonablyLongDescription"
+];
+```
+
+```python
+# ✅ 単一要素タプル（カンマ必須）
+single = 42,
+```
+
+## 2.15 末尾セミコロン
+
+**対象**：C, C++, C#, Java, Go, Rust, Kotlin, Swift, PHP, JavaScript, TypeScript, Ruby, Python, CSS の文・宣言
+
+**強度**：必須 (`MUST`)
+
+### 規則
+
+セミコロンは文の終端又は構文内の区切として扱い，値を返す式と区別する．本体を閉じる記号の後へ一律に追加しない．
+
+| 構文・対象 | 終端・区切の規則 |
+|---|---|
+| C / C++ / C# / Java / PHP の文・宣言 | 文法上セミコロンで終える文・宣言には，終端の `;` を記述する． |
+| Go / Kotlin / Swift / Ruby の文 | 不要な行末の `;` は記述せず，同行の文又は構文内の要素を区切る為に必要な箇所だけに用いる． |
+| Rust の文と値を返す式 | 文法と式の値を保つ．値を返す末尾式へ `;` を加えて単位型の値へ変えない．関数の返戻は 5.7 に従う． |
+| JavaScript / TypeScript の文 | 文法上付与出来る終端の `;` は省略せず，自動セミコロン挿入に依存しない．関数・クラスの宣言本体には不要な `;` を追加しない． |
+| Python の文 | 単純文も文毎の行へ分け，末尾又は同行の文区切として `;` を記述しない．本体の配置は 2.3 に従う． |
+| CSS / SCSS の宣言 | 各宣言の末尾に `;` を記述する． |
+
+### 例
+
+```typescript
+// ❌
+const name = "hello"
+const greet = () => "hi"
+
+// ✅
+const name = "hello";
+const greet = (): string => "hi";
+```
+
+## 2.16 セミコロンとカンマの選択
+
+**対象**：TypeScript
+
+**強度**：必須 (`MUST`)
+
+### 規則
+
+セミコロンとカンマの何方も使用可能な文脈（インタフェース本体，オブジェクト型等）では，カンマを使用する．
+
+### 例
+
+```typescript
+// ❌
+interface Props {
+	firstReasonablyLongPropertyNameToPreventCollapse: string;
+	secondReasonablyLongPropertyNameToPreventCollapse: number;
+}
+
+// ✅
+interface Props {
+	firstReasonablyLongPropertyNameToPreventCollapse: string,
+	secondReasonablyLongPropertyNameToPreventCollapse: number
+}
+```
+
+---
+
+# 第３章 制御構文
+
+## 3.1 制御語と括弧の間隔
+
+**対象**：C, C++, C#, Java, Kotlin, PHP, JavaScript, TypeScript
+
+**強度**：必須 (`MUST`)
+
+### 規則
+
+制御構文キーワード（`if`, `for`, `while`, `switch`, `catch` 等）と括弧の間にスペースを入れない（関数・メソッドの呼出及び添字の括弧は 2.9 の丸括弧・角括弧と呼出を参照）．
+
+### 例
+
+```cpp
+// ❌
+if (Condition) return;
+for (int i = 0; i < n; ++i) Process(i);
+
+// ✅
+if(Condition) return;
+for(int i = 0; i < n; ++i) Process(i);
+```
+
+## 3.2 波括弧
+
+**対象**：C, C++, C#, Java, Go, Rust, Kotlin, Swift, PHP, JavaScript, TypeScript の波括弧で囲む制御本体
+
+**強度**：必須 (`MUST`)
+
+### 規則
+
+#### 原則
+
+| 対象の制御本体 | 波括弧と配置 |
+|---|---|
+| 単一文を波括弧無で記述出来る本体 (C, C++, C#, Java, Kotlin, PHP, JavaScript, TypeScript) | 下記の必須条件に該当しない場合は波括弧を省略し，見出と同じ行に置く． |
+| 言語仕様が波括弧を必須とする本体（Go, Rust, Swift 等） | 単一文でも波括弧を記述する．１行に収まる場合は見出・本体・閉じを同じ行に置く． |
+
+行幅を超える場合は 2.3 に従い，見出だけを折る場合は，閉じ括弧に続く本体が収まるかを確かめる．
+
+#### 波括弧が必須の条件
+
+波括弧を省略出来る制御構文でも，次の本体には波括弧を記述する．
+
+- ２文以上の本体，又は宣言を直接含む本体．
+- 本体を見出と同じ行へ続けると行長制限を超える場合，又は本体自身が複数行に亘る場合．条件を折った場合は，閉じ括弧の行から測る．中間の連鎖は 3.6 に従う．
+- `else` の結合先，宣言のスコープ，資源の寿命又は構文の成立に波括弧が必要な本体．
+
+#### if-else で片方のみ複数文の場合
+
+各本体を個別に上記の条件へ照合する．単一文側が省略条件を満たす場合は其の波括弧を省き，複数文側には波括弧を記述する．
+
+### 例
+
+#### 原則
+
+```cpp
+// ❌
+if(Cond) {
+	return;
+}
+
+// ✅
+if(Cond) return;
+```
+
+```cpp
+// １２８文字を超える場合のみ許可
+if(VeryLongConditionalExpressionExceedingHundredTwentyEightChars) {
+	DoSomethingWithVeryLongArguments(Arg1, Arg2, Arg3, Arg4, Arg5);
+}
+```
+
+#### 波括弧が必須の条件
+
+```cpp
+// ❌ 危険（DoB() は常に実行される）
+if(Condition)
+	DoA();
+	DoB();
+
+// ✅
+if(Condition) {
+	DoA();
+	DoB();
+}
+```
+
+```cpp
+// ❌（単一文だが引数の折返で複数行に渡る — 波括弧無だと範囲が誤読され易い）
+if(SomeReasonablyLongConditionExpression) PerformOperationWithLongerDescriptiveName(
+	FirstArgumentWithReasonablyLongName,
+	SecondArgumentWithReasonablyLongName,
+	ThirdArgumentWithReasonablyLongName
+);
+
+// ✅
+if(SomeReasonablyLongConditionExpression) {
+	PerformOperationWithLongerDescriptiveName(
+		FirstArgumentWithReasonablyLongName,
+		SecondArgumentWithReasonablyLongName,
+		ThirdArgumentWithReasonablyLongName
+	);
+}
+```
+
+#### if-else で片方のみ複数文の場合
+
+```cpp
+// ❌（単一文側にも波括弧）
+if(Condition) {
+	DoA();
+} else {
+	DoB();
+	DoC();
+}
+
+// ✅（単一文側は省略）
+if(Condition) DoA();
+else {
+	DoB();
+	DoC();
+}
+```
+
+## 3.3 条件分岐の平坦化
+
+**対象**：C, C++, C#, Java, Go, Rust, Kotlin, Swift, PHP, JavaScript, TypeScript, Ruby, Python
+
+**強度**：推奨 (`SHOULD`)
+
+### 規則
+
+ネストが深く為るのを避ける為，`if-else` 及び三項演算子（三項演算子を持つ言語のみ．4.10 参照）では，`if ... else if ... else if ... else` の形で記述出来る様に条件を設定する．`if` の中に `if` をネストにするのではなく，条件を反転させて `else` 側に `if` を配置し，`else if` チェーンにする．
+
+本体が同じであり，短絡評価と本体の実行回数が要求動作を満たす場合は，条件を `||` で結んだ１文で記述する (MUST)．条件式の重複は，呼出・代入・増減を含まず再評価の副作用も無い場合に限り省略する．
+
+尚，下例は通常の整数値を前提とする．NaN や演算子の多重定義では，`!(x <= a)` と `x > a` が等価とは限らない．多重定義された論理演算子，プロパティ・添字・`volatile`・共有状態の読取では，字面が同じでも評価回数・破棄時点・束縛範囲を個別に確認する．
+
+### 適用条件・例外
+
+**例外**：条件が同時に成立し得る連続した `if` で本体に副作用が有る場合 (`if(a) Log(); if(b) Log();`) は，統合すると実行回数が変わる為統合しない．
+
+### 例
+
+```cpp
+// ❌ if の中に if をネスト（深く為る）
+if(x <= 10) {
+	if(x <= 6) DoC();
+	else DoB();
+} else DoA();
+
+// ✅ 条件を反転して else if チェーンにする
+if(x > 10) DoA();
+else if(x > 6) DoB();
+else DoC();
+
+// 三項演算子も同様
+
+// ❌ ネストが深い
+const int LongResultIdentifierForVeryDescriptiveStorageInLogicLayer = LongInputValue <= UpperThresholdValue ?
+LongInputValue <= LowerThresholdValue ? LowResultValue : MidResultValue :
+HighResultValue;
+
+// ✅ 条件を反転して平坦に
+const int LongResultIdentifierForVeryDescriptiveStorageInLogicLayer = LongInputValue > UpperThresholdValue ?
+HighResultValue :
+LongInputValue > LowerThresholdValue ? MidResultValue : LowResultValue;
+```
+
+```cpp
+// ❌ 同じ本体の if が連続（先行の脱出で後続は実行されない）
+if(!Ptr) return;
+if(!Count) return;
+
+// ✅ 条件を || で結合
+if(!Ptr || !Count) return;
+
+// ❌ else if で同じ本体
+if(a) Reset();
+else if(b) Reset();
+
+// ✅ 条件を || で結合
+if(a || b) Reset();
+```
+
+## 3.4 else / else if
+
+**対象**：C, C++, C#, Java, Go, Rust, Kotlin, Swift, PHP, JavaScript, TypeScript の `else` / `else if`
+
+**強度**：必須 (`MUST`)
+
+### 規則
+
+本体の波括弧は 3.2 の条件に従って記述する．単一文の `else` / `else if` も，省略条件を満たす場合は波括弧を付けない．
+
+| 直前の本体の形 | 後続の配置 |
+|---|---|
+| 波括弧を省略した単一文 | `else` を次行に置く． |
+| 波括弧で囲む本体 | 閉じ波括弧と同じ行に `else` を続ける (`} else if` / `} else`)． |
+
+### 例
+
+```cpp
+if(a) DoA();
+else if(b) DoB();
+else DoC();
+```
+
+## 3.5 switch
+
+**対象**：C, C++, C#, Java, Go, Rust, Kotlin, Swift, PHP, JavaScript, TypeScript, Ruby, Python
+
+**強度**：必須 (`MUST`)
+
+### 規則
+
+同一変数に対する３分岐以上の値比較には `switch`（Rust は `match`，Kotlin は `when`，Ruby は `case`，Python 3.10 以降は `match`）を使用する．分岐には，要求する型と比較方法を満たす構文を用いる．PHP の緩い比較，Ruby の `===`，Python の捕捉パターンを，単純な値比較と混同してはならない．
+
+明示的な処理が必要な場合は `default` 句（Rust / Python は `_`，Kotlin / Ruby は `else`）を必ず記述する．処理が不要で，言語が要求する網羅性も満たす場合は省略する．尚，Ruby の `case` の記述詳細は 3.8 に従う．
+
+**分岐の終端 (C#)**：各 `case` 区画は `break` / `return` / `throw` / `continue` / `goto case` 等，制御が区画の末尾へフォールスルーしない形で終端させる事が必須である（暗黙のフォールスルーは CS0163 エラー）．中身の無い `case` ラベルを積み重ねる記述（`case 1: case 2: 処理; break;`）は可能である．
+
+**注意 (C#, Java)**：全 case が同一変数への代入である場合は，本節の関数切出に代えて switch 式（C# 8 以降の `x switch { 1 => "A", _ => "X" }`，Java 14 以降の `case 1 -> "A";`）を用いて良い．
+
+**複数値の併記（Go, Rust, Kotlin, Swift, PHP の `match`）**：暗黙のフォールスルーが無い為，複数値の併記は `case 2, 3:` (Go, Swift)，`2 | 3 =>` (Rust)，`2, 3 ->` (Kotlin)，`2, 3 => ...`（PHP の `match`）の様に列挙する．Go で空の `case` を並べる書き方は，素通りせず何も実行しない為意味が変わる．
+
+**網羅性 (Rust, Swift)**：分岐の網羅性が言語仕様上必須である．全ての値を列挙出来る場合は既定分岐を省略出来る．未処理の値が残る場合は Rust の `_ => {}`，Swift の `default: break` 等を用いる．値を返す式では各分岐の型も満たす必要が有る．
+
+**注意 (PHP)**：`switch` の比較は緩い比較 (`==`) で行われる．厳密な同一性が必要な場合の書き方は 4.12 に定める．
+
+#### 関数切出
+
+全 case が同一変数への代入のみの場合は，switch 文を関数に切り出して戻値で返す．
+
+### 例
+
+```cpp
+switch(Code) {
+case 1:
+	return "A";
+case 2:
+case 3:
+	return "BC";
+default:
+	return "X";
+}
+```
+
+#### 関数切出
+
+```cpp
+// ❌
+std::string Message;
+switch(Reason) {
+case 1:
+	Message = "見付かりません";
+	break;
+case 2:
+	Message = "権限が有りません";
+	break;
+default:
+	Message = "エラー";
+	break;
+}
+
+// ✅
+std::string GetMessage(int Reason) {
+	switch(Reason) {
+	case 1:
+		return "見付かりません";
+	case 2:
+		return "権限が有りません";
+	default:
+		return "エラー";
+	}
+}
+```
+
+## 3.6 for / while / do-while
+
+**対象**：C, C++, C#, Java, Go, Rust, Kotlin, Swift, PHP, JavaScript, TypeScript, Ruby, Python
+
+**強度**：必須 (`MUST`)
+
+### 規則
+
+#### 使分
+
+- **for**: 反復回数が既知の場合，又はイテレータで走査する場合に使用する．
+- **while**: 終了条件のみが既知で，０回実行の可能性が有る場合に使用する．
+- **do-while**: 本体を少なくとも１回は実行する場合に使用する．
+
+各言語の対応構文は以下の通りとする．
+
+- 丸括弧を用いる `for(初期化; 条件; 更新)` は C, C++, C#, Java, PHP, JavaScript, TypeScript に在る．Go の３区画の形式は `for 初期化; 条件; 更新 { ... }` とし，見出全体を丸括弧で囲まない．Rust は `for i in 0..n`，Kotlin は `for(i in 0 until n)`，Swift は `for i in 0..<n`，Ruby は `for` を用いず `n.times` 又は `each`，Python は `for i in range(n)` を用いる．
+- `while` を持たないのは Go のみであり，`for 条件 { }` が対応する．
+- `do-while` を持つのは C, C++, C#, Java, Kotlin, PHP, JavaScript, TypeScript のみである．Swift は `repeat { } while 条件`，Ruby は `begin ... end while 条件` を用いる（`begin` を伴わない修飾子 `while` は０回実行に為り do-while に為らない）．Go / Rust / Python は `for { }` / `loop { }` / `while True:` の末尾で条件を判定して `break` する形で表す．
+
+#### 波括弧
+
+**対象**：C, C++, C#, Java, Go, Rust, Kotlin, Swift, PHP, JavaScript, TypeScript の反復本体
+
+本体の波括弧は 3.2 の条件に従う．`do-while` の `while` は，波括弧付本体では閉じ波括弧と同じ行に，波括弧無の単一文本体では `do <文>;` の次行に置く．
+
+#### 条件式への集約
+
+**対象**：C, C++, C#, Java, Kotlin, PHP, JavaScript, TypeScript（空本体 `;` と前置デクリメントを共に持つ言語）
+
+条件式自体に副作用（インクリメント，代入等）を含める事でループ本体が不要に為る場合は，本体を省略して条件式のみで記述する．ループ本体に相当する処理を条件式に集約出来る場合は，優先的に此のパターンを使用する．
+
+条件式への処理の移動も 1.3 に従う．下例は `Bottom` が非負整数であり，全ての添字が `Mask` の範囲内である事を前提とする．又，C# / Java / Kotlin は整数を真偽値として扱えない為，`while(Bottom > 0 && !Mask[--Bottom]);` の様に明示的な比較として記述する．
+
+#### 多重ループ・ループ内条件分岐の連鎖
+
+**対象**：3.2 で波括弧の省略が出来る言語 (C, C++, C#, Java, Kotlin, PHP, JavaScript, TypeScript)
+
+多重ループ，及びループと `if` / `switch` の組合せは，波括弧を使わず同一行に連鎖して記述する．本体が複数文の場合は本体のみに波括弧を付ける．
+
+連鎖自体の折返が不要な場合，最内ブロックの本体が複数行であっても，中間のループや条件分岐には波括弧を付けない．ヘッダの折返が必要な場合，又は結合関係やスコープが変わる場合は，3.2 に従い必要に応じて中間の本体にも波括弧を付ける．
+
+### 例
+
+#### 使分
+
+```cpp
+// for: 回数既知
+for(int i = 0; i < n; ++i) Process(i);
+
+// for: 範囲走査
+for(const Item &x : Items) Process(x);
+
+// while: 条件充足迄の繰返
+while(a && b) {
+	const int g = Gcd(a, b);
+	a -= g;
+	b -= g;
+}
+
+// while: 単一文
+while(!(n % 2)) n /= 2;
+
+// do-while: １回以上の実行を保証
+do {
+	Increment(s);
+	++Step;
+} while(next_permutation(s.begin(), s.end()));
+```
+
+#### 波括弧
+
+```cpp
+for(int i = 0; i < n; ++i) Process(i);
+while(Queue.front() != Target) Queue.pop();
+do ++i;
+while(i < n);
+```
+
+#### 条件式への集約
+
+```cpp
+// ❌ 冗長（上記で記述可能）
+while(Bottom > 0) {
+	--Bottom;
+	if(Mask[Bottom]) break;
+}
+
+// ✅ 条件式に副作用を集約（空本体）
+while(Bottom && !Mask[--Bottom]);
+
+// ✅ 条件式と単一文に依る簡潔な記述
+while(!(n % 2)) n /= 2;
+```
+
+#### 多重ループ・ループ内条件分岐の連鎖
+
+```cpp
+// 単一文：全て同一行
+for(int i = 0; i < h; ++i) for(int j = 0; j < w; ++j) Process(i, j);
+
+// ループ＋if＋単一文
+for(int i = 0; i < n; ++i) if(s[i] == '#') ++Count;
+
+// 多重ループ＋if＋単一文
+for(int i = 0; i < h; ++i) for(int j = 0; j < w; ++j) if(Grid[i][j] == '#') ++Count;
+
+// if＋ループ＋単一文
+if(CookieCnt < LastCookieCnt) for(int j = 0; j < w; ++j) if(s[i][j] != s[i - 1][j]) return j;
+
+// 本体が複数文：本体のみに波括弧
+for(int i = 0; i < h; ++i) for(int j = 0; j < w; ++j) if(s[i][j] == '#') {
+	Search(s, h, w, i, j);
+	++Ans;
+}
+
+// ループ＋switch（3.5 参照）
+for(int i = 1; i <= Size; ++i) for(int j = 1; j <= Size; ++j) switch(Paths[i][j]) {
+case 1:
+	BuildWall(i, j);
+	break;
+default:
+	BuildPath(i, j);
+	break;
+}
+```
+
+```cpp
+// ❌ 中間の for に波括弧
+for(int i = 0; i < h; ++i) {
+	for(int j = 0; j < w; ++j) Process(i, j);
+}
+
+// ✅
+for(int i = 0; i < h; ++i) for(int j = 0; j < w; ++j) Process(i, j);
+```
+
+## 3.7 goto・ラベル付 break
+
+**対象**：C, C++, C#, Java, Go, Rust, Kotlin, Swift, PHP, JavaScript, TypeScript
+
+**強度**：必須 (`MUST`)
+
+### 規則
+
+多重ループからの脱出には，`goto` (C, C++, C#, Go, PHP)，ラベル付 `break` / `continue` (Java, Go, Rust, Kotlin, Swift, JavaScript, TypeScript)，及び PHP の `break <段数>;` の使用を許可する．但し，可能な限りループ部分を関数に切り出して `return` で脱出する事に依り回避すべきである (SHOULD)．
+
+各言語の記法は以下の通りとする．
+
+- Java / Go / Swift / JavaScript / TypeScript: 独立行のラベル（Swift は `outerLoop:` の次行にループ）．
+- Go: `goto` は変数宣言を飛び越せず，ブロック内へも飛び込めない為，多重ループ脱出にはラベル付 `break` を第一選択とする．
+- Rust: `'outer: loop { ... break 'outer; }`.
+- Kotlin: `OuterLoop@ for(...) { ... break@OuterLoop }`（ラベルはループと同一行に前置する）．
+- PHP: ラベル付 `break` は無く `break 2;` の様に段数を指定する．PHP の `goto` はループや `switch` の内側へは飛び込めない．
+
+上記以外の用途（エラー処理・資源の解放等）であっても，他の構文では資源漏洩・処理の重複を招く場合は使用を認める（全面禁止ではない）．独立行のラベルは 2.6 に従う．Rust / Kotlin の同行ラベルは，対象の文と同じ深さの先頭に置く．
+
+### 適用条件・例外
+
+C の資源解放用ラベルは関数末尾に獲得順の逆順で並べ，前方へだけ跳躍する．
+
+### 例
+
+```cpp
+// ✅ 関数化で対応（推奨）
+bool Search(const Grid &Grid) {
+	for(int i = 0; i < h; ++i) for(int j = 0; j < w; ++j) if(Grid[i][j] == Target) return true;
+	return false;
+}
+
+// ✅ goto に依る多重ループ脱出（関数化が困難な場合のみ）
+for(int i = 0; i < h; ++i) for(int j = 0; j < w; ++j) if(Grid[i][j] == Target) goto Found;
+
+// 未発見時の処理
+// ...
+Found:
+// 発見時の処理
+```
+
+```typescript
+// ✅ ラベル付 break に依る多重ループ脱出（関数化が困難な場合のみ）
+outerLoop:
+	for(let i = 0; i < h; ++i) for(let j = 0; j < w; ++j) if(Grid[i][j] === target) break outerLoop;
+```
+
+## 3.8 Ruby 制御構文
+
+**対象**：Ruby
+
+**強度**：必須 (`MUST`)
+
+### 規則
+
+Ruby の制御構文の書式を以下に定める．三項演算子は 4.10 に従う．
+
+#### 修飾子形式
+
+`if`, `unless`, `while`, `until` の本体が単一文であり，且つ else 節を伴わない場合は修飾子形式（`<式> if <条件>`，`<式> unless <条件>`，`<式> while <条件>`，`<式> until <条件>`）を用いる．通常形式（`if <条件> ... end` 等）は冗長である為禁止する．
+
+条件内の代入・正規表現の捕捉に依る局所変数の束縛，式の値又は後判定が必要な場合は，其の条件を満たす通常形式を用いる．`use(value) if (value = fetch)` は通常形式と解析時の束縛順が異なり，後判定には `begin ... end while/until` が必要である．
+
+#### １行統合形
+
+else 節を伴う `if`, `unless` や `case` は，全節の本体が単一文であれば１行に統合して記述する．行長制限を超える場合の改行は 2.3 に従い，１行統合形式を維持した儘改行する．通常形式（`when`, `elsif` の前で改行した上で，本体を別行に展開する複数行形式）には展開しない．
+
+#### 単一文本体と複数文本体の混合
+
+複数文本体の節のみ本体部を改行して展開する．単一文本体の節は次の節境界キーワードと同行の儘１行統合形式を維持する．`if` と `case` (`when`) の何れも同様とする．
+
+`case ... in`（パターンマッチ）は，対象式と最初の `in` を同一行に配置すると `x in 1` が１行パターンマッチ式と解釈され，`case` の対象式を消費してしまう為，１行統合形式の対象外とする．`case <式>` を単独行とし，各節を `in <パターン> then <式>` の１行形式で並べる．
+
+### 例
+
+#### 修飾子形式
+
+```ruby
+# ❌ 単一文本体の冗長な通常形式
+if cond
+	return
+end
+
+# ✅ 修飾子（本体単一文，else 無）
+return if cond
+puts "warn" unless valid?
+i += 1 while i < arr.size
+process until done?
+```
+
+#### １行統合形
+
+```ruby
+# ✅ 全節単一文 → １行統合
+if x < 0 then -1 elsif x.zero? then 0 elsif x < 10 then 1 else 2 end
+
+case x when 0 then "zero" when 1 then "one" else "other" end
+
+# ✅ 行長超過時の改行
+case status when :ok then perform_success_action_with_long_name(payload)
+when :err then perform_error_action_with_long_name(payload) else perform_default_action_with_long_name(payload) end
+```
+
+#### 単一文本体と複数文本体の混合
+
+```ruby
+# ✅ case/in は対象式の後で改行する
+case x
+in 1 then :a
+in 2 then :b
+else :c
+end
+```
+
+```ruby
+# ✅ if-elsif-else の混合（elsif 節のみ複数文）
+if cond1 then a elsif cond2
+	b1
+	b2
+else c end
+
+# ✅ case-when の混合（when :b 節のみ複数文）
+case x when :a then short_a when :b
+	long_b_1
+	long_b_2
+else short_else end
+```
+
+---
+
+# 第４章 式・演算
+
+## 4.1 項の順序
+
+**対象**：C, C++, C#, Java, Go, Rust, Kotlin, Swift, PHP, JavaScript, TypeScript, Ruby, Python
+
+**強度**：必須 (`MUST`)
+
+### 規則
+
+以下の規則は記載順に優先度が高い．項の順序は 1.3 の要求動作を満たす事を前提とし，減算・除算を交換可能として扱ってはならない．尚，以下のコード例は中間値も型の範囲内に収まる整数を前提とする．
+
+1. 加算／減算では次数の高い（変数の数が多い）項を先に配置する．
+2. 加算／減算では加算を先に配置する．
+3. 乗算／除算の定数と変数では定数を先に配置する．
+4. 乗算／除算では乗算を先に配置する．
+
+### 適用条件・例外
+
+**例外**：上記の規則に依って計算コストが増大する場合は此の限りではない（効率を優先する）．例えば，並替に依って短絡評価が崩れる場合，計算負荷の高い項が安価なガード条件（早期に偽と為る条件）より前に出る場合，共通部分式の再利用や強度低減が妨げられる場合等が該当する．
+
+### 例
+
+```cpp
+// ❌
+z = 1 - 3 * y + x * x;
+
+// ✅
+z = x * x - 3 * y + 1;
+```
+
+```cpp
+// ✅ ルール通りなら -x + 1 だが，単項マイナス（符号反転）が増える為其の儘にする
+y = 1 - x;
+```
+
+## 4.2 式の簡約
+
+**対象**：C, C++, C#, Java, Go, Rust, Kotlin, Swift, PHP, JavaScript, TypeScript, Ruby, Python
+
+**強度**：推奨 (`SHOULD`)
+
+### 規則
+
+式は変数の出現回数や演算子の数が少なく為る様に最適化する．同じ変数が複数回出現する場合は，因数分解や共通項の括出を行う．因数分解した式も 1.3 の要求動作を満たす必要が有る．尚，以下のコード例は中間値も型の範囲内に収まる整数を前提とする．
+
+多項式は仕様上の許容誤差を確認した上でホーナー法（ネストした乗算）を優先する．乗算回数は削減出来るが，展開形と丸め結果が一致する事や精度の向上は保証されない．
+
+融合積和演算 (FMA) は，１回の丸めが仕様上許容され，且つ対象環境で効果を確認出来た場合に優先する．個別の乗算・加算とは計算結果が異なり，常に単一命令に為るとは限らず，高速化されるとも限らない．
+
+### 例
+
+```cpp
+// ❌ 同じ変数が重複
+z = a * x + x;
+y = x * x - 2 * x + 1;
+
+// ✅ 最適化
+z = (a + 1) * x;
+y = (x - 1) * (x - 1);
+```
+
+```cpp
+// ❌ 許容誤差を確認した上で削減出来る展開形（乗算６回）
+float y = a * x * x * x + b * x * x + c * x + d;
+
+// ✅ ホーナー法（乗算３回）
+float y = x * (x * (x * a + b) + c) + d;
+```
+
+```cpp
+// ✅ FMA に依るホーナー法
+const double y = std::fma(x, std::fma(x, std::fma(x, a, b), c), d);
+```
+
+## 4.3 シフト演算と逆数乗算
+
+**対象**：C, C++, C#, Java, Go, Rust, Kotlin, Swift, PHP, JavaScript, TypeScript, Ruby, Python
+
+**強度**：必須 (`MUST`)
+
+### 規則
+
+整数の２の冪乗に依る乗算・除算は，同じ値・型・丸め・例外動作を表せる場合にビットシフトで記述する．其れ以外は乗除算を用いる．
+
+- 除算 `/` → `>>`：ゼロ方向に丸める整数除算 (C / C++ / C# / Java / Go / Rust / Kotlin / Swift) では，負の値で `>>`（負の無限大方向への丸め）と結果が異なる為（例：`-7 / 4 == -1` に対し `-7 >> 2 == -2`），符号無整数又は非負である事が保証されて居る場合にのみ右シフトを用いる．切下除算を行う Ruby (`/`) と Python (`//`) は `>>` と結果が一致する為，右シフトで記述出来る．PHP の `/` と JavaScript / TypeScript の `Number` の `/` には，整数除算の規則を適用しない．PHP の `intdiv()` と JavaScript / TypeScript の `BigInt` の `/` は，０方向へ丸める整数除算として扱う．
+- 乗算 `*` → `<<`：計算結果が型の範囲に収まる限り `× 2^n` と同値である（負値に対する `<<` は C 及び C++17 以前では未定義動作と為り，C++20 以降及び其の他の対象言語では定義されて居る）．固定幅の型で桁溢れの動作が異なる場合は，要求する動作に合う演算を用いる．C / C++ の符号付乗算のオーバーフローは未定義動作である．PHP の整数演算は溢れると `float` へ昇格するが，`<<` はラップアラウンド（桁溢れで巡回）する．Rust のデバッグビルドでは `*` はオーバーフローでパニックし，`<<` はシフトするビット数が型幅以上の場合にのみパニックする．JavaScript / TypeScript の `Number` の `<<` は３２ビット整数として計算し，`BigInt` の `<<` に此の桁幅の制限は無い．
+
+浮動小数の除算を逆数との乗算で記述する場合は，対象型・値域で同じ丸め結果と例外動作を要する．１０進の有限小数である事だけを同値の根拠にしない．誤差を許容する最適化では，仕様上の許容範囲と効果を別途検証する．
+
+### 適用条件・例外
+
+**論理右シフト (Java)**：符号無整数型が存在しない為，符号無としての右シフトが必要な場合は `>>>` を用いる．
+
+**中置関数 (Kotlin)**：ビット演算子の記号が無く，中置関数 `shl` / `shr` / `ushr` / `and` / `or` / `xor` 及び `inv()` を用いる．此等の中置関数は全て同一の優先順位であり，乗除・加減の演算子よりも低い為，`a and b shl 2` は `(a and b) shl 2` と解釈される．意図する結合を括弧で明示する必要が有り，此の括弧は 4.4 の冗長な括弧には該当しない．
+
+### 例
+
+```cpp
+// ❌ (unsigned)
+unsigned a = x * 8;
+unsigned b = y / 4;
+
+// ✅ (unsigned)
+unsigned a = x << 3; // ×8
+unsigned b = y >> 2; // ÷4
+
+// ✅ 符号付除算で負を取り得る場合はシフト置換しない（/ と >> で丸め方向が異なる）
+int c = z / 4;
+```
+
+```cpp
+// ❌ ２進浮動小数で結果同値を確認済の場合
+float a = x / 2.0F;
+
+// ✅
+float a = 0.5F * x; // 1/2 は２進でも正確
+float b = y / 5.0F; // 1/5 は２進で正確に表せず，0.2F 乗算へ置換しない
+
+// ※ 1/3 = 0.333... は無限小数の為，分数の儘残す
+float c = 1.0F / 3.0F * x;
+```
+
+## 4.4 括弧
+
+**対象**：C, C++, C#, Java, Go, Rust, Kotlin, Swift, PHP, JavaScript, TypeScript, Ruby, Python
+
+**強度**：必須 (`MUST`)
+
+### 規則
+
+括弧は演算子の優先順位に従い，必要な場合にのみ使用し，冗長な括弧を付けてはならない．以下に示す括弧は冗長ではなく，必ず記述する．
+
+#### 文法上必須の括弧
+
+- **Go, Rust**: `if` / `for` / `switch`（Rust は `if` / `while` / `for` / `match`）のヘッダ部に現れる複合リテラル・構造体リテラル `T{...}`．
+- **Rust**: 単一要素タプル `(x,)` 及びタプル型 `(T,)`（2.14 参照）．
+- **PHP**: 三項演算子の結合を指定する為に必要な包装（4.10 参照）．`?` と `:` の間に置く式，又は短縮形 `?:` だけの連鎖に同じ必須条件を一律に適用しない．
+- **JavaScript, TypeScript**: アロー関数を呼び出す `(() => { ... })()` の包装や，文頭の関数式を宣言と読ませない為の包装．即時実行という用途だけで，代入右辺の `function() { ... }()` 等へ不要な包装を要求しない．
+- **JavaScript, TypeScript**: `??` と `||` / `&&` を混在させる式．`a ?? (b || c)` / `(a || b) ?? c` の何れも括弧無は構文エラーと為る．
+- **JavaScript, TypeScript**: 単項演算子を伴う冪乗 `(-a) ** b`（`-a ** b` は構文エラーと為る）．
+- **JavaScript, TypeScript**: 文の先頭に置くオブジェクト分割代入 `({ a } = Obj);`（括弧が無いと波括弧がブロックと解釈され，構文エラーに為る）．
+- **JavaScript, TypeScript**: 要素が２つ以上有るか，又は識別子以外のキーを持つオブジェクトリテラルを返すアロー関数 `() => ({ a: 1, b: 2 })` / `() => ({ "a": 1 })`（括弧が無いと波括弧がブロックと解釈され，`,` 又は `"a"` の位置で構文エラーに為る）．
+- **Ruby**: 実引数へ置く `and` / `or` / `not` の式．`g((true and false))` / `g((not true))` の様に，実引数全体を囲む括弧と式を囲む括弧を区別する．`g(not true)` は使用しない．
+- **Ruby**: 条件節に置く修飾子 `rescue`（`elsif(t.zone rescue false)` の括弧を外すと構文エラーに為る．代入の右辺では `=` より強く結合する為括弧は不要である〈`x = f() rescue -1`〉．6.8 参照）．
+- **Python**: 行を跨ぐ式を囲む括弧（2.3 参照）．
+- **Python**: 式文として記述する代入式（ウォルラス演算子）を囲む括弧 `(x := f())`（括弧の無い単独の `x := f()` は式文として構文エラーに為る．`if x := f():` の様に条件式単独で置く場合は括弧は不要である．5.2 参照）．
+
+尚，`sizeof` の括弧 (2.12) は式に対しては文法上任意であるが，本規約で省略を禁止して居る為冗長な括弧には該当しない．
+
+#### 意味を保存する括弧
+
+- **C, C++**: ポインタのメンバアクセス `(*Ptr).Member`（`*Ptr.Member` は `*(Ptr.Member)` と解釈される．C++ では `->` を用いる事で本項を回避出来る）．
+- **C#, Java, Kotlin, TypeScript**: キャスト・型表明の結果に対してメンバアクセスする際の括弧 `((String)Obj).Length` (C#)・`((String)Obj).length()` (Java)・`(x as Foo).bar` (Kotlin, TypeScript)（括弧が無いとキャストが呼出結果に掛かる．Kotlin と TypeScript の `x as Foo.bar` は `Foo.bar` が修飾型名と解釈される）．
+- **C#, PHP**: `??` と `||` / `&&` を混在させる式．`??` の方が優先順位が低い為，括弧が必要なのは `(a ?? b) || c` の側である．
+- **Go**: ポインタ型・チャネル型への型変換 `(*T)(p)` / `(<-chan int)(ch)`（括弧の無い `*T(p)` は `*(T(p))` と解釈されて型変換にならず，型検査エラーに為る．`<-chan int(ch)` は `<-(chan int(ch))` と解釈され，型変換ではなく受信式に為って型が要素型へと変化する）．
+- **Go, Swift**: シフト演算と加減算を混在させる式．`<<` / `>>` が `+` / `-` より優先順位が高く，`a << (b + c)` の括弧を外すと `(a << b) + c` と解釈される（`1 << 2 + 3` は 7）．
+- **Rust**: 範囲式に対してメソッドを呼び出す際の括弧 `(1..5).map(...)`（括弧が無いと `1..(5.map(...))` と解釈される）．
+- **Kotlin**: 中置関数（`shl` / `and` 等）を混在させる式．中置関数は全て同一の優先順位であり加減算より低い（4.3 参照）．
+- **Kotlin**: エルビス演算子 `?:` と `||` / `&&` を混在させる式．`?:` の方が優先順位が高く，`a ?: (b || c)` の括弧を外すと `(a ?: b) || c` と解釈される．
+- **Swift**: `??` と `||` / `&&` を混在させる式．`??` の方が優先順位が高く，`a ?? (b || c)` の括弧を外すと `(a ?? b) || c` と解釈される．
+- **PHP**: `and` / `or` / `xor` を囲む括弧．何れも代入演算子より優先順位が低く，`$x = ($a and $b)` の括弧を外すと `($x = $a) and $b` と解釈される．論理演算には `&&` / `||` を用いる事で本項を回避出来る（6.9 参照）．
+- **JavaScript, TypeScript**: 空，又は要素が１つで識別子キーを持つオブジェクトリテラルを返すアロー関数 `() => ({})` / `() => ({ a: 1 })`（括弧の無い `() => {}` は空ブロックと為り，`() => { a: 1 }` は `a:` をラベル付文とする妥当な構文と為る為，何れも構文エラーにはならず戻値が `undefined` に変化する．プロパティ短縮記法 `() => { a }` も同様である）．
+- **Ruby**: `and` / `or` / `not` 及び修飾子 `if` / `unless` / `while` / `until` を囲む括弧．何れも代入演算子より優先順位が低く，`x = (a and b)` の括弧を外すと `(x = a) and b` と解釈される．
+
+## 4.5 クランプ
+
+**対象**：C, C++, C#, Java, Go, Rust, Kotlin, Swift, PHP, JavaScript, TypeScript, Ruby, Python
+
+**強度**：必須 (`MUST`)
+
+### 規則
+
+言語にクランプ関数が用意されて居る場合は其れを使用する（C++ の `std::clamp` 等）．クランプ関数が無い場合は `min(max(値, 下限), 上限)` の順で記述する．`max(min(値, 上限), 下限)` 等の逆順での記述は禁止する．
+
+上下限の指定順序，比較対象の型，NaN の扱いを確認し，下限が上限以下である事等の前提条件を満たす必要が有る．`std::clamp` の返却参照を保持する場合は，参照先オブジェクトの寿命も確保する．`min` / `max` の組合せも，同じ前提条件を満たす形で記述する．
+
+### 例
+
+```typescript
+Math.min(Math.max(value, lower), upper);
+```
+
+## 4.6 ０判定
+
+**対象**：C, C++, C#, Java, Go, Rust, Kotlin, Swift, PHP, JavaScript, TypeScript, Ruby, Python, SCSS の数値の０判定
+
+**強度**：必須 (`MUST`)
+
+### 規則
+
+数値の型・値域と，判定で区別する値を確認して次の記法を用いる．
+
+| 判定の対象 | 記述方法 |
+|---|---|
+| ０比較と真偽判定が同値である数値 (C, C++, JavaScript, TypeScript, Python) | ０との等値比較は否定の論理演算で，非０比較は値自体で表す．非負である事が明らかな値の `> 0` も値自体で表す． |
+| 数値を条件として直接用いれない構文 (C#, Java, Go, Rust, Kotlin, Swift) | ０との比較を明示する． |
+| PHP の数値 | 4.12 に従い `=== 0` / `!== 0` 等の厳密比較を用いる． |
+| Ruby の数値 | `.zero?` 又は `!= 0` を用いる． |
+| SCSS の数値 | `== 0` / `!= 0` を用いる． |
+
+### 適用条件・例外
+
+`null` / `undefined` / `nil` / `None` 等と０を区別する判定は，其の違いを表す比較を用いる．`-1` を番兵値とする変数等，負の値を取り得る対象の `> 0` は，非０判定と区別する．
+
+真偽判定には０以外の偽値，NaN 及び独自型の変換が関わる．JavaScript / TypeScript の `NaN !== 0` と `!!NaN` の差や，Python の数値以外の偽値も確認し，型名だけを同値の根拠にしない．
+
+### 例
+
+```cpp
+// ❌
+if(Count == 0) return;
+if(Count != 0) Process(Count);
+if(Count > 0) Process(Count); // 非負整数型の > 0
+size_t Idx = 5;
+while(Idx > 0) --Idx;
+
+// ✅
+if(!Count) return;
+if(Count) Process(Count);
+while(Idx) --Idx;
+const int Side = SplitSide(Token); // -1/0/+1 番兵値
+if(Side > 0) ProcessLeading();
+```
+
+## 4.7 真偽値リテラル
+
+**対象**：C, C++, C#, Java, Go, Rust, Kotlin, Swift, PHP, JavaScript, TypeScript, Ruby, Python
+
+**強度**：必須 (`MUST`)
+
+### 規則
+
+真偽値型 (`bool` / `boolean` / `Boolean`) の値には `true` / `false`（Python は `True` / `False`）を使用する．`0` や `1` で代用してはならない．C 言語は C23 で `bool` / `true` / `false` が予約語と為った為対象に含める．C17 以前では `<stdbool.h>` をインクルードした上で使用する．
+
+整数型のフラグや外部インタフェース定義の型は変更してはならない．Python の `flag: bool = 1` は型注釈が在っても実体が整数であり，真偽値の記述とは異なる．尚，以下のコード例は契約上も真偽値型である場合を前提とする．
+
+### 例
+
+```cpp
+// ❌
+int IsReady = 1, Done = 0;
+
+// ✅
+bool IsReady = true, Done = false;
+```
+
+## 4.8 真偽値の反転
+
+**対象**：C, C++, C#, Java, Go, Rust, Kotlin, Swift, PHP, JavaScript, TypeScript, Ruby, Python, SCSS の真偽値の再代入
+
+**強度**：必須 (`MUST`)
+
+### 規則
+
+真偽値の反転には，次の記法を用いる．
+
+| 対象言語 | 記述方法 |
+|---|---|
+| C, C++, C#, Java, Rust, Ruby | `Flag ^= true` |
+| Go, Kotlin, Swift, PHP, JavaScript, TypeScript | `Flag = !Flag` |
+| Python | `flag ^= True` |
+| SCSS | `$flag: not $flag;` |
+
+### 適用条件・例外
+
+排他的論理和代入は組込の真偽値に用いる．多重定義・プロキシ・アクセサ等が関わる場合は，要求される型・評価回数・副作用を満たす記法を用いる．
+
+### 例
+
+```cpp
+// ❌
+Flag = !Flag;
+
+// ✅
+Flag ^= true;
+```
+
+## 4.9 増減演算
+
+**対象**：C, C++, C#, Java, Go, Rust, Kotlin, Swift, PHP, JavaScript, TypeScript, Ruby, Python, SCSS の数値の１加算・１減算
+
+**強度**：必須 (`MUST`)
+
+### 規則
+
+| 対象言語 | 記述方法 |
+|---|---|
+| C, C++, C#, Java, Kotlin, PHP, JavaScript, TypeScript | 前置の `++` / `--` を用い，変更前の値が必要な場合だけ後置とする． |
+| Go | `i++` / `i--` を用いる． |
+| Rust, Swift, Ruby, Python | `+= 1` / `-= 1` を用いる． |
+| SCSS | `$i: $i + 1;` / `$i: $i - 1;` を用いる． |
+
+### 適用条件・例外
+
+数値の型，演算子の多重定義，評価回数及び副作用を確認する．前置の増減が同じ数値演算を表す場合は，`+= 1` / `-= 1` で代用しない．
+
+### 例
+
+```cpp
+// ❌
+i++;
+i += 1;
+Count -= 1;
+
+// ✅
+++i;
+--Count;
+```
+
+```cpp
+Array[i++] = Value; // 現在の i の位置に代入してからインクリメント
+```
+
+## 4.10 三項演算子
+
+**対象**：C, C++, C#, Java, Swift, PHP, JavaScript, TypeScript, Ruby, Python
+
+**強度**：必須 (`MUST`)
+
+### 規則
+
+変数への代入を伴う条件分岐では，`if-else` 文で分岐させるのではなく三項演算子を用いて変数宣言と代入を一体化する．但し，両分岐の型，暗黙の型変換，副作用，代入対象の評価回数を同一に保持出来る場合に限る．
+
+１行の文字数が規約の行長制限（2.3: １２８文字）を超える場合に限り改行する．条件が連鎖する場合（`else if` 相当）も含め，改行位置は 2.3 に従い，`?` / `:` で表す構文では，両記号を前行の末尾に配置する．
+
+### 適用条件・例外
+
+**結合の指定 (PHP)**：PHP 8 以降の通常の三項演算子は非結合であり，条件側又は偽値側へ重ねる場合は結合を括弧で指定する．`$a > $b ? "A" : ($a < $b ? "B" : "Draw")` の括弧は保持する．`?` と `:` の間の式及び短縮形 `?:` だけの連鎖は，此の理由だけで括弧を必須としない．
+
+**条件式 (Python)**：`<真値> if <条件> else <偽値>` を用いる．`if` / `else` を構文の語として記述し，改行は 2.3 に従う．
+
+### 例
+
+```cpp
+// ✅ 単純な選択
+int Sign = x > 0 ? 1 : -1;
+std::cout << (n == 1 ? "Yes" : "No") << std::endl;
+
+// ✅ チェーン（else if 相当）
+std::cout << (a > b ? "A" : a < b ? "B" : "Draw") << std::endl;
+```
+
+```cpp
+// ❌
+std::string Result;
+if(Score > 59) Result = "合格";
+else Result = "不合格";
+
+// ✅
+std::string Result = Score > 59 ? "合格" : "不合格";
+```
+
+```typescript
+// ✅ 条件連鎖（else if 相当）
+const result = condition > 10 ?
+primaryResultValue :
+condition > 6 ? secondaryResultValue : condition > 2 ? tertiaryResultValue : defaultResultValue;
+```
+
+## 4.11 比較演算子の選択
+
+**対象**：C, C++, C#, Java, Go, Rust, Kotlin, Swift, PHP, JavaScript, TypeScript, Ruby, Python
+
+**強度**：必須 (`MUST`)
+
+### 規則
+
+同じ判定を境界値の調整で記述出来る場合は，`>=` / `<=` よりも `>` / `<` を優先する．
+
+### 適用条件・例外
+
+**例外**：以下の場合は `>=` / `<=` を使用する．
+
+- `i < n + 1` より `i <= n` の方が計算量を減らせる場合．
+- 意味の有るリテラル（文字コード境界や列挙値等）に依る境界判定を行う場合（例：`c >= 'a' && c <= 'z'` の `'a'` や `'z'` は文字コード隣接の境界其の物を表す為，`>=` / `<=` を使用する）．
+- 値が整数である事を型や文脈から保証出来ない場合（PHP / JavaScript / Ruby / Python 等で浮動小数点数値を取り得る変数等）．例えば `59.5 >= 60` は偽であるが `59.5 > 59` は真と為り判定が変化する為，境界値の調整を行ってはならない．
+- 境界値の加減算に依ってオーバーフロー，アンダーフロー，又は整数精度の喪失が発生する場合，或いは多重定義された比較演算の等価性が確認出来ない場合．
+- 尚，Kotlin の範囲反復では `0..n - 1` ではなく `0 until n` を用いる事で本規則を満たす物とする．
+
+### 例
+
+```cpp
+// ❌
+if(Score >= 60) return "合格";
+for(int i = 0; i <= n - 1; ++i) Process(i);
+
+// ✅
+if(Score > 59) return "合格";
+for(int i = 0; i < n; ++i) Process(i);
+
+// ✅ 余計な計算が発生する為 <= を使用
+for(int i = 0; i <= n; ++i) Process(i);
+```
+
+## 4.12 比較演算子の使分
+
+**対象**：C#, Java, Kotlin, PHP, JavaScript, TypeScript, Python
+
+**強度**：必須 (`MUST`)
+
+### 規則
+
+等価比較演算子 (`==` / `!=`) 及び厳密等価比較演算子 (`===` / `!==`) は，言語仕様及び文脈に応じて以下の様に使分ける（０判定は 4.6 を参照）．
+
+C#: 値の比較には `Equals`，参照の同一性判定には `ReferenceEquals` を用いる．`==` は演算子の多重定義に依って型毎に動作が異なる為，`string` 等の値意味論が明確な型に限定して使用する．
+
+Java: オブジェクトの内容比較には `equals`（`null` 安全な比較には `Objects.equals`）を用いる．`==` は参照の同一性判定，プリミティブ型，及び `enum` 定数の比較にのみ用いる．
+
+Kotlin: 内容比較には `==`（内部で `equals` を呼び出す），参照の同一性判定には `===` を用いる．
+
+PHP: `undefined` が存在せず，`==` に依る暗黙の型変換が意図しない一致を招く為，**常に `===` / `!==` を使用する**．型を揃えた上で厳密比較を行う事で，比較の意図を明確にする．尚，PHP の `switch` 文は緩い比較 (`==`) で分岐する為，厳密な同一性判定が必要な場合は `match` 式（PHP 8.0 以降）を用いる．
+
+JavaScript, TypeScript:
+
+- **数値同士の比較**：`==` / `!=`.
+- **`null` / `undefined` の個別判定**：`===` / `!==`.
+- **`typeof` に依る型判定**：`===` / `!==`.
+- **其の他の値**：`===` / `!==` を原則とし，異なる型の値を暗黙の型変換に依って一致させてはならない．尚，数値同士の `==` / `!=` は，両辺が同一の数値型である事を確認出来る場合に限る．`Number` と `BigInt` の比較，外部入力，型が未確定の値には厳密比較を用いる．
+
+### 適用条件・例外
+
+**例外 (JavaScript, TypeScript)**：`null` と `undefined` を区別せず両方を纏めて判定したい場合に限り，`==` / `!=` を使用する．
+
+Python: `None` / `True` / `False` との比較には `is` / `is not` を用いる（`==` は `__eq__` の多重定義に依って挙動が偽装され得る）．値の等価判定には `==` を用い，整数や文字列の内部キャッシュに依存した `is` 比較は行ってはならない．
+
+### 例
+
+```php
+// ❌ 型変換に依存する緩い比較
+if($count == "0") return;
+
+// ✅ 厳密比較（型変換を挟まず値の同一性のみで判定する）
+if($code === 404) return;
+if($value === null) return;
+```
+
+```tsx
+// ❌ 数値に ===
+if(index === -1) return null;
+
+// ✅ 数値は ==
+if(index == -1) return null;
+
+// ✅ null/undefined を個別判定
+if(value === null) return;
+if(value !== undefined) Process(value);
+
+// ✅ typeof は ===
+if(typeof item === "string") Process(item);
+
+// ❌ null と undefined を区別しない場合に ===
+if(value === null || value === undefined) return;
+
+// ✅ null と undefined を区別しない場合は ==
+if(value == null) return;
+```
+
+---
+
+# 第５章 変数・型
+
+## 5.1 変数化
+
+**対象**：C, C++, C#, Java, Go, Rust, Kotlin, Swift, PHP, JavaScript, TypeScript, Ruby, Python
+
+**強度**：必須 (`MUST`)
+
+### 規則
+
+構文上直接渡せる値を一度だけ使用する場合は，変数を経由せず代入・引数・返戻値として記述する．
+
+### 適用条件・例外
+
+**注意**：代入直後の `return` では，局所変数の型に依る変換・丸め・寿命・コピー省略を保持出来る場合に，変数を経由せず直接返す．例えば `float` の局所変数を経由する `double` の返却は，変数化を省略すると丸め処理が変わり得る．
+
+**例外**：以下の場合は変数化する．
+
+- 式が長く，可読性が低下する場合（目安：６４文字超）．
+- マジックナンバーに意味の有る名前を付ける場合．
+
+### 例
+
+```cpp
+// ❌
+int Total = CalcTotal(Items);
+SetTotal(Total);
+const int Result = Calculate(x);
+return Result;
+
+// ✅
+SetTotal(CalcTotal(Items));
+return Calculate(x);
+```
+
+## 5.2 制御文での即時束縛
+
+**対象**：C++ (C++17+), C#, Java, Go, Rust, Kotlin, Swift, Python
+
+**強度**：必須 (`MUST`)
+
+### 規則
+
+代入と判定を同時に行う場合は，初期化文等を用いて変数の束縛箇所を判定に近付け，構文上可能な場合はスコープも限定する．型指定を伴う束縛には 5.4 を適用し，`:=` / `if let` 等は当該構文の記法を用いる．
+
+後続の処理で値又は寿命が必要な場合は初期化文へ移動させず，ロック・資源・借用の終了時点も保持する．Swift の `guard let` は後続スコープへ束縛を公開し，Python の代入式は独立したスコープを生成しない点に注意する．
+
+- C++17: `if(init; cond)`, `switch(init; cond)`
+- C#: パターンマッチに依る束縛 `if(expr is Type name)`
+- Java: パターン変数 `if(expr instanceof Type name)`（Java 16 以降）
+- Go: `if cond := expr; cond { ... }`, `switch x := expr; x { ... }`
+- Rust: `if let Pat = expr { ... }`（束縛と条件の同時記述）
+- Kotlin: `when(val x = expr) { ... }`, `x?.let { ... }`, `if(x != null)` に依るスマートキャスト
+- Swift: `if let x = expr { ... }`, `guard let x = expr else { ... }`
+- Python: `if (x := expr) is not None:`（ウォルラス演算子）
+
+### 例
+
+```cpp
+// ❌ 不必要に広いスコープ
+const int Result = Compute();
+if(Result > 0) Process(Result);
+
+// ✅ 初期化文でスコープ限定
+if(const int Result = Compute(); Result > 0) Process(Result);
+```
+
+```cpp
+// ❌ 一時変数を外側に定義
+const auto Iter = Map.find(Key);
+if(Iter != Map.end()) Use(Iter->second);
+
+// ✅ 初期化文
+if(const auto Iter = Map.find(Key); Iter != Map.end()) Use(Iter->second);
+```
+
+```python
+# ❌
+ptr = connection_map.get(pos)
+if ptr is not None:
+	return ptr
+
+# ✅
+if (ptr := connection_map.get(pos)) is not None:
+	return ptr
+
+# ✅ 内包表記内での使用
+results = [y for x in data if (y := transform(x)) is not None]
+```
+
+## 5.3 一括宣言
+
+**対象**：C, C++, C#, Java, Go, Swift, PHP, JavaScript, TypeScript の変数・定数宣言（PHP は関数内の `static` 宣言）
+
+**強度**：必須 (`MUST`)
+
+### 規則
+
+#### 関数内の宣言
+
+連続する変数・定数は，各宣言子の型・初期化・束縛を保ってカンマで併記出来る最長の範囲を，一括宣言で記述する．型が異なる事だけを理由に別宣言にしない．
+
+宣言種別，修飾，属性，初期化順序及び指示子の適用を保ち，宣言以外の文・本体・適用境界を跨がない．型の明示は 5.4，不変指定は 5.8 に従う．
+
+宣言全体で共有する指定は１回だけ記述する．各宣言子に属する型注釈・ポインタ・参照・修飾は個別に記述し，共通の型へ揃える為に型を変更しない．
+
+#### 最上位・成員の宣言
+
+ファイル直下の変数とクラス成員は，１宣言１行とする．複数の宣言子を要する構文又は外部契約では，其の記法を用いる．
+
+#### 行長を超える宣言
+
+宣言子の順を保ち，共有する指定・各宣言子の型注釈・終端記号を含めて行内に収まる連続範囲毎の別宣言にする．１宣言子だけでも長い場合は，其の式を 2.3 に従って折り返す．宣言の分離でスコープ・初期化・属性・指示子の適用が変わる場合は，別宣言にせず意味を保てる位置で折り返す．
+
+### 例
+
+```cpp
+void Prepare() {
+	int n, m, Ans = 0;
+	float x, y, z;
+	constexpr int Width = 32, Height = 16;
+	int a, *b, &c = a; // ポインタ・参照の混在も可（`&c` は参照型を持つ C++ 限定）
+	// 終了
+	return;
+}
+```
+
+```swift
+func describe() -> String {
+	let count: Int = 1, label: String = "item", isReady: Bool = true
+	return "\(label):\(count):\(isReady)"
+}
+```
+
+```php
+function nextLabel(): string {
+	static $count = 0, $label = "item";
+	return $label . ++$count;
+}
+```
+
+```typescript
+function describe(): string {
+	const count: number = 1, label: string = "item", isReady: boolean = true;
+	return `${label}:${count}:${isReady}`;
+}
+```
+
+## 5.4 型の明示と推論の制限
+
+**対象**：C, C++, C#, Java, Go, Rust, Kotlin, Swift, PHP, TypeScript, Python の型を明示出来る宣言・仮引数・戻値
+
+**強度**：必須 (`MUST`)
+
+### 規則
+
+型を記述出来る宣言・仮引数・戻値には型を明示する．型推論用の `auto` / `var` 等は，下記の条件を満たす箇所だけで用いる．初期値又は戻値が自明である事だけを，言語別の省略理由にしない．Kotlin の戻値型 `Unit` も明示する．
+
+### 適用条件・例外
+
+| 条件 | 適用 |
+|---|---|
+| 同じ型を名前で記述出来ない． | 匿名型，非公開型又は不透明な具体型の推論を用いる．クロージャでも同じ型を明示出来る場合は此の条件に含めない． |
+| 型名が著しく冗長である． | 先ず型別名で意味を示す．其れでも明示が適切でない場合は，推奨上の選択でなく第９章に従う根拠を記録する． |
+| 型注釈が値として参照される． | Python の `__annotations__` 等，注釈の評価・観測・公開契約を満たす型を記述する． |
+
+TypeScript の `any` は使用せず，`unknown` 又は具体型を用いる．
+
+### 例
+
+```cpp
+// ❌
+auto Name = User.GetName();
+
+// ✅
+std::string Name = User.GetName();
+```
+
+```tsx
+// ❌ 型省略
+let count;
+const getName = () => "hello";
+function App() {
+	return <div />;
+}
+
+// ✅ 型明記
+let count: number;
+const getName = (): string => "hello";
+function App(): JSX.Element {
+	return <div />;
+}
+```
+
+## 5.5 整数型の符号選択
+
+**対象**：C, C++, C#, Go, Rust, Kotlin, Swift の整数変数
+
+**強度**：必須 (`MUST`)
+
+### 規則
+
+論理的に負の値を取らない整数変数（カウンタ・インデックス・ネストの深さ・サイズ・バイトオフセット等）は `int` ではなく**符号無整数型**で宣言する．各言語で使用する型名は次の通りとする．
+
+符号無整数であっても，減算・逆順走査・サイズ計算に因ってアンダーフロー（巻戻）が発生し得る．「非負である」と言う意図のみで安全と判断せず，値の範囲を確認する．Go の `uintptr` は一般的な計数ではなくアドレス表現の用途に限る．
+
+- C, C++: `size_t` / `uint8_t` / `uint16_t` / `uint32_t` / `uint64_t`.
+- C#: `byte` / `ushort` / `uint` / `ulong`.
+- Go: `uint` / `uint8` / `uint16` / `uint32` / `uint64` / `uintptr`.
+- Rust: `u8` / `u16` / `u32` / `u64`. 添字と長さには `usize` を用いる（スライスの添字は `usize` のみを受け付ける）．
+- Kotlin: `UByte` / `UShort` / `UInt` / `ULong`.
+- Swift: `UInt` / `UInt8` / `UInt16` / `UInt32` / `UInt64`.
+
+### 適用条件・例外
+
+**例外**：以下の何れかに該当する変数は符号付整数の使用を許可する．
+
+- `-1` を番兵値として使用する場合．
+- `std::numeric_limits<int>::min/max` を番兵値として使用する場合．
+- 戻値として `-1` / `0` / `+1` を返す関数の結果を受け取る場合．
+- 演算に因って一時的に負の値を取り得る場合．
+- API やコレクションの添字型・差分型が符号付整数を要求する場合（Go の `len` は `int`，Kotlin の標準コレクション添字は `Int`，Swift の `Array` 添字は `Int`）．不要な型変換を挟まず，利用先の型契約に合わせる．
+
+### 例
+
+```cpp
+// ❌
+int ChangedCount = 0; // 単純な計数 → unsigned で十分
+int NestDepth = 0; // 負に為らない深さ → unsigned
+int ByteOffset = 100; // バイト位置 → unsigned
+
+// ✅
+size_t ChangedCount = 0;
+uint32_t NestDepth = 0;
+uint32_t ByteOffset = 100;
+int LastRank = -1; // -1 番兵値
+int BaseIndent = std::numeric_limits<int>::max(); // numeric_limits 番兵値
+int Indent = SegIndent[LineIdx]; // 演算で一時的に負値に為り得るので int
+if(IsCloseBracket) --Indent;
+if(Indent < 0) Indent = 0;
+```
+
+## 5.6 引数無の void 省略
+
+**対象**：C, C++
+
+**強度**：必須 (`MUST`)
+
+### 規則
+
+引数無の関数宣言・定義では，C17 以前は `(void)`，C23 以降及び C++ は `()` を使用する．
+
+### 例
+
+```c
+// ✅ C17 以前では引数無を明示
+void Initialize(void);
+int GetCount(void);
+```
+
+```cpp
+// ❌
+void Initialize(void);
+int GetCount(void);
+
+// ✅
+void Initialize();
+int GetCount();
+```
+
+## 5.7 return の明示
+
+**対象**：C, C++, C#, Java, Go, Rust, Kotlin, Swift, PHP, JavaScript, TypeScript, Ruby, Python
+
+**強度**：必須 (`MUST`)
+
+### 規則
+
+#### main 関数
+
+**対象**：C, C++
+
+`main` 関数の末尾には `return 0;` を必ず記述する．
+
+#### 起動処理と終了
+
+Python では `def main() -> int:` に起動処理を纏め，正常終了時に `return 0` を記述する．`if __name__ == "__main__":` の本体に `sys.exit(main())` を置く．
+
+強制終了 API を用いる場合は，必要な資源解放を完了してから呼ぶ．
+
+#### void 関数・コンストラクタ・デストラクタ
+
+通常の void 関数，コンストラクタ，デストラクタの末尾が**到達可能**な場合は，使用言語が許容する返戻構文を用いて終端を明示する．C++ のデストラクタ，C# のファイナライザ，Swift の `deinit`，PHP の `__destruct` 等は呼出契機や構文が異なる為区別して扱う．
+
+末尾が**到達不能**な場合は，末尾の `return;` を**記述しない**．脱出経路の無い無限ループ，全ての実行経路が返戻・送出・戻らない呼出で終わる分岐等が該当する．`switch` は，不一致時に後続へ進む経路も含めて判断する．
+
+C, C++, C#, Java, Rust, PHP, JavaScript, TypeScript は文脈上許容される関数本体で `return;` を用い，Go, Kotlin, Swift, Python は `return` を用いる．Ruby は後述の規定に従う．初期化ブロック，式本体，ジェネレータ，コルーチン等には通常の終端 return を挿入しない．
+
+**例外**：本体が空の関数 (`void Foo() {}`) は，2.5 に従い波括弧を同一行に配置し，末尾の `return;` は記述しない．
+
+通常の関数本体では，返す値を `return` で明示する．値・型・一時値の寿命等の要求を満たす場合に限り，Rust も同じとする．内部ブロック・クロージャの値と，関数からの返戻を区別する．
+
+式本体の関数・メソッド・ラムダは，式全体を値として返す形式で記述する．Kotlin / Ruby 等の式本体に通常本体の `return` は要求しない．生成器・コルーチンの終了には，其の構文に適した記法を用いる．
+
+#### Ruby メソッド
+
+Ruby の通常のメソッド本体も，呼出元での使用方法に依らず，返す値を `return` で明示する．引数無の `return` は `nil` を返す終了に用いる．
+
+メソッド本体の rescue 節で値を返す場合，rescue 節の最終式に `return` を明示する．ensure 節内での `return` は禁止する（rescue で捕捉した例外やメソッド本体の return 値を破棄してしまう為）．ブロック (`do ... end` / `{ ... }`) 内の `return` は，rescue 節内に限らず外側のメソッド自体を脱出する為，意図した動作でない限り記述しない．ブロックの値を返す目的には `next` を用いる（`lambda` 内の `return` は lambda のみを脱出する）．
+
+#### 返戻の説明
+
+返戻コメントの形式，配置及び省略条件は 7.10 に集約する．本節は `return` 自体の要否だけを定める．
+
+### 例
+
+#### main 関数
+
+```cpp
+int main() {
+	// ...
+	return 0;
+}
+```
+
+#### void 関数・コンストラクタ・デストラクタ
+
+```cpp
+void Initialize() {
+	Setup();
+	// 終了
+	return;
+}
+
+Ball::Ball() {
+	ModelHandle = MV1LoadModel("models\\ball.mv1");
+	// 終了
+	return;
+}
+
+// 到達不能 — 末尾 return; は書かない
+[[noreturn]] void RunForever() {
+	while(true) Tick();
+}
+```
+
+#### Ruby メソッド
+
+```ruby
+# ❌ ensure 内 return
+def bad
+	return api_call
+ensure
+	return :ensured
+end
+
+# ❌ イテレータブロック内 rescue で return（外側メソッドを脱出してしまう）
+def process(items)
+	return items.each do |item|
+		do_work(item)
+	rescue => e
+		return :err
+	end
+end
+
+# ✅ 末尾式に return を明示
+def total(a, b)
+	# 合計の返戻
+	return a + b
+end
+
+# ✅ 呼出結果を使うかに依らず同じ返戻規則
+def log_event(msg)
+	return puts(msg)
+end
+
+# ✅ rescue 節最終式に return を明示
+def fetch
+	# 取得結果の返戻
+	return api_call
+rescue => e
+	# 代替値の返戻
+	return default_value(e)
+ensure
+	cleanup
+end
+```
+
+## 5.8 不変束縛の優先
+
+**対象**：C, C++, C#, Java, Go, Rust, Kotlin, Swift, PHP, JavaScript, TypeScript, Ruby
+
+**強度**：必須 (`MUST`)
+
+### 規則
+
+再代入を必要としない束縛には，対象言語・宣言位置で有効な不変指定を用い，初期化と宣言を一体にする．局所変数・仮引数・反復変数・成員へ同じ判断を適用する．不変指定，コンパイル時評価及び参照先の不変性は区別する．
+
+| 言語 | 使用する記法と成立条件 |
+|---|---|
+| C / C++ | 対象となる型への `const`．ポインタ自体は `T *const`，参照先も不変なら `const T *const`．`constexpr` が含意する指定を重ねない． |
+| C# | 定数式の局所変数・定数は `const`，成員は許された `readonly`．実行時の局所束縛を不変にする為に，値渡しを `in` の参照渡しへ変えない． |
+| Java | 明示可能な局所変数・仮引数・成員は `final`．暗黙に不変となる資源宣言等も同じ意味として扱う． |
+| Go | 言語が定数として受理する値は `const`．一般の実行時の局所変数・仮引数・反復変数には不変指定を追加しない． |
+| Rust | 既定の不変束縛を用い，変更に必要な場合だけ `mut` を付ける． |
+| Kotlin / Swift | `val` / `let`. 暗黙に不変となる仮引数へ不要な指定を加えない． |
+| PHP | 定数の `const` と，対象版・宣言が許すプロパティの `readonly`．局所束縛へ存在しない指定を加えない． |
+| JavaScript / TypeScript | 初期化子を持つ `const`．仮引数の宣言形式や，反復毎の束縛の意味を保持する． |
+| Ruby | 定数を宣言出来る位置では定数名を用いる．局所変数の定数化は行わない．オブジェクトの変更を止める `freeze` は束縛とは別に必要性を判断する． |
+
+### 適用条件・例外
+
+不変指定は，型照会，多重定義の解決，ムーブ，借用，捕捉，外部契約及び評価結果の要求を満たす範囲で用いる．コンパイル時定数は 5.9，型の明示は 5.4 に従う．
+
+### 例
+
+```cpp
+// ❌ 変数として宣言して後から代入
+int Result;
+if(Score > 59) Result = 80;
+else Result = 40;
+
+// ✅ const として宣言時に値を確定
+const int Result = Score > 59 ? 80 : 40;
+```
+
+```typescript
+// ❌
+let name;
+if(user.isAdmin) name = "管理者";
+else name = user.displayName;
+
+// ✅
+const name = user.isAdmin ? "管理者" : user.displayName;
+```
+
+## 5.9 コンパイル時定数
+
+**対象**：C (C23+), C++, C#, Java, Go, Rust, Kotlin, PHP
+
+**強度**：必須 (`MUST`)
+
+### 規則
+
+コンパイル時に値が確定する定数には，各言語のコンパイル時定数機能を使用する．実行時にしか確定しない値には通常の定数機能を使用する．
+
+- C（C23 以降）：`constexpr`.
+- C++: `constexpr`. クラス内の定数には `static constexpr` を用いる．
+- C#: `const`（定数式のみ）．
+- Java: クラス定数には `static final`，局所変数には `final` を用いる．コンパイル時定数と為るのは，プリミティブ型又は `String` を定数式で初期化する場合に限られる．
+- Go: `const`．定数式で初期化出来る型及び値に限る．
+- Rust: `const`. コンパイル時に評価可能な関数には `const fn` を用いる．
+- Kotlin: `const val`. 最上位，名前付 `object`，`companion object` の何れかに配置する（クラス本体の直下には記述出来ない）．型はプリミティブ型と `String` に限られる為，其れ以外の型は `object` 内の `val` を用いる．局所変数には指定出来ない為 `val` とする．クラス内定数は `companion object { const val CellCount = 16 }` とする．
+- PHP: 使用バージョンが許容する定数式に `const` を用いる．定数式として記述出来ない評価処理を無理に定数化しない．
+
+### 例
+
+```cpp
+// ❌
+const int MaxCount = 100;
+
+// ✅
+constexpr int MaxCount = 100;
+
+// クラス内
+class Config {
+private:
+
+	static constexpr int CellCount = 16;
+	static constexpr float CellScale = 100.0F;
+};
+```
+
+## 5.10 遅延初期化・静的初期化
+
+**対象**：C++, C#, Java, Kotlin, Swift, PHP, JavaScript, TypeScript
+
+**強度**：推奨 (`SHOULD`)
+
+### 規則
+
+複雑な初期化ロジックが必要な静的メンバや定数には，各言語の遅延初期化機能又は即時実行パターンを使用する．
+
+即時実行と遅延実行を混同しない事．初回の実行タイミング，例外発生時の再試行動作，再入性，複数スレッドからの初期化に関するスレッド安全性を確認し，要件に合う方式を選択する．
+
+- C++: 即時実行ラムダ `[]() {...}()`．
+- C#: `Lazy<T>` 又は静的コンストラクタ．
+- Java: 静的初期化ブロック．
+- Kotlin: `by lazy { ... }`（`lateinit var` の使用可否は 6.10 に従う）．
+- Swift: 型の保持プロパティには `static let` / `static var` に依る遅延初期化を用いる．`lazy var` はインスタンスの保持プロパティ用であり，型プロパティとは区別して使用する．
+- PHP: 局所 `static` 変数等で初回評価を管理する．`??=` は評価結果が非 null の場合に限る．結果が null と為り得る場合は初期化済の状態を別途管理する．
+- JavaScript, TypeScript: 即時実行関数式 `(() => { ... })()`．
+
+### 例
+
+```cpp
+class Chunk {
+private:
+
+	static inline const std::vector<int> Triangles = []() -> std::vector<int> {
+		std::vector<int> Result;
+		for(int x = 0; x < CellCount; ++x) for(int y = 0; y < CellCount; ++y) AppendTriangle(Result, x, y);
+		return Result;
+	}();
+};
+```
+
+## 5.11 クラス設計
+
+**対象**：C++, C#, Java, Go, Rust, Kotlin, Swift, PHP, JavaScript, TypeScript, Ruby, Python
+
+**強度**：必須 (`MUST`)
+
+### 規則
+
+#### メンバ関数
+
+型の内部処理は補助関数であってもメンバとして配置する．但し，ADL 用の `swap`，非メンバ演算子，外部コールバック，型其の物に属さない処理は除く．Kotlin の拡張関数等は 6.9 の規定に従う．
+
+**注意 (Go, Rust)**：クラス構文の代わりに，型とレシーバ付関数 (Go) 又は `impl` ブロック (Rust) を用いる．型に属する処理は其れ等の中に記述し，型に紐付かない処理のみをパッケージ又はモジュールの直下に配置する．
+
+#### 宣言順序
+
+構成要素の名称でなく役割に従い，存在する項目だけを次の順に配置する．公開範囲は 2.7，初期化・破棄・メモリ配置・外部契約は 1.3 を先に満たす．
+
+| 順位 | 役割 |
+|---|---|
+| １ | 型の関係・構成の指定（友達宣言，トレイトの取込等） |
+| ２ | 型別名・関連型・ネスト型 |
+| ３ | 型に属する定数・静的な状態 |
+| ４ | 実体毎の状態・プロパティ |
+| ５ | 型に属する操作・関連関数 |
+| ６ | 実体毎の操作・演算子 |
+| ７ | 生成・初期化 |
+| ８ | 破棄・終了 |
+
+関数は被呼出側から呼出側へ並べ，言語毎に生成・破棄・型定義を別の位置へ移す慣習は用いない．言語が要求する宣言位置や，初期化・クラス本体の実行順に意味が有る部分は其の順を保つ．型名・可視性・束縛を変えて順序だけを揃えない．Ruby の可視性区画も各メソッドの公開範囲を保持する．
+
+同じ順位内では，意味を保持出来る範囲で型・定数・変数を使用順に，関数を被呼出側から呼出側の順に配置する．相互再帰は一群として扱い，依存関係で一意に決まらない順序は最初の呼出元での初出順とする．異なる呼出元からの逆順要求を同時に満たす事は強制しない．必要な前方宣言は此れを認める．
+
+##### C++ の詳細順序
+
+各アクセス区画内では次の順とする．複数の分類に当たる場合は，特殊メンバ関数，演算子，其の他の該当する上位行の順に選ぶ．生成・破棄の公開範囲を配置の為に変えない．
+
+| 順位 | 分類 | 分類内の順序 |
+|---|---|---|
+| １ | クラス関係 | `private` 区画の `friend` |
+| ２ | ネスト型 | `using` / `typedef` → `enum` → `struct` → `class` |
+| ３ | 静的な成員変数 | `constexpr` → `constinit` → `const` → `inline` → `thread_local` → `volatile` → 其の他 |
+| ４ | 実体毎の成員変数 | `const` → `volatile` → `mutable` → 其の他 |
+| ５ | 静的な成員関数 | `consteval` → `constexpr` → `inline` → 其の他 |
+| ６ | 仮想関数 | 純粋仮想 → 其の他の `virtual` → `override` / `final` |
+| ７ | 其の他の成員関数 | `consteval` → `constexpr` → `inline` → `volatile` → 通常関数 |
+| ８ | 成員演算子 | 読取専用 → 変更系 → コピー代入 → ムーブ代入 |
+| ９ | コンストラクタ | 値受取 → コピー → ムーブ → 既定 |
+| １０ | デストラクタ | 最後に配置 |
+
+同じ関数分類では `const` 付を先にする．参照修飾子，`noexcept` 及び属性は順位を変更しない．`consteval` / `constexpr` / `inline` は明示した指定で分類し，暗黙の含意だけで別の行へ移さない．
+
+非静的データメンバに `constexpr` / `inline` を付ける，静的メンバ関数に `this` の `const` / `volatile` を付ける等，言語が許さない宣言は順序の候補に含めない．
+
+#### 定義順序
+
+ファイル内の関数定義は，公開範囲・初期化順序・言語別区画を保持した上で，被呼出側（末端の関数）を先に，呼出側（上位の関数）を後に配置する．クラス外定義にはクラス内宣言の種別順を適用しない．相互再帰と競合する呼出順序は，宣言順序の規則に従う．
+
+### 例
+
+#### 定義順序
+
+```cpp
+void Model::Prepare() {}
+
+void Model::Draw() {
+	Prepare();
+	// 終了
+	return;
+}
+```
+
+`Prepare` を先に定義し，其れを呼ぶ `Draw` を後に置く．相互再帰は一群として扱う．
+
+## 5.12 命名
+
+**対象**：全言語共通（自ら定める識別子・ファイル名）
+
+**強度**：必須 (`MUST`)
+
+### 規則
+
+識別子の命名は以下の原則に従う．
+
+- 意味を表す名前を使用する．
+- 識別子は原則として英語で命名する．ローマ字表記（`kensaku` 等）は使用しない．
+- 識別子に使用する文字は ASCII の英数字と `_` に限る．言語仕様が Unicode 識別子を許容して居る場合であっても，非 ASCII 文字（漢字・仮名・キリル文字・ギリシャ文字・絵文字等）は使用しない．
+	- 言語仕様上必須とされる接頭辞や接尾辞の記号は名前の一部と見做さず，本制限の対象外とする（C# の `@`，Rust のライフタイム `'`，PHP の `$`，JavaScript / TypeScript の `#`，Ruby の `@` / `@@` / `$` 及び末尾の `?` / `!` / `=`，Ruby の演算子メソッド名 `<=>` / `[]`）．
+
+	**例外**：定訳の無い固有名詞・製品名・外部 API が定める名称は其の儘用いる．
+
+命名規則は以下の通りとする（言語毎の一般的な慣行と異なる場合であっても，言語間の一貫性を優先し本規約に従う）：
+
+- C, C++, C#, Java: 全て `PascalCase`（ローカル変数，関数，クラス，定数を含む）
+- Go: エクスポート識別子は `PascalCase`，非エクスポート識別子は `camelCase`
+- Rust: ローカル変数・関数は `snake_case`，型・トレイトは `PascalCase`，定数は `UPPER_SNAKE_CASE`
+- Kotlin: 全て `PascalCase`（ローカル変数，関数，クラス，定数を含む）
+- Swift: ローカル変数・関数は `camelCase`，型・プロトコルは `PascalCase`，`enum` の case は `camelCase`
+- PHP: ローカル変数・メソッドは `camelCase`，クラス・インタフェース・トレイトは `PascalCase`，定数は `UPPER_SNAKE_CASE`
+- JavaScript, TypeScript: ローカル変数・関数は `camelCase`，型・クラスは `PascalCase`，定数は `UPPER_SNAKE_CASE`
+	- React コンポーネントの関数・束縛は `PascalCase` とする．`const` に依る再代入不可と言う理由のみで，全ての局所束縛を定数名記法に変更してはならない．`UPPER_SNAKE_CASE` は固定の設定値等の定数に用いる．
+- Ruby: ローカル変数・メソッドは `snake_case`，クラスは `PascalCase`，定数は `UPPER_SNAKE_CASE`
+- Python: ローカル変数・関数は `snake_case`，クラス・型エイリアスは `PascalCase`，定数は `UPPER_SNAKE_CASE`
+
+識別子の種類や用途に応じた個別規則は以下の通りとする．
+
+- **JSON のキー**：`camelCase` とする（外部仕様が定める場合は其れに従う）．同名キーを重複させない．
+- **HTML, CSS の識別子**：`id`，`class`，カスタムプロパティは `kebab-case` とする．`id` は文書内で一意にする．
+- **真偽値**：真偽で回答出来る名前にする．変数・プロパティ及び通常の関数名は `is` / `has` / `can` / `should` 等で開始し，真偽を表す接尾辞を用いるメソッド名は下記に従う．大文字・小文字は言語別規則に従う（例：`isValid` / `IsValid`, `hasError`, `canRetry`）．
+	- Ruby の真偽を返すメソッドは `?` 接尾辞で表す (`valid?`, `empty?`)．レシーバを破壊的に変更するメソッドには `!` を付与し，非破壊版と対で提供する．
+- **アクセサ**：セッターの接頭辞は `set` とし，ゲッターの接頭辞は `get` とする（大文字・小文字は各言語の規則に従う．例：`setCount` / `SetCount`, `getCount` / `GetCount`, `set_count` / `get_count`）．
+- **１文字変数**：C, C++, C#, Java, Kotlin の１文字変数の大文字・小文字は以下に従う．
+	- 意味を持たないカウンタ・一時変数（`i`, `j`, `k`, `n`, `x`, `a`, `b` 等）：小文字．
+	- 意味を持つ１文字（座標の `X` / `Y` / `Z`，テンプレート引数の `T` 等）：大文字．
+- **意味の伝わらない省略名の禁止**：`I`, `Nl`, `Op`, `Sv` 等，語を切り詰めて意味が不明瞭に為った短縮名は禁止し，意味の伝わる名前（`Iterator`, `Newline`, `Operator`, `Source` 等）を使用する．大文字・小文字は各言語の規則に従う．尚，前項の慣用的な１文字変数や，慣用イテレータ名 (`it` / `lhs` / `rhs`) は本禁止事項の対象としない．
+
+- **ファイル名**：定義する主要なクラス名・モジュール名と一致させる（JSON / HTML / CSS，及び外部ツールが名称を固定して居る設定ファイルは，其のツールの要求仕様を優先する）．
+	- C, C++, C#, Java: `PascalCase`（Java は public クラス名との一致が言語仕様上の必須要件）．
+	- Go, Rust: `snake_case`.
+	- Kotlin, Swift: `PascalCase`（Kotlin は複数の最上位宣言を持てる為，内容を表す適切な名前で良い）．
+	- PHP（クラスを定義するファイル）：`PascalCase`.
+	- JavaScript, TypeScript（React コンポーネント）：`PascalCase`.
+	- JavaScript, TypeScript（非コンポーネント）：`camelCase`.
+	- Ruby, Python: `snake_case`.
+	- JSON, HTML, CSS: `kebab-case`.
+
+**注意 (Go)**：`_test`, `_<GOOS>`, `_<GOARCH>` で終わるファイル名は暗黙のビルド制約と為り，該当環境以外では自動的にビルド対象から除外される．意図した場合を除き，末尾に `test`, `windows`, `linux`, `darwin`, `amd64`, `arm64` 等を配置しない．
+
+**注意 (SCSS)**：パーシャルファイルは先頭に `_` を付与する (`_variables.scss`)．
+
+#### エラー変数の命名
+
+エラーや例外を扱う変数は以下の規則に従って命名する．
+
+- `e`: `catch` 節の例外変数（大文字・小文字は上記の言語別規則に従う．PascalCase 系言語では `E`）．
+- `error`: コールバック関数の引数等で受け取る非例外エラー．
+- 具体名（`databaseError`, `retryError` 等）：ネストにした `catch` 節等で外側の例外と区別が必要な場合．
+
+### 例
+
+```cpp
+int uc; // ❌
+int UserCount; // ✅
+
+for(int i = 0; i < n; ++i) // ✅ 意味の無いカウンタは小文字
+float X = Position.X; // ✅ 座標を表す X は大文字
+```
+
+#### エラー変数の命名
+
+```cpp
+// catch: E を使用
+try {
+	Process();
+} catch(const std::exception &E) {
+	std::cerr << "failed: " << E.what() << std::endl;
+}
+
+// コールバック：Error を使用
+Exporter.Export(
+	Scene,
+	[](const Result &R) -> void {
+		HandleResult(R);
+	},
+	[](const Error &Error) -> void {
+		std::cerr << "export failed: " << Error.what() << std::endl;
+	}
+);
+
+// ネストされた catch：具体名で区別
+try {
+	Attempt();
+} catch(const std::exception &E) {
+	try {
+		Retry();
+	} catch(const std::exception &RetryError) {
+		std::cerr << "retry failed: " << RetryError.what() << std::endl;
+	}
+}
+```
+
+---
+
+# 第６章 ファイル構成・言語固有機能
+
+## 6.1 include / import の順序
+
+**対象**：C, C++, C#, Java, Go, Rust, Kotlin, Swift, PHP, JavaScript, TypeScript, Ruby, Python, HTML, CSS
+
+**強度**：必須 (`MUST`)
+
+### 規則
+
+使用する宣言・機能に必要な依存を取り込む．C++ の標準依存は，必要な標準ヘッダを個別に取り込む．配置は以下の順序とし，空行は 2.4 に従う．
+
+前提マクロ・初期化・登録・循環依存・カスケード等に意味を持つ読込順序と，言語仕様が要求する位置は保持する．
+
+同じ位置へ安全に置ける読込は，次の順に分類する．
+
+| 順位 | 分類 |
+|---|---|
+| １ | 当該実装自身の宣言を持つヘッダ又は同等の依存 |
+| ２ | プロジェクト内の依存 |
+| ３ | 第三者の依存 |
+| ４ | 言語・実行環境の標準依存 |
+
+同じ群では名前を大文字・小文字を区別せず昇順にし，同順位は実際の綴りの辞書順で決める．名前付のインポート指定子も同じ順とし，必要な別名・型指定・値の読込を記述する．特定のライブラリ名だけを先頭へ優先しない．
+
+識別子を使用しない読込は，副作用等を必要とする場合だけ記述する．
+
+**HTML:** `<link rel="stylesheet">` は `<head>` 内へ，`<script>` は `defer` を付けて `<head>` 内へ置くか，`</body>` の直前へ置く．
+
+**CSS:** `@import` は `@charset` と `@layer` 文より後，其の他の全ての規則より前へ置く（後に置くと無効に為る）．
+
+**SCSS:** `@use` / `@forward` は言語仕様が許す先頭位置へ置き，設定と読込の依存関係を保持する．同一モジュールを再公開且つ利用する場合は `@forward` → `@use` の順とし，利用側の設定を先に適用する．設定用変数の宣言や出力 CSS の順序も保持する．`@import` は使用しない（6.16 参照）．
+
+### 適用条件・例外
+
+**例外（競技プログラミング）**：小規模コードに限り，提出先の処理系が提供する `#include <bits/stdc++.h>` を使用して良い．
+
+### 例
+
+```cpp
+#include "Chunk.h"
+#include "NoiseGenerator.h"
+#include "Terrain.h"
+#include "Mesh/RealtimeMeshAlgo.h"
+#include "RealtimeMeshSimple.h"
+#include <algorithm>
+#include <vector>
+```
+
+```typescript
+// ❌
+import { View, Text, StyleSheet } from "react-native";
+
+// ✅
+import { StyleSheet, Text, View } from "react-native";
+```
+
+## 6.2 ヘッダガード
+
+**対象**：C, C++
+
+**強度**：必須 (`MUST`)
+
+### 規則
+
+ヘッダファイルには，対象の処理系が対応している場合 `#pragma once` を使用する．`#ifndef` ガードは通常使用しない．
+
+### 適用条件・例外
+
+**例外**：非標準の `#pragma once` に対応しない処理系への移植要件が有る場合は，`#ifndef` ガードを用いる．ガード名が外部の条件分岐等にも必要な場合は，其の契約を満たすガードを記述する．
+
+### 例
+
+```cpp
+// ❌
+#ifndef FOO_H
+#define FOO_H
+// ...
+#endif
+
+// ✅
+#pragma once
+// ...
+```
+
+## 6.3 宣言と定義の分離
+
+**対象**：C, C++
+
+**強度**：必須 (`MUST`)
+
+### 規則
+
+関数の宣言（プロトタイプ）はヘッダファイル (`.h` / `.hpp`) に，定義（実装）はソースファイル (`.c` / `.cpp`) に記述する．ヘッダファイル内に関数本体を記述してはならない．此れは C のフリー関数，並びに C++ のフリー関数及びメンバ関数に適用する．
+
+引数の `const` 修飾は宣言側と定義側の両方に記述する．値渡しの最上位 `const` は言語仕様上シグネチャに影響しないが，記述を統一する事で「関数本体内で再代入しない」という意図を呼出側・実装側双方に明示する．ポインタや参照の `const`（C は `const T *`，C++ は `const T *` / `const T &`）は型の一部であり，宣言と定義で必ず一致させる必要が有る．
+
+### 適用条件・例外
+
+**例外**：次の関数は，必要な翻訳単位で定義を参照出来る様に配置する（必ずしも公開ヘッダへ置くという意味ではない）．
+
+- 意図してヘッダへ実装を置く明示的な `inline` 関数（C の `static inline` を含む）
+- `template` 関数（明示的実体化で定義を分離出来る場合を除く）
+- `constexpr` / `consteval` 関数
+- ローカルクラスのメンバ定義等，言語仕様がクラス内部での定義を要求する物
+
+尚，クラス内定義が暗黙に `inline` に為る事だけを理由に，分離規則の例外としてはならない．又，外部へ公開しない関数・実装専用型・`main` の宣言を公開ヘッダへ追加する必要は無い（実装内で必要な前方宣言を用いる）．
+
+### 例
+
+```c
+// ❌ C ヘッダ内に定義
+// foo.h
+int Add(int A, int B) { return A + B; }
+
+// ✅ C ヘッダには宣言のみ
+// foo.h
+int Add(int A, int B);
+
+// ✅ C ソースに定義
+// foo.c
+int Add(int A, int B) {
+	// 和の返戻
+	return A + B;
+}
+```
+
+```cpp
+// ❌ C++ ヘッダ内に定義
+class Foo {
+public:
+
+	void Bar() {
+		DoSomething();
+	}
+};
+
+// ✅ C++ ヘッダには宣言のみ
+class Foo {
+public:
+
+	void Bar();
+};
+
+// ✅ C++ ソースに定義
+void Foo::Bar() {
+	DoSomething();
+	// 終了
+	return;
+}
+```
+
+```cpp
+// ❌ 宣言と定義で const が不一致
+// foo.hpp
+void Bar(int Value, const std::string &Name);
+
+// foo.cpp
+void Bar(const int Value, const std::string &Name) {
+	// ...
+}
+
+// ✅ 宣言と定義の両方に const
+// foo.hpp
+void Bar(const int Value, const std::string &Name);
+
+// foo.cpp
+void Bar(const int Value, const std::string &Name) {
+	// ...
+}
+```
+
+## 6.4 キャスト
+
+**対象**：C, C++
+
+**強度**：必須 (`MUST`)
+
+### 規則
+
+C では C 形式のキャストを使用する．C++ では C 形式のキャスト `(int)x` を使用せず，C++ のキャスト演算子を用いる．
+
+キャスト演算子の使分：
+- `static_cast`: 一般的な型変換（整数↔浮動小数点，列挙型↔整数等）
+- `reinterpret_cast`: ポインタ型の再解釈（極力避ける）
+- `const_cast`: `const` 外し（極力避ける）
+- `dynamic_cast`: ポリモーフィズムに依るダウンキャスト
+
+### 例
+
+```cpp
+// ❌
+int n = (int)Str.length();
+float f = (float)x;
+
+// ✅
+int n = static_cast<int>(Str.length());
+float f = static_cast<float>(x);
+```
+
+## 6.5 マクロの使用制限
+
+**対象**：C, C++
+
+**強度**：必須 (`MUST`)
+
+### 規則
+
+定数には，5.8, 5.9 が定める定数機能を用い，通常は `#define` を用いない．C23 以降のコンパイル時定数にも 5.9 を適用する．
+
+定数以外のマクロは，条件コンパイル（`#ifdef` 等），又は外部 ABI・処理系が要求し他の機能で代替出来ない場合に限る．インクルードガードは 6.2 に従う．
+
+### 適用条件・例外
+
+**例外**：
+- C / C++ では，`#if` 等の前処理で参照する定数は `#define` を用いる．
+- C では，対象バージョンの定数機能で表現出来ない場合（配列長，`case` ラベル，ビットフィールド幅等の必要な定数式）に限り `#define` を許可する．対象バージョンで利用出来る `constexpr` 又は列挙定数で意味を保てる場合は，其れらを優先する．
+
+### 例
+
+```cpp
+// ❌
+#define MAX_SIZE 100
+#define PI 3.14159F
+
+// ✅
+constexpr int MaxSize = 100;
+constexpr float Pi = 3.14159F;
+```
+
+## 6.6 using namespace
+
+**対象**：C++
+
+**強度**：必須 (`MUST`)
+
+### 規則
+
+`using namespace` は使用せず，名前空間を明示する．
+
+### 適用条件・例外
+
+**例外（競技プログラミング）**：小規模な単一ファイルコードに限り，`using namespace std;` を使用して良い．
+
+### 例
+
+```cpp
+// ❌ 例外に該当しないコード
+using namespace std;
+cout << "hello" << endl;
+
+// ✅ 名前空間の明示
+std::cout << "hello" << std::endl;
+```
+
+## 6.7 NULL と nullptr
+
+**対象**：C, C++
+
+**強度**：必須 (`MUST`)
+
+### 規則
+
+C17 以前は `NULL`，C23 以降及び C++ は `nullptr` を使用する．
+
+### 例
+
+```cpp
+// ❌
+int *Ptr = NULL;
+if(Ptr == NULL) return;
+
+// ✅
+int *Ptr = nullptr;
+if(!Ptr) return;
+```
+
+## 6.8 エラー処理
+
+**対象**：C, C++, C#, Java, Go, Rust, Kotlin, Swift, PHP, JavaScript, TypeScript, Ruby, Python
+
+**強度**：推奨 (`SHOULD`)
+
+### 規則
+
+エラーを握り潰す（空の `catch` ブロック，Go の `_ = f()`，Rust の `let _ = ...` 等）事は禁止する．呼出側への伝播，明示された回復処理，又は適切な境界での記録を行う．意図した代替値の返却は握り潰しとは区別する．記録には認証情報や不要な入力本文を含めず，同一の異常に対する重複記録も避ける．
+
+各言語のエラー処理方針は以下の通りとする．
+
+- C: 戻値と `errno` で異常を返す．呼出側は必ず判定する．
+- C++: 例外 (`throw` / `try` / `catch`) を基本とする．性能が要求される箇所では戻値に依る判定を許可する．
+- C#: 例外を基本とする．捕捉は具体型に限り，`catch(Exception)` は再送出を伴う場合のみ許可する．資源解放は `using` 宣言で行う．
+- Java: 例外を基本とする．回復可能な異常は検査例外，前提条件違反は非検査例外（`IllegalArgumentException` 等）とする．検査例外を意味の無い非検査例外へ包み直さない．資源解放は try-with-resources で行う．
+- Go: 例外を用いず `error` を最終戻値で返す．呼出側は必ず判定し，握り潰し (`_ = f()`) を禁止する．文脈追加は `fmt.Errorf("…: %w", resultError)`，判定は `errors.Is` / `errors.As` で行う．`panic` は不変条件の破壊時のみとする．資源解放は `defer` で行う．
+- Rust: `Result<T, E>` を返し，伝播は `?` 演算子で行う．`unwrap` / `expect` は不変条件が保証出来る箇所に限る．エラー型は `std::error::Error` を実装し，文脈追加は `map_err` で行う．`Result` の無視 (`let _ = ...`) を禁止する．
+- Kotlin: 例外を基本とする（検査例外は無い）．Java から呼ばれる API にのみ `@Throws` を付ける．資源解放は `use` で行う．
+- Swift: `throws` と `do` / `catch` を基本とする．`try!` は禁止する．`try?` は失敗を `nil` として扱う事が意味的に正しい場合のみ用いる．
+- PHP: 例外 (`throw` / `try` / `catch` / `finally`) を基本とする．捕捉型は `Throwable` ではなく具体型を指定し，`Error`（内部エラー）は原則として捕捉しない．複数型は `catch(FooException|BarException $e)` で束ねる．
+- JavaScript, TypeScript: `try` / `catch` を基本とする．非同期処理では `.catch()` 又は `await` を伴う `try` / `catch` を使用する．
+- Ruby: 例外 (`raise` / `rescue`) を基本とする．代替値の返却のみで足り，且つ捕捉対象が `StandardError` 全域で構わない場合に限り修飾子 `rescue`（`<式> rescue <代替値>`）を用いる．ログ出力・例外種別の限定が必要な場合，本体が複数文の場合，複数 rescue 分岐・`else` / `ensure` を伴う場合は通常形式の `begin` / `rescue` / `end` を用いる．
+- Python: `try` / `except` を基本とする．裸の `except:` は `KeyboardInterrupt` 迄捕捉する為禁止し，`except <具体型> as e` とする．再送出時は `raise X from e` で原因を保つ．資源管理は `with` 文で行う．
+
+### 例
+
+```ruby
+# ❌ 単一文を begin/rescue/end で包む
+value = begin
+	JSON.parse(str)
+rescue
+	{}
+end
+
+# ✅ 単一文 — 修飾子 rescue
+value = JSON.parse(str) rescue {}
+
+# ✅ 複数文本体，複数 rescue 分岐，又は ensure を伴う場合 — 通常形式
+result = begin
+	complex_op_a
+	complex_op_b
+rescue ArgumentError => e
+	handle_argument(e)
+rescue StandardError => e
+	handle_standard(e)
+end
+```
+
+## 6.9 言語固有の必須事項
+
+**対象**：C, C#, Java, Go, Rust, Kotlin, Swift, PHP, Ruby, Python
+
+**強度**：必須 (`MUST`)
+
+### 規則
+
+各言語の中核機能の内，安全性 (1.3) に直結する事項を以下に定める．
+
+#### C
+
+- 外部へ公開しない関数・変数には `static` を付け，内部リンケージにする．
+- ヘッダは自己完結させる（必要な `#include` を自ら持つ）．ヘッダには公開宣言のみを置き，定義は１つの翻訳単位に置く（6.3 参照）．
+- 文字列・バッファ操作は境界付関数（`snprintf` 等）を用いる．`size_t` の書式指定子は `%zu` とする．
+- `restrict` は別名が存在しない事を保証出来る場合のみ付ける．
+- 使用する C の版 (C17 / C23) をプロジェクトで固定し，`bool`／`nullptr`／`constexpr`／２進リテラルの可否を明示する．
+
+#### C#
+
+- 公開データはプロパティで表し，公開フィールドを作らない．必要な変更可否に応じて `get` のみ・`init`・非公開 `set` 等を選び，不要な公開セッターを追加しない．尚，`record` だけでは参照先を含む不変性は保証されない点に注意する．
+
+#### Java
+
+- `record` は不変データ，`sealed interface` は限定された派生に用いる．
+
+#### Go
+
+- `defer` はループ内に置かない（関数終了迄解放されない為）．資源解放の方針は 6.8 に従う．
+- `nil` 判定は `if resultError != nil` の形で明示的に書く．
+- ゴルーチンは起動元が停止責任を持つ．`context.Context` を取る関数では第１引数に置く．
+- `interface {}` ではなく `any` を用い，型を特定出来る箇所では具体型を用いる．
+
+#### Rust
+
+- 引数は既定で借用 (`&T` / `&mut T`) とし，所有権が必要な場合のみ値渡しにする．`clone()` で借用検査を回避しない．
+- 文字列は引数に `&str`，保持に `String` を用いる．スライスは引数に `&[T]`，保持に `Vec<T>` を用いる．
+- `unsafe` はプロジェクトで許可した箇所のみとする．
+- 条件付の初期化は `let x = if c { a } else { b };` 又は `match` 式で行う．
+
+#### Kotlin
+
+- 最上位関数・拡張関数を用いて良い．`data class` は値の集約，`object` は単一実体，`companion object` は型に紐付く定数・生成関数に用いる．
+- 条件付の初期化は `if` 又は `when` の式で行う．
+
+#### Swift
+
+- 先ず `struct`（値型）を用い，参照同一性・継承・`deinit` が必要な場合のみ `class` を用いる．`struct` の状態変更メソッドには `mutating` を付ける．
+- 保持関係を調べ，循環参照が生じる場合は `[weak self]` 等で解消する．`[unowned self]` はクロージャの使用中に参照先が生存する保証が有る場合に限る．処理完了迄の生存に必要な強参照を一律に弱めない．
+- 資源解放・後処理は `defer` で行う．
+- 準拠毎に `extension` を分けて良い（5.11 の宣言順序は各 `extension` 内で適用する）．
+
+#### PHP
+
+- 純粋な PHP ファイルでは終了タグ `?>` を書かない（末尾の余分な出力を防ぐ為）．
+- 合成には `trait` を用い，クラス本体の先頭で `use` する（5.11 参照）．
+- ヒアドキュメント（展開有）とナウドキュメント（展開無）は，要求する補間・逃避の解釈に応じて選ぶ．
+- 論理演算には `&&` / `||` を用いる（`and` / `or` / `xor` は代入より優先順位が低く括弧が必要と為る．4.4 参照）．
+
+#### Ruby
+
+- ハッシュのキーはシンボル (`{ key: value }`) を既定とし，外部データの写しのみ文字列キーとする．
+- 論理演算には `&&` / `||` を用いる（`and` / `or` は代入より優先順位が低く括弧が必要と為る．4.4 参照）．
+
+#### Python
+
+- 可変オブジェクト (`[]` / `{}` / `set()`) を既定引数に指定してはならない（既定値は定義時に１度だけ評価され，呼出間で共有される為）．`None` を既定にして本体で生成する．
+- `global` / `nonlocal` は使用しない．
+- 反復には `enumerate` / `zip` を用い，添字の手動管理を避ける．
+
+## 6.10 型ヒント・null 安全
+
+**対象**：C#, Kotlin, Swift, PHP, TypeScript, Python
+
+**強度**：必須 (`MUST`)
+
+### 規則
+
+関数の引数と戻値の型明記は 5.4 に従う．
+
+- **C#**: プロジェクト全体で `<Nullable>enable</Nullable>` を有効化する．null 免除演算子 `!` は使用禁止とし，`?.` / `??` / `ArgumentNullException.ThrowIfNull` で代替する．
+- **Kotlin**: 値が null を取り得るか否かを型 (`T` / `T?`) で表現する．`!!` は使用禁止とし，`?.`／`?:`／`requireNotNull`／スマートキャストで代替する．`lateinit var` は依存注入等で初期化時点を制御出来ない場合に限る．
+- **Swift**: `Optional` (`T?`) で null 可能性を表現する．強制アンラップ `!` と `try!` は使用禁止とし，`if let` / `guard let` / `??` / `flatMap` で代替する．`guard` は早期脱出に用いる．
+- **PHP**: ファイル先頭の許される位置へ `declare(strict_types=1);` を置く．スカラー引数の厳密性は原則として呼出元ファイルに依存し，宣言側だけで全呼出を厳密に出来る訳ではない点に留意する．未定義と null を同一視する場合は `isset()` / `??`，null 其の物の判定は `=== null` を用いる．`empty()` は偽値全般を真とする為，`0` や空文字列を区別する文脈では使用しない．
+- **TypeScript**: `tsconfig.json` で `strict`（少なくとも `strictNullChecks`）を有効化する．非 null 表明 `!` は使用禁止とし，`?.`／`??`／型ガードで代替する．
+
+PHP では `?T` と `T|null` は同じ型を表す場合に `?T` へ揃え，`mixed` は具体型を定めれない場合に用いる．
+
+Python の型ヒントにも 5.4 を適用する．総称型・合併型・省略可能型は対象版で有効な形式へ揃え，型別名は `PascalCase` とする．`typing` からは組込に対応の無い物だけを取り込む．
+
+### 例
+
+```php
+class Cart {
+	private readonly int $itemCount;
+
+	public function findItem(string $code): ?Item {
+		return $this->items[$code] ?? null;
+	}
+}
+```
+
+```python
+Tree = str|tuple
+
+def parse_ids(ids: str) -> tuple[Tree, int]:
+	return ids, 0
+
+def count_strokes(cp: int) -> int:
+	return 0
+```
+
+```python
+# 値が自明な変数にも型を明示
+name: str = "hello"
+
+# 複合型の明示
+components: dict[str, dict[str, set[str]]] = { idc: { role: set() for role in roles } for idc, roles in IDC_ROLES.items() }
+```
+
+## 6.11 JSX 条件レンダリング
+
+**対象**：JavaScript, TypeScript
+
+**強度**：必須 (`MUST`)
+
+### 規則
+
+数値を `&&` の描画条件に使用する場合は `!!` で真偽値化する．数値が `0` の場合に式の値も `0` と為り，React は数値を其の儘描画する．React Native では `Text` コンポーネントの直下以外のテキストがエラーに為る為，条件の偽値として数値を返してはならない．
+
+### 例
+
+```tsx
+// ❌（length が０の時 "0" が描画される）
+{items.length && <List items={items} />}
+
+// ✅
+{!!items.length && <List items={items} />}
+```
+
+## 6.12 Ruby の式本体に依るメソッド定義
+
+**対象**：Ruby の式本体形式で定義するメソッド
+
+**強度**：必須 (`MUST`)
+
+### 規則
+
+式本体形式は `def 名前(引数) = 式` と記述する．行長制限内では１行で記述し，超える場合は同じ形式の式内で 2.3 に従って折り返す．`return` と返戻コメントは付けない．
+
+### 例
+
+```ruby
+def double(x) = x * 2
+def square(x) = x ** 2
+```
+
+## 6.13 内包表記
+
+**対象**：Python
+
+**強度**：推奨 (`SHOULD`)
+
+### 規則
+
+リスト・辞書・集合の生成には `for` ループよりも内包表記を優先する．ネストは１段迄を推奨し，２段以上は可読性を考慮して判断する．
+
+### 例
+
+```python
+# ❌
+result = []
+for x in items:
+	if x.is_valid():
+		result.append(x.value)
+
+# ✅
+result = [x.value for x in items if x.is_valid()]
+
+# ✅ 辞書内包表記
+char_rank = { cp: i for i, cp in enumerate(sorted_chars) }
+
+# ✅ 集合内包表記
+unique_ids = { ids for id_list in df["IDS"] for ids in id_list }
+```
+
+## 6.14 JSON
+
+**対象**：JSON
+
+**強度**：必須 (`MUST`)
+
+### 規則
+
+- キーの命名規則と重複禁止は 5.12 に従う．
+- キーは意味的な纏まり毎に並べ，同一グループ内は宣言順を保つ．
+- 数値は受信側の精度・範囲の契約に合わせる．一般的な `binary64` 受信側で整数を厳密に扱う場合は絶対値を `2^53 - 1` 以下に収める．`0.1` 等の小数が２進数で厳密に表現出来ない事を理由に禁止せず，許容誤差を定める．厳密な１０進値・巨大な整数には，合意した文字列等の表現を用いる．
+- 指数記号は `E` に統一する．
+- 素の JSON はコメントを書けない為，説明は別文書に記述する（7.1 参照）．JSONC は `//` と `/* */` を記述出来る為，第７章のコメント規則に従う．
+
+## 6.15 HTML 構造
+
+**対象**：HTML
+
+**強度**：必須 (`MUST`)
+
+### 規則
+
+- 完全な HTML 文書の先頭に `<!DOCTYPE html>` を置く（指定が無い場合は後方互換モードに為る）．HTML 断片へ文書構造タグを追加してはならない．
+- 完全な文書では `html` の `lang` を本文の言語に合わせ（日本語は `ja`），`<meta charset="UTF-8">` を置く．断片は埋込先の文書構造に従う．
+- 意味付タグ (`header` / `nav` / `main` / `article` / `section` / `aside` / `footer`) を用い，`<div>` は意味を持たない配置目的に限る．
+- `<img>` には `alt` を必ず付ける．装飾目的の画像は `alt=""` とする．
+- 入力欄は `<label>` と関連付ける（`for` 属性との対応に依り，ラベルのクリックが入力欄へ届く様にする）．
+- `<script>` の文字列リテラル中に `</script>` を直接記述出来ない為，`<\/script>` へエスケープする．
+- HTML の空要素は `<br>` の形で書き，末尾に `/` を付けない．真偽属性は属性名のみを書く (`disabled`)．
+- 属性は `id` → `class` → `data-*` → 其の他の順に並べる．`id` の命名と一意性は 5.12 に従う．
+- インラインの `style` 属性と `on*` 属性は使用しない．
+
+## 6.16 CSS / SCSS
+
+**対象**：CSS
+
+**強度**：必須 (`MUST`)
+
+### 規則
+
+- `!important` は他の手段が無い場合のみ用いる．
+- １６進カラーコードは大文字で書く (`#ABCDEF`)．
+- 識別子（`id`・`class`・カスタムプロパティ）の命名は 5.12 に従う．
+- プロパティは，カスケードの結果を保持出来る場合に「配置 → 寸法 → 装飾」の順に並べる．但し，重複宣言・フォールバック・一括指定と個別指定・論理方向と物理方向・SCSS の評価順が関係する物は相対順を保持する．
+- SCSS の除算は `math.div` を用いる（`/` に依る除算は非推奨で将来削除される為）．
+- SCSS の取込は `@use` / `@forward` を用い，`@import` は使用しない．
+
+---
+
+# 第７章 コメント
+
+## 7.1 コメントの基本
+
+**対象**：C, C++, C#, Java, Go, Rust, Kotlin, Swift, PHP, JavaScript, TypeScript, Ruby, Python, JSONC, HTML, CSS
+
+**強度**：必須 (`MUST`)
+
+### 規則
+
+- 日本語で記述する．
+- コメントの説明文は，日本語・英文・引用，種別・記法に依らず**１文１論理行**とする．各文を別の論理行に記述し，行幅だけで１文を折り返さない．
+- 文終端を示す句点 `.`／`．`／`。` は使用しない．文境界は論理行で表す．
+- 数値・識別子・経路・URL・版番号・略語・文書記法の一部として必要な `.` は記述する．説明文を終える句点とは区別する．
+- 行末・文中の説明は，１文で簡潔に述べ，対象との対応を明確にする．コードの折返・空行はコメントの有無・内容に依らず第２章に従う．
+- 関数本体の説明には，コードだけでは分からない理由・制約を記述する．処理区分の見出は 7.6，返戻の説明は 7.10，関数の利用契約は 7.8 に従い，同じ説明を重複して要求しない．
+
+### 適用条件・例外
+
+**指示コメント**：対象言語・版の言語仕様，公式の言語参照又は公式ツールチェーンの仕様に，記法・意味・適用条件が定められた指示子だけを用いる．指示構文，引数，文書文字列・文書属性及び実行時データは，説明文と区別して必要な内容を記述する．記法は 7.2，空行は 2.4 に従う．
+
+### 例
+
+次は英文を用いて文境界と論理行の対応を示す．
+
+```cpp
+// ❌ 複数文を同行へ記述し，句点を使用
+// Read the cache. Return the result.
+
+// ✅ １文１論理行，句点無
+// Read the cache
+// Return the result
+```
+
+数値・経路の一部である点は，文の終端を示さない．
+
+```cpp
+// 許容誤差は 0.25
+// 設定は config.json から読む
+```
+
+## 7.2 コメント形式
+
+**対象**：C, C++, C#, Java, Go, Rust, Kotlin, Swift, PHP, JavaScript, TypeScript, Ruby, Python, JSONC, HTML, CSS
+
+**強度**：必須 (`MUST`)
+
+### 規則
+
+#### 空白の位置
+
+通常のコメントは，開始記号と説明本文の間にスペース１つを置く．`//go:build` / `//go:debug` 等の指示コメントは，`//` と指示子名の間に空白を入れず，指示子名と引数の間にスペース１つを置く．
+
+本文又は引数を伴わない記法には末尾空白を付けない．引数・ファイル名等の値は，必要な空白を含めて記述する．
+
+#### 記法の選択
+
+| 対象・用途 | 記法と条件 |
+|---|---|
+| 通常の独立・行末コメント | 対象言語の行形式を用いる．Ruby / Python は `#`，其の他の行形式を持つ対象言語は `//` とする． |
+| 文中コメント | 後続コードをコメント化しない `/* ... */` 等の囲み形式を用いる．囲み形式を持たない言語では独立又は行末に記述する． |
+| 文書化・区切コメント | `/** ... */` は 7.8 の文書化又は 7.9 の区切に用いる．言語別の記法は各節に従う． |
+| HTML | `<!-- ... -->` を用いる．本文に `<!--` / `-->` / `--!>` を含めず，`>` 又は `->` で開始せず，`<!-` で終了しない． |
+| CSS | `/* ... */` を用いる． |
+| SCSS | 実装説明には `//`，配信物へ残す著作権表示等には `/*! ... */` を用いる． |
+
+内容の無い通常のコメント行は記述しない．文書記法の空の論理行には，採用する記法の継続記号又は開始記号を記述する．空行は 2.4，説明の要否と配置は 7.3, 7.5~7.12 に従う．
+
+### 適用条件・例外
+
+指示コメントは，7.1 の範囲に含まれる記法を用い，名前・引数・記述位置を各指示子の規定に従って記述する．
+
+| 指示記法・対象 | 記述条件 |
+|---|---|
+| `//go:build` | 対象環境を表す条件式を記述し，`package` より前へ置く．１ファイルに１行迄とする． |
+| `//go:debug` | 対象版で有効な設定を `名前=値` で記述し，適用対象の `package` より前へ置く．同じ設定名を重複させない． |
+| `//go:embed` | 必要なパターンを記述し，型・初期化・取込等の成立条件を満たす対象変数の宣言へ付ける． |
+| 言語標準が認める `#!` | 対象言語・版が定める開始位置と記法で記述する． |
+| Rust の文書属性を表すコメント | 7.8 の外側・内側の文書形式を，説明する対象へ記述する． |
+| Ruby の符号化宣言・マジックコメント | 言語参照が定める名前・値を，有効な位置へ記述する． |
+| Python の符号化宣言 | `# coding: utf-8` 等を先頭又は２行目へ記述し，前行の条件を満たす． |
+
+### 例
+
+```cpp
+// 独立した説明
+Process();
+Value = Left /* 行内で必要な説明 */ + Right;
+```
+
+```go
+//go:build linux
+//go:debug panicnil=1
+package main
+```
+
+## 7.3 重複・不要なコメントの禁止
+
+**対象**：C, C++, C#, Java, Go, Rust, Kotlin, Swift, PHP, JavaScript, TypeScript, Ruby, Python, JSONC, HTML, CSS
+
+**強度**：必須 (`MUST`)
+
+### 規則
+
+以下の対象にはコメントを記述しない：
+
+- 同じパターンの繰返（最初の１箇所にのみコメントすれば十分である為）
+- import 文及び include 文
+- JSX のタグ自体
+
+## 7.4 規約番号参照の禁止
+
+**対象**：C, C++, C#, Java, Go, Rust, Kotlin, Swift, PHP, JavaScript, TypeScript, Ruby, Python, JSONC, HTML, CSS のソースコード内の説明コメント
+
+**強度**：必須 (`MUST`)
+
+### 規則
+
+ソースコード内のコメントで本規約の節番号を直接参照してはならない（`規約 N.M`，`(規約 N.M 準拠)`，`CODING_STANDARDS.md 参照` 等）．代わりに**意図其の物**を直接コメントとして記述する．
+
+### 例
+
+```cpp
+// ❌ 規約番号を参照
+if(c >= 'a' && c <= 'z') return true; // 規約 4.11 例外：ASCII 隣接
+
+// ✅ 意図を直接記述
+if(c >= 'a' && c <= 'z') return true; // 文字コード隣接境界の意図を保つ為，>= / <= 維持
+```
+
+## 7.5 宣言グループ
+
+**対象**：C, C++, C#, Java, Go, Rust, Kotlin, Swift, PHP, JavaScript, TypeScript, Ruby, Python
+
+**強度**：必須 (`MUST`)
+
+### 規則
+
+宣言グループの先頭に，行コメント（`//` 又は `#`）で見出を付ける．グループ内の自明な個別項目にはコメントを記述しない．特殊値・単位・制約等の説明が必要な項目は 7.7 に従う．
+
+### 例
+
+```cpp
+// ファイル参照
+File *Front = nullptr, *Back = nullptr;
+// サウンド
+int BgmHandle, SeHandle;
+```
+
+## 7.6 ステップコメント
+
+**対象**：C, C++, C#, Java, Go, Rust, Kotlin, Swift, PHP, JavaScript, TypeScript, Ruby, Python, SCSS
+
+**強度**：必須 (`MUST`)
+
+### 規則
+
+関数本体を意味上の処理区分へ分け，各区分の直前に簡潔な見出を置く．文毎の逐語的な説明ではなく，コードを読む際の区分を示す．記法は各言語の行コメントとし，対象コードと同じ深さへ置き，間に空行を入れない．見出は「対象の処理」の体言止とする（例：画像の読込）．
+
+7.3 の繰返説明の省略と 7.10 の単純な返戻の省略を優先する．省略出来る返戻だけの区分へ，別名のステップコメントを再要求しない．同じ区分を宣言の見出・返戻コメント等で説明済なら重ねない．
+
+### 例
+
+```cpp
+// 画像の読込
+Image *Image = LoadImage(Path);
+// マスクの生成
+Mask *Mask = CreateMask(Image);
+// 輪郭の抽出
+Contour *Contour = ExtractContour(Mask);
+```
+
+## 7.7 行末・文中コメント
+
+**対象**：C, C++, C#, Java, Go, Rust, Kotlin, Swift, PHP, JavaScript, TypeScript, Ruby, Python, JSONC, HTML, CSS
+
+**強度**：必須 (`MUST`)
+
+### 規則
+
+名前から意味が自明でない構造体・クラスのメンバやマジックナンバーには，対象と同じ行のインラインコメント（`//` 又は各言語のコメント記法）で説明を付ける．自明な値にはコメントを記述しない．特殊値（`null` と `undefined` の使分等）の説明は必ず記述する．
+
+行末コメントの開始記号 (`//` / `#` / `/*` / `<!--`) の前には，スペース１つ又はタブの何れかを挿入する．複数のスペースを挿入してはならない．列を揃えたい場合はタブを使用する．
+
+### 例
+
+```cpp
+// ❌ 複数スペースで列揃え
+int BaseWidth = 32;   // 台座中心から接地限界迄の幅
+int Margin = 4;       // 余白の基準幅（凸部の最小半径）
+
+// ✅ スペース１つ
+int BaseWidth = 32; // 台座中心から接地限界迄の幅
+int Margin = 4; // 余白の基準幅（凸部の最小半径）
+
+// ✅ タブで列揃え
+int BaseWidth = 32;	// 台座中心から接地限界迄の幅
+int Margin = 4;		// 余白の基準幅（凸部の最小半径）
+```
+
+## 7.8 文書化コメント
+
+**対象**：C, C++, C#, Java, Go, Rust, Kotlin, Swift, PHP, JavaScript, TypeScript, Ruby, Python
+
+**強度**：必須 (`MUST`)
+
+### 規則
+
+全ての名前付関数の定義に，目的と利用契約を記述する．宣言と定義が分かれる場合は定義側にだけ記述し，匿名関数では代入先や引数の役割を説明する．
+
+存在する引数・戻値と必要な制約を説明する．失敗時の利用契約には，呼出側へ伝わる例外・エラー値等の種類と発生条件を記述し，該当しない項目や空の項目は設けない．数学的な制約は数学記号で示す．主要な算法や，入力規模に応じて費用が変わる関数には，計算量を O 記法で記述し，基準とする入力規模を示す．内部の算法・最適化の手順は本体内で説明する (7.6)．
+
+#### 記法と説明項目
+
+文書化コメントは次表の形式に統一する．複数行の囲みコメントでは開始・終端記号を独立行に置き，本文の各行を ` *` で始める．文区切と句点は 7.1，空白と空行は 7.2 に従う．
+
+| 言語 | 記法 | 本文の形式・説明項目 |
+|---|---|---|
+| C | `/** ... */` | Doxygen: 引数は `@param`，戻値は `@return`．失敗はエラー値・`errno` の条件を説明する． |
+| C++ | `/** ... */` | Doxygen: 引数は `@param`，戻値は `@return`，送出例外は `@throws`． |
+| C# | `/** ... */` | XML: 概要は `<summary>`，引数は `<param>`，戻値は `<returns>`，送出例外は `<exception>`． |
+| Java | `/** ... */` | Javadoc: 引数は `@param`，戻値は `@return`，送出例外は `@throws`． |
+| Go | `//` | 宣言名で始め，引数・戻値・失敗条件を本文で説明する． |
+| Rust | 外側は `/** ... */`，内側は `/*! ... */` | Markdown: 引数・戻値・失敗条件は `# Arguments` / `# Returns` / `# Errors` / `# Panics` の見出で示す． |
+| Kotlin | `/** ... */` | KDoc: 引数は `@param`，戻値は `@return`，送出例外は `@throws`，プロパティは `@property`． |
+| Swift | `/** ... */` | 文書用マークアップ．引数は `- Parameter 名前:`，戻値は `- Returns:`，送出例外は `- Throws:`． |
+| PHP | `/** ... */` | PHPDoc: 引数は `@param`，戻値は `@return`，送出例外は `@throws`． |
+| JavaScript, TypeScript | `/** ... */` | JSDoc: 引数は `@param`，戻値は `@return`，送出例外は `@throws`． |
+| Ruby | `#` | YARD: 引数は `@param`，戻値は `@return`，送出例外は `@raise`． |
+| Python | `""" ... """` | 文書文字列．引数・戻値・送出例外の見出書式をプロジェクトで統一する． |
+
+文書は対象の定義の直前に置く．Rust の内側の文書は説明する本体の先頭，Python の文書文字列は関数・クラスの本体の先頭に記述する．
+
+### 例
+
+```cpp
+/**
+ * 標高を算出する
+ * 計算量：O(1)（標本の取得は格子の添字引き）
+ * @param Location 当該地点の平面座標
+ * @return 当該地点の標高
+ */
+FVector2f CalculateElevation(const FVector2f &Location) {
+	// 当該地点の標高の返戻
+	return Heightmap.Sample(Location);
+}
+```
+
+```csharp
+/**
+ * <summary>二つの整数を加算する</summary>
+ * <param name="a">第１加数</param>
+ * <param name="b">第２加数</param>
+ * <returns>二つの整数の和</returns>
+ */
+int Add(int a, int b) {
+	// 和の返戻
+	return a + b;
+}
+```
+
+```typescript
+/**
+ * マスク上の原点を取得する
+ * @param mask バイナリマスク（0：背景，1：対象領域）
+ * @param baseWidth 台座幅の½（∈ℤ，≧0）
+ * @return 原点座標 [X, Y]
+ */
+function findOrigin(mask: number[][], baseWidth: number): [number, number] {
+	return [0, 0];
+}
+```
+
+## 7.9 区切コメント
+
+**対象**：C, C++, C#, Java, Go, Rust, Kotlin, Swift, PHP, JavaScript, TypeScript, Ruby, Python, HTML, CSS
+
+**強度**：推奨 (`SHOULD`)
+
+### 規則
+
+ファイル内の大きな機能ブロックの区切には，対象言語に応じた次の記法を用いる．空行は 2.4 に従う．
+
+| 対象言語 | 記法 |
+|---|---|
+| C, C++, C#, Java, Go, Kotlin, Swift, PHP, JavaScript, TypeScript | `/** ========== セクション名 ========== */` |
+| Rust, SCSS | `// ========== セクション名 ==========` |
+| Ruby, Python | `# ========== セクション名 ==========` |
+| HTML | `<!-- ========== セクション名 ========== -->` |
+| CSS | `/* ========== セクション名 ========== */` |
+
+### 適用条件・例外
+
+Go の区切コメントは，構文間の空行の手前等，後続宣言の文書と区別出来る位置に置く．区切コメントの為に空行を増やさず，適切な位置が無い場合は区切コメントを記述しない．
+
+### 例
+
+```cpp
+/** ========== セクション名 ========== */
+```
+
+## 7.10 返戻コメント
+
+**対象**：C, C++, C#, Java, Go, Rust, Kotlin, Swift, PHP, JavaScript, TypeScript, Ruby, Python
+
+**強度**：必須 (`MUST`)
+
+### 規則
+
+- void 関数・コンストラクタ・デストラクタの末尾 `return;` の直前に `// 終了` コメントを記述する．
+- 値を返す `return` 文の直前に `// 〜の返戻` コメントを記述する．
+- 早期リターンにも `// 〜が有る場合の返戻` 等の形式で適用する．
+- switch 文内の各 case の `return` や，１〜２行の単純な関数では省略可能とする．
+
+`return` 文を記述する義務と其の例外は 5.7 に従う．
+
+コメント記号は使用言語の形式を用いる．省略条件の「１〜２行」は，コメントと行長制限に依る折返を数えず，本体の必須改行で区切るコードの行数とする．
+
+## 7.11 useEffect コメント
+
+**対象**：JavaScript, TypeScript
+
+**強度**：必須 (`MUST`)
+
+### 規則
+
+`useEffect` の直前に，実行契機と対象を表すコメントを記述する．状態の更新は `// 〜時の〜の更新`，接続・購読等の開始と解放は其の処理を表す体言止とする．終了時の処理を説明する場合は，対応する解放関数を実際に返す．
+
+### 例
+
+```typescript
+// 正面ファイル又はスケール更新時のシェイプの更新
+useEffect((): void => { UpdateShape(frontFile, scale); }, [frontFile, scale]);
+
+// 接続の開始と終了
+useEffect((): (() => void) => {
+	Setup();
+	return Cleanup;
+}, []);
+```
+
+## 7.12 JSX コメント
+
+**対象**：JavaScript, TypeScript
+
+**強度**：必須 (`MUST`)
+
+### 規則
+
+JSX 内では `{/* コメント */}` を使用する．UI セクションの見出として記述する．
+
+### 例
+
+```tsx
+function Sample(): JSX.Element {
+	return (
+		<>
+			{/* 3D モデルプレビュー */}
+			<div ref={containerRef} className="preview"/>
+			{/* 操作パネル */}
+			<View style={styles.controlPanel}>{/* ボタン群 */}</View>
+		</>
+	);
+}
+```
+
+---
+
+# 第８章 表記統一
+
+## 8.1 英単語の混入制限
+
+**対象**：全言語共通（コメント・文書の表記）
+
+**強度**：必須 (`MUST`)
+
+### 規則
+
+**本章はコメント・ドキュメント内の表記にのみ適用する**（コード中の値・式・識別子には適用しない）．HTML の本文テキストと CSS の `content` 値は文書の内容其の物である為，本章の対象とする．
+
+説明文と，値・識別子・外部データとして記録する内容を区別する．説明文の引用には記載先の表記規則を適用し，値・識別子・外部データは参照先の内容を正確に記述する．
+
+日本語文中で英単語を混入させない．日本語訳が定着している場合は日本語化する．日本語訳が無い・不自然な場合のみ片仮名化を許容する．
+
+- 「status」→「状態」
+- 「issue」→「問題」
+- 「prefix」→「接頭辞」
+- 「pending」→「保留中」
+- 「fetch」→「取得する」
+- 「create」→「作成する」
+- 「update」→「更新する」
+- 「fail」→「失敗する」
+- 「render」→「描画する」
+- 「disable」→「無効化する」
+
+片仮名化する語の例：「risk」→「リスク」，「interface」→「インタフェース」，「algorithm」→「アルゴリズム」．
+
+### 適用条件・例外
+
+**例外**：以下は対象外で英語の儘記述して良い．
+
+- プログラミング言語の予約語・キーワード（`if`, `for`, `return` 等）
+- 変数名・関数名・クラス名のコード内引用
+- 外部ライブラリや API の固有名詞（`React`, `tree-sitter` 等）
+- URL・ファイルパス・コードリテラル
+
+## 8.2 漢字表記
+
+**対象**：全言語共通（コメント・文書の表記）
+
+**強度**：必須 (`MUST`)
+
+### 規則
+
+漢字で表記可能な語は原則漢字で表記する．
+
+| 分類 | 用いる表記 | 用いない表記 |
+|---|---|---|
+| 形式名詞・形式用言 | 〜の上 | 〜のうえ |
+| 形式名詞・形式用言 | 〜の下 | 〜のもと |
+| 形式名詞・形式用言 | 〜の時 | 〜のとき |
+| 形式名詞・形式用言 | 〜の為 | 〜のため |
+| 形式名詞・形式用言 | 〜の訳 | 〜のわけ |
+| 形式名詞・形式用言 | 〜の通り | 〜のとおり |
+| 形式名詞・形式用言 | 〜の様に | 〜のように |
+| 形式名詞・形式用言 | 〜の物 | 〜のもの |
+| 形式名詞・形式用言 | 〜の他 | 〜のほか |
+| 形式名詞・形式用言 | 〜の所 | 〜のところ |
+| 形式名詞・形式用言 | 〜する事 | 〜すること |
+| 形式名詞・形式用言 | 〜毎 | 〜ごと |
+| 形式名詞・形式用言 | 〜等 | 〜など |
+| 形式名詞・形式用言 | 〜有る | 〜ある |
+| 形式名詞・形式用言 | 〜無い | 〜ない |
+| 形式名詞・形式用言 | 〜出来る | 〜できる |
+| 形式名詞・形式用言 | 〜に於いて | 〜において |
+| 形式名詞・形式用言 | 〜に就いて | 〜について |
+| 副詞 | 敢えて | あえて |
+| 副詞 | 取分 | とりわけ |
+| 副詞 | 直ちに | ただちに |
+| 副詞 | 予め | あらかじめ |
+| 副詞 | 既に | すでに |
+| 副詞 | 更に | さらに |
+| 副詞 | 概ね | おおむね |
+| 副詞 | 殆ど | ほとんど |
+| 副詞 | 全て | すべて |
+| 副詞 | 恐らく | おそらく |
+| 副詞 | 何故 | なぜ |
+| 接続詞 | 即ち | すなわち |
+| 接続詞 | 従って | したがって |
+| 接続詞 | 及び | および |
+| 接続詞 | 且つ | かつ |
+| 接続詞 | 併せて | あわせて |
+| 接続詞 | 又 | また |
+| 接続詞 | 或いは | あるいは |
+| 接続詞 | 若しくは | もしくは |
+| 接続詞 | 但し | ただし |
+| 接続詞 | 尚 | なお |
+| 代名詞 | 此れ | これ |
+| 代名詞 | 其れ | それ |
+| 代名詞 | 彼れ | あれ |
+| 代名詞 | 何れ | いずれ／どれ |
+| 代名詞 | 此処 | ここ |
+| 代名詞 | 其処 | そこ |
+| 代名詞 | 彼処 | あそこ |
+| 代名詞 | 何処 | どこ |
+| 代名詞 | 此方 | こちら |
+| 代名詞 | 其方 | そちら |
+| 代名詞 | 彼方 | あちら |
+| 代名詞 | 何方 | どちら |
+| 連体詞 | 此の | この |
+| 連体詞 | 其の | その |
+| 連体詞 | 彼の | あの |
+| 連体詞 | 何の | どの |
+| 連体詞 | 凡ゆる | あらゆる |
+| 動詞（「付く」系） | 片付く | 片づく |
+| 動詞（「付く」系） | 気付く | 気づく |
+| 動詞（「付く」系） | 近付く | 近づく |
+| 動詞（「付く」系） | 根付く | 根づく |
+| 動詞（「付く」系） | 基付く | 基づく |
+
+「より」の使分（漢字化対象の３語と，平仮名保持の２用法を文脈で区別する）：
+- 「依り」：依拠・依存関係．例：「設定に依り動作が変わる」「型情報に依り判定する」．
+- 「拠り」：根拠・出発点．例：「証拠に拠り結論する」「AST に拠り判定する」．
+- 「因り」：原因・理由．例：「バグに因り処理失敗」「構文解析エラーに因り巻戻」．
+- 平仮名「より」の儘（漢字化対象外）：
+	- 比較．例：「A より B が大きい」．
+	- 起点．例：「明日より開始」「先頭より走査」．
+
+動詞「ある」（存在動詞）の使分（「有る」と「在る」を文脈で判定）：
+- 「有る」（所有・抽象的存在）．例：「必要が有る」「機能が有る」．
+- 「在る」（場所的存在）．例：「内部に在る」「次の兄弟ノードが在る」．
+
+助数詞は「箇」を用い，仮名で書かない．
+
+- 「１箇月」（×「１か月」「１ヶ月」「１ケ月」）
+- 「１箇所」（×「１か所」「１ヶ所」「１ケ所」）
+- 「１箇条」（×「１か条」「１ヶ条」「１ケ条」）
+
+### 適用条件・例外
+
+**例外**：地名等の固有名詞（「八ヶ岳」「関ヶ原」等）は原文の表記に従う．
+
+**例外（平仮名表記対象）**：
+
+- 動詞活用＋助動詞「ない」：「〜しない」（×「〜し無い」）．形容詞「〜無い」（存在の否定）とは別語．
+- 助動詞「である」「でない」：「〜である」「〜でない」（×「〜で有る」「〜で無い」）．動詞「ある」・形容詞「無い」（存在）とは別語．
+
+## 8.3 ら抜き言葉
+
+**対象**：全言語共通（コメント・文書の表記）
+
+**強度**：必須 (`MUST`)
+
+### 規則
+
+可能形はら抜き（ar 抜き）を使用する．
+
+- 「食べられる」→「食べれる」
+- 「見られる」→「見れる」
+- 「行かれる」→「行ける」
+
+### 適用条件・例外
+
+**例外**：法令・告示・報告書等の正式名称は原文の儘引用する為，本節と 8.2 の対象外とする．
+
+## 8.4 複合名詞の送仮名省略
+
+**対象**：全言語共通（コメント・文書の表記）
+
+**強度**：必須 (`MUST`)
+
+### 規則
+
+複合動詞の連用形から成る名詞では，各動詞の送仮名を省略する．動詞として使用する場合は省略しない．
+
+- 「受け取り」→「受取」（動詞：「受け取る」は其の儘）
+- 「書き込み」→「書込」（動詞：「書き込む」は其の儘）
+- 「切り替え」→「切替」（動詞：「切り替える」は其の儘）
+- 「切り捨て」→「切捨」（動詞：「切り捨てる」は其の儘）
+- 「組み合わせ」→「組合せ」（動詞：「組み合わせる」は其の儘）
+- 「取り込み」→「取込」（動詞：「取り込む」は其の儘）
+- 「問い合わせ」→「問合せ」（動詞：「問い合わせる」は其の儘）
+- 「繰り返し」→「繰返」（動詞：「繰り返す」は其の儘）
+- 「呼び出し」→「呼出」（動詞：「呼び出す」は其の儘）
+- 「読み込み」→「読込」（動詞：「読み込む」は其の儘）
+- 「〜有り」→「〜有」
+- 「〜入り」→「〜入」
+- 「〜済み」→「〜済」
+- 「〜付き」→「〜付」
+- 「〜無し」→「〜無」
+- 「〜向け」→「〜向」
+
+### 適用条件・例外
+
+**例外**：法令・告示・報告書等の正式名称は原文の儘引用する為，本節の対象外とする．
+
+### 例
+
+```cpp
+// ✅ 名詞（送仮名省略）
+// 画像の読込
+// データの書込
+// モデルの読込
+
+// ✅ 動詞（其の儘）
+// 画像を読み込む
+// データを書き込む
+```
+
+## 8.5 全角・半角の使分
+
+**対象**：全言語共通（コメント・文書の表記）
+
+**強度**：必須 (`MUST`)
+
+### 規則
+
+#### 判定の対象
+
+本節と 8.6 の判定は，文書記法の構文を除いた実文字列に対して行う．
+
+- 装飾記号 (`**` / `` ` `` / `_`)・見出記号 (`#`)・箇条書記号 (`-` / `*` / `+`)・番号付リストの番号と `.`・引用記号 (`>`)，及び其れらの直後のスペースは対象に含めない．判定は其れらを除いた本文の先頭から始める．
+- 例示の可否を示す印（`❌` / `✅` / `⚠`）と其の直後のスペースも，箇条書記号と同じく対象に含めない．
+- 表の行はセル毎に独立した判定単位とし，区切り `|` と，`|` に隣接するセル前後のスペースは対象に含めない．
+- リンク記法の記号部（`[` / `]` / `(` / `)` 及びリンク先の文字列）は記法其の物であり，全角化するとリンクが機能しない為，括弧・連結記号の規則を適用しない．
+- コードスパンの内容は其の儘の文字種で周囲との隣接を判定するが，内側には括弧・連結記号・区切子・単位・スペースの規則を適用しない（`for(初期化; 条件; 更新)` の様な擬似コードも言語の記法通りに書く）．内側のスペースは対象に含めず，外側のスペースとの連続も数えない．
+- コードフェンス（`` ``` `` で囲む区画）の内側は，コメント（`//` / `#` / `/* */` / `<!-- -->` に依る行）のみを対象とし，コード其の物は対象外とする．
+- 素の URL・ファイルパス（`https://…`，`a/b/c.txt` 等）は全体を一つの半角の語として扱い，内部の区切子・連結記号・スペースには本節と 8.6 の規則を適用しない．
+- 節番号・版番号・列挙番号（`2.3`, `PHP 8.1`, `1.`, `A.` 等）及び数値の小数点の `.` は数の一部で区切子ではない為，本節と 8.6 の規則を適用しない．
+
+#### 文字種の判定
+
+ASCII の可視文字 (U+0021~U+007E)，表音文字（ラテン文字・ギリシャ文字・キリル文字・ハングル等の，語の間を空白で区切る文字），数値との間にスペースを入れない単位記号（`%` `‰` `°` `′` `″` 等），及び通貨記号（`$` `¥` `€` `£` `₹` 等）を半角とし，其れ以外の字（仮名・漢字・全角形，及び `→` `↔` `—` `…` `×` `÷` `※` 等の記号）を全角とする．数式・コード片の中では何れも半角．
+
+#### 区切子（読点・句点・コロン・セミコロン）
+
+本項は使用する区切子の文字種を定める．句点の使用可否は記載先で区別し，コメントでは 7.1 に従って使用しない．対象は読点 `,`／`，`，句点 `.`／`．`，コロン `:`／`：`，セミコロン `;`／`；` とし，**区切子より前の一区切**の文字種で選ぶ．一区切とは，一つ前の区切子（無ければ行頭）から当該の区切子迄の範囲を指す．括弧の内側は独立した範囲とし，一区切は開き括弧の内側から始まる．
+
+- 一区切が全て半角文字 → 半角 `,` `.` `:` `;`
+- 一区切に全角文字が１つでも含まれる → 全角 `，` `．` `：` `；`
+
+**例外**：語を列挙する読点は，文を区切るのではなく語を繋ぐ為，連結記号と同じく**列挙する語の全体**の文字種で選び，一区切を区切らない．和文の読点 `、` と句点 `。` は使用しない（全角の読点は `，`，句点は `．` を用いる）．コメント以外の文書本文が数式・英文である場合は，其の記法に従う．
+
+#### 句点の有無
+
+文書の全ての文が対象．コメントは 7.1 に依り句点を用いない為，本項の対象外とする．**句点の有無が異なる文を混在させない**．同じ箇条書の群，同じ表の列，同じ段落の中で揃え，末尾の文の句点も省略しない．
+
+- 文中に読点を含む → 句点を必須とする．
+- 項目・セル・段落の途中に句点を打つ → 末尾にも句点を置く．
+
+**例外**：見出，ラベル，欄の値，体言止だけで構成する項目は文ではない為，句点を付けない．語を列挙する連結記号としての読点は，上記の読点の判定に含めない．
+
+#### 括弧（丸括弧・角括弧・波括弧・山括弧）
+
+半角・全角の両方が存在する括弧の全種類が対象．丸括弧 `()`／`（）`，角括弧 `[]`／`［］`，波括弧 `{}`／`｛｝`，山括弧 `<>`／`＜＞`．**括弧の内側**の文字種で選ぶ．内側とは，開き括弧から対応する閉じ括弧迄の範囲を指す．
+
+- 内側が全て半角文字 → 半角 `(` `)` `[` `]` `{` `}` `<` `>`
+- 内側に全角文字が１つでも含まれる → 全角 `（` `）` `［` `］` `｛` `｝` `＜` `＞`
+
+**例外**：全角のみで半角形が無い括弧（鍵括弧 `「」`，二重鍵括弧 `『』`，隅付括弧 `【】`，山形括弧 `〈〉` 等）は内側の文字種に関わらず全角を使用する．
+
+#### 連結記号（スラッシュ・ハイフン・中黒等）
+
+半角・全角の両方が存在する連結記号の全種類が対象．スラッシュ `/`／`／`，ハイフン `-`／`－`，中黒 `･`／`・`，算術演算子 `+`／`＋`・`*`／`×`・`/`／`÷`，波ダッシュ `~`／`〜`，等号 `=`／`＝`，アンパサンド `&`／`＆`等．**連結対象の全体**の文字種で選ぶ．連結対象とは，連結記号が繋ぐ語の全てを指す．
+
+- 連結対象が全て半角文字 → 半角（`/` `-` `･` `+` `*` `~` `=` `&` 等）
+- 連結対象に全角文字が１つでも含まれる → 全角（`／` `－` `・` `＋` `×` `÷` `〜` `＝` `＆` 等）
+
+#### 数字と単位
+
+単位の文字種に，数字及び数量を表す英字（`N`, `M`, `X` 等の変数記号）の文字種を合わせる．
+
+- 単位が半角（`px`, `em`, `Hz`, `KB`, `ms`, `%`, `‰`, `°`, `′`, `″` 等）→ 数字・数量英字も半角．数値と単位の間に半角スペースを入れる．但し，`%`，`‰`，角度の `°` / `′` / `″` にはスペースを入れない．例：`128 px`, `60 Hz`, `5 ms`, `N px`, `50%`, `30°`．
+- 単位を伴わずに全角の語（漢字・仮名）へ直に続く数字も全角とする．例：「１６進」「２進」「８進」「２冪乗」「０の時」．半角の儘では全角との間に半角スペースが要り，語が分断される．数式・コード片の中の数値，及び句読点や括弧の直前の数値は対象外とする．
+- 単位が全角（`メートル`，`個`，`回`，`文字`，`本`，`行`，`年`，`月`，`日` 等の漢字・片仮名表記，及び `㌕`，`㍉`，`㍍`，`㎏`，`㎜`，`㎝`，`㎞`，`㎡`，`㏄` 等の単位合字）→ 数字・数量英字も全角．スペースは入れない．例：「１個」「１２８文字」「２行」「２０２４年１月１日」「３㌕」「１０㎏」「５㎝」「Ｍ個」「Ｎ回」「Ｘ文字」．
+
+### 例
+
+#### 区切子（読点・句点・コロン・セミコロン）
+
+```
+❌ 対応言語は C，C++，Java である. 文字コード:UTF-8
+✅ 対応言語は C, C++, Java である．文字コード：UTF-8
+✅ 対象は数値，文字列，真偽値である．
+```
+
+#### 括弧（丸括弧・角括弧・波括弧・山括弧）
+
+```
+❌ 説明 (識別子の意味)，項目 [対象範囲]，集合 {要素群}
+✅ 説明（識別子の意味），項目［対象範囲］，集合｛要素群｝
+✅ 指示子 (foo)，配列 [foo]，型 (`int`)
+```
+
+#### 連結記号（スラッシュ・ハイフン・中黒等）
+
+```
+❌ 比較演算子/代入演算子，配列-連結リスト，行数+桁数，１~３行，幅=４，型&値
+✅ 比較演算子／代入演算子，配列・連結リスト，行数＋桁数，１〜３行，幅＝４，型＆値
+✅ A / B / C, if-else, a + b, 1~3, x=4, a&b
+```
+
+## 8.6 空白の配置
+
+**対象**：全言語共通（コメント・文書の表記）
+
+**強度**：必須 (`MUST`)
+
+### 規則
+
+半角と全角が接する箇所のスペースを定める．判定の対象は 8.5 に従う．**スペースを入れない条件が，入れる条件に優先する．**
+
+**全体**
+
+- スペースは２つ以上連続させない（インデント・整列の為の詰物も含む．インデントはタブで行う）．
+- 行頭と行末にスペースを置かない．但しブロックコメントの継続行の `*` の前（` * ` の形）の様に，コメントの記法が定める行頭のスペースは此の限りではない．
+
+**スペースを入れない**
+
+- 全角文字同士が接する箇所（日本語は分かち書きをしない）．
+- 全角の区切子・括弧類・連結記号に接する箇所（字形の前後に余白を含む為，隣が半角の語・区切子・括弧であっても入れない）．
+- 半角の区切子の前，及び半角の括弧の内側．
+- 半角の区切子・括弧の外側の隣が，区切子又は括弧である箇所．
+
+**スペースを１つ入れる**（前項に該当する箇所を除く）
+
+- 半角の語（識別子・コード片・英単語・数字，単位・通貨記号を含む数量，及び `C++` `C#` `F#` `.NET` の様に記号を含む固有名詞）と全角文字が接する箇所．
+- 半角の区切子の後ろ．
+- 半角の括弧の外側．
+
+### 適用条件・例外
+
+**例外**：見出の章番号と題名の区切り（「第１章 基本方針」の形．目次の項目と本文中の引用を含む），及び矢印（`→` `↔`）・ダッシュ（`—`）の前後は可読性の為に半角スペースを許可する．コードスパンの外周に接するスペースは，隣接する文字が全角であっても入れて良い（コードスパンが連続する場合は区切りのスペースを必ず入れる．除去すると記法が壊れる）．
+
+### 例
+
+```
+❌ 関数(foo)を呼ぶ
+❌ 関数 ( foo ) を呼ぶ
+❌ ASCIIの記号
+❌ 型  (`int`)  を返す
+❌ 型 (`int`) を返す (MUST) ．
+❌ 虚数の i ・虚部の j
+❌ 括弧 （真偽値，文字列）
+✅ ASCII の記号
+✅ 関数 (foo) を呼ぶ
+✅ 関数（識別子）を呼ぶ
+✅ 呼出 (f(x)) を評価する
+✅ 型 (`int`) を返す (MUST)．
+✅ 虚数の i・虚部の j
+✅ 括弧（真偽値，文字列）
+```
+
+---
+
+# 第９章 例外の適用
+
+## 9.1 適用条件
+
+**対象**：本規約の適用対象
+
+**強度**：必須 (`MUST`)
+
+### 規則
+
+明示した対象・条件・例外を先に適用する．個別節で許容されていない必須規則を，下位の可読性又は局所的な簡潔性だけを理由に無効にしない (1.2, 1.3)．
+
+推奨規則に就いては，可読性の明確な改善，性能要件又は外部の API との不一致等，合理的な理由が有る場合に限り例外を認める．外部契約と要求動作は 1.3 に従い，書式又は局所的な簡潔性よりも優先する．
+
+## 9.2 理由と記録
+
+**対象**：執筆・レビュー
+
+**強度**：必須 (`MUST`)
+
+### 規則
+
+例外の対象範囲と理由を，レビュー記録又は必要なコメントに残す．ソース内では規約番号を理由の代わりに書かず，保持すべき型・値・寿命・外部契約等の意図を述べる (7.4)．
+
+例外の記録だけを正しさの根拠にしない．前提又は適用条件を確認出来ない箇所は，確認が必要な箇所として明示する．
+
+---
+
+# 第１０章 運用
+
+## 10.1 適用と確認
+
+**対象**：コード・文書の執筆・改訂・レビュー
+
+**強度**：必須 (`MUST`)
+
+### 規則
+
+執筆・改訂では，対象言語・バージョン・外部契約を確認する．レビューでは，要求動作，型，式，構造，書式，コメント及び表記を照合する．
+
+個別節の例だけを満たして全体を適合と扱わない．確認出来ない条件と既知の違反を明示し，例外を適用する場合は第９章に従って理由と範囲を記録する．
+
+## 10.2 規約の改訂
+
+**対象**：本規約の保守と適用
+
+**強度**：必須 (`MUST`)
+
+### 規則
+
+規則を変更する場合は，目的，適用対象，強度，条件及び例外を確認し，関連する本書内の条文・例・目次を同時に更新する．変更の影響と移行方法を適用先へ周知する．
+
+改訂後も，本書だけで規則の解釈と適用条件が分かる構成とする．
+
+---
+
+© 2026 Fugo Shimizu

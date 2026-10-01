@@ -1,0 +1,14 @@
+/**
+ *
+ * - Returns:
+ */
+func f() -> Int {
+	let a: Int = 1, b = "x"
+	var c = 2, d: Double = 1.5 // 倍率
+	let e = a + 1
+	c += 1
+	d += 1
+	let alpha = firstOperationWithAVeryLongName(1), bravo = secondOperationWithAVeryLongName(2)
+	let charlie = thirdOperationWithAVeryLongName(3)
+	return a + c + e + Int(d) + b.count + alpha + bravo + charlie
+}

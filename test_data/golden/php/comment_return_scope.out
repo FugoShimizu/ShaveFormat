@@ -1,0 +1,19 @@
+<?php
+
+/**
+ * 分岐値に応じて処理する
+ * @param int $code 分岐値
+ */
+function dispatch(int $code): void {
+	$run = function(): void {
+		return;
+	};
+	switch($code) {
+	case 0:
+		$run();
+		return;
+	default:
+		break;
+	}
+	return;
+}

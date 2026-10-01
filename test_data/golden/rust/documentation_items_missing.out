@@ -1,0 +1,22 @@
+/// 足す
+///
+/// # Arguments
+///
+/// * `a` - 左
+fn add(a: i32, b: i32) -> i32 {
+	return a + b;
+}
+
+/// 何もしない
+///
+/// # Arguments
+///
+/// * `a` - 値
+///
+/// # Returns
+///
+/// 無し
+fn unit(a: i32) {
+	let _ = a;
+	return;
+}

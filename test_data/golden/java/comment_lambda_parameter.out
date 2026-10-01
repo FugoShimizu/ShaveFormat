@@ -1,0 +1,28 @@
+class A {
+	/**
+	 *
+	 */
+	void f() {
+		g(
+			x -> { // 本体
+				h();
+				i();
+			}
+		);
+		return;
+	}
+}
+
+class A {
+	/**
+	 *
+	 */
+	void f() {
+		run(
+			() -> { // task
+				g();
+			}
+		);
+		return;
+	}
+}

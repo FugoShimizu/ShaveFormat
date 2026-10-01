@@ -1,0 +1,12 @@
+package main
+
+func main() {
+//line gen.go:100
+	a()
+	//line gen.go:200
+	b()
+//go:generate echo active
+	c()
+	//go:generate echo inactive
+	d()
+}

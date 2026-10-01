@@ -1,0 +1,4 @@
+9:3: Violation: Add the required comment before this `return`
+10:13: Review: Use a strict inequality with an equivalent adjusted boundary; verify type, value range
+11:3: Violation: Add the required comment before this `return`
+12:2: Violation: Add the required comment before this `return`

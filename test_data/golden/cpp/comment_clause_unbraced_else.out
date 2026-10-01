@@ -1,0 +1,14 @@
+/**
+ * 値の選択関数
+ * @param Value 値
+ * @return 選択した値
+ */
+int Select(int Value) {
+	while(true) {
+		if(Value) {
+			Value = 1;
+			Value = 3;
+		// 其の他の値
+		} else return 0;
+	}
+}

@@ -1,0 +1,13 @@
+typedef long T;
+
+/**
+ *
+ * @param p
+ * @param x
+ * @param y
+ * @return
+ */
+long f(long *p, long x, long y) {
+	long e = (T)++ * p, g = (T)--(x), h = x++ + y, i = x++;
+	return e + g + h + i;
+}

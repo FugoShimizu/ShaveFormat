@@ -1,0 +1,1 @@
+foo(class { @dec() m(): void {} });

@@ -1,0 +1,9 @@
+fn a() {
+    let s = r"x;
+}
+
+fn b() {
+    if true {
+        c();
+    }
+}

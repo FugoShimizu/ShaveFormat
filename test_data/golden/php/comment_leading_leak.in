@@ -1,0 +1,7 @@
+<?php
+// secret key: xyz
+?>
+<html>
+<?php if (isset($user['name']) && in_array('admin', $user['roles'], true) && $settings['enabled'] === true && strlen($user['name']) > 0): // admins only ?>
+<b>admin</b>
+<?php endif; ?>

@@ -1,0 +1,9 @@
+class A {
+	/// 足す
+	///
+	/// @param a 左
+	/// @return 和
+	int Add(int a) {
+		return a;
+	}
+}

@@ -1,0 +1,10 @@
+p(if a then 1 else 2 end)
+f(if a then b end, 2)
+
+g(
+	1,
+	if a
+		x
+		y
+	end
+)

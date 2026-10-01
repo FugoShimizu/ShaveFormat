@@ -1,0 +1,16 @@
+/**
+ *
+ */
+void f(void) {
+	// c
+	if(a) {} else {
+		x();
+		y();
+	}
+	// d1
+	// d2
+	if(a) {}
+	// w
+	while(b) {}
+	return;
+}

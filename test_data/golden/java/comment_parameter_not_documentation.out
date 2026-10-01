@@ -1,0 +1,15 @@
+class A {
+	/**
+	 * the first value
+	 * the second value
+	 * @param firstArgumentWithLongName
+	 * @param secondArgumentWithLongName
+	 */
+	void Run(
+		int firstArgumentWithLongName,
+		int secondArgumentWithLongName
+	) {
+		foo();
+		return;
+	}
+}

@@ -1,0 +1,5 @@
+<?php
+
+if($post): ?>
+	<?php $x; ?>
+<?php endif;

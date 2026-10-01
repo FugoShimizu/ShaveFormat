@@ -1,0 +1,6 @@
+enum E {
+	X;
+
+	public int a;
+	private int b;
+}

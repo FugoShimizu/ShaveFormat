@@ -1,0 +1,45 @@
+/**
+ *
+ */
+func f() {
+	a()
+	return
+}
+
+/**
+ *
+ * - Returns:
+ */
+func g() -> Int {
+	return 1
+}
+
+/**
+ *
+ */
+func h() -> Never {
+	fatalError()
+}
+
+class A {
+	/**
+	 *
+	 */
+	init() {
+		b()
+		return
+	}
+
+	deinit {
+		c()
+		return
+	}
+
+	var w: Int {
+		get { return 1 }
+		set {
+			v = newValue
+			return
+		}
+	}
+}

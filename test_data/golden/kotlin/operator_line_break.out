@@ -1,0 +1,21 @@
+/**
+ *
+ * @param alphaValue
+ * @param bravoValue
+ * @param charlieValue
+ * @param deltaValue
+ * @param echoValue
+ * @param foxtrotValue
+ * @return
+ */
+fun compute(alphaValue: Int, bravoValue: Int, charlieValue: Int, deltaValue: Int, echoValue: Int, foxtrotValue: Int): Int {
+	val total =
+	alphaValue + bravoValue + charlieValue + deltaValue + echoValue + foxtrotValue + alphaValue + bravoValue + charlieValue +
+	deltaValue + echoValue + foxtrotValue
+	val flag =
+	alphaValue > 0 && bravoValue > 0 && charlieValue > 0 && deltaValue > 0 && echoValue > 0 && foxtrotValue > 0 && alphaValue > 0 &&
+	bravoValue > 0 && charlieValue > 0
+	val picked = if(flag) alphaValue + bravoValue + charlieValue + deltaValue + echoValue + foxtrotValue
+	else alphaValue + bravoValue + charlieValue + deltaValue + echoValue + total
+	return total + picked
+}

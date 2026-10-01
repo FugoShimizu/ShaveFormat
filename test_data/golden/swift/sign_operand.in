@@ -1,0 +1,11 @@
+let x = 5, y = 3, z = 2
+let c = true
+print(y - (-x - y))
+print(z * (-x + y))
+print((-x - y) * 2)
+print(~(-x) & y)
+print(-(-x) - y)
+print(-(-x))
+print(!(!c))
+print(y - (-x))
+print(0..<(-1 + 3))

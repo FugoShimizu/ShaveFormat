@@ -1,0 +1,4 @@
+func f() {
+	var x = 1; /* c */ x = 2
+	print(x)
+}

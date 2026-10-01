@@ -1,0 +1,7 @@
+class A {
+	// Example:
+	//
+	//     int y = f(1);
+	/// Adds one.
+	int f(int x) { return x + 1; }
+}

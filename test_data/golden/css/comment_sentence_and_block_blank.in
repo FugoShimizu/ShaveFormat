@@ -1,0 +1,11 @@
+a {
+	color: red; /* One. Two. */
+}
+/*
+a
+
+b
+*/
+a {
+	color: red;
+}

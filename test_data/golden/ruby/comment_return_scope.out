@@ -1,0 +1,13 @@
+# 分岐値に応じて処理する
+# @param code [Integer] 分岐値
+def dispatch(code)
+	run = -> do
+		return
+	end
+	case code
+	when 0
+		run.call
+		return
+	end
+	return
+end

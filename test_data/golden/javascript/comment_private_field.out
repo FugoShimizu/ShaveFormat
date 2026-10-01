@@ -1,0 +1,11 @@
+class A {
+	/* c */ #x = 1;
+
+	/**
+	 *
+	 * @return
+	 */
+	get() {
+		return this. /* d */ #x;
+	}
+}

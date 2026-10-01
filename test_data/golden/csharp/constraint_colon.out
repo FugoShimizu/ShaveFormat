@@ -1,0 +1,2 @@
+class Box<TItem> where TItem : IComparable<TItem>,
+new() {}

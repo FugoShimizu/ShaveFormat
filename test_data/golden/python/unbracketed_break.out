@@ -1,0 +1,14 @@
+import os, sys, json, re, collections
+
+def f(configuration):
+	assert isinstance(
+		configuration,
+		dict
+	), "expected a mapping"
+	global aaaaaaaaaaaaaaaa, bbbbbbbbbbbbbbbbbb
+	def g():
+		nonlocal cccccccccccccccc, dddddddddddddddd
+		return
+	with eeeeeeeeeeeeeeee as e, ffffffffffffffff as h:
+		pass
+	return

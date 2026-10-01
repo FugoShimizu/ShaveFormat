@@ -1,0 +1,55 @@
+/**
+ * 検体
+ * @param X 値
+ * @param Y 値
+ * @param Input 入力
+ */
+void F(int X, int Y, std::istream &Input) {
+	(Thing(X));
+	(((Thing(X))));
+	(int(X));
+	(Thing(X) = Y);
+	(Thing(X)[1]);
+	Holder((Thing(X)));
+	Holder(Convert((Thing(X))));
+	std::string Bytes((std::istreambuf_iterator<char>(Input)), std::istreambuf_iterator<char>());
+	int Value(((X + 1)));
+	std::string Other((((std::istreambuf_iterator<char>(Input)))), std::istreambuf_iterator<char>());
+	Convert(((X + 1)));
+	Thing Copy = Convert((Thing(X)));
+	Obj.Convert((Thing(X)));
+}
+
+struct Record {};
+
+using Alias = int;
+
+typedef int Named;
+
+enum Kind { Item };
+
+int Global;
+
+Record Factory();
+
+/**
+ * 局所の型を宣言する
+ */
+void Local() { struct Hidden {}; }
+
+/**
+ * 型の確かな宣言を纏める
+ */
+void Merge() { Record b; Record c; int *p; int *q; Record *x; Record *y; Alias *u; Alias *v; Named *m; Named *n; Space::Box<int> g; Space::Box<int> h; }
+
+/**
+ * 式とも読める文を保つ
+ * @param T 左辺
+ * @param b 第１の右辺
+ * @param c 第２の右辺
+ * @param x 第１の整数
+ * @param y 第２の整数
+ */
+void Keep(Record T, Record b, Record c, int x, int y) { T<1>b;
+// 次の比較
+T<1>c; T*b; T*c; Factory*b; Factory*c; Item*x; Item*y; Global*b; Global*c; Hidden*b; Hidden*c; Unknown<1>b; Unknown<1>c; Unknown&b; Unknown&c; Space::Box<Item> m; Space::Box<Item> n; }

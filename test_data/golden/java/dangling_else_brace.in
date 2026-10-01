@@ -1,0 +1,15 @@
+class A {
+	void f(boolean a, boolean b, boolean c) {
+		if (a) if (b) x(); else { if (c) y(); } else z();
+		if (a) { if (b) x(); } else z();
+		if (a) { x(); } else if (b) { y(); } else { z(); }
+	}
+}
+
+class A {
+	void f(boolean a, boolean b) {
+		if(a) if(b) x(); else y();
+		while(a) do x(); while(b);
+		if(a) x(); else do y(); while(b);
+	}
+}

@@ -1,0 +1,8 @@
+y = 1 # 末尾のコメント
+
+#
+# @param a
+# @return
+def twice(a)
+	return a * 2
+end

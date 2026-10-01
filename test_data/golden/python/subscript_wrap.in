@@ -1,0 +1,5 @@
+def f(table):
+	for c in table:
+		result = registry.lookup(configuration_table[compute_primary_index(c, "alpha_component"), compute_secondary_index(c, "beta_component")])
+		section = document_contents[first_boundary_position_for_section(c) : last_boundary_position_for_section(c) + trailing_margin_amount]
+		return result, section

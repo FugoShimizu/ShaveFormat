@@ -1,0 +1,12 @@
+/**
+ *
+ */
+void f() {
+	while(true) while(true) {
+		auto g = [] {
+			goto done;
+		done:
+			return;
+		};
+	}
+}

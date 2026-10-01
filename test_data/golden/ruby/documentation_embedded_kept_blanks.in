@@ -1,0 +1,29 @@
+=begin
+Para
+
+    code1
+=end
+#     code2
+def f(x)
+  x
+end
+
+# Para
+=begin
+    a  =  b
+
+Tail
+=end
+def g(x)
+  x
+end
+
+=begin
+a
+=end
+=begin
+b
+=end
+def h(x)
+  x
+end

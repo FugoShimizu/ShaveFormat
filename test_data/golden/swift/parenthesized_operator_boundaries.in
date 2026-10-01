@@ -1,0 +1,2 @@
+let result = -(a <> b)
+let x: UInt8 = (1 &<< 2) &>> 3

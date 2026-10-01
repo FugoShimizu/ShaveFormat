@@ -1,0 +1,21 @@
+a:before {
+	content: "\\";
+}
+
+b:after {
+	content: "/";
+}
+
+c {
+	d: e;
+}
+
+a {
+	content: "it's \"x\"";
+}
+
+.a {
+	content: "a\
+    b";
+	grid-template-areas: "x y" "z w";
+}

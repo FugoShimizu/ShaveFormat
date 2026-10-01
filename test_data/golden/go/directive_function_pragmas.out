@@ -1,0 +1,19 @@
+//go:debug panicnil=1
+package main
+
+// a
+//go:norace
+//go:nosplit
+func a() {}
+// b
+//go:uintptrescapes
+func b(p uintptr) {}
+
+// add
+//go:wasmexport add
+func add(x int32) int32 {
+	return x
+}
+
+//go:wasmimport env log
+func log(x int32)

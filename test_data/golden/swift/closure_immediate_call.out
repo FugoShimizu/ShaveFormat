@@ -1,0 +1,12 @@
+/**
+ *
+ * - Parameter a:
+ * - Returns:
+ */
+func compute(a: Int) -> Int {
+	let computed: Int = {
+		let firstValue = firstOperationWithLongName(a), secondValue = secondOperationWithLong(a)
+		return firstValue + secondValue
+	}()
+	return computed
+}

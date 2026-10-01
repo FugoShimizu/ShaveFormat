@@ -1,0 +1,9 @@
+class Api {
+	/// <summary>取得</summary>
+	/// <param name="id">識別子</param>
+	public void Get([FromQuery(Name = "id")] int id = 0) {
+		Load(id);
+		// 終了
+		return;
+	}
+}

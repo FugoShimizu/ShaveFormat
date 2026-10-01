@@ -1,0 +1,13 @@
+class A {
+	void f() {
+		if (a) {
+			g();
+			h();
+		} // d1
+		// own
+		else {
+			k();
+			m();
+		}
+	}
+}

@@ -1,0 +1,13 @@
+<?php
+
+declare(strict_types=1);
+
+function f(bool $a, bool $b, bool $c): void {
+	$x = ($a and $b);
+	$y = $a and ($b or $c);
+	$z = ($a xor $b);
+	$w = ($a && $b) || $c;
+	echo $x, $y, $z, $w;
+}
+$x = ($a)and($b);
+$y = ($a)xor($b);

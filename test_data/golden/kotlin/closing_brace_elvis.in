@@ -1,0 +1,4 @@
+fun compute(a: Int): Int {
+	val result = run { firstOperationWithLongName(a); secondOperationWithLongName(a); thirdOperationWithLongName(a) } ?: defaultValue
+	return result
+}

@@ -1,0 +1,12 @@
+fn f(a: bool, c: bool) {
+	let x = 1; // X
+	if a {
+		g();
+	// A
+	// T1
+	// T2
+	} else if c {} else {}
+	// W1
+	// W2
+	loop {}
+}

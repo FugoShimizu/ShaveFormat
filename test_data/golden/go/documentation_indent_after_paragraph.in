@@ -1,0 +1,9 @@
+package p
+
+// Run runs x
+//   more
+func Run() {}
+
+// Stop stops now.
+//	fmt.Println("a. b.")
+func Stop() {}

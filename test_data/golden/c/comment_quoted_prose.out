@@ -1,0 +1,12 @@
+/**
+ *
+ */
+void g(void) {
+	f(); // He said "Stop now" // "Go home" to me
+	f(); // 例として "設定を読む" // "結果を返す" と書く
+	f(); // Prints "Done." on success
+	f(); // The answer is no // Then stop
+	f(); // Read from x.y // Then close
+	f(); // See No. 5 and e.g. this
+	return;
+}

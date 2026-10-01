@@ -1,0 +1,7 @@
+#include <functional>
+void a();
+void b();
+void f(std::function<void()> g = [] { a(); b(); }) { g(); }
+
+#include <functional>
+void f(std::function<int()> g = ([] { return 1; })) {}

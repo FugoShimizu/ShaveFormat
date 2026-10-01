@@ -1,0 +1,5 @@
+<div>
+<?php
+$x = 1; # trailing hash. Next.
+?>
+</div>

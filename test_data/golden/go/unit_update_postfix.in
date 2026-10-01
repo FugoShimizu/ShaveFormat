@@ -1,0 +1,13 @@
+package p
+
+func F(i int) int {
+	i += 1
+	i -= 1
+	return i
+}
+
+// Counts values
+func G() int {
+	// 値の返戻
+	return 1
+}

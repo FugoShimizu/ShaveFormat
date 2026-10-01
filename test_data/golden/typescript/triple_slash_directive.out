@@ -1,0 +1,3 @@
+/// <reference path="a.ts" />
+/// <reference types="node"/>
+import x from "y";

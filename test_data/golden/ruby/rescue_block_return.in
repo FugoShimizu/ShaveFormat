@@ -1,0 +1,21 @@
+def update
+  w
+  transaction do
+    x
+    # y の説明
+    y
+  end
+rescue StandardError => e
+  z
+end
+
+def update2
+  w
+  items.each { |i|
+    x
+    # y2 の説明
+    y
+  }
+ensure
+  z
+end

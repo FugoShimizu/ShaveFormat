@@ -1,0 +1,5 @@
+# 説明
+=begin
+frozen_string_literal: true
+=end
+puts 1

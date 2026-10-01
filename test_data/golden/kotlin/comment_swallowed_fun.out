@@ -1,0 +1,8 @@
+val b = 2
+
+// a
+/* n */ fun h() {}
+
+// block
+// line
+val x = a.foo()

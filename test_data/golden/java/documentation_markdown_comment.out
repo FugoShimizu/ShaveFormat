@@ -1,0 +1,11 @@
+class C {
+	/// 説明
+	void f() {}
+
+	/// 引数の説明
+	/// @param a 値
+	/// @return
+	int g(int a) {
+		return a;
+	}
+}

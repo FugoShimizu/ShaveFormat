@@ -1,0 +1,7 @@
+int f(int a, int b) {
+	if(
+		a > 0 && b > 0
+		// 条件の閉じの前の注記
+	) return 1;
+	return 0;
+}

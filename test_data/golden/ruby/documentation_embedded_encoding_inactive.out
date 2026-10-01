@@ -1,0 +1,5 @@
+x = 1
+=begin
+encoding: ascii-8bit
+=end
+y = 2

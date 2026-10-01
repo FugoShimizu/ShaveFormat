@@ -1,0 +1,10 @@
+class A {
+	/**
+	 * <summary>確かめる</summary>
+	 * <param name="value">値</param>
+	 */
+	void Check(int value) {
+		if(value < 0) throw new ArgumentException("負");
+		return;
+	}
+}

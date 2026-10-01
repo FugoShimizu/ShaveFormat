@@ -1,0 +1,6 @@
+1:1: File mixes CRLF and LF line endings; they become LF outside literals
+1:1: Violation: Documentation is missing a summary
+6:1: Violation: Documentation is missing a return-value description
+6:5: Review: Use PascalCase for function f; verify external contract
+6:11: Violation: Documentation is missing a description for parameter 'a'
+9:2: Violation: Add the required comment before this `return`

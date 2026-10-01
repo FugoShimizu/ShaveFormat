@@ -1,0 +1,5 @@
+void Measure(void) {
+	const unsigned long size = sizeof(const char **);
+	// 終了
+	return;
+}

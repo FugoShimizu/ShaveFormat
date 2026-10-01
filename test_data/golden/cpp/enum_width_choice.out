@@ -1,0 +1,17 @@
+enum class Small { A, B };
+enum class Exact { Alpha, Beta, Gamma };
+
+enum class Extra {
+	Alpha,
+	Beta,
+	Gammas
+};
+
+enum class Colors {
+	Red,
+	Green,
+	Blue,
+	Cyan,
+	Magenta,
+	Yellow
+};

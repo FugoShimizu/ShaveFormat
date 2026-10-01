@@ -1,0 +1,31 @@
+# frozen_string_literal: true
+# doc of f
+# @param x
+# @return
+def f(x)
+	return x
+end
+
+# ==== Section ====
+# doc of g
+# @param x
+# @return
+def g(x)
+	return x
+end
+
+# a
+# b
+# c
+# @param x
+# @return
+def h(x)
+	return x
+end
+
+# about a
+# @param a
+# @return
+def k(a)
+	return a
+end

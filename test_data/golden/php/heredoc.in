@@ -1,0 +1,19 @@
+<?php
+
+$name = 'World';
+
+$greeting = <<<TXT
+    Hello $name
+      indented line
+    TXT;
+
+$raw = <<<'RAW'
+    No $interpolation here
+    RAW;
+
+$plain = <<<EOT
+line one
+line two
+EOT;
+
+echo $greeting, $raw, $plain;

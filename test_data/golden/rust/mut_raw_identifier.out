@@ -1,0 +1,6 @@
+fn f() -> i32 {
+	let mut r#x = 1;
+	x = 2;
+	let y = 3;
+	return x + r#y;
+}

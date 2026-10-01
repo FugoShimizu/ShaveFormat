@@ -1,0 +1,20 @@
+/**
+ * 分岐値に応じて処理する
+ * @param Code 分岐値
+ */
+fun Dispatch(Code: Int) {
+	/**
+	 * 処理する
+	 */
+	fun Run() {
+		return
+	}
+	when(Code) {
+		0 -> {
+			Run()
+			return
+		}
+		else -> {}
+	}
+	return
+}

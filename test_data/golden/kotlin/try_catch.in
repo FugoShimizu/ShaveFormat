@@ -1,0 +1,29 @@
+fun f(a: Boolean, c: Boolean) {
+	try {
+		g()
+	} catch (e: Exception) {
+		h(e)
+	} finally {
+		i()
+	}
+	val x = try { g() } catch (e: IOException) { null }
+	try {
+		g()
+	} catch (e: Exception) {
+		// C1
+		// C2
+	}
+	if (a) {
+		g()
+	} else if (c) {
+		// A
+	} else {
+		// T1
+		// T2
+	}
+}
+
+class K(val v: Int) {
+	constructor(x: Int) : this(x) { g(); h(x) }
+	init { g() }
+}

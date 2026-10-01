@@ -1,0 +1,22 @@
+<?php
+declare(strict_types=1);
+
+/**
+ * 統合候補関数
+ * @param bool $isFirst 第一条件
+ * @param bool $isSecond 第二条件
+ */
+function merge(bool $isFirst, bool $isSecond): void {
+	while(true) {
+		if($isFirst) break;
+		if($isSecond) break;
+		break;
+	}
+	while(true) {
+		if($isFirst) break;
+		elseif($isSecond) break;
+		break;
+	}
+	// 終了
+	return;
+}

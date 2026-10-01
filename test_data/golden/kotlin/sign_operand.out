@@ -1,0 +1,10 @@
+/**
+ *
+ * @param c
+ * @param x
+ * @param y
+ * @return
+ */
+fun f(c: Boolean, x: Int, y: Int): Boolean {
+	return !(!c) && -(-x) > y - -1
+}

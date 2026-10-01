@@ -1,0 +1,67 @@
+/**
+ * 検体
+ * @param X 値
+ */
+void F(int X) {
+	(Thing(X));
+	(Thing(X));
+	(Thing(X)[1]);
+	Holder((Thing(X)));
+	Convert(X + 1);
+	Obj.Convert(Thing(X));
+	return;
+}
+
+typedef int Alias;
+
+enum Kind { Item };
+
+int Global;
+
+/**
+ * 型の確かな宣言を纏める
+ */
+void Merge(void) {
+	Alias b, c;
+	int *p, *q;
+	struct Record *x, *y;
+	Alias *u, *v;
+	return;
+}
+
+/**
+ * 値の名前と未確定の名前との積を保つ
+ * @param T 左辺
+ * @param b 第１の右辺
+ * @param c 第２の右辺
+ */
+void Keep(int T, int b, int c) {
+	T *b;
+	T *c;
+	Item *b;
+	Item *c;
+	Global *b;
+	Global *c;
+	Unknown *b;
+	Unknown *c;
+	return;
+}
+
+/**
+ * 内側の範囲の値の名前は外の型名を隠さない
+ */
+void Scoped(void) {
+	{
+		int Alias;
+	}
+	Alias *m, *n;
+	return;
+}
+
+/**
+ * 同じ本文の行末コメントを積む
+ */
+void Stacked(void) {
+	int a = 1, b = 2;	// n		// n
+	return;
+}

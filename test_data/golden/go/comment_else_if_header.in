@@ -1,0 +1,5 @@
+func f(a int) {
+	if a > 0 { g(); g() } else if
+	// 別の枝の説明
+	a < -1 { k(); k() }
+}

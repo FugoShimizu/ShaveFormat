@@ -1,0 +1,40 @@
+/** ループ本体のラベルを処理する */
+function f() {
+	for(let i = 0; i < 3; i++) lbl: console.log(i);
+}
+
+/**
+ * クロージャ内の切替文を処理する
+ * @param isReady 反復条件
+ * @param code 分岐値
+ */
+function f(isReady, code) {
+	outer: while(isReady) {
+		const g = () => {
+			switch(code) {
+			default:
+				break;
+			}
+		};
+		break outer;
+	}
+}
+
+/** ラベルの後のループを処理する */
+function f() {
+	lbl: console.log(1);
+	for(let k = 0; k < 3; k++) {
+		console.log(k);
+	}
+}
+
+/**
+ * ラベル付ブロックを処理する
+ * @param isReady 分岐条件
+ */
+function f(isReady) {
+	blk: {
+		if(isReady) break blk;
+		g();
+	}
+}

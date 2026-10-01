@@ -1,0 +1,8 @@
+[[1, 2]].each { |a,| p a }
+[[1, 2]].each do |a,|
+  p a
+end
+foo { |x, y ; i, j| i = x }
+foo { |x, y| }
+foo do |x, y| end
+fn = -> {}

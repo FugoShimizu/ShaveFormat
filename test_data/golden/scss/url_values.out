@@ -1,0 +1,27 @@
+.a {
+	background: url(http://x/*y*/z.png);
+}
+
+.b {
+	background: URL(http://x/y.png);
+}
+
+.c {
+	background: url(a/*b);
+}
+
+.d {
+	color: red;
+}
+
+@media screen {
+	.e {
+		color: red;
+	}
+}
+
+a {
+	background: url(http://x/y.png);
+	content: "\\";
+	font: 1px/2 "a/b";
+}

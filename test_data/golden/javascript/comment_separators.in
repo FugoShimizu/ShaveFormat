@@ -1,0 +1,24 @@
+let b = a /* x y */ ++c;
+first(); // one 	 // two
+second(); /* three */ 	 /* four */
+third();	　	// fullwidth between tabs
+fourth();　// fullwidth only
+fifth();
+　// own line after fullwidth
+sixth(); // nbsp
+alpha();	// 同文
+beta();		// 同文
+
+f(a, /* c */ b);
+let unicodeSum = a + /* c */ b;
+const unicodeObject = { x: 1, /* c */ y: 2 };
+let bomValue = 1;﻿// bom
+let afterBom = 2;
+let lineValue = 1; // line let afterLine = 2;
+let paragraphValue = 1; // paragraph let afterParagraph = 2;
+let formValue = 1;
+// form
+let afterForm = 2;
+let tabValue = 1;
+// vertical
+let afterVertical = 2;

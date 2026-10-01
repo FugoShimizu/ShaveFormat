@@ -1,0 +1,11 @@
+foo(
+	new Object() {
+		/**
+		 *
+		 * @return
+		 */
+		@Override public String toString() {
+			return "";
+		}
+	}
+);

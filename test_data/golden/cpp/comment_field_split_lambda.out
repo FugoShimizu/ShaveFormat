@@ -1,0 +1,8 @@
+class A {
+	int a = 1;
+
+	int b = [] {
+		// inside
+		return 2; // tail
+	}();
+};

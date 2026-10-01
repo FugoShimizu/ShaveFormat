@@ -1,0 +1,27 @@
+/**
+ *
+ */
+func die() -> Never {
+	fatalError()
+}
+
+/**
+ *
+ * - Returns:
+ */
+func fromNever() -> Int {
+	die()
+}
+
+/**
+ *
+ * - Parameter b:
+ * - Returns:
+ */
+func choose(_ b: Bool) -> Int {
+	if b {
+		1
+	} else {
+		2
+	}
+}

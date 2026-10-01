@@ -1,0 +1,18 @@
+void Nested(int A, int B, int C) {
+	if(A) {
+		if(B) {
+			if(C) {
+				Deep();
+			} else {
+				Shallow();
+			}
+		}
+	}
+	for(int Idx = 0; Idx < 10; ++Idx) {
+		for(int Jdx = 0; Jdx < 10; ++Jdx) {
+			if(Idx == Jdx) continue;
+			else if(Idx > Jdx) Sum += Idx;
+			else Sum -= Jdx;
+		}
+	}
+}

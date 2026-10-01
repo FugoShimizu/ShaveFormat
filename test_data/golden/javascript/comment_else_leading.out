@@ -1,0 +1,44 @@
+/**
+ *
+ * @param a
+ */
+function f(a) {
+	if(a) {
+		x();
+		z();
+	// before else
+	} else {
+		y();
+		w();
+	}
+	try {
+		x();
+	// before catch
+	} catch(e) {
+		y();
+	}
+	return;
+}
+
+/**
+ *
+ * @param a
+ * @param b
+ */
+function g(a, b) {
+	if(a) {
+		x();
+		z();
+	// before bare else
+	} else y();
+	if(a) {
+		x();
+		z();
+	// before else if
+	} else if(b) y();
+	if(a) x();
+	// 一つ目
+	// 二つ目
+	else y();
+	return;
+}

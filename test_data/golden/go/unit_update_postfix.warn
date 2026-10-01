@@ -1,0 +1,5 @@
+3:1: Violation: Documentation is missing a summary
+5:4: Review: Use the increment or decrement form required for this target; verify type, evaluation
+6:4: Review: Use the increment or decrement form required for this target; verify type, evaluation
+7:2: Violation: Add the required comment before this `return`
+10:4: Violation: Start the documentation with G

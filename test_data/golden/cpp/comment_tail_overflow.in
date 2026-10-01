@@ -1,0 +1,6 @@
+enum class E { A, // a
+	B, // b
+	C, // c
+};
+
+void Next(void) { return; }

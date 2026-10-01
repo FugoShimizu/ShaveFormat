@@ -1,0 +1,3 @@
+struct S { int A; int B; } while名;
+struct T { int A; int B; } elseName;
+struct U { int A; int B; } finally_value;

@@ -1,0 +1,20 @@
+class Dispatcher {
+	/**
+	 * <summary>分岐値に応じて処理する</summary>
+	 * <param name="Code">分岐値</param>
+	 */
+	static void Dispatch(int Code) {
+		switch(Code) {
+		case 0:
+			Run();
+			return;
+		default:
+			break;
+		}
+		// <summary>処理する</summary>
+		void Run() {
+			return;
+		}
+		return;
+	}
+}

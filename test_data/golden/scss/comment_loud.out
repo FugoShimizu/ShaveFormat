@@ -1,0 +1,4 @@
+/*! Copyright 2026 Foo */
+.a {
+	color: red;
+} // trailing // Two

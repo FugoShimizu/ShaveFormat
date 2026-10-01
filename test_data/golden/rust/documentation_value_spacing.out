@@ -1,0 +1,6 @@
+//!   inner value
+///   indented value
+///x
+///　full width
+/// normal
+fn f() {}

@@ -1,0 +1,1 @@
+foo(new Object() { @Override public String toString() { return ""; } });

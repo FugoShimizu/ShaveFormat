@@ -1,0 +1,12 @@
+6:12: Violation: Documentation is missing a description for parameter 'code'
+6:25: Violation: Documentation is missing a description for parameter 'isReady'
+20:16: Violation: Documentation is missing a description for parameter 'code'
+20:29: Violation: Documentation is missing a description for parameter 'isReady'
+28:2: Violation: Remove the unreachable trailing `return`
+36:13: Violation: Documentation is missing a description for parameter 'code'
+36:26: Violation: Documentation is missing a description for parameter 'isReady'
+43:2: Violation: Add the required comment before this `return`
+51:26: Violation: Documentation is missing a description for parameter 'code'
+51:39: Violation: Documentation is missing a description for parameter 'isReady'
+65:28: Violation: Documentation is missing a description for parameter 'code'
+65:41: Violation: Documentation is missing a description for parameter 'isReady'

@@ -1,0 +1,11 @@
+func f(a: Int, b: Int, c: Int, p: [Int], x: Int?) -> Int {
+	let y = ((a + b)) * c
+	let z = (p[b + c]) * a
+	let w = ((x!))!
+	return ((y + z + w))
+}
+func t(_ x: Int) throws -> Int { return x }
+let a = (try? t(1)) ?? 5
+let dd: Int?? = 3
+let b = (dd!)!
+print(a, b)

@@ -1,0 +1,1 @@
+class C { void F() { Dictionary<VeryLongFirstType, VeryLongSecondType> alpha, beta, gamma; Use(alpha,beta,gamma); } }

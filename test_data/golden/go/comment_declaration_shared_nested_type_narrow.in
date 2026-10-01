@@ -1,0 +1,8 @@
+package p
+
+// f は変数を使う
+func f() {
+	var alpha func(veryLongFirstParameter int, veryLongSecondParameter int)
+	var beta func(veryLongFirstParameter /* 型の説明 */ int, veryLongSecondParameter int)
+	use(alpha, beta)
+}

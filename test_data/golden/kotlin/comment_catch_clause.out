@@ -1,0 +1,15 @@
+/**
+ *
+ * @param a
+ */
+fun f(a: Int) {
+	try {
+		g1()
+		g2()
+	// note
+	} catch(e: Exception) {
+		h1()
+		h2()
+	}
+	return
+}

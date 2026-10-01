@@ -1,0 +1,9 @@
+interface Listener {
+	/**
+	 *
+	 * @param id
+	 */
+	default void OnStart(int id) {}
+}
+
+interface Plain { void Run(int a); }

@@ -1,0 +1,23 @@
+<?php
+
+for(
+	$i = 0;
+	$i < 10;
+	++$i
+): endfor;
+
+foreach(
+	$items as $item
+): endforeach;
+
+while(
+	$a
+): endwhile;
+
+declare(
+	ticks=1
+): enddeclare;
+
+switch(
+	$a
+): endswitch;

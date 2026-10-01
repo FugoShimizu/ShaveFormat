@@ -1,0 +1,3 @@
+.single{color:red}
+.multiple{width:100%;color:red}
+.empty{}

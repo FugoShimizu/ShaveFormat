@@ -1,0 +1,1 @@
+const A = () => (<div>{}<b>x</b></div>); // line comment // Two

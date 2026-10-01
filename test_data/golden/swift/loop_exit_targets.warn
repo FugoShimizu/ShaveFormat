@@ -1,0 +1,11 @@
+11:2: Violation: Add the required comment before this `return`
+21:4: Review: Replace this jump with structured control flow; verify applicability, lifetime
+42:15: Violation: Documentation is missing a description for parameter 'flag'
+46:4: Review: Replace this jump with structured control flow; verify applicability, lifetime
+54:2: Violation: Add the required comment before this `return`
+61:6: Review: Add an explicit return type to this function; verify type, external contract
+61:8: Violation: Documentation is missing a description for parameter 'x'
+71:2: Violation: Add the required comment before this `return`
+77:6: Review: Add an explicit return type to this function; verify type, external contract
+80:3: Review: Replace this jump with structured control flow; verify applicability, lifetime
+82:2: Violation: Add the required comment before this `return`

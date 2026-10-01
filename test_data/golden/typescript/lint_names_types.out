@@ -1,0 +1,18 @@
+/**
+ * 値の作成関数
+ * @param other 他の値
+ * @return 作成した値
+ */
+function MakeValue(): any {
+	// 作成した値の返戻
+	return 1;
+}
+
+/**
+ * 状態を確かめる
+ * @return 確認結果
+ */
+function calculate(): boolean {
+	// 確認結果の返戻
+	return true;
+}

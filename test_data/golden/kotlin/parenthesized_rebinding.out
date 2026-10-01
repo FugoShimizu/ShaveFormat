@@ -1,0 +1,32 @@
+/**
+ * 括弧付の更新対象を保持する関数
+ * @return 更新後の値
+ */
+fun CountUpdates(): Int {
+	var Counter: Int = 1
+	++Counter
+	// 更新結果の返戻
+	return Counter
+}
+
+/**
+ * 引用付の識別子を照合する関数
+ * @return 更新後の値
+ */
+fun CountQuoted(): Int {
+	var Count: Int = 1
+	++`Count`
+	// 更新結果の返戻
+	return Count
+}
+
+/**
+ * 配列要素を更新する関数
+ * @return 更新後の値
+ */
+fun CountElements(): Int {
+	val Values: IntArray = intArrayOf(7)
+	++Values[0]
+	// 更新結果の返戻
+	return Values[0]
+}

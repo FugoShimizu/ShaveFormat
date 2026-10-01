@@ -1,0 +1,16 @@
+#include <stdbool.h>
+
+class Counter {
+public:
+
+	int Count;
+};
+
+/**
+ *
+ */
+void Spin() {
+	while(true) {
+		Counter C;
+	}
+}

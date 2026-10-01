@@ -1,0 +1,3 @@
+<?php
+if($a) if($b) x(); else y();
+while($a) do x(); while($b);

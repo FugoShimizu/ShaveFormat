@@ -1,0 +1,21 @@
+<?php
+
+declare(strict_types=1);
+
+/**
+ *
+ * @param $a
+ * @param $b
+ * @param $c
+ */
+function f(bool $a, bool $b, bool $c): void {
+	$x = ($a and $b);
+	$y = $a and ($b or $c);
+	$z = ($a xor $b);
+	$w = $a && $b || $c;
+	echo $x, $y, $z, $w;
+	return;
+}
+
+$x = $a and $b;
+$y = $a xor $b;

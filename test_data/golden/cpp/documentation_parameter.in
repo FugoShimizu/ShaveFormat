@@ -1,0 +1,9 @@
+/**
+ * 移動する
+ * \param x,y 座標
+ * @param x 補足
+ * \return 結果
+ */
+int Move(int x, int y) {
+	return x + y;
+}

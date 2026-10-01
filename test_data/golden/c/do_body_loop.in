@@ -1,0 +1,6 @@
+void f(int a, int b) {
+	do {
+		while(a) x();
+	} while(b);
+	do while(a) x(); while(b);
+}

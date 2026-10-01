@@ -1,0 +1,30 @@
+if x = 1 then p x end
+
+unless y = nil then p y end
+
+#
+# @return
+def items
+	return []
+end
+
+#
+# @param k
+# @return
+def f(k)
+	if items.empty? then items = [2] end
+	x = 1
+	x = 2 if x > 0
+	k = 5 if k
+	[1].each { m = 1 }
+	if m then m = 3 end
+	return [items, x, k]
+end
+
+x = 1
+
+if x then y = 1.. end
+
+while false do m 1.. end
+
+if x then p m a: end

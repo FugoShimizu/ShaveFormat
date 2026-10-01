@@ -1,0 +1,11 @@
+class C {
+    public (int, int) Foo() { return (1, 2); }
+    private readonly (int a, string b) _t;
+    static (int, int)[] Arr;
+    ~C() { Dispose(); }
+    void M() {
+        var a = (ref x) => x;
+        var b = (text, out result) => Int32.TryParse(text, out result);
+        var c = async (ref readonly q, scoped p) => { await Task.Yield(); return q; };
+    }
+}

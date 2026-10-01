@@ -1,0 +1,5 @@
+class A {
+	"accessor"; // c
+	x = 1;
+	static z = 3; // e
+}

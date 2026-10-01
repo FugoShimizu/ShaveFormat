@@ -1,0 +1,3 @@
+R = def m(a) end
+S = class A end
+T = if true then end

@@ -1,0 +1,8 @@
+/**
+ * c
+ * @param a
+ */
+function f(a) {
+	g(a);
+	return;
+}

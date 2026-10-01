@@ -1,0 +1,21 @@
+/**
+ *
+ */
+function outer() {
+	function *g() {
+		return 1;
+	}
+	g();
+	return;
+}
+
+/**
+ *
+ */
+function outer2() {
+	const g = function *() {
+		return 1;
+	};
+	g();
+	return;
+}

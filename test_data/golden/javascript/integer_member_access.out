@@ -1,0 +1,5 @@
+const a = 1 .toString();
+const b = 1..toString();
+const c = 0X10.toString();
+const d = (class A extends B {}).name;
+const e = (class {}).name;

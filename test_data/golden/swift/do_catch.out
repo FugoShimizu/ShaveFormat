@@ -1,0 +1,21 @@
+/**
+ *
+ * - Parameter a:
+ * - Parameter c:
+ */
+func f(a: Bool, c: Bool) {
+	do {
+		try g()
+	} catch let e as MyError {
+		h(e)
+	// C1
+	// C2
+	} catch {}
+	if a {
+		g()
+	// A
+	// T1
+	// T2
+	} else if c {} else {}
+	return
+}

@@ -1,0 +1,1 @@
+class T { void f(int a) { if (a == 1) { final int x = 1; } } }

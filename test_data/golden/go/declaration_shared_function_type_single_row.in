@@ -1,0 +1,2 @@
+package p
+func f() { var a, b func(x struct{ f int }); use(a, b) }

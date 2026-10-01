@@ -1,0 +1,7 @@
+const provider = {
+	run(x: number): number {
+		return x + 1;
+	}
+};
+
+console.log(provider.run(1));

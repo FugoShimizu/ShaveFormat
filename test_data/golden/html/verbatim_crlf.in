@@ -1,0 +1,8 @@
+<pre>a
+bc</pre>
+<textarea>x
+y</textarea>
+<!-- c
+d -->
+<span style="white-space: pre-wrap">u
+v</span>

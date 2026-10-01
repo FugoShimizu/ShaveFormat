@@ -1,0 +1,10 @@
+.a { /* c */
+	color: red;
+	margin: 0;
+}
+
+@media screen { /* m */
+	.b {
+		color: blue;
+	}
+}

@@ -1,0 +1,5 @@
+class A {
+	int F(int a, int b) {
+		return - -a + + +b - - -b;
+	}
+}

@@ -1,0 +1,16 @@
+/**
+ * 読む
+ * @param path 経路
+ */
+fun read(path: String) {
+	try {
+		open(path)
+	} catch(e: IllegalArgumentException) {
+		report(e)
+	} catch(e: IllegalStateException) {
+		log(e)
+	} finally {
+		close()
+	}
+	return
+}

@@ -1,0 +1,5 @@
+/// Logs
+/// - Parameters:
+///   - message: The message
+///   - date: The time
+func log(message: String, date: Date) {}

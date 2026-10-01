@@ -1,0 +1,5 @@
+void (*tbl[2])(void) = { [OP_A] = fa,
+#ifdef CONFIG_B
+[OP_B] = fb,
+#endif
+};

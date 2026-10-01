@@ -1,0 +1,25 @@
+package p
+
+import "fmt"
+
+func ExampleHello() {
+	fmt.Println("a  b")
+	fmt.Println("日本  語")
+	// Output:
+	// a  b
+	// 日本  語
+}
+
+func ExampleUnordered() {
+	fmt.Println(1)
+	// Unordered output:  1
+}
+
+func f(x int) int {
+	if x > 0 {
+		return 1
+		// 分岐の終わり  注記
+	}
+	return 0
+	// 関数の終わり
+}

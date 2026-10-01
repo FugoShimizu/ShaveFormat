@@ -1,0 +1,2 @@
+// @deprecated 旧
+const o = { old: 1, new1: 2 };

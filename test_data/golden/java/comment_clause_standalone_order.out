@@ -1,0 +1,16 @@
+class A {
+	/**
+	 *
+	 */
+	void f() {
+		if(a) {
+			g();
+			h();
+		// own
+		} else { // d1
+			k();
+			m();
+		}
+		return;
+	}
+}

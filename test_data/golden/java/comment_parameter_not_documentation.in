@@ -1,0 +1,10 @@
+class A {
+	void Run(
+		// the first value
+		int firstArgumentWithLongName,
+		// the second value
+		int secondArgumentWithLongName
+	) {
+		foo();
+	}
+}

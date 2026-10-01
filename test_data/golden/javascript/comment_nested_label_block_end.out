@@ -1,0 +1,9 @@
+/**
+ *
+ */
+function f() {
+a:
+b:
+	while(true) g();
+// tail
+}

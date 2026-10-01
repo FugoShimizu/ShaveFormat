@@ -1,0 +1,9 @@
+struct V {
+	var body: some View {
+		Text("hi")
+#if os(iOS)
+			.foo()
+#endif
+			.bar()
+	}
+}

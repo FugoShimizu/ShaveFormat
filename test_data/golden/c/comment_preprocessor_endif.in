@@ -1,0 +1,12 @@
+#if A
+int a;
+// keep
+#endif
+
+#if B
+int b;
+// then
+#else
+int c;
+// else
+#endif

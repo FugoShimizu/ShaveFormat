@@ -1,0 +1,51 @@
+class T {
+	/**
+	 * <summary></summary>
+	 */
+	static void Plain() {
+		var sql = @"SELECT *
+    FROM users
+    // inside literal
+        WHERE id = ""1""
+
+    ORDER BY Name";
+		return;
+	}
+
+	/**
+	 * <summary></summary>
+	 * <param name="name"></param>
+	 */
+	static void Interp(string name) {
+		var s = $@"hello
+    {name}
+    // inside interpolated literal
+        nested 8sp
+
+end";
+		var alternate = @$"begin
+    // inside alternate literal
+""end""";
+		return;
+	}
+
+	/**
+	 * <summary></summary>
+	 * <param name="a"></param>
+	 * <param name="b"></param>
+	 * <param name="c"></param>
+	 * <param name="v"></param>
+	 * <returns></returns>
+	 */
+	static string Hole(bool a, int b, int c, double v) {
+		return $"{(a ? b : c):D2} {v.ToString("F2")}";
+	}
+
+	/**
+	 * <summary></summary>
+	 * <returns></returns>
+	 */
+	static bool After() {
+		return false;
+	}
+}

@@ -1,0 +1,5 @@
+func die() -> Never { fatalError() }
+
+func fromNever() -> Int { die() }
+
+func choose(_ b: Bool) -> Int { if b { 1 } else { 2 } }

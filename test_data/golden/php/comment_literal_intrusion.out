@@ -1,0 +1,6 @@
+<?php
+
+$a = "x\t
+y"; // c1
+
+var_dump($a);

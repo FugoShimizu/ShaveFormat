@@ -1,0 +1,13 @@
+/**
+ *
+ * @param cb
+ */
+function g(cb: () => number = () => 2) {}
+
+class K {
+	/**
+	 *
+	 * @param f
+	 */
+	m(f = () => 1) {}
+}

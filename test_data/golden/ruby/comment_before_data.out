@@ -1,0 +1,5 @@
+puts DATA.read
+
+# note
+__END__
+data

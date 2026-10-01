@@ -1,0 +1,12 @@
+/*!
+ * 足す
+ */
+int Add(int a) {
+	return a;
+}
+/*******************
+ * Utilities
+ *******************/
+int f(int a) {
+	return a;
+}

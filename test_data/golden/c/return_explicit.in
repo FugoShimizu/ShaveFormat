@@ -1,0 +1,34 @@
+/**
+ * 値を渡す
+ * @param a 値
+ */
+void f(int a) {
+	g(a);
+}
+
+/**
+ * 繰り返す
+ */
+void h(void) {
+	while(1) g(1);
+}
+
+/**
+ * 止める
+ */
+void k(void) {
+	abort();
+}
+
+/**
+ * 何もしない
+ */
+void e(void) {}
+
+/**
+ * 起動する
+ * @return 終了状態
+ */
+int main(void) {
+	g(2);
+}

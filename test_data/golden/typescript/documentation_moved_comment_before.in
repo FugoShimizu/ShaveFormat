@@ -1,0 +1,8 @@
+function h(c: boolean): number {
+	if (c) {
+		x(); // x
+	} /** c2 */
+
+	function g() {}
+	return 1;
+}

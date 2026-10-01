@@ -1,0 +1,9 @@
+y = 'it\'s "q"'
+z = r'a\d'
+w = f'{v} \n'
+
+x = f"{d['key']}"
+m = f'hi {n}'
+b = b'bytes'
+r = r'\d+'
+f('//"')

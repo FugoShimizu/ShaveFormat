@@ -1,0 +1,12 @@
+/**
+ * 境界の比較
+ * @param {number} x 数
+ * @param {Array} xs 配列
+ */
+function check(x, xs) {
+	if(x >= 10) return;
+	if(x <= 9007199254740992) return;
+	if(xs.length >= 10) return;
+	if(xs.length <= 9) return;
+	return;
+}

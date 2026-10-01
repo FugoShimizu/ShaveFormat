@@ -1,0 +1,7 @@
+class C {
+	void f() {
+		final /* c */ int a = 1;
+		final /* d */ int b = 2;
+		System.out.println(a + b);
+	}
+}

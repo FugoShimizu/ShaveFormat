@@ -1,0 +1,5 @@
+fun f() {
+	if (aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa > 0) g(bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb, bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb)
+	if (aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa > 0) if (bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb > 0) if (cccccccccccccccccccccccccccccccccccccc > 0) g()
+	while (aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa > 0) if (bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb > 0) g(bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb)
+}

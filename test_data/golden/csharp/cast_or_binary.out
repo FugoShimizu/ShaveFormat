@@ -1,0 +1,65 @@
+class C {
+	/**
+	 * <summary></summary>
+	 */
+	unsafe void f() {
+		g((d - a) * 2);
+		g(d + a);
+		g(d * a);
+		g(d & a);
+		g(d ^ a);
+		g((int)-a);
+		g((d?)-a);
+		g((d)!a);
+		g(A.B - a * 2);
+		g(x * d - a);
+		g(-d - a);
+		g(d * a);
+		g(out d* a);
+		var t = (d * a, 1);
+		(int* p, int q) = (x, y);
+		h(x: d * a);
+		g(d[0] - a);
+		g(global::A.B - a);
+		g((global::A)-a);
+		g(A<int>.B - a);
+		g((A.B<int>)-a);
+		var (m, n) = (1, 2);
+		g(d /* c */ + a);
+		g(d * a); // e
+		return;
+	}
+}
+
+class C {
+	/**
+	 * <summary></summary>
+	 * <returns></returns>
+	 */
+	int M() {
+		var x = d /* c */ - a;
+		return d - a; // c
+	}
+
+	/**
+	 * <summary></summary>
+	 */
+	void N() {
+		var s = $"{(x == @"\" ? 1 : 2)}";
+		var t = $"{(a ? b : c)}";
+		var u = $"{f(a ? b : c)}";
+		G(x => x);
+		return;
+	}
+}
+
+class T {
+	/**
+	 * <summary></summary>
+	 * <param name="n"></param>
+	 * <returns></returns>
+	 */
+	static string F(int n) {
+		return $"{(global::System.Math.PI):F2} {(n > 0 ? 1 : 2)} {n + 1}";
+	}
+}

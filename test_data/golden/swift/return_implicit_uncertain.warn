@@ -1,0 +1,8 @@
+1:1: Violation: Documentation is missing a summary
+8:1: Violation: Documentation is missing a summary
+12:6: Review: Determine whether the function needs an explicit trailing return; verify type, reachability
+12:21: Violation: Documentation is missing a return-value description
+16:1: Violation: Documentation is missing a summary
+21:6: Review: Determine whether the function needs an explicit trailing return; verify type, reachability
+21:15: Violation: Documentation is missing a description for parameter 'b'
+21:27: Violation: Documentation is missing a return-value description

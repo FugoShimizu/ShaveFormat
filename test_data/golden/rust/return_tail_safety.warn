@@ -1,0 +1,18 @@
+1:4: Violation: Function is missing a documentation comment
+5:4: Violation: Function is missing a documentation comment
+9:4: Violation: Function is missing a documentation comment
+13:4: Review: Determine whether the function needs an explicit trailing return; verify type, reachability
+13:4: Violation: Function is missing a documentation comment
+17:4: Review: Determine whether the function needs an explicit trailing return; verify type, reachability
+17:4: Violation: Function is missing a documentation comment
+21:4: Review: Determine whether the function needs an explicit trailing return; verify type, reachability
+21:4: Violation: Function is missing a documentation comment
+26:4: Review: Determine whether the function needs an explicit trailing return; verify type, reachability
+26:4: Review: Use boolean-query naming for function compared; verify external contract, intent
+26:4: Violation: Function is missing a documentation comment
+30:4: Review: Determine whether the function needs an explicit trailing return; verify type, reachability
+30:4: Violation: Function is missing a documentation comment
+34:4: Review: Determine whether the function needs an explicit trailing return; verify type, reachability
+34:4: Violation: Function is missing a documentation comment
+40:4: Review: Determine whether the function needs an explicit trailing return; verify type, reachability
+40:4: Violation: Function is missing a documentation comment

@@ -1,0 +1,7 @@
+const a = [1,
+	// close bracket
+];
+f(
+	1,
+	// call close
+);

@@ -1,0 +1,4 @@
+interface Item {
+	/** 名前 */
+	someLongPropertyName: SomeLongTypeName
+}

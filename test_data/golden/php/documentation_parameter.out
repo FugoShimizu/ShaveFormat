@@ -1,0 +1,11 @@
+<?php
+
+/**
+ * 足す
+ * @param array &$out 出力
+ * @param int ...$values 値
+ * @return int 合計
+ */
+function add(array &$out, int ...$values): int {
+	return 0;
+}

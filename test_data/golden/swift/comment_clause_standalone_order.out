@@ -1,0 +1,12 @@
+/**
+ *
+ */
+func f() {
+	if c {
+		g()
+	// own
+	} else { // d1
+		h()
+	}
+	return
+}

@@ -1,0 +1,22 @@
+@use "sass:math" as *;
+@use "sass:map" as m;
+@forward "src/list" as list-*;
+@forward "src/theme" show color, font;
+
+$base: 8px;
+
+@mixin flex($dir: row) {
+	display: flex;
+	flex-direction: $dir;
+}
+
+.card {
+	@include flex(column);
+	padding: $base * 2;
+	> .title { font-weight: 700; }
+	&:hover { opacity: .8; }
+	.nested & { color: red; }
+	// card close
+}
+
+.a { &#top { color: red; } }

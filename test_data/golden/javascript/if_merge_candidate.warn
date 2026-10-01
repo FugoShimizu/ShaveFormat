@@ -1,0 +1,17 @@
+8:3: Review: Merge the conditions of these identical branch bodies; verify lifetime
+22:5: Review: Describe the termination or returned value in the return comment; verify documentation, intent
+23:2: Review: Merge the conditions of these identical branch bodies; verify lifetime
+24:5: Review: Describe the termination or returned value in the return comment; verify documentation, intent
+26:5: Review: Describe the termination or returned value in the return comment; verify documentation, intent
+28:5: Review: Describe the termination or returned value in the return comment; verify documentation, intent
+38:5: Review: Describe the termination or returned value in the return comment; verify documentation, intent
+39:2: Review: Merge the conditions of these identical branch bodies; verify lifetime
+40:5: Review: Describe the termination or returned value in the return comment; verify documentation, intent
+42:5: Review: Describe the termination or returned value in the return comment; verify documentation, intent
+52:5: Review: Describe the termination or returned value in the return comment; verify documentation, intent
+54:5: Review: Describe the termination or returned value in the return comment; verify documentation, intent
+56:5: Review: Describe the termination or returned value in the return comment; verify documentation, intent
+65:5: Review: Describe the termination or returned value in the return comment; verify documentation, intent
+66:2: Review: Merge the conditions of these identical branch bodies; verify lifetime
+67:5: Review: Describe the termination or returned value in the return comment; verify documentation, intent
+69:5: Review: Describe the termination or returned value in the return comment; verify documentation, intent

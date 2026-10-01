@@ -1,0 +1,9 @@
+const f = () => {
+	return 1
+}
+
+[1, 2].forEach(x => x)
+const h = () => {}
+`t`.length
+const i = () => {}
+(function(){})()

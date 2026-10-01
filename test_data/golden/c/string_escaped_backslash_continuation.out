@@ -1,0 +1,9 @@
+const char *p = "C:\\dir\\file";
+
+/**
+ *
+ * @return
+ */
+int f(void) {
+	return 1;
+}

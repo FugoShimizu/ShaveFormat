@@ -1,0 +1,30 @@
+/**
+ *
+ */
+fun f() {
+	if(a) {
+		if(b) x()
+		else if(c) y()
+	} else z()
+	if(a) while(b) g()
+	else z()
+	// block
+	// line
+	val x = a.foo()
+	return
+}
+
+/**
+ *
+ */
+fun f() {
+	if(a) {
+		if(b) x()
+		else y()
+	}
+	while(a) {
+		do x()
+		while(b)
+	}
+	return
+}

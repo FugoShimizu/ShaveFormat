@@ -1,0 +1,32 @@
+fn f() {
+	a();
+}
+
+fn g() -> i32 {
+	x + 1
+}
+
+fn h() -> usize {
+	v.iter().count()
+}
+
+fn k() {
+	b()
+}
+
+fn m() -> i32 {
+	if c { 1 } else { 2 }
+}
+
+fn n() -> ! {
+	loop {}
+}
+
+#[rewrite]
+fn p() {
+	d();
+}
+
+fn q() -> String {
+	format!("{}", 1)
+}

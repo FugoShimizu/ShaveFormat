@@ -1,0 +1,28 @@
+/**
+ * 読む
+ * @param Path 経路
+ */
+void Read(const std::string &Path) {
+	try {
+		Open(Path);
+	// 引数の誤り
+	} catch(const std::invalid_argument &E) {
+		Report(E);
+	} catch(...) { // 其の他の例外
+		throw;
+	}
+	return;
+}
+
+/**
+ * 確かめる
+ * @param value 値
+ */
+void Check(int value) {
+	try {
+		if(value < 0) throw 1;
+	} catch(...) {
+		return;
+	}
+	return;
+}

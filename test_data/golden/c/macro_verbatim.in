@@ -1,0 +1,10 @@
+#define GLSL(x) #x
+#define STR(x) #x
+#define SWAP(a, b) t = a; a = b; b = t
+const char *s = GLSL({int a; int b;});
+const char *t = STR(m/*x*/+n);
+void f(int c, int x, int y, int t) {
+	if (c) { SWAP(x, y); }
+	M({ int c; int d; });
+	int v = ({ int w = 1; w; });
+}

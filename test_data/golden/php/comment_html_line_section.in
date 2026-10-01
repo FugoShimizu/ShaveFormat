@@ -1,0 +1,10 @@
+<span><?php g(); /* c4 */ ?>x<?php h(); // c5 ?></span>
+<span><?php g(); // c4
+?>x<?php h(); ?></span>
+<span><?php g(); ?>x<?php h(); // c5 ?></span>
+<ul><?php // TODO(security): escape output
+foreach ($xs as $x) {
+	echo $x;
+	echo $x;
+}
+?></ul>

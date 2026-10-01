@@ -1,0 +1,10 @@
+/**
+ * 生成する
+ * @param o 値
+ */
+function f(o: {
+	/** x */
+	a: number
+}): void {
+	g(o);
+}

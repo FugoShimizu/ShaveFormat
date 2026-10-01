@@ -1,0 +1,9 @@
+x: int|None = a | b
+y = c | d
+
+def f(p: str|bytes = b"", *, q: list[int|None] = []) -> int|str:
+	"""
+	変換
+	"""
+	# 変換結果の返戻
+	return g(key=p, other=q)

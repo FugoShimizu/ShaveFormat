@@ -1,0 +1,6 @@
+enum class E {
+	/** 赤 */
+	Red,
+	/** 青 */
+	Blue,
+};

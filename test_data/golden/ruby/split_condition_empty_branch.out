@@ -1,0 +1,18 @@
+open(T) do |f|
+	while l = f.gets
+		c1 = from_hex(c1)
+		# # NFC TEST
+		if c2 == Unicode.nfc(c1) && c2 == Unicode.nfc(c2) && c2 == Unicode.nfc(c3) && c4 == Unicode.nfc(c4) && c4 == Unicode.nfc(c4)
+		# #puts "NFC OK: " + code
+		else
+			puts "NFC NG: " + to_hex(c1)
+			printf(
+				"  c2=%s NFC(c1)=%s NFC(c2)=%s NFC(c3)=%s\n",
+				to_hex(c2),
+				to_hex(Unicode.nfc(c1)),
+				to_hex(Unicode.nfc(c2)),
+				to_hex(Unicode.nfc(c3))
+			)
+		end
+	end
+end

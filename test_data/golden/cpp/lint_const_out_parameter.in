@@ -1,0 +1,25 @@
+/**
+ * 妥当性判定関数
+ * @param Text 判定対象
+ * @param Size 長さ
+ * @return 全て読めれば true
+ */
+bool IsValid(const char *Text, unsigned Size) {
+	for(unsigned Pos = 0; Pos < Size;) {
+		unsigned Point = 0;
+		if(!Decode(Text, Pos, Point)) return false;
+	}
+	// 全て読めた事の返戻
+	return true;
+}
+
+/**
+ * 合計関数
+ * @param Size 件数
+ * @return 合計
+ */
+int Sum(int Size) {
+	int Total = 0;
+	// 合計の返戻
+	return Total + Size;
+}

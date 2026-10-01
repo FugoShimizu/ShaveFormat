@@ -1,0 +1,3 @@
+4:5: Violation: Documentation is missing a return-value description
+4:9: Violation: Documentation is missing a description for parameter 'a'
+22:1: @param x does not match a parameter

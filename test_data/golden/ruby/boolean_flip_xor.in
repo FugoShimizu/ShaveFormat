@@ -1,0 +1,25 @@
+def f(flag)
+  flag = !flag
+  flag
+end
+
+# 真偽値を返す
+# @return 真偽値
+def valid
+	return true
+end
+
+# 準備の状態を返す
+# @return 真偽値
+def ready?
+	return true
+end
+
+class Counter
+	# 件数を増やす
+	# @return 更新後の件数
+	def advance!
+		@count += 1
+		return @count
+	end
+end

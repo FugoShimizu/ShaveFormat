@@ -1,0 +1,6 @@
+1:1: Violation: Documentation is missing a summary
+4:5: Violation: Documentation is missing a return-value description
+4:7: Violation: Documentation is missing a description for parameter 'flag'
+5:7: Review: Use the boolean-negation assignment required for this target; verify type, binding, evaluation
+11:5: Review: Use boolean-query naming for function valid; verify external contract, intent
+24:6: Review: Use paired destructive-method naming for function advance!; verify external contract

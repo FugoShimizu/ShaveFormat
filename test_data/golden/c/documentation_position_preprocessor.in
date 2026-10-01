@@ -1,0 +1,5 @@
+/** @file 頭 */
+#pragma once
+
+/** 取込 */
+#include <stdio.h>

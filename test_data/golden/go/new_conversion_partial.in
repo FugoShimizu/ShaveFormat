@@ -1,0 +1,12 @@
+package p
+
+type T int
+
+func F(v int) *T {
+	return new(T(v))
+}
+
+func G() {
+	for p := 0; p < 1; p += int(unsafe.Sizeof(T(0))) {
+	}
+}

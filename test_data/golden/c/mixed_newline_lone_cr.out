@@ -1,0 +1,10 @@
+/**
+ *
+ * @param a
+ * @return
+ */
+int f(int a) {
+	int r = 0;
+	if(a) r = 1; // c
+	return r;
+}

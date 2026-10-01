@@ -1,0 +1,6 @@
+class A {
+    fun g(parameterNumberOne: SomeLongType, parameterTwo: AnotherType, parameterThree: Third): Boolean = true
+    private fun longFunctionNameThatIsVeryLongIndeedAndLongerStillAndEvenLongerThanThatOne(p: SomeLongTypeName): Boolean {
+        return true
+    }
+}

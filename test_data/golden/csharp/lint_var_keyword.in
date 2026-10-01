@@ -1,0 +1,11 @@
+class A {
+	/**
+	 * <summary>値の出力関数</summary>
+	 */
+	void Print() {
+		var Value = 1;
+		System.Console.WriteLine(Value);
+		// 終了
+		return;
+	}
+}

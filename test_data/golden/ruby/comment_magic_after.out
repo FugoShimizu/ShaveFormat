@@ -1,0 +1,8 @@
+# c1
+# @return
+# encoding: ascii-8bit
+def f
+	return "e".length
+end
+
+p __ENCODING__, f

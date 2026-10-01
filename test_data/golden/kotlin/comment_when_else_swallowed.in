@@ -1,0 +1,9 @@
+val y = when (a) {
+	1 -> 2
+	/* c */
+	else -> 3
+}
+
+val z = when (a) {
+	1 -> 2 /* d */ else -> 3
+}

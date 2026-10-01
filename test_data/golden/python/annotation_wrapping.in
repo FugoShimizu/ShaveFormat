@@ -1,0 +1,11 @@
+from __future__ import annotations
+
+type Alias[TypeValue,] = list[TypeValue]
+type PairAlias = Receiver[int, str,]
+type TupleAlias = Receiver[int,]
+
+Bare: AlphaResponseType | BetaResponseType | GammaResponseType | DeltaResponseType | EpsilonResponseType | ZetaResponseType | EtaResponseType
+Assigned: AlphaResponseType | BetaResponseType | GammaResponseType | DeltaResponseType | EpsilonResponseType | ZetaResponseType = None
+TupleItem: Receiver[int,]
+PairItem: Receiver[int, str,]
+values: list[int] = [first_value_name, second_value_name, third_value_name, fourth_value_name, fifth_value_name, sixth_value_name]

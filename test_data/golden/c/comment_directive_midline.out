@@ -1,0 +1,15 @@
+#define X /* mid */ 1
+
+#include /* w */ <stdio.h>
+
+#define F(a) f(/* c */ a)
+#define G(a /* p */, b) a /* q */ + b
+
+#if A /* c */ && B
+
+#endif
+
+#pragma omp parallel /* c */ for
+
+#define H 1 /* e */
+#define I 2

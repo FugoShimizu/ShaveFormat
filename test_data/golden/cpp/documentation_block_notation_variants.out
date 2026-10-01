@@ -1,0 +1,19 @@
+/**
+ * 足す
+ * @param a
+ * @return
+ */
+int Add(int a) {
+	return a;
+}
+
+/**
+ * ******************
+ * Utilities
+ * *****************
+ * @param a
+ * @return
+ */
+int f(int a) {
+	return a;
+}

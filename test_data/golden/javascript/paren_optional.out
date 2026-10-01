@@ -1,0 +1,12 @@
+const a = x => x + 1;
+const b = async y => y;
+const c = z => z;
+const d = (p, q) => p + q;
+const e = new Date;
+const f = new Date().getTime();
+const g = new Date().getTime();
+const h = [new Set, new Set];
+const k = new Map()[0];
+const m = new new Function();
+
+console.log(a(1), b, c(2), d(3, 4), e instanceof Date, f, g, h.length, k, m);

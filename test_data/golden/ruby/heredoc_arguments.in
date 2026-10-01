@@ -1,0 +1,23 @@
+logger.warn <<-ALPHA.strip, <<-BETA.strip, "a very long third argument string that pushes this particular call well past the one hundred twenty eight character limit"
+alpha body text
+	ALPHA
+beta body text
+	BETA
+
+rows = [<<~A, <<~B, <<~C]
+  alpha
+A
+  beta
+B
+  gamma
+C
+
+x = f(<<~X, g { 1 })
+  body
+X
+y = f(<<~Y, g do 1 end)
+  body
+Y
+z = foo(<<~Z).each do |q| a; b end
+  body
+Z

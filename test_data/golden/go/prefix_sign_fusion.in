@@ -1,0 +1,6 @@
+package p
+
+// f は値を返す
+func f(a int) int {
+	return - -a + - - -a
+}

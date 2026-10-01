@@ -1,0 +1,7 @@
+3:1: Violation: Documentation is missing a summary
+11:3: Review: Replace this jump with structured control flow; verify applicability, lifetime
+13:2: Violation: Add the required comment before this `return`
+25:2: Violation: Add the required comment before this `return`
+33:4: Review: Replace this jump with structured control flow; verify applicability, lifetime
+36:2: Violation: Add the required comment before this `return`
+47:2: Review: Replace this jump with structured control flow; verify applicability, lifetime

@@ -1,0 +1,3 @@
+x = f(lambda a: g(a, b))
+y = sorted(xs, key=lambda item: (item.a, item.b))
+z = map(lambda v: {v: 1}, xs)

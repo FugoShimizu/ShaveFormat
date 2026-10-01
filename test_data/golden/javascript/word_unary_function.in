@@ -1,0 +1,3 @@
+void function () { f(); }();
+console.log(typeof function () { f(); });
+const t = typeof class { m() { f(); } };

@@ -1,0 +1,10 @@
+def read(path):
+	"""経路の本文を読む"""
+	try:
+		return load(path)
+	except ValueError as e:
+		return report(e)
+	except (OSError, IOError) as e:
+		return log(e)
+	finally:
+		close()

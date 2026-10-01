@@ -1,0 +1,6 @@
+function f() {
+	a: b: for (;;) {
+		g();
+		// tail
+	}
+}

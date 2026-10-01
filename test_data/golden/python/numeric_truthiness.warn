@@ -1,0 +1,9 @@
+1:5: Review: Add an explicit return type to this function; verify type, evaluation, external contract
+1:5: Violation: Function is missing a documentation comment
+1:7: Review: Add an explicit type to parameter 'n'; verify type, evaluation, external contract
+1:10: Review: Add an explicit type to parameter 'flag'; verify type, evaluation, external contract
+2:7: Review: Use the zero-test form required for this numeric type; verify type, value range
+3:3: Violation: Add the required comment before this `return`
+4:7: Review: Use the zero-test form required for this numeric type; verify type, value range
+5:8: Review: Use the boolean-negation assignment required for this target; verify type, binding, evaluation
+6:2: Violation: Add the required comment before this `return`

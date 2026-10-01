@@ -1,0 +1,14 @@
+class A {
+	void F(int a) {
+		try { // t
+			G();
+		} finally { // f
+			H();
+		}
+		if (a > 0) { // 真
+			G();
+		} else { // 偽
+			H();
+		}
+	}
+}

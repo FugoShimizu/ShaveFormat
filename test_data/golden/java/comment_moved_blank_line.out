@@ -1,0 +1,15 @@
+class A {
+	/**
+	 * c8
+	 * c9
+	 */
+	void f() {}
+
+	/**
+	 *
+	 */
+	void g() {
+		x();
+		return;
+	}
+}

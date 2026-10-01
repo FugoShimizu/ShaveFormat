@@ -1,0 +1,50 @@
+class A {
+	/**
+	 * <summary></summary>
+	 */
+	A() {
+		X();
+		return;
+	}
+
+	~A() {
+		Y();
+		return;
+	}
+
+	/**
+	 * <summary></summary>
+	 */
+	void M() {
+		Z();
+		return;
+	}
+
+	/**
+	 * <summary></summary>
+	 */
+	async Task N() {
+		await Q();
+		return;
+	}
+
+	int P {
+		get {
+			return 1;
+		}
+		set {
+			_x = value;
+			return;
+		}
+	}
+
+	/**
+	 * <summary></summary>
+	 * <returns></returns>
+	 */
+	IEnumerable<int> I() {
+		yield return 1;
+	}
+
+	int E() => 1;
+}

@@ -1,0 +1,21 @@
+/**
+ *
+ * @param X
+ * @return
+ */
+int Switch(int X) {
+	switch(X) {
+	case 1:
+		return 10;
+	case 2:
+		Setup();
+		return 20;
+	case 3:
+		{
+			const int Tmp = X * 2;
+			return Tmp;
+		}
+	default:
+		return 0;
+	}
+}

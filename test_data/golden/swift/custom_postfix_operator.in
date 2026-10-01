@@ -1,0 +1,6 @@
+postfix operator ^^
+postfix func ^^(x: Int) -> Int { return x * x }
+func f(y: Int) -> Int {
+	let z = y^^
+	return z^^
+}

@@ -1,0 +1,9 @@
+#define F(a, b) \
+	g(a, \
+	/* c */ b)
+
+#if A(B || C) && \
+    /* CA */ // CB
+    !D(F)
+int x;
+#endif

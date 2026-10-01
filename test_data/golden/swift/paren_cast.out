@@ -1,0 +1,22 @@
+/**
+ *
+ * - Parameter a:
+ * - Parameter b:
+ * - Parameter c:
+ * - Returns:
+ */
+func f(a: Any, b: Int, c: Int) -> Int {
+	let x = a as! Int * 2, p = (b &+ c) * 2, q = b << (c + 1), r = b & (c + 1), y = a as? Int ?? 0, z = (a as! Int) << 1
+	return x + p + q + r + y + z
+}
+
+/**
+ *
+ * - Parameter x:
+ * - Parameter a:
+ * - Returns:
+ */
+func f(_ x: inout Int?, a: Any) -> Bool {
+	let b = a as? Int ?? 0, c = (a as! Int) < 5
+	return a is Int?
+}

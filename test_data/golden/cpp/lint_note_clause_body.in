@@ -1,0 +1,6 @@
+void f(int x) {
+	if (x > 0) {
+		g();
+		// NOLINTNEXTLINE
+	} else if (x > 1) { int y = 42; }
+}

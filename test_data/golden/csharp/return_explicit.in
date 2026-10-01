@@ -1,0 +1,9 @@
+class A {
+	A() { X(); }
+	~A() { Y(); }
+	void M() { Z(); }
+	async Task N() { await Q(); }
+	int P { get { return 1; } set { _x = value; } }
+	IEnumerable<int> I() { yield return 1; }
+	int E() => 1;
+}

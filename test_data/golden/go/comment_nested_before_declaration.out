@@ -1,0 +1,7 @@
+package main
+// end x
+
+var x = []int{ 1 }
+
+// F is f
+func F() {}

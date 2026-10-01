@@ -1,0 +1,15 @@
+const x = <span>
+	a
+	{/* first */ /* second */}
+	b
+</span>;
+
+const y = <div>{/* note */}<span>A</span></div>;
+
+const z = <span>
+	foo
+	{/* note */}
+	bar
+</span>;
+
+const w = <span>foo &amp; bar</span>;

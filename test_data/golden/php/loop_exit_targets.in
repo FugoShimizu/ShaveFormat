@@ -1,0 +1,7 @@
+<?php
+/** 外側のループから脱出する */
+function outerExit():void{while(true){while(true){break 2;}}}
+/** 内側のループだけを脱出する */
+function innerExit():void{while(true){while(true){break;}}}
+/** 外側のループを継続する */
+function outerContinue():void{while(true){while(true){continue 2;}}}

@@ -1,0 +1,33 @@
+def f
+  if a
+    b
+    c
+    # then end
+  elsif d
+    e
+    g
+    # elsif end
+  else
+    h
+    i
+  end
+  begin
+    j
+    k
+    # begin end
+  rescue StandardError
+    l
+    m
+    # rescue end
+  ensure
+    n
+  end
+end
+
+def g
+  a
+  b
+  # def body end
+rescue StandardError
+  c
+end

@@ -1,0 +1,28 @@
+<?php
+
+$debug = false;
+
+if($debug) {
+	?><pre>SECRET</pre><?php
+}
+
+$a = 0;
+
+if($a) {
+	?>A<?php
+} else {
+	?>B<?php
+}
+?>
+<?php
+while($a) {
+	?>W<?php
+}
+
+foreach([] as $r) {
+	?><tr><?= $r; ?></tr><?php
+}
+
+do {
+	?>D<?php
+} while($a);

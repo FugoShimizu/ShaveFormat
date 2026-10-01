@@ -1,0 +1,15 @@
+class C {
+	/**
+	 * <summary></summary>
+	 */
+	void F() {
+		Dictionary<VeryLongFirstType,
+		VeryLongSecondType> alpha;
+		Dictionary<VeryLongFirstType,
+		VeryLongSecondType> beta;
+		Dictionary<VeryLongFirstType,
+		VeryLongSecondType> gamma;
+		Use(alpha, beta, gamma);
+		return;
+	}
+}

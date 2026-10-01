@@ -1,0 +1,14 @@
+class Counter {
+public:
+
+	int Count;
+};
+
+/**
+ *
+ */
+void Spin() {
+	while(1) {
+		Counter C;
+	}
+}

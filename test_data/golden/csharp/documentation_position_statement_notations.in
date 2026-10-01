@@ -1,0 +1,4 @@
+/** 説明 */
+Console.WriteLine("x");
+/// 説明
+Console.WriteLine("x");

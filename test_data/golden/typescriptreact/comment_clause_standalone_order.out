@@ -1,0 +1,41 @@
+/**
+ *
+ */
+function f() {
+	if(a) {
+		g();
+		h();
+	// own
+	} else { // d1
+		k();
+		m();
+	}
+	try {
+		g();
+		h();
+	// before catch
+	} catch(e) {
+		k();
+		m();
+	}
+	return;
+}
+
+/**
+ *
+ */
+function f() {
+	if(a) g(); // d1
+	// own
+	else k();
+	try {
+		g();
+	// own2
+	} catch(e) { // d2
+		k();
+	// own3
+	} finally { // d3
+		m();
+	}
+	return;
+}

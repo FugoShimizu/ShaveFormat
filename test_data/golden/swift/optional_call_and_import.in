@@ -1,0 +1,6 @@
+import class SomeModule.SomeClass
+
+func Invoke(target: Handler?) {
+	target.hello?("world")
+	target.list?[3]
+}

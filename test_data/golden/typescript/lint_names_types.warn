@@ -1,0 +1,4 @@
+6:1: @param other does not match a parameter
+6:10: Review: Use camelCase for function MakeValue; verify external contract
+6:23: Violation: Replace `any` with `unknown` or a specific type
+15:10: Review: Use boolean-query naming for function calculate; verify external contract, intent

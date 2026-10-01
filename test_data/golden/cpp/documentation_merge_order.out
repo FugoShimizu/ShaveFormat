@@ -1,0 +1,41 @@
+/** ========== 算術 ========== */
+/**
+ *
+ * @param A
+ * @param B
+ * @return
+ */
+int Add(int A, int B) {
+	return A + B;
+}
+
+/**
+ * 表を返す
+ * ====
+ * 見出しの下線
+ * @return
+ */
+int Table() {
+	return 1;
+}
+
+/**
+ * 前の注記
+ * 概要
+ * 後の注記
+ * @param A
+ * @return
+ */
+int Mid(int A) {
+	return A;
+}
+
+/**
+ * 行形式の概要
+ * 行形式の後の注記
+ * @param A
+ * @return
+ */
+int Line(int A) {
+	return A;
+}

@@ -1,0 +1,8 @@
+package p
+
+// f
+func f() {
+	for {
+		g()
+	}
+}

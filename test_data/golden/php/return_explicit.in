@@ -1,0 +1,31 @@
+<?php
+
+/**
+ * 呼ぶ
+ */
+function f() {
+	a();
+}
+
+/**
+ * 終える
+ */
+function h() {
+	exit(1);
+}
+
+/**
+ * 生成する
+ */
+function g() {
+	yield 1;
+}
+
+class A {
+	/**
+	 * 作る
+	 */
+	function __construct() {
+		b();
+	}
+}

@@ -1,0 +1,11 @@
+package p
+
+// F does x
+//
+// More
+func F() {
+	// a
+	//
+	// b
+	g()
+}

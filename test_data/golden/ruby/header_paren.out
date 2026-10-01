@@ -1,0 +1,40 @@
+if a
+	p 1
+	p 2
+elsif b
+	p 3
+	p 4
+end
+
+while c
+	p 5
+	p 6
+end
+
+until d
+	p 7
+	p 8
+end
+
+case e when 1 then p 9 end
+
+unless f
+	p 10
+	p 11
+end
+
+if x # 条件
+	y
+	z
+end
+
+f = -> { y } # 本体
+
+for x in a || b do p x end
+for x in c ? a : b do p x end
+for x in a or b do p x end
+for x in 0..n do p x end
+
+x = (1..)
+
+p x

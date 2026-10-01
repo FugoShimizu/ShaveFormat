@@ -1,0 +1,17 @@
+/**
+ * 分岐値に応じて処理する
+ * @param {number} code 分岐値
+ */
+function dispatch(code) {
+	const run = () => {
+		return;
+	};
+	switch(code) {
+	case 0:
+		run();
+		return;
+	default:
+		break;
+	}
+	return;
+}

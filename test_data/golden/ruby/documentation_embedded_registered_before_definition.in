@@ -1,0 +1,7 @@
+=begin
+説明
+frozen_string_literal: true
+=end
+def f(x)
+  x
+end

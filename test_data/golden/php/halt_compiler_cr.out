@@ -1,0 +1,6 @@
+<?php
+
+echo 1;
+
+__halt_compiler()
+?>data

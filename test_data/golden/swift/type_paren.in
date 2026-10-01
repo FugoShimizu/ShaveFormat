@@ -1,0 +1,27 @@
+protocol P {}
+protocol Q {}
+struct S: P, Q {}
+let a: (Int) = 1
+let b: ((Int)) -> Int = { $0 }
+let c: (Int)? = nil
+let d: [(Int)] = []
+let e: (() -> Void)? = nil
+let f: (Int)! = 1
+let g: (P & Q)? = nil
+let h: [String: (Int)] = [:]
+func k(x: (Int)) -> (Int) { x }
+let m: () -> ((Int) -> Int) = { { $0 } }
+typealias T = (Int)
+let n: (P).Type = S.self
+print(a, b(1), c as Any, d, e as Any, f!, g as Any, h, k(x: 2), m()(3), n)
+let f2: ((() -> Int))? = nil
+let g2: ((Int)) = 1
+let h2: ((Int, Int)) = (1, 2)
+let v: ( Int )? = nil
+let w: (
+	Int
+)? = nil
+let u: (Int?)? = nil
+let t: (Int?).Type = Int?.self
+var s: (Int?)! = nil
+print(v as Any, w as Any, u as Any, t, s as Any)

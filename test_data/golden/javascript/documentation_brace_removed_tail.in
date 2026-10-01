@@ -1,0 +1,8 @@
+function outer() {
+	if (a) {
+		x();
+		// c
+	}
+
+	function inner() {}
+}

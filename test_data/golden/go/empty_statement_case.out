@@ -1,0 +1,39 @@
+package p
+
+// f
+func f(x int) {
+	switch x {
+	case 1:
+	// c
+	default:
+	}
+	return
+}
+
+// g
+func g(c chan int) {
+	select {
+	case <-c:
+	default:
+	}
+	return
+}
+
+// h
+func h(v any) {
+	switch v.(type) {
+	case int:
+	// e
+	default:
+	}
+	return
+}
+
+// i
+func i(x int) {
+	switch x {
+	case 1:
+	default:
+	}
+	return
+}

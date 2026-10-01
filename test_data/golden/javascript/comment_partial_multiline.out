@@ -1,0 +1,6 @@
+function f(body: RequestBody): Object {
+	// a
+	// b
+	if (body instanceof A) return {base64: g(body)};
+	return body;
+}

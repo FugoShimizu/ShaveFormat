@@ -1,0 +1,11 @@
+@keyframes fade { 0% { opacity: 0; } 50% { opacity: 0.5; } 100% { opacity: 1; } }
+@keyframes slide { from { left: 0; } to { left: 100%; } }
+@-webkit-keyframes spin { 0% { transform: rotate(0); } 100% { transform: rotate(360deg); } }
+
+/*
+~~~text
+50
+%
+~~~
+*/
+@keyframes fade { from, 50.5%, to { opacity: 0; } 1e+1%, .5e+2%, 100% { opacity: 1; } }

@@ -1,0 +1,11 @@
+x = 1
+# * item one
+# continued
+# * item two
+# code block
+y = 2
+z = 3
+# indented head
+# body
+# tail
+w = 4

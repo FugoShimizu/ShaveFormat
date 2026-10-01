@@ -1,0 +1,16 @@
+/// 足す
+/// - Parameters:
+///   - a: 左
+///   - stale: 古い
+func add(_ a: Int, _ b: Int) -> Int {
+	return a + b
+}
+
+/// 表示する
+/// - Returns: 無し
+func show() -> Void {
+}
+
+func pick(from list: [Int]) -> Int? {
+	return list.first
+}

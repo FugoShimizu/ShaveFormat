@@ -1,0 +1,13 @@
+class A {
+	/**
+	 * <summary>独立</summary>
+	 * <param name="a"></param>
+	 * <param name="b"></param>
+	 */
+	void F(int a /* 文中 */, int b) { // 行末
+		var x = new[] { 1, /* 文中 */ 2 };
+		F(a, /* c */ b);
+		return;
+	// 塊の末尾
+	}
+}

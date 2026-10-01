@@ -1,0 +1,40 @@
+// === rule_docgen_generate ===
+int Add(const int a, const int b) {
+	return a + b;
+}
+
+void Log(const std::string &Message) {
+	Write(Message);
+	return;
+}
+
+class Widget {
+public:
+	Widget(const int Id) {
+		this->Id = Id;
+	}
+	int *Find(const int Key) const {
+		return Lookup(Key);
+	}
+};
+
+// === rule_docgen_reconcile ===
+/**
+ * 二点間の距離を求める
+ * @param a 始点
+ * @param removed 削除されるべき余分な引数
+ * @return 距離
+ */
+double Distance(const double a, const double b, const double c) {
+	return Hypot(a, b, c);
+}
+
+/**
+ * 状態を更新する
+ * @param value 新しい値
+ * @return 不要な戻値
+ */
+void SetState(const int value) {
+	State = value;
+	return;
+}

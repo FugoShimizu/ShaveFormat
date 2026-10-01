@@ -1,0 +1,17 @@
+/**
+ * 分岐値に応じて処理する
+ * @param Code 分岐値
+ */
+void Dispatch(const int Code) {
+	const auto Run = []() -> void {
+		return;
+	};
+	switch(Code) {
+	case 0:
+		Run();
+		return;
+	default:
+		break;
+	}
+	return;
+}

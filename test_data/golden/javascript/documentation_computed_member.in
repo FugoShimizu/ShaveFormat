@@ -1,0 +1,9 @@
+class Registry {
+	[someConfigurationObject.namespaceIdentifierWithAVeryLongName + someConfigurationObject.featureIdentifierWithAVeryLongName + "x"]() {
+		return 3;
+	}
+	// note
+	[ k ]() {
+		return 4;
+	}
+}

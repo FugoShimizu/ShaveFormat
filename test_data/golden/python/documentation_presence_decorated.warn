@@ -1,0 +1,3 @@
+4:5: Review: Add an explicit return type to this function; verify type, evaluation, external contract
+4:5: Violation: Function is missing a documentation comment
+4:13: Review: Add an explicit type to parameter 'x'; verify type, evaluation, external contract

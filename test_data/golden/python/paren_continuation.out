@@ -1,0 +1,6 @@
+def f():
+	total_slots = (
+		external_slots.count() + internal_slots.count() + len(google_slots) + len(msoffice_slots) + len(garoon_slots) +
+		len(cybozu_slots)
+	)
+	return total_slots

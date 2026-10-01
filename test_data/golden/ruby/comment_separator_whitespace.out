@@ -1,0 +1,11 @@
+# x
+# y
+# z
+# frozen_string_literal: true
+v = 1
+form_feed_a = 1
+# own
+form_feed_c = 3
+vertical_a = 1
+# vertical
+vertical_c = 3

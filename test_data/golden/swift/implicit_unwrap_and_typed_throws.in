@@ -1,0 +1,9 @@
+enum ComputeError: Error { case bad }
+
+func sum(alpha: Int!, beta: [Int]!) -> Int {
+	return alpha + beta.count
+}
+
+func compute() throws(ComputeError) -> Int {
+	return 1
+}

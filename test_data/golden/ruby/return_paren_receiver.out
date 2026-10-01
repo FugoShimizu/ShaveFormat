@@ -1,0 +1,24 @@
+#
+# @param a
+# @return
+def f(a)
+	return(
+		(+"x#{a}").tap do |s|
+			s << "y"
+		end
+	)
+end
+
+#
+# @param a
+# @return
+def g(a)
+	return((+"x").concat(a))
+end
+
+#
+# @param a
+# @return
+def h(a)
+	return (a + 1).tap { |s| p s }
+end

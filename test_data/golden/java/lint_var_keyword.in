@@ -1,0 +1,11 @@
+class A {
+	/**
+	 * 値の出力関数
+	 */
+	void Print() {
+		var value = 1;
+		System.out.println(value);
+		// 終了
+		return;
+	}
+}

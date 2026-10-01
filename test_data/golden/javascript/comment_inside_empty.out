@@ -1,0 +1,24 @@
+/**
+ *
+ * @param x
+ */
+function m(x) {
+	if(x) return;
+	else {/* empty else */}
+	g();
+	return /* d */;
+}
+
+try {
+	g();
+} catch(e) {/* ignore */}
+
+const a = [/* empty */];
+const f = () => {/* noop */};
+
+foo(/* nothing */);
+
+const n = new A /* nothing */;
+const f /* a */ = (/* b */) => 1;
+
+g(/* c */);

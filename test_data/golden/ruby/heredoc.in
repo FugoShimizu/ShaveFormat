@@ -1,0 +1,91 @@
+def squiggly_test
+  sql = <<~SQL
+      SELECT *
+      FROM users
+      WHERE id = 1
+    SQL
+  sql
+end
+
+def dash_test
+  text = <<-EOT
+      indented body
+      more text
+  EOT
+  text
+end
+
+def plain_test
+  text = <<EOT
+not indented
+body
+EOT
+  text
+end
+
+X = <<~TEXT
+
+
+abc
+TEXT
+Y = <<-TEXT
+
+abc
+TEXT
+p X, Y
+
+def f
+  puts <<~EOS; return 1
+    usage
+  EOS
+end
+x = <<A; y = 2
+body
+A
+if true
+  s = <<B; t = 1
+  q
+B
+  p s, t
+end
+p f, x, y
+y = 1; puts <<~EOS
+  body
+EOS
+p y
+
+if <<-A then
+  aaa
+A
+ 1
+end
+
+r1 = foo(<<~X) do |y|
+  text1
+X
+  y
+end
+r2 = foo(
+  <<~X,
+    text2
+  X
+  2
+)
+c = case y
+    in 1 then <<~C end
+  one
+C
+d = foo.new(
+  select: <<-TEXT,
+    content,
+  TEXT
+  conditions: <<-TEXT
+    content
+  TEXT
+)
+
+def usage = m <<~TEXT
+  foo +1 #{1 + 1}
+  bar (+2)
+TEXT
+def f = m [1, 2]

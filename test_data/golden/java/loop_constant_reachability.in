@@ -1,0 +1,38 @@
+class A {
+	static final boolean RUN = true;
+
+	/** 脱出の有る定数条件の繰返 */
+	void F() {
+		while(RUN) {
+			if(G()) {
+				break;
+			}
+		}
+	}
+
+	/** 脱出の無い定数条件の繰返 */
+	void H() {
+		while(RUN) {
+			G();
+		}
+	}
+
+	/** 捕捉後に継続する定数条件の繰返 */
+	void K() {
+		try {
+			while(RUN) {
+				G();
+			}
+		} catch(RuntimeException E) {
+			G();
+		}
+	}
+
+	/**
+	 * 続けるかの判定
+	 * @return 続けるか
+	 */
+	boolean G() {
+		return true;
+	}
+}

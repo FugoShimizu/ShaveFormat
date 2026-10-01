@@ -1,0 +1,43 @@
+function f() {
+	x();
+	{ // bare
+		y();
+	}
+	try { // t
+		g();
+	} catch(e) { // c
+		k();
+	} finally { // f
+		m();
+	}
+	do { // d
+		g();
+	} while(c);
+	for(;;) { // e
+		g();
+	}
+	if (a === 1) { // 一
+		g();
+	} else if (a === 2) { // 二
+		h();
+	} else { // 他
+		i();
+	}
+	switch (a) {
+	case 1:
+		g();
+		break;
+	default: // 他
+		h();
+	}
+	const o = { // obj
+		a: 1,
+		b: 2,
+	};
+	foo(a, { // arg
+		x: 1,
+	});
+	return ( // ret
+		aaaa + bbbb
+	);
+}

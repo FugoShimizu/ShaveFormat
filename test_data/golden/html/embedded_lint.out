@@ -1,0 +1,11 @@
+<div>
+	<script>
+		if(a == 0) f();
+
+		const s = `x
+y`;
+
+		if(b == 0) g(s);
+	</script>
+	<p>x</p>
+</div>

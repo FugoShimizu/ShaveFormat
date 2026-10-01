@@ -1,0 +1,6 @@
+/**
+ * example(1);
+ * @see other
+ * @param a
+ */
+function g(a) {}

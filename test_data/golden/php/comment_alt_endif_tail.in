@@ -1,0 +1,9 @@
+<?php
+if ($post) :
+	?>
+	<?php
+	$x;
+	?>
+<?php
+// ZQ
+endif;

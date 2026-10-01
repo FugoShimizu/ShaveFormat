@@ -1,0 +1,20 @@
+async function f(x) {
+	await (x);
+	const y = await (g());
+	await (a || b);
+	return (y);
+}
+function* h() { yield (1); yield (a, b); }
+function t() { throw (new Error("e")); }
+function u() { return (
+	a && b
+); }
+const d = new (Date)(0), e = new (a.B)(), g = new (a.b())(), k = new (a?.b)();
+const m = new (a["B"])(), n = new (a.arr[0])();
+const r = new (f()).default(x), s = new (a.b).c(x), w = new (f().g).h(x), z = new (a?.b).c(x);
+const t1 = new (f()).g`t`, t2 = new (f())[0]`t`, t3 = new (a.b)`t`, t4 = new (a.b`t`)();
+for (k in (a = o)) {}
+async function v() {
+	await (0, f)(x);
+	const o = (await (0, f)(x)).exports, p = (await (0, f)(x)) ** 2, q = (await [a, b][0]).c;
+}

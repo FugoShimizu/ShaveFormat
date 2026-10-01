@@ -1,0 +1,8 @@
+<?php
+class Form {
+    /**
+     * 名前、説明。
+     * @Assert\Regex(pattern="/^[^、。]+$/u", message="句読点は使えません。")
+     */
+    public $nick;
+}

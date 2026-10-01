@@ -1,0 +1,8 @@
+export declare class A {
+	g(prompt: string, options?: Options): Promise<R>;
+	/* c */
+}
+export declare class B {
+	h(a: string): void;
+	/* d */
+}

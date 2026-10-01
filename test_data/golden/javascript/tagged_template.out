@@ -1,0 +1,3 @@
+const a = tag`t${x}`;
+const b = obj.tag`u`;
+const c = String.raw`w`;

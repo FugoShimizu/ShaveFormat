@@ -1,0 +1,96 @@
+/**
+ * 外側のループから脱出する
+ * @return 到達時の値
+ */
+fun OuterExit(): Int {
+	Outer@ while(true) {
+		println(0)
+		while(true) {
+			println(1)
+			break@Outer
+		}
+	}
+}
+
+/**
+ * 内側のループだけを脱出する
+ * @return 返戻しない
+ */
+fun InnerExit(): Int {
+	while(true) {
+		println(0)
+		Inner@ while(true) {
+			println(1)
+			break@Inner
+		}
+	}
+}
+
+/**
+ * 外側のループを継続する
+ * @return 返戻しない
+ */
+fun OuterContinue(): Int {
+	Outer@ while(true) {
+		println(0)
+		while(true) {
+			println(1)
+			continue@Outer
+		}
+	}
+}
+
+/**
+ * 外側脱出後に値を返す
+ * @return 定値 1
+ */
+fun Finished(): Int {
+	Outer@ while(true) {
+		println(0)
+		while(true) {
+			println(1)
+			break@Outer
+		}
+	}
+	// 値の返戻
+	return 1
+}
+
+@Target(AnnotationTarget.EXPRESSION) @Retention(AnnotationRetention.SOURCE) annotation class Mark
+
+/**
+ * 注釈付ラベルから脱出する
+ * @return 定値 1
+ */
+fun Annotated(): Int {
+	Outer@ @Mark while(true) {
+		println(0)
+		while(true) {
+			println(1)
+			break@Outer
+		}
+	}
+	// 値の返戻
+	return 1
+}
+
+/**
+ *
+ * @param xs
+ */
+fun f(xs: List<Int>) {
+	xs.forEach lit@ {
+		if(it == 0) return@lit
+		println(it)
+	}
+	return
+}
+
+/**
+ * ラベルとコメントを処理する
+ */
+fun F() {
+	outer@ /* note */ while(true) break@outer
+	// 終了
+	return
+}

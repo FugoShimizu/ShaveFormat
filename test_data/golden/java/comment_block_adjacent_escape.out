@@ -1,0 +1,10 @@
+class A {
+	/**
+	 *
+	 */
+	void f() {
+		/* a\u0041\u000ab */
+		g();
+		return;
+	}
+}

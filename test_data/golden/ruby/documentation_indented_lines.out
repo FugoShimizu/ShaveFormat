@@ -1,0 +1,6 @@
+# Adds
+# @param x foo
+# @return
+def f(x)
+	return x
+end

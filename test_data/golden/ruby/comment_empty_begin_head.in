@@ -1,0 +1,7 @@
+x = 1
+begin # c3
+end # c4
+y = 2
+begin # c5
+rescue # c6
+end

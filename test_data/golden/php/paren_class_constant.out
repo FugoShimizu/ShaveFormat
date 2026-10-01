@@ -1,0 +1,20 @@
+<?php
+
+$x = ($a . $b)::C;
+$y = ($a ?: $b)::f();
+$z = ($a . $b)::$p;
+$alpha = 1;
+$bravo = 2;
+$charlie = ($alpha - $bravo)?->render();
+$delta = ($alpha - $bravo)::create();
+$o = new (pick("B"));
+$p = new (g())(5);
+var_dump($o instanceof (pick("B")));
+var_dump(((int)$x) ** 2);
+$r = (!$user = find(0)) ? 1 : 2;
+$base = 5;
+$negated = -(-$base);
+$compared = ($alpha < $bravo) > $charlie;
+$m = $a > $b ? "A" : ($a < $b ? "B" : "D");
+$n = ($a ? 1 : 2) ? 3 : 4;
+$o = ($a + 1) * 2;

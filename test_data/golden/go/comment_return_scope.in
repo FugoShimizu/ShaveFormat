@@ -1,0 +1,14 @@
+package p
+
+// Dispatch は分岐値に応じて処理する
+func Dispatch(code int) {
+	run := func() {
+		return
+	}
+	switch code {
+	case 0:
+		run()
+		return
+	}
+	return
+}

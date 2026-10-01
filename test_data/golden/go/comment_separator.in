@@ -1,0 +1,22 @@
+package p
+
+// Section comment about helpers.
+
+func F(a int) {}
+
+func H() {
+	return
+}
+
+// Tail section
+
+func I() {
+	return
+}
+
+func A() {}
+
+// Helpers
+
+// G does g.
+func G() {}

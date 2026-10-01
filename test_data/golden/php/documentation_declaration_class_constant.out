@@ -1,0 +1,6 @@
+<?php
+
+class C {
+	/** 値 */
+	public const X = 1;
+}

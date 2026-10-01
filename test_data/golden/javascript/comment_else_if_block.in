@@ -1,0 +1,14 @@
+function f(c, d) {
+	if (c) {
+		g();
+	} else if (d) {
+		/*
+		 * a
+		 */
+		h();
+	} else {
+		/** b
+		 * c */
+		if (e) k();
+	}
+}

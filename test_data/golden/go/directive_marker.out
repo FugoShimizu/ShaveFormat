@@ -1,0 +1,24 @@
+//go:build linux
+package p
+
+import _ "embed"
+
+//go:embed data/*.json データ.txt
+var d string
+
+//go:generate stringer -type=X
+// todo: fix
+func i() {}
+
+// go:embeddata/*.json
+var e string
+
+// go:buildtag
+func k() {}
+// go:generateX
+func l() {}
+// go:nowritebarrierrec
+func h() {}
+// j
+//go:generate echo "a  b" 完了、次へ。終わり
+func j() {}

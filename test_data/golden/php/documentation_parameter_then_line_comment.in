@@ -1,0 +1,9 @@
+<?php
+class A {
+	public function __construct(
+		/** 幅 */
+		// TODO: 単位
+		private int $w,
+		private int $h,
+	) {}
+}

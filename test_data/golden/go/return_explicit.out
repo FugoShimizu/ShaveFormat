@@ -1,0 +1,31 @@
+package p
+
+// f
+func f() {
+	a()
+	return
+}
+
+// g
+func g() int {
+	return 1
+}
+
+// h
+func h() {
+	for {}
+}
+
+// k
+func k() {
+	panic("x")
+}
+
+// m
+func (r *R) m() {
+	if r.ok {
+		return
+	}
+	b()
+	return
+}

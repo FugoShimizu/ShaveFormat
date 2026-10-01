@@ -1,0 +1,34 @@
+def f():
+    a()
+    # end f
+
+
+def g(x):
+    if x:
+        return 1
+
+
+def h():
+    """Doc."""
+
+
+def k():
+    yield 1
+
+
+class A:
+    def __init__(self):
+        self.x = 1
+
+    def m(self) -> None:
+        def inner():
+            b()
+            # end inner
+
+
+def nested():
+    def inner():
+        g()
+        # t1
+    # t2
+    return inner

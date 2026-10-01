@@ -1,0 +1,14 @@
+class NumericInitializers {
+/**
+ * 数値初期値と配列長の確認関数
+ * @return 数値と配列長の合計
+ */
+public static double InspectNumbers() {
+float[] Values = new float[0xE0];
+final float Hex = 0xE0, Other = 0x1e2, Negative = -0xE0, HexTail = 0xE0F;
+final float Exact = 0x1p2F, Fraction = 0x1.8p1F;
+final double Signed = -0x1.Ap0, Decimal = -.5;
+// 数値と配列長の合計の返戻
+return Hex + Other + Negative + HexTail + Exact + Fraction + Signed + Decimal + Values.length;
+}
+}

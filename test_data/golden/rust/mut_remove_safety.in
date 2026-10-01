@@ -1,0 +1,80 @@
+/// 可変性判定
+fn main() {
+	let mut tuple_value: i32 = 0;
+	(tuple_value,) = (1,);
+	let mut borrowed: i32 = 0;
+	let ref mut borrowed_ref: i32 = borrowed;
+	*borrowed_ref = 1;
+	let mut matched: i32 = 0;
+	match matched {
+		ref mut matched_ref => *matched_ref = 1
+	}
+	let mut conditional: i32 = 0;
+	if let ref mut conditional_ref = conditional {
+		*conditional_ref = 1;
+	}
+	let mut index: usize = 0;
+	let mut values: [i32; 1] = [0];
+	values[index] = 1;
+	let _ = index;
+	let mut outer: i32 = 0;
+	match outer {
+		_ => {
+			let mut inner: i32 = 0;
+			let ref mut inner_ref: i32 = inner;
+			*inner_ref = 1;
+		}
+	}
+	let _ = outer;
+	let mut shared_tuple: (i32,) = (1,);
+	let ref whole @(mut part,): (i32,) = shared_tuple;
+	part += 1;
+	let _ = (whole, part);
+	let mut raw_value: i32 = 0;
+	r#raw_value = 1;
+	let mut r#reverse: i32 = 0;
+	reverse = 1;
+	let seed: i32 = 1;
+	let mut captured @ _: i32 = seed;
+	let _ = captured;
+	let mut removable: i32 = 0;
+	let _ = removable;
+}
+
+macro_rules! change {
+	($value:ident) => {
+		$value = 1
+	};
+}
+
+/// マクロ判定
+#[rewrite]
+fn attributed() {
+	let mut attribute_value: i32 = 0;
+	let _ = attribute_value;
+}
+
+/// マクロ判定
+fn main() {
+	let mut macro_value: i32 = 0;
+	change!(macro_value);
+	let mut nested_value: i32 = 0;
+	{
+		change!(nested_value);
+	}
+	let mut stringified: &str = stringify!(abc);
+	let _ = stringified;
+	let mut untouched: i32 = 0;
+	let _ = untouched;
+}
+
+/// 識別子判定
+fn main() {
+	let mut K: i32 = 0;
+	K = 1;
+	let mut untouched: i32 = 0;
+	let _ = untouched;
+}
+
+fn make() -> impl FnMut() { let mut n = 0; move || { n += 1; println!("{}", n); } }
+fn main() { let mut f = make(); f(); (f)(); let mut v = Vec::new(); v.extend::<[i32;1]>([1]); println!("{:?}", v); }

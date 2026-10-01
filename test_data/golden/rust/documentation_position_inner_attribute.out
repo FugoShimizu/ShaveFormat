@@ -1,0 +1,2 @@
+//! 箱の説明
+#![deny(missing_docs)]

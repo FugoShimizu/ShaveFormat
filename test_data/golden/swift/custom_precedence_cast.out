@@ -1,0 +1,2 @@
+infix operator <> : MultiplicationPrecedence
+let value = 1 <> 2 as Any

@@ -1,0 +1,2 @@
+const a = <FooComponentName<string>>text</FooComponentName>;
+const b = <FooComponent<string> className="alpha" id="beta">text</FooComponent>;

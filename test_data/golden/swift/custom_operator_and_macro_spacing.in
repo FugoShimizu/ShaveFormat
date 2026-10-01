@@ -1,0 +1,9 @@
+postfix operator ^^
+prefix operator ~~
+infix operator <>
+let a = 1
+let b = a^^
+print(b)
+let c = a <> a
+let d = a<>a
+@freestanding(expression) macro m(_ v: Int) -> Int = #externalMacro(  module: "M",type: "T")

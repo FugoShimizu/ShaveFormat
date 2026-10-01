@@ -1,0 +1,38 @@
+/**
+ *
+ * - Parameter lhs:
+ * - Parameter rhs:
+ * - Returns:
+ */
+func ==(lhs: Int, rhs: Int) -> Bool {
+	return true
+}
+
+/**
+ *
+ * - Parameter lhs:
+ * - Parameter rhs:
+ * - Returns:
+ */
+func !=(lhs: Int, rhs: Int) -> Bool {
+	return false
+}
+
+/**
+ *
+ * - Parameter lhs:
+ * - Parameter rhs:
+ * - Returns:
+ */
+func +(lhs: Int, rhs: Int) -> Int {
+	return 0
+}
+
+/**
+ *
+ * - Parameter alpha:
+ * - Returns:
+ */
+func compute(alpha: Int) -> Int {
+	return alpha
+}

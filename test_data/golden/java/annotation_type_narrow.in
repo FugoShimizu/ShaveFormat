@@ -1,0 +1,9 @@
+@interface Ann {
+	int value() default 1;
+	String name();
+	int[] xs() default {};
+}
+
+@interface One { int v(); }
+
+@interface Empty {}

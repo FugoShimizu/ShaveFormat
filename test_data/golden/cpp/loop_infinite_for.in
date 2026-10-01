@@ -1,0 +1,27 @@
+void f() {
+	for(;;) doThing();
+}
+
+void g() {
+	for ( ; ; ) {
+		doThing();
+		if(stop) break;
+	}
+}
+
+void h() {
+	// 既存の `while(true)` は不変
+	while(true) doThing();
+}
+
+void k() {
+	// 範囲 for は対象外
+	for(int &x : items) doThing(x);
+}
+
+void labeled() {
+	// label 付きでも変換 (但し C++ には label-break が無いので影響無し)
+	for(;;) {
+		if(done()) break;
+	}
+}

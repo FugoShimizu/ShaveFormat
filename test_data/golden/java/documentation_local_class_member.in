@@ -1,0 +1,11 @@
+class A {
+	/** 処理 */
+	void f() {
+		class Local {
+			/** count */
+			int n;
+		}
+		/** step */
+		int x = 1;
+	}
+}

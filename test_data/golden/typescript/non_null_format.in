@@ -1,0 +1,11 @@
+declare function foo(a: number, b: number): number | null;
+declare const items: { id: number }[];
+const v = foo(
+  1 ,2 )!;
+const item = items.find((x) => {
+        return x.id  ===  1;
+})!;
+const w = <any> foo( 1,2 );
+const d = (a - b!) / 1000, e = (-a!).x, g = (a.b!) * 2;
+const nn1 = (mm++)!, nn2 = (a--)!, nn3 = (a.b)!.c;
+g(f<typeof import("x"), B>(y));

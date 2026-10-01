@@ -1,0 +1,10 @@
+/**
+ * 幅
+ * TODO: 単位
+ * @param w
+ * @param h
+ * @return
+ */
+int area(int w, int h) {
+	return w * h;
+}

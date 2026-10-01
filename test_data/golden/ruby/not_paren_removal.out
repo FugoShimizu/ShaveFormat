@@ -1,0 +1,8 @@
+a = not(x)
+b = not(x)
+
+not y
+not y
+
+x = not(a and b)
+y = not(a and b)

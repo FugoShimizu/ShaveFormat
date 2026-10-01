@@ -1,0 +1,12 @@
+class A {
+	/**
+	 * <summary>
+	 * </summary>
+	 * <param name="a"></param>
+	 * <param name="b">右</param>
+	 * <returns></returns>
+	 */
+	private int Add(int a, int b) {
+		return a + b;
+	}
+}

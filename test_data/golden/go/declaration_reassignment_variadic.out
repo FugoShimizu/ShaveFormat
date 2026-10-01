@@ -1,0 +1,11 @@
+package p
+
+// f は値を返す
+func f(xs ...int) int {
+	p := &xs
+	_ = p
+	xs, y := []int{ 7 }, 2
+	z := len(*p)
+	// 値を返す
+	return y + z
+}

@@ -1,0 +1,34 @@
+class A {
+	/**
+	 *
+	 * @param s
+	 */
+	void f(Shape s) {
+		switch(s) {
+		case Circle c -> {
+			return;
+		}
+		case Square q -> {
+			return;
+		}
+		}
+	}
+
+	/**
+	 *
+	 * @param o
+	 */
+	void g(Object o) {
+		switch(o) {
+		case null -> {
+			return;
+		}
+		case String t -> {
+			return;
+		}
+		case Object x -> {
+			return;
+		}
+		}
+	}
+}

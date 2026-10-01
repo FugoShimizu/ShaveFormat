@@ -1,0 +1,9 @@
+def f():
+	(
+		xxxx,
+		yyyy
+	) = (
+		aaaa,
+		bbbb
+	)
+	return xxxx

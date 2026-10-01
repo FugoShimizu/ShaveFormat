@@ -1,0 +1,24 @@
+class Calculator {
+	/**
+	 *
+	 * @param alphaValue
+	 * @param bravoValue
+	 * @param charlieValue
+	 * @param deltaValue
+	 * @param echoValue
+	 * @param foxtrotValue
+	 * @return
+	 */
+	public int Compute(int alphaValue, int bravoValue, int charlieValue, int deltaValue, int echoValue, int foxtrotValue) {
+		final int total =
+		alphaValue + bravoValue + charlieValue + deltaValue + echoValue + foxtrotValue + alphaValue + bravoValue + charlieValue +
+		deltaValue + echoValue + foxtrotValue;
+		final boolean flag =
+		alphaValue > 0 && bravoValue > 0 && charlieValue > 0 && deltaValue > 0 && echoValue > 0 && foxtrotValue > 0 && alphaValue > 0 &&
+		bravoValue > 0 && charlieValue > 0;
+		final int picked = flag ?
+		alphaValue + bravoValue + charlieValue + deltaValue + echoValue + foxtrotValue :
+		alphaValue + bravoValue + charlieValue + deltaValue + echoValue + total;
+		return total + picked;
+	}
+}

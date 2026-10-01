@@ -1,0 +1,16 @@
+package p
+
+func f() uint64 { return 0 /* XXX */ }
+
+func g(x int) {
+	switch {
+	case x == 0:
+		if x > 1 {
+			// No-op.
+		} else {
+			h()
+		}
+	case x == 1:
+		h()
+	}
+}
