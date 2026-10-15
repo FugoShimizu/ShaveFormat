@@ -10,3 +10,106 @@ int b;
 int c;
 // else
 #endif
+
+#/*
+*/
+
+int null_single;
+
+#/* First.
+ Extra */
+#/* Second.
+*/
+
+int null_pair;
+
+#/* Continued.
+*/\
+
+int null_continued;
+
+#/*
+*/
+#/*
+*/
+
+#if A && /* conditional
+ */ B
+int multiline_condition;
+#elif B /* before
+ */ && C
+int multiline_branch;
+#endif
+
+#if F(A, /* argument
+ */ B)
+int multiline_argument;
+#endif
+
+#if A && \
+    /* inline */ B
+int continued_inline;
+#endif
+
+#if A && \
+    /* own */ \
+    B
+int continued_own;
+#endif
+
+#if A /* tail
+ */
+int multiline_tail;
+#endif
+
+#if A // continued tail \
+    B
+int spliced_line_comment;
+#endif
+
+#define MULTILINE A /* macro
+ note */ + B
+#define BEFORE /* before
+ note */ A
+#define TRAILING A /* trailing
+ note */
+#define ARGUMENT(a, b) G(a, /* argument
+ note */ b)
+#define PARAMETERS(a /* parameter
+ note */, b) a + b
+#define CONTINUED A \
+    /* own macro */ \
+    + B
+#define LINE A // line \
+    continued
+
+#pragma marker /* pragma
+ note */ value
+#pragma marker \
+    /* own pragma */ \
+    value
+
+#include /* header
+ note */ <stddef.h>
+#include \
+    /* own header */ \
+    <stddef.h>
+
+#error Problem /* error
+ note */ remains
+#error Problem \
+    /* own error */ \
+    remains
+
+#warning Notice /* warning
+ note */ remains
+
+#line /* position
+ note */ 30
+
+#undef /* name
+ note */ MULTILINE
+
+#define TEXT "/* not comment */ // text" /* real */
+
+int directive_end;

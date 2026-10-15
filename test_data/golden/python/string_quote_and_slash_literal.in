@@ -7,3 +7,6 @@ m = f'hi {n}'
 b = b'bytes'
 r = r'\d+'
 f('//"')
+
+a = "a'b"
+b = 'a\'b'

@@ -15,3 +15,34 @@ func dispatch(code: Int) {
 	}
 	return
 }
+
+/**
+ * 値の取得関数
+ * - Returns: 取得した値
+ */
+func escapedReturn() -> Int {
+	let a: Int = g()
+	return `a`
+}
+
+/**
+ * クロージャの束縛を区別する関数
+ * - Returns: 取得した値
+ */
+func closureBinding() -> Int {
+	let a: Int = g { (a: Int) -> Int in
+		a
+	}
+	return a
+}
+
+/**
+ * 外側の値を捕捉する関数
+ * - Returns: 取得した値
+ */
+func capturedBinding() -> Int {
+	let a: Int = g { (b: Int) -> Int in
+		a
+	}
+	return a
+}

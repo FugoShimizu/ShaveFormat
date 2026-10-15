@@ -9,6 +9,14 @@ def f(configuration):
 	def g():
 		nonlocal cccccccccccccccc, dddddddddddddddd
 		return
-	with eeeeeeeeeeeeeeee as e, ffffffffffffffff as h:
+	with (
+		eeeeeeeeeeeeeeee
+	) as e, ffffffffffffffff as h:
 		pass
 	return
+
+def dependency_order():
+	return (
+		aaaa + bbbb + cccc + dddd +
+		eeee + ffff + gggg + hhhh
+	)

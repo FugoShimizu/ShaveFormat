@@ -1,0 +1,80 @@
+class C
+	# 属性
+	#
+	# 続き
+	attr_reader :value
+	# 定数
+	#
+	# 続き
+	FOO = 1
+end
+
+=begin
+説明
+frozen_string_literal: true
+=end
+def f(x)
+  x
+end
+
+x = 1
+=begin
+Note. Warn_indent: true
+=end
+def f2(a)
+  a
+end
+
+=begin
+Toggle. Warn_indent: true
+=end
+x = 1
+=begin
+甲。乙。丙。
+=end
+y = 2
+
+# === rule_docgen_generate ===
+def add(a, b)
+	return a + b
+end
+
+def log_message(message)
+	puts message
+end
+
+# === rule_docgen_reconcile ===
+# 合計を求める
+# @param a 第一項
+# @param obsolete 余分な引数
+# @return 合計
+def total(a, b, c)
+	return a + b + c
+end
+
+class C
+	# 説明
+	#
+	# 続き
+	puts 1
+end
+
+if a
+  x
+  # c
+end
+
+def g(p)
+end
+
+def header_line_end( # rubocop:disable Metrics/ParameterLists
+ a, b
+)
+ a
+end
+
+describe "x" do # note
+ def inner
+ 1
+ end
+end

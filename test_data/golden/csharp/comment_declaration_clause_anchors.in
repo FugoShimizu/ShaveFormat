@@ -1,0 +1,98 @@
+f(
+	[
+		// 成員の深さ
+		FirstCollectionMemberWithANameLongEnoughForWrapping,
+		SecondCollectionMemberWithANameLongEnoughForWrapping,
+		ThirdCollectionMemberWithANameLongEnoughForWrapping
+	]
+);
+
+class C {
+	void F() {
+		List</* c */int> a = null;
+		List</* d */int> b = null;
+		System.Console.WriteLine(a == b);
+	}
+}
+
+int A = 1, B = 2 /* top */;
+class K {
+	int S = 1, T = 2 /* c1 */;
+	void M() {
+		int P = 1 /* c2 */;
+		int R = 2;
+		int Q = 3 // c3
+		;
+		int U = 4;
+	}
+}
+
+int C, D = 2; /* note3 */
+int E = 1, G = 2; // note4
+
+class C {
+	void F(int a) {
+		if(a > 0) { G(); G(); } else if(
+			// 別の枝の説明
+			a < -1) { K(); K(); }
+	}
+}
+
+class A {
+	void F() {
+		G((x) => { // 本体
+			H();
+			I();
+		});
+	}
+}
+
+class A {
+	// 独立
+	void F(int a /* 文中 */, int b) { // 行末
+		var x = new[] { 1, /* 文中 */ 2 };
+		F(a, /* c */ b);
+		// 塊の末尾
+	}
+}
+
+class A {
+	void F(int a) {
+		try { // t
+			G();
+		} finally { // f
+			H();
+		}
+		if (a > 0) { // 真
+			G();
+		} else { // 偽
+			H();
+		}
+	}
+}
+
+class BoundaryProbe {
+	/** <summary>Keep boundaries</summary> */
+	void EmptyBoundary() { /* Read. Return. */ }
+	
+	/** <summary>Keep boundaries</summary> */
+	void EmptyBoundaryPair() { /* Read */ /* Return */ }
+}
+// "Read here." 日本語ABC "Return now."
+// 'Read here.' 甲, B '?Return now.' 日本語ABC '!Finish here.'
+// {@code A.  B.}
+// {@literal A.  B.}
+// (@code A.  B. @endcode)
+// (@dot A.  B. @enddot)
+// (@msc A.  B. @endmsc)
+// (@verbatim A.  B. @endverbatim)
+// (\code A.  B. \endcode)
+// (\dot A.  B. \enddot)
+// (\msc A.  B. \endmsc)
+// (\verbatim A.  B. \endverbatim)
+// (@f$ A.  B. @f$)
+// (@f[ A.  B. @f])
+// (@f{ A.  B. @f})
+// (\f$ A.  B. \f$)
+// (\f[ A.  B. \f])
+// (\f{ A.  B. \f})

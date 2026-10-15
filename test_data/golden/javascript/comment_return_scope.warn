@@ -1,1 +1,12 @@
 16:2: Violation: Add the required comment before this `return`
+24:8: Review: Inline immediately returned variable a
+51:8: Review: Inline immediately returned variable \u0061
+60:8: Review: Inline immediately returned variable K
+69:8: Review: Inline immediately returned variable a
+78:8: Review: Inline immediately returned variable a
+87:8: Review: Inline immediately returned variable a
+96:8: Review: Inline immediately returned variable a
+105:8: Review: Inline immediately returned variable a
+114:8: Review: Inline immediately returned variable a
+128:8: Review: Inline immediately returned variable a
+142:8: Review: Inline immediately returned variable a

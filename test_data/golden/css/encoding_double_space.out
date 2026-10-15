@@ -1,0 +1,5 @@
+@charset  "Shift_JIS";
+
+a {
+	color: red;
+}

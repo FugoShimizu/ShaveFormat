@@ -1,75 +1,31 @@
 #include "SyntaxNormalizer.hpp"
-#include "../Util/FormatLimitExceeded.hpp"
-#include <algorithm>
+#include "SyntaxGeneration.hpp"
 #include <cstddef>
 #include <span>
 #include <string>
-#include <string_view>
+#include <unordered_map>
 #include <unordered_set>
 #include <utility>
 #include <vector>
 
 namespace Core {
 	/**
-	 * 本体を波括弧で包む生成形式の書換関数
-	 * 正規化と出力検証が同じ文法定義から，選択した本体の構造を作る
-	 * @param Syntax 書換前の構文モデル
-	 * @param Body 包む本体
-	 * @param Form 所属する制御構文の生成形式
-	 * @return 波括弧を付ける書換操作
-	 * @throws FormatLimitExceeded 生成形式の部品が足りない場合
-	 */
-	RewriteStep SyntaxNormalizer::BraceBodyStep(const SyntaxModel &Syntax, const NodeId Body, const CanonicalForm &Form) {
-		// 包装の可否と必要な生成部品の確認
-		if(!Form.CanWrapBody(Syntax.IsBracedBody(Body))) {
-			throw FormatLimitExceeded("the brace form cannot wrap this body", FailureReason::FormatterDefect);
-		}
-		const bool IsContainer = Syntax.Is(Body, Role::BodyWrapper);
-		if(!Form.PartOf(FormPartRole::Body)) {
-			throw FormatLimitExceeded("the brace form lacks its body role", FailureReason::FormatterDefect);
-		}
-		const auto Part = [&Form](const FormPartRole Role, std::vector<GeneratedNode> &&Children) -> GeneratedNode {
-			const FormPart *const Found = Form.PartOf(Role);
-			if(!Found || !Found->Definition) {
-				throw FormatLimitExceeded("the brace form lacks a required part", FailureReason::FormatterDefect);
-			}
-			// 部品の種別の生成節点の返戻
-			return { {}, Found->Definition->IsNamed, std::move(Children), 0, NoNode, std::string(Found->FixedLexeme), Found->Definition };
-		};
-		// 本体の包みの再構成と単一の文の包装
-		if(IsContainer) {
-			std::vector<GeneratedNode> Statements;
-			for(const NodeId Child : Syntax.ChildrenOf(Body)) Statements.push_back({ {}, false, {}, Syntax.GetNode(Child).Fields, Child });
-			RewriteStep Step { RewriteKind::Reshape, Body };
-			Step.Inserted = Part(
-				FormPartRole::Block,
-				{ Part(FormPartRole::Open, {}), Part(FormPartRole::Statements, std::move(Statements)), Part(FormPartRole::Close, {}) }
-			);
-			// 本体の包みを組み直す操作の返戻
-			return Step;
-		}
-		RewriteStep Step { RewriteKind::Wrap, Body };
-		Step.Inserted =
-		Part(FormPartRole::Block, { Part(FormPartRole::Open, {}), { {}, false, {}, {}, Body }, Part(FormPartRole::Close, {}) });
-		Step.Boundary = BoundaryKind::Spaced;
-		// 本体の文を新しい塊で包む操作の返戻
-		return Step;
-	}
-
-	/**
-	 * else の枝を持つ分岐かの判定関数
+	 * `else` の枝を持つ分岐かの判定関数
+	 * 計算量：参照する子又は兄弟の数 C に対し O(C)
 	 * @param Syntax 構文モデル
-	 * @param Node 節点
-	 * @return 後続の枝の場か else の字句を持つ if なら true
+	 * @param Node ノード
+	 * @return 後続の枝のフィールド又は `else` のトークンを持つ `if` なら `true`
+	 * @throws FormatLimitExceeded 構文の探索・事実の収集又は書換が作業予算を超える場合
+	 * @throws std::out_of_range 照会するノード・テキストの位置又は事実のキーが範囲外の場合
 	 */
-	bool SyntaxNormalizer::IfWithElse(const SyntaxModel &Syntax, const NodeId Node) {
+	bool SyntaxNormalizer::HasElseBranch(const SyntaxModel &Syntax, const NodeId Node) {
 		// 後続の枝の有無の返戻
 		return Syntax.Is(Node, Role::If) && (
-			Syntax.FieldChild(Node, ChildRole::Alternative) != NoNode || AnyChildOf(
+			Syntax.GetFieldChild(Node, ChildRole::Alternative) != NoNode || Core::SyntaxModel::HasChildMatching(
 				Syntax,
 				Node,
 				[&Syntax](const NodeId Child) -> bool {
-					// else の字句かの返戻
+					// `else` のトークンかの返戻
 					return Syntax.Is(Child, Role::ElseKeyword);
 				}
 			)
@@ -77,281 +33,325 @@ namespace Core {
 	}
 
 	/**
-	 * 後続の枝を受け得る開いた if で終わるかの判定関数
+	 * 後続の枝又は終端の前で改行を要する制御文かの判定関数
+	 * 空の波括弧の閉じには後続の語を同行に置けるが，波括弧を省く単一文の後には置けない
+	 * 計算量：後続枝の連鎖で読む直接子の総数 C に対し O(C + 1)
 	 * @param Syntax 構文モデル
-	 * @param Node 判定する文
-	 * @param IsThroughBraces 単一の文の塊の中へも辿るか
-	 * @return 末尾の子を辿って else を持たない if に達すれば true
+	 * @param Node 制御文
+	 * @return 枝又は終端の前に必須の改行が在れば `true`
+	 * @throws FormatLimitExceeded 枝の探索が作業予算を超える場合
+	 * @throws std::out_of_range 照会する本体又は子がノード表に無い場合
 	 */
-	bool SyntaxNormalizer::EndsWithOpenIf(const SyntaxModel &Syntax, NodeId Node, const bool IsThroughBraces) {
-		while(true) {
-			// 開いた if で終わる事の返戻
-			if(Syntax.Is(Node, Role::If) && !IfWithElse(Syntax, Node)) return true;
-			const NodeId Last = Syntax.LastNamedChild(Node);
-			const bool IsTail = Last != NoNode && Syntax.Child(Node, Syntax.ChildCount(Node) - 1) == Last;
-			// 単一の文の塊と其の中の文の並び
-			const bool IsSingleBlock =
-			IsThroughBraces && Syntax.NamedChildCount(Node) == 1 && (Syntax.IsBracedBody(Node) || Syntax.Is(Node, Role::StatementSequence));
-			// 末尾を辿れない事の返戻
-			if(!IsTail && !IsSingleBlock) return false;
-			Node = Last;
+	bool SyntaxNormalizer::HasClauseLineBreak(const SyntaxModel &Syntax, NodeId Node) {
+		// 本体の正規形が空の波括弧で終わるかの判定
+		const auto IsEmptyBlock = [&Syntax](NodeId Body) -> bool {
+			if(Syntax.Is(Body, Role::BodyWrapper) && !Syntax.IsBracedBody(Body)) Body = Syntax.GetContentChild(Body, 0);
+			// 波括弧を省く文の終了には改行を要する事の返戻
+			if(!Syntax.IsBracedBody(Body)) return false;
+			const size_t Count = Syntax.GetContentChildCount(Body);
+			const NodeId Inner = Count == 1 ? Syntax.GetContentChild(Body, 0) : NoNode;
+			// 空のブロック又は空の文の並びを包むブロックかの返戻
+			return !Count || Syntax.Is(Inner, Role::StmtSeq) && !Syntax.GetContentChildCount(Inner);
+		};
+		// `while` の前で改行を要する `do` の本体の判定
+		if(Syntax.Is(Node, Role::DoLoop)) {
+			const NodeId Body = Syntax.GetFieldChild(Node, ChildRole::Body);
+			// 本体のフィールドを持たない文法でも，登録済の本体ラッパーを判定する
+			return !IsEmptyBlock(Body == NoNode ? Syntax.GetFirstNamedChildWithRole(Node, Role::BodyWrapper) : Body);
 		}
+		// 最初の枝と，後続の `if` 又は独立した中間枝の終了の判定
+		while(HasElseBranch(Syntax, Node)) {
+			// 後続枝の前に必須の改行が在る事の返戻
+			if(!IsEmptyBlock(Syntax.GetIfConsequence(Node))) return true;
+			for(const NodeId Child : Syntax.GetChildrenOf(Node)) {
+				// 中間枝の後に必須の改行が在る事の返戻
+				if(Syntax.Is(Child, Role::ElseIfClause) && !IsEmptyBlock(Syntax.GetFieldChild(Child, ChildRole::Body))) return true;
+			}
+			Node = Syntax.GetFieldChild(Node, ChildRole::Alternative);
+			if(Syntax.Is(Node, Role::ElseClause) || Syntax.Is(Node, Role::BodyWrapper)) Node = Syntax.GetContentChild(Node, 0);
+		}
+		// 各枝の閉じに後続の語を続けられる事の返戻
+		return false;
 	}
 
 	/**
-	 * 後に else が続く本体かの判定関数
+	 * 後に `else` が続く本体かの判定関数
+	 * 計算量：O(1)
 	 * @param Syntax 構文モデル
 	 * @param Body 本体
-	 * @return 次の兄弟が else の字句か後続の枝の節なら true
+	 * @return 次の兄弟が `else` のトークン又は後続の枝の節なら `true`
 	 */
 	bool SyntaxNormalizer::IsFollowedByElse(const SyntaxModel &Syntax, const NodeId Body) {
-		const NodeId Next = Syntax.NextSibling(Body);
+		// 後に `else` が続く本体かの判定
+		const NodeId Next = Syntax.GetNextSibling(Body);
 		// 後続の枝かの返戻
 		return Syntax.Is(Next, Role::ElseKeyword) || Syntax.Is(Next, Role::ElseClause) || Syntax.Is(Next, Role::ElseIfClause);
 	}
 
 	/**
-	 * 値が使われる枝を持つ式と文の並びの文の収集関数
-	 * 文の並びの最後の文は，ラムダの本体と，値として使う if / when / try の枝では値が結果に為る
-	 * 役割索引の枝と文の並びから候補を集め，祖先を先に判定する
+	 * 後続の枝を受け得る開いた `if` で終わるかの判定関数
+	 * 計算量：末尾の連鎖で参照するノードと子の総数 N に対し期待値 O(N + 1)
 	 * @param Syntax 構文モデル
-	 * @return 値が使われ得る節点
+	 * @param Node 判定する文
+	 * @param IsThroughBraces 単一の文のブロックの中へも辿るか
+	 * @param BraceForms 判定済の本体毎の正規形で波括弧を持つか
+	 * @return 正規形の波括弧で遮られず，末尾から `else` を持たない `if` に達すれば `true`
+	 * @throws FormatLimitExceeded 構文の探索・事実の収集又は書換が作業予算を超える場合
+	 * @throws std::out_of_range 照会するフィールドの子がノード表に無い場合
 	 */
-	std::unordered_set<NodeId> SyntaxNormalizer::UsedBranchValues(const SyntaxModel &Syntax) const {
-		std::unordered_set<NodeId> Used;
-		// 値が使われるか（祖先は先行順で先に判定済）
-		const auto IsUsed = [&](const NodeId Node) -> bool {
-			NodeId Holder = Syntax.ParentOf(Node);
-			if(Syntax.Is(Holder, Role::StatementSequence)) {
-				const NodeId Parent = Syntax.LastNamedChild(Holder) == Node ? Syntax.ParentOf(Holder) : NoNode;
-				// 最後の文でない文と，最上位の文の並びの文の値は使われない事の返戻
-				if(Parent == NoNode) return false;
-				Holder = Parent;
-			// 代入の右辺・実引数等の値の位置に在る事の返戻
-			} else if(!Syntax.Is(Holder, Role::BodyWrapper)) return true;
-			// ラムダの本体は最後の文の値を結果にする事の返戻
-			if(Syntax.Is(Holder, Role::LastValueLambda)) return true;
-			NodeId Branch = Holder;
-			if(Syntax.Is(Holder, Role::BranchBody)) {
-				Branch = Syntax.ParentOf(Holder);
-				// 根の直下の本体は値を持たない事の返戻
-				if(Branch == NoNode) return false;
-				if(Syntax.Is(Branch, Role::CaseArm)) Branch = Syntax.ParentOf(Branch);
-				// 繰返の本体等は値を持たない事の返戻
-				if(Syntax.Is(Holder, Role::BodyWrapper) && !Syntax.Is(Branch, Role::ValueBranching)) return false;
-			// 関数の本体・finally 等は値を持たない事の返戻
-			} else if(!Syntax.Is(Holder, Role::ValueTry)) return false;
-			// 枝を持つ式の値が使われるかの返戻
-			return Used.contains(Branch);
-		};
-		std::vector<NodeId> Targets = Candidates(Syntax, { Role::ValueBranching, Role::ValueTry }, {});
-		// 文の並びから値の候補を加えて構文順へ整列
-		for(const NodeId Sequence : Candidates(Syntax, { Role::StatementSequence }, {})) {
-			for(const NodeId Child : Syntax.ChildrenOf(Sequence)) Targets.push_back(Child);
+	bool SyntaxNormalizer::HasOpenIfSuffix(
+		const SyntaxModel &Syntax,
+		NodeId Node,
+		const bool IsThroughBraces,
+		const std::unordered_map<NodeId, bool> &BraceForms
+	) {
+		// 後続の枝を受け得る開いた `if` で終わるかの判定
+		while(true) {
+			const std::unordered_map<NodeId, bool>::const_iterator Form = BraceForms.find(Node);
+			// 正規形の波括弧で閉じる末尾の返戻
+			if(Form != BraceForms.end() && Form->second) return false;
+			// 開いた `if` で終わる事の返戻
+			if(Syntax.Is(Node, Role::If) && !HasElseBranch(Syntax, Node)) return true;
+			const NodeId Last = Syntax.GetLastContentChild(Node);
+			const bool IsTail = Last != NoNode && Syntax.GetChild(Node, Syntax.GetChildCount(Node) - 1) == Last;
+			// 単一の文のブロックと其の中の文の並び
+			// 末尾を辿れない事の返戻
+			if(
+				const bool IsSingleBlock = IsThroughBraces && Syntax.GetContentChildCount(Node) == 1 &&
+				(Syntax.Is(Node, Role::StmtSeq) || Syntax.IsBracedBody(Node) && Form != BraceForms.end() && !Form->second);
+				!IsTail && !IsSingleBlock
+			) return false;
+			Node = Last;
 		}
-		Targets = InDocumentOrder(Syntax, Targets, {});
-		for(const NodeId Node : Targets) if(Node != Syntax.GetRoot() && Syntax.IsNamed(Node) && IsUsed(Node)) Used.insert(Node);
-		// 値が使われる節点の返戻
-		return Used;
-	}
-
-	/**
-	 * 値が使われるかの判定関数
-	 * @param Node 枝を持つ式又は文の並びの文
-	 * @return 値が結果に為る位置に在れば true
-	 */
-	bool SyntaxNormalizer::ValueUse::Contains(const NodeId Node) {
-		if(!Used) Used = Normalizer.UsedBranchValues(Syntax);
-		// 集めた節点に在るかの返戻
-		return Used->contains(Node);
 	}
 
 	/**
 	 * 制御本体の波括弧の付与・除去の候補の収集関数（整形仕様 5.5）
-	 * 宣言・do-while・else を持つ if 等の結付や範囲に波括弧が要る本体へ付け，其れ以外の単一の文の塊の波括弧を除く
+	 * 宣言の有効範囲・`do-while` の終端・`else` の結付を保つ必要が在る本体へ波括弧を付ける
+	 * 省略可能な単一文のブロックでは，値の利用位置等の条件を満たす場合だけ波括弧を除く
+	 * 計算量：本体・末尾・値位置の総探索量 Q と候補の生成量 G に対し期待値 O(Q + G + 1)
 	 * @param Scan 走査の状態
 	 * @param Body 本体
-	 * @param IsElseBody else の枝の本体か
-	 * @param ValueHost 本体の値を結果にし得る枝を持つ式（無ければ無し）
+	 * @param ValHost 本体の値を結果にし得る枝を持つ式（無ければ `NoNode`）
 	 * @param Owner 本体を持つ制御構文
+	 * @param IsElseBody 後続の枝又は値を持つ枝の本体か
+	 * @throws FormatLimitExceeded 構文の探索・事実の収集又は書換が作業予算を超える場合
+	 * @throws std::bad_alloc 照会・生成又は書換で用いるメモリを確保出来ない場合
+	 * @throws std::length_error テキスト又はメモリの要素数上限を超える場合
+	 * @throws std::out_of_range 照会するノード・テキストの位置又は事実のキーが範囲外の場合
 	 */
 	void SyntaxNormalizer::CollectBodyBraces(
 		BraceScan &Scan,
 		const NodeId Body,
-		const bool IsElseBody,
-		const NodeId ValueHost,
-		const NodeId Owner
+		const NodeId ValHost,
+		const NodeId Owner,
+		const bool IsElseBody
 	) const {
+		// 制御本体の波括弧の付与・除去の候補の収集
 		const SyntaxModel &Syntax = Scan.Syntax;
-		const CanonicalForm *const Form = Syntax.FormOf(Owner, FormOperation::BraceBody);
-		// 本体の無い構文と，本体の波括弧を省略出来ない構文と，波括弧の増減で解析器が繋げなかった else の結付が変わる構文の終了
+		const CanonicalForm *const Form = Syntax.GetFormOf(Owner, FormOperation::BraceBody);
+		// 本体又は生成形式が無い構文と，波括弧の変更が許されない本体の終了
 		if(
 			Body == NoNode || !Form || Syntax.GetNode(Owner).Facts.Has(ConstraintKind::DetachedElse) ||
 			Syntax.Is(Body, Role::DelimitedBody) || Syntax.Is(Body, Role::ElseIfClause) || Syntax.Is(Body, Role::ElseClause)
 		) return;
 		const bool IsBraced = Syntax.IsBracedBody(Body), IsFollowedByBranch = IsFollowedByElse(Syntax, Body);
-		// ラベルを除いた本体の文（波括弧の無い本体の包みは其の中の文）
-		NodeId Inner = !IsBraced && Syntax.Is(Body, Role::BodyWrapper) ? Syntax.NamedChild(Body, 0) : Body;
-		while(Syntax.Is(Inner, Role::Labeled) && Syntax.NamedChildCount(Inner) > 1) Inner = Syntax.LastNamedChild(Inner);
+		// ラベルを除いた本体の文（波括弧の無い本体ラッパーでは其の中の文）
+		NodeId Inner = !IsBraced && Syntax.Is(Body, Role::BodyWrapper) ? Syntax.GetContentChild(Body, 0) : Body;
+		while(Syntax.Is(Inner, Role::Labeled) && Syntax.GetContentChildCount(Inner) > 1) Inner = Syntax.GetLastContentChild(Inner);
 		if(
 			!IsBraced && (
-				Syntax.Is(Body, Role::Declaration) || Syntax.Is(Inner, Role::DoLoop) ||
-				Syntax.GetNode(Inner).Facts.Has(ConstraintKind::StatementMacro) ||
-				!IsElseBody && (IfWithElse(Syntax, Inner) || IsFollowedByBranch && EndsWithOpenIf(Syntax, Inner, true))
+				Syntax.Is(Body, Role::Decl) || Syntax.GetNode(Inner).Facts.Has(ConstraintKind::StmtMacro) ||
+				(!IsElseBody || Syntax.Is(Inner, Role::DoLoop)) && HasClauseLineBreak(Syntax, Inner) ||
+				IsFollowedByBranch && HasOpenIfSuffix(Syntax, Inner, true, Scan.Forms)
 			)
 		) {
-			// 宣言の範囲・do-while の終わり・else の結付に波括弧の要る本体の付与の候補の追加
+			// 宣言の範囲・マクロの文境界・`else` の結付に波括弧を要する本体の付与候補の追加
 			Scan.Candidates.push_back({ Body, true, {}, Form });
-			// 終了
+			// 波括弧の付与候補を追加した為の終了
 			return;
 		}
 		// 波括弧の無い本体と単一の文でない本体の場合の終了
-		if(!IsBraced || Syntax.NamedChildCount(Body) != 1) return;
-		// 単一の文を包む入れ子の塊と其の文（塊の中の文の並びは其の唯一の文）
+		if(!IsBraced || Syntax.GetContentChildCount(Body) != 1) return;
+		// 単一の文を包むネストのブロックと其の文（ブロックの中の文の並びは其の唯一の文）
 		std::vector<NodeId> Layers { Body };
-		NodeId Statement = Syntax.NamedChild(Body, 0);
-		if(Syntax.Is(Statement, Role::StatementSequence)) {
+		NodeId Stmt = Syntax.GetContentChild(Body, 0);
+		if(Syntax.Is(Stmt, Role::StmtSeq)) {
 			// 文の並びが単一の文でない場合の終了
-			if(Syntax.NamedChildCount(Statement) != 1) return;
-			Statement = Syntax.NamedChild(Statement, 0);
+			if(Syntax.GetContentChildCount(Stmt) != 1) return;
+			Stmt = Syntax.GetContentChild(Stmt, 0);
 		}
-		while(Syntax.IsBracedBody(Statement) && Syntax.NamedChildCount(Statement) == 1) {
-			Layers.push_back(Statement);
-			Statement = Syntax.NamedChild(Statement, 0);
+		while(Syntax.IsBracedBody(Stmt) && Syntax.GetContentChildCount(Stmt) == 1) {
+			Layers.push_back(Stmt);
+			Stmt = Syntax.GetContentChild(Stmt, 0);
 		}
-		// ラベル・注釈の後の文で判定する（付与と揃えないと付与と除去が交互に起きる）
-		NodeId Head = Statement;
+		// ラベル・アノテーションの後の文で判定する（付与と揃えないと付与と除去が交互に起きる）
+		NodeId Head = Stmt;
 		while(
-			Syntax.NamedChildCount(Head) > 1 &&
-			(Syntax.Is(Head, Role::Labeled) || Syntax.Is(Head, Role::PrefixOperation) && Syntax.Is(Syntax.NamedChild(Head, 0), Role::Label))
-		) Head = Syntax.LastNamedChild(Head);
-		// using の宣言の文か
-		NodeId Using = Syntax.NamedChild(Statement, 0);
-		if(Syntax.Is(Using, Role::Await)) Using = Syntax.NamedChild(Using, 0);
-		const bool IsUsing = Syntax.Is(Statement, Role::ExpressionStatement) && Syntax.Is(Using, Role::Assignment) &&
-		Syntax.Is(Syntax.Child(Using, 0), Role::UsingKeyword);
+			(
+				Syntax.Is(Head, Role::Labeled) ||
+				Syntax.Is(Head, Role::PrefixOperation) && Syntax.Is(Syntax.GetContentChild(Head, 0), Role::Label)
+			) && Syntax.GetContentChildCount(Head) > 1
+		) Head = Syntax.GetLastContentChild(Head);
+		// `using` の宣言の文か
+		NodeId Using = Syntax.GetContentChild(Stmt, 0);
+		if(Syntax.Is(Using, Role::Await)) Using = Syntax.GetContentChild(Using, 0);
 		// 宣言・値の位置の文と，枝の結付や文の終端が変わる本体の波括弧を保つ事の終了
 		if(
-			Syntax.Is(Head, Role::Preprocessor) || Syntax.Is(Head, Role::Declaration) || Syntax.Is(Head, Role::InlineText) || IsUsing ||
-			// 塊でない波括弧で始まる文（ラベル・注釈付のラムダ）と，改行が文を終える Kotlin の do の本体の唯一の繰返（外すと後の while が別の文の頭に読める）
-			Syntax.GetNode(Head).Facts.Has(ConstraintKind::StatementMacro) || Syntax.Is(Head, Role::DoLoop) ||
-			!Syntax.IsBracedBody(Head) && Syntax.IsTokenRole(FirstLeaf(Syntax, Head), Role::OpeningBraceToken) ||
-			Syntax.Is(Owner, Role::NestedLoopBodyBraces) && Syntax.Is(Head, Role::Loop) || !IsElseBody && IfWithElse(Syntax, Head) ||
-			IsFollowedByBranch && EndsWithOpenIf(Syntax, Head, true) ||
-			ValueHost != NoNode && Syntax.Is(Head, Role::StatementOnly) && Scan.Values.Contains(ValueHost) ||
-			Syntax.IsTokenRole(FirstLeaf(Syntax, Statement), Role::OpeningParenToken)
+			const bool IsUsing = Syntax.Is(Stmt, Role::ExprStmt) && Syntax.Is(Using, Role::Assignment) &&
+			Syntax.Is(Syntax.GetChild(Using, 0), Role::UsingKeyword);
+			Syntax.Is(Head, Role::Preproc) || Syntax.Is(Head, Role::Decl) || Syntax.Is(Head, Role::InlineText) || IsUsing ||
+			// ブロックでない波括弧で始まる文は，波括弧の省略で読みが変わる為に保持
+			// Kotlin の `do` の本体の唯一の繰返は，後の `while` が別の文の頭に読まれない様に保持
+			Syntax.GetNode(Head).Facts.Has(ConstraintKind::StmtMacro) ||
+			(!IsElseBody || Syntax.Is(Head, Role::DoLoop)) && HasClauseLineBreak(Syntax, Head) ||
+			!Syntax.IsBracedBody(Head) && Syntax.IsTokenRole(Syntax.GetFirstEdge(Head).Leaf, Role::OpeningBraceToken) ||
+			Syntax.Is(Owner, Role::NestedLoopBodyBraces) && Syntax.Is(Head, Role::Loop) ||
+			IsFollowedByBranch && HasOpenIfSuffix(Syntax, Head, true, Scan.Forms) ||
+			ValHost != NoNode && Syntax.Is(Head, Role::StmtOnly) && Syntax.IsBranchValUsed(ValHost)
 		) return;
-		// 単一の文の塊の除去の候補の追加
-		Scan.Candidates.push_back({ Body, false, std::move(Layers), Form, IsFollowedByBranch });
+		// 単一の文のブロックの除去の候補の追加
+		Scan.Candidates.push_back({ Body, false, std::move(Layers), Form });
 		// 終了
 		return;
 	}
 
 	/**
 	 * 枝の値を結果にする式の本体の波括弧の候補の収集関数（整形仕様 5.5）
-	 * when の各枝の本体と if 式の本体を扱い，最後の枝の後へ演算が続く if 式は其の枝の波括弧を保つ
+	 * `when` の各枝の本体と `if` 式の本体を扱う
+	 * 後続の演算が最後の枝の値に結び付かない様に，演算が続く `if` 式では其の枝の波括弧を保つ
+	 * 計算量：枝と其の本体・末尾・値位置の総探索量 Q と候補の生成量 G に対し期待値 O(Q + G + 1)
 	 * @param Scan 走査の状態
-	 * @param Node if 式又は when 式
+	 * @param Node `if` 式又は `when` 式
 	 * @param Parent 式の親
-	 * @param Next 式の次の兄弟（無ければ無し）
+	 * @param Next 式の次の兄弟（無ければ `NoNode`）
+	 * @throws FormatLimitExceeded 構文の探索・事実の収集又は書換が作業予算を超える場合
+	 * @throws std::bad_alloc 照会・生成又は書換で用いるメモリを確保出来ない場合
+	 * @throws std::length_error テキスト又はメモリの要素数上限を超える場合
+	 * @throws std::out_of_range 照会するノード・テキストの位置又は事実のキーが範囲外の場合
 	 */
 	void SyntaxNormalizer::CollectBranchBraces(BraceScan &Scan, const NodeId Node, const NodeId Parent, const NodeId Next) const {
+		// 枝の値を結果にする式の本体の波括弧の候補の収集
 		const SyntaxModel &Syntax = Scan.Syntax;
-		// 最初の本体と其の直前の字句，後続の枝の本体，when の各枝の本体
-		NodeId First = NoNode, Previous = NoNode, Following = NoNode;
-		for(const NodeId Child : Syntax.ChildrenOf(Node)) {
+		// `if` の最初の本体・其の直前のトークン・後続の枝の本体と，`when` の各枝の本体
+		NodeId First = NoNode, Prev = NoNode, Following = NoNode;
+		for(const NodeId Child : Syntax.GetChildrenOf(Node)) {
 			if(Syntax.Is(Child, Role::CaseArm)) {
-				for(const NodeId Part : Syntax.ChildrenOf(Child)) {
-					if(Syntax.Is(Part, Role::BodyWrapper)) CollectBodyBraces(Scan, Part, true, Node, Node);
+				for(const NodeId Part : Syntax.GetChildrenOf(Child)) if(Syntax.Is(Part, Role::BodyWrapper)) {
+					CollectBodyBraces(Scan, Part, Node, Node, true);
 				}
 			} else if(First == NoNode) {
 				if(Syntax.Is(Child, Role::BodyWrapper)) First = Child;
-				else Previous = Child;
+				else Prev = Child;
 			} else if(Following == NoNode && Syntax.IsNamed(Child)) Following = Child;
 		}
-		// if 式でない when 式の終了
+		// `if` 式でない `when` 式の終了
 		if(First == NoNode) return;
 		// 真の枝の本体を持たない `if(a) else b` か
-		const bool IsEmptyThen = Syntax.Is(Previous, Role::ElseKeyword);
+		const bool IsEmptyThen = Syntax.Is(Prev, Role::ElseKeyword);
 		// 式の後へ演算が続くか
-		const bool IsContinued =
-		Next != NoNode && !Syntax.Is(Parent, Role::StatementHost) && !Syntax.Is(Next, Role::ExpressionTerminator);
-		if(!IsContinued || IfWithElse(Syntax, Node)) CollectBodyBraces(Scan, IsEmptyThen ? NoNode : First, false, Node, Node);
+		const bool IsContinued = Next != NoNode && !Syntax.Is(Parent, Role::StmtHost) && !Syntax.Is(Next, Role::ExprTerminator);
+		if(!IsContinued || HasElseBranch(Syntax, Node)) CollectBodyBraces(Scan, IsEmptyThen ? NoNode : First, Node, Node, false);
 		// 最後の枝の波括弧が後続の演算を式全体へ結び付ける時は保つ
-		if(!IsContinued) CollectBodyBraces(Scan, IsEmptyThen ? First : Following, true, Node, Node);
+		if(!IsContinued) CollectBodyBraces(Scan, IsEmptyThen ? First : Following, Node, Node, true);
 		// 終了
 		return;
 	}
 
 	/**
-	 * 制御本体の波括弧の正規化の収集関数（整形仕様 5.5）
-	 * 内側の波括弧の増減で判断が変わり得る候補（後続の枝の結付を保つ除去と付与）は，他の候補を内に持てば内側を確定した次の巡で判断する
-	 * 役割索引から候補の所有者を集め，入れ子の候補だけ祖先を調べる
-	 * @param Syntax 構文モデル
-	 * @param Plan 書換の計画の格納先
+	 * １所有者の波括弧の意味候補の収集関数
+	 * 計算量：対象の子・本体・末尾の連鎖と，値位置の祖先の総探索量 Q に対し期待値 O(Q + 1)
+	 * @param Scan 現在の構文と値位置の判定
+	 * @param Node 本体又は枝を所有するノード
+	 * @throws FormatLimitExceeded 作業予算を超えた場合
+	 * @throws std::bad_alloc 照会・生成又は書換で用いるメモリを確保出来ない場合
+	 * @throws std::length_error テキスト又はメモリの要素数上限を超える場合
+	 * @throws std::out_of_range 照会するノード・テキストの位置又は事実のキーが範囲外の場合
 	 */
-	void SyntaxNormalizer::CollectBraceSteps(const SyntaxModel &Syntax, RewritePlan &Plan) const {
-		// 本体の所有者と枝の親の候補の整列
-		BraceScan Scan { Syntax, { *this, Syntax } };
-		std::vector<NodeId> Targets = Candidates(Syntax, { Role::BodyOwner, Role::ElseClause, Role::If }, { Role::Error });
-		std::vector<NodeId> Parents = ParentsOfRole(Syntax, Role::ValueBranching, { Role::Error });
-		Targets.insert(Targets.end(), Parents.begin(), Parents.end());
-		Targets = InDocumentOrder(Syntax, Targets, {});
-		// 誤りを含む構文の本体は既知の正常な構文へ組み直さない（整形仕様 4.6）
+	void SyntaxNormalizer::CollectBraceCandidates(BraceScan &Scan, const NodeId Node) const {
+		// １所有者の波括弧の意味候補の収集
+		const SyntaxModel &Syntax = Scan.Syntax;
+		// エラーを含む構文の本体は既知の正常な構文へ組み直さない（整形仕様 4.6）
 		const auto IsSound = [&Syntax](const NodeId Control) -> bool {
-			// 誤りを含まない構文かの返戻
+			// エラーを含まない構文かの返戻
 			return !Syntax.GetNode(Control).Facts.Has(ConstraintKind::ContainsError);
 		};
-		for(const NodeId Node : Targets) {
-			// 子の枝の値を結果にする式へ親と次の兄弟を渡す
-			const std::span<const NodeId> Children = Syntax.ChildrenOf(Node);
-			for(size_t Index = 0; Index < Children.size(); ++Index) {
-				if(!Syntax.Is(Children[Index], Role::ValueBranching) || !IsSound(Children[Index])) continue;
-				CollectBranchBraces(Scan, Children[Index], Node, Index + 1 < Children.size() ? Children[Index + 1] : NoNode);
-			}
-			// 親の側で扱った枝の値を結果にする式と誤りを含む構文の読飛
-			if(Syntax.Is(Node, Role::ValueBranching) || !IsSound(Node)) continue;
-			if(Syntax.Is(Node, Role::ElseClause)) CollectBodyBraces(Scan, Syntax.NamedChild(Node, 0), true, NoNode, Node);
-			else if(Syntax.Is(Node, Role::If)) {
-				CollectBodyBraces(Scan, Syntax.IfConsequence(Node), false, NoNode, Node);
-				CollectBodyBraces(Scan, Syntax.FieldChild(Node, ChildRole::Alternative), true, NoNode, Node);
-			} else if(Syntax.Is(Node, Role::BodyOwner)) {
-				// 繰返の本体（場か本体の包み）
-				NodeId Body = Syntax.FieldChild(Node, ChildRole::Body);
-				for(const NodeId Child : Children) if(Body == NoNode && Syntax.Is(Child, Role::BodyWrapper)) Body = Child;
-				// 宣言の有効範囲と巻上げを保つラベル付の宣言の包装の除外
-				if(!Syntax.Is(Node, Role::Labeled) || !Syntax.Is(Body, Role::Declaration)) CollectBodyBraces(Scan, Body, false, NoNode, Node);
+		// 子の枝の値を結果にする式への親と次の兄弟の受渡
+		const std::span<const NodeId> Children = Syntax.GetChildrenOf(Node);
+		for(size_t Idx = 0; Idx < Children.size(); ++Idx) {
+			if(!Syntax.Is(Children[Idx], Role::ValBranching) || !IsSound(Children[Idx])) continue;
+			CollectBranchBraces(Scan, Children[Idx], Node, Idx + 1 < Children.size() ? Children[Idx + 1] : NoNode);
+		}
+		// 親の側で扱った枝の値を結果にする式とエラーを含む構文の読飛
+		// 親が扱う枝又はエラーを含む構文の場合の終了
+		if(Syntax.Is(Node, Role::ValBranching) || !IsSound(Node)) return;
+		if(Syntax.Is(Node, Role::ElseClause)) CollectBodyBraces(Scan, Syntax.GetContentChild(Node, 0), NoNode, Node, true);
+		else if(Syntax.Is(Node, Role::If)) {
+			CollectBodyBraces(Scan, Syntax.GetIfConsequence(Node), NoNode, Node, false);
+			CollectBodyBraces(Scan, Syntax.GetFieldChild(Node, ChildRole::Alternative), NoNode, Node, true);
+		} else if(Syntax.Is(Node, Role::BodyOwner)) {
+			// 本体のフィールド又は本体ラッパーの選択
+			NodeId Body = Syntax.GetFieldChild(Node, ChildRole::Body);
+			for(const NodeId Child : Children) if(Body == NoNode && Syntax.Is(Child, Role::BodyWrapper)) Body = Child;
+			// 宣言の有効範囲と巻上げを保つラベル付の宣言のラッパーの除外
+			if(!Syntax.Is(Node, Role::Labeled) || !Syntax.Is(Body, Role::Decl)) CollectBodyBraces(Scan, Body, NoNode, Node, false);
+		}
+		// 終了
+		return;
+	}
+
+	/**
+	 * 全所有者の波括弧の正規化の一括収集関数（整形仕様 5.5）
+	 * 計算量：候補整列の費用 S，判定の総探索量 Q，生成・移譲の総処理量 G に対し期待値 O(S + Q + G)
+	 * @param Syntax 現在の構文
+	 * @param Plan 全所有者の書換計画の格納先
+	 * @throws FormatLimitExceeded 作業予算を超えた場合，又は必要な波括弧の生成形式・部品が不正な場合
+	 * @throws std::bad_alloc 照会・生成又は書換で用いるメモリを確保出来ない場合
+	 * @throws std::length_error テキスト又はメモリの要素数上限を超える場合
+	 * @throws std::out_of_range 照会するノード・テキストの位置又は事実のキーが範囲外の場合
+	 */
+	void SyntaxNormalizer::CollectBraceBatch(const SyntaxModel &Syntax, RewritePlan &Plan) const {
+		// 全所有者の波括弧の正規化の一括収集
+		std::vector<NodeId> Owners;
+		for(const Role Wanted : { Role::BodyOwner, Role::ElseClause, Role::If }) {
+			const std::span<const NodeId> Nodes = Syntax.GetNodesWith(Wanted);
+			Syntax.Charge(Nodes.size());
+			Owners.insert(Owners.end(), Nodes.begin(), Nodes.end());
+		}
+		for(const NodeId Branch : Syntax.GetNodesWith(Role::ValBranching)) {
+			Syntax.Charge(1);
+			Owners.push_back(Syntax.GetParentOf(Branch));
+		}
+		Owners = SortInDocOrder(Syntax, Owners);
+		BraceScan Scan { Syntax };
+		for(std::vector<NodeId>::const_reverse_iterator Owner = Owners.rbegin(); Owner != Owners.rend(); ++Owner) {
+			if(HasErrorNormalizationAncestor(Syntax, *Owner)) continue;
+			const size_t First = Scan.Candidates.size();
+			CollectBraceCandidates(Scan, *Owner);
+			for(size_t Idx = First; Idx < Scan.Candidates.size(); ++Idx) {
+				const BraceCandidate &Found = Scan.Candidates[Idx];
+				Scan.Forms.insert_or_assign(Found.Body, Found.IsAdd);
+				for(const NodeId Layer : Found.Layers) Scan.Forms.insert_or_assign(Layer, false);
 			}
 		}
-		// 他の候補を内に持つ候補（各候補から最も近い候補の祖先迄を辿り，辿った祖先の上は先の走査が決めて居る）
-		std::unordered_set<NodeId> Bodies, Outer, Visited;
-		for(const BraceCandidate &Found : Scan.Candidates) Bodies.insert(Found.Body);
+		std::unordered_set<NodeId> Removed;
 		for(const BraceCandidate &Found : Scan.Candidates) {
-			for(NodeId Up = Syntax.ParentOf(Found.Body); Up != NoNode && Visited.insert(Up).second; Up = Syntax.ParentOf(Up)) {
-				Syntax.Charge(1);
-				if(!Bodies.contains(Up)) continue;
-				Outer.insert(Up);
-				break;
-			}
-		}
-		for(const BraceCandidate &Found : Scan.Candidates) {
-			// 内側の確定を待つ候補の除外
-			if(Outer.contains(Found.Body) && Found.DependsOnInner) continue;
-			// 波括弧の有無に依らず残る本体の包みか
-			const bool IsContainer = Syntax.Is(Found.Body, Role::BodyWrapper);
-			if(Found.IsAdd) Plan.Steps.push_back(BraceBodyStep(Syntax, Found.Body, *Found.Form));
-			else if(IsContainer) {
-				// 本体の包みの波括弧の除去（錨は中の文の前後へ移し，文の並びの包みを外す）
-				const NodeId Statements = Syntax.NamedChild(Found.Body, 0);
-				const NodeId Statement = Syntax.Is(Statements, Role::StatementSequence) ? Syntax.NamedChild(Statements, 0) : Statements;
-				const AnchorTarget Before { Statement, false }, After { Statement, true };
-				for(const NodeId Token : Syntax.ChildrenOf(Found.Body)) {
-					if(Token == Statements) continue;
+			if(Found.IsAdd) Plan.Steps.push_back(Generation::BraceBodyStep(Syntax, Found.Body, *Found.Form));
+			else if(Syntax.Is(Found.Body, Role::BodyWrapper)) {
+				// 本体ラッパーを残す形式での波括弧の除去（アンカーは中の文の前後へ移す）
+				// 文の並びが別のラッパーに入る場合は，其のラッパーも除去
+				const NodeId Stmts = Syntax.GetContentChild(Found.Body, 0);
+				const NodeId Stmt = Syntax.Is(Stmts, Role::StmtSeq) ? Syntax.GetContentChild(Stmts, 0) : Stmts;
+				const AnchorTarget Before { Stmt, false }, After { Stmt, true };
+				for(const NodeId Token : Syntax.GetChildrenOf(Found.Body)) {
+					if(Token == Stmts) continue;
 					const AnchorTarget &Target = Syntax.Is(Token, Role::OpenBrace) ? Before : After;
 					Plan.Steps.push_back({ RewriteKind::Remove, Token, {}, { Token, Target, Target, Target } });
 				}
-				if(Statements != Statement) Plan.Steps.push_back({ RewriteKind::Unwrap, Statements });
-			} else for(const NodeId Layer : Found.Layers) Plan.Steps.push_back({ RewriteKind::Unwrap, Layer });
+				if(Stmts != Stmt) Plan.Steps.push_back({ RewriteKind::Unwrap, Stmts });
+			} else for(const NodeId Layer : Found.Layers) if(Removed.insert(Layer).second) {
+				Plan.Steps.push_back({ RewriteKind::Unwrap, Layer });
+			}
 		}
 		// 終了
 		return;

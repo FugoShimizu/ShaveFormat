@@ -1,5 +1,4 @@
 // Package p does things
-//
 // bool: %t
 // int: %d
 package p

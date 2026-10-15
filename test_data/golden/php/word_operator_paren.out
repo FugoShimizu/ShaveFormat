@@ -19,3 +19,15 @@ function f(bool $a, bool $b, bool $c): void {
 
 $x = $a and $b;
 $y = $a xor $b;
+$closureItems = [fn() => 1, fn() => 2];
+$absorbingArrow = (fn() => 1) + $other;
+
+$x = (
+	function() {
+		return 1;
+	}
+)();
+
+$y = ($obj->handler)(2);
+$u = ($a ?: $b)();
+$w = (strlen)("x");

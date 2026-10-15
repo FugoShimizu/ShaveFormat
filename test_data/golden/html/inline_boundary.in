@@ -1,3 +1,4 @@
+﻿<meta charset="utf-8">
 <div><span>q</span><span>r</span></div>
 <div><span>q</span>
 <span>r</span></div>
@@ -12,3 +13,11 @@
 <p>a<b>x</b>c</p>
 Hello<b>x</b>
 <span>q</span><span>r</span>
+<p>&&=</p>
+<p>x > y</p>
+<p>&&amp;>&#62;&gt;&</p>
+<p data-value="a&b>c">a&<b>></b>&</p>
+<div><span>a</span><circle></circle><span>b</span></div>
+<div><span>a</span><svg></svg><span>b</span></div>
+<div><span>a</span><math><mi>x</mi></math><span>b</span></div>
+<div><span>a</span><dialog></dialog><span>b</span></div>

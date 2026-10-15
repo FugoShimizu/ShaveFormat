@@ -9,3 +9,5 @@ int m(void) { return (M) / 2; }
 #undef N
 int n(int N) { return (N) / 2; }
 int p(int P) { return (P) / 2; }
+
+int q(void) { return g((1)); }

@@ -4,3 +4,38 @@ package p
 func F(w int) int {
 	return w
 }
+
+// G computes
+// input
+func G(x int) int {
+	return x
+}
+
+type HeaderReceiver int
+
+// M computes
+// method input
+func (receiver HeaderReceiver) M(x int) int {
+	return x
+}
+
+// H computes
+// block input
+func H(x int) int {
+	return x
+}
+
+// HeaderDoc
+func /* Hello */ HeaderDoc() {}
+// LeadingDoc
+/* LeadingDoc explains */ func LeadingDoc() {}
+
+// HeaderLineEnd
+func HeaderLineEnd(value int) int { // nolint:revive
+	return value
+}
+
+// ResultLineEnd
+func ResultLineEnd(value int) (int, error) { // results
+	return value, nil
+}

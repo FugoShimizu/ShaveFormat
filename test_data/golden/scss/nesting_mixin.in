@@ -20,3 +20,22 @@ $base: 8px;
 }
 
 .a { &#top { color: red; } }
+
+.mapping-after {
+ width: #{$base};
+ > .child { color: red; }
+}
+
+.mapping-before {
+ > .child { color: red; }
+ width: #{$base};
+}
+
+@-moz-document url-prefix(){.probe{width:1px}}
+@document url("https://example.test/"),url-prefix("https://sample.test/"){.probe{height:2px}}
+.relative{.first,> .second,+ .third,~ .fourth{color:red}}
+
+%shared-line{color:red;}
+.existing-line{color:blue;}
+.extending{@extend %shared-line;background:url(http://example.test/a);}
+.extending-class{@extend .existing-line;}

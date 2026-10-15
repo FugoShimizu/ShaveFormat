@@ -1,256 +1,34 @@
 #include "LintAnalyzer.hpp"
 #include "../Core/CommentRepository.hpp"
-#include "../Core/DocCommentSynchronizer.hpp"
+#include "../Core/ControlFlow.hpp"
+#include "../Core/DocCommentReader.hpp"
 #include <algorithm>
+#include <cstddef>
+#include <cstdint>
+#include <optional>
 #include <stdexcept>
 #include <string>
 #include <string_view>
 #include <unordered_map>
+#include <utility>
 #include <vector>
 
+using Core::ChildRole;
 using Core::NodeId;
 using Core::NoNode;
 using Core::Role;
-using Core::ChildRole;
 
 /**
- * 最終投影を読む静的検査の構築子
- * @param Syntax 最終字面の独自構文
- * @param Source 検証済の最終字面
- * @param Comments 分離したコメント
- * @param Facts 最終位置と共通解析の資料
+ * コメントの投影データの取得関数
+ * 計算量：期待値 O(1)
+ * @param Text 最終テキストに在る投影済のコメントの範囲
+ * @return 最終テキストと本文を対応付けるデータ
+ * @throws std::logic_error 投影データに無いテキストを渡した場合
+ * @throws std::bad_alloc 処理又は呼出先のメモリを確保出来ない場合
+ * @throws std::length_error 本文又は作業列の要素数上限を超える場合
  */
-LintAnalyzer::LintAnalyzer(
-	const Core::SyntaxModel &Syntax,
-	const std::string &Source,
-	const Core::CommentRepository &Comments,
-	const StaticLint::OutputFacts &Facts
-) : Syntax(Syntax), Repository(Comments), Facts(Facts), Rules(Syntax.Rules()), Source(Source) {
-	// 同じ字面の別コメントを混同しない様に，最終字面の開始位置で索引化
-	for(const StaticLint::CommentFacts &Comment : Facts.Comments) {
-		CommentTexts.emplace(Source.data() + Comment.Range.Start, &Comment);
-	}
-	// コメントの位置別索引を構築した後の終了
-	return;
-}
-
-/**
- * 節点の開始位置の取得関数
- * @param Id 対象の節点
- * @return 最終字面の開始バイト位置（空の節点は０）
- */
-uint32_t LintAnalyzer::BeginOf(const NodeId Id) const {
-	return Id == NoNode ? 0 : Facts.Positions.at(Id).Start;
-}
-
-/**
- * 節点の終端位置の取得関数
- * @param Id 対象の節点
- * @return 最終字面の終端バイト位置（空の節点は０）
- */
-uint32_t LintAnalyzer::EndOf(const NodeId Id) const {
-	return Id == NoNode ? 0 : Facts.Positions.at(Id).End;
-}
-
-/**
- * 節点の出力位置の取得関数
- * @param Id 対象の節点
- * @return 最終字面の０始まりの行・列（空の節点は原点）
- */
-StaticLint::OutputPoint LintAnalyzer::PointOf(const NodeId Id) const {
-	return Id == NoNode ? StaticLint::OutputPoint{} : Facts.Positions.at(Id).Point;
-}
-
-/**
- * 定義の名前の節点の取得関数
- * @param Function 対象の関数
- * @return 名前の節点（無名なら空）
- */
-NodeId LintAnalyzer::FunctionNameOf(const NodeId Function) const {
-	// 名前の場が在る場合の其の節点の返戻
-	if(const NodeId Name = Syntax.FieldChild(Function, ChildRole::Name); Name != NoNode) return Name;
-	NodeId Found = NoNode;
-	WalkChildrenCursor(
-		Function,
-		[this, &Found](const NodeId Child) -> bool {
-			// 名前を取得済又は本体に達した場合の探索打切の返戻
-			if(Found != NoNode || Syntax.Is(Child, Role::FunctionBodyContainer)) return false;
-			if(Syntax.Is(Child, Role::FunctionNameIdentifier)) Found = Child;
-			// 名前が見付からない場合の探索継続の返戻
-			return Found == NoNode;
-		}
-	);
-	// 探索した関数名の節点の返戻
-	return Found;
-}
-
-/**
- * 関数の明示された戻値型の節点の取得関数
- * @param Function 対象の関数
- * @return 型の先頭の節点（明示無しなら空）
- */
-NodeId LintAnalyzer::ExplicitReturnTypeOf(const NodeId Function) const {
-	// 戻値型の場・型注釈・仮引数の後の結果型・後置の戻値型の順の探索
-	NodeId Type = Syntax.FieldChild(Function, ChildRole::ReturnType);
-	if(Type == NoNode) Type = Syntax.FirstNamedChildWithRole(Function, Role::TypeAnnotation);
-	if(Type == NoNode) Type = Syntax.FirstNamedChildWithRole(Function, Role::PostParameterResultType);
-	if(Type == NoNode) Type = Syntax.FirstNamedChildWithRole(Function, Role::TrailingReturnType);
-	// 名前の前に戻値型を書く文法の型の場（推論の指定は明示された型でない）
-	if(
-		const NodeId Leading = Syntax.FieldChild(Function, ChildRole::Type);
-		Type == NoNode && !Syntax.Is(Leading, Role::PlaceholderTypeSpecifier)
-	) Type = Leading;
-	if(Syntax.Is(Type, Role::TypeAnnotation) && Syntax.NamedChildCount(Type)) Type = Syntax.NamedChild(Type, 0);
-	// 型の先頭の節点の返戻
-	return Type;
-}
-
-/**
- * 署名内の仮引数名の節点の取得関数
- * @param Function 対象の関数
- * @param Name 対象の仮引数名
- * @return 名前の節点（無名又は見付からなければ空）
- */
-NodeId LintAnalyzer::ParameterNameOf(const NodeId Function, const std::string_view Name) const {
-	NodeId Found = NoNode;
-	WalkChildrenCursor(
-		Function,
-		[this, &Found, Name](const NodeId Child) -> bool {
-			// 名前を取得済又は本体に達した場合の探索打切の返戻
-			if(Found != NoNode || Syntax.Is(Child, Role::FunctionBodyContainer)) return false;
-			if(Syntax.Is(Child, Role::ParameterName) && Syntax.Text(Child) == Name) Found = Child;
-			// 名前が見付からない場合の探索継続の返戻
-			return Found == NoNode;
-		}
-	);
-	// 探索した仮引数名の節点の返戻
-	return Found;
-}
-
-/**
- * 親の直下に在る名前無字句の取得関数
- * @param Parent 対象の構文
- * @param Spelling 字句の綴り
- * @return 一致する字句の節点（無ければ空）
- */
-NodeId LintAnalyzer::TokenChildOf(const NodeId Parent, const std::string_view Spelling) const {
-	for(const NodeId Child : Syntax.ChildrenOf(Parent)) if(!Syntax.IsNamed(Child) && Syntax.Text(Child) == Spelling) return Child;
-	return NoNode;
-}
-
-/**
- * コメント本文の位置を最終字面へ写す関数
- * @param Index コメントの記録の添字
- * @param Body 記法を除いた本文
- * @param Offset 本文内のバイト位置
- * @return 最終字面の行と UTF-8 バイト列
- */
-StaticLint::OutputPoint LintAnalyzer::PointInComment(
-	const size_t Index,
-	const std::string_view Body,
-	const size_t Offset
-) const {
-	const StaticLint::CommentFacts &Comment = Facts.Comments[Index];
-	// 本文の外を指す位置の場合の元の位置の返戻
-	if(Offset >= Body.size()) return Comment.Range.Point;
-	const size_t BodyLine = Body.rfind('\n', Offset), BodyStart = BodyLine == std::string_view::npos ? 0 : BodyLine + 1;
-	const size_t BodyEnd = std::min(Body.find('\n', BodyStart), Body.size());
-	const std::string_view Segment = Body.substr(BodyStart, BodyEnd - BodyStart);
-	const uint32_t LineIndex = static_cast<uint32_t>(std::count(Body.begin(), Body.begin() + BodyStart, '\n'));
-	size_t SourceStart = Comment.Range.Start;
-	for(uint32_t Line = 0; Line < LineIndex; ++Line) {
-		const size_t End = Source.find('\n', SourceStart);
-		// コメント内に改行が無い場合の元の位置の返戻
-		if(End == std::string::npos || End >= Comment.Range.End) return Comment.Range.Point;
-		SourceStart = End + 1;
-	}
-	const size_t SourceEnd = std::min(Source.find('\n', SourceStart), static_cast<size_t>(Comment.Range.End));
-	const size_t Match = std::string_view(Source).substr(SourceStart, SourceEnd - SourceStart).find(Segment);
-	// 字面が一致しない場合の元の位置の返戻
-	if(Match == std::string_view::npos) return Comment.Range.Point;
-	// 本文内の位置に対応する原文位置の返戻
-	return {
-		Comment.Range.Point.Row + LineIndex,
-		static_cast<uint32_t>((LineIndex ? 0 : Comment.Range.Point.Column) + Match + Offset - BodyStart)
-	};
-}
-
-/**
- * 投影した構文の破損の判定関数
- * @param Id 対象の節点
- * @return 未修復の構文破損を含むか
- */
-bool LintAnalyzer::HasError(const NodeId Id) const {
-	return Id != NoNode && Syntax.GetNode(Id).Facts.Has(Core::ConstraintKind::ContainsError);
-}
-
-/**
- * 単一式の最外の括弧の取得関数
- * 計算量：探索する節点又は字面の長さ N に対し O(N)
- * @param Id 内側の式
- * @return 同じ値を表す最外の括弧又は元の式
- */
-NodeId LintAnalyzer::OutermostGroup(NodeId Id) const {
-	for(
-		NodeId Parent = Syntax.ParentOf(Id);
-		Parent != NoNode && Syntax.Is(Parent, Role::GroupingParen) && Syntax.NamedChildCount(Parent) == 1 &&
-		Syntax.ChildCount(Parent) == 3;
-		Parent = Syntax.ParentOf(Id)
-	) Id = Parent;
-	// 値を変えずに包む最外の括弧の返戻
-	return Id;
-}
-
-/**
- * 式の値を消費しない文脈の判定関数
- * @param Id 対象の式
- * @param Parent 直上の親
- * @return 式文又は反復の更新部か
- */
-bool LintAnalyzer::IsValueUnusedContext(const NodeId Id, const NodeId Parent) const {
-	// 文脈が無い場合の不一致の返戻
-	if(Parent == NoNode) return false;
-	// 値を捨てる文の一致の返戻
-	if(Syntax.Is(Parent, Role::UnusedValueHost)) return true;
-	// 更新欄を持たない構文の不一致の返戻
-	if(!Syntax.Is(Parent, Role::CountedLoop)) return false;
-	NodeId Update = Syntax.FieldChild(Parent, ChildRole::Update);
-	if(Update == NoNode) Update = Syntax.FieldChild(Parent, ChildRole::Increment);
-	// 更新欄が対象の式であるかの返戻
-	return Update != NoNode && Update == Id;
-}
-
-/**
- * 最終字面の範囲を包む最小の子孫の取得関数
- * 計算量：探索する節点又は字面の長さ N に対し O(N)
- * @param Root 探索を始める根
- * @param Begin 範囲の始まり
- * @param End 範囲の終わり
- * @return 範囲を包む最も内側の節点
- */
-NodeId LintAnalyzer::DescendantAt(NodeId Root, const uint32_t Begin, const uint32_t End) const {
-	while(true) {
-		NodeId Found = NoNode;
-		for(const NodeId Child : Syntax.ChildrenOf(Root)) {
-			if(BeginOf(Child) <= Begin) if(const uint32_t ChildEnd = EndOf(Child); ChildEnd >= End && ChildEnd > Begin) {
-				Found = Child;
-				break;
-			}
-		}
-		// 範囲を包む更に内側の子が無い場合の返戻
-		if(Found == NoNode) return Root;
-		Root = Found;
-	}
-}
-
-/**
- * コメントの投影資料の取得関数
- * @param Text 最終字面に在る投影済のコメントの範囲
- * @return 最終字面と本文を対応付ける資料
- * @throws std::logic_error 投影資料に無い字面を渡した場合
- */
-const StaticLint::CommentFacts &LintAnalyzer::CommentInfo(const std::string_view Text) const {
-	// 最終字面での開始位置が一致する資料の返戻
+const StaticLint::CommentFacts &LintAnalyzer::GetCommentInfo(const std::string_view Text) const {
+	// 最終テキストでの開始位置が一致するデータの返戻
 	if(
 		const std::unordered_map<const char *, const StaticLint::CommentFacts *>::const_iterator Hit = CommentTexts.find(Text.data());
 		Hit != CommentTexts.end() && Text.size() == Hit->second->Range.End - Hit->second->Range.Start
@@ -259,34 +37,358 @@ const StaticLint::CommentFacts &LintAnalyzer::CommentInfo(const std::string_view
 }
 
 /**
- * 文書コメントの装飾を除いた論理行の取得関数
- * 最終字面を投影した記録（記法・役割・本文の分解済）の論理行を読む
- * 本文を其の儘保つ文書属性（Rust の文書）は，囲みの飾りの `*` と区切空白１つだけを除き，其の他の字下げ（入れ子の箇条等）を値として保つ
- * 計算量：本文の長さ N に対し O(N)
- * @param Text 最終字面のコメント
- * @return 本文の論理行の並び
+ * 最終投影を読む静的解析のコンストラクタ
+ * 計算量：コメントの記録数 C に対し期待値 O(C)
+ * @param Syntax 最終テキストの独自構文
+ * @param Src 検証済の最終テキスト
+ * @param Comments 分離したコメント
+ * @param Facts 最終位置と共通解析のデータ
+ * @throws std::bad_alloc 処理又は呼出先のメモリを確保出来ない場合
  */
-std::vector<std::string> LintAnalyzer::SourceLogicalLines(const std::string_view Text) const {
-	const CommentRecord &Record = Repository.GetRecords()[CommentInfo(Text).Record];
-	// 分解済の本文の論理行の返戻
-	if(Record.Role != CommentRole::Directive) return Core::DocCommentSynchronizer::LogicalLines(Record);
-	const bool IsBlock = Core::CommentRepository::IsBlockNotation(Record.Notation);
-	std::vector<std::string> Lines;
-	for(size_t Cursor = 0; Cursor <= Record.Text.size();) {
-		const size_t End = std::min(Record.Text.find('\n', Cursor), Record.Text.size());
-		std::string_view Line = std::string_view(Record.Text).substr(Cursor, End - Cursor);
-		Cursor = End + 1;
-		// 囲みの継続行の飾りの `*` と，記号・飾りの後の区切空白１つ
-		if(IsBlock) {
-			Line.remove_prefix(std::min(Line.find_first_not_of(" \t"), Line.size()));
-			if(Line.starts_with('*')) Line.remove_prefix(1);
-		}
-		if(Line.starts_with(' ')) Line.remove_prefix(1);
-		Lines.emplace_back(Line);
+LintAnalyzer::LintAnalyzer(
+	const Core::SyntaxModel &Syntax,
+	const std::string &Src,
+	const Core::CommentRepository &Comments,
+	const StaticLint::OutputFacts &Facts
+) : Syntax(Syntax), Repository(Comments), Facts(Facts), Flow(*Facts.Flow), Rules(Syntax.GetRules()), Src(Src) {
+	// 同じテキストの別コメントを混同しない様に，最終テキストの開始位置でインデックス化
+	if(Rules.Notation.Doc != Core::DocStyle::Docstring) {
+		const char *const Text = Src.data();
+		for(const StaticLint::CommentFacts &Comment : Facts.Comments) CommentTexts.emplace(Text + Comment.Range.Start, &Comment);
 	}
-	// 囲みの開始記号・終端記号だけの行の除去
-	if(IsBlock && !Lines.empty() && Lines.back().find_first_not_of(" \t") == std::string::npos) Lines.pop_back();
-	if(IsBlock && !Lines.empty() && Lines.front().empty()) Lines.erase(Lines.begin());
-	// 飾りを除いた論理行の返戻
-	return Lines;
+	// 終了
+	return;
+}
+
+/**
+ * ノードの開始位置の取得関数
+ * 計算量：O(1)
+ * @param Id 対象のノード
+ * @return 最終テキストの開始バイト位置（空のノードは０）
+ */
+uint32_t LintAnalyzer::GetBeginOf(const NodeId Id) const {
+	// ノードの開始バイト位置又は空のノードの原点の返戻
+	return Id == NoNode ? 0 : Facts.Positions[Id].Start;
+}
+
+/**
+ * ノードの終端位置の取得関数
+ * 計算量：O(1)
+ * @param Id 対象のノード
+ * @return 最終テキストの終端バイト位置（空のノードは０）
+ */
+uint32_t LintAnalyzer::GetEndOf(const NodeId Id) const {
+	// ノードの終端バイト位置又は空のノードの原点の返戻
+	return Id == NoNode ? 0 : Facts.Positions[Id].End;
+}
+
+/**
+ * ノードの出力位置の取得関数
+ * 計算量：O(1)
+ * @param Id 対象のノード
+ * @return 最終テキストの０始まりの行・列（空のノードは原点）
+ */
+StaticLint::OutputPoint LintAnalyzer::GetPointOf(const NodeId Id) const {
+	// ノードの出力位置又は空のノードの原点の返戻
+	return Id == NoNode ? StaticLint::OutputPoint{} : Facts.Positions[Id].Point;
+}
+
+/**
+ * 定義の名前のノードの取得関数
+ * 計算量：名前を取得する迄に辿るシグネチャのノード数 V に対し O(V)
+ * @param Function 対象の関数
+ * @return 名前のノード（無名なら空）
+ * @throws FormatLimitExceeded 構文の照会・修復又は整形の作業予算を超えた場合
+ * @throws std::bad_alloc 処理又は呼出先のメモリを確保出来ない場合
+ * @throws std::length_error 本文又は作業列の要素数上限を超える場合
+ * @throws std::out_of_range 照会する添字又は識別子が表に無い場合
+ */
+NodeId LintAnalyzer::GetFunctionNameOf(const NodeId Function) const {
+	// 名前の場が有る場合の其のノードの返戻
+	if(const NodeId Name = Syntax.GetFieldChild(Function, ChildRole::Name); Name != NoNode) return Name;
+	NodeId Found = NoNode;
+	WalkChildrenCursor(
+		Function,
+		[this, &Found](const NodeId Child) -> bool {
+			// 名前を取得済又は本体に達した場合の探索打切の返戻
+			if(Found != NoNode || Syntax.Is(Child, Role::FunctionBodyContainer)) return false;
+			if(
+				Syntax.Is(Child, Role::FunctionNameIdentifier) || Syntax.Is(Child, Role::OperatorName) ||
+				Syntax.Is(Child, Role::UserDefinedOperator)
+			) Found = Child;
+			// 名前が見付からない場合の探索継続の返戻
+			return Found == NoNode;
+		}
+	);
+	// 探索した関数名のノードの返戻
+	return Found;
+}
+
+/**
+ * 所属する宣言子の後置戻値型の型部分の取得関数
+ * 仮引数・初期値・本体へ探索を広げず，所有する宣言子のラッパーだけを辿る
+ * 計算量：宣言子の深さ D と直接の子数 C の総和に対し O(D + C)
+ * @param Declarator 後置戻値型を読む宣言子
+ * @return 矢印と先行するコメントを除いた型部分（無ければ空）
+ * @throws FormatLimitExceeded 構文の照会が作業予算を超える場合
+ * @throws std::out_of_range ノードが表に無い場合
+ */
+NodeId LintAnalyzer::GetTrailingReturnTypeOf(NodeId Declarator) const {
+	while(Declarator != NoNode) {
+		if(const NodeId Type = Syntax.GetFirstNamedChildWithRole(Declarator, Role::TrailingReturnType); Type != NoNode) {
+			// 矢印と先行するコメントを除いた型部分の返戻
+			for(const NodeId Part : Syntax.GetChildrenOf(Type)) if(Syntax.IsNamed(Part) && !Syntax.Is(Part, Role::Comment)) return Part;
+			// 型部分を確認出来ない場合の返戻
+			return NoNode;
+		}
+		Declarator = Flow.GetNextDeclarator(Declarator);
+	}
+	// 後置戻値型の無い事の返戻
+	return NoNode;
+}
+
+/**
+ * 仮引数又は束縛の型指定の有無の判定関数
+ * 計算量：直接の子と分解の束縛の子数の総数 C に対し O(C)
+ * @param Node 型指定を読む仮引数又は束縛
+ * @return 共有の指定を含め型が明示されて居るか
+ * @throws FormatLimitExceeded 構文の照会が作業予算を超える場合
+ * @throws std::out_of_range ノードが表に無い場合
+ */
+bool LintAnalyzer::HasExplicitTypeOf(const NodeId Node) const {
+	// 型のフィールド・型注釈・コロンに続く型指定を持つ事の返戻
+	if(
+		Syntax.GetFieldChild(Node, ChildRole::Type) != NoNode ||
+		Syntax.GetFirstNamedChildWithRole(Node, Role::TypeAnnotation) != NoNode ||
+		GetTokenChildOf(Node, ":") != NoNode && Syntax.GetFirstNamedChildWithRole(Node, Role::PostParamResultType) != NoNode
+	) return true;
+	if(Syntax.Is(Node, Role::TypeHintBindingGroup)) {
+		bool HasBinding = false;
+		for(const NodeId Child : Syntax.GetChildrenOf(Node)) if(Syntax.Is(Child, Role::VarDecl)) {
+			HasBinding = true;
+			// 分解した束縛の型指定の不足の返戻
+			if(!HasExplicitTypeOf(Child)) return false;
+		}
+		// 各束縛へ型を指定済かの返戻
+		return HasBinding;
+	}
+	// 型指定の無い事の返戻
+	return false;
+}
+
+/**
+ * 後置戻値型を導く先頭の auto かの判定関数
+ * 計算量：所有する宣言子の深さ D と直接の子数 C の総和に対し O(D + C)
+ * @param Node 推論指定の型のノード
+ * @return 全ての宣言子の後置戻値型を導く必須の指定か
+ * @throws FormatLimitExceeded 構文の照会が作業予算を超える場合
+ * @throws std::out_of_range ノードが表に無い場合
+ */
+bool LintAnalyzer::HasRequiredAuto(const NodeId Node) const {
+	const NodeId Owner = Syntax.GetParentOf(Node), OwnDeclarator = Syntax.GetFieldChild(Owner, ChildRole::Declarator);
+	// decltype(auto) と，後置戻値型の中の推論指定は先頭のプレースホルダーと区別する
+	if(
+		Syntax.GetFieldChild(Owner, ChildRole::Type) != Node || Syntax.GetNamedChildCount(Node) != 1 ||
+		!Syntax.Is(Syntax.GetNamedChild(Node, 0), Role::DeducedTypeKeyword) || OwnDeclarator == NoNode
+	) return false;
+	bool HasDeclarator = false;
+	for(const NodeId Child : Syntax.GetChildrenOf(Owner)) {
+		if(Child != OwnDeclarator && !Syntax.Is(Child, Role::DeclInitDeclarator)) continue;
+		HasDeclarator = true;
+		// 推論を要する宣言子を含む場合の返戻
+		if(GetTrailingReturnTypeOf(Child) == NoNode) return false;
+	}
+	// 全ての宣言子に後置戻値型が在るかの返戻
+	return HasDeclarator;
+}
+
+/**
+ * 関数の明示された戻値型のノードの取得関数
+ * 計算量：シグネチャ・所有する宣言子・結果のコンテナの子数の総数 C に対し O(C)
+ * @param Function 戻値型を読む関数のノード
+ * @return 戻値型のノード（明示無なら空）
+ * @throws FormatLimitExceeded 型の探索でモデルの作業予算を超えた場合
+ * @throws std::bad_alloc 収集中の読取記録の追加に失敗した場合
+ * @throws std::out_of_range 子の識別子が構文表に無い場合
+ * @throws std::length_error 本文又は作業列の要素数上限を超える場合
+ */
+NodeId LintAnalyzer::GetExplicitReturnTypeOf(const NodeId Function) const {
+	// 戻値型の場・型注釈・仮引数の後の結果型・後置の戻値型の順の探索
+	NodeId Type = Syntax.GetFieldChild(Function, ChildRole::ReturnType);
+	if(Type == NoNode) Type = Syntax.GetFirstNamedChildWithRole(Function, Role::TypeAnnotation);
+	if(Type == NoNode) {
+		bool HasParams = false;
+		for(const NodeId Child : Syntax.GetChildrenOf(Function)) {
+			HasParams |= Syntax.Is(Child, Role::ParamContainer);
+			if(HasParams && Syntax.Is(Child, Role::PostParamResultType)) {
+				Type = Child;
+				break;
+			}
+		}
+	}
+	if(Type == NoNode) {
+		const NodeId Declarator = Syntax.GetFieldChild(Function, ChildRole::Declarator);
+		Type = GetTrailingReturnTypeOf(Declarator == NoNode ? Function : Declarator);
+	}
+	// 名前の前に戻値型を書く文法の型の場（推論の指定は明示された型でない）
+	if(
+		const NodeId Leading = Syntax.GetFieldChild(Function, ChildRole::Type);
+		Type == NoNode && !Syntax.Is(Leading, Role::PlaceholderTypeSpecifier) && !Syntax.Is(Leading, Role::LambdaFunctionType)
+	) Type = Leading;
+	// クロージャのヘッダの矢印に続く明示型だけを取得する
+	if(
+		const NodeId Header = Syntax.GetFieldChild(Function, ChildRole::Type);
+		Type == NoNode && Syntax.Is(Header, Role::LambdaFunctionType) && GetTokenChildOf(Header, "->") != NoNode
+	) Type = Syntax.GetFirstNamedChildWithRole(Header, Role::PostParamResultType);
+	// 関数の結果型の場だけを取得し，別の所有者の式を結果型と混同しない
+	if(Type == NoNode && Syntax.Is(Function, Role::FunctionScope)) Type = Syntax.GetFieldChild(Function, ChildRole::Result);
+	if(Syntax.Is(Type, Role::TypeAnnotation) && Syntax.GetNamedChildCount(Type)) Type = Syntax.GetNamedChild(Type, 0);
+	// １つの結果宣言の型だけを取得し，複数名又は複数結果を真偽値１つと扱わない
+	if(Syntax.Is(Type, Role::ParamContainer) && Syntax.GetNamedChildCount(Type) == 1) {
+		if(const NodeId Entry = Syntax.GetNamedChild(Type, 0); Syntax.Is(Entry, Role::ParamDecl)) {
+			if(
+				const NodeId ValType = Syntax.GetFieldChild(Entry, ChildRole::Type), Name = Syntax.GetFieldChild(Entry, ChildRole::Name);
+				ValType != NoNode && (Name == NoNode || Syntax.Is(Name, Role::Identifier)) &&
+				Syntax.GetNamedChildCount(Entry) == (Name != NoNode) + 1U
+			) Type = ValType;
+		}
+	}
+	// 明示された戻値型のノードの返戻
+	return Type;
+}
+
+/**
+ * 親の直下に在る名前無トークンの取得関数
+ * 計算量：調べる子の数 V と比較するテキストの総長 B に対し O(V + B)
+ * @param Parent 対象の構文
+ * @param Spelling トークンの綴り
+ * @return 一致するトークンのノード（無ければ空）
+ * @throws FormatLimitExceeded 構文の照会・修復又は整形の作業予算を超えた場合
+ * @throws std::bad_alloc 処理又は呼出先のメモリを確保出来ない場合
+ * @throws std::length_error 本文又は作業列の要素数上限を超える場合
+ */
+NodeId LintAnalyzer::GetTokenChildOf(const NodeId Parent, const std::string_view Spelling) const {
+	// 綴りが一致する名前無の子の返戻
+	for(const NodeId Child : Syntax.GetChildrenOf(Parent)) if(!Syntax.IsNamed(Child) && Syntax.GetText(Child) == Spelling) {
+		// 綴りが一致する子の返戻
+		return Child;
+	}
+	// 一致する子が無い場合の返戻
+	return NoNode;
+}
+
+/**
+ * コメント本文の位置を最終テキストへコピーする関数
+ * 計算量：初回は本文長 B に対し O(B)，本文行数 L と初めて照合する行の長さ S に対し平均 O(log(L + 1) + S²)
+ * @param Idx コメントの記録の添字
+ * @param Body 記法を除いた本文
+ * @param Offset 本文内のバイト位置
+ * @return 最終テキストの行と UTF-8 バイト列
+ * @throws std::bad_alloc 本文の行インデックスのメモリを確保出来ない場合
+ * @throws std::length_error 本文の行インデックスの要素数上限を超える場合
+ */
+StaticLint::OutputPoint LintAnalyzer::GetPointInComment(
+	const size_t Idx,
+	const std::string_view Body,
+	const size_t Offset
+) const {
+	// 対象コメントの構文事実の取得
+	const StaticLint::CommentFacts &Comment = Facts.Comments[Idx];
+	// 本文の外を指す位置の場合の元の位置の返戻
+	if(Offset >= Body.size()) return Comment.Range.Point;
+	// 同じ本文の行頭を１度だけインデックス化する
+	const std::pair<std::unordered_map<const char *, std::vector<CommentLine>>::iterator, bool> Entry =
+	CommentLines.try_emplace(Body.data());
+	std::vector<CommentLine> &Lines = Entry.first->second;
+	if(Entry.second) {
+		Lines.push_back({ 0, std::nullopt });
+		for(size_t Pos = 0; Pos < Body.size(); ++Pos) if(Body[Pos] == '\n') Lines.push_back({ Pos + 1, std::nullopt });
+	}
+	const std::vector<CommentLine>::iterator Line = std::upper_bound(
+		Lines.begin(),
+		Lines.end(),
+		Offset + 1,
+		// 本文の位置に対する行頭の大小比較
+		[](const size_t Pos, const CommentLine &Candidate) -> bool {
+			// 対象位置より後の行頭かの返戻
+			return Pos < Candidate.Begin;
+		}
+	) - 1;
+	const size_t LineIdx = static_cast<size_t>(Line - Lines.begin()), SrcRow = Comment.Range.Point.Row + LineIdx;
+	if(!Line->Match) {
+		Line->Match = std::string_view::npos;
+		if(SrcRow < Facts.LineStarts.size()) {
+			const size_t SrcStart = LineIdx ? Facts.LineStarts[SrcRow] : Comment.Range.Start;
+			if(SrcStart < Comment.Range.End) {
+				const size_t SrcEnd = std::min(
+					SrcRow + 1 < Facts.LineStarts.size() ? static_cast<size_t>(Facts.LineStarts[SrcRow + 1] - 1) : Src.size(),
+					static_cast<size_t>(Comment.Range.End)
+				);
+				const size_t BodyEnd = Line + 1 == Lines.end() ? Body.size() : (Line + 1)->Begin - 1;
+				Line->Match = std::string_view(Src).substr(SrcStart, SrcEnd - SrcStart).find(Body.substr(Line->Begin, BodyEnd - Line->Begin));
+			}
+		}
+	}
+	// テキストが一致しない場合の元の位置の返戻
+	if(*Line->Match == std::string_view::npos) return Comment.Range.Point;
+	// 本文内の位置に対応する最終テキストの位置の返戻
+	return {
+		static_cast<uint32_t>(SrcRow),
+		static_cast<uint32_t>((LineIdx ? 0 : Comment.Range.Point.Column) + *Line->Match + Offset - Line->Begin)
+	};
+}
+
+/**
+ * 投影した構文の破損の判定関数
+ * 計算量：部分木のノード数 N に対し O(N)
+ * @param Id 対象のノード
+ * @return 未修復の構文破損を含むか
+ * @throws FormatLimitExceeded 構文の照会・修復又は整形の作業予算を超えた場合
+ * @throws std::out_of_range 照会する添字又は識別子が表に無い場合
+ */
+bool LintAnalyzer::HasError(const NodeId Id) const {
+	// 未修復の構文破損の有無の返戻
+	return Id != NoNode && Syntax.GetNode(Id).Facts.Has(Core::ConstraintKind::ContainsError);
+}
+
+/**
+ * 単一式の最外の括弧の取得関数
+ * 計算量：探索するノード又はテキストの長さ N に対し O(N)
+ * @param Id 内側の式
+ * @return 同じ値を表す最外の括弧又は元の式
+ * @throws FormatLimitExceeded 構文の照会・修復又は整形の作業予算を超えた場合
+ * @throws std::bad_alloc 処理又は呼出先のメモリを確保出来ない場合
+ * @throws std::length_error 本文又は作業列の要素数上限を超える場合
+ */
+NodeId LintAnalyzer::GetOutermostGroup(NodeId Id) const {
+	// 対象範囲の走査
+	for(
+		NodeId Parent = Syntax.GetParentOf(Id);
+		Parent != NoNode && Syntax.Is(Parent, Role::GroupingParen) && Syntax.GetNamedChildCount(Parent) == 1 &&
+		Syntax.GetChildCount(Parent) == 3;
+		Parent = Syntax.GetParentOf(Id)
+	) Id = Parent;
+	// 値を変えずに包む最外の括弧の返戻
+	return Id;
+}
+
+/**
+ * ドキュメントコメントの装飾を除いた論理行の追加関数
+ * 最終テキストを投影した記録（記法・役割・本文の分解済）の論理行を読む
+ * 計算量：本文の長さ N に対し O(N)
+ * @param Record 最終テキストを投影したコメントの記録
+ * @param Lines 本文の論理行の追加先
+ * @return 最初に追加した論理行が始まる記録内の位置（行内の装飾を含む）
+ * @throws std::bad_alloc 処理又は呼出先のメモリを確保出来ない場合
+ * @throws std::length_error 本文又は作業列の要素数上限を超える場合
+ * @throws std::logic_error 呼出先で構文・所有関係の内部契約が成立しない場合
+ */
+size_t LintAnalyzer::AppendSrcLogicalLines(const CommentRecord &Record, std::vector<std::string> &Lines) const {
+	// 分解済の本文の論理行の直接追加
+	Core::DocCommentReader::AppendLogicalLines(Record, Lines);
+	const std::string_view Text = Core::CommentRepository::GetOutputTextOf(Record);
+	// 先頭の空行だけを除いた論理行の開始位置の返戻
+	return Core::CommentRepository::IsBlockNotation(Core::CommentRepository::GetOutputNotationOf(Record)) ?
+	std::min(Text.find_first_not_of('\n'), Text.size()) :
+	0;
 }

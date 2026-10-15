@@ -1,8 +1,0 @@
-package p
-
-type T struct {
-	// X の説明
-	//
-	// 続き
-	X int
-}

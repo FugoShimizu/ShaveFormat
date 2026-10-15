@@ -11,3 +11,7 @@ y";
 		}
 	</style>
 </div>
+<script>
+	// script note
+	const selfNumber = <A p={1} />;
+</script>

@@ -1,0 +1,66 @@
+f(
+	T{
+		// 成員の深さ
+		FirstCollectionMemberWithANameLongEnoughForWrapping,
+		SecondCollectionMemberWithANameLongEnoughForWrapping,
+		ThirdCollectionMemberWithANameLongEnoughForWrapping
+	}
+);
+
+const /* c */ int a = 1;
+const int b = 2;
+
+struct S {
+	const /* e */ int x;
+	const int y;
+};
+
+class A {
+	int a = 1;
+
+	int b = [] {
+		// inside
+		return 2; // tail
+	}();
+};
+
+/**
+ *
+ */
+void f() {
+	const auto V = [ // c
+		&AaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaB,
+		&CcccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccD
+	](int x) {
+		g(x);
+	};
+	return;
+}
+
+namespace a {
+	/**
+	 *
+	 */
+	void f() {}
+} // namespace a
+
+extern "C" {
+	int g();
+} // extern "C"
+
+int x;
+// b
+int y;
+
+/**
+ *
+ */
+void f() {
+	g();
+	// <pre>
+	// a  =  b
+	// c  =  d
+	// </pre>
+	h();
+	return;
+}

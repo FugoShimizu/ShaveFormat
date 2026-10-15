@@ -1,1 +1,1 @@
-1:1: Input has a UTF-8 BOM; successful output omits it
+[notice] <stdin>: Input has a UTF-8 BOM; successful output omits it

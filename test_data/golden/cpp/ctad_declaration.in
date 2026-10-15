@@ -10,3 +10,11 @@ int main() {
 	std::array<int, 2> f{3, 4};
 	return c.size() + d.size() + s.size() + u.size() + v.size() + e.size() + f.size();
 }
+
+void f() {
+	auto const x = 1;
+	auto const x2 = 1.5;
+	[[nodiscard]] int const y = 2;
+	decltype(auto) z = x;
+	decltype(auto) w = y;
+}

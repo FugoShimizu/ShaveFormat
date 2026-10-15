@@ -14,3 +14,13 @@ function A() {
     </div>
   );
 }
+
+const attr = (
+	<div>
+		<span>aaaaaaaaaaaaaaaaaaaa</span>
+		<input
+			// attr comment
+			value={x}
+		/>
+	</div>
+);

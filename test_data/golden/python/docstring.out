@@ -5,3 +5,10 @@ def f(a):
 def g():
 	"""Doc string.""" "continued"
 	return 1
+
+def generate() -> object:
+	yield 1
+
+def described() -> object:
+	"""Generator doc."""
+	yield 1

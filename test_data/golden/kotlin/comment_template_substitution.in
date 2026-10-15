@@ -1,2 +1,19 @@
 val s = """a${x /* m */}
 b"""
+
+val shifted = """line1
+${x // trailing
+}
+line3"""
+
+val nested = """first${"""inner${x // nested
+}
+tail"""}
+last"""
+val after = x // outside
+
+val plainNested = """first${"""inner${x}
+tail"""}
+last"""
+
+val body: String = "${run { foo(); bar(); 1 }}"

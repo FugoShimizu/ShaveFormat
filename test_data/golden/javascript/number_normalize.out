@@ -5,3 +5,9 @@ const exp = 1E10;
 const small = 1.5E-3;
 const big = 123n;
 const hexBig = 0XFFn;
+const a = "x";
+const b = "it's \"q\" \n";
+
+const s = `a
+//b`;
+// c

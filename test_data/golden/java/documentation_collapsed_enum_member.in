@@ -1,5 +1,0 @@
-enum E {
-	/** 赤 */
-	RED,
-	BLUE
-}

@@ -1,3 +1,8 @@
-4:5: Review: Add an explicit return type to this function; verify type, evaluation, external contract
-4:5: Violation: Function is missing a documentation comment
-4:13: Review: Add an explicit type to parameter 'x'; verify type, evaluation, external contract
+4:5: Review: Add an explicit return type to this function
+4:13: Review: Add an explicit type to parameter 'x'
+9:6: Review: Add an explicit return type to this function
+9:8: Review: Add an explicit type to parameter 'x'
+9:11: Review: Add an explicit type to parameter 'y'
+12:6: Review: Add an explicit return type to this function
+12:8: Review: Add an explicit type to parameter 'self'
+12:14: Review: Add an explicit type to parameter 'x'

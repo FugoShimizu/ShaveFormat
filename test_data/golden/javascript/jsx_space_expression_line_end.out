@@ -1,4 +1,0 @@
-const f2 = <p>a b</p>; // c
-const x = a / /* m */ <p>a b</p>;
-const y = 2;
-const z = cond ? <p>a b</p> : null; // d

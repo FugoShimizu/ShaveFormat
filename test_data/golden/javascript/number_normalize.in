@@ -5,3 +5,10 @@ const exp = 1e10;
 const small = 1.5e-3;
 const big = 123n;
 const hexBig = 0xffn;
+
+const a = 'x';
+const b = 'it\'s "q" \n';
+
+const s = `a
+//b`;
+// c

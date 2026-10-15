@@ -12,3 +12,53 @@ func Dispatch(code int) {
 	}
 	return
 }
+
+// ClosedSelect は通信の後に終える
+func ClosedSelect(c chan int) {
+	select {
+	case <-c:
+		return
+	}
+	// 終了
+	return
+}
+
+// EmptySelect は待機する
+func EmptySelect() {
+	select {}
+	// 終了
+	return
+}
+
+// ShortBinding は初期値を返す
+func ShortBinding() int {
+	a := g()
+	return a
+}
+
+// ReassignedBinding は書込後の値を返す
+func ReassignedBinding() int {
+	a := g()
+	a = h()
+	// 値の返戻
+	return a
+}
+
+// ReferencedBinding は使用後の値を返す
+func ReferencedBinding() int {
+	a := g()
+	use(a)
+	// 値の返戻
+	return a
+}
+
+// ClosureBinding は別の仮引数を持つ関数を渡す
+func ClosureBinding() int {
+	a := g(
+		func(a int) int {
+			return a
+		},
+	)
+	// 値の返戻
+	return a
+}

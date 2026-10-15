@@ -1,3 +1,0 @@
-// own line
-// before div close
-const A = () => (<div>{/* keep */}{}{}</div>);

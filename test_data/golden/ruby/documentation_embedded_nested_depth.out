@@ -1,8 +1,0 @@
-# 値を返す
-# @return 値
-def f
-=begin
-	frozen_string_literal: true
-=end
-	return x
-end

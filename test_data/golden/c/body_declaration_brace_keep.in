@@ -1,1 +1,6 @@
-void f(int a) { if (a == 1) { struct S { int m; }; } if(a==2) { enum E { A }; } if(a==3) { typedef int T; } if(a==4) { union U { int m; }; } }
+void f(int a) { if (a == 1) { struct S { int m; }; } if(a==2) { enum E { A }; } if(a==3) { typedef int T; } if(a==4) { union U { int m; }; }
+	if(a == 1) { if(a == 2) {} else {} }
+	if(a == 1) if(a == 2) {} else {}
+	if(a == 1) { do {} while(a == 2); }
+	if(a == 1) do {} while(a == 2);
+}

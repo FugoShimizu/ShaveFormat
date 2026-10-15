@@ -20,3 +20,32 @@ int Compute(int AlphaValue, int BravoValue, int CharlieValue, int DeltaValue, in
 	AlphaValue + BravoValue + CharlieValue + DeltaValue + EchoValue + Total;
 	return Total + Flag + Picked;
 }
+
+/**
+ *
+ */
+void Measure(void) {
+	const unsigned long size = sizeof(const char **);
+	// 終了
+	return;
+}
+
+/**
+ * 符号の判定関数
+ * @param Value 値
+ * @return 符号付きの値
+ */
+int Signs(const int Value) {
+	// 符号付きの値の返戻
+	return -(-(-Value));
+}
+
+/**
+ *
+ * @param a
+ * @param b
+ * @return
+ */
+int f(int a, int b) {
+	return -(-a) + +(+b) - -(-b) + -(--a);
+}

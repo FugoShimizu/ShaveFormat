@@ -1,1 +1,1 @@
-7:8: Review: Inline immediately returned variable o; verify type, binding, lifetime, intent
+7:8: Review: Inline immediately returned variable o

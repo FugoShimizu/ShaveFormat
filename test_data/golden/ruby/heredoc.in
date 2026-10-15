@@ -89,3 +89,136 @@ def usage = m <<~TEXT
   bar (+2)
 TEXT
 def f = m [1, 2]
+
+arguments = receiver(
+  <<~TAIL,
+    text
+  TAIL
+  next_value
+)
+
+if c then <<~C else 1 end
+  body
+C
+
+unless c then <<~C else 1 end
+  body
+C
+
+case c when 1 then <<~C end
+  body
+C
+
+if c then 1 elsif d then <<~C end
+  body
+C
+
+foo(if c then <<~C else 1 end)
+  body
+C
+
+z = (if c then <<~C else 1 end)
+  body
+C
+
+if c then <<~C else 1 end.strip
+  body
+C
+
+x = <<~A; y = if c then 1 else 2 end
+  body
+A
+
+collect {
+  consume <<~TEXT
+alpha
+TEXT
+}
+
+collect {
+  consume <<~TEXT; record 2
+beta
+TEXT
+  record 3
+}
+
+if ready
+  unless done
+    consume <<~TEXT
+gamma
+TEXT
+  end
+end
+
+while ready
+  until done
+    consume <<~TEXT
+delta
+TEXT
+  end
+end
+
+def guarded(ready)
+  if ready
+    consume <<~TEXT
+epsilon
+TEXT
+  end
+end
+
+def sequential(first, second)
+  if first
+    consume_pair <<~FIRST, <<~EXTRA
+first
+FIRST
+extra
+EXTRA
+  end
+  if second
+    consume <<~SECOND
+second
+SECOND
+  end
+  0
+end
+
+# 条件を満たさない場合の本文の処理関数
+# @param ready 準備の状態
+# @return 処理の結果
+def explicit_guarded(ready)
+  return ((unless ready
+    consume_pair <<~FIRST, <<~SECOND
+first
+FIRST
+second
+SECOND
+  end))
+end
+
+# 条件を満たす場合の本文の処理関数
+# @param ready 準備の状態
+# @return 終了の値
+def yielded(ready)
+  yield (if ready
+    consume <<-TEXT.strip
+value
+TEXT
+  end)
+  return 0
+end
+
+collect {
+  break (while ready
+    consume <<~TEXT
+loop
+TEXT
+  end)
+}
+
+collect {
+  next (until done
+    consume <<~TEXT
+loop
+TEXT
+  end)
+}

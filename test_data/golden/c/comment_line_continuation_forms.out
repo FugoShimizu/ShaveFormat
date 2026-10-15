@@ -1,0 +1,26 @@
+/**
+ *
+ * @param x
+ * @return
+ */
+int F(int x) {
+	/* note \
+	 * continued */ return x;
+}
+
+/**
+ *
+ * @param authorized
+ * @return
+ */
+int open_file(int authorized) {
+	// Allowed dir: C:\data
+	if(!authorized) return -1;
+	int x = 0;
+	return x;
+}
+
+// ~~~
+int x;
+/* path C:\ */
+int d = 1;

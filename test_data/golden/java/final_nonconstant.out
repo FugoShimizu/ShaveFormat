@@ -71,3 +71,54 @@ class ConstantSemantics {
 		return;
 	}
 }
+
+class MixedFinal {
+	/**
+	 * 宣言子毎の不変指定を検査する関数
+	 */
+	static void CheckMixed() {
+		final int First = Nonconstant.Read();
+		int Second = Nonconstant.Read();
+		Second = 3;
+		System.out.println(First + Second);
+		// 終了
+		return;
+	}
+
+	/**
+	 * 個別宣言から同じ群を検査する関数
+	 */
+	static void CheckSeparate() {
+		final int First = Nonconstant.Read();
+		int Second = Nonconstant.Read();
+		Second = 3;
+		System.out.println(First + Second);
+		// 終了
+		return;
+	}
+}
+
+class Foo {
+	/**
+	 *
+	 */
+	void bar() {
+		final int a = 1, b = 2, c = 3;
+		return;
+	}
+
+	int x = 10;
+	int y = 20;
+}
+
+class A {
+	/**
+	 * 処理
+	 */
+	void F() {
+		int _ = G();
+		boolean running = true;
+		while(running) running = H();
+		return;
+	}
+}

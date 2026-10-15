@@ -11,3 +11,48 @@ use const App\Config\{LIMIT, OFFSET};
 labelA:
 
 echo Item::class;
+
+namespace ImportedStops;
+
+use function \exit as Stop;
+
+/**
+ * 名前空間のインポートした標準関数で終える
+ */
+function importedStop() {
+	sToP(0);
+}
+
+namespace LocalStops;
+
+/**
+ * 別の名前空間のインポートを参照せず戻る
+ */
+function localStop() {
+	Stop(0);
+	return;
+}
+
+namespace MixedImports;
+
+use Other\{function quit as stop, const V, T};
+
+/**
+ * グループでインポートした別対象の関数から戻る
+ */
+function mixedStop() {
+	stop(0);
+	return;
+}
+
+namespace LateImports;
+
+/**
+ * 定義の後のインポートを適用せず戻る
+ */
+function beforeImport() {
+	stop(0);
+	return;
+}
+
+use function \exit as stop;

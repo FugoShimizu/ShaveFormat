@@ -1,7 +1,0 @@
-/**
- *
- */
-func Loop() {
-	repeat {} while Something()
-	return
-}

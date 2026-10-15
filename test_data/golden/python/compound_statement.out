@@ -20,6 +20,46 @@ class C:
 			pass
 		finally:
 			pass
+		try:
+			value = {}
+		except KeyError:
+			value = {}
+		except TypeError:
+			value = { 1 }
+		except ValueError:
+			value = { item: item for item in items }
+		else:
+			value = { item for item in items }
+		finally:
+			value = {}
+		try:
+			value = { 1 }
+		except LookupError:
+			value = { item for item in items }
+		finally:
+			value = {}
+		try:
+			value = {}
+		except* TypeError:
+			value = { 1 }
+		except* ValueError:
+			value = { item for item in items }
+		else:
+			value = { item: item for item in items }
+		finally:
+			value = {}
+		if first:
+			value = {}
+		elif second:
+			value = {}
+		elif additional:
+			value = { 1 }
+		elif third:
+			value = { item: item for item in items }
+		elif fourth:
+			value = { item for item in items }
+		else:
+			value = {}
 		return len(items)
 
 	def h(self, a):
@@ -54,3 +94,25 @@ class Box:
 
 	def double(self):
 		return self.value * 2
+
+def f():
+	while True:
+		g()
+
+def read(path):
+	"""経路の本文を読む"""
+	try:
+		return load(path)
+	except ValueError as e:
+		return report(e)
+	except (OSError, IOError) as e:
+		return log(e)
+	finally:
+		close()
+
+try:
+	work()
+except* TypeError:
+	h1()
+except* ValueError:
+	h2()

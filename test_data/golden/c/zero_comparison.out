@@ -8,7 +8,7 @@ int Probe(int N) {
 	if(N == 0) return 0;
 	// 制御条件の非等値比較は x を案内する
 	while(N != 0) --N;
-	// 値文脈のゼロ比較は警告しない
+	// 値文脈の０比較は真偽値を保持
 	const int Flag = N == 0;
 	// 返戻する
 	return Flag;
@@ -30,4 +30,55 @@ int ProbeContexts(const int N) {
 	const int Result = N ? N != 0 : 0;
 	// 判定結果の返戻
 	return Result;
+}
+
+/**
+ * 非ゼロの値の更新関数
+ * @param Value 値
+ * @return 更新した値
+ */
+int ZeroCopy(int Value) {
+	if(Value != 0) ++Value;
+	// 更新した値の返戻
+	return Value;
+}
+
+/**
+ * 浮動小数の値の更新関数
+ * @param Value 値
+ * @return 更新した値
+ */
+double FloatZero(double Value) {
+	if(Value != 0) Value = 1;
+	// 更新した値の返戻
+	return Value;
+}
+
+/**
+ * トークンの境界の照合
+ */
+void TokenBoundaries() {
+	if(A) Z = X++ + Y;
+	if(B) Z = X + ++Y;
+	if(A) Z = X-- - Y;
+	else if(B) Z = X - --Y;
+	if(A) {
+		Z = X++ + Y;
+		Touch();
+	}
+	if(B) {
+		Z = X + ++Y;
+		Touch();
+	}
+	if(A) {
+		Z = X-- - Y;
+		Touch();
+	} else if(B) {
+		Z = X - --Y;
+		Touch();
+	}
+	if(A) Z = X + Y;
+	else if(B) Z = X + Y;
+	// 終了
+	return;
 }

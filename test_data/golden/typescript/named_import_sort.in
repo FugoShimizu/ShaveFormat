@@ -1,5 +1,5 @@
-import { View, Text, StyleSheet } from "react-native";
-import { useState, useEffect } from "react";
+import { omega as alpha, Box, count } from "./alpha";
+import { type Gamma, beta } from "./box";
 import {
 	zed,	// note
 	ant		// note
@@ -9,3 +9,14 @@ import {
 	cat,		// note
 	bee			// note
 } from "n";
+import { ba, b as c } from "alias-order";
+import { b as c, ba } from "reverse-alias-order";
+import { type A, b } from "type-order";
+
+export
+function f(x: number): number {
+	return x;
+}
+const a = 1;
+export
+{ a };

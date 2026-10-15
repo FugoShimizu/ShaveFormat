@@ -3,3 +3,6 @@ package p
 
 // not preamble
 import "C"
+// one
+// two
+import ("fmt"; "os")

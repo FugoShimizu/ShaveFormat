@@ -1,9 +1,23 @@
-1:5: Review: Add an explicit return type to this function; verify type, evaluation, external contract
-1:5: Violation: Function is missing a documentation comment
-1:7: Review: Add an explicit type to parameter 'n'; verify type, evaluation, external contract
-1:10: Review: Add an explicit type to parameter 'flag'; verify type, evaluation, external contract
-2:7: Review: Use the zero-test form required for this numeric type; verify type, value range
+1:5: Review: Add an explicit return type to this function
+1:7: Review: Add an explicit type to parameter 'n'
+1:10: Review: Add an explicit type to parameter 'flag'
+2:7: Review: Use the zero-test form required for this numeric type
 3:3: Violation: Add the required comment before this `return`
-4:7: Review: Use the zero-test form required for this numeric type; verify type, value range
-5:8: Review: Use the boolean-negation assignment required for this target; verify type, binding, evaluation
+4:7: Review: Use the zero-test form required for this numeric type
+5:8: Review: Use the boolean-negation assignment required for this target
 6:2: Violation: Add the required comment before this `return`
+9:2: Review: Inline immediately returned variable K
+14:2: Review: Inline immediately returned variable K
+37:6: Review: Use the boolean-negation assignment required for this target
+42:2: Review: Inline immediately returned variable é
+47:2: Review: Inline immediately returned variable ﬃ
+52:2: Review: Inline immediately returned variable 가
+57:2: Review: Inline immediately returned variable à̕
+69:2: Review: Inline immediately returned variable a
+74:2: Review: Inline immediately returned variable a
+79:2: Review: Inline immediately returned variable a
+84:2: Review: Inline immediately returned variable a
+89:2: Review: Inline immediately returned variable a
+94:2: Review: Inline immediately returned variable a
+99:2: Review: Inline immediately returned variable a
+104:2: Review: Inline immediately returned variable a

@@ -27,6 +27,9 @@ g(a || (b || c));
 g((a && b) && c);
 g(a && (b || c) || d);
 g(((a && b)) || c);
+g(x && ((a || b) || d));
+g((a || b) || d);
+g(x && (a || (b || d)));
 g((a ** b) ** c);
 g(a ** (b ** c));
 g(a ** (b * c));
@@ -42,3 +45,182 @@ const f = <T>(x: T) => x;
 let x = ((a + b)) * c;
 let y = (p[b + c]) * a;
 ((<any>q)) = 2;
+
+class Box<T> {
+	v?: T;
+}
+const a = (x) => x;
+const b = (x: number) => x;
+const c = <T>(x: T) => x;
+const d = (x): number => x;
+const e = (x?) => x;
+const f = (x = 1) => x;
+const g = (...x) => x;
+const h = ({ x }) => x;
+const k = new Box<number>();
+const m = new Box();
+const n = new Box()!;
+const p = new Box() as Box<number>;
+const q = (new Box()) < (new Box());
+console.log(a(1), b(2), c(3), d(4), e(5), f(), g(6), h({ x: 7 }), k.v, m.v, n.v, p.v, q);
+
+const x = (a.b).c + (g()).h + (a[0]).b + (f)(1) + (a.b)(2) + (this).x + (1).x + (a?.b).c + (new A).b + (new A()).b + ("abc").length + ([1]).length + ((a.b)).c;
+const y = (x!).y + (/re/).test(s) + (f(a?.b)).c;
+
+value = (function() {})();
+value = (function() {}).call(this);
+f((function() {})());
+value = (class {}).name;
+value = (function*() {})();
+value = (async function() {})();
+(function() {})();
+export default (function() {})();
+value = (() => 1)();
+
+let a1 = (-a) * b;
+let a2 = c - (-a) * b;
+let a3 = x - (-1);
+let a4 = -(-x);
+let a5 = f((-a));
+let a6 = !(-a);
+let a7 = (-a) ** 2;
+let a8 = -(a + (b * c));
+let a9 = (a++) + (++b);
+
+const x = (a)in(b);
+const y = (a)instanceof(B);
+
+const firstArrowSequence = ((() => 1), 2);
+const lastArrowSequence = (1, (() => 2));
+const arrowItems = [(() => 1), (() => 2)];
+const absorbingArrow = (() => 1) + other;
+const rightArrow = [other + (() => 2), 1];
+
+const logicalConstructor=new (A||B)(1);
+const conditionalConstructor=new (c?A:B)(1);
+const nullishConstructor=new (A??B)();
+const bareConstructor=new (A||B);
+const memberConstructor=new (c?A.x:B.x)(1).value;
+const awaitedConstructor=new (await load())(1);
+const calledConstructor=new (factory())(1);
+const plainConstructor=new (A)(1);
+
+const awaitedCast=(await r) as T;
+const awaitedSatisfies=(await r) satisfies T;
+const awaitedChain=(await r) as unknown as T;
+f((await r) as T);
+const awaitedInstance=(await r) instanceof A;
+const awaitedSum=(await r)+1;
+
+declare const a: unknown, b: number, n: number | null;
+const x = (a as boolean) ? -b : 2;
+const y = (n as number | null) ?? 3;
+const z = (a as boolean) && b;
+
+let a = 1;
+let m = (mode as number) & 1;
+let n = (x as any) < 2;
+declare function f(a: any, b: any): void;
+f((a < b), c > (-d));
+(<any>x) = 2;
+(x as number) = 3;
+let o = (mode as number) + 1;
+let p = x - (mode as number) * 2;
+let q = (x as boolean) ? 1 : 2;
+for ((x as any) in o) {}
+let r = a < (m as number) + n;
+let s = x - (m satisfies number) * 2;
+let t = (m satisfies number) + 1;
+
+function g(cb: () => number = (() => 2)) {}
+class K { m(f = (() => 1)) {} }
+
+let unionCast = a as (A | B);
+let intersectionCast = a as (A & B);
+let functionCast = a as (() => A);
+let constructorCast = a as (new () => A);
+let conditionalCast = a as (A extends B ? A : B);
+let keyCast = a as (keyof A);
+let readonlyCast = a as (readonly A[]);
+let unionCheck = a satisfies (A | B);
+let functionCheck = a satisfies (() => A);
+let guardedCast = (a as (A | B)) & 1;
+
+a = new Foo<Bar>!();
+b = new Foo!();
+c = new Foo<Bar>!(1);
+d = new Foo();
+e = new Foo(new Bar<Baz>!());
+
+declare const a: any;
+declare const x: number;
+export const r = [(new a)!.c, (new a)!(), (new a)![0], (new a)!, (new a())!.c, new (a!.b)(x), (new (a!.b))()];
+
+declare function foo(a: number, b: number): number | null;
+declare const items: { id: number }[];
+const v = foo(
+  1 ,2 )!;
+const item = items.find((x) => {
+        return x.id  ===  1;
+})!;
+const w = <any> foo( 1,2 );
+const d = (a - b!) / 1000, e = (-a!).x, g = (a.b!) * 2;
+const nn1 = (mm++)!, nn2 = (a--)!, nn3 = (a.b)!.c;
+g(f<typeof import("x"), B>(y));
+
+f(a < b, c >> d);
+const v = [a < b, c >>= d];
+const w = (a < b, c >>> d);
+const r = f<typeof import("x")>("y"), s = f<typeof import("x")>(y)(z), t = f<typeof import("x")>("y").z;
+
+const binaryCastNullish = p.x ?? (p.y as string);
+const binaryCheckNullish = p.x ?? (p.y satisfies string);
+const binaryCastOr = p.x || (p.y as string);
+const binaryCheckOr = p.x || (p.y satisfies string);
+const binaryCastAnd = p.x && (p.y as string);
+const binaryCheckAnd = p.x && (p.y satisfies string);
+const binaryCastEqual = p.x === (p.y as string);
+const binaryCheckEqual = p.x === (p.y satisfies string);
+const arrayCastNullish = p.x ?? ([1] as number[]);
+const arrayCheckNullish = p.x ?? ([1] satisfies number[]);
+const arrayCastOr = p.x || ([1] as number[]);
+const arrayCheckOr = p.x || ([1] satisfies number[]);
+const arrayCastAnd = p.x && ([1] as number[]);
+const arrayCheckAnd = p.x && ([1] satisfies number[]);
+const arrayCastEqual = p.x === ([1] as number[]);
+const arrayCheckEqual = p.x === ([1] satisfies number[]);
+const objectCastNullish = p.x ?? ({ x: 1 } as Record<string, number>);
+const objectCheckNullish = p.x ?? ({ x: 1 } satisfies Record<string, number>);
+const objectCastOr = p.x || ({ x: 1 } as Record<string, number>);
+const objectCheckOr = p.x || ({ x: 1 } satisfies Record<string, number>);
+const objectCastAnd = p.x && ({ x: 1 } as Record<string, number>);
+const objectCheckAnd = p.x && ({ x: 1 } satisfies Record<string, number>);
+const objectCastEqual = p.x === ({ x: 1 } as Record<string, number>);
+const objectCheckEqual = p.x === ({ x: 1 } satisfies Record<string, number>);
+const looseCastEqual = p.x == (p.y as string);
+const looseCheckEqual = p.x == (p.y satisfies string);
+const looseCastUnequal = p.x != (p.y as string);
+const looseCheckUnequal = p.x != (p.y satisfies string);
+const strictCastUnequal = p.x !== (p.y as string);
+const strictCheckUnequal = p.x !== (p.y satisfies string);
+const bitCastOr = p.x | (p.y as number);
+const bitCheckOr = p.x | (p.y satisfies number);
+const bitCastXor = p.x ^ (p.y as number);
+const bitCheckXor = p.x ^ (p.y satisfies number);
+const bitCastAnd = p.x & (p.y as number);
+const bitCheckAnd = p.x & (p.y satisfies number);
+const nestedCast = p.x ?? ((p.y as string));
+const chainedCast = p.x || (p.y as unknown as string);
+const chainedCheck = p.x && (p.y as string satisfies string);
+const unionRightCast = p.x ?? (p.y as string | null);
+const rightCastSum = p.x + (p.y as number);
+const rightCheckLess = p.x < (p.y satisfies number);
+const rightCastPower = p.x ** (p.y as number);
+const assignedCast = target = (p.y as string);
+const assignedCheck = target = (p.y satisfies string);
+const conditionalRightCast = flag ? p.x : (p.y as string);
+const leftNullishCast = (p.x as string) ?? p.y;
+const nestedRightCast = p.x ?? (p.y as string) + 1;
+const nestedRightCheck = p.x || (p.y satisfies number) * 2;
+const assignedNestedCast = target = (p.y as string) + 1;
+const conditionalNestedCast = flag ? p.x : (p.y as string) + 1;

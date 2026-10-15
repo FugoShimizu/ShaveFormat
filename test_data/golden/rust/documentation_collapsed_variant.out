@@ -1,0 +1,19 @@
+// 赤
+// 青
+enum E { Red, Blue }
+
+// 左
+// 右
+struct Fields { left: i32, right: i32 }
+struct Plain { left: i32, right: i32 }
+
+struct Expanded {
+	/**
+	 * 先の値
+	 */
+	first_field_with_a_name_long_enough_to_require_an_expanded_body: i32,
+	/**
+	 * 後の値
+	 */
+	second_field_with_a_name_long_enough_to_require_an_expanded_body: i32
+}

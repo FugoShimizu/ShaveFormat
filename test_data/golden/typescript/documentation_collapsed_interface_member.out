@@ -1,3 +1,0 @@
-// @deprecated use key
-// TODO: rename
-interface Props { id: string }

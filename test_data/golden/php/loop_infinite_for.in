@@ -1,5 +1,0 @@
-<?php
-for(;;) {
-	echo 1;
-	break;
-}

@@ -49,7 +49,9 @@ abstract class Base implements Payable {
 }
 
 final class Cart extends Base {
-	/** @var array<int, Item> */
+	/**
+	 * @var array<int, Item>
+	 */
 	private array $items = [];
 
 	/**

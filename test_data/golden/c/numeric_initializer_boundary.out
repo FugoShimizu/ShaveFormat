@@ -9,3 +9,25 @@ double InspectNumbers(void) {
 	// 数値と配列長の合計の返戻
 	return Hex + Other + Negative + Exact + Fraction + Signed + Decimal + sizeof(Values) / sizeof(Values[0]);
 }
+
+int SpacedNegative = -1;
+int SpacedPositive = +1;
+double SpacedDecimal = -1.5;
+int SpacedHex = -0X1;
+int ParenthesizedNegative = -1;
+int NestedNegative = -(-1);
+
+/**
+ * 符号付きの被演算子の検査関数
+ */
+void InspectSignedOperands(void) {
+	Consume(-1 > 0);
+	Consume(+1);
+	// 終了
+	return;
+}
+
+double HexDoubles[] = { 0X1.0P0, 0X0.8P0, -0XA.0P+2, -0X0.8P-2, 0X1.AP0, 0X1.FP0, 0XFP-2, -0X0.0P0 };
+float HexFloats[] = { 0X1.0P0F, 0X0.8P0F, -0XA.0P+2F, -0X0.8P-2F };
+long double HexLongs[] = { 0X1.0P0L, 0X0.8P0L, -0XA.0P+2L, -0X0.8P-2L };
+int IntegerBases[] = { 0X1E2, 0XABC, 0B1010, 0B1100, 0755 };

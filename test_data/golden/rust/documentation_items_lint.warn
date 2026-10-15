@@ -1,3 +1,5 @@
-1:1: Violation: Use outer Rust block documentation for this documentation
-9:16: Violation: Documentation is missing a description for parameter 'b'
-9:27: Violation: Documentation is missing a return-value description
+8:16: Violation: Documentation is missing a description for parameter 'b'
+8:27: Violation: Documentation is missing a return-value description
+65:18: Violation: Documentation is missing a description for parameter 'x'
+96:11: Review: Add an explicit type to parameter #1
+96:14: Review: Add an explicit type to parameter #2

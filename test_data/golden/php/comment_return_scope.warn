@@ -1,1 +1,2 @@
 18:2: Violation: Add the required comment before this `return`
+26:2: Review: Inline immediately returned variable $a

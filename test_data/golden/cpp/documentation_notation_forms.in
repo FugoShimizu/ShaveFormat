@@ -1,0 +1,90 @@
+/**
+使用例
+
+    const char *Value = "甲。乙";
+*/
+class Documentation {};
+
+/*!
+ * 足す
+ */
+int Add(int a) {
+	return a;
+}
+/*******************
+ * Utilities
+ *******************/
+int f(int a) {
+	return a;
+}
+
+class A {
+	int x; /** Returns a. */ int m(int a) { return a; }
+};
+
+class A {
+public:
+	/// 取得する
+	/// @param a 引数
+	/// @return 値
+	int Get(int a) { return a; }
+
+	//! 設定する
+	void Set(int a) { X = a; }
+
+	////////////////////
+	int Reset() { X = 0; return X; }
+
+	int X;
+};
+
+/**
+ * 呼ぶ
+ */
+void F() {
+	///@brief x
+	G();
+}
+
+int /** Hello */ InlineFrame(int a){return a;}
+
+/** A */
+/** ========== X ========== */
+/** B
+ * @param b B value
+ * @param a A value
+ */
+int SectionDocs(int a,int b){return a+b;}
+
+/** First
+ * @param b B value
+ * @param a A value
+ * @return Result
+ */
+/** ========== Y ========== */
+/** Second
+ * @param c C value
+ */
+int CoveredDocs(int a,int b,int c){return a+b+c;}
+
+/** A */
+/** B
+ * @param b B value
+ * @param a A value
+ */
+int AdjacentDocs(int a,int b){return a+b;}
+
+/** */
+int EmptyVariable;
+/**
+ *
+ */
+int ExplicitEmptyVariable;
+/** */
+void EmptyFunction() {}
+
+/**
+ * .
+ *
+ */
+void NormalizedEmptyFunction() {}

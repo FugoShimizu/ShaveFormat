@@ -1,0 +1,121 @@
+def update
+  w
+  transaction do
+    x
+    # y の説明
+    y
+  end
+rescue StandardError => e
+  z
+end
+
+def update2
+  w
+  items.each { |i|
+    x
+    # y2 の説明
+    y
+  }
+ensure
+  z
+end
+
+def output_value
+  puts "x"
+end
+
+def assignment_value
+  x = 1
+end
+
+def rescued_value
+  begin
+    1
+  rescue
+    2
+  ensure
+    h()
+  end
+end
+
+def rescued_else
+ begin
+ 1
+ rescue
+ 2
+ else
+ 3
+ ensure
+ h()
+ end
+end
+
+def assignment_update
+ x += 1
+end
+
+def self.rescued_else
+ 1
+rescue
+ 2
+else
+ 3
+ensure
+ h()
+end
+
+# 読む
+# @param path [String] 経路
+# @return [String] 本文
+def read(path)
+  return load(path)
+rescue ArgumentError => e
+  return report(e)
+rescue IOError => e
+  return log(e)
+ensure
+  close
+end
+
+x = bar, foo rescue 1
+
+def parse(options, name)
+	opt = options[name] and (options[name] = Integer(opt)) rescue nil
+	return options
+end
+
+def f
+  g = -> { return 1 }
+  puts g.call
+end
+
+def f(a)
+  (+"x#{a}").tap do |s|
+    s << "y"
+  end
+end
+
+def g(a)
+  (+"x").concat(a)
+end
+
+def h(a)
+  (a + 1).tap { |s| p s }
+end
+
+def f1; x = 1; - 1.abs; end
+def f2; x = 1; + 1.to_s; end
+def f3; x = 1; - 2 ** 2; end
+def f4; x = 1; - 1; end
+def f5; x = 1; - x.abs; end
+def f6; x = 1; -1.abs; end
+def g1; x = 1; - x + 1; end
+def g3; x = 1; - x.abs + 1; end
+def g6; x = 1; + x * 2; end
+def g7; x = 1; - 1.abs + 1; end
+def g8; x = 1; + 1 + 2; end
+def h1; x = 1; + 1.to_s.freeze.frozen?; rescue NoMethodError; :err; end
+def h2; x = 1; +1.to_s.freeze.frozen?; end
+def h3; x = 1; y = + 1[0]; y; end
+def h5; x = 1; - 1[0] + 2; end
+p [f1, f2, f3, f4, f5, f6, g1, g3, g6, g7, g8, h1, h2, h3, h5]

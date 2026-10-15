@@ -17,3 +17,36 @@ fn dispatch(code: i32) {
 	}
 	return;
 }
+
+/**
+ * 値の取得関数
+ *
+ * # Returns
+ * 取得した値
+ */
+fn escaped_return() -> i32 {
+	let a: i32 = g();
+	return r#a;
+}
+
+/**
+ * クロージャの束縛を区別する関数
+ *
+ * # Returns
+ * 取得した値
+ */
+fn closure_binding() -> i32 {
+	let a: i32 = g(|a| -> i32 { a });
+	return a;
+}
+
+/**
+ * タプルの導入を区別する関数
+ *
+ * # Returns
+ * 取得した値
+ */
+fn tuple_binding() -> i32 {
+	let a: i32 = g(|(a,): (i32,)| -> i32 { a });
+	return a;
+}

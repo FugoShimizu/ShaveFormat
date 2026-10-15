@@ -21,3 +21,19 @@ class K {
 		const int Y = 2;
 	}
 };
+
+decltype([]{}) First, Second;
+
+struct Shared { decltype([]{}) First, Second; };
+
+struct S { int A; int B; } while名;
+struct T { int A; int B; } elseName;
+struct U { int A; int B; } finally_value;
+
+class A {
+public:
+	virtual ~A()   =   0 ;
+};
+
+struct EmptyDeclarations { ; int B; ; };
+union EmptyUnion { ; int B; ; };

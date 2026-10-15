@@ -1,3 +1,4 @@
+<meta charset="utf-8">
 <div><span>q</span><span>r</span></div>
 <div>
 	<span>q</span>
@@ -5,12 +6,16 @@
 </div>
 <p>x<b>y</b>z<i>w</i></p>
 <p>a<b> x</b>y<span> </span>z</p>
-<p>a<script>
-	f();
-</script>b</p>
-<p>a <script>
-	f();
-</script>b</p>
+<p>
+	a<script>
+		f();
+	</script>b
+</p>
+<p>
+	a <script>
+		f();
+	</script>b
+</p>
 <p>{x} <b>y</b> a) }b</p>
 <div>t<p>a</p>u</div>
 <p>
@@ -19,13 +24,15 @@
 		<div>y</div>
 	</span>b
 </p>
-<svg>
-	<g>
-		<rect />
-		<rect />
-	</g>
-	<text>a<tspan>b</tspan> c</text>
-</svg>
+<svg><g><rect /><rect /></g><text>a<tspan>b</tspan> c</text></svg>
 <p>a<b>x</b>c</p>
 Hello<b>x</b>
 <span>q</span><span>r</span>
+<p>&&=</p>
+<p>x > y</p>
+<p>&&amp;>&#62;&gt;&</p>
+<p data-value="a&b>c">a&<b>></b>&</p>
+<div><span>a</span><circle></circle><span>b</span></div>
+<div><span>a</span><svg></svg><span>b</span></div>
+<div><span>a</span><math><mi>x</mi></math><span>b</span></div>
+<div><span>a</span><dialog></dialog><span>b</span></div>

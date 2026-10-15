@@ -1,0 +1,73 @@
+def f():
+    for s in "a", "b", \
+             "c", \
+             "d":
+        g(s)
+    y = "a", \
+        "b"
+    x = 1 + \
+        2
+
+x = 0
+# c
+\
+y = 1
+
+class A:
+    # d
+    \
+    y = 1
+
+for c in changes:
+  try:
+    company = Company.get(c[1])
+    company.save()
+  except:
+    print("error")
+
+class A:
+    x = 0
+    \
+    y = 1
+print(A.y)
+def f():
+    a = 1
+    \
+    return a
+print(f())
+for i in range(2):
+    \
+    print(i)
+\
+z = 1 + \
+    2
+print(z)
+
+def f():
+    total_slots = (external_slots.count() + internal_slots.count() +
+                   len(google_slots) + len(msoffice_slots) + len(garoon_slots) + len(cybozu_slots))
+    return total_slots
+
+
+def g(first_part, second_part, third_part, fourth_part, fifth_part, sixth_part, extra, trailing):
+    body: str = first_part + "-" + second_part + "-" + third_part + "-" + fourth_part + "-" + fifth_part + "-" + sixth_part + "-" + extra
+    label = first_part + "-" + second_part + "-" + third_part + "-" + fourth_part + "-" + fifth_part + "-" + sixth_part + "-" + trailing
+    return body + label
+
+
+def h():
+    cases = (
+        ("swift", "let v = a" + "".join(" ?? b%d * c%d << d%d" % (index, index, index) for index in range(3000)) + "\n"),
+        ("swift", "let v = a" + "".join(" ?? b%d * c%d << d%d" % (index, index, index) for index in range(3000)) + "\nxxxxxxxxxxxxxxx"),
+    )
+    return cases
+
+
+def k(token, opener, blocks):
+    stacked: list[str] = re.findall(rf"([ \t\u3000]+){re.escape(opener)} ", token.text[len(opener):]) if opener not in blocks else []
+    return stacked
+
+def long_signature(codes: dict[Path, str], bodies: dict[str, list[tuple[Path, str]]], aliases: dict[str, str], graph: dict[str, set[str]]) -> list[str]:
+    return []
+
+annotated: str = first_component_name + second_component_name + third_component_name + fourth_component_name + fifth_component_name

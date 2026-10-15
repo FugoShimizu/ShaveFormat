@@ -1,0 +1,12 @@
+def replaced() -> None:
+	import sys
+	sys.exit = lambda: None
+	sys.exit()
+	# 通常復帰後の返戻
+	return
+
+def original() -> None:
+	import sys
+	sys.exit()
+	# 標準の終了後の返戻
+	return

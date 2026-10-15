@@ -2,8 +2,17 @@ if a then
 # c
 end
 
-if b
+if b then
 # d
-else
-	x
+else x end
+
+#
+# @param o
+# @param p
+# @return
+def v(o, p)
+	return o *
+	# note
+	p..(o + 1) *
+	p - 1
 end

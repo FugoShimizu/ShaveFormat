@@ -1,0 +1,121 @@
+class A
+{ // 本体
+	int x;
+
+	void f()
+	{ // 処理
+		g();
+		h();
+	}
+}
+
+class C {
+	void f() {
+		try { g(); } catch(
+			// 例外の説明
+			Exception e) { h(); }
+	}
+}
+
+class A {
+	void m() {
+		x(); // c2
+	}
+	/* c1 */ }
+
+class B {
+	void n() {
+		y();
+	/* c3 */ }
+}
+
+class A {
+	void f() {
+		if (x) {
+			y();
+			v();
+		} else if (
+			a &&
+			b
+			// c
+		) {
+			z();
+			w();
+		}
+	}
+}
+
+class A {
+	void f(int x) {
+		switch (x) {
+			case 1:
+				break;
+			default:
+				// 既定
+		}
+		switch (x) {
+			case 2:
+				// 空の case
+		}
+	}
+}
+
+class A {
+	void f() {
+		label: /* x */ ;
+		for (int i = 0; /* c */ ; i++) {
+			break;
+		}
+		formFeedA();
+// own
+		formFeedC();
+	}
+}
+
+class A {
+	void f() {
+		// c8
+		/* c9 */
+	}
+	void g() { x(); }
+}
+
+class A {
+	/** 面積 */
+	int area(
+		/** 幅 */
+		int w,
+		int h
+	) {
+		return w * h;
+	}
+}
+
+class A {
+	static { // s
+		g();
+	}
+	{ ; ; }
+	void f(int a) {
+		try { // t
+			g();
+		} finally { // f
+			h();
+		}
+		if (a > 0) { // 真
+			g();
+		} else { // 偽
+			h();
+		}
+	}
+}
+
+class BoundaryProbe {
+	/** Keep boundaries */
+	void EmptyBoundary() { /* Read. Return. */ }
+	
+	/** Keep boundaries */
+	void EmptyBoundaryPair() { /* Read */ /* Return */ }
+}
+// "Read here." 日本語ABC "Return now."
+// 'Read here.' 甲, B '?Return now.' 日本語ABC '!Finish here.'

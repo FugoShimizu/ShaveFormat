@@ -1,0 +1,28 @@
+3:2: Review: Reorder access specifiers as private → private protected → protected → internal → protected internal → public
+8:2: Review: Reorder access specifiers as private → private protected → protected → internal → protected internal → public
+14:2: Review: Reorder access specifiers as private → private protected → protected → internal → protected internal → public
+23:2: Review: Reorder access specifiers as private → private protected → protected → internal → protected internal → public
+29:2: Review: Reorder access specifiers as private → private protected → protected → internal → protected internal → public
+34:2: Review: Reorder access specifiers as private → private protected → protected → internal → protected internal → public
+39:2: Review: Reorder access specifiers as private → private protected → protected → internal → protected internal → public
+44:2: Review: Reorder access specifiers as private → private protected → protected → internal → protected internal → public
+50:2: Review: Reorder this member according to its role
+56:2: Review: Reorder this member according to its role
+61:2: Review: Reorder access specifiers as private → private protected → protected → internal → protected internal → public
+66:2: Review: Reorder access specifiers as private → private protected → protected → internal → protected internal → public
+71:2: Review: Reorder access specifiers as private → private protected → protected → internal → protected internal → public
+76:2: Review: Reorder access specifiers as private → private protected → protected → internal → protected internal → public
+82:2: Review: Reorder access specifiers as private → private protected → protected → internal → protected internal → public
+88:2: Review: Reorder access specifiers as private → private protected → protected → internal → protected internal → public
+94:2: Review: Reorder access specifiers as private → private protected → protected → internal → protected internal → public
+100:2: Review: Reorder access specifiers as private → private protected → protected → internal → protected internal → public
+106:2: Review: Reorder access specifiers as private → private protected → protected → internal → protected internal → public
+112:2: Review: Reorder access specifiers as private → private protected → protected → internal → protected internal → public
+118:2: Review: Reorder access specifiers as private → private protected → protected → internal → protected internal → public
+127:2: Review: Reorder access specifiers as private → private protected → protected → internal → protected internal → public
+133:2: Review: Reorder access specifiers as private → private protected → protected → internal → protected internal → public
+148:2: Review: Reorder access specifiers as private → private protected → protected → internal → protected internal → public
+162:2: Review: Reorder access specifiers as private → private protected → protected → internal → protected internal → public
+179:2: Review: Reorder access specifiers as private → private protected → protected → internal → protected internal → public
+191:2: Review: Reorder access specifiers as private → private protected → protected → internal → protected internal → public
+197:2: Review: Reorder this member according to its role

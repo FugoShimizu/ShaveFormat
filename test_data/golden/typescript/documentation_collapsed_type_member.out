@@ -1,3 +1,0 @@
-// a の説明
-// b の説明
-type T = { a: number, b: string };

@@ -1,7 +1,0 @@
-package p
-
-// Run runs
-//
-//	code()
-//   more
-func Run() {}

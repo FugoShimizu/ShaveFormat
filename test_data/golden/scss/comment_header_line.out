@@ -8,3 +8,9 @@
 		color: blue;
 	}
 }
+
+.a {
+	// stylelint-disable-next-line color-no-hex -- 理由
+	// 二文目
+	color: #FFF;
+}

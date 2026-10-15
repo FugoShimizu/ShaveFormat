@@ -1,0 +1,224 @@
+if(x) { // 条件
+	f();
+	g();
+}
+
+/**
+ *
+ * @return
+ */
+function h() { // 本体
+	return { a: 1 }; // 値
+}
+
+/**
+ *
+ */
+function f() {
+	try {
+		g();
+	} catch(e) { // t1
+		h();
+	} finally { // t2
+		k();
+	}
+	return;
+}
+
+/**
+ *
+ * @param c
+ * @param d
+ */
+function f(c, d) {
+	if(c) g();
+	// a
+	else if(d) h();
+	// b
+	// c
+	else if(e) k();
+	return;
+}
+
+if(x) {
+	y();
+	v();
+// c
+} else if(a && b) {
+	z();
+	w();
+}
+
+/**
+ *
+ * @param a
+ */
+function f(a) {
+	if(a) {
+		x();
+		z();
+	// before else
+	} else {
+		y();
+		w();
+	}
+	try {
+		x();
+	// before catch
+	} catch(e) {
+		y();
+	}
+	return;
+}
+
+/**
+ *
+ * @param a
+ * @param b
+ */
+function g(a, b) {
+	if(a) {
+		x();
+		z();
+	// before bare else
+	} else y();
+	if(a) {
+		x();
+		z();
+	// before else if
+	} else if(b) y();
+	if(a) x();
+	// 一つ目
+	// 二つ目
+	else y();
+	return;
+}
+
+/**
+ *
+ * @return
+ */
+async function f() {
+	let /* note
+	 * more */ x = 1;
+	++x;
+	const v = await /* a
+	 * b */ g();
+	return;
+	/* c
+	 * d */ x + v;
+}
+
+/**
+ *
+ * @param elems
+ * @param callback
+ * @return
+ */
+function map(elems, callback) {
+	var i = 0, ret = [];
+	if(isArray) for(; i < elems.length; ++i) {
+		ret.push(callback(elems[i]));
+		++count;
+	// Go through every key on the object
+	} else for(i in elems) {
+		ret.push(callback(elems[i]));
+		++count;
+	}
+	return ret;
+}
+
+/**
+ *
+ */
+function f() {
+a:
+b:
+	while(true) g();
+// tail
+}
+
+/**
+ *
+ */
+function f() {
+	if(a) {
+		g();
+		h();
+	// own
+	} else { // d1
+		k();
+		m();
+	}
+	try {
+		g();
+		h();
+	// before catch
+	} catch(e) {
+		k();
+		m();
+	}
+	return;
+}
+
+/**
+ *
+ */
+function SameLine() {
+	try {
+		g();
+		h();
+	// clause
+	} catch {}
+	return;
+}
+
+/**
+ *
+ */
+function NextLine() {
+	try {
+		g();
+		h();
+	// clause
+	} catch {}
+	return;
+}
+
+/**
+ *
+ * @return
+ */
+function f() {
+	x();
+	{ // bare
+		y();
+	}
+	try { // t
+		g();
+	} catch(e) { // c
+		k();
+	} finally { // f
+		m();
+	}
+	do g(); // d
+	while(c);
+	while(true) g(); // e
+	if(a === 1) g(); // 一
+	else if(a === 2) h(); // 二
+	else i(); // 他
+	switch(a) {
+	case 1:
+		g();
+		break;
+	default: // 他
+		h();
+	}
+	const o = { a: 1, b: 2 }; // obj
+	foo(a, { x: 1 }); // arg
+	return aaaa + bbbb; // ret
+}
+
+// TODO
+// deps
+useEffect(() => {}, [a]);

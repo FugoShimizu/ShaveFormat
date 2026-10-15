@@ -18,3 +18,5 @@ fun f() {
 		h()
 	}
 }
+// "Read here." 日本語ABC "Return now."
+// 'Read here.' 甲, B '?Return now.' 日本語ABC '!Finish here.'

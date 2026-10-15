@@ -17,3 +17,16 @@ func multiple(_ flag:Bool)->Void{while true,flag{print(3)}}
 func always()->Void{while true,true{continue}}
 /// a が真なら 1，b が真なら 2，其の他は 3 を返す．
 func chained(_ a:Bool,_ b:Bool)->Int{if a{return 1}else if b{return 2}else{return 3}}
+
+func Loop() {
+	repeat {
+	}
+	while Something()
+}
+
+func spacedBoundary(_ flag:Bool){if flag{print(1)} ;let value=2;print(value)}
+func nestedBoundary(_ flag:Bool){if flag{while flag{break} ;print(3)}	;print(4)}
+func closureBoundary(){let action={print(5)} ;action()}
+func localBoundary(){func action(){print(6)} ;action()}
+func trailingBoundary(){run{print(7)} ;print(8)}
+func emptyBoundary(){} ;let boundaryValue=9

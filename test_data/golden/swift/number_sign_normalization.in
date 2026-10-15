@@ -1,0 +1,30 @@
+let hex = 0xff
+let hexFloat = 0x1p4
+let exp = 1e5
+
+let x = 5, y = 3, z = 2
+let c = true
+print(y - (-x - y))
+print(z * (-x + y))
+print((-x - y) * 2)
+print(~(-x) & y)
+print(-(-x) - y)
+print(-(-x))
+print(!(!c))
+print(y - (-x))
+print(0..<(-1 + 3))
+
+/// 値の選択
+/// - Parameters:
+///   - x: 候補
+///   - y: 既定値
+/// - Returns: 選んだ値
+func pick(x: Int? = nil, y: Int = 0) -> Int {
+	// 選んだ値の返戻
+	return x ?? y
+}
+
+let signedHex: Double = -0xA.fp+2
+let upperExponent: Double = 0x1.AP-2
+let binary: Int = 0b1010
+let octal: Int = 0o17

@@ -1,4 +1,0 @@
-const /* c */ int a = 1, b = 2;
-struct S {
-	const /* e */ int x, y;
-};

@@ -1,7 +1,0 @@
-#if X
-
-const char *s = R"(a"  
-b"  
-)";
-
-#endif

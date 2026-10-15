@@ -1,0 +1,209 @@
+const f = x => x + 1;
+
+g(y => y, z => z);
+
+const o = { a: x => x, b: c ? 1 : 2 };
+const k = (x => x)(1);
+const m = a || (x => x);
+const n = [x => x];
+const x = 1; // a // b
+
+/**
+ *
+ * @return
+ */
+function* g() {
+	yield x => x;
+	throw x => x;
+}
+
+const t = c ? x => x : y => y;
+
+export default x => x;
+
+const a = x => x + 1;
+const b = async y => y;
+const c = z => z;
+const d = (p, q) => p + q;
+const e = new Date;
+const f = new Date().getTime();
+const g = new Date().getTime();
+const h = [new Set, new Set];
+const k = new Map()[0];
+const m = new new Function();
+
+console.log(a(1), b, c(2), d(3, 4), e instanceof Date, f, g, h.length, k, m);
+g(x && (a || b || d));
+g(a || b || d);
+g(x && (a || (b || d)));
+
+(
+	function(global, factory) {
+		if(typeof module === "object" && typeof module.exports === "object") module.exports = factory(global);
+	}(
+		typeof window !== "undefined" ? window : this,
+		function(window, noGlobal) {
+			return {};
+		}
+	)
+);
+
+void function() {
+	f();
+}();
+
+console.log(
+	typeof function() {
+		f();
+	}
+);
+
+const t = typeof class {
+	/**
+	 *
+	 */
+	m() {
+		f();
+		return;
+	}
+};
+
+/**
+ *
+ * @param cb
+ */
+function f(
+	cb = () => {
+		a();
+		b();
+	}
+) {
+	cb();
+	return;
+}
+
+/**
+ *
+ */
+function a() {}
+/**
+ *
+ */
+function b() {}
+/**
+ *
+ * @param cb
+ */
+function g(cb = () => 2) {}
+
+const [z = () => 6] = [];
+const { w = () => 7 } = {};
+const a = 1 .toString();
+const b = 1..toString();
+const c = 0X10.toString();
+const d = class A extends B {}.name;
+const e = class {}.name;
+
+foo(
+	class {
+		/**
+		 *
+		 */
+		m() {}
+	}
+);
+
+/**
+ *
+ * @param arr
+ * @param init
+ * @return
+ */
+function reduce(arr, init) {
+	let accumulator = init, initAccum = true;
+	arr.forEach(
+		function(value) {
+			accumulator = initAccum ? (initAccum = false, value) : sum(accumulator, value);
+		}
+	);
+	return accumulator;
+}
+
+const firstArrowSequence = (() => 1, 2);
+const lastArrowSequence = (1, () => 2);
+const arrowItems = [() => 1, () => 2];
+const absorbingArrow = (() => 1) + other;
+const rightArrow = [other + (() => 2), 1];
+
+/**
+ *
+ * @param x
+ * @return
+ */
+async function f(x) {
+	await x;
+	const y = await g();
+	await (a || b);
+	return y;
+}
+
+/**
+ *
+ * @return
+ */
+function* h() {
+	yield 1;
+	yield (a, b);
+}
+
+/**
+ *
+ */
+function t() {
+	throw new Error("e");
+}
+
+/**
+ *
+ * @return
+ */
+function u() {
+	return a && b;
+}
+
+const d = new Date(0);
+const e = new a.B;
+const g = new (a.b());
+const k = new (a?.b);
+const m = new a["B"];
+const n = new a.arr[0];
+const r = new (f()).default(x);
+const s = new a.b.c(x);
+const w = new (f().g).h(x);
+const z = new (a?.b).c(x);
+const t1 = new (f()).g`t`;
+const t2 = new (f())[0]`t`;
+const t3 = new a.b`t`;
+const t4 = new a.b`t`;
+
+for(k in a = o) {}
+
+/**
+ *
+ * @return
+ */
+async function v() {
+	await (0, f)(x);
+	const o = (await (0, f)(x)).exports, p = (await (0, f)(x)) ** 2, q = (await [a, b][0]).c;
+	return;
+}
+
+/**
+ *
+ * @return
+ */
+async function* asyncGenerator() {
+	yield 1;
+}
+
+const anonymousGenerator = function*() {};

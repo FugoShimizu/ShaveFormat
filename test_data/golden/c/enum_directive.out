@@ -1,7 +1,0 @@
-enum E {
-	A,
-	#ifdef X
-	B,
-	#endif
-	C
-};

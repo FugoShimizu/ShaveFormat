@@ -29,3 +29,50 @@ func (r *R) m() {
 	b()
 	return
 }
+
+// shadow
+func shadow(panic func()) {
+	panic()
+	return
+}
+
+// unshadowed
+func unshadowed() {
+	panic("stop")
+}
+
+// requiredEntry
+func requiredEntry() {
+	if panic(1); true {
+		g()
+	}
+}
+
+// selectReturn
+func selectReturn(c chan int) {
+	select {
+	case <-c:
+		return
+	}
+}
+
+// selectBreak
+func selectBreak(c chan int) {
+	select {
+	case <-c:
+		break
+	}
+	return
+}
+
+// selectEmpty
+func selectEmpty() {
+	select {}
+}
+
+// 普通の呼出は複数の短縮宣言の後でも復帰し得る
+func ordinaryAfterPair() {
+	a, b := 3, 4
+	use(a, b)
+	return
+}

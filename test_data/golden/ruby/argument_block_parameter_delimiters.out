@@ -1,0 +1,345 @@
+#
+# @return
+def f2(*)
+	return p :f2
+end
+
+#
+# @return
+def f4(**)
+	return p :f4
+end
+
+#
+# @return
+def f5(&)
+	return p :f5
+end
+
+#
+# @param a
+# @return
+def f6(a, *)
+	return p a
+end
+
+[[1, 2]].each { |a,| p a }
+
+[[1, 2]].each do |a,|
+	p a
+end
+
+foo { |x, y; i, j| i = x }
+foo { |x, y| }
+foo do |x, y| end
+
+fn = -> {}
+
+#
+# @param a
+# @return
+def foo(*a) = a
+
+x = foo(+1, 2)
+
+p x
+
+#
+# @param x
+# @return
+def ret1(x)
+	return(+x)
+end
+
+#
+# @param x
+# @return
+def ret2(x)
+	return x + 1
+end
+
+#
+# @param x
+# @return
+def ret3(x)
+	return(+x + 1)
+end
+
+#
+# @param x
+# @return
+def ret4(x)
+	return(- 1.abs)
+end
+
+#
+# @param x
+# @return
+def ret5(x)
+	return(..x)
+end
+
+#
+# @param x
+# @return
+def ret6(x)
+	return [x]
+end
+
+#
+# @param x
+# @return
+def ret7(x)
+	return yield(+x)
+end
+
+x = foo(+1)
+
+p(foo(+1))
+p(foo(..1))
+p(foo(a) { 1 })
+
+foo = 10
+
+p(foo(-2))
+
+y = - 2.abs
+z = -(2).abs
+
+case [1, 2]
+in [q,] then p q
+end
+
+v = bar - 1
+w = foo + 1 ? 2 : 3
+u = foo + 1..5
+z1 = quux(+1)
+z2 = quuz -2
+
+x.each do |a|
+	next [a, 1] if a
+	break [a] if a
+	next a if a
+end
+
+#
+# @return
+def g
+	yield [1]
+	yield(1)
+	return super [1]
+end
+
+#
+# @return
+def f
+	return g(<<~EOS, 1)
+    text
+  EOS
+end
+
+#
+# @param x
+# @return
+def nested(x)
+	g(<<~EOS, 1) if x
+      t
+    EOS
+	return nil
+end
+
+#
+# @return
+def pair
+	return g(<<~A, <<~B)
+    a
+  A
+    b
+  B
+end
+
+result = g(<<~TOP, 1)
+  top
+TOP
+
+#
+# @return
+def f
+	return g(<<~EOS, 1)
+    text
+  EOS
+end
+
+#
+# @param x
+# @return
+def nested(x)
+	g(<<~EOS, 1) if x
+      t
+    EOS
+	return nil
+end
+
+#
+# @return
+def pair
+	return g(<<~A, <<~B)
+    a
+  A
+    b
+  B
+end
+
+result = g(<<~TOP, 1)
+  top
+TOP
+
+while cond(<<~C)
+  c
+C
+	z
+end
+
+if cond(<<~D)
+  d
+D
+	z
+end
+
+x = cond(<<~D).ok?
+  text
+D
+
+x = cond(<<~D).ok?
+  text
+D
+
+if cond(<<~D).ok?
+  text
+D
+	g
+end
+
+if cond(<<~D).ok?
+  text
+D
+	g
+end
+
+x = cond(<<~D) && ready
+  text
+D
+
+x = cond(<<~D) && ready
+  text
+D
+
+logger.warn <<-ALPHA.strip, <<-BETA.strip, "a very long third argument string that pushes this particular call well past the one hundred twenty eight character limit"
+alpha body text
+	ALPHA
+beta body text
+	BETA
+
+rows = [<<~A, <<~B, <<~C]
+  alpha
+A
+  beta
+B
+  gamma
+C
+
+x = f(<<~X, g { 1 })
+  body
+X
+
+y = f(<<~Y, g do 1 end)
+  body
+Y
+
+z = foo(<<~Z).each do |q| a; b end
+  body
+Z
+
+f <<~FIRST_BODY
+  foo +1
+FIRST_BODY
+
+f <<~SECOND_BODY
+  bar +2
+SECOND_BODY
+
+z1 = quux(+1)
+z2 = quuz -2
+
+#
+# @param g
+# @return
+def f(
+	g = -> {
+		a
+		b
+	}
+)
+	return g.call
+end
+
+p(if a then 1 else 2 end)
+f(if a then b end, 2)
+
+g(
+	1,
+	if a
+		x
+		y
+	end
+)
+
+h = {
+	a: if x then 1 end,
+	b: a + b
+}
+
+x = if a then b end + 1
+
+f(if a then b end, 2)
+
+#
+# @param a
+# @param k
+# @param b
+# @return
+def m(*a, **k, &b) = a
+
+#
+# @return
+def f(*, **, &)
+	m(*)
+	m(**)
+	m(&)
+	m(1, &)
+	return m
+end
+
+a = 1
+
+m(a:)
+m 2
+
+x = (1..)
+
+p x
+
+y = (1..)
+
+p y
+
+z = m(2..)
+
+for i in (1..)
+	p i
+	break
+end
+
+exclusive = (1...)
+
+p exclusive

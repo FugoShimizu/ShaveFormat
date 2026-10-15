@@ -1,22 +1,27 @@
-/// 足す
-///
-/// # Arguments
-///
-/// * `a` - 左
+/**
+ * 足す
+ * # Arguments
+ * * `a` - 左
+ * * `b`
+ * # Returns
+ */
 fn add(a: i32, b: i32) -> i32 {
 	return a + b;
 }
 
-/// 何もしない
-///
-/// # Arguments
-///
-/// * `a` - 値
-///
-/// # Returns
-///
-/// 無し
+/**
+ * 何もしない
+ * # Arguments
+ * * `a` - 値
+ * # Returns
+ * 無し
+ */
 fn unit(a: i32) {
 	let _ = a;
 	return;
 }
+
+/**
+ *
+ */
+fn undocumented() -> () {}

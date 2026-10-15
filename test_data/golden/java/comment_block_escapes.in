@@ -1,0 +1,43 @@
+class A {
+	void f() {
+		/* a\u0041\u000ab */
+		g();
+	}
+}
+
+class A {
+	void f() {
+		/* a \\u000a b */
+		g();
+	}
+}
+
+class A {
+	void f() {
+		/* x \u000a g(); */
+		g();
+	}
+}
+
+// \u0028Read. Return.\u0029. Next.
+class Brackets {}
+// Read\u002e Return.
+class Period {}
+// \uuuu0028Read. Return.\uuuu0029. Next.
+class RepeatedBrackets {}
+// \\u0028Read. Return.
+class IneligibleEscape {}
+
+/* a
+ * b
+ *c
+ */
+class PhysicalDecoration {}
+/* a\u000a * b\u000a *c\u000a */
+class EscapedDecoration {}
+/* a
+ * b\u000a *c
+ */
+class MixedDecoration {}
+/* a\u000a *b\u000a *c\u000a */
+class UndecoratedEscape {}

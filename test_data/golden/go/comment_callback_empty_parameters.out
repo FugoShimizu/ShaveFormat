@@ -1,9 +1,0 @@
-package main
-
-// main
-func main() {
-	go func() { // worker
-		g()
-	}()
-	return
-}

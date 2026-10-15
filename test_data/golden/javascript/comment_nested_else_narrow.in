@@ -14,3 +14,18 @@ function map(elems, callback) {
 	}
 	return ret;
 }
+
+if(conditionValue) for(let i = 0; i < n; ++i) doWork(i); else doOther();
+
+if (a) {
+  for (; i < n; ++i) { x(); y(); }
+  // between branches
+} else {
+  for (j in values) { z(); w(); }
+}
+
+if (b) {
+  for (; i < n; ++i) { x(); y(); }
+} else {
+  for (j in values) { z(); w(); }
+}

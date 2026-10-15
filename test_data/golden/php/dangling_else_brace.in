@@ -13,3 +13,35 @@ if ($post) :
 	?>
 <?php
 endif;
+
+if($a) while($b) if($c) {} else echo 2;
+if($a) while($b) if($c) {} elseif($d) {} else echo 3;
+if($a) for($i=0;$b;++$i) if($c) {} else echo 2;
+if($a) for($i=0;$b;++$i) if($c) {} elseif($d) {} else echo 3;
+if($a) foreach($xs as $b) if($c) {} else echo 2;
+if($a) foreach($xs as $b) if($c) {} elseif($d) {} else echo 3;
+if($a) declare(ticks=1) if($c) {} else echo 2;
+if($a) declare(ticks=1) if($c) {} elseif($d) {} else echo 3;
+if($a) while($b) for($i=0;$b;++$i) if($c) {} else echo 2;
+if($a) while($b) for($i=0;$b;++$i) if($c) {} elseif($d) {} else echo 3;
+if($a) { while($b) if($c) {} } else echo 4;
+if($a) do if($c) echo 1; while($b); else echo 5;
+if($a) { if($b) {} else {} }
+if($a) if($b) {} else {}
+if($a) { do {} while($b); }
+if($a) do {} while($b);
+if($a) { if($b) x(); else y(); }
+if($a) { if($b) {} elseif($c) x(); else y(); }
+if($a) { do x(); while($b); }
+
+if($a) if($b) x(); else y();
+while($a) do x(); while($b);
+
+function classify($value) {
+	if ($value === 1) { firstOperationWithLongName($value); secondOperationWithLongName($value); thirdOperationName($value); } elseif ($value === 2) { fallbackOperation($value); finalOperation($value); }
+	return 0;
+}
+
+function register($sourceText, $position, $languageMode, &$handlers) {
+	if($position < strlen($sourceText) && $sourceText[$position] !== "\n" && shouldBreakAfterExpandedBrace("\n}", substr($sourceText, $position), $languageMode)) $handlers[] = $position;
+}

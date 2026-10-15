@@ -1,0 +1,468 @@
+// @deprecated 旧
+enum E { RED, BLUE }
+// 赤
+enum E { RED, BLUE }
+
+class C {
+	/**
+	 * 値
+	 */
+	int value;
+}
+
+enum E {
+	/**
+	 * 最初
+	 */
+	A,
+	B;
+
+	int value;
+}
+
+// === rule_docgen_generate ===
+class Calc {
+	/**
+	 *
+	 * @param a
+	 * @param b
+	 * @return
+	 */
+	public int add(final int a, final int b) {
+		return a + b;
+	}
+
+	/**
+	 *
+	 */
+	void reset() {
+		this.total = 0;
+		return;
+	}
+
+	/**
+	 *
+	 * @param seed
+	 */
+	Calc(int seed) {
+		this.total = seed;
+		return;
+	}
+}
+
+// === rule_docgen_reconcile ===
+class Geo {
+	/**
+	 * 面積を求める
+	 * @param width 幅
+	 * @param height
+	 * @param stale 余分な引数
+	 * @return 面積
+	 */
+	double area(double width, double height) {
+		return width * height;
+	}
+}
+
+class B extends A {
+	/**
+	 * {@inheritDoc}
+	 */
+	@Override int f(int a) {
+		return a;
+	}
+}
+
+class A {
+	/**
+	 * 処理
+	 */
+	void f() {
+		class Local {
+			/**
+			 * count
+			 */
+			int n;
+		}
+		// step
+		final int x = 1;
+		return;
+	}
+}
+
+class A {
+	/**
+	 * 合計を求める
+	 * @return 合計
+	 */
+	int f() {
+		/**
+		 * 点
+		 */
+		record P(int x, int y) {
+			/**
+			 * 合計
+			 */
+			static int total = 0;
+		}
+		// 処理
+		final Runnable r = new Runnable() {
+			/**
+			 * 回数
+			 */
+			int count = 0;
+
+			/**
+			 * 実行する
+			 */
+			public void run() {
+				++count;
+				return;
+			}
+		};
+		return new P(1, 2).x();
+	}
+}
+
+class A {
+	/**
+	 *
+	 * @param id the user id
+	 * @param verbose flag
+	 * @return the user
+	 */
+	User find(@PathVariable("id") long id, boolean verbose) {
+		return null;
+	}
+
+	/**
+	 *
+	 * @param xs values
+	 */
+	void g(@Nonnull final String... xs) {}
+}
+
+class A {
+	/**
+	 * 幅
+	 * TODO: 単位
+	 * @param w
+	 * @param h
+	 * @return
+	 */
+	int area(int w, int h) {
+		return w * h;
+	}
+}
+
+class A {
+	/**
+	 * 包む
+	 * @param <T> 要素の型
+	 * @param value 値
+	 * @return 包んだ値
+	 */
+	<T> T wrap(T value) {
+		return value;
+	}
+}
+
+class Continuations {
+	/**
+	 * Preserve descriptions
+	 * @param old
+	 * retained parameter
+	 * @return
+	 * retained result
+	 */
+	void keep() {}
+}
+
+class TypeParameterOrder {
+	/**
+	 * 型と値の対応を保つ
+	 * @param <B> 先の型
+	 * @param <A> 後の型
+	 * @param A 後の型の補足
+	 * @param first 先の値
+	 * @param second 後の値
+	 */
+	<B, A> void ordered(B first, A second) {}
+	/**
+	 * 型の順を保つ
+	 * @param <B> 先の型
+	 * @param <A> 後の型
+	 */
+	<B, A> void stable() {}
+}
+
+class SameParameterName {
+	/**
+	 * 型と同名の値を区別する
+	 * @param <T> 型
+	 * @param other 別の値
+	 * @param T 値
+	 */
+	<T> void same(int other, T T) {}
+}
+
+class C { /**
+ * Summary
+ * @param x
+ * @param x
+ */
+	void f(int x) {}
+}
+
+class DuplicateFailures { /**
+ * Summary
+ * @throws IllegalArgumentException
+ * @throws IllegalArgumentException
+ */
+	void f() {}
+}
+
+class DuplicateReturns { /**
+ * Summary
+ * @return
+ * @return
+ */
+	int f() {
+		return 1;
+	}
+}
+
+class DuplicateTypeParameters { /**
+ * Summary
+ * @param <T>
+ * @param <T>
+ */
+	<T> void f() {}
+}
+
+class MarkdownDuplicates {
+	/// Summary
+	/// @param x
+	/// @param x
+	void f(int x) {}
+}
+
+class OwnLineDuplicates {
+	/**
+	 * Summary
+	 * @param x
+	 * @param x
+	 */
+	void f(int x) {}
+}
+
+class SeparateDocs {
+	/**
+	 * First
+	 * Second
+	 * @param a Alpha
+	 */
+	void docBoundary(int a) {}
+}
+
+class EscapedName {
+	/**
+	 * Summary
+	 * @param a Value
+	 */
+	void f(int \u0061) {}
+}
+
+class InlineDocuments {
+	/**
+	 * Summary
+	 * @param a A
+	 * @param b B
+	 * @return
+	 */ int ordered(int a, int b) {
+		return a + b;
+	}
+}
+
+class SeparatedDocuments {
+	int /**
+	 * Hello
+	 * @param a
+	 * @return
+	 */ inlineFrame(int a) {
+		return a;
+	}
+
+	/**
+	 * A
+	 * ========== X ==========
+	 * B
+	 * @param a A value
+	 * @param b B value
+	 * @return
+	 */
+	int sectionDocs(int a, int b) {
+		return a + b;
+	}
+}
+
+class EscapedDocumentation {
+	/**
+	 * Summary
+	 * @param a\u0020Alpha
+	 */
+	void separator(int a) {}
+	/**
+	 * Summary
+	 * @param \u0061 Alpha
+	 */
+	void name(int a) {}
+	/**
+	 * Summary
+	 * @param \uuuu0061 Alpha
+	 */
+	void repeated(int a) {}
+	/**
+	 * Summary
+	 * @\u0070aram a Alpha
+	 */
+	void tag(int a) {}
+	/**
+	 * Summary
+	 * @param\u0020a Alpha
+	 */
+	void tagSeparator(int a) {}
+	/**
+	 * Summary
+	 * @param a\u0009Alpha
+	 */
+	void tabSeparator(int a) {}
+	/**
+	 * Summary
+	 * @param a Alpha
+	 */
+	void plain(int a) {}
+
+	/**
+	 * Summary
+	 * @\u0072eturn Value
+	 */
+	int result() {
+		return 1;
+	}
+
+	/**
+	 * Summary
+	 * @param <\u0054> Type
+	 */
+	<T> void type() {}
+	/**
+	 * {@\u0069nheritDoc}
+	 */
+	void inherited(int a) {}
+	/// Summary
+	/// @param \u0061 Alpha
+	void markdown(int a) {}
+	void inline(/** @param \u0061 Alpha */ int a) {}
+	/**
+	 * Summary
+	 * <\u0070re>a.b;  c.d;</\u0070re>
+	 */
+	void code() {}
+	/**
+	 * Summary
+	 * @param a Alpha
+	 * Literal \\u0061
+	 */
+	void literal(int a) {}
+}
+
+class TrailingDescription {
+	/**
+	 * A
+	 * ========== X ==========
+	 * B
+	 */
+	void trailing() {}
+}
+
+class EscapedLines {
+	/**
+	 * S
+	 * @param a Alpha
+	 */
+	void lineFeed(int a) {}
+	/**
+	 * S
+	 * @param a Alpha
+	 */
+	void carriageReturn(int a) {}
+	/**
+	 * S
+	 * @param a Alpha
+	 */
+	void pair(int a) {}
+	/**
+	 * S
+	 * <pre>a.\u000a  b.</pre>
+	 */
+	void preservedCode() {}
+}
+
+record GeneratedCompact(int x, int y) {
+	/**
+	 *
+	 * @param x
+	 * @param y
+	 */
+	GeneratedCompact {}
+}
+
+record SynchronizedCompact(int x, int y) {
+	/**
+	 * Summary
+	 * @param x
+	 * @param y Y
+	 * @param old Old
+	 * @return Obsolete
+	 */
+	SynchronizedCompact {}
+}
+
+class RegisteredTags {
+	/**
+	 * Summary
+	 * @arg missing
+	 * \param other
+	 * @template T
+	 * @param x Value
+	 */
+	void UnknownAliases(int x) {}
+	/**
+	 * &#64;param Ghost
+	 * @param x
+	 */
+	void LiteralTag(int x) {}
+	/**
+	 * &#64;param Ghost
+	 * @param x
+	 */
+	void EscapedLiteralTag(int x) {}
+	/**
+	 * &#92;param Ghost
+	 * @param x
+	 */
+	void BackslashLiteralTag(int x) {}
+	/**
+	 * &#92;&#92;u0040param Ghost
+	 * @param x
+	 */
+	void IneligibleLiteralTag(int x) {}
+}
+
+/**
+ * Header description
+ */
+class Header {
+	int value;
+}

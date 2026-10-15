@@ -34,3 +34,61 @@ void g(void);
 #endif
 
 /* lead */ #define GLOB "src/*.c"
+
+# // After linkage // Extra
+
+#if defined(__cplusplus)
+
+extern "C" {
+
+#endif
+
+int CALL_MODE api(int value);
+
+#if defined(__cplusplus)
+
+}
+
+#endif
+
+#ifdef __cplusplus
+
+extern "C++" { // first // second
+
+#endif
+
+int cpp_linkage(void);
+
+#ifdef __cplusplus
+
+} // third // fourth
+
+#endif
+
+#if defined(__cplusplus)
+
+extern R"tag(C++)tag" {
+
+#endif
+
+int raw_linkage(void);
+
+#if defined(__cplusplus)
+
+}
+
+#endif
+
+#ifdef __cplusplus
+
+extern "C" "++" {
+
+#endif
+
+int concatenated_linkage(void);
+
+#ifdef __cplusplus
+
+}
+
+#endif

@@ -1,7 +1,0 @@
-class C {
-	void f() {
-		try { g(); } catch(
-			// 例外の説明
-			Exception e) { h(); }
-	}
-}

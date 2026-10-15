@@ -39,3 +39,161 @@ function f() {
 	}
 	return;
 }
+
+declare function foo(x: number): number;
+declare function bar(x: number, y: number): number;
+
+/**
+ *
+ * @param a
+ * @return
+ */
+export function f(a: boolean): number {
+	let r = 0;
+	if(a) r = foo("s"); // @ts-expect-error
+	else r = foo("t"); // @ts-expect-error
+	r += foo("real bug");
+	for(const k of [1]) r += foo("u"); // @ts-expect-error
+	r = bar(1, "t"); // @ts-expect-error
+	r += foo("real bug 2");
+	const x = 1; // eslint-disable-next-line no-eval
+	eval("x");
+	return r;
+}
+
+declare function h(n: number): void;
+declare function g(a: number, b?: number): void;
+declare const s: string;
+declare let c: boolean;
+declare let n: number;
+
+/**
+ *
+ */
+function a(): void {}
+
+/**
+ *
+ */
+export function t1(): void {
+	while(c) a();
+	// @ts-ignore
+	h(s);
+	return;
+}
+
+/**
+ *
+ */
+export function t2(): void {
+	g(1); // @ts-ignore
+	h(s);
+	return;
+}
+
+/**
+ *
+ */
+export function t3(): void {
+	while(n--) h("1"); // @ts-expect-error
+	return;
+}
+
+/**
+ *
+ */
+export function t4(): void {
+	const x1 = 1; // @ts-expect-error
+	/**
+	 *
+	 * @param a
+	 */
+	function k(a: number = "s"): void {}
+	k(x1);
+	return;
+}
+
+/**
+ *
+ */
+export function t5(): void {
+	/**
+	 * \@ts-expect-error
+	 * @param a
+	 */
+	function k2(a: number = "s"): void {}
+	k2(1);
+	return;
+}
+
+declare function useEffectLike(f: () => void, deps: number[]): void;
+declare function g(): void;
+
+useEffectLike(
+	() => {
+		g();
+	// @ts-expect-error deps are intentionally strings here
+	},
+	["x"]
+);
+
+declare function x(): void;
+declare function h(v: string): void;
+
+/**
+ *
+ * @param a
+ * @param b
+ */
+function f(a: boolean, b: boolean) {
+	if(a) x();
+	// @ts-expect-error
+	else if(b) {
+		const bad: number = "s";
+	}
+	try {
+		x();
+	// @ts-ignore
+	} catch(e) {
+		h("1");
+		x();
+	}
+	// @ts-expect-error 理由
+	// 二文目
+	const worse: number = "t";
+	return;
+}
+
+/**
+ *
+ * @return
+ */
+function f() {
+	x();
+	{ // bare
+		y();
+	}
+	try { // t
+		g();
+	} catch(e) { // c
+		k();
+	} finally { // f
+		m();
+	}
+	do g(); // d
+	while(c);
+	while(true) g(); // e
+	if(a === 1) g(); // 一
+	else if(a === 2) h(); // 二
+	else i(); // 他
+	switch(a) {
+	case 1:
+		g();
+		break;
+	default: // 他
+		h();
+	}
+	const o = { a: 1, b: 2 }; // obj
+	foo(a, { x: 1 }); // arg
+	return aaaa + bbbb; // ret
+}

@@ -1,1 +1,0 @@
-void F() { while(X) while(X) while(X) while(X) while(X) while(X) while(X) while(X) while(X) while(X) while(X) while(X) while(X) while(X) while(X) while(X) while(X) while(X) while(X) while(X) Call(FirstArgumentWithLongIdentifierForWrapping, SecondArgumentWithLongIdentifierForWrapping, ThirdArgumentWithLongIdentifierForWrapping); }

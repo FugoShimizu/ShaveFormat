@@ -1,18 +1,21 @@
 #
+# @return
 def m
-	..3
+	return(..3)
 end
 
 #
 # @param c
+# @return
 def f(c)
-	not c ? 1 : 2
+	return (not c ? 1 : 2)
 end
 
 #
 # @param c
+# @return
 def g(c)
-	not c
+	return (not c)
 end
 
 #
@@ -53,18 +56,330 @@ end
 p f
 
 #
+# @return
 def m
-	/
+	return (
+		/
   /ix
+	)
 end
 
 #
+# @return
 def n
-	/ a/
+	return (/ a/)
 end
 
 #
 # @return
 def o
 	return /a /.source
+end
+
+#
+# @return
+def explicit_regex
+	return (/ a/)
+end
+
+# 後判定の本体で終える
+# @param c 条件
+# @return
+def post_while(c)
+	return (
+		begin
+			return
+		end while c
+	)
+end
+
+# 逆条件の後判定の本体で終える
+# @param c 条件
+# @return
+def post_until(c)
+	return (
+		begin
+			return
+		end until c
+	)
+end
+
+# 前判定の条件を保つ
+# @param c 条件
+# @return
+def pre_while(c)
+	return (return while c)
+end
+
+#
+# @return
+def beginless_inclusive
+	return(..3)
+end
+
+#
+# @return
+def beginless_exclusive
+	return(...3)
+end
+
+#
+# @return
+def beginless_nested
+	return(..3)
+end
+
+#
+# @return
+def beginless_nested_exclusive
+	return(...3)
+end
+
+#
+# @param x
+# @return
+def beginless_bound(x)
+	return(..x)
+end
+
+#
+# @param a
+# @param b
+# @param c
+# @return
+def implicit_if_value(a, b, c)
+	return (if a then b else c end)
+end
+
+#
+# @param a
+# @param b
+# @param c
+# @return
+def implicit_unless_value(a, b, c)
+	return (unless a then b else c end)
+end
+
+#
+# @param a
+# @param b
+# @return
+def implicit_while_value(a, b)
+	return (b while a)
+end
+
+#
+# @param a
+# @param b
+# @return
+def implicit_until_value(a, b)
+	return (b until a)
+end
+
+#
+# @param a
+# @param b
+# @return
+def implicit_if_no_else(a, b)
+	return (b if a)
+end
+
+#
+# @param a
+# @param b
+# @return
+def implicit_unless_no_else(a, b)
+	return (b unless a)
+end
+
+# 末尾の値の明示の確認
+# @param a 条件又は始端の無い範囲の終端
+# @param b 本体の値
+# @param c 代替の値
+# @return 末尾の値
+def bare_if(a, b, c)
+	return (if a then b else c end)
+end
+
+# 末尾の値の明示の確認
+# @param a 条件又は始端の無い範囲の終端
+# @param b 本体の値
+# @param c 代替の値
+# @return 末尾の値
+def bare_unless(a, b, c)
+	return (unless a then b else c end)
+end
+
+# 末尾の値の明示の確認
+# @param a 条件又は始端の無い範囲の終端
+# @param b 本体の値
+# @param c 代替の値
+# @return 末尾の値
+def bare_if_single(a, b, c)
+	return (b if a)
+end
+
+# 末尾の値の明示の確認
+# @param a 条件又は始端の無い範囲の終端
+# @param b 本体の値
+# @param c 代替の値
+# @return 末尾の値
+def bare_unless_single(a, b, c)
+	return (b unless a)
+end
+
+# 末尾の値の明示の確認
+# @param a 条件又は始端の無い範囲の終端
+# @param b 本体の値
+# @param c 代替の値
+# @return 末尾の値
+def bare_case(a, b, c)
+	return case a when true then b else c end
+end
+
+# 末尾の値の明示の確認
+# @param a 条件又は始端の無い範囲の終端
+# @param b 本体の値
+# @param c 代替の値
+# @return 末尾の値
+def bare_case_match(a, b, c)
+	return case a
+	in true then b
+	else c
+	end
+end
+
+# 末尾の値の明示の確認
+# @param a 条件又は始端の無い範囲の終端
+# @param b 本体の値
+# @param c 代替の値
+# @return 末尾の値
+def bare_while(a, b, c)
+	return (b while false)
+end
+
+# 末尾の値の明示の確認
+# @param a 条件又は始端の無い範囲の終端
+# @param b 本体の値
+# @param c 代替の値
+# @return 末尾の値
+def bare_until(a, b, c)
+	return (b until true)
+end
+
+# 末尾の値の明示の確認
+# @param a 条件又は始端の無い範囲の終端
+# @param b 本体の値
+# @param c 代替の値
+# @return 末尾の値
+def bare_for(a, b, c)
+	return for x in [a] do x end
+end
+
+# 末尾の値の明示の確認
+# @param a 条件又は始端の無い範囲の終端
+# @param b 本体の値
+# @param c 代替の値
+# @return 末尾の値
+def bare_if_modifier(a, b, c)
+	return (b if a)
+end
+
+# 末尾の値の明示の確認
+# @param a 条件又は始端の無い範囲の終端
+# @param b 本体の値
+# @param c 代替の値
+# @return 末尾の値
+def bare_unless_modifier(a, b, c)
+	return (b unless a)
+end
+
+# 末尾の値の明示の確認
+# @param a 条件又は始端の無い範囲の終端
+# @param b 本体の値
+# @param c 代替の値
+# @return 末尾の値
+def bare_while_modifier(a, b, c)
+	return (b while false)
+end
+
+# 末尾の値の明示の確認
+# @param a 条件又は始端の無い範囲の終端
+# @param b 本体の値
+# @param c 代替の値
+# @return 末尾の値
+def bare_until_modifier(a, b, c)
+	return (b until true)
+end
+
+# 末尾の値の明示の確認
+# @param a 条件又は始端の無い範囲の終端
+# @param b 本体の値
+# @param c 代替の値
+# @return 末尾の値
+def bare_rescue_modifier(a, b, c)
+	return (b rescue c)
+end
+
+# 末尾の値の明示の確認
+# @param a 条件又は始端の無い範囲の終端
+# @param b 本体の値
+# @param c 代替の値
+# @return 末尾の値
+def bare_and(a, b, c)
+	return (a and b)
+end
+
+# 末尾の値の明示の確認
+# @param a 条件又は始端の無い範囲の終端
+# @param b 本体の値
+# @param c 代替の値
+# @return 末尾の値
+def bare_or(a, b, c)
+	return (a or b)
+end
+
+# 末尾の値の明示の確認
+# @param a 条件又は始端の無い範囲の終端
+# @param b 本体の値
+# @param c 代替の値
+# @return 末尾の値
+def bare_yield_argument(a, b, c)
+	return yield(a)
+end
+
+# 末尾の値の明示の確認
+# @param a 条件又は始端の無い範囲の終端
+# @param b 本体の値
+# @param c 代替の値
+# @return 末尾の値
+def bare_yield(a, b, c)
+	return yield
+end
+
+# 末尾の値の明示の確認
+# @param a 条件又は始端の無い範囲の終端
+# @param b 本体の値
+# @param c 代替の値
+# @return 末尾の値
+def bare_super(a, b, c)
+	return super
+end
+
+# 末尾の値の明示の確認
+# @param a 条件又は始端の無い範囲の終端
+# @param b 本体の値
+# @param c 代替の値
+# @return 末尾の値
+def bare_lambda(a, b, c)
+	return -> { a }
+end
+
+# 末尾の値の明示の確認
+# @param a 条件又は始端の無い範囲の終端
+# @param b 本体の値
+# @param c 代替の値
+# @return 末尾の値
+def bare_range(a, b, c)
+	return(...a)
 end

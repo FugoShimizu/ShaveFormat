@@ -1,0 +1,16 @@
+var await=x=>x;console.log(await(1));
+var yield=x=>x;console.log(yield(1));
+
+const stopped = () => { return
+(1 + 0); };
+const generated = function*() { yield
+(2 + 0); };
+
+const logicalConstructor=new (A||B)(1);
+const conditionalConstructor=new (c?A:B)(1);
+const nullishConstructor=new (A??B)();
+const bareConstructor=new (A||B);
+const memberConstructor=new (c?A.x:B.x)(1).value;
+const awaitedConstructor=async()=>new (await load())(1);
+const calledConstructor=new (factory())(1);
+const plainConstructor=new (A)(1);

@@ -16,3 +16,58 @@ function calculate(): boolean {
 	// 確認結果の返戻
 	return true;
 }
+
+/**
+ * 型注釈を持つ数値の検査関数
+ */
+function inspectNumericAnnotation(): void {
+	let value: number = 1;
+	value += 1;
+	consume(value);
+	const sample: number = 1;
+	consume(sample === 2);
+	// 終了
+	return;
+}
+
+/**
+ * 未確定な数値型と外部の数値の検査関数
+ * @param value 未確定な型の値
+ * @param other 明示された数値型の値
+ */
+function inspectUnknownNumeric(value: unknown, other: number): void {
+	consume(value === other);
+	consume(other === 2);
+	// 終了
+	return;
+}
+
+/**
+ * 数値以外と確定する比較の検査関数
+ * @param callback 呼出対象
+ * @param items 数値の列
+ * @param value 実体の値
+ * @param unknownValue 未確定の値
+ * @param callbacks 呼出対象の索引
+ */
+function inspectNonnumericComparison(
+	callback: () => void,
+	items: number[],
+	value: object,
+	unknownValue: unknown,
+	callbacks: Map<string, () => void>
+): void {
+	const alias: () => void = callback;
+	consume(callback === alias);
+	consume(items === unknownValue);
+	consume(value === unknownValue);
+	consume(callbacks.get("key") === callback);
+	consume(unknownValue === new Holder(1));
+	// 終了
+	return;
+}
+
+const increment = x => x + 1;
+const typedIncrement: (x: number) => number = (x: number): number => x + 1;
+const rest = (...xs) => xs;
+const typedRest: (...xs: unknown[]) => unknown[] = (...xs: unknown[]): unknown[] => xs;

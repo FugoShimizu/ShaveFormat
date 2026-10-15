@@ -1,8 +1,0 @@
-package p
-
-// f は値を使う
-func f() {
-	a, _, b, _ := 1, 2, 3, 4
-	use(a, b)
-	return
-}

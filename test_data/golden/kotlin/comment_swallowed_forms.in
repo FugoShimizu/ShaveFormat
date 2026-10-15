@@ -1,0 +1,24 @@
+val b = 2
+/* a */
+/* n */ fun h() {}
+val x = a
+/* block */
+// line
+.foo()
+
+class C {
+	val b = 1
+
+	/* a */
+	/* n */ val c = 2
+}
+
+val y = when (a) {
+	1 -> 2
+	/* c */
+	else -> 3
+}
+
+val z = when (a) {
+	1 -> 2 /* d */ else -> 3
+}

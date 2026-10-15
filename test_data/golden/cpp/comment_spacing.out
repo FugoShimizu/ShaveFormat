@@ -2,29 +2,33 @@
 // 関数 (foo) を呼ぶ，型は {string} で，配列 xs[0] の値
 // 日本語の文，次（括弧）の後
 // 値 x を返す，UTF-8 の文字，16 進の値，0x10 個
-// 型 (`int`) を返す，引用「a  b」は保つ
-// リンク[説明](https://example.com/a)の後
+// 型 (`int`) を返す，引用「a b」は保つ
 // 第１章 基本方針と 8.6 スペースの入れ方，a → b
+// 第 1 章 説明
+// 第 1 章 説明
+// 第 1 ２章 説明
+// 第章説明
 // 例の区切り（注記） // TS x = 1
 // 囲み注記
-/** <summary>要素の記法</summary> */
+/**
+ * <summary>要素の記法</summary>
+ */
 // go:generate echo a
 // TODO: 後で直す
 // 字下げの注記
-// 3 回繰返す，vector<int> の要素，N個の値
+// 3 回繰返す，vector<int> の要素，N 個の値
 // 16 進と 0 の時，3 回と 128 文字，第 1 章と第 2 章
-// N個と M 回と X文字，3 ㌕と 10 ㎏と 5 ㎝
+// N 個と M 回と X 文字，3 ㌕と 10 ㎏と 5 ㎝
 // 1〜3 行と a〜b，1～3 行と a＝b と c＋d と e×f と g÷h と i＆j と k＊l
 // 3.14 の値，1,000 文字，1.2.3 版，8.6 節，12:30 の時，16:9 の比，1/2 の時
 // 0x10 個，C++17 版，v2 の値，x+1 の値，-1 の値，#1 の値，$100 の値，¥1000 の値，50% の値，30° の角，128 px の幅
-// 3，3）と 3 回，2024/01/01，1/2
+// 3, 3）と 3 回，2024/01/01，1/2
 // `3回`と"N個"と'3回'と https://example.com/2024/01/01 と src/a3.cpp
 // 参照は https://example.com/a b と src/Pass/Edit.cpp の２つ
 // 文字列"a  b"と'c  d'を保つ，${x} の展開
 // - 箇条書き
 // 1. 番号付き
-// ❌  誤りの例
-// | 列 1  | 列 2 |
+// | 列 1 | 列 2 |
 // 前の値 (x) は [a] に入り {b} となる
 int x = 1;
 // カテゴリー (ドメイン) ごとの値，値 [要素] を返す，入子 (外 (内) 側) の値
@@ -32,7 +36,7 @@ int y = 1; // 経路は C:\dir\。
 int z = 2;
 // café の値，α の係数，Сергей の名前，m² の面積
 // 한국어 설명을 読む，日本語と 한국어
-// response’s type, You’re a lie，起動“後”に実行，the“foo”option
+// response’s type，You’re a lie，起動“後”に実行，the“foo”option
 // ※注意※ Note，wait …，等…，30° の角，N°，x′ の値，y″ の値，5‰ の割合，50% の割合，$100 の価格，¥1000 の価格，€ 価格，£10 の価格，₹50 の価格，₩1000 の価格
 // A→B，C → D，E—F，✅ OK，🎉完了
 // 経路は src/a.cpp です，処理は src/Pass/Edit.cpp の関数，A/B テスト，and/or の意味
@@ -43,8 +47,12 @@ int w = 3;
 // tooMany
 int MarkerSpacing = 1; // inlineNoSpace
 // tabAfter
-/** doxygenStays */
-/** doxygenStays */
+/**
+ * doxygenStays
+ */
+/**
+ * doxygenStays
+ */
 // 資料は docs/設計書.md を参照
 // 資料は docs/仕様書.md にある
 // src/a.ts(旧版)を参照
@@ -66,6 +74,105 @@ int PathSpacing;
 /**
  * 数量を返す
  * @param N 個数
- * @return N回
+ * @return N 回
  */
 int Count(int N);
+// 赤，blue，green
+// red, blue, green
+// red，blue，緑
+// A, B 及び群
+// 定数には，5.8, 5.9 が
+// 数量は 3 個，N 回, 5 ms
+// `a,b`, `c.d`, https://example.com/a,b と 1,000
+// read cache
+// write result
+// Read cache
+// `write()` stores result
+// Stores config.json and 0.25
+// next step
+// 1. item
+int CommentCases;
+
+/**
+ * 列挙を返す
+ * @param [in,out] x,y 赤，blue，green
+ * @return red, blue, green
+ */
+int ReadValues(int x, int y) {
+	return x + y;
+}
+
+// a が真なら 1，b が真なら 2，其の他は 3 を返す
+// 整形仕様 3.3, 3.4, 7.3
+// 整形仕様 1.5, 2.1，行分割仕様 2.3
+// linux,amd64 と a,b
+// fmt.Println("a. b.")
+// fmt.Printf("%s", "a. b.")
+// TODO: care?
+// unlike http/1, it won't mess up our framing, so it's
+// more safe smuggling-wise to ignore
+int RegressionCases;
+// 列挙：A，B，にんじん
+// apple，にんじん，banana
+// apple，はと，banana
+// apple，わに，banana
+// 列挙：A，B，菜の花
+// 条件には，A, B が続く
+// 赤，https://example.com/に, banana
+int EnumerationWords;
+// 文書を付けれる宣言（同じ節点名が文法毎に異なる構文を表す物は宣言を表す文法だけに付け，CSS, SCSS の性質の宣言と Python の根を除く）
+// 宣言を取る，CSS, SCSS の性質を除く
+// 宣言を取る，CSS, SCSS と Python の根を除く
+// 宣言を取る，CSS, SCSS, Python の性質を除く
+// 赤，CSS, SCSS の性質を比べる
+int EnumerationDescriptions;
+// "a\"x  y"
+// 'a\'x  y'
+// "a\\" outside text
+int EscapedValues;
+// 「ASCII と日本語」
+// 『Alpha Beta』
+// 【日本語と日本語】
+// 「外『ASCII と日本語の説明』内」
+// 「`ASCIIと日本語  x`」
+// 『"a\"x  y"』
+// 【<code>日本語 と 日本語</code>】
+int QuotedSpacing;
+// と'a  b'を保つ
+// 漢'a  b'字を保つ
+// ｶ'a  b'を保つ
+int JapaneseQuoteValues;
+// 𐐀 と 𐐁
+// A ҂ B
+// 𐐀, 𐐁
+// 𐐀，日本語，𐐁
+// 記号҂を使う
+// 記号᠀を使う
+// café と β
+// 한글 と 𞤀
+// ª と µ
+// `𐐀と𐐁  A҂B`を保つ
+// α, β
+// α，日本語，β
+// m² の面積，x³ の値，a⁰ の値，b¹ の値，c⁹ の値，x₀ の値，y₉ の値
+int PhoneticWords;
+// 𐒰 と 𐓘，𐲀 と 𐳀，𑢠 と 𑣀，𖹀 と 𖹠，𞤀 と 𞤢，𝼀 と 𝼁
+// 象形文字𓀀を示す
+// A 𒀀 B
+int SupplementaryWords;
+int PhoneticTrailing; // 𐐀 と 𐐁
+int /* A ҂ B */ PhoneticInline;
+// 日本語，English words，more words
+// English，（日本語），Other
+// English，[日本語，other]，Other
+// Call f() (see A Then B) now
+// nolint:errcheck
+// go: embeddata/*.json
+// g();
+// @overload doc_boundary(a)
+// Read( the result )Now
+// Input:ready; output:done
+int EnumerationPhrases;
+// N 回 N 日
+// Ｎ回Ｎ日
+int QuantityWords;

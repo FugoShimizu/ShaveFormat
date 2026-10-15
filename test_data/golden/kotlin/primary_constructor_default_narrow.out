@@ -10,7 +10,7 @@ class C(
 }
 
 class D private constructor(
-	val alpha: Int = 1111111111 +
-	2222222222 + 3333333333,
+	val alpha: Int =
+	1111111111 + 2222222222 + 3333333333,
 	val b: Int = 2
 )

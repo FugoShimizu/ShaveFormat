@@ -1,0 +1,2 @@
+3:2: Review: Add an explicit type to this declaration
+12:2: Violation: Remove the unreachable trailing `return`

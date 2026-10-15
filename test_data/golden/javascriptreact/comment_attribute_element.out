@@ -10,3 +10,11 @@ function A() {
 		</div>
 	);
 }
+
+const attr = (
+	// attr comment
+	<div>
+		<span>aaaaaaaaaaaaaaaaaaaa</span>
+		<input value={x} />
+	</div>
+);

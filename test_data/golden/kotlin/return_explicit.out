@@ -1,3 +1,7 @@
+import kotlin.error as stop
+import other.error
+import other.helper
+
 /**
  * 呼ぶ
  */
@@ -32,4 +36,105 @@ class A {
  */
 fun h(): Nothing {
 	TODO()
+}
+
+/**
+ * 分割した値を使う
+ */
+fun destructured() {
+	val (a, b) = Pair(1, 2)
+	println(a + b)
+	return
+}
+
+/**
+ * 分割した値を変更する
+ */
+fun changedDestructured() {
+	var (a, b) = Pair(1, 2)
+	b = 3
+	println(a + b)
+	return
+}
+
+/**
+ * 一部の値を破棄する
+ */
+fun discardedDestructured() {
+	val (_, value) = Pair(1, 2)
+	println(value)
+	return
+}
+
+/**
+ * 取込んだ呼出から戻る
+ */
+fun importedError() {
+	error(0)
+	return
+}
+
+/**
+ * 後判定の本体で終える
+ * @param c 条件
+ */
+fun postStop(c: Boolean) {
+	do return
+	while(c)
+}
+
+/**
+ * 標準関数の別名で終える
+ */
+fun importedStandardError() {
+	stop("stop")
+}
+
+/**
+ * 未使用の委譲先にも可変性を伝える
+ */
+fun delegatedUnused() {
+	var x by D()
+	return
+}
+
+/**
+ * 型を明示した委譲先にも可変性を伝える
+ */
+fun delegatedTyped() {
+	var x: Int by delegate()
+	return
+}
+
+/**
+ * 参照だけでも委譲の契約を保つ
+ */
+fun delegatedRead() {
+	var x by D()
+	println(x)
+	return
+}
+
+/**
+ * 委譲先への書込と通常の不変化を区別する
+ */
+fun delegatedWrite() {
+	var x by D()
+	x = 2
+	val y = 1
+	val z by D()
+	println(x + y + z)
+	return
+}
+
+class EmptyConstructors {
+	/**
+	 *
+	 */
+	constructor() : this(1) {}
+	/**
+	 *
+	 * @param Value
+	 */
+	constructor(Value: Int) {}
 }

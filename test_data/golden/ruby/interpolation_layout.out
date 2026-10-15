@@ -1,0 +1,66 @@
+"p#{
+	aaaaaaaaa + bbbbbbbbb +
+	ccccccccc + ddddddddd
+}q"
+
+%Q[p#{
+	aaaaaaaaa + bbbbbbbbb +
+	ccccccccc + ddddddddd
+}q]
+
+%W[
+	p#{
+		aaaaaaaaa + bbbbbbbbb +
+		ccccccccc + ddddddddd
+	}q
+]
+
+%I[
+	p#{
+		aaaaaaaaa + bbbbbbbbb +
+		ccccccccc + ddddddddd
+	}q
+]
+
+/p#{
+	aaaaaaaaa + bbbbbbbbb +
+	ccccccccc + ddddddddd
+}q/
+
+%r[p#{
+	aaaaaaaaa + bbbbbbbbb +
+	ccccccccc + ddddddddd
+}q]
+
+`p#{
+	aaaaaaaaa + bbbbbbbbb +
+	ccccccccc + ddddddddd
+}q`
+
+%x[p#{
+	aaaaaaaaa + bbbbbbbbb +
+	ccccccccc + ddddddddd
+}q]
+
+<<TEXT
+p#{
+	aaaaaaaaa + bbbbbbbbb +
+	ccccccccc + ddddddddd
+}q
+TEXT
+
+<<~TEXT
+p#{
+	aaaaaaaaa + bbbbbbbbb +
+	ccccccccc + ddddddddd
+}q
+TEXT
+
+"p#{
+	fn(
+		aaaaaaaaa,
+		bbbbbbbbb,
+		ccccccccc,
+		ddddddddd
+	)
+}q"

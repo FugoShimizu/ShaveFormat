@@ -1,6 +1,11 @@
-async function f() {
-	const actual = await vi.importActual<typeof import("@remix-run/react")>("@remix-run/react",
+/**
+ * 数値と呼出の結果を返す
+ * @return 値の配列
+ */
+async function alpha() {
+	const box: unknown = await beta<typeof import("./alpha")>(3, 7,
 	);
-	expect(screen.getByTestId("x")).toHaveTextContent("VoiceForm");
-	return actual;
+	const count: number = 1 + 2;
+	// 値の配列の返戻
+	return [box, count];
 }

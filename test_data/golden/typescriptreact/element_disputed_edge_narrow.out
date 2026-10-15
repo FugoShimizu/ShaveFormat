@@ -1,0 +1,18 @@
+const control =
+<Widget>
+	a&#13;b
+	{}
+	c
+</Widget>;
+
+const braces =
+<Widget>
+	a&#123;b&#125;{}
+	c
+</Widget>;
+
+const tabs =
+<Widget>
+	a	b
+	{}	 c
+</Widget>;

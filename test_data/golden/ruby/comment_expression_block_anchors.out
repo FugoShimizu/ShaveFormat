@@ -1,0 +1,138 @@
+f(
+	{
+		# 成員の深さ
+		first_collection_member_with_a_long_name: 1,
+		second_collection_member_with_a_long_name: 2,
+		third_collection_member_with_a_long_name: 3
+	}
+)
+
+# c
+x = 1..2
+# c
+b = 1..5
+
+#
+# @param o
+# @param p
+# @return
+def v(o, p)
+	# note
+	return o * p..(o + 1) * p - 1
+end
+
+#
+# @return
+def f
+	b if a
+	# c
+	x = 1
+	# d
+	if a then end
+	return y
+# e
+end
+
+class A
+	# :xml => [Representable::XML],
+	# :yaml => [Representable::YAML]
+	for_formats(:hash => [Representable::Hash, { "title" => "Wie Es Geht" }, { "title" => "Revolution" }]) do |format,
+		mod,
+		input,
+		output|
+		x
+	end
+end
+
+# c
+r = /a#{foo(1, 2)}/
+# c
+y = :"s#{foo(1, 2)}"
+
+# c
+s = "abc
+#{foo 1..2}"
+
+r_nested = /head#{x}
+tail/ # regex trailing
+
+y_nested = :"head#{x}
+tail" # symbol trailing
+
+command_nested = `head#{x}
+tail` # command trailing
+
+# c
+foo 1..2
+# exclusive
+foo 1...2
+
+# assigned
+range_value = 1..2
+
+foo 1...2
+
+# string range
+s_range = "head
+#{foo 1...2}"
+
+# regex range
+r_range = /#{foo 1...2}/
+# symbol range
+y_range = :"#{foo 1..2}"
+# command range
+command_range = `#{foo 1..2}`
+
+#
+# @return
+def f
+	return puts <<~EOS
+    text
+  EOS
+# c1
+end
+
+#: (Integer) -> String
+# @param x
+# @return
+def g(x) = x.to_s
+# Doc
+# --
+# hidden
+# ++
+# @param y
+# @return
+def h(y) = y
+
+R = /\A
+b/ # note
+
+S = <<~T # c2
+    text
+  T
+
+p R.source, S
+
+class Z
+	ITEMS = %w[
+		css/fonts.css
+		fonts/Lato-Light.ttf
+		fonts/Lato-LightItalic.ttf
+		fonts/Lato-Regular.ttf
+		fonts/Lato-RegularItalic.ttf
+		fonts/SourceCodePro-Bold.ttf
+		fonts/SourceCodePro-Regular.ttf
+	] # :nodoc:
+end
+
+DIRECT = <<~T # start
+    text
+  T
+
+p DIRECT
+
+SUBSTITUTION = <<~U # start with substitution
+  #{value}
+U
+
+p SUBSTITUTION

@@ -1,3 +1,8 @@
+/**
+ *
+ * # Arguments
+ * * `p`
+ */
 fn f(p: P) {
 	let P { x: a, y: b } = p;
 	return;
@@ -19,6 +24,9 @@ impl Limit for Value {
 static TEXT: &str = "x: y";
 static mut TOTAL: i32 = 4;
 
+/**
+ *
+ */
 fn main() {
 	let before = unsafe {
 		TOTAL
@@ -29,6 +37,6 @@ fn main() {
 	let after = unsafe {
 		TOTAL
 	};
-	println!("{}|{}|{}|{}|{}",Value::REQUIRED,Value::DEFAULT,TEXT,before,after);
+	println!("{}|{}|{}|{}|{}", Value::REQUIRED, Value::DEFAULT, TEXT, before, after);
 	return;
 }

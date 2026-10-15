@@ -1,2 +1,0 @@
-// note
-const A = () => (<a href="x">{}</a>);

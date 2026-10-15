@@ -2,3 +2,9 @@ interface A {
 	abstract: boolean;
 	readonly b: string;
 }
+class X { a=1; ?; b=2; c=3; d=4; }
+class Y { a=1; ?; b=2; c=3; d=4; a1=1; ?; b1=2; c1=3; d1=4; }
+type B = { a: number; b: string
+c: boolean; };
+interface B { a: number; b: string
+c: boolean; }

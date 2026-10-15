@@ -15,3 +15,144 @@ function dispatch(code) {
 	}
 	return;
 }
+
+/**
+ * 値の取得関数
+ * @return 取得した値
+ */
+function escapedReturn() {
+	const a = g();
+	return \u0061;
+}
+
+/**
+ * 捕捉した値の取得関数
+ * @return 取得した値
+ */
+function escapedCapture() {
+	const a = g(() => \u0061);
+	return a;
+}
+
+/**
+ * 捕捉した値の取得関数
+ * @return 取得した値
+ */
+function plainCapture() {
+	const a = g(() => a);
+	return a;
+}
+
+/**
+ * 値の取得関数
+ * @return 取得した値
+ */
+function escapedDeclaration() {
+	const \u0061 = g();
+	return a;
+}
+
+/**
+ * NFKC を適用しない言語の値の取得関数
+ * @return 取得した値
+ */
+function distinctNames() {
+	const K = g(() => K);
+	return K;
+}
+
+/**
+ * 束縛の参照を区別する関数
+ * @return 取得した値
+ */
+function arrowBinding() {
+	const a = g(a => a);
+	return a;
+}
+
+/**
+ * 束縛の参照を区別する関数
+ * @return 取得した値
+ */
+function patternBinding() {
+	const a = g(({ a }) => a);
+	return a;
+}
+
+/**
+ * 束縛の参照を区別する関数
+ * @return 取得した値
+ */
+function restBinding() {
+	const a = g((...a) => a);
+	return a;
+}
+
+/**
+ * 束縛の参照を区別する関数
+ * @return 取得した値
+ */
+function defaultBinding() {
+	const a = g((a = 1) => a);
+	return a;
+}
+
+/**
+ * 束縛の参照を区別する関数
+ * @return 取得した値
+ */
+function asyncBinding() {
+	const a = g(async a => a);
+	return a;
+}
+
+/**
+ * 束縛の参照を区別する関数
+ * @return 取得した値
+ */
+function functionBinding() {
+	const a = g(
+		function(a) {
+			return a;
+		}
+	);
+	// 値の返戻
+	return a;
+}
+
+/**
+ * 束縛の参照を区別する関数
+ * @return 取得した値
+ */
+function generatorBinding() {
+	const a = g(
+		function*(a) {
+			yield a;
+		}
+	);
+	// 値の返戻
+	return a;
+}
+
+/**
+ * 束縛の参照を区別する関数
+ * @return 取得した値
+ */
+function internalBinding() {
+	const a = g(
+		function a() {
+			return 1;
+		}
+	);
+	// 値の返戻
+	return a;
+}
+
+/**
+ * 束縛の参照を区別する関数
+ * @return 取得した値
+ */
+function defaultCapture() {
+	const a = g((b = a) => b);
+	return a;
+}

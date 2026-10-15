@@ -16,4 +16,22 @@ class Dispatcher {
 		}
 		return;
 	}
+
+	/**
+	 * 値の取得関数
+	 * @return 取得した値
+	 */
+	static int escapedReturn() {
+		final int a = g();
+		return \u0061;
+	}
+
+	/**
+	 * 値の取得関数
+	 * @return 取得した値
+	 */
+	static int formatCharacterReturn() {
+		final int a‌ = g();
+		return a;
+	}
 }

@@ -12,3 +12,35 @@ void g(int x, int (*h)(int)) {
 	(void)r;
 	(void)z;
 }
+
+void Bind(bool IsFlag, int Left, int Right) {
+    int (&Reference) = IsFlag ? Left : Right;
+    Reference = 1;
+}
+void Shadow(int Left, int Right) {
+    { int (&Left) = Right; Left = 1; }
+    Consume(Left);
+}
+
+typedef int Element;
+Element (*TypedPointer);
+Element (*TypedArray)[3];
+Element (*InitializedPointer) = 0;
+
+int (*EmptyFunction)(void);
+int (*InitializedFunction)(void) = nullptr;
+void RepairedFirst() { int (*First); int Second; }
+void RepairedSecond() { int First; int (*Second); }
+void SharedParentheses() { int (First), (Second); }
+void SharedArray() { int (First)[2]; int Second; }
+void SharedReference(int Value) { int (&Reference) = Value; int Other; }
+void ReboundValue() { int (Value) = 1; Value * Other; }
+void DeducedPointers() { auto *Pointer = &Value; Pointer * Value; decltype(Value) *Other = &Value; Other * Value; }
+void ReferenceBindings() { auto &[First, Second] = Pair(); First * Second; auto &&[Left, Right] = Pair(); Left < Right > Value; }
+void ShadowCatch() { int Index = 0; try { Work(); } catch(Iterator &Index) { Index++; } }
+void ShadowCondition() { int Index = 0; if(Iterator Index = Read(); true) { Index++; } while(Iterator Index = Read()) { Index++; } }
+void ShadowTuple() { int Second = 0; { auto [First, Second] = Pair(); Second++; } }
+void ShadowAlias() { size_t Value; Value++; }
+
+void InitializerScope() { int Index = 0; { Iterator Index = (Index++, Read()); } Index++; }
+void LaterDeclarator() { Iterator Index; { int Value = (Index++, 1), Index = 0; Index++; } }

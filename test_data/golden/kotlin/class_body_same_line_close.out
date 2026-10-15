@@ -43,3 +43,52 @@ val o = object : Runnable {
 
 	val q = 1
 }
+
+class A constructor(val x: Int) {}
+
+class B @Inject constructor(val y: Int, val z: Int) {
+	/**
+	 * 空
+	 */
+	fun f() {}
+}
+
+class C private constructor(val q: Int)
+class D @Inject constructor(val y: Int, val z: Int)
+
+class J {
+	var b = 0
+	private set
+}
+
+class M {
+	var count = 0
+	private set
+
+	val q get() = 1
+
+	/**
+	 *
+	 */
+	fun f() {}
+}
+
+/**
+ *
+ * @param alpha
+ * @return
+ */
+@[JvmStatic JvmOverloads] fun compute(alpha: Int = 1): Int {
+	return alpha
+}
+
+/**
+ * 送信
+ * @param retry 再試行回数
+ */
+fun send(retry: Int = 3) {
+	post(timeout=10, retry=retry)
+	return
+}
+
+class Box<T: Any> where T: Comparable<T>

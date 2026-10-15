@@ -1,9 +1,0 @@
-fn f(a: bool) {
-	if a {
-		x();
-	// before else
-	} else {
-		y();
-	}
-	return;
-}

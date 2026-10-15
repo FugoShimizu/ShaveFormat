@@ -1,5 +1,7 @@
 x = 1
-# Frozen-String-Literal : 値は無効。
+# Frozen-String-Literal: 値は無効
 # -*- warn_indent: true; 説明。 -*-
-# shareable-constant-value: literal。
+=begin
+shareable-constant-value: literal
+=end
 y = 2

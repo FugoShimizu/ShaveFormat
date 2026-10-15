@@ -1,2 +1,15 @@
 @use "x" /*C*/ as y;
 @forward "z" /*D*/ show a;
+
+@use "tokens" as ns with ($gap:2px);
+@use "local" as *;
+@forward "palette" as palette-* hide $tone,paint;
+@forward "sizes" show $gap;
+@forward "settings" as cfg-* with ($gap:3px !default,);
+@include ns.member(2px,);
+@include ns.member();
+@include ns.member;
+$from-module: ns.$gap;
+$from-function: ns.fn(2px);
+
+.configuration{width:ns.fn($gap:2px);}

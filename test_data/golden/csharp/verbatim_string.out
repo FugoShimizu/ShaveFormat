@@ -49,3 +49,34 @@ end";
 		return false;
 	}
 }
+
+class Edge {
+	/**
+	 * <summary></summary>
+	 */
+	void F() {
+		var s = $@"line1
+{x}
+line3"; // trailing
+		return;
+	}
+}
+
+class Boundary {
+	/**
+	 * <summary></summary>
+	 */
+	void F() {
+		var s = $@"{x}
+text"; // final
+		next(); // outside
+		return;
+	}
+}
+
+class C {
+	#if DEBUG
+	string s = @"a  
+b  ";
+	#endif
+}

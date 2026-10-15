@@ -1,6 +1,0 @@
-class A {
-	accessor // c
-	x = 1
-	static // e
-	z = 3
-}

@@ -1,5 +1,5 @@
 const C = ({ count, items, flag }) => {
-	// JSX 内のゼロ比較は !! を案内する
+	// JSX 内のゼロ比較は `!!` を案内する
 	const a = <div>{count !== 0 && <span/>}</div>;
 	console.log(a);
 	// JSX 内の等値比較は !x を案内する
@@ -19,3 +19,50 @@ const C = ({ count, items, flag }) => {
 1 === 2;
 1n === 2n;
 1n === 2;
+
+/**
+ * 値の取得関数
+ * @return 取得した値
+ */
+function escapedElement(): object {
+	const a: object = <span />;
+	return \u{61};
+}
+
+/**
+ * トークンの境界の照合
+ */
+function tokenBoundaries(): void {
+	if(a) z = x++ + y;
+	if(b) z = x + ++y;
+	if(a) z = x-- - y;
+	else if(b) z = x - --y;
+	if(a) {
+		z = x++ + y;
+		touch();
+	}
+	if(b) {
+		z = x + ++y;
+		touch();
+	}
+	if(a) {
+		z = x-- - y;
+		touch();
+	} else if(b) {
+		z = x - --y;
+		touch();
+	}
+	if(a) z = x + y;
+	else if(b) z = x + y;
+	// 終了
+	return;
+}
+
+x === null || x === \u0075ndefined;
+x == \u{75}ndefined || x == null;
+x !== null && x !== un\u0064efined;
+undefine\u0064 !== x && null !== x;
+\u0075ndefined == x || null == x;
+null != x && \u{75}ndefined != x;
+x === null || x === \u0075ndefinedExtra;
+x === \u0075ndefined || x === \u{75}ndefined;

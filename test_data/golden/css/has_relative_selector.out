@@ -1,3 +1,7 @@
 .p :has(> .q) {
 	x: 1;
 }
+
+.p:has(> [x*="a b"], + .r, ~ .s) {
+	height: 2px;
+}

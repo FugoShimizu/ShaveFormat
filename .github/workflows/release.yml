@@ -1,6 +1,6 @@
 name: Release
 
-# v* タグの送信時だけ各環境の .vsix を作り，GitHub Release へ添付して Marketplace へ公開する
+# v* タグの送信時だけ各環境の CLI と .vsix を作り，GitHub Release へ添付して Marketplace へ公開する
 on:
   push:
     tags: ["v*"]
@@ -10,6 +10,7 @@ jobs:
   build:
     name: ${{ matrix.target }}
     runs-on: ${{ matrix.os }}
+    timeout-minutes: 120
     # 配布物を作るだけの工程で書込は要らない（既定の継承で余計な権限を持たない様に明示する）
     permissions:
       contents: read
@@ -29,19 +30,22 @@ jobs:
             vsce_target: linux-x64
             os: ubuntu-24.04
             bin_ext: ""
+            build_image: quay.io/pypa/manylinux_2_28_x86_64@sha256:53390351aeb4688114b02c36a23b3e6ce1166ee9b7afc5df1a4f776354fc764c # 2026.09.05-1
           - target: linux-arm64
             vsce_target: linux-arm64
             os: ubuntu-24.04-arm
             bin_ext: ""
+            build_image: quay.io/pypa/manylinux_2_28_aarch64@sha256:ad74e53b713f3b07d8c889c526dc0c6500da9827b45e38739570875fef52e28f # 2026.09.05-1
           - target: win32-x64
             vsce_target: win32-x64
             os: windows-2022
             bin_ext: ".exe"
-    # Windows の Python の既定の符号化では日本語を含む入出力を扱えない為，UTF-8 に固定する
+    # Windows の Python の既定のエンコーディングでは日本語を含む入出力を扱えない為，UTF-8 に固定する
     env:
       PYTHONUTF8: "1"
+      LINUX_BUILD_IMAGE: ${{ matrix.build_image }}
     steps:
-      # Windows の取出しの CRLF 化で `tools/` の台本が動かなく為る為，リポジトリの内容の儘取り出す（基準出力は .gitattributes の `-text` で既に変換されない）
+      # Windows のチェックアウトの CRLF 化で `tools/` のスクリプトが動かなく為る為，リポジトリの内容の儘取り出す（基準出力は .gitattributes の `-text` で既に変換されない）
       - name: Keep line endings (Windows)
         if: runner.os == 'Windows'
         run: git config --global core.autocrlf false;
@@ -49,16 +53,34 @@ jobs:
       - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4
         with:
           submodules: recursive
-          # 同じ工程が vendor の文法の生成と走査器の構築を行う為，書込権限の認証情報を .git/config へ残さない
+          # 同じ工程が vendor の文法の生成とスキャナーの構築を行う為，書込権限の認証情報を .git/config へ残さない
           persist-credentials: false
 
-      # 基準出力は構文木に依り誤りの読みの回復の木の形が版で変わる為，全環境の実行時を開発環境と同じ版に固定して源から構築する
+      # コンテナに同梱された GCC 14 と CMake を使い，ホストのツールキャッシュを混ぜない
+      - name: Verify Linux build environment
+        if: runner.os == 'Linux'
+        shell: bash
+        run: |
+          set -eu;
+          docker run --rm "$LINUX_BUILD_IMAGE" bash -euc '
+            [ "$(getconf GNU_LIBC_VERSION)" = "glibc 2.28" ];
+            [ "$(gcc -dumpversion)" = 14 ];
+            [ "$(g++ -dumpversion)" = 14 ];
+            cmake --version;
+          ';
+
+      # 基準出力は構文木に依り，エラーからの回復の木の形がバージョンで変わる為，全環境の実行時を開発環境と同じバージョンに固定してソースから構築する
       # 配布物は tree-sitter の入って居ない計算機で動く必要が有る為，静的な書庫にし，MSVC は本体と同じく C の実行時も静的に結合する
       - name: Install tree-sitter
+        timeout-minutes: 15
         shell: bash
         run: |
           tmp="$RUNNER_TEMP";
-          if [ "$RUNNER_OS" = Windows ]; then tmp="$(cygpath -m "$tmp")"; fi
+          workspace="$GITHUB_WORKSPACE";
+          if [ "$RUNNER_OS" = Windows ]; then
+            tmp="$(cygpath -m "$tmp")";
+            workspace="$(cygpath -m "$workspace")";
+          fi
           if ! command -v cmake > /dev/null; then sudo apt-get update && sudo apt-get install -y cmake; fi
           git init -q "$tmp/tree-sitter-runtime";
           fetch_args=(
@@ -77,10 +99,19 @@ jobs:
             -DCMAKE_INSTALL_LIBDIR=lib
             -DCMAKE_POLICY_DEFAULT_CMP0091=NEW
             -DCMAKE_MSVC_RUNTIME_LIBRARY=MultiThreaded
+            "-DCMAKE_PROJECT_INCLUDE=$workspace/tools/TreeSitterHardening.cmake"
           );
-          cmake "${configure_args[@]}";
-          cmake --build "$tmp/tree-sitter-build" --config Release --parallel;
-          cmake --install "$tmp/tree-sitter-build" --config Release --prefix "$tmp/tree-sitter-install";
+          if [ "$RUNNER_OS" = macOS ]; then configure_args+=(-DCMAKE_OSX_DEPLOYMENT_TARGET=14.0); fi
+          configure=(cmake);
+          if [ "$RUNNER_OS" = Linux ]; then
+            configure=(
+              docker run --rm --user "$(id -u):$(id -g)" -v "$RUNNER_TEMP:$RUNNER_TEMP"
+              -v "$GITHUB_WORKSPACE:$GITHUB_WORKSPACE:ro" "$LINUX_BUILD_IMAGE" cmake
+            );
+          fi
+          "${configure[@]}" "${configure_args[@]}";
+          "${configure[@]}" --build "$tmp/tree-sitter-build" --config Release --parallel;
+          "${configure[@]}" --install "$tmp/tree-sitter-build" --config Release --prefix "$tmp/tree-sitter-install";
           echo "TREE_SITTER_ROOT=$tmp/tree-sitter-install" >> "$GITHUB_ENV";
 
       - name: Setup Node.js
@@ -91,36 +122,219 @@ jobs:
       - name: Install tree-sitter CLI
         uses: ./.github/actions/tree-sitter-cli
 
-      - name: Generate swift parser.c
-        shell: bash
-        run: |
-          cd vendor/tree-sitter-swift;
-          tree-sitter generate;
-
-      - name: Configure CMake
-        run: cmake -B build -S . -DCMAKE_BUILD_TYPE=Release;
-
-      - name: Build
-        run: cmake --build build --config Release --parallel;
-
-      - name: Run CTest checks
-        run: ctest --test-dir build -C Release --output-on-failure --no-tests=error;
-
       - name: Setup Python
+        id: python
         uses: actions/setup-python@a26af69be951a213d495a4c3e4e4022e16d87065 # v5
         with:
           python-version: "3.13"
 
+      - name: Verify grammar extension shapes
+        run: python tools/verify_grammar_extensions.py --shapes-only --source-dir . --work-dir "${{ runner.temp }}";
+
+      - name: Configure CMake
+        if: runner.os == 'Windows'
+        run: cmake -B build -S . -DCMAKE_BUILD_TYPE=Release "-DPython3_EXECUTABLE=${{ steps.python.outputs.python-path }}";
+
+      # 生成は従来の検証済の CLI で行い，生成した C だけを glibc 2.28 の構築環境へ渡す
+      # tools/prepare<文法名>.mjs の在る文法は全て拡張した文法から生成する（CMake の add_ts_grammar と同じ対象）
+      - name: Generate extended parsers for Linux build
+        if: runner.os == 'Linux'
+        shell: bash
+        run: |
+          cmake "-DSHAVEFMT_PARSER_OUTPUT_DIR=$PWD/build/generated" -P tools/Grammars.cmake;
+
+      - name: Record execution profiles (GCC / Clang)
+        timeout-minutes: 30
+        if: runner.os != 'Windows'
+        shell: bash
+        run: |
+          configure=(cmake);
+          extra=("-DPython3_EXECUTABLE=${{ steps.python.outputs.python-path }}");
+          if [ "$RUNNER_OS" = Linux ]; then
+            configure=(
+              docker run --rm --user "$(id -u):$(id -g)"
+              -v "$GITHUB_WORKSPACE:$GITHUB_WORKSPACE" -v "$RUNNER_TEMP:$RUNNER_TEMP"
+              -w "$PWD" -e TREE_SITTER_ROOT "$LINUX_BUILD_IMAGE" cmake
+            );
+            extra=(-DPython3_EXECUTABLE=/opt/python/cp313-cp313/bin/python);
+            extra+=("-DSHAVEFMT_PREGENERATED_ROOT=$PWD/build/generated");
+          fi
+          "${configure[@]}" -B build -S . -DCMAKE_BUILD_TYPE=Release -DPGO_MODE=generate "-DPGO_DATA=$PWD/build/pgo-data" "${extra[@]}";
+          "${configure[@]}" --build build --config Release --parallel ${{ runner.os == 'macOS' && '3' || '' }} --target shavefmt;
+          for input in test_data/golden/*/*.in; do
+            lang="${input%/*}";
+            if python tools/run_limited.py --seconds 30 -- build/shavefmt --stdin --lang "${lang##*/}" < "$input" > /dev/null 2>&1; then
+              continue;
+            else
+              status=$?;
+              if [ "$status" = 124 ]; then
+                echo "PGO timed out: $input";
+              else
+                echo "PGO input did not complete (exit $status): $input";
+              fi
+            fi
+          done
+          if compgen -G "build/pgo-data/*.profraw" > /dev/null; then
+            if [ "$RUNNER_OS" = macOS ]; then profdata=(xcrun llvm-profdata); else profdata=(llvm-profdata); fi
+            "${profdata[@]}" merge -output=build/pgo-data/default.profdata build/pgo-data/*.profraw;
+          fi
+          "${configure[@]}" -B build -S . -DCMAKE_BUILD_TYPE=Release -DPGO_MODE=use "-DPGO_DATA=$PWD/build/pgo-data" "${extra[@]}";
+
+      # 数を省いた --parallel は make の無制限の並列に為り，３コア・７GB の darwin-arm64 でメモリが溢れる為，macOS は並列数を明示する
+      - name: Build
+        timeout-minutes: 40
+        if: runner.os != 'Linux'
+        run: cmake --build build --config Release --parallel ${{ runner.os == 'macOS' && '3' || '' }};
+
+      - name: Build (Linux glibc 2.28)
+        timeout-minutes: 20
+        if: runner.os == 'Linux'
+        shell: bash
+        run: |
+          configure=(
+            docker run --rm --user "$(id -u):$(id -g)"
+            -v "$GITHUB_WORKSPACE:$GITHUB_WORKSPACE" -v "$RUNNER_TEMP:$RUNNER_TEMP"
+            -w "$PWD" -e TREE_SITTER_ROOT "$LINUX_BUILD_IMAGE" cmake
+          );
+          "${configure[@]}" --build build --config Release --parallel;
+
+      - name: Run CTest checks
+        timeout-minutes: 10
+        if: runner.os != 'Linux'
+        run: ctest --test-dir build -C Release --output-on-failure --no-tests=error;
+
+      - name: Run CTest checks (Linux glibc 2.28)
+        timeout-minutes: 10
+        if: runner.os == 'Linux'
+        shell: bash
+        run: |
+          docker run --rm --user "$(id -u):$(id -g)" \
+            -v "$GITHUB_WORKSPACE:$GITHUB_WORKSPACE" -v "$RUNNER_TEMP:$RUNNER_TEMP" \
+            -w "$PWD" -e TREE_SITTER_ROOT "$LINUX_BUILD_IMAGE" \
+            ctest --test-dir build -C Release --output-on-failure --no-tests=error;
+
+      - name: Verify minimum OS of the release binary
+        if: runner.os != 'Windows'
+        shell: bash
+        run: |
+          set -eu;
+          if [ "$RUNNER_OS" = macOS ]; then
+            xcrun vtool -show-build build/shavefmt > "$RUNNER_TEMP/minimum-os.txt";
+            cat "$RUNNER_TEMP/minimum-os.txt";
+            awk '
+              $1 == "minos" { count++; if ($2 != "14.0" && $2 != "14.0.0") bad = 1; }
+              END { exit(count != 1 || bad); }
+            ' "$RUNNER_TEMP/minimum-os.txt";
+          else
+            objdump -T build/shavefmt > "$RUNNER_TEMP/minimum-os.txt";
+            objdump -p build/shavefmt > "$RUNNER_TEMP/dependencies.txt";
+            python - "$RUNNER_TEMP/minimum-os.txt" "$RUNNER_TEMP/dependencies.txt" <<'PY'
+          from pathlib import Path
+
+          import re
+          import sys
+
+          # 配布バイナリの動的な要求と依存先の読込
+          symbols: str = Path(sys.argv[1]).read_text()
+          dependencies: str = Path(sys.argv[2]).read_text()
+
+          versions: list[tuple[int, ...]] = [
+          	tuple(map(int, val.split("."))) for val in re.findall(r"\bGLIBC_([0-9]+(?:\.[0-9]+)+)\b", symbols)
+          ]
+
+          if not versions or max(versions) > (2, 28):
+          	sys.exit("missing GLIBC requirements or a requirement newer than GLIBC_2.28")
+
+          if re.search(r"\b(?:GLIBCXX_|CXXABI_|GCC_|GLIBC_PRIVATE)", symbols):
+          	sys.exit("unexpected dynamic C++ / libgcc / private glibc requirement")
+
+          if re.search(r"NEEDED\s+lib(?:stdc\+\+|gcc_s)", dependencies):
+          	sys.exit("C++ / libgcc runtime is not statically linked")
+
+          print("maximum GLIBC requirement:", ".".join(map(str, max(versions))))
+          PY
+          fi
+
+      - name: Collect GCC runtime licenses
+        if: runner.os == 'Linux'
+        shell: bash
+        run: |
+          set -eu;
+          mkdir -p build/gcc-licenses;
+          docker run --rm --user "$(id -u):$(id -g)" -v "$GITHUB_WORKSPACE:$GITHUB_WORKSPACE" -w "$PWD" "$LINUX_BUILD_IMAGE" bash -euc '
+            for name in COPYING3 COPYING.RUNTIME; do
+              source="";
+              for location in /opt/rh/gcc-toolset-14/root/usr/share/licenses/*/"$name" /usr/share/licenses/*/"$name"; do
+                if [ -f "$location" ]; then source="$location"; break; fi
+              done
+              [ -n "$source" ];
+              cp "$source" "build/gcc-licenses/$name";
+            done
+          ';
+
+      - name: Generate third-party notices
+        shell: bash
+        run: |
+          set -eu;
+          tmp="$RUNNER_TEMP";
+          if [ "$RUNNER_OS" = Windows ]; then tmp="$(cygpath -m "$tmp")"; fi
+          extra=();
+          if [ "$RUNNER_OS" = Linux ]; then extra=(--gcc-licenses build/gcc-licenses); fi
+          python tools/generate_third_party_notices.py . "$tmp/tree-sitter-runtime" vscode-extension/THIRD_PARTY_NOTICES ${extra[@]+"${extra[@]}"};
+
+      - name: Verify Windows runtime and minimum OS
+        if: runner.os == 'Windows'
+        shell: pwsh
+        run: |
+          $vswhere = "${env:ProgramFiles(x86)}/Microsoft Visual Studio/Installer/vswhere.exe";
+          $installArgs = @(
+            "-latest", "-products", "*", "-requires", "Microsoft.VisualStudio.Component.VC.Tools.x86.x64",
+            "-property", "installationPath"
+          );
+          $install = & $vswhere @installArgs;
+          if ($LASTEXITCODE -ne 0 -or -not $install) { throw "MSVC installation not found"; }
+          $tools = Get-ChildItem "$install/VC/Tools/MSVC" -Directory | Sort-Object Name -Descending | Select-Object -First 1;
+          $dumpbin = "$($tools.FullName)/bin/Hostx64/x64/dumpbin.exe";
+          & $dumpbin /headers build/shavefmt.exe | Out-File -Encoding utf8 "$env:RUNNER_TEMP/pe-headers.txt";
+          if ($LASTEXITCODE -ne 0) { throw "dumpbin /headers failed"; }
+          & $dumpbin /dependents build/shavefmt.exe | Out-File -Encoding utf8 "$env:RUNNER_TEMP/pe-dependencies.txt";
+          if ($LASTEXITCODE -ne 0) { throw "dumpbin /dependents failed"; }
+          & $dumpbin /loadconfig build/shavefmt.exe | Out-File -Encoding utf8 "$env:RUNNER_TEMP/pe-loadconfig.txt";
+          if ($LASTEXITCODE -ne 0) { throw "dumpbin /loadconfig failed"; }
+          $runtime = Get-ChildItem "$env:TREE_SITTER_ROOT/lib/*tree-sitter.lib";
+          if (@($runtime).Count -ne 1) { throw "tree-sitter static runtime not found"; }
+          & $dumpbin /symbols $runtime.FullName | Out-File -Encoding utf8 "$env:RUNNER_TEMP/runtime-symbols.txt";
+          if ($LASTEXITCODE -ne 0) { throw "dumpbin /symbols failed"; }
+          $hardeningArgs = @(
+            "tools/verify_binary_hardening.py", "windows", "$env:RUNNER_TEMP/pe-headers.txt",
+            "$env:RUNNER_TEMP/runtime-symbols.txt", "--loadconfig", "$env:RUNNER_TEMP/pe-loadconfig.txt"
+          );
+          python @hardeningArgs;
+          if ($LASTEXITCODE -ne 0) { throw "Windows binary hardening verification failed"; }
+          python tools/verify_windows_binary.py "$env:RUNNER_TEMP/pe-headers.txt" "$env:RUNNER_TEMP/pe-dependencies.txt";
+          if ($LASTEXITCODE -ne 0) { throw "Windows binary verification failed"; }
+
+      - name: Verify Unix binary and runtime hardening
+        if: runner.os != 'Windows'
+        shell: bash
+        run: |
+          platform=macos;
+          if [ "$RUNNER_OS" = Linux ]; then platform=linux; fi
+          python tools/verify_binary_hardening.py "$platform" build/shavefmt "$TREE_SITTER_ROOT/lib/libtree-sitter.a";
+
       - name: Install extension dependencies
+        timeout-minutes: 10
         working-directory: vscode-extension
-        # 鍵ファイルの固定を捨てて解決し直すと配布物の依存が黙って変わる為，失敗は其の儘失敗させる
-        # 導入時の台本（鍵ファイルで照合されない取得を行う物が有る）は包むのにも検査にも要らない為に走らせない
+        # ロックファイルの固定を捨てて解決し直すと配布物の依存が黙って変わる為，失敗は其の儘失敗させる
+        # インストール時のスクリプト（ロックファイルで照合されない取得を行う物が有る）はパッケージ化にも検査にも要らない為に走らせない
         run: npm ci --ignore-scripts;
 
       - name: Verify runtime and standard streams
+        timeout-minutes: 20
         run: python tools/verify_runtime.py build/shavefmt${{ matrix.bin_ext }};
 
       - name: Golden test and semantic preservation
+        timeout-minutes: 30
         shell: bash
         run: |
           bash tools/golden_test.sh;
@@ -128,6 +342,7 @@ jobs:
 
       # 基準出力の期待値と型名の比較の形は環境に依らない為，処理系の揃う１環境で確かめる
       - name: Check golden outputs and node type names
+        timeout-minutes: 10
         if: matrix.target == 'darwin-arm64'
         # 入力が処理系の構文検査を通る基準出力は期待値も通る事を確かめる（手元に無い処理系の言語は飛ばす）
         run: |
@@ -135,6 +350,7 @@ jobs:
           python tools/verify_node_type_names.py;
 
       - name: Verify layout independence
+        timeout-minutes: 10
         shell: bash
         run: |
           python tools/verify_space_random_ast.py;
@@ -142,28 +358,33 @@ jobs:
 
       # ディレクトリの再帰の走査と名前に依る除外は此の段だけが通る（書戻・見送は verify_runtime.py も覆う）
       - name: Directory scan and name exclusion
+        timeout-minutes: 5
         shell: bash
         run: |
           set -eu;
           dir="$RUNNER_TEMP/cli";
           if [ "$RUNNER_OS" = Windows ]; then dir="$(cygpath -m "$RUNNER_TEMP")/cli"; fi
           rm -rf "$dir";
-          mkdir -p "$dir/node_modules" "$dir/.hidden";
+          mkdir -p "$dir/node_modules" "$dir/.hidden" "$dir/build" "$dir/src/build";
           cp test_data/golden/c/bom_removed.in "$dir/a.c";
+          cp test_data/golden/c/bom_removed.in "$dir/build/excluded.c";
+          cp test_data/golden/c/bom_removed.in "$dir/src/build/included.c";
           cp test_data/golden/c/bom_removed.in "$dir/node_modules/excluded.c";
           cp test_data/golden/c/bom_removed.in "$dir/.hidden/excluded.c";
           cp test_data/golden/c/bom_removed.in "$dir/package-lock.json";
           build/shavefmt${{ matrix.bin_ext }} --check --fail-on-skip "$dir" > "$RUNNER_TEMP/cli.pre" && code=0 || code=$?;
           [ "$code" = 1 ];
-          grep -q "Formatting check: 0 unchanged, 1 would change, 0 partial," "$RUNNER_TEMP/cli.pre";
+          grep -q "Formatting check: 0 unchanged, 2 would change, 0 partial," "$RUNNER_TEMP/cli.pre";
           build/shavefmt${{ matrix.bin_ext }} -w "$dir" 2> "$RUNNER_TEMP/cli.err";
           cmp "$dir/a.c" test_data/golden/c/bom_removed.out;
+          cmp "$dir/src/build/included.c" test_data/golden/c/bom_removed.out;
+          cmp "$dir/build/excluded.c" test_data/golden/c/bom_removed.in;
           grep -q "Input has a UTF-8 BOM" "$RUNNER_TEMP/cli.err";
           cmp "$dir/node_modules/excluded.c" test_data/golden/c/bom_removed.in;
           cmp "$dir/.hidden/excluded.c" test_data/golden/c/bom_removed.in;
           cmp "$dir/package-lock.json" test_data/golden/c/bom_removed.in;
           build/shavefmt${{ matrix.bin_ext }} --check --fail-on-skip "$dir" > "$RUNNER_TEMP/cli.out";
-          grep -qF ", 3 path(s) excluded by name." "$RUNNER_TEMP/cli.out";
+          grep -qF ", 4 path(s) excluded by name." "$RUNNER_TEMP/cli.out";
           build/shavefmt${{ matrix.bin_ext }} --check "$dir/does-not-exist.php" && code=0 || code=$?;
           [ "$code" = 1 ];
           mkdir -p "$dir/partial";
@@ -171,6 +392,21 @@ jobs:
           build/shavefmt${{ matrix.bin_ext }} --check --no-lint "$dir/partial" > "$RUNNER_TEMP/cli.partial" && code=0 || code=$?;
           [ "$code" = 1 ];
           grep -q "0 unchanged, 0 would change, 1 partial," "$RUNNER_TEMP/cli.partial";
+
+      # 実時間は目標との照合を記録し，作業単位の密度の退行と倍々の伸長で CI の合否を決める
+      - name: Verify 10k-line performance budget
+        timeout-minutes: 10
+        shell: bash
+        run: |
+          python tools/build_10k.py --self-test;
+          python tools/build_10k.py --verify-baseline tools/performance_baseline.json;
+          measure_args=(
+            tools/measure_10k.py build/shavefmt${{ matrix.bin_ext }} build/performance
+            "release/performance-${{ matrix.target }}.md" --generate-inputs --work-probe build/verify_performance${{ matrix.bin_ext }}
+            --environment "${{ matrix.os }} / ${{ matrix.target }}" --pgo "${{ matrix.target == 'win32-x64' && 'disabled' || 'enabled' }}"
+          );
+          python "${measure_args[@]}";
+          cat "release/performance-${{ matrix.target }}.md" >> "$GITHUB_STEP_SUMMARY";
 
       - name: Stage binary in vscode-extension/bin (target-specific only)
         shell: bash
@@ -181,15 +417,17 @@ jobs:
           chmod +x vscode-extension/bin/shavefmt-${{ matrix.target }}${{ matrix.bin_ext }};
 
       - name: Build extension TypeScript
+        timeout-minutes: 5
         working-directory: vscode-extension
         run: npm run build;
 
       - name: Verify extension process lifecycle
+        timeout-minutes: 5
         run: node tools/verifyExtension.cjs build/shavefmt${{ matrix.bin_ext }};
 
       - name: Version consistency
         shell: bash
-        # タグ・拡張機能の宣言・実行ファイルの三者が食い違うと，配布物が別の版を名乗る
+        # タグ・拡張機能の宣言・実行ファイルの３者が食い違うと，配布物が別のバージョンを名乗る
         run: |
           TAG="${GITHUB_REF_NAME#v}";
           PKG="$(node -p 'require("./vscode-extension/package.json").version')";
@@ -198,8 +436,62 @@ jobs:
 
       - name: Package target-specific .vsix
         working-directory: vscode-extension
-        # vsce は鍵ファイルで推移的な依存迄固定した開発依存を使う（公開の度に解決し直さない）
+        # vsce はロックファイルで推移的な依存迄固定した開発依存を使う（公開の度に解決し直さない）
         run: npx --no-install vsce package --target ${{ matrix.vsce_target }};
+
+      # Windows ARM64 向けの拡張機能も同じ検査済の x64 バイナリを包む（OS のエミュレーションで実行する）
+      - name: Package Windows ARM64 .vsix
+        if: matrix.target == 'win32-x64'
+        working-directory: vscode-extension
+        run: npx --no-install vsce package --target win32-arm64;
+
+      # 同じ検査済の実行ファイルを CLI として包み，書庫のバイト列から SHA-256 を求める
+      - name: Package standalone CLI and SHA-256
+        shell: bash
+        env:
+          CLI_TARGET: ${{ matrix.target }}
+          CLI_EXT: ${{ matrix.bin_ext }}
+        run: |
+          python - <<'PY'
+          import hashlib
+          import os
+
+          from pathlib import Path
+
+          import tarfile
+          import zipfile
+
+          # 検査済の実行ファイルと配布物の保存先
+          target: str = os.environ["CLI_TARGET"]
+          name: str = "shavefmt" + os.environ["CLI_EXT"]
+          binary: Path = Path("build") / name
+          output: Path = Path("release")
+
+          output.mkdir(exist_ok=True)
+
+          # 環境に対応する形式での CLI のパッケージ化
+          if target == "win32-x64":
+          	archive: Path = output / f"shavefmt-{target}.zip"
+          	with zipfile.ZipFile(archive, "w", compression=zipfile.ZIP_DEFLATED) as packaged:
+          		packaged.write(binary, arcname=name)
+          		packaged.write("LICENSE", arcname="LICENSE")
+          		packaged.write("vscode-extension/THIRD_PARTY_NOTICES", arcname="THIRD_PARTY_NOTICES")
+          else:
+          	archive = output / f"shavefmt-{target}.tar.gz"
+          	with tarfile.open(archive, "w:gz") as packaged:
+          		packaged.add(binary, arcname=name)
+          		packaged.add("LICENSE", arcname="LICENSE")
+          		packaged.add("vscode-extension/THIRD_PARTY_NOTICES", arcname="THIRD_PARTY_NOTICES")
+
+          with archive.open("rb") as stream:
+          	digest: str = hashlib.file_digest(stream, "sha256").hexdigest()
+
+          archive.with_name(archive.name + ".sha256").write_bytes(f'{digest}  {archive.name}\n'.encode("ascii"))
+          PY
+
+      - name: Verify packaged third-party notices
+        shell: bash
+        run: python tools/verify_release_notices.py release vscode-extension;
 
       - name: Upload .vsix artifact
         uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4
@@ -209,12 +501,21 @@ jobs:
           if-no-files-found: error
           retention-days: 30
 
+      - name: Upload CLI and performance artifacts
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4
+        with:
+          name: shavefmt-${{ matrix.target }}-cli
+          path: release/*
+          if-no-files-found: error
+          retention-days: 30
+
   publish:
     name: Publish to Marketplace
     # 一部の環境が落ちても成功分を配る為，build の失敗では飛ばさない（欠けた環境は配布の後に知らせる）
-    if: ${{ !cancelled() && github.repository == 'FugoShimizu/ShaveFormat' }}
+    if: ${{ !cancelled() }}
     needs: build
     runs-on: ubuntu-24.04
+    timeout-minutes: 20
     permissions:
       contents: write
     steps:
@@ -223,7 +524,7 @@ jobs:
         with:
           persist-credentials: false
 
-      - name: Download all .vsix artifacts
+      - name: Download all release artifacts
         uses: actions/download-artifact@d3f86a106a0bac45b974a628896c90dbdf5c8093 # v4
         with:
           path: vsix
@@ -237,7 +538,7 @@ jobs:
           mkdir -p vsix;
           missing="";
           total=0;
-          for target in darwin-arm64 darwin-x64 linux-arm64 linux-x64 win32-x64; do
+          for target in darwin-arm64 darwin-x64 linux-arm64 linux-x64 win32-arm64 win32-x64; do
             set -- vsix/*-"$target"-*.vsix;
             if [ ! -e "$1" ]; then
               missing="$missing $target";
@@ -253,27 +554,75 @@ jobs:
           echo "MISSING_TARGETS=${missing# }" >> "$GITHUB_ENV";
           [ -z "$missing" ] || echo "::warning::no .vsix for:$missing; publishing the rest";
 
+      # 成功した環境の CLI は .vsix の有無に依らず添付し，欠けた組は配布後に知らせる
+      - name: Verify standalone CLI artifacts
+        shell: bash
+        run: |
+          set -eu;
+          missing="";
+          total=0;
+          for target in darwin-arm64 darwin-x64 linux-arm64 linux-x64 win32-x64; do
+            suffix=tar.gz;
+            if [ "$target" = win32-x64 ]; then suffix=zip; fi
+            archive="shavefmt-$target.$suffix";
+            if [ ! -f "vsix/$archive" ] || [ ! -f "vsix/$archive.sha256" ]; then
+              missing="$missing $target";
+            else
+              awk -v name="$archive" '
+                { sub(/\r$/, ""); }
+                NF == 2 && length($1) == 64 && $1 ~ /^[0-9a-f]+$/ && $2 == name { valid++; }
+                END { exit(NR != 1 || valid != 1); }
+              ' "vsix/$archive.sha256";
+              (cd vsix && tr -d "\r" < "$archive.sha256" | sha256sum --check --strict -);
+              total=$((total + 1));
+            fi
+          done
+          actual="$(find vsix -maxdepth 1 -type f \( -name '*.tar.gz' -o -name '*.zip' \) | wc -l)";
+          [ "$actual" -eq "$total" ] || { echo "::error::unexpected or incomplete CLI artifact: $actual archives, $total pairs"; exit 1; }
+          checksums="$(find vsix -maxdepth 1 -type f -name '*.sha256' | wc -l)";
+          [ "$checksums" -eq "$total" ] || { echo "::error::unexpected CLI checksum count: $checksums"; exit 1; }
+          echo "MISSING_CLI_TARGETS=${missing# }" >> "$GITHUB_ENV";
+          [ -z "$missing" ] || echo "::warning::no CLI archive for:$missing; attaching the rest";
+          set -- vsix/*.vsix;
+          [ "$total" -gt 0 ] || [ -f "$1" ] || { echo "::error::no verified release artifacts"; exit 1; }
+
       # 公開の成否に依らず配布物を Release へ残す為，公開より先に添付する
-      - name: Attach .vsix to GitHub Release
-        # 書込権限と秘密情報を持つ工程の為，操作は公式の物も含めて版の札でなくコミットで固定する（版は行末の注記）
-        uses: softprops/action-gh-release@3bb12739c298aeb8a4eeaf626c5b8d85266b0e65 # v2
-        with:
-          files: vsix/*.vsix
-          # 全環境が失敗した時に配布物の無い Release を作らない
-          fail_on_unmatched_files: true
+      - name: Attach CLI, SHA-256, performance and .vsix to GitHub Release
+        continue-on-error: true
+        if: github.repository == 'FugoShimizu/ShaveFormat'
+        shell: bash
+        env:
+          GH_TOKEN: ${{ github.token }}
+          GH_REPO: ${{ github.repository }}
+        run: |
+          set -eu;
+          if ! gh release view "$GITHUB_REF_NAME" > /dev/null; then
+            gh release create "$GITHUB_REF_NAME" --verify-tag --title "$GITHUB_REF_NAME" --notes "";
+          fi
+          shopt -s nullglob;
+          files=(vsix/*.vsix vsix/performance-*.md vsix/shavefmt-*.sha256 vsix/shavefmt-*.tar.gz vsix/shavefmt-*.zip);
+          [ "${#files[@]}" -gt 0 ];
+          gh release upload "$GITHUB_REF_NAME" "${files[@]}" --clobber;
 
       - name: Setup Node.js (for vsce)
+        if: github.repository == 'FugoShimizu/ShaveFormat'
         uses: actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020 # v4
         with:
           node-version: "22"
 
-      # 秘密情報を渡す工程で実行する vsce は，鍵ファイルで推移的な依存迄固定し，導入時の台本も走らせない
+      # 秘密情報を渡す工程で実行する vsce は，ロックファイルで推移的な依存迄固定し，インストール時のスクリプトも走らせない
       - name: Install vsce from the lockfile
+        timeout-minutes: 10
+        continue-on-error: true
+        if: github.repository == 'FugoShimizu/ShaveFormat'
         run: npm ci --ignore-scripts --prefix vscode-extension;
 
       # Marketplace 側の拒否で残りを止めず，全件を試みて警告に留める
       # 秘密情報の未設定は公開を試みずに失敗とし，原因を工程の要約へ出す
       - name: Publish each .vsix to Marketplace
+        timeout-minutes: 10
+        continue-on-error: true
+        if: github.repository == 'FugoShimizu/ShaveFormat'
         env:
           VSCE_PAT: ${{ secrets.VSCE_PAT }}
         run: |
@@ -302,8 +651,10 @@ jobs:
 
       # 成功分を配り終えた後に，欠けた環境を失敗として知らせる
       - name: Report missing targets
-        if: ${{ !cancelled() && env.MISSING_TARGETS != '' }}
+        if: ${{ !cancelled() && (env.MISSING_TARGETS != '' || env.MISSING_CLI_TARGETS != '') }}
         run: |
-          echo "::error::no .vsix for: $MISSING_TARGETS";
+          [ -z "$MISSING_TARGETS" ] || echo "::error::no .vsix for: $MISSING_TARGETS";
+          [ -z "$MISSING_CLI_TARGETS" ] || echo "::error::no CLI for: $MISSING_CLI_TARGETS";
           echo "Missing targets: $MISSING_TARGETS" >> "$GITHUB_STEP_SUMMARY";
+          echo "Missing CLI targets: $MISSING_CLI_TARGETS" >> "$GITHUB_STEP_SUMMARY";
           exit 1;

@@ -1,3 +1,7 @@
+(__END__)
+(__END__)
+(__END__)
+
 puts DATA.read
 
 # note

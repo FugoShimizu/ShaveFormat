@@ -1,4 +1,0 @@
-// 古い
-// 使わない
-// 使わない
-enum class E { Old, Legacy };

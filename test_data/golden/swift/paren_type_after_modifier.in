@@ -1,6 +1,0 @@
-func f(g: @escaping (Int) -> Void, h: @Sendable () -> Void) {}
-func run() {
-    let c = g();
-    { print("x") }()
-    print(c)
-}

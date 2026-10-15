@@ -18,3 +18,26 @@ function foo() {
 	c += 1;
 	d += 1;
 }
+
+(function(window) {
+var class2type = {};
+var toString = class2type.toString;
+var
+	document = window.document,
+	version = "2.1.1",
+	jQuery = function(selector, context) {
+		return new jQuery.fn.init(selector, context);
+	},
+	rtrim = /x/g;
+jQuery.x = 1;
+})(window);
+
+let
+a = 1,
+b = 2;
+let // c
+/* d */ e = 3;
+let
+{ f } = { f: 4 };
+console.log(a, b, e, f);
+const g = () => (({ id: 1 }));

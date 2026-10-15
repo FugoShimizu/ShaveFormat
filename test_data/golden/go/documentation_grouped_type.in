@@ -1,8 +1,0 @@
-package p
-
-type (
-	// T の説明
-	//
-	// 続き
-	T int
-)

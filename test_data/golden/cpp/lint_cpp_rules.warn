@@ -1,13 +1,28 @@
-1:1: Review: Avoid `using namespace`; qualify names explicitly; verify applicability
+1:1: Review: Avoid `using namespace`; qualify names explicitly
 4:2: Violation: Make private: explicit
-5:2: Review: Reorder this member according to its role and dependencies; verify lifetime, external contract
-8:11: Review: Use `constexpr` for this compile-time constant; verify applicability, type, external contract
-10:1: Review: Document the required usage constraints; verify applicability
-10:1: Review: Document the complexity and its input-size measure; verify applicability
-19:9: Review: Replace the C-style cast with the appropriate C++ cast; verify type, value range, intent
-26:2: Review: Reorder this member according to its role and dependencies; verify lifetime, external contract
-61:6: Review: Use getter naming for function Value; verify external contract
-70:7: Review: Use setter naming for function ChangeCount; verify external contract
-77:1: Violation: Document the complexity and its input-size measure
+5:2: Review: Reorder this member according to its role
+19:9: Violation: Replace the C-style cast with the appropriate C++ cast
+26:2: Review: Reorder this member according to its role
 90:1: Violation: Documentation is missing a summary
-90:5: Violation: Use @return for this documentation item
+97:1: Review: Avoid `using namespace`; qualify names explicitly
+107:9: Violation: Replace the C-style cast with the appropriate C++ cast
+125:12: Review: Inline immediately returned variable Value
+144:26: Violation: Documentation is missing a return-value description
+182:2: Review: Reorder this member according to its role
+184:2: Review: Reorder this member according to its role
+193:6: Review: Inline immediately returned variable α
+216:5: Review: Use the boolean-negation assignment required for this target
+233:2: Review: Reorder this member according to its role
+237:2: Review: Reorder this member according to its role
+241:2: Review: Reorder this member according to its role
+245:2: Review: Reorder this member according to its role
+250:2: Review: Reorder this member according to its role
+258:6: Review: Inline immediately returned variable α
+271:2: Review: Reorder this member according to its role
+282:2: Review: Reorder this member according to its role
+294:9: Review: Replace this constant macro with a language constant
+295:9: Review: Replace this constant macro with a language constant
+296:9: Review: Replace this constant macro with a language constant
+297:9: Review: Replace this constant macro with a language constant
+304:1: Review: Reorder access specifiers as private → protected → public
+322:1: Review: Reorder access specifiers as private → protected → public

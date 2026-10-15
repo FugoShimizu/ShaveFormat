@@ -69,3 +69,50 @@ function literal() {
 	// 結果
 	return 0;
 }
+
+/**
+ * トークンの境界の照合
+ */
+function tokenBoundaries() {
+	if(a) z = x++ + y;
+	if(b) z = x + ++y;
+	if(a) z = x-- - y;
+	else if(b) z = x - --y;
+	if(a) {
+		z = x++ + y;
+		touch();
+	}
+	if(b) {
+		z = x + ++y;
+		touch();
+	}
+	if(a) {
+		z = x-- - y;
+		touch();
+	} else if(b) {
+		z = x - --y;
+		touch();
+	}
+	if(a) z = x + y;
+	else if(b) z = x + y;
+	if(a) { if(b) { consume(); } }
+	if(a) if(b) if(c) consume();
+	x += 1E0_1;
+	x -= 1E+0_1;
+	x += 1E-0_1;
+	consume(x >= b + 1E0_1);
+	consume(x <= b - 1E-0_1);
+	consume(b + 1E+0_1 <= x);
+	consume(b - 1E0_1 >= x);
+	x += 1E0_0;
+	consume(x >= b + 1E0_0);
+	consume(x == 0E1_0);
+	if(a) consume();
+	if(b) consume();
+	if(c) consume();
+	if(a) consume();
+	else if(b) consume();
+	else if(c) consume();
+	// 終了
+	return;
+}

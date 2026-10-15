@@ -1,0 +1,11 @@
+function numberQuery(){let x=1;type T=typeof x extends 1?string:number;let y:T=0;return y;}
+function stringQuery(){let x="a";type T=typeof x extends "a"?string:number;let y:T=0;return y;}
+function bigintQuery(){let x=1n;type T=typeof x extends 1n?string:number;let y:T=0;return y;}
+function nestedQuery(){let x=1;type Box<T>=T[];type T=Box<{value:typeof x}>;const read=():typeof x=>x;return read();}
+function runtimeQuery(){let x=1;return typeof x;}
+function shadowedQuery(){let x=1;{let x="a";type T=typeof x;const y:T="a";console.log(y);}return x;}
+function objectIsolation(){let x=1;type Box<T>=T[];type T=Box<{value:typeof x}>;return 0;}
+function runtimeAfterObject(){let x=1;return typeof x;}
+function arrowIsolation(){let x=1;const read=():typeof x=>x;return read();}
+function runtimeAfterArrow(){let x=1;return typeof x;}
+function signatureShadowing(){let x=1;type T=(x:string)=>typeof x;type U=new(x:string)=>typeof x;return typeof x;}

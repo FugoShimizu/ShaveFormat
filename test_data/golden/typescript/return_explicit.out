@@ -26,6 +26,7 @@ class A {
 
 	/**
 	 * 生成する
+	 * @return
 	 */
 	*gen() {
 		yield 1;
@@ -38,6 +39,7 @@ const l = () => {
 
 /**
  * 待つ
+ * @return
  */
 async function p(): Promise<void> {
 	await q();
@@ -50,5 +52,178 @@ async function p(): Promise<void> {
  */
 function r(x: unknown): asserts x {
 	check(x);
+	return;
+}
+
+/**
+ * 未確定の結果
+ * @return 既存の説明
+ */
+function unknownResult() {
+	resolveResult();
+	return;
+}
+
+/**
+ * 無値
+ */
+function noValue(): void {}
+
+/**
+ * 戻らない
+ */
+function stop(): never {
+	throw new Error("stop");
+}
+
+/**
+ * 後判定の本体で終える
+ * @param c 条件
+ */
+function postStop(c: boolean): void {
+	do return;
+	while(c);
+}
+
+/**
+ *
+ */
+function outer() {
+	/**
+	 *
+	 * @return
+	 */
+	function* g() {
+		return 1;
+	}
+	g();
+	return;
+}
+
+/**
+ *
+ */
+function outer2() {
+	const g = function*() {
+		return 1;
+	};
+	g();
+	return;
+}
+
+const anonymousAsyncGenerator = async function*() {};
+
+/**
+ *
+ */
+function eventLoop(): void {
+	// 無限ループ
+	while(true) {
+		const evt = queue.pop();
+		if(!evt) break;
+		dispatch(evt);
+	}
+	return;
+}
+
+class Worker {
+	private running = true;
+
+	/**
+	 *
+	 */
+	run(): void {
+		// クラスメソッド内の無限ループ
+		while(true) {
+			if(!this.running) break;
+			this.tick();
+		}
+		return;
+	}
+}
+
+/**
+ *
+ */
+function existingWhile(): void {
+	// 既存の while(true) は不変
+	while(true) doWork();
+}
+
+/**
+ *
+ * @param obj
+ */
+function forIn(obj: Record<string, number>): void {
+	// for-in は対象外
+	for(const k in obj) use(k);
+	return;
+}
+
+/**
+ *
+ * @param n
+ */
+function regularFor(n: number): void {
+	// 通常 for は対象外
+	for(let i = 0; i < n; ++i) use(i);
+	return;
+}
+
+/**
+ *
+ */
+function LiteralWhile(): void {
+	while(2) {}
+}
+
+/**
+ *
+ */
+function LiteralFor(): void {
+	for(; 0X2;) {}
+}
+
+/**
+ *
+ */
+function LiteralDo(): void {
+	do {} while(-1);
+}
+
+/**
+ *
+ */
+function LiteralFloat(): void {
+	while(1.0) {}
+}
+
+/**
+ *
+ */
+function LiteralString(): void {
+	while("x") {}
+}
+
+/**
+ *
+ */
+function LiteralWrapped(): void {
+	while(2) {}
+}
+
+/**
+ *
+ */
+function LiteralZero(): void {
+	while(0) {}
+	return;
+}
+
+/**
+ *
+ */
+function LiteralBreak(): void {
+	while(2) break;
 	return;
 }

@@ -1,5 +1,38 @@
-macro_rules! m {
-	($x:expr,) => {
-        $x +  1
-    };
-}
+macro_rules! m { ($x: expr,) => { $x + 1 }; }
+macro_rules! name { () => {}; ($x: expr) => { $x + 1 }; }
+macro_rules! two { ($a: ident) => { let $a = 1; } }
+macro_rules! empty { () => {} }
+macro_rules! comment_only { () => { /* keep
+ * body */ 1 }; }
+macro_rules! no_comment { () => { 2 }; }
+macro_rules! single_comment { () => { /* keep body */ 1 }; }
+
+const LINE: u32 = line!();
+const COLUMN: u32 = column!();
+const QUALIFIED: u32 = std::line!() + core::column!();
+
+// 外側の行
+// 内側の行
+// 外側の囲み
+// 内側の囲み
+macro_rules! documented_tokens { () => { struct Item; }; }
+macro_rules! keep { ($($token: tt) *) => {}; }
+macro_rules! repeat { ($($x: tt),*) => { $($x) + }; }
+
+// 項目
+// 通常
+keep!{ struct Item; struct /* 型名 */ Other; } // 行末
+
+// 項目
+keep!(struct Parenthesized;);
+// 項目
+keep![struct Bracketed;];
+
+// 後続
+keep!{ const TEXT: & str = r"first
+second"; struct AfterLiteral; }
+
+keep!(+*);
+keep!(+ *);
+keep!(+ /* note */ *);
+keep!(#[allow(unused)] fn token_name() {});

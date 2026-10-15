@@ -1,2 +1,0 @@
-def f(g=(lambda: 1), h: int=(lambda: 2)):
-	pass

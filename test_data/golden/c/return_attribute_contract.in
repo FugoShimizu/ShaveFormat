@@ -1,0 +1,45 @@
+enum { noreturn = 16 };
+
+__attribute__((noreturn)) void StandardStop(void);
+
+__attribute__((aligned(noreturn))) void ArgumentTarget(void);
+
+/**
+ * 普通の関数からの返戻
+ */
+void ArgumentCheck(void) {
+	ArgumentTarget();
+	// 通常復帰後の返戻
+	return;
+}
+
+/**
+ * 標準の非復帰契約の対照
+ */
+void StandardCheck(void) {
+	StandardStop();
+	// 非復帰の呼出後の返戻
+	return;
+}
+
+/**
+ * 導入前の値の返戻
+ * @return 終了状態
+ */
+int UnintroducedResult(void) {
+	abort();
+	// 通常復帰後の値の返戻
+	return 0;
+}
+
+#include <stdlib.h>
+
+/**
+ * 導入後も宣言した戻値の説明を保つ
+ * @return 終了状態
+ */
+int IntroducedResult(void) {
+	abort();
+	// 非復帰の呼出後の値の返戻
+	return 0;
+}

@@ -27,3 +27,23 @@ class K(val v: Int) {
 	constructor(x: Int) : this(x) { g(); h(x) }
 	init { g() }
 }
+
+/**
+ * 読む
+ * @param path 経路
+ */
+fun read(path: String) {
+	try {
+		open(path)
+	}
+	catch (e: IllegalArgumentException) {
+		report(e)
+	}
+	catch (e: IllegalStateException) {
+		log(e)
+	}
+	finally {
+		close()
+	}
+	return
+}

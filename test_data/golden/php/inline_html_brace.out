@@ -26,3 +26,11 @@ foreach([] as $r) {
 do {
 	?>D<?php
 } while($a);
+
+/**
+ *
+ */
+function f() {
+	?>a) }b {x} <b>y</b><?php return;
+}
+?>

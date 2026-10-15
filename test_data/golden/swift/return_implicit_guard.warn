@@ -1,16 +1,12 @@
 1:1: Violation: Documentation is missing a summary
-5:15: Review: Determine whether the function needs an explicit trailing return; verify type, reachability
 5:30: Violation: Documentation is missing a return-value description
 10:2: Violation: Documentation is missing a summary
 14:2: Violation: Make internal explicit
-14:7: Review: Determine whether the function needs an explicit trailing return; verify type, reachability
 14:21: Violation: Documentation is missing a return-value description
 20:2: Violation: Documentation is missing a summary
 24:2: Violation: Make internal explicit
-24:7: Review: Determine whether the function needs an explicit trailing return; verify type, reachability
 24:21: Violation: Documentation is missing a return-value description
 30:2: Violation: Make internal explicit
 36:2: Violation: Documentation is missing a summary
 40:2: Violation: Make internal explicit
-40:7: Review: Determine whether the function needs an explicit trailing return; verify type, reachability
 40:18: Violation: Documentation is missing a return-value description

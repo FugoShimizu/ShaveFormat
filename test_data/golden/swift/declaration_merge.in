@@ -11,3 +11,15 @@ func f() -> Int {
 	let charlie = thirdOperationWithAVeryLongName(3)
 	return a + c + e + Int(d) + b.count + alpha + bravo + charlie
 }
+
+var a,b:Int
+
+struct SharedBindings {
+	var first,second,third: [String: [Int?]]
+}
+
+enum E { case a; case b }
+enum F {
+	case a; case b
+	case c(Int); case d
+}

@@ -1,2 +1,22 @@
 // <summary>値</summary>
 int value = 1;
+/**
+ * <summary>Top</summary>
+ * <param name="x"></param>
+ * <param name="old">Old</param>
+ * <returns>R</returns>
+ */
+int Top(int x) => x;
+/**
+ * <summary></summary>
+ * <param name="x"></param>
+ * <returns></returns>
+ */
+int EmptyTop(int x) => x;
+
+/**
+ * <summary>Header description</summary>
+ */
+class Header {
+	int value;
+}

@@ -1,0 +1,112 @@
+fn f() {
+	g(); /* a */ /* b */
+	h(); /* c */ // d
+	/* e */ /* f */
+	i();
+	loop { /* l */ // m
+		j();
+	}
+	let form_feed_a = 1;
+// own
+	let form_feed_c = 3;
+}
+
+f(
+	Point {
+		// 成員の深さ
+		first_collection_member_with_a_long_name: 1,
+		second_collection_member_with_a_long_name: 2,
+		third_collection_member_with_a_long_name: 3
+	}
+);
+
+fn f(a: bool) {
+	if a {
+		x();
+		// before else
+	} else {
+		y();
+	}
+}
+
+fn main() {
+	let v = vec![1 /* c
+	x */ , 2];
+}
+
+#[derive(Debug /* d
+e */ )]
+struct S;
+
+fn f(a: Vec<i32>, x: i32) -> usize {
+	let s = x /* c */ + 1;
+	a
+		/* m */
+		.len() + s as usize
+}
+
+fn f(a: bool, c: bool) {
+	let x = 1; // X
+	if a {
+		g();
+	} else if c {
+		// A
+	} else {
+		// T1
+		// T2
+	}
+	loop {
+		// W1
+		// W2
+	}
+}
+/** Lifetime comment */
+fn lifetime_comment<'a>() -> () { // it's kept
+}
+/** Block comment */
+fn lifetime_block_comment<'a /* keep */, 'b>() -> () {}
+
+fn f() {
+    println!(
+        "{}",
+        // value
+        x
+    );
+    let v = vec![
+        // first
+        1,
+        // mk01
+    ];
+    println!("{}", x
+        // mk02
+    );
+    m!{ a
+        // mk03
+    };
+}
+
+fn gaps() {
+	m!(a    b);
+	m!(a
+        b);
+}
+
+fn f() {
+	loop { // l
+		g();
+	}
+	unsafe { // u
+		g();
+	}
+	match a { // m
+		_ => h(),
+	}
+}
+
+/** Keep boundaries */
+fn empty_boundary() { /* Read. Return. */ }
+
+/** Keep boundaries */
+fn empty_boundaryPair() { /* Read */ /* Return */ }
+// "Read here." 日本語ABC "Return now."
+// 'Read here.' 甲, B '?Return now.' 日本語ABC '!Finish here.'

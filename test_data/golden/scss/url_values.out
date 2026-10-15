@@ -25,3 +25,14 @@ a {
 	content: "\\";
 	font: 1px/2 "a/b";
 }
+
+@keyframes x {
+	to {
+		--pppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppp:
+		vvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvv;
+	}
+}
+
+.literal {
+	content: "begin\n";
+}

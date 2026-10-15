@@ -1,1 +1,5 @@
-18:3: Violation: Add the required comment before this `return`
+20:3: Violation: Add the required comment before this `return`
+28:7: Review: Inline immediately returned variable a
+37:7: Review: Inline immediately returned variable \u0061
+46:7: Review: Inline immediately returned variable a
+55:7: Review: Inline immediately returned variable a?

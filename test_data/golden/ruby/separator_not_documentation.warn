@@ -1,3 +1,0 @@
-2:1: Violation: Documentation is missing a summary
-5:5: Violation: Documentation is missing a return-value description
-5:7: Violation: Documentation is missing a description for parameter 'x'

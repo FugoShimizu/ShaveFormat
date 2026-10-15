@@ -1,3 +1,6 @@
+import other.System;
+import static java.lang.System.exit;
+
 class A {
 	static final boolean FLAG = true;
 	boolean running;
@@ -40,5 +43,167 @@ class A {
 	void p() {
 		if(running) return;
 		else throw new RuntimeException();
+	}
+}
+
+class ImportedSystem {
+	/**
+	 * 取込んだ呼出から戻る
+	 */
+	void call() {
+		System.exit(0);
+	}
+}
+
+class PostLoop {
+	/**
+	 * 呼出の後へ戻る
+	 */
+	void g() {}
+
+	/**
+	 * 繰返の経路を確認する
+	 * @param c 条件
+	 */
+	void stop(boolean c) {
+		do return;
+		while(c);
+	}
+
+	/**
+	 * 繰返の経路を確認する
+	 * @param c 条件
+	 */
+	void branches(boolean c) {
+		do {
+			if(c) return;
+			else throw new RuntimeException();
+		} while(c);
+	}
+
+	/**
+	 * 繰返の経路を確認する
+	 * @param c 条件
+	 */
+	void escape(boolean c) {
+		do {
+			if(c) break;
+			return;
+		} while(c);
+	}
+
+	/**
+	 * 繰返の経路を確認する
+	 * @param c 条件
+	 */
+	void next(boolean c) {
+		do {
+			if(c) continue;
+			return;
+		} while(c);
+	}
+
+	/**
+	 * 繰返の経路を確認する
+	 * @param c 条件
+	 */
+	void normal(boolean c) {
+		do g();
+		while(c);
+	}
+
+	/**
+	 * 繰返の経路を確認する
+	 * @param c 条件
+	 */
+	void before(boolean c) {
+		while(c) return;
+	}
+
+	/**
+	 * 繰返の経路を確認する
+	 * @param c 条件
+	 */
+	void nested(boolean c) {
+		do {
+			while(c) break;
+			return;
+		} while(c);
+	}
+}
+
+class StaticExit {
+	/**
+	 * 標準の終了を呼ぶ
+	 */
+	void stop() {
+		exit(0);
+	}
+}
+
+class ShadowedStaticExit {
+	/**
+	 * 通常復帰する
+	 * @param code 終了番号
+	 */
+	void exit(int code) {}
+
+	/**
+	 * 同名のメソッドを呼ぶ
+	 */
+	void stop() {
+		exit(0);
+	}
+}
+
+class ProcessExit {
+	/**
+	 * プロセス終了を捕捉しない
+	 */
+	void stop() { try { java.lang.System.exit(0); } catch(Throwable e) { work(); } }
+}
+
+class FinallyTransfers {
+	/**
+	 * 後始末で継続する
+	 */
+	void continueFinally() { while(true) { try { break; } finally { continue; } } }
+
+	/**
+	 * 後始末で返す
+	 */
+	void returnFinally() { while(true) { try { break; } finally { return; } } }
+
+	/**
+	 * 後判定の後始末で継続する
+	 */
+	void postContinueFinally() { do { try { break; } finally { continue; } } while(true); }
+
+	/**
+	 * 後判定の後始末で返す
+	 */
+	void postReturnFinally() { do { try { break; } finally { return; } } while(true); }
+
+	/**
+	 * 正常完了する後始末で脱出を保つ
+	 */
+	void completeFinally() { while(true) { try { break; } finally {} } }
+}
+
+class DeclarationHeaders {
+	/**
+	 * 初期化子内の定数を後続へ伝えない
+	 */
+	void localConstant() {
+		int a = new Object() { final int z = 0; }.hashCode(), b = 0;
+		while(b < 1) b++;
+	}
+
+	/**
+	 * 宣言全体の定数を全宣言子へ伝える
+	 */
+	void sharedConstant() {
+		final int a = 1, b = 2;
+		while(b < 3) {}
 	}
 }

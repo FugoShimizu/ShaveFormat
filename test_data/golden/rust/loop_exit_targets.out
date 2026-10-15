@@ -1,7 +1,8 @@
-/// 多重ループの脱出
-///
-/// # Returns
-/// 見付けた添字
+/**
+ * 多重ループの脱出
+ * # Returns
+ * 見付けた添字
+ */
 fn outer_exit() -> i32 {
 	let mut found = -1;
 	'outer: for i in 0..10 {
@@ -15,10 +16,11 @@ fn outer_exit() -> i32 {
 	return found;
 }
 
-/// 単一ループのラベル
-///
-/// # Returns
-/// 常に 0
+/**
+ * 単一ループのラベル
+ * # Returns
+ * 常に 0
+ */
 fn inner_exit() -> i32 {
 	'inner: loop {
 		break 'inner;

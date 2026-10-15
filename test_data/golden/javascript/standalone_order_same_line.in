@@ -1,6 +1,0 @@
-useEffect(() => {
-	// TODO
-}, [
-	// deps
-	a,
-]);

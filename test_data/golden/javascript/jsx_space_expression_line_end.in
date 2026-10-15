@@ -1,5 +1,0 @@
-const f2 = <p>a{// c
-" "}b</p>;
-const x = a/<p>a{" " /* m */}b</p>, y = 2;
-const z = cond ? <p>a{// d
-" "}b</p> : null;

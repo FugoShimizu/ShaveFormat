@@ -1,4 +1,5 @@
 #include <memory>
+#include <utility>
 /**
  * 値を返す
  * @return 値
@@ -7,4 +8,27 @@ int F() {
 	auto P = std::make_shared<int>(1);
 	// 値の返戻
 	return *P;
+}
+
+/**
+ * 推論の例外を使う
+ * @param Pair 分解する値
+ */
+void Inferred(const std::pair<int, int> &Pair) {
+	const auto Direct = []() -> int {
+		return 1;
+	};
+	const auto Multi =
+	[Value = Direct()]() -> int {
+		return Value;
+	};
+	const auto &[First, Second] = Pair;
+	for(const auto &[A, B] : { Pair }) Consume(A, B);
+	auto Nameable = std::make_pair(First, Second);
+	auto Invoked = []() -> int {
+		return 1;
+	}();
+	Consume(Multi(), Nameable, Invoked);
+	// 終了
+	return;
 }

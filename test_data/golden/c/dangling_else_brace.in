@@ -7,3 +7,17 @@ void f(int a, int b, int c) {
 	if (a) { ; } else { ; }
 	while (a) { ; }
 }
+
+void f(int a, int b) {
+	if(a) do x(); while(b);
+	if(a) { do x(); while(b); } else y();
+	if(a) y(); else do x(); while(b);
+	while(a) do x(); while(b);
+	if(a) do g(); while(b); else h();
+	if(a) { g(); h(); } while(b);
+	do { g(); h(); } while(b);
+}
+
+void Register(const char *SourceText, unsigned Position, unsigned SourceSize, unsigned LanguageMode, unsigned *Handlers) {
+	if(Position < SourceSize && SourceText[Position] != '\n' && ShouldBreakAfterExpandedBrace("\n}", SourceText + Position, LanguageMode)) Handlers[0] = Position;
+}

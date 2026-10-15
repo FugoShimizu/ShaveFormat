@@ -1,8 +1,0 @@
-f(
-	T{
-		// 成員の深さ
-		FirstCollectionMemberWithANameLongEnoughForWrapping,
-		SecondCollectionMemberWithANameLongEnoughForWrapping,
-		ThirdCollectionMemberWithANameLongEnoughForWrapping
-	}
-);

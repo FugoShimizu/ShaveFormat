@@ -1,1 +1,3 @@
 const e = <a b="x" c='say "hi"' />;
+const markers = "";
+const markerText = <p>{" "}</p>;

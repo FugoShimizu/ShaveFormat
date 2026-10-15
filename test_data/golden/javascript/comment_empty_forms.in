@@ -1,0 +1,94 @@
+describe("suite", () => { // group
+	it("works", () => { // check
+		expect(1).toBe(1);
+	});
+});
+useEffect(() => { // init
+	start();
+}, []);
+setTimeout(() => { // later
+	done();
+}, 10);
+
+const a = [
+  // d
+];
+g();
+
+function f() {
+	if (a) {
+		// c
+	} else {
+		x();
+		y();
+	}
+	if (a) {
+		// d1
+		// d2
+	} else {
+		x();
+	}
+	try {
+		g();
+	} catch {
+		// e
+	}
+	try {
+		g();
+	} catch {
+		// f1
+		// f2
+	}
+	{
+		// bare
+	}
+	const o = {
+		// obj
+	};
+	f(
+		// arg
+	);
+}
+
+function f(x) {
+  switch (x) {
+    case 1:
+      a();
+    case 2:
+      // b
+    default:
+      // c
+  }
+}
+
+function f() {
+	a();
+	;
+	/* s2 */ ;
+}
+
+function g() {
+	b();
+	/* s3 */ ;
+}
+
+function m(x) {
+	if (x) { return; }
+	else { /* empty else */ }
+	g();
+	return /* d */;
+}
+try { g(); } catch (e) { /* ignore */ }
+const a = [/* empty */];
+const f = () => { /* noop */ };
+foo(/* nothing */);
+const n = new A(/* nothing */);
+
+const f /* a */ = (/* b */) => 1;
+g(/* c */);
+
+/** Keep boundaries */
+function emptyBoundary() { /* Read. Return. */ }
+
+/** Keep boundaries */
+function emptyBoundaryPair() { /* Read */ /* Return */ }

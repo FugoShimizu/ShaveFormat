@@ -44,3 +44,22 @@ short""" +
 			zzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzz + b
 		)
 	return x
+
+def escaped_doc():
+	"""
+    ... print("\\n")
+    """
+	return None
+
+escaped_value = """begin
+\n
+end"""
+
+escaped_bytes = b"""begin
+\n
+end"""
+
+escaped_format = f"""begin
+\n
+{1 + 2}
+end"""

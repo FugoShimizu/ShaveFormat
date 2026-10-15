@@ -1,9 +1,0 @@
-if in_part then end # c
-x = 1
-while x do end # d
-if a then
-  # e
-end
-while y do
-  # f
-end

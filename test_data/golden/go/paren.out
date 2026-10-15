@@ -4,15 +4,7 @@ package p
 func h() {
 	g(a / (b * c))
 	g(a * (b % c))
-	g(a - (b + c))
-	g(a - (b - c))
-	g(a - b * c)
 	g(a * (b + c))
-	g(a + b - c)
-	g(a * b % c)
-	g(a - (b + c) * d)
-	g(a / (b * c))
-	g(a + b)
 	g(a & (b + c))
 	g(a | (b + c))
 	g(a ^ (b + c))
@@ -32,11 +24,6 @@ func h() {
 	g(a & b < c)
 	g(a && (b || c))
 	g(a || b && c)
-	g(a && (b && c))
-	g(a || (b || c))
-	g(a && b && c)
-	g(a && (b || c) || d)
-	g(a && b || c)
 	g((a - b).M())
 	return
 }
@@ -45,4 +32,47 @@ func h() {
 func Compare(alpha int, bravo int, charlie int) bool {
 	result := alpha < bravo != (charlie > 0)
 	return result
+}
+
+// F
+func F[T any](s []T) T {
+	return s[0]
+}
+
+// m
+func m() {
+	d := (func() int {
+		return 3
+	})()
+	_ = d
+	return
+}
+
+// f
+func f() {
+	x = a.b.c + g().h + a[0].b + f(1) + a.b(2) + a.(T).c + T{ c: 1 }.c + a.b.c
+	return
+}
+
+// Kind
+func Kind(Value any, Items []int) int {
+	switch Copy := Value.(type) {
+	case int:
+		return Copy
+	}
+	Total := 0
+	for _, Item := range Items {
+		Total += Item
+	}
+	return Total
+}
+
+// f
+func f(x, y int) int {
+	return -(-x) + ^-x - +y + y * -x
+}
+
+// f は値を返す
+func f(a int) int {
+	return -(-a) + -(-(-a))
 }

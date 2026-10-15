@@ -1,4 +1,8 @@
-6:1: @param other does not match a parameter
-6:10: Review: Use camelCase for function MakeValue; verify external contract
 6:23: Violation: Replace `any` with `unknown` or a specific type
-15:10: Review: Use boolean-query naming for function calculate; verify external contract, intent
+25:8: Review: Use the increment or decrement form required for this target
+70:7: Review: Add an explicit type to this declaration
+70:19: Review: Add an explicit type to parameter 'x'
+70:19: Review: Add an explicit return type to this function
+72:7: Review: Add an explicit type to this declaration
+72:14: Review: Add an explicit return type to this function
+72:18: Review: Add an explicit type to parameter 'xs'

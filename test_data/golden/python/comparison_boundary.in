@@ -10,3 +10,64 @@ def check(x: float, xs: list[int]) -> None:
 	if len(xs) >= 10:
 		return
 	return
+
+if a:
+	f()
+
+if b:
+	f()
+
+if c:
+	f()
+
+if a:
+	f()
+elif b:
+	f()
+elif c:
+	f()
+
+if a:
+	if b:
+		f()
+
+x += 1E0_1
+x -= 1E+0_1
+x += 1E-0_1
+consume(x >= b + 1E0_1)
+consume(x <= b - 1E-0_1)
+consume(b + 1E+0_1 <= x)
+consume(b - 1E0_1 >= x)
+x += 1E0_0
+consume(x >= b + 1E0_0)
+consume(x == 0E1_0)
+
+consume(x >= -1)
+consume(x <= -1)
+consume(-1 <= x)
+consume(-1 >= x)
+consume(x >= +1)
+consume(x <= +1)
+consume(+1 <= x)
+consume(+1 >= x)
+consume(x >= -(1))
+consume(x <= +(1))
+consume(x >= (-1))
+consume((+1) <= x)
+consume(x <= 1J)
+consume(x >= 1J)
+consume(1J <= x)
+consume(1J >= x)
+consume(x >= B + 1J)
+consume(x <= B - 1J)
+consume(B + 1J <= x)
+consume(B - 1J >= x)
+consume(x >= 1_000J)
+consume(x <= (1J))
+consume(x >= -(1J))
+consume(x <= +(1J))
+consume(x >= B + (1J))
+consume(x <= B - 1.0J)
+consume(x >= B + 1E0J)
+consume(x == 0J)
+consume(x > 0J)

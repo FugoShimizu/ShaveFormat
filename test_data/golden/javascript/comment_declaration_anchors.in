@@ -1,0 +1,77 @@
+f(
+	[
+		// 成員の深さ
+		"FirstCollectionMemberWithANameLongEnoughForWrapping",
+		"SecondCollectionMemberWithANameLongEnoughForWrapping",
+		"ThirdCollectionMemberWithANameLongEnoughForWrapping"
+	]
+);
+
+const r = foo
+	/* a */ // b
+	.bar()
+	// c
+	.baz();
+
+var a = 1, g = function(x) {
+	// step 1
+	return x; // ret
+};
+
+// Para
+/**
+    a  =  b
+
+Tail
+ */
+f();
+
+function f(
+  a,
+  // c
+) {
+  g(a);
+}
+
+foo(); let
+// s
+x = 1;
+let // c
+y = `a${z}
+b`;
+let // d
+w = <div>
+	text
+</div>;
+let // e
+v = 1; let
+u = 2;
+let /* m */
+t = 3;
+x++; y += "1"; w = null; v++; u++; t++;
+
+let // t
+x = 1 /* a
+
+b */ + 2
+console.log(x)
+
+class A {
+	static // s
+	y = 1 /* c
+	 *
+	 * d */ + 2
+}
+
+foo(); /* c */ let
+// s
+x = 1;
+
+/* d */ let
+// t
+y = 2;
+
+class A {
+	/* c */ #x = 1;
+	get() { return this./* d */#x; }
+}

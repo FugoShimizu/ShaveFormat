@@ -1,0 +1,5 @@
+#!/usr/bin/env python3
+# coding: UTF_7
+x = (False and # see docs+AAo-print("marker"),
+ True)
+print(x)

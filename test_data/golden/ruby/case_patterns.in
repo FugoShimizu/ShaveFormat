@@ -46,3 +46,7 @@ when :ok then perform_success_action_with_long_name(payload)
 when :err then perform_error_action_with_long_name(payload)
 else perform_default_action_with_long_name(payload)
 end
+
+case 7
+when 1.. then p :a; p :b
+end

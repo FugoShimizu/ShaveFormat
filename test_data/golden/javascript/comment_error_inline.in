@@ -1,1 +1,3 @@
 function f(a /* c */: T) { return a; }
+
+function independent() { let x = 1; consume(x); }

@@ -4,10 +4,49 @@ def dispatch(code)
 	run = -> do
 		return
 	end
-	case code
-	when 0
+	case code when 0
 		run.call
 		return
 	end
 	return
+end
+
+# 初期値を返す関数
+# @return [Integer] 初期値
+def first_binding
+	a = g()
+	return a
+end
+
+# 括弧で包んだ値を返す関数
+# @return [Integer] 初期値
+def grouped_binding
+	a = g()
+	return a
+end
+
+# 書込後の値を返す関数
+# @return [Integer] 書込後の値
+def reassigned_binding
+	a = g()
+	a = h()
+	# 値の返戻
+	return a
+end
+
+# 使用後の値を返す関数
+# @return [Integer] 使用後の値
+def referenced_binding
+	a = g()
+	use(a)
+	# 値の返戻
+	return a
+end
+
+# 仮引数を書き換えて返す関数
+# @param a [Integer] 元の値
+# @return [Integer] 書込後の値
+def parameter_binding(a)
+	a = g()
+	return a
 end

@@ -3,3 +3,92 @@
  *     @see other
  */
 function g(a) {}
+
+/**
+ * 生成する。
+ * @param x 値
+ * @returns 最後の値
+ */
+function* h(x) { yield x; return x; }
+function* bare() { yield 1; }
+const anonymousGenerator = function*() { yield 1; };
+
+/**
+ * Summary
+ * @return {{x: number}}
+ */
+function recordReturn() { return {x: 1}; }
+
+/**
+ * Summary
+ * @returns {{x: number}}
+ */
+function aliasReturn() { return {x: 1}; }
+
+/**
+ * Summary
+ * @return {number}
+ */
+function plainReturn() { return 1; }
+
+/**
+ * Summary
+ * @param {Array} [xs=[1,2]]
+ */
+function arrayDefault(xs=[1,2]) {}
+
+/**
+ * Summary
+ * @param {Object} [opts={x: "]"}]
+ */
+function objectDefault(opts={x: "]"}) {}
+
+/**
+ * Summary
+ * @param a Value
+ */
+function escaped(\u0061) {}
+
+/**
+ * Summary
+ * @param a Value
+ */
+function destructured({key: \u0061}) {}
+
+/**
+ * Summary
+ * @param a Value
+ * @param b Value
+ */
+function arrayBindings([\u0061=1,...\u0062]=[]) {}
+
+/**
+ * Summary
+ * @param a Value
+ * @param b Value
+ */
+function nestedBindings({outer:{inner:\u0061},...\u0062}={outer:{inner:1}}) {}
+
+/**
+ * Summary
+ * @param a Value
+ */
+function defaultClass(a = class A {}) {}
+/**
+ * Summary
+ * @param a Value
+ */
+function defaultLocal(
+	a = class {
+		static {
+			const { x, y } = z;
+		}
+	}
+) {}
+/**
+ * Summary
+ * @param a Value
+ * @param b Value
+ * @param rest Values
+ */
+function defaultPattern({ key: a = class A {} }, [b = class B {}, ...rest] = []) {}

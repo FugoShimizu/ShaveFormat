@@ -1,0 +1,95 @@
+class C
+	# 属性
+	# 続き
+	attr_reader :value
+
+	# 定数
+	# 続き
+	FOO = 1
+end
+
+# 説明
+# @param x
+# @return
+=begin
+frozen_string_literal: true
+=end
+def f(x)
+	return x
+end
+
+x = 1
+
+# Note
+# @param a
+# @return
+=begin
+Warn_indent: true
+=end
+def f2(a)
+	return a
+end
+
+# Toggle
+=begin
+Warn_indent: true
+=end
+x = 1
+# 甲
+# 乙
+# 丙
+y = 2
+
+# === rule_docgen_generate ===
+# @param a
+# @param b
+# @return
+def add(a, b)
+	return a + b
+end
+
+#
+# @param message
+# @return
+def log_message(message)
+	return puts message
+end
+
+# === rule_docgen_reconcile ===
+# 合計を求める
+# @param a 第一項
+# @param b
+# @param c
+# @param obsolete 余分な引数
+# @return 合計
+def total(a, b, c)
+	return a + b + c
+end
+
+class C
+	# 説明
+	# 続き
+	puts 1
+end
+
+x if a
+
+# c
+# @param p
+def g(p) end
+
+#
+# @param a
+# @param b
+# @return
+def header_line_end(a, b) # rubocop:disable Metrics/ParameterLists
+	return a
+end
+
+describe "x" do # note
+	#
+	# @return
+	def inner
+		return 1
+	end
+end

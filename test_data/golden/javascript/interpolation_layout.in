@@ -1,0 +1,4 @@
+`p${aaaaaaaaa + bbbbbbbbb + ccccccccc + ddddddddd}q`;
+tag`p${aaaaaaaaa + bbbbbbbbb + ccccccccc + ddddddddd}q`;
+`p${`q${aaaaaaaaa + bbbbbbbbb + ccccccccc + ddddddddd}r`}s`;
+`p${fn(aaaaaaaaa, bbbbbbbbb, ccccccccc, ddddddddd)}q`;

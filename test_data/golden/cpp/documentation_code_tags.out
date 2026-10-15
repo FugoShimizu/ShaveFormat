@@ -18,3 +18,92 @@
 int Example(const int First, const int Second) {
 	return First + Second;
 }
+
+/**
+ * | x | First
+ * Second
+ * |
+ * > First
+ * Second
+ * - First
+ * Second
+ * `left | right`
+ * Second
+ * ## First
+ * Second
+ */
+int Structured;
+// <b>First</b>
+// Second
+// <see cref="C"/>
+// Next
+// <code>a.  b.</code>
+// Next
+// <summary>! Next
+// `x >. Next.`
+int MarkupSentences;
+
+/**
+ * Protected examples
+ * @code
+ * int x; // @endcodex Alpha. Beta.
+ * @endcode_more Alpha. Beta.
+ * @endcode2 Alpha. Beta.
+ * @endcode
+ * After code
+ * Next
+ * @verbatim
+ * @endverbatimx Alpha. Beta.
+ * @endverbatim
+ * @dot
+ * a -> b [label="First. Second."];
+ * @enddotx Alpha. Beta.
+ * @enddot
+ * @msc
+ * a,b;
+ * a=>b [label="First. Second."];
+ * @endmscx Alpha. Beta.
+ * @endmsc
+ * \code{.cpp}
+ * // \endcodex Alpha. Beta.
+ * \endcode
+ * Formula: \f$\text{First.  Second.}\f$
+ * After formula
+ * Display: \f[\text{First. Second.}\f]
+ * Environment: \f{align}{\text{First. Second.}\f}
+ * Alternate: @f$\text{First. Second.}@f$
+ * Alternate display: @f[\text{First. Second.}@f]
+ * Alternate environment: @f{align}{\text{First. Second.}@f}
+ */
+void ProtectedExamples() {}
+/**
+ * @code
+ * *p = f("First.  Second.");
+ * **p = 2;
+ * @endcode
+ */
+void UndecoratedCode() {}
+/**
+ * @code
+ * *p = f("First.  Second.");
+ * **p = 2;
+ * @endcode
+ */
+void DecoratedCode() {}
+
+// <code <code <code <code />
+// <pre <pre <pre />
+// <code title='/>.'>A.  B.<code value="/>"/>C.  D.</code>
+// <code title=">">A.  B.
+int AttributeEnds;
+
+/**
+ * {@code A B}
+ * {@literal A B}
+ * ({@dot A B} @enddot)
+ * ({@msc A B} @endmsc)
+ * ({@verbatim A B} @endverbatim)
+ * (@code A.  B. {@endcode} C.  D. @endcode)
+ * (After End)
+ */
+void InlineTagExamples() {}

@@ -1,0 +1,86 @@
+f(
+	(int[]){
+		// 成員の深さ
+		FirstCollectionMemberWithANameLongEnoughForWrapping,
+		SecondCollectionMemberWithANameLongEnoughForWrapping,
+		ThirdCollectionMemberWithANameLongEnoughForWrapping
+	}
+);
+
+/**
+ *
+ */
+void f() {
+	const /* c */ /* d */ /* f */ int a = 1, b = 2, /* e */ c = 3, d = 4;
+	return;
+}
+
+/**
+ *
+ * @param K
+ * @return
+ */
+int g(int K) {
+	return K;
+}
+
+// xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
+#include "k.h"
+
+/**
+ *
+ * @return
+ */
+int h(void) {
+	return (K) / 2;
+}
+
+// a
+// b
+int x;
+
+/**
+ *
+ * @param a
+ */
+void g(int a) {
+	x();
+	return;
+// end of void
+}
+
+/**
+ *
+ * @param a
+ * @param b
+ * @return
+ */
+int f(int a, int b) {
+	int c = 1; // i
+	return a + b; // 和
+}
+
+struct P {
+	int b;
+};
+
+/**
+ *
+ * @param p
+ * @param a
+ * @return
+ */
+int f(struct P *p, int a) {
+	int s = a /* c */ + 1;
+	// m
+	return p->b + s;
+}
+
+/**
+ * Keep boundaries
+ */
+void EmptyBoundary() {/* Read */ /* Return */}
+/**
+ * Keep boundaries
+ */
+void EmptyBoundaryPair() {/* Read */ /* Return */}

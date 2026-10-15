@@ -1,0 +1,9 @@
+value = $"p{aaaaaaaaa + bbbbbbbbb + ccccccccc + ddddddddd}q";
+value = $@"p{aaaaaaaaa + bbbbbbbbb + ccccccccc + ddddddddd}q";
+value = $"""
+p{aaaaaaaaa + bbbbbbbbb + ccccccccc + ddddddddd}q
+""";
+value = $"p{fn(aaaaaaaaa, bbbbbbbbb, ccccccccc, ddddddddd)}q";
+value = $$"""
+p{{aaaaaaaaa + bbbbbbbbb + ccccccccc + ddddddddd}}q
+""";

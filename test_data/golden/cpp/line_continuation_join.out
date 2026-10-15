@@ -13,3 +13,6 @@ this)";
 int F(int X) {
 	return ADD(X, 1);
 }
+
+const char *s = R"(ab)";
+int x = 1;

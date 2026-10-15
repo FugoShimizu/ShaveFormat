@@ -1,2 +1,4 @@
-/** @fileoverview 概要 */
+/**
+ * @fileoverview 概要
+ */
 import x from "y";

@@ -1,0 +1,5 @@
+/* note *\ 
+/
+int Hidden;
+/* close */
+int Value;

@@ -1,7 +1,0 @@
-class A {
-	int x;
-
-	/** Returns a */ int m(int a) {
-		return a;
-	}
-};

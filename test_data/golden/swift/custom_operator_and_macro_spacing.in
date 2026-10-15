@@ -7,3 +7,9 @@ print(b)
 let c = a <> a
 let d = a<>a
 @freestanding(expression) macro m(_ v: Int) -> Int = #externalMacro(  module: "M",type: "T")
+
+let position =
+(#line, #column)
+
+@_specialize(where T==Box<Int>)
+func specialized<T>(_ value:T) {}

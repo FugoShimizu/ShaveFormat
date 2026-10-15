@@ -1,5 +1,4 @@
 /// Returns a */ b
-///
 /// x = f()
 /// Y = 2
 void g() {

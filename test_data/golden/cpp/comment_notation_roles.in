@@ -1,0 +1,44 @@
+/// ========== Alpha ==========
+int A = 1;
+//! ========== Beta ==========
+long B = 2;
+/*!========== Delta ========== */
+int D = 4;
+
+// ==== A. B ====
+int f(int x) {
+	return x;
+}
+
+/// ==== Section ====
+int g(int x) {
+	return x;
+}
+
+// ========== ASCIIと日本語 ==========
+int MixedSection;
+// ========== Alpha  Beta ==========
+long SpacedSection;
+// ========== `a  b. c` ASCIIと日本語 ==========
+short ProtectedSection;
+// ========== 「ASCIIと日本語」『Alpha  Beta』【日本語 と 日本語】 ==========
+int QuotedSection;
+// ==== Wait..?! Continue. ====
+int MarkSection;
+/** ========== 1. First ========== */
+int NumberSection;
+// ========== 1. Read. Next. ==========
+int SentenceSection;
+// ========== 12. First ==========
+int MultiDigitSection;
+// ========== A. First ==========
+int UpperLetterSection;
+// ========== a. First ==========
+int LowerLetterSection;
+// ========== ==== ==========
+/// ========== ==== ==========
+//! ========== ==== ==========
+/* ========== ==== ========== */
+/** ========== ==== ========== */
+/*! ========== ==== ========== */
+// ========== ==Alpha== ==========

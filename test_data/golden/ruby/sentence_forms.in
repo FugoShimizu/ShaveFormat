@@ -1,0 +1,52 @@
+# defined? Next step. Is it? Done!
+# a?.b と != と ?: を保持する。次へ進む
+# `f!()` を保持する。Done! Continue.
+# URL https://example.com/path? を保持する。次へ進む
+# ... operator
+# Read ...
+# (... see)
+x = 1
+
+# [First. Second.]
+# ｛一文。二文。｝
+# "a\"x. Next."
+# "a\"x  y"
+sentence_cases = 1
+
+x = 1
+# frozen_string_literal: 説明。二文目 です
+# Read. Return.
+# Read (once). Return.
+# Dr. Smith reads.
+# 処理する.結果を返す.
+# 1. Read. Return.
+# A. Read. Return.
+# (Read. Return.)
+# (Read. Return.). Next.
+# "Read (once. Return.) then. Finish."
+# 'Read "once. Return." then. Finish.'
+# don't stop. users' cache. Next.
+# Read \"once. Return.
+# ('a.'b.'x.'c)
+# 処理.. 続行.
+# 処理.。
+# 処理.。次
+# (処理.。次)
+# Read.続行.
+# Read？Return！Next。
+# `Read. Return.` x = "Read. Return."
+# ... operator
+# Read ...
+# (... see)
+# Read　. Next.
+# (Read.　Return.)
+X = 1
+# frozen_string_literal: 説明。二文目 です
+
+Y = 1
+# (Read.
+# Return. Close.) Next.
+GROUP_PAREN = 1
+# "Read.
+# Return. Close." Next.
+GROUP_QUOTE = 1

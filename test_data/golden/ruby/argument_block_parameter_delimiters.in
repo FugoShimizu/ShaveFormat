@@ -1,0 +1,243 @@
+def f2 *; p :f2; end
+def f4 **; p :f4; end
+def f5 &; p :f5; end
+def f6 a, *; p a; end
+
+[[1, 2]].each { |a,| p a }
+[[1, 2]].each do |a,|
+  p a
+end
+foo { |x, y ; i, j| i = x }
+foo { |x, y| }
+foo do |x, y| end
+fn = -> {}
+
+def foo(*a) = a
+x = foo +1, 2
+p x
+
+def ret1(x)
+  return +x
+end
+def ret2(x)
+  return(x) + 1
+end
+def ret3(x)
+  return(+x) + 1
+end
+def ret4(x)
+  return - 1.abs
+end
+def ret5(x)
+  return ..x
+end
+def ret6(x)
+  return[x]
+end
+def ret7(x)
+  yield (+x)
+end
+x = foo +1
+p(foo (+1))
+p(foo (..1))
+p(foo (a) { 1 })
+foo = 10
+p(foo (-2))
+y = - 2.abs
+z = -(2).abs
+case [1, 2]
+in [q, ]
+  p q
+end
+v = (bar) -1
+w = foo +1 ? 2 : 3
+u = foo +1..5
+z1=quux +1
+z2=quuz -2
+
+x.each do |a|
+  next [a, 1] if a
+  break [a] if a
+  next(a) if a
+end
+def g
+  yield [1]
+  yield(1)
+  super [1]
+end
+
+def f
+  g(<<~EOS, 1
+    text
+  EOS
+  )
+end
+
+def nested(x)
+  if x
+    g(<<~EOS, 1
+      t
+    EOS
+    )
+  end
+  nil
+end
+
+def pair
+  g(<<~A, <<~B
+    a
+  A
+    b
+  B
+  )
+end
+
+result = g(<<~TOP, 1
+  top
+TOP
+)
+
+def f
+  g(<<~EOS, 1)
+    text
+  EOS
+end
+
+def nested(x)
+  if x
+    g(<<~EOS, 1)
+      t
+    EOS
+  end
+  nil
+end
+
+def pair
+  g(<<~A, <<~B)
+    a
+  A
+    b
+  B
+end
+
+result = g(<<~TOP, 1)
+  top
+TOP
+
+while cond(<<~C)
+  c
+C
+  z
+end
+
+if cond(<<~D
+  d
+D
+)
+  z
+end
+
+x = cond(<<~D).ok?
+  text
+D
+
+x = cond(<<~D
+  text
+D
+).ok?
+
+if cond(<<~D).ok?
+  text
+D
+  g
+end
+
+if cond(<<~D
+  text
+D
+).ok?
+  g
+end
+
+x = cond(<<~D) && ready
+  text
+D
+
+x = cond(<<~D
+  text
+D
+) && ready
+
+logger.warn <<-ALPHA.strip, <<-BETA.strip, "a very long third argument string that pushes this particular call well past the one hundred twenty eight character limit"
+alpha body text
+	ALPHA
+beta body text
+	BETA
+
+rows = [<<~A, <<~B, <<~C]
+  alpha
+A
+  beta
+B
+  gamma
+C
+
+x = f(<<~X, g { 1 })
+  body
+X
+y = f(<<~Y, g do 1 end)
+  body
+Y
+z = foo(<<~Z).each do |q| a; b end
+  body
+Z
+
+f <<~FIRST_BODY
+  foo +1
+FIRST_BODY
+f <<~SECOND_BODY
+  bar +2
+SECOND_BODY
+z1=quux +1
+z2=quuz -2
+
+def f(g = -> { a; b })
+  g.call
+end
+
+p(if a then 1 else 2 end)
+f(if a
+  b
+end, 2)
+g(1, if a
+  x
+  y
+end)
+
+h = {
+  a: (if x
+    1
+  end),
+  b: (a +
+    b),
+}
+x = (if a
+  b
+end) + 1
+f((if a
+  b
+end), 2)
+
+def m(*a, **k, &b) = a
+def f(*, **, &)
+  m *; m **; m &; m 1, &; m
+end
+a = 1
+m a:; m 2
+x = 1..; p x
+y = (1..)
+p y
+z = m((2..))
+for i in 1..; p i; break; end
+
+exclusive = 1...; p exclusive

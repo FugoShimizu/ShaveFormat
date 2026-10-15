@@ -1,0 +1,5 @@
+package main
+
+var a = 1
+// c
+var b = 2

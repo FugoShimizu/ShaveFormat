@@ -73,3 +73,9 @@ function collect(int ...$ids): iterable {
 $closure = function(int $a, int $b = 2) use(&$total): void {
 	$total += $a + $b;
 };
+
+#[A] class HashAttribute {} // Hash tail
+#[A] class SlashAttribute {} // Slash tail
+#[A("#")] class LiteralAttribute {}
+// Leading
+#[A, B("#")] class MultilineAttribute {}

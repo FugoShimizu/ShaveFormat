@@ -78,3 +78,101 @@ fn main() {
 
 fn make() -> impl FnMut() { let mut n = 0; move || { n += 1; println!("{}", n); } }
 fn main() { let mut f = make(); f(); (f)(); let mut v = Vec::new(); v.extend::<[i32;1]>([1]); println!("{:?}", v); }
+
+fn tuple_bindings() { let (mut x, mut y) = (1, 2); x = 3; let _ = (x, y); }
+fn tuple_writes() { let (mut x, mut y) = (1, 2); x = 3; y = 4; let _ = (x, y); }
+
+fn captured_tuple() { let (mut whole @ (mut x, mut y), mut z) = ((1, 2), 3); x = 4; let _ = (whole, x, y, z); }
+
+fn borrowed_tuple() { let ref whole @ (mut part,) = (1,); let _ = (whole, part); }
+
+fn f() -> i32 {
+	let mut r#x = 1;
+	x = 2;
+	let mut y = 3;
+	x + r#y
+}
+
+#[allow::rewrite]
+fn attribute_allow_relative()->i32{let mut x:i32=1;x}
+
+#[allow::tools::rewrite]
+fn attribute_allow_nested()->i32{let mut x:i32=1;x}
+
+#[::allow::rewrite]
+fn attribute_allow_absolute()->i32{let mut x:i32=1;x}
+
+#[cold::rewrite]
+fn attribute_cold_relative()->i32{let mut x:i32=1;x}
+
+#[cold::tools::rewrite]
+fn attribute_cold_nested()->i32{let mut x:i32=1;x}
+
+#[::cold::rewrite]
+fn attribute_cold_absolute()->i32{let mut x:i32=1;x}
+
+#[deny::rewrite]
+fn attribute_deny_relative()->i32{let mut x:i32=1;x}
+
+#[deny::tools::rewrite]
+fn attribute_deny_nested()->i32{let mut x:i32=1;x}
+
+#[::deny::rewrite]
+fn attribute_deny_absolute()->i32{let mut x:i32=1;x}
+
+#[deprecated::rewrite]
+fn attribute_deprecated_relative()->i32{let mut x:i32=1;x}
+
+#[deprecated::tools::rewrite]
+fn attribute_deprecated_nested()->i32{let mut x:i32=1;x}
+
+#[::deprecated::rewrite]
+fn attribute_deprecated_absolute()->i32{let mut x:i32=1;x}
+
+#[doc::rewrite]
+fn attribute_doc_relative()->i32{let mut x:i32=1;x}
+
+#[doc::tools::rewrite]
+fn attribute_doc_nested()->i32{let mut x:i32=1;x}
+
+#[::doc::rewrite]
+fn attribute_doc_absolute()->i32{let mut x:i32=1;x}
+
+#[forbid::rewrite]
+fn attribute_forbid_relative()->i32{let mut x:i32=1;x}
+
+#[forbid::tools::rewrite]
+fn attribute_forbid_nested()->i32{let mut x:i32=1;x}
+
+#[::forbid::rewrite]
+fn attribute_forbid_absolute()->i32{let mut x:i32=1;x}
+
+#[inline::rewrite]
+fn attribute_inline_relative()->i32{let mut x:i32=1;x}
+
+#[inline::tools::rewrite]
+fn attribute_inline_nested()->i32{let mut x:i32=1;x}
+
+#[::inline::rewrite]
+fn attribute_inline_absolute()->i32{let mut x:i32=1;x}
+
+#[must_use::rewrite]
+fn attribute_must_use_relative()->i32{let mut x:i32=1;x}
+
+#[must_use::tools::rewrite]
+fn attribute_must_use_nested()->i32{let mut x:i32=1;x}
+
+#[::must_use::rewrite]
+fn attribute_must_use_absolute()->i32{let mut x:i32=1;x}
+
+#[warn::rewrite]
+fn attribute_warn_relative()->i32{let mut x:i32=1;x}
+
+#[warn::tools::rewrite]
+fn attribute_warn_nested()->i32{let mut x:i32=1;x}
+
+#[::warn::rewrite]
+fn attribute_warn_absolute()->i32{let mut x:i32=1;x}
+
+#[allow(unused)]
+fn attribute_standard()->i32{let mut x:i32=1;x}

@@ -6,4 +6,6 @@ interface Listener {
 	default void OnStart(int id) {}
 }
 
-interface Plain { void Run(int a); }
+interface Plain {
+	void Run(int a);
+}

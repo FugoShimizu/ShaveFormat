@@ -1,0 +1,231 @@
+def f
+  if a
+    b
+    c
+    # then end
+  elsif d
+    e
+    g
+    # elsif end
+  else
+    h
+    i
+  end
+  begin
+    j
+    k
+    # begin end
+  rescue StandardError
+    l
+    m
+    # rescue end
+  ensure
+    n
+  end
+end
+
+def g
+  a
+  b
+  # def body end
+rescue StandardError
+  c
+end
+
+x = 1
+begin # c3
+end # c4
+y = 2
+begin # c5
+rescue # c6
+end
+
+begin
+  x
+rescue E
+  if mode
+    # failed to chmod.
+  elsif uid
+    uid = nil
+    retry # gid
+  end
+end
+
+if a
+  b
+elsif c
+  # expression continues
+elsif d
+  e
+end
+
+def f
+  if a
+    b = 1
+    z = 2
+  elsif c
+    # Continue
+  elsif d
+    b = 2
+  end
+end
+
+if a
+  # 本体の空の if
+end
+def m(a)
+  # 一文目。二文目
+  # 三文目
+end
+begin
+  g
+rescue ArgumentError => e
+  # 一文目。二文目
+  # 三文目。
+rescue
+  # 例外を略した rescue
+else
+  # 空の else
+ensure
+  # 空の ensure
+end
+case x
+when 1
+  # 空の when
+when 2
+  y
+end
+if a
+  x
+elsif b
+  # 空の elsif
+else
+  z
+end
+class A < B
+  # 空の class
+end
+while a
+  # 空の while
+end
+begin
+  # 空の begin
+end
+foo do |x|
+  # 空の do
+end
+
+def f
+	z
+	if a
+		b
+	else
+		# C1
+	end
+	y
+end
+
+if a
+  x
+  y
+else
+  # c
+end
+while a
+  # w
+end
+
+def f(v)
+  if v
+    a
+    # before elsif
+  elsif w
+    b
+    # before end
+  end
+  z
+end
+
+def f(a)
+  if a
+    g
+  # shallow
+  elsif b
+    h
+  end
+end
+
+def f(v)
+  case v
+  when 1
+    w
+    z
+    # when の注記
+  end
+  if v
+    a
+  elsif w
+    b
+    # elsif の注記
+  end
+  begin
+    c
+  rescue StandardError
+    d
+    # rescue の注記
+  end
+  case v
+  in Integer
+    e
+    # in の注記
+  end
+end
+
+def g
+  1
+rescue StandardError
+  2
+  # def の rescue の注記
+end
+
+class Box
+  # 配列の条件を比べる
+  # @param alpha 対象の配列
+  # @return 条件に合う呼出の値
+  def count(alpha)
+    alpha.each do |count|
+      unless count.zero?
+        beta :a, [count, 3], note: "alpha beta gamma delta epsilon zeta eta theta iota kappa lambda mu nu xi omicron pi rho sigma tau", count: 7
+      end
+    end
+    # 条件に合う値の返戻
+    unless alpha.last == 7
+      gamma :b, values: %i[a b c], note: "alpha beta gamma delta epsilon zeta eta theta iota kappa lambda mu nu", count: 7
+    end
+  end
+end
+
+if in_part then end # c
+x = 1
+while x do end # d
+if a then
+  # e
+end
+while y do
+  # f
+end
+
+def f(s, e)
+  case s
+  when 'a'
+    # 一文目。二文目
+    return e
+  when 'b'
+    g
+    h
+  else
+    # 三文目。四文目
+    e.destroy!
+  end
+  nil
+end

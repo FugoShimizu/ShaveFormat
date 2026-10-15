@@ -1,0 +1,8 @@
+<i>
+	{
+		`p${
+			aaaaaaaaa + bbbbbbbbb +
+			ccccccccc + ddddddddd
+		}q`
+	}
+</i>;

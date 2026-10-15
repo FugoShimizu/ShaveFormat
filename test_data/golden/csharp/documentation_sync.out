@@ -28,6 +28,7 @@ class Calc {
 	/**
 	 * <summary></summary>
 	 * <param name="n"></param>
+	 * <returns></returns>
 	 */
 	async System.Threading.Tasks.Task RunAsync(int n) {
 		await System.Threading.Tasks.Task.Delay(n);
@@ -39,4 +40,261 @@ class Calc {
 	 * <param name="seed"></param>
 	 */
 	Calc(int seed) {}
+}
+
+class Deferred {
+	/**
+	 * <summary></summary>
+	 * <returns></returns>
+	 */
+	async System.Threading.Tasks.ValueTask CompleteAsync() {
+		await System.Threading.Tasks.Task.Delay(1);
+		return;
+	}
+
+	/**
+	 * <summary></summary>
+	 */
+	async void NotifyAsync() {
+		await System.Threading.Tasks.Task.Delay(1);
+		return;
+	}
+}
+
+class TypeParameterOrder {
+	/**
+	 * <summary>型と値の対応を保つ</summary>
+	 * <typeparam name="B">先の型</typeparam>
+	 * <typeparam name="A">後の型</typeparam>
+	 * <typeparam name="A">後の型の補足</typeparam>
+	 * <param name="first">先の値</param>
+	 * <param name="second">後の値</param>
+	 */
+	void Ordered<B, A>(B first, A second) {}
+}
+
+class SummaryOrder {
+	/**
+	 * <summary>Before
+	 * First</summary>
+	 * <summary>Second
+	 * After</summary>
+	 */
+	void Multiple() {}
+	/**
+	 * <summary>Before
+	 * First</summary>
+	 * <summary>Second
+	 * After</summary>
+	 */
+	void SameLine() {}
+	/**
+	 * <summary role="first">Before
+	 * First</summary>
+	 * <summary role="last">Second
+	 * After</summary>
+	 */
+	void Separate() {}
+	/**
+	 * <summary>Before
+	 * First</summary>
+	 * <summary>Second
+	 * After</summary>
+	 */
+	void Mixed() {}
+	/**
+	 * <summary>First<![CDATA[</summary>]]>Last
+	 * After</summary><!-- </summary> -->
+	 */
+	void LiteralClosing() {}
+}
+
+class EscapedNames {
+	/**
+	 * <summary>Summary</summary>
+	 * <param name="class">Value</param>
+	 */
+	void F(int @class) {}
+	/**
+	 * <summary>Summary</summary>
+	 * <typeparam name="class">First</typeparam>
+	 * <typeparam name="U">Second</typeparam>
+	 */
+	void G<@class, U>() {}
+}
+
+class AttributeSummaryOrder {
+	/**
+	 * <summary data="a
+	 * >b">Before
+	 * First</summary>
+	 * <summary data='/>'>Second
+	 * After</summary>
+	 */
+	void Merge() {}
+}
+
+class InlineDocuments {
+	/**
+	 * <summary>Summary</summary>
+	 * <param name="a">A</param>
+	 * <param name="b">B</param>
+	 * <returns></returns>
+	 */ int Ordered(int a, int b) {
+		return a + b;
+	}
+}
+
+class SeparatedDocuments {
+	int /**
+	 * <summary>Hello</summary>
+	 * <param name="a"></param>
+	 * <returns></returns>
+	 */ InlineFrame(int a) {
+		return a;
+	}
+
+	/**
+	 * <summary>A</summary>
+	 * ========== X ==========
+	 * <summary>B</summary>
+	 * <param name="a">A value</param>
+	 * <param name="b">B value</param>
+	 * <returns></returns>
+	 */
+	int SectionDocs(int a, int b) {
+		return a + b;
+	}
+}
+
+class TrailingDescription {
+	/**
+	 * <summary>A</summary>
+	 * <summary>========== X ==========
+	 * B</summary>
+	 */
+	void trailing() {}
+}
+
+class ImplementationForms {
+	/**
+	 * <summary></summary>
+	 * <param name="x"></param>
+	 * <returns></returns>
+	 */
+	int Arrow(int x) => x;
+
+	/**
+	 * <summary>C</summary>
+	 * <param name="x">X</param>
+	 */
+	ImplementationForms(int x) => Use(x);
+
+	/**
+	 * <summary>D</summary>
+	 */
+	~ImplementationForms() {}
+
+	/**
+	 * <summary>O</summary>
+	 * <param name="left">L</param>
+	 * <param name="right">R</param>
+	 * <returns>V</returns>
+	 */
+	public static ImplementationForms operator +(ImplementationForms left, ImplementationForms right) => left;
+
+	/**
+	 * <summary>C</summary>
+	 * <param name="value">V</param>
+	 * <returns>R</returns>
+	 */
+	public static implicit operator int(ImplementationForms value) => 1;
+
+	/**
+	 * <summary>Outer</summary>
+	 */
+	void Outer() {
+		/**
+		 * <summary>S</summary>
+		 * <param name="x"></param>
+		 * <param name="old">Old</param>
+		 * <returns>R</returns>
+		 */
+		int Local(int x) {
+			return x;
+		}
+		/**
+		 * <summary></summary>
+		 * <param name="x"></param>
+		 * <returns></returns>
+		 */
+		int LocalArrow(int x) => x;
+		return;
+	}
+}
+
+class LiteralDescriptions {
+	/**
+	 * <summary>A &amp; B &lt; C &gt; D</summary>
+	 */
+	void Plain() {}
+	/**
+	 * <summary id="kept">Before &amp;lt;
+	 * Existing &amp; value
+	 * After &lt; value</summary>
+	 */
+	void Existing() {}
+	/**
+	 * <summary id="empty">Head &amp; value
+	 * Tail &lt; value</summary>
+	 */
+	void EmptySummary() {}
+	/**
+	 * <summary>Body &amp; &lt;value&gt;</summary>
+	 */
+	void Body() {}
+}
+
+class Api {
+	/**
+	 * <summary>取得</summary>
+	 * <param name="id">識別子</param>
+	 */
+	public void Get([FromQuery(Name="id")] int id = 0) {
+		Load(id);
+		// 終了
+		return;
+	}
+}
+
+// <summary>赤</summary>
+enum E { Red, Blue }
+// <summary>赤</summary>
+enum E { [Obsolete] Red, Blue }
+
+class A {
+	/**
+	 * <summary>確かめる</summary>
+	 * <param name="value">値</param>
+	 */
+	void Check(int value) {
+		if(value < 0) throw new ArgumentException("負");
+		return;
+	}
+}
+
+class CallerPosition {
+	/**
+	 * <summary>位置の記録</summary>
+	 * <param name="line">行</param>
+	 */
+	static void Record([System.Runtime.CompilerServices.CallerLineNumber] int line = 0) {}
+
+	/**
+	 * <summary>呼出</summary>
+	 */
+	static void Invoke() {
+		Record();
+		return;
+	}
 }

@@ -1,3 +1,5 @@
+5:2: Review: Add an explicit type to this declaration
 69:34: Violation: Nesting depth 33 exceeds the limit of 32
 104:2: Violation: Add the required comment before this `return`
+109:2: Review: Add an explicit type to this declaration
 205:2: Violation: Add the required comment before this `return`

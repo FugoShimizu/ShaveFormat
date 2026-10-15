@@ -7,3 +7,34 @@ struct V {
 		.bar()
 	}
 }
+
+#if os(Linux) || os(Windows)
+#elseif !canImport(FoundationNetworking) && canImport(Foundation)
+#elseif !(os(iOS) || os(macOS)) && (arch(arm64) || arch(x86_64))
+#elseif (FEATURE || OTHER) && !FEATURE
+#else
+#endif
+
+struct MemberDiagnostic {
+	#if NEVER
+
+	#error("disabled target")
+
+	#endif
+}
+
+protocol ProtocolDiagnostic {
+	#if NEVER
+
+	#warning("disabled target")
+
+	#endif
+}
+
+enum EnumDiagnostic {
+	#if NEVER
+
+	#error("disabled target")
+
+	#endif
+}

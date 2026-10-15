@@ -1,0 +1,67 @@
+/**
+ *
+ */
+function outer() {
+	if(a) x();
+	/**
+	 * c
+	 */
+	function inner() {}
+	return;
+}
+
+const s = `a
+
+b`;
+
+// 値
+const o = { a: 1 };
+
+if(a) {
+	f();
+	f();
+// 値
+} else if(g({ b: 1 })) {
+	h();
+	h();
+}
+
+/**
+ * 作る
+ * @return 結果
+ */
+function build() {
+	// 詳細を出す
+	const name = "x", options = { verbose: true };
+	return run(name, options);
+}
+
+const label = "y";
+// 詳細を出す
+const flags = { verbose: true };
+
+do {
+	f();
+	g();
+// 値
+} while(h({ a: 1 }));
+
+const o = {
+	/**
+	 * 値を返す
+	 */
+	m() {}
+};
+
+const p = {
+	/**
+	 * First
+	 * Second
+	 */
+	n() {}
+};
+
+// @deprecated 旧
+const o = { old: 1, new1: 2 };
+// 値
+const f = { f: 1 };

@@ -2,6 +2,25 @@
  *
  */
 void h() {
+	RAW_CALL(1 + 2);
+	raw_call(1 + 2);
+	MixedCall(1 + 2);
+	RAW_CALL(1 + 2, 3, 4 + 5);
+	(F(a & b));
+	(F(a && b));
+	(F(a * b));
+	(F(a < b));
+	(F(a > b));
+	(F(a >> b));
+	F(a + b);
+	g(1);
+	g(g(1));
+	g(g(1));
+	g(1 + 2);
+	(T(x));
+	g((T(x)));
+	(T(x[1]));
+	(T(*x));
 	g(a / (b * c));
 	g(a % (b * c));
 	g(a * (b % c));
@@ -39,16 +58,19 @@ void h() {
 	g(a && b && c);
 	g(a && (b || c) || d);
 	g(a && b || c);
+	g(x && (a || b || d));
+	g(a || b || d);
+	g(x && (a || (b || d)));
 	g(-(-9));
 	g(y - -1);
 	g(y + +1);
 	g(((d *(b))-a) * 3);
 	g(((d)-a) * 2);
-	g((int)y);
-	g((char *)p);
+	g((int)(y));
+	g((char *)(p));
 	g((T)(y));
-	g(p->x);
-	b -= c;
+	g((p)->x);
+	(b) -= c;
 	g((b) && c);
 	for(i = 0; i < n; ++i) (void)p;
 	g((double)(SUM) / 2);
@@ -81,4 +103,13 @@ int f(int x) {
 	if((x = 1) == 2) return 1;
 	if(x) return 1;
 	return 0;
+}
+
+/**
+ *
+ * @return
+ */
+int f(void) {
+	int x = a.b.c + g().h + a[0].b + p->q->r + f(1) + a.b(2) + (1).x + (*p).x + a.b.c + "abc"[1] + s.max(a, b) + (g())(1) + a[0](2);
+	return x;
 }

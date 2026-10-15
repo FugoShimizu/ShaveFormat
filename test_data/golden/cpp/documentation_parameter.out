@@ -7,3 +7,276 @@
 int Move(int x, int y) {
 	return x + y;
 }
+
+/**
+ * Preserve descriptions
+ * @param old
+ * retained parameter
+ * @return
+ * retained result
+ */
+void Continuations() {}
+
+/**
+ * Return the value
+ * @param value
+ * supplied value
+ * @return
+ * returned value
+ */
+int MatchingContinuations(int value) {
+	return value;
+}
+
+/**
+ * 型と値の対応を保つ
+ * @tparam B 先の型
+ * @tparam A 後の型
+ * @tparam A 後の型の補足
+ * @param first 先の値
+ * @param second 後の値
+ */
+template<class B, class A> void Ordered(B first, A second) {}
+
+/**
+ * Summary
+ * @param α Value
+ */
+void Escaped(int \u03B1) {}
+
+/**
+ * Summary
+ * @tparam α First
+ * @tparam U Second
+ */
+template<class \u03B1, class U> void EscapedTypes() {}
+/**
+ * Summary
+ * @tparam N First
+ * @tparam U Second
+ */
+template<int N, class U> void NonType() {}
+/**
+ * Summary
+ * @tparam N First
+ * @tparam U Second
+ */
+template<int ...N, class U> void NonTypePack() {}
+/**
+ * Summary
+ * @tparam N First
+ * @tparam U Second
+ */
+template<int (*N)(int Inner), class U> void FunctionPointer() {}
+/**
+ * Summary
+ * @tparam N First
+ * @tparam U Second
+ */
+template<int N = 1, class U> void DefaultValue() {}
+/**
+ * Summary
+ * @tparam C First
+ * @tparam U Second
+ */
+template<template<class Inner> class C, class U> void TemplateTemplate() {}
+/**
+ * Summary
+ * @tparam C First
+ * @tparam U Second
+ */
+template<template<class> class ...C, class U> void TemplatePack() {}
+/**
+ * Summary
+ * @tparam T First
+ * @tparam U Second
+ */
+template<template<class> class T = C, class U> void TemplateDefault() {}
+
+/**
+ * Summary
+ * @param a A
+ * @param b B
+ * @return
+ */ int InlineOrder(int a, int b) {
+	return a + b;
+}
+
+int /**
+ * Hello
+ * @return
+ */ HeaderDoc() {
+	return 1;
+}
+
+int ParamDoc(/**
+ * Input
+ * @param a
+ * @return
+ */ int a) {
+	return a;
+}
+
+/**
+ * Summary
+ * @param a A
+ * @param b B
+ */
+int /** @return Result */ MixedDocs(int a, int b) {
+	return a + b;
+}
+
+int /**
+ * Summary
+ * @param a A
+ * @param b B
+ */ BoundaryDocs(int a, /** @return Result */ int b) {
+	return a + b;
+}
+
+// Independent
+/**
+ * Inline summary
+ * @param a A
+ * @param b B
+ * @return
+ */ int KeptKinds(int a, int b) {
+	return a + b;
+}
+
+/**
+ * === rule_docgen_generate ===
+ * @param a
+ * @param b
+ * @return
+ */
+int Add(const int a, const int b) {
+	return a + b;
+}
+
+/**
+ *
+ * @param Message
+ */
+void Log(const std::string &Message) {
+	Write(Message);
+	return;
+}
+
+class Widget {
+public:
+
+	/**
+	 *
+	 * @param Id
+	 */
+	Widget(const int Id) {
+		this->Id = Id;
+		return;
+	}
+
+	/**
+	 *
+	 * @param Key
+	 * @return
+	 */
+	int *Find(const int Key) const {
+		return Lookup(Key);
+	}
+};
+
+/**
+ * === rule_docgen_reconcile ===
+ * 二点間の距離を求める
+ * @param a 始点
+ * @param b
+ * @param c
+ * @param removed 削除されるべき余分な引数
+ * @return 距離
+ */
+double Distance(const double a, const double b, const double c) {
+	return Hypot(a, b, c);
+}
+
+/**
+ * 状態を更新する
+ * @param value 新しい値
+ * @return 不要な戻値
+ */
+void SetState(const int value) {
+	State = value;
+	return;
+}
+
+/**
+ *
+ * @param a
+ * @return
+ */
+extern "C" int External(int a) {
+	return a;
+}
+
+/**
+ * Existing
+ * @param a Value
+ * @param b
+ * @return
+ */
+extern "C" int ExternalSync(int a, int b) {
+	return a + b;
+}
+
+/**
+ *
+ * @param a
+ * @return
+ */
+int FunctionTry(int a) try {
+	return a;
+} catch(...) {
+	return 0;
+}
+
+class TryConstructor {
+	int value;
+
+	/**
+	 * Build
+	 * @param value Value
+	 */
+	TryConstructor(int value) try : value(value) {} catch(...) {}
+};
+
+class TryFriends {
+	/**
+	 *
+	 * @param x
+	 * @return
+	 */
+	friend int PlainFriend(int x) {
+		return x;
+	}
+
+	/**
+	 *
+	 * @param x
+	 * @return
+	 */
+	friend int TryFriend(int x) try {
+		return x;
+	} catch(...) {
+		return 0;
+	}
+
+	/**
+	 *
+	 * @param x
+	 * @return
+	 */
+	template<typename T> friend T TemplateFriend(T x) try {
+		return x;
+	} catch(...) {
+		throw;
+	}
+};

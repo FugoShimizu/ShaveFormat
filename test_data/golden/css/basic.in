@@ -1,3 +1,5 @@
+ @charset "Shift_JIS";a{color:red}
+@charset "utf-8";
 .card {
 	display: flex;
 	flex-direction: column;
@@ -18,3 +20,28 @@
 	margin-bottom: calc(1rem*(2)*(3));
 	padding: calc(1em*var(--y));
 }
+
+.sign-values { b: - 1px; --b: - 1px; c: + 1px; --c: + 1px; d: -1px; e: +1px; f: - 1; g: + 1; }
+
+@keyframes x { to { --pppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppp: vvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvv; } }
+
+.foo {
+	color: red
+	margin: 0;
+}
+.bar {
+	--x: }
+
+a { color: red; margin: 0 }
+
+.b {
+	padding: 1px
+}
+
+a { opacity:  opacity: 0.5; }
+
+.baz { --payload: alpha: beta; }
+
+.grid-lines{display:grid;grid-template-columns:[start] 1fr [inner] minmax(0,30rem) [edge] 1fr [end];grid-template-rows:auto [row];grid-template-rows:repeat(2,[top] 12px [bottom]);grid-auto-columns:1fr 2fr;}
+
+.\32 1unit, .word\+tail, .\000032unit, #\32 key > \61 tag{color:red;}

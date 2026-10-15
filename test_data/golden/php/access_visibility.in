@@ -1,0 +1,36 @@
+<?php
+
+trait Reverse  {
+    public int $A;
+    private int $B;
+}
+
+enum ReverseEnum  {
+    public const A = 1;
+    private const B = 2;
+}
+
+$Value = new class  {
+    public int $A;
+    private int $B;
+};
+
+trait Forward  {
+    private int $A;
+    public int $B;
+}
+
+trait ReverseForward  {
+    private int $B;
+    public int $A;
+}
+
+enum ReverseEnumForward  {
+    private const B = 2;
+    public const A = 1;
+}
+
+$ValueForward = new class  {
+    private int $B;
+    public int $A;
+};

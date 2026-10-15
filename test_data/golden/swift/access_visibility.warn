@@ -1,0 +1,8 @@
+3:2: Review: Reorder access specifiers as private → fileprivate → internal → package → public → open
+9:2: Review: Reorder access specifiers as private → fileprivate → internal → package → public → open
+15:2: Review: Reorder access specifiers as private → fileprivate → internal → package → public → open
+21:2: Review: Reorder access specifiers as private → fileprivate → internal → package → public → open
+25:2: Violation: Make internal explicit
+27:2: Review: Reorder access specifiers as private → fileprivate → internal → package → public → open
+46:2: Review: Reorder this member according to its role
+75:2: Violation: Make internal explicit

@@ -1,3 +1,17 @@
 val total =
 firstObjectName.secondPropertyName
 .thirdPropertyName.fourthPropertyName
+
+val bound =
+receiverNameWithLongScopeContinuation::
+make
+
+val unbound =
+ReceiverNameWithLongScopeContinuation::
+make
+
+val type =
+ReceiverNameWithLongScopeContinuation::
+class
+
+val absolute = ::make

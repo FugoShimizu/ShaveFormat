@@ -19,3 +19,7 @@ func I() {
 func A() {}
 // G does g
 func G() {}
+// {@code A B}
+// {@literal A B}
+// (@dot A B @enddot)
+// (@f$ A B @f$)

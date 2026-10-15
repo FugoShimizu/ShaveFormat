@@ -1,0 +1,239 @@
+class A {
+	/**
+	 * <summary>写す</summary>
+	 * <typeparam name="T">型</typeparam>
+	 * <param name="a">値</param>
+	 * <returns></returns>
+	 */
+	T Map<T>(T a) {
+		return a;
+	}
+}
+
+class A {
+	/// <summary>
+	/// 一覧を探す
+	/// </summary>
+	/// <param name="Pattern">**/*.cs の形</param>
+	void F(string Pattern) {
+		G(Pattern);
+		return;
+	}
+
+	/**
+	 * <summary>
+	 * 別の一覧を探す
+	 * </summary>
+	 * <param name="Pattern">照合の形</param>
+	 */
+	void H(string Pattern) {
+		G(Pattern);
+		return;
+	}
+}
+
+class A {
+	/// <summary>
+	/// 一覧を探す（例 **/*.cs）
+	/// </summary>
+	/// <param name="Pattern"></param>
+	void F(string Pattern) {
+		G(Pattern);
+		return;
+	}
+}
+
+/**
+ * <summary>文書の開始
+ * 文書の続き</summary>
+ */
+class Documentation {
+	/**
+	 * <summary>! を含む説明
+	 * 後続へ追加しない</summary>
+	 */
+	static void Receive() {}
+}
+
+/**
+ * <summary>`"甲。乙、丙"` の例
+ * 続き</summary>
+ * <code><![CDATA[var s = "</code>甲。乙、丙";]]></code>
+ */
+class Documentation {}
+/**
+ * <summary>First item
+ * Second item</summary>
+ */
+class Framed {}
+/**
+ * <summary>One item</summary>
+ */
+class Single {}
+
+class C {
+	/**
+	 * <summary>前の注記
+	 * 概要
+	 * 後の注記</summary>
+	 * <param name="a"></param>
+	 * <returns></returns>
+	 */
+	int F(int a) {
+		return a;
+	}
+
+	/**
+	 * <summary>複数行の
+	 * 注記
+	 * 既存</summary>
+	 */
+	void G() {}
+}
+
+class A {
+	/**
+	 * <summary>Sum
+	 * header</summary>
+	 * <param name="x">value</param>
+	 * <returns>result</returns>
+	 */
+	int f(int x) {
+		return x;
+	}
+}
+
+class A {
+	/**
+	 * <summary>足す</summary>
+	 * <param
+	 * name="a">値</param>
+	 * <returns>結果</returns>
+	 */
+	public int Add(int a) {
+		return a;
+	}
+}
+
+class Outer {
+	/**
+	 * <remarks
+	 * >
+	 * <param name="other"/>
+	 * </remarks>
+	 * <param name="x"></param>
+	 */
+	void F(int x) {}
+}
+
+class Quoted {
+	/**
+	 * <remarks text="a >
+	 * b">
+	 * <![CDATA[<param name="data"/>]]>
+	 * <param name="other"/>
+	 * </remarks>
+	 * <param
+	 * name
+	 * =
+	 * "x">value</param>
+	 */
+	void F(int x) {}
+}
+
+class Unclosed {
+	/**
+	 * <param
+	 * <param
+	 * <param
+	 * <param
+	 */
+	void F(int x) {}
+}
+
+class SameLine {
+	/**
+	 * <summary>足す</summary>
+	 * <param name="a">左</param>
+	 * <param name="b">右</param>
+	 * <returns>結果</returns>
+	 */
+	int Add(int a, int b) {
+		return a + b;
+	}
+}
+
+class JoinedSummary {
+	/**
+	 * <summary>前の説明
+	 * 概要
+	 * 後の説明</summary>
+	 * <param name="x">入力</param>
+	 * <returns>出力</returns>
+	 */
+	int Read(int x) {
+		return x;
+	}
+}
+
+class NestedLine {
+	/**
+	 * <summary><![CDATA[<param name="z">例</param>]]></summary>
+	 * <param name="x"><c>a,b</c>入力</param>
+	 * <returns>出力</returns>
+	 */
+	int Read(int x) {
+		return x;
+	}
+}
+
+class CodeFirst {
+	/**
+	 * <code>x();</code>
+	 * <summary>読む</summary>
+	 * <param name="x">入力</param>
+	 * <returns>出力</returns>
+	 */
+	int Read(int x) {
+		return x;
+	}
+
+	/**
+	 * <summary>再び読む</summary>
+	 * <code>
+	 * x();
+	 * </code>
+	 * <param name="x">入力</param>
+	 * <returns>出力</returns>
+	 */
+	int ReadAgain(int x) {
+		return x;
+	}
+}
+
+class EscapedValues {
+	/**
+	 * <summary>"a\"x  y" and 'a\'x  y'</summary>
+	 */
+	void Quotes() {}
+	/**
+	 * <summary><see cref="EscapedValues"/>
+	 * Next</summary>
+	 */
+	void Elements() {}
+}
+
+/**
+ * <summary>
+ * [First Second]
+ * {First Second}
+ * ［一文二文］
+ * ｛一文二文｝
+ * "a\"x Next"
+ * "a\"x  y"
+ * <code>a.  b?</code>
+ * next
+ * </summary>
+ */
+class SentenceCases {}
+// ========== ==== ==========

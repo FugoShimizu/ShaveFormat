@@ -1,0 +1,16 @@
+#if A(B || C) && \
+    /* CA */ // CB
+    !D(F)
+int x;
+#endif
+
+#if A && // logical end
+    B
+int invalid_plain;
+#endif
+
+#if A && // continued comment \
+    B
+    C
+int invalid_spliced;
+#endif

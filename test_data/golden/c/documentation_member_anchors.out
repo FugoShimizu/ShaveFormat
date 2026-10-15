@@ -1,0 +1,109 @@
+// 赤
+enum E { Red, Blue };
+
+/**
+ * 値を返す
+ * @return 値
+ */
+int f(void) {
+	/**
+	 * 色
+	 */
+	enum E {
+		/**
+		 * 赤
+		 */
+		RED = 1,
+		/**
+		 * 青
+		 */
+		BLUE = 2000000000,
+		GREEN_LONG_NAME_TO_EXPAND_THE_LINE = 3000000,
+		YELLOW_LONG_NAME_TO_EXPAND_THE_LINE = 4000000
+	};
+	// 値
+	int x = RED;
+	return x;
+}
+
+/**
+ * 幅
+ * TODO: 単位
+ * @param w
+ * @param h
+ * @return
+ */
+int area(int w, int h) {
+	return w * h;
+}
+
+/**
+ * 処理
+ */
+void f(void) {
+	/* dir C:\ */
+	g();
+	return;
+}
+
+/**
+ * First
+ * Second
+ * @param a Alpha
+ */
+void DocBoundary(int a) {}
+/**
+ * Summary
+ * @param α Value
+ */
+void Escaped(int \u03B1) {}
+
+/**
+ * Summary
+ * @param a A
+ * @param b B
+ * @return
+ */ int InlineOrder(int a, int b) {
+	return a + b;
+}
+
+int /**
+ * Hello
+ * @return
+ */ HeaderDoc() {
+	return 1;
+}
+
+int /**
+ * Hello
+ * @param a
+ * @return
+ */ InlineFrame(int a) {
+	return a;
+}
+
+/**
+ * A
+ * ========== X ==========
+ * B
+ * @param a A value
+ * @param b B value
+ * @return
+ */
+int SectionDocs(int a, int b) {
+	return a + b;
+}
+
+/**
+ * A
+ * ========== X ==========
+ * B
+ */
+void trailing(void) {}
+
+/**
+ * Header description
+ */
+struct Header {
+	int value;
+};

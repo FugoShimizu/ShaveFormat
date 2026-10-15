@@ -1,0 +1,2 @@
+4:5: Violation: Documentation is missing a return-value description
+4:7: Violation: Documentation is missing a description for parameter 'x'

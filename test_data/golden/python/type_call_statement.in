@@ -1,3 +1,0 @@
-type (x).y = 1
-type(z)[0] = 2
-type X   =   int

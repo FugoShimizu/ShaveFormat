@@ -1,3 +1,4 @@
 <style>
+ @charset  'Shift_JIS' ;
 a::before { content: "\\"; } b::before { content: "/* x、y */"; }
 </style>

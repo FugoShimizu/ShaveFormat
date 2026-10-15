@@ -1,2 +1,9 @@
-7:4: Review: Add an explicit return type to this function; verify type, external contract
-18:2: Violation: Add the required comment before this `return`
+6:4: Review: Add an explicit return type to this function
+7:12: Review: Add an explicit return type to this function
+17:2: Violation: Add the required comment before this `return`
+26:6: Review: Inline immediately returned variable a
+36:6: Review: Inline immediately returned variable a
+37:4: Review: Add an explicit type to parameter 'a'
+41:2: Violation: Add the required comment before this `return`
+50:6: Review: Inline immediately returned variable a
+55:2: Violation: Add the required comment before this `return`

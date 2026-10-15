@@ -1,2 +1,4 @@
+[notice] <stdin>:3:2: parser recognition failed; verify the source syntax and target language version
 1:4: Violation: Function is missing a documentation comment
 3:2: Parser could not read part of the source; formatting is partial
+4:2: Review: Add an explicit type to this declaration

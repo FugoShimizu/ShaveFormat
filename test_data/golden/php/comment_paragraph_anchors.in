@@ -1,0 +1,38 @@
+<?php
+
+f(
+	[
+		// 成員の深さ
+		"first_collection_member_with_a_long_name" => 1,
+		"second_collection_member_with_a_long_name" => 2,
+		"third_collection_member_with_a_long_name" => 3
+	]
+);
+
+$x = 1;
+/*
+	First sentence. Second sentence
+*/
+$y = 2;
+
+class U {
+	/** 構築子 */
+	public function __construct(
+		/** @var string 名前 */
+		private string $name,
+		private int $age,
+	) {
+	}
+}
+
+$a = new A();
+$a
+	/* m */
+	->b();
+$s = $x /* c */ + 1;
+
+/** Keep boundaries */
+function emptyBoundary(): void { /* Read. Return. */ }
+
+/** Keep boundaries */
+function emptyBoundaryPair(): void { /* Read */ /* Return */ }

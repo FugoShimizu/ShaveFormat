@@ -3,3 +3,8 @@
 #define MAX(a, b) ((a) > (b) ? (a) : (b)) // Larger. Of two.
 
 int x;
+
+#define EXPONENT 1.0e1'0
+#define HEX_EXPONENT 0x1p1'0
+#define POSITIVE_EXPONENT (+(1.0e+1'0F))
+#define NEGATIVE_EXPONENT (-0x1p-0'1L)

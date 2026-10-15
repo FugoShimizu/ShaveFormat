@@ -17,4 +17,40 @@ class Dispatcher {
 		}
 		return;
 	}
+
+	/**
+	 * <summary>値の取得関数</summary>
+	 * <returns>取得した値</returns>
+	 */
+	static int EscapedReturn() {
+		int a = G();
+		return @a;
+	}
+
+	/**
+	 * <summary>値の取得関数</summary>
+	 * <returns>取得した値</returns>
+	 */
+	static int UnicodeDeclaration() {
+		int \u0061 = G();
+		return a;
+	}
+
+	/**
+	 * <summary>値の取得関数</summary>
+	 * <returns>取得した値</returns>
+	 */
+	static int LongEscapeReturn() {
+		int a = G();
+		return \U00000061;
+	}
+
+	/**
+	 * <summary>値の取得関数</summary>
+	 * <returns>取得した値</returns>
+	 */
+	static int FormatCharacterReturn() {
+		int a‌ = G();
+		return a;
+	}
 }

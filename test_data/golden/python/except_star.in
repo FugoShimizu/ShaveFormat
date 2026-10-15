@@ -1,6 +1,0 @@
-try:
-    work()
-except* TypeError:
-    h1()
-except* ValueError:
-    h2()

@@ -40,3 +40,28 @@ class T {
 		System.out.println(k);
 	}
 }
+
+class EscapeSpelling {
+static int \u0061=1;
+static String text="\uu0041";
+}
+
+class UnicodeTokens \u007b
+    \u0069nt value;
+    int doubled = value \u002b value;
+    boolean nonnegative = value \u003e\u003d 0;
+    /** Run the function */
+    static vo\u0069d run() \u007b
+        // End
+        return;
+    \u007d
+\u007d
+
+class RepeatedEscapes {
+String c = "\uu0041\uu0042";
+/**
+ * S
+ * @param a
+ */
+void F(int a) {}
+}

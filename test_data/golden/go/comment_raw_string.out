@@ -1,4 +1,0 @@
-package main
-
-var s = `a
-b` // note

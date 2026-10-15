@@ -1,4 +1,0 @@
-fun f(a: Boolean, b: Boolean) {
-	if(a) { g(); h() }
-	while(b);
-}

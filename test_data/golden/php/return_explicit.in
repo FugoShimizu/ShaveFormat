@@ -1,5 +1,9 @@
 <?php
 
+use function \ExIt as Stop, \die as halt;
+use \exit as typeStop;
+use const \exit as constStop;
+
 /**
  * 呼ぶ
  */
@@ -29,3 +33,109 @@ class A {
 		b();
 	}
 }
+
+/**
+ * 後判定の本体で終える
+ * @param $c 条件
+ */
+function postStop($c) {
+	do return;
+	while($c);
+}
+
+/**
+ * インポートした標準関数で終える
+ */
+function importedStop() {
+	sToP(0);
+}
+
+/**
+ * インポートした標準関数の別名で終える
+ */
+function importedDie() {
+	halt(0);
+}
+
+/**
+ * 型のインポートと同名の関数から戻る
+ */
+function typeImported() {
+	typeStop(0);
+}
+
+/**
+ * 定数のインポートと同名の関数から戻る
+ */
+function constantImported() {
+	constStop(0);
+}
+
+/**
+ * 完全修飾した標準関数で終える
+ */
+function qualifiedStop() {
+	\ExIt(0);
+}
+
+function &f() { static $a = 1; return ($a); }
+function g($b) { return ($b + 1); }
+$h = fn&() => ($x);
+$k = fn() => ($x);
+class K { public $x = 1; public function &m() { return ($this->x); } }
+
+/**
+ * 節を確定出来ない切替の末尾を補完しない
+ * @param $x 対象
+ */
+function unknownMatch($x): void {
+	match($x) {
+		1 => throw new Exception("a"),
+		default => throw new Exception("b")
+	};
+}
+
+/**
+ * 一致する節が無く送出する
+ * @param $x 対象
+ */
+function emptyMatch($x): void {
+	match($x) {};
+}
+
+/**
+ * 通常に完了する枝から後続へ進む
+ * @param $x 対象
+ */
+function returningMatch($x): void {
+	match($x) {
+		1 => g(),
+		default => throw new Exception("b")
+	};
+}
+
+/**
+ * 一致した枝も不一致も正常に完了しない
+ * @param $x 対象
+ */
+function terminatingMatch($x): void {
+	match($x) {
+		1 => throw new Exception("a")
+	};
+}
+
+function LiteralWhile(): void{while(2){}}
+
+function LiteralFor(): void{for(;0x2;){}}
+
+function LiteralDo(): void{do{}while(-1);}
+
+function LiteralFloat(): void{while(1.0){}}
+
+function LiteralString(): void{while("x"){}}
+
+function LiteralWrapped(): void{while(((2))){}}
+
+function LiteralZero(): void{while(0){}}
+
+function LiteralBreak(): void{while(2){break;}}

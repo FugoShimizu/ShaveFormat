@@ -1,18 +1,19 @@
 #!/bin/bash
-
 set -euo pipefail;
 export LC_ALL=C;
-
 ROOT="$(cd "$(dirname "$0")/.." && pwd)";
 FMT="${ROOT}/build/shavefmt";
 DUMPAST="${ROOT}/build/dumpast";
 MAX_CHARS="${MAX_CHARS:-128}";
 KEEP_TMP="${KEEP_TMP:-0}";
 REFERENCE_FMT="${REFERENCE_FMT:-}";
+
 FILTERS=("$@");
-VERIFIED_LANGUAGES=0;
-SOURCE_INDEX=0;
-EXAMPLE_INDEX=0;
+
+VERIFIED_LANGS=0;
+SRC_IDX=0;
+EXAMPLE_IDX=0;
+
 # macOS 既定の bash 3.2 は `set -u` の下で空配列の展開を未定義変数として扱う為，要素が有る時だけ展開する
 for filter in ${FILTERS[@]+"${FILTERS[@]}"}; do
 	case "${filter}" in
@@ -20,16 +21,14 @@ for filter in ${FILTERS[@]+"${FILTERS[@]}"}; do
 		*) echo "unknown language: ${filter}" >&2; exit 1 ;;
 	esac
 done
-# 整形器は記号リンクを経る経路を辿らない為（macOS の /tmp は /private/tmp へのリンク），実体の経路を使う
+
+# フォーマッターはシンボリックリンクを経るパスを辿らない為（macOS の /tmp は /private/tmp へのリンク），実体のパスを使う
 TMP_CREATED="$(mktemp -d "${TMPDIR:-/tmp}/shavefmt-corpus.XXXXXX")";
 
 cleanup() {
-	if [ "${KEEP_TMP}" != "1" ]; then
-		rm -rf "${TMP_CREATED}";
-	else
-		echo "kept temp dir: ${TMP_CREATED}";
-	fi
+	if [ "${KEEP_TMP}" != "1" ]; then rm -rf "${TMP_CREATED}"; else echo "kept temp dir: ${TMP_CREATED}"; fi
 }
+
 trap cleanup EXIT;
 TMP_ROOT="$(cd "${TMP_CREATED}" && pwd -P)";
 
@@ -37,6 +36,7 @@ if [ ! -x "${FMT}" ]; then
 	echo "missing formatter: ${FMT}" >&2;
 	exit 1;
 fi
+
 if [ ! -x "${DUMPAST}" ]; then
 	echo "missing dumpast: ${DUMPAST}" >&2;
 	exit 1;
@@ -50,34 +50,40 @@ extract_corpus_file() {
 	local prefix="$4";
 	local error_list="$5";
 	local other_dialect="$6";
-	awk -v ext="${ext}" -v out_dir="${out_dir}" -v prefix="${prefix}" -v error_list="${error_list}" -v other="${other_dialect}" '
+	awk -v extension="${ext}" -v out_dir="${out_dir}" -v prefix="${prefix}" -v error_list="${error_list}" -v \
+		other="${other_dialect}" '
 function flush_sample() {
 	if(foreign) {
-		source = "";
+		for(source_line = 1; source_line <= source_count; ++source_line) delete source_lines[source_line];
+		source_count = 0;
 		collecting = 0;
 		name = "";
 		return;
 	}
-	if(!collecting || source == "") return;
+	if(!collecting || source_count == 0) return;
 	++count;
-	name = sprintf("%s_%04d.%s", prefix, count, ext);
+	name = sprintf("%s_%04d.%s", prefix, count, extension);
 	path = sprintf("%s/%s", out_dir, name);
-	printf "%s", source > path;
+	for(source_line = 1; source_line <= source_count; ++source_line) printf "%s\n", source_lines[source_line] > path;
 	close(path);
-	source = "";
+	for(source_line = 1; source_line <= source_count; ++source_line) delete source_lines[source_line];
+	source_count = 0;
 	collecting = 0;
 }
-# 期待木に ERROR / MISSING を持つ見本は構文誤りの入力の為，見送を失敗に数えない一覧へ載せる
+
+# 期待木に ERROR / MISSING を持つ見本は構文エラーの入力の為，見送を失敗に数えない一覧へ載せる
 function flush_error() {
 	if(errored && name != "") print name >> error_list;
 	errored = 0;
 }
+
 BEGIN {
 	state = "seek_eq";
 	count = 0;
-	source = "";
+	source_count = 0;
 	collecting = 0;
 }
+
 /^={3,}$/ {
 	if(state == "seek_eq") {
 		state = "read_title";
@@ -95,6 +101,7 @@ BEGIN {
 		next;
 	}
 }
+
 {
 	if(state == "read_title") {
 		state = "after_title";
@@ -107,7 +114,7 @@ BEGIN {
 	if(state == "seek_source") {
 		if($0 == "") next;
 		if($0 ~ /^-{3,}$/) next;
-		source = $0 "\n";
+		source_lines[++source_count] = $0;
 		collecting = 1;
 		state = "read_source";
 		next;
@@ -118,18 +125,19 @@ BEGIN {
 			state = "skip_ast";
 			next;
 		}
-		source = source $0 "\n";
+		source_lines[++source_count] = $0;
 		next;
 	}
 	if(state == "skip_ast" && $0 ~ /\((ERROR|MISSING)/) errored = 1;
 }
+
 END {
 	flush_sample();
 	flush_error();
 }' "${corpus_file}";
 }
 
-# 見本の整形（構文誤りの見本は見送を許し，構文守衛と異常終了だけを失敗とする）
+# 見本の整形（構文エラーの見本は見送を許し，構文守衛と異常終了だけを失敗とする）
 format_samples() {
 	local formatter="$1";
 	local sample_dir="$2";
@@ -156,14 +164,20 @@ collect_examples() {
 		[ -d "${example_dir}" ] || continue;
 		while IFS= read -r path; do
 			[ -f "${path}" ] || continue;
-			((++EXAMPLE_INDEX));
-			local name="example_${EXAMPLE_INDEX}.${ext}";
+			((++EXAMPLE_IDX));
+			local name="example_${EXAMPLE_IDX}.${ext}";
 			cp "${path}" "${out_dir}/${name}";
-			# 期待木を持たない見本は，解析器が ERROR / MISSING を立てる物を構文誤りの入力として一覧へ載せる
-			# `grep -q` は一致で読むのを止めて dumpast を SIGPIPE で終わらせ，pipefail の下で偽に為る為，全行を読ませる
-			if "${DUMPAST}" --types-only "${out_dir}/${name}" | grep -xE "ERROR|MISSING" > /dev/null; then
+			# 期待木を持たない見本は，パーサーが ERROR / MISSING を立てる物を構文エラーの入力として一覧へ載せる
+			# パーサーの終了状態とエラーノードの有無を分け，取得失敗を正常な木と読み違えない
+			local types_file="${error_list}.types";
+			if ! "${DUMPAST}" --types-only "${out_dir}/${name}" > "${types_file}"; then
+				echo "FAIL ${name}: AST reader failed" >&2;
+				return 1;
+			fi
+			if grep -xE "ERROR|MISSING" "${types_file}" > /dev/null; then
 				echo "${name}" >> "${error_list}";
 			fi
+			rm -f "${types_file}";
 		done < <(find "${example_dir}" -type f \( -name "*.${ext}" \) | sort)
 	done
 }
@@ -181,33 +195,30 @@ verify_language() {
 				break;
 			fi
 		done
-		if (( !matched )); then
-			return 0;
-		fi
+		if (( !matched )); then return 0; fi
 	fi
-	local work_dir="${TMP_ROOT}/${label}";
-	local corpus_dir="${work_dir}/corpus";
-	local current_dir="${work_dir}/current";
-	local reference_dir="${work_dir}/reference";
-	local error_list="${work_dir}/error_samples.txt";
+	local working_directory="${TMP_ROOT}/${label}";
+	local corpus_dir="${working_directory}/corpus";
+	local current_dir="${working_directory}/current";
+	local reference_dir="${working_directory}/reference";
+	local error_list="${working_directory}/error_samples.txt";
 	local corpus_inputs=("$@");
 	local other_dialect="";
-	case "${label}" in
-		typescript) other_dialect="tsx" ;;
-		tsx) other_dialect="typescript" ;;
-	esac
+	case "${label}" in typescript) other_dialect="tsx" ;; tsx) other_dialect="typescript" ;; esac
 
 	mkdir -p "${corpus_dir}";
 	: > "${error_list}";
 
 	for corpus_path in "${corpus_inputs[@]}"; do
 		if [ -f "${corpus_path}" ]; then
-			((++SOURCE_INDEX))
-			extract_corpus_file "${corpus_path}" "${ext}" "${corpus_dir}" "source_${SOURCE_INDEX}" "${error_list}" "${other_dialect}";
+			((++SRC_IDX))
+			extract_corpus_file "${corpus_path}" "${ext}" "${corpus_dir}" "source_${SRC_IDX}" "${error_list}" \
+				"${other_dialect}";
 		elif [ -d "${corpus_path}" ]; then
 			while IFS= read -r corpus_file; do
-				((++SOURCE_INDEX))
-				extract_corpus_file "${corpus_file}" "${ext}" "${corpus_dir}" "source_${SOURCE_INDEX}" "${error_list}" "${other_dialect}";
+				((++SRC_IDX))
+				extract_corpus_file "${corpus_file}" "${ext}" "${corpus_dir}" "source_${SRC_IDX}" "${error_list}" \
+					"${other_dialect}";
 			done < <(find "${corpus_path}" -type f -name "*.txt" | sort)
 			collect_examples "${ext}" "${corpus_dir}" "${error_list}" "${corpus_path}";
 		fi
@@ -238,11 +249,10 @@ verify_language() {
 		format_samples "${FMT}" "${current_dir}" "${error_list}";
 		echo "output ${label}: reference skipped";
 	fi
-	: "$((++VERIFIED_LANGUAGES))";
+	: "$((++VERIFIED_LANGS))";
 }
 
 verify_language "c" "c" "${ROOT}/vendor/tree-sitter-c/test/corpus" "${ROOT}/vendor/tree-sitter-c/examples";
-
 verify_language "cpp" "cpp" "${ROOT}/vendor/tree-sitter-cpp/test/corpus" "${ROOT}/vendor/tree-sitter-cpp/examples";
 
 paths=(
@@ -250,22 +260,20 @@ paths=(
 	"${ROOT}/vendor/tree-sitter-c-sharp/test/highlight"
 	"${ROOT}/vendor/tree-sitter-c-sharp/test/queries"
 );
+
 verify_language "csharp" "cs" "${paths[@]}";
-
 verify_language "java" "java" "${ROOT}/vendor/tree-sitter-java/test/corpus";
-
 verify_language "go" "go" "${ROOT}/vendor/tree-sitter-go/test/corpus" "${ROOT}/vendor/tree-sitter-go/examples";
-
 verify_language "rust" "rs" "${ROOT}/vendor/tree-sitter-rust/test/corpus" "${ROOT}/vendor/tree-sitter-rust/examples";
-
 verify_language "kotlin" "kt" "${ROOT}/vendor/tree-sitter-kotlin/test/corpus" "${ROOT}/vendor/tree-sitter-kotlin/examples";
 
 paths=("${ROOT}/vendor/tree-sitter-swift/test/corpus" "${ROOT}/vendor/tree-sitter-swift/test/highlight");
-verify_language "swift" "swift" "${paths[@]}";
 
+verify_language "swift" "swift" "${paths[@]}";
 verify_language "php" "php" "${ROOT}/vendor/tree-sitter-php/test/corpus";
 
 paths=("${ROOT}/vendor/tree-sitter-javascript/test/corpus" "${ROOT}/vendor/tree-sitter-javascript/examples");
+
 verify_language "javascript" "js" "${paths[@]}";
 
 # `.ts` は JSX 無の文法，`.tsx` は JSX 付の文法で読む（見本は拡張子で振り分けて集める）
@@ -274,16 +282,12 @@ paths=(
 	"${ROOT}/vendor/tree-sitter-typescript/examples"
 	"${ROOT}/vscode-extension/src"
 );
+
 verify_language "typescript" "ts" "${paths[@]}";
-
 verify_language "tsx" "tsx" "${ROOT}/vendor/tree-sitter-typescript/test/corpus";
-
 verify_language "ruby" "rb" "${ROOT}/vendor/tree-sitter-ruby/test/corpus";
-
 verify_language "python" "py" "${ROOT}/vendor/tree-sitter-python/test/corpus" "${ROOT}/vendor/tree-sitter-python/examples";
-
 verify_language "json" "json" "${ROOT}/vendor/tree-sitter-json/test/corpus";
-
 verify_language "html" "html" "${ROOT}/vendor/tree-sitter-html/test/corpus" "${ROOT}/vendor/tree-sitter-html/examples";
 
 paths=(
@@ -291,7 +295,9 @@ paths=(
 	"${ROOT}/vendor/tree-sitter-scss/examples"
 	"${ROOT}/vendor/tree-sitter-scss/test/highlight"
 );
+
 verify_language "css" "css" "${paths[@]}";
 
-(( VERIFIED_LANGUAGES )) || { echo "FAIL: no languages verified" >&2; exit 1; }
-echo "verify_local_corpus: complete (${VERIFIED_LANGUAGES} languages)";
+(( VERIFIED_LANGS )) || { echo "FAIL: no languages verified" >&2; exit 1; }
+
+echo "verify_local_corpus: complete (${VERIFIED_LANGS} languages)";

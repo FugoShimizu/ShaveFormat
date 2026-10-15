@@ -1,0 +1,10 @@
+package p
+
+// shadowPackage
+func shadowPackage() int {
+ n:=0
+ for true { n++; break }
+ return n
+}
+
+var true=false

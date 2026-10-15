@@ -1,8 +1,0 @@
-/**
- *
- */
-fun m() {
-	// c
-	val a = listOf()
-	return
-}

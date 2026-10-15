@@ -1,3 +1,9 @@
-8:3: Review: Merge the conditions of these identical branch bodies; verify evaluation, lifetime
-12:3: Review: Merge the conditions of these identical branch bodies; verify lifetime
-17:3: Review: Merge the conditions of these identical branch bodies; verify evaluation, lifetime
+12:3: Review: Merge the conditions of these identical branch bodies
+17:3: Review: Merge the conditions of these identical branch bodies
+41:2: Review: Merge the conditions of these identical branch bodies
+83:2: Review: Merge the conditions of these identical branch bodies
+94:4: Review: Use the increment or decrement form required for this target
+95:12: Review: Use a strict inequality with an equivalent adjusted boundary
+96:12: Review: Use the zero-test form required for this numeric type
+101:2: Review: Merge the conditions of these identical branch bodies
+104:2: Review: Merge the conditions of these identical branch bodies

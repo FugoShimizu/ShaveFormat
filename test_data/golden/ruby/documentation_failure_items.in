@@ -1,7 +1,0 @@
-# 確かめる
-# @param value 値
-# @return [Integer] 値
-def check(value)
-	raise ArgumentError, "負" if value.negative?
-	return value
-end

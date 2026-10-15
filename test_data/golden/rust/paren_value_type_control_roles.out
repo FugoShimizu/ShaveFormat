@@ -1,0 +1,209 @@
+/**
+ *
+ * # Arguments
+ * * `x`
+ * * `y`
+ * # Returns
+ */
+fn f(x: u8, y: i32) -> i32 {
+	let a = x as i32 + y;
+	let b = x as i32 * 2;
+	let c = (x as i32) < y;
+	let d = y + x as i32;
+	let e = -(x as i32);
+	let g = (x as i32).pow(2);
+	let h = x as u16 as u32 as i32;
+	let k = (x as i32) << 2;
+	let m = -y as u8;
+	return a + b + d + e + g + h + k + m as i32 + c as i32;
+}
+
+/**
+ *
+ * # Arguments
+ * * `a`
+ * * `b`
+ * * `c`
+ * * `d`
+ */
+fn p(a: *const (u8, u8), b: *mut (u8, u8), c: &(u8, u8), d: &mut (u8, u8)) {}
+
+/**
+ *
+ */
+fn f() {
+	while (return) {}
+	if (x == return) {}
+	match(break 'a) {
+		_ => {}
+	}
+	if return x {}
+	if f(|| return) {}
+}
+
+#[derive(PartialEq)]
+struct S { a: i32 }
+
+/**
+ *
+ * # Arguments
+ * * `x`
+ * * `y`
+ * * `b`
+ */
+fn f(x: S, y: i32, b: bool) {
+	if b {
+		g();
+	}
+	if x == (S { a: 1 }) {
+		g();
+	}
+	match y {
+		_ => {}
+	}
+	while b {
+		g();
+	}
+	if (S { a: 2 }) == x {
+		g();
+	}
+	return;
+}
+
+/**
+ *
+ */
+fn g() {}
+
+/**
+ *
+ * # Arguments
+ * * `x`
+ */
+fn f(x: bool) {
+	if x { // 条件
+		y();
+		z();
+	}
+	return;
+}
+
+/**
+ *
+ * # Arguments
+ * * `n`
+ * * `v`
+ */
+fn h(n: usize, v: &[i32]) {
+	for i in 0..n {
+		g();
+	}
+	for j in (0..) {
+		break;
+	}
+	let r = 0..;
+	let w = &v[1..];
+	return;
+}
+
+/**
+ *
+ * # Arguments
+ * * `c`
+ * # Returns
+ */
+fn f(c: bool) -> i32 {
+	let y = if c {
+		1
+	} else {
+		0
+	};
+	let z = match c {
+		true => 1,
+		false => 0
+	};
+	let w = (
+		if c {
+			1
+		} else {
+			0
+		}
+	) + 1;
+	return y + z + w;
+}
+
+/**
+ *
+ */
+fn f() {
+	let x = a.b.c + g().h + a[0].b + f(1) + (a.b)(2) + self.a.b + (1).max(2) + a.b.m() + a.b.c;
+	return;
+}
+
+/**
+ *
+ * # Arguments
+ * * `x`
+ * * `y`
+ * * `z`
+ */
+fn f<'a>(x: &'a (i32, i32), y: &'a mut (i32, i32), z: &'a ()) {
+	match x {
+		1 => println!("a"),
+		_ => println!("b"),
+	};
+	let v2: i32 =
+	aaaaaaaaaaaaaaa + bbbbbbbbbbbbbbbbbbbbb + ccccccccccccccccccccc + ddddddddddddddddddddd + eeeeeeeeeeeeeeeeeeee + ffffffffff;
+	m!(a, | b | c);
+	m!(1, 2,);
+	let r = &[..=..][..];
+	let s = ..=..=.. ..;
+}
+
+/**
+ *
+ * # Arguments
+ * * `x`
+ * * `a`
+ * * `b`
+ * # Returns
+ */
+async fn f(x: Option<S>, a: S, b: u8) -> Option<u8> {
+	let y = x?.y;
+	let w = a.b?;
+	let v = g()?;
+	let u = (-a)?;
+	let t = (a.c + b)?;
+	let s = h().await;
+	let r = (&mut k).await;
+	let q = a.b as u8;
+	let p = (a.c + b) as u8;
+	let o = -b as u8;
+	let n = (a.f)();
+	return None;
+}
+
+/**
+ *
+ * # Arguments
+ * * `x`
+ * * `b`
+ * * `c`
+ * * `d`
+ * # Returns
+ */
+fn f(x: u8, b: &(dyn A + Send), c: Box<dyn A + Send>, d: &u8) -> u8 {
+	let e: i32 = 1;
+	return x;
+}
+
+/**
+ *
+ * # Arguments
+ * * `x`
+ * * `y`
+ * * `z`
+ */
+fn f(x: &(dyn A + Send), y: u8, z: (u8, u16)) {}
+
+struct P { x: i32, y: i32 }

@@ -1,0 +1,27 @@
+if a { f() }
+if b { f() }
+if c { f() }
+
+if a { f() } else if b { f() } else if c { f() }
+
+if a { if b { f() } }
+if a { if b { if c { f() } } }
+
+if a {}
+if b {}
+if c {}
+
+if a {} else if b {} else if c {}
+
+x += 1E0_1
+x -= 1E+0_1
+x += 1E-0_1
+consume(x >= b + 1E0_1)
+consume(x <= b - 1E-0_1)
+consume(b + 1E+0_1 <= x)
+consume(b - 1E0_1 >= x)
+x += 1E0_0
+consume(x >= b + 1E0_0)
+consume(x == 0E1_0)
+x += 0x1P0_1
+consume(x >= b + 0x1P-0_1)

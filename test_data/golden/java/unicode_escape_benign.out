@@ -1,7 +1,7 @@
 public class A {
 	static String s = "caf\u00e9 \uD83D\uDE00";
 	static char c = '\u0041';
-	static String q = "\"quoted\"";
+	static String q = "\u005c\u0022quoted\u005c\u0022";
 	// comment \u00e9 fine
 	/* block */ static int hidden = 5;
 
@@ -20,17 +20,17 @@ public class A {
 	 * @param args
 	 */
 	public static void main(String[] args) {
-		int ab = 3;
+		int \u0061b = 3;
 		System.out.println(s + c + q + hidden + check() + ab);
 		return;
 	}
 }
 
 class A {
-	String c = "\uD834\uDD1E";
+	String c = "\uuuuD834\uDD1E";
 	char f = '\uD800';
 	String a = "caf\u00e9";
-	int a = 1;
+	int \u0061 = 1;
 	int x = 1;
 }
 
@@ -62,4 +62,33 @@ class T {
 		System.out.println(k);
 		return;
 	}
+}
+
+class EscapeSpelling {
+	static int \u0061 = 1;
+	static String text = "\uu0041";
+}
+
+class UnicodeTokens {
+	int value;
+	int doubled = value + value;
+	boolean nonnegative = value >= 0;
+
+	/**
+	 * Run the function
+	 */
+	static void run() {
+		// End
+		return;
+	}
+}
+
+class RepeatedEscapes {
+	String c = "\uu0041\uu0042";
+
+	/**
+	 * S
+	 * @param a
+	 */
+	void F(int a) {}
 }

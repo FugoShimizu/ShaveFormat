@@ -37,3 +37,18 @@ func i(x int) {
 	}
 	return
 }
+
+// j
+func j(x int) {
+	switch x {
+	case 0:
+	default:
+	}
+	return
+}
+
+// f
+func f() {
+	if true {/* c */}
+	return
+}

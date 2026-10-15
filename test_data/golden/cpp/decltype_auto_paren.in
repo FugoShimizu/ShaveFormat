@@ -22,3 +22,45 @@ decltype(auto) Get() {
 
 decltype(auto) v = ((ga.m));
 constexpr auto r = [:(^^int):];
+
+void g(std::meta::info r, X<false> xv) {
+	r == (^^int) && true;
+	r == (^^int);
+	(^^X) < xv;
+	constexpr std::meta::info a = (^^int);
+	f((^^int), (^^X));
+}
+
+constexpr auto a = ^^int;
+constexpr auto b = ^^x;
+constexpr auto c = ^^::std;
+constexpr auto d = ^^MyClass;
+constexpr auto e = (^^int);
+using T = [: r :];
+typename [: s :] v;
+
+template<int N> int Add(int x) { return N + x; }
+
+void h(int a, int b, int c, int d) {
+	f((a < b, c >> d));
+	int r = (a < b, c >> d);
+	k(a < b + c > (d + 1));
+	Add<(1+1)>(d);
+	Add<1+1>(d);
+	x = (std::pair<int, int>{});
+	g(a < 64, b >> d);
+	k((a < b), (c > d));
+	k((x && a < b), c > (d));
+	int v[] = { (a < b), c > (d) };
+	return a < b && c > (d + 1);
+}
+
+#define ONE 1
+task f() {
+	co_return (ONE);
+}
+task g() {
+	co_await (y);
+	co_return (a, b);
+	throw (ONE);
+}

@@ -18,7 +18,7 @@ b {
 
 d {
 	--f: ;
-	--x: ;
+	--x:;
 }
 
 @namespace svg url(http://www.w3.org/2000/svg);
@@ -53,4 +53,27 @@ a[xlink|href] {
 
 /* x */ .a .b {
 	x: y;
+}
+
+.missing {
+	--empty:;
+}
+
+.space {
+	--blank: ;
+}
+
+.nested {
+	.inner {
+		--empty:;
+		--blank: ;
+	}
+}
+
+@media all {
+	.inner {
+		--empty:;
+		--blank: ;
+		color: red;
+	}
 }

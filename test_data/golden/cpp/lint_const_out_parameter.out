@@ -23,3 +23,52 @@ int Sum(int Size) {
 	// 合計の返戻
 	return Total + Size;
 }
+
+/**
+ * 値の更新関数
+ * @param Size 値
+ * @return 更新した値
+ */
+int UpdateTotal(const int Size) {
+	int Total = Size;
+	++Total;
+	// 更新した値の返戻
+	return Total;
+}
+
+/**
+ * 二つの値の合計関数
+ * @param Size 値
+ * @return 合計
+ */
+int PairSum(const int Size) {
+	int Left = Size, Right = Size + 1;
+	// 合計の返戻
+	return Left + Right;
+}
+
+/**
+ * 有効範囲の判定関数
+ * @param Size 値
+ * @return 外側の値
+ */
+int Shadow(const int Size) {
+	int Value = Size;
+	{
+		int Value = 1;
+		++Value;
+	}
+	// 外側の値の返戻
+	return Value + Size;
+}
+
+/**
+ * 作業列の更新関数
+ */
+void UpdatePending() {
+	std::vector<int> Pending { 1 };
+	Pending.push_back(2);
+	Pending.pop_back();
+	// 終了
+	return;
+}

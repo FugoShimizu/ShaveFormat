@@ -1,0 +1,56 @@
+void // c
+f() {
+	{
+		g();
+	}
+}
+
+int x;
+/*
+	First sentence. Second sentence
+*/
+int y;
+
+void f(void) {
+	int b; /* three
+	          four
+	        */
+	g();
+}
+
+int x; /* dir C:\
+          next */
+int y;
+
+void f(void) {
+	if (a) {
+		// c
+	} else {
+		x();
+		y();
+	}
+	if (a) {
+		// d1
+		// d2
+	}
+	while (b) {
+		/* w */
+	}
+}
+
+/** 面積 */
+int area(
+	/** 幅 */
+	int w,
+	int h
+) {
+	return w * h;
+}
+
+// Para
+/*
+    a  =  b
+
+Tail
+ */
+int x;

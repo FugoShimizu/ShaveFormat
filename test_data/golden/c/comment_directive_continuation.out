@@ -1,7 +1,0 @@
-#define F(a, b) g(a, /* c */ b)
-
-#if A(B || C) && !D(F)
-
-int x;
-
-#endif

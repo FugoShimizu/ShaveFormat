@@ -1,0 +1,30 @@
+enum class E {
+	/** 赤 */
+	Red,
+	/** 青 */
+	Blue,
+};
+
+enum class E {
+	/** 古い。使わない */
+	Old,
+	/** 使わない */
+	Legacy,
+};
+
+struct A {
+	int x; ///<   横の位置
+	long y; //!<	縦の位置
+	char z; /**<　奥行 */
+	short w; ///<幅
+};
+
+int area(
+	/** 幅 */
+	// TODO: 単位
+	int w,
+	int h) { return w * h; }
+
+struct Header
+/** Header description */
+{ int value; };

@@ -1,4 +1,0 @@
-class A {
-	/* c */ #x = 1;
-	get() { return this./* d */#x; }
-}

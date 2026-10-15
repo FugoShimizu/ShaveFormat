@@ -1,0 +1,65 @@
+<?php
+
+if ($c):
+    // e4
+else:
+    g();
+endif;
+if ($a):
+    g();
+elseif ($b):
+    // e7
+else:
+    h();
+endif;
+if ($d):
+    g();
+else:
+    // e8
+endif;
+
+if ($post) :
+	?>
+	<?php
+	$x;
+	?>
+<?php
+// ZQ
+endif;
+
+foreach ($xs as $x):
+    e();
+    // foreach の注記
+endforeach;
+if ($a):
+    e();
+elseif ($b):
+    f();
+    // elseif の注記
+endif;
+if ($a):
+    e();
+else:
+    g();
+    // else の注記
+endif;
+while ($a):
+    e();
+    // while の注記
+endwhile;
+for ($i = 0; $i < 3; $i++):
+    e();
+    // for の注記
+endfor;
+switch ($a):
+    case 1:
+        e();
+        // case の注記
+endswitch;
+h();
+
+if ($a):
+	// c8
+	/* c9 */
+endif;
+g();

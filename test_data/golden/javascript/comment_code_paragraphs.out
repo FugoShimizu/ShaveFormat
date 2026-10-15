@@ -1,0 +1,39 @@
+// a
+// b
+f();
+// a
+// b
+f();
+// ```
+// a();
+// b();
+// ```
+f();
+// Example:
+// a();
+// b();
+g();
+// Example:
+// a();
+// b();
+h();
+// <pre>
+// a();
+// b();
+// </pre>
+k();
+// `x` is used
+// a = b
+f();
+// > Para
+// > a = b
+g();
+// ```
+// a
+f();
+// "Read here" 日本語 ABC "Return now"
+// 'Read here' 甲，B '?Return now' 日本語 ABC '!Finish here'
+// {@code A B}
+// {@literal A B}
+// (@dot A B @enddot)
+// (@f$ A B @f$)

@@ -7,3 +7,41 @@ func f() {
 	print(a, b)
 	return
 }
+
+let r = try await unsafe f(
+	firstArgument,
+	secondArgument
+)
+
+for e in unsafe items(
+	firstArgument,
+	secondArgument
+) {
+	print(e)
+}
+
+/**
+ *
+ * - Parameter x:
+ * - Parameter a:
+ */
+func transfer(
+	x: sending [4 of Int],
+	a: isolated MyActor
+) {}
+
+/**
+ *
+ */
+func fixedArrays() {
+	let small: [4 of Int] = [0, 0, 0, 0]
+	let other: [4 of Int] = [1, 1, 1, 1]
+	print(small, other)
+	return
+}
+
+let gridFive: [4 of Int] = [0, 0, 0, 0]
+let fixedGrid: [4 of Int] = [0, 0, 0, 0]
+
+let fixedGrid2: [4 of Int] =
+[0, 0, 0, 0]

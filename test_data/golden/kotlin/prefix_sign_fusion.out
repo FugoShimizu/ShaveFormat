@@ -1,9 +1,0 @@
-/**
- *
- * @param a
- * @param b
- * @return
- */
-fun f(a: Int, b: Boolean): Boolean {
-	return -(-a) > 0 && !(!b)
-}

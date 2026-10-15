@@ -1,0 +1,4 @@
+# coding: unicode_escape
+x = (False and # see docs\nprint("marker"),
+ True)
+print(x)

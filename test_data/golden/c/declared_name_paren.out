@@ -26,7 +26,7 @@ int g(void) {
  * @return
  */
 int h(void) {
-	return MAX;
+	return (MAX);
 }
 
 /**
@@ -35,4 +35,53 @@ int h(void) {
  */
 int k(void) {
 	return (MAX) / 2 + (N) * 2;
+}
+
+typedef int Element;
+
+/**
+ *
+ */
+void Repaired(void) {
+	Element (*First), Second, (Left), (Right);
+	return;
+}
+
+/**
+ * 使用位置の定義と取消だけで括弧を判断する
+ * @param Name 値
+ * @param Function 呼出先
+ * @return 使用位置で保持した値の和
+ */
+int MacroNamePosition(int Name, int (*Function)(int)) {
+	#undef Name
+	#undef Function
+	const int Before = Name;
+	Function(Name);
+	struct FunctionReceiver {
+		int (*Invoke)(int);
+	};
+	const struct FunctionReceiver Receiver = { Function };
+	Receiver.Invoke(Name);
+	#define Invoke(Value) Value
+	(Receiver.Invoke)(Name);
+	#undef Invoke
+	Receiver.Invoke(Name);
+	#define Name 7
+	const int During = (Name);
+	#undef Name
+	const int After = Name;
+	#if 0
+	#define Name 8
+	#endif
+	const int Inactive = Name;
+	#if Name
+	#endif
+	const int Condition = Name;
+	#define Function(Value) Value
+	(Function)(Name);
+	#undef Function
+	Function(Name);
+	// 値の和の返戻
+	return Before + During + After + Inactive + Condition;
 }

@@ -1,0 +1,199 @@
+/**
+ *
+ * @param a
+ */
+function foo(a: number) {
+	if(a === 1) {
+		const x = 1;
+	}
+	return;
+}
+
+/**
+ *
+ * @param a
+ */
+function f(a: number) {
+	if(a === 1) {
+		type T = number;
+	}
+	if(a === 2) {
+		interface I {}
+	}
+	if(a === 3) {
+		enum E { A }
+	}
+	return;
+}
+
+/**
+ *
+ * @param a
+ * @param b
+ */
+function f(a: boolean, b: boolean): void {
+	if(a) if(b) {
+		let x = read(), /* first */ y = read();
+		/* second */ use(x, y);
+	}
+	if(a) if(b) {} else {}
+	if(a) if(b) {} else {}
+	if(a) do {} while(b);
+	if(a) do {} while(b);
+	return;
+}
+
+/**
+ *
+ * @param sourceText
+ * @param position
+ * @param languageMode
+ * @param handlers
+ */
+function registerHandler(sourceText: string, position: number, languageMode: number, handlers: number[]): void {
+	if(
+		position < sourceText.length && sourceText[position] !== "\n" &&
+		shouldBreakAfterExpandedBrace("\n}", sourceText.substring(position), languageMode)
+	) handlers.push(position);
+	for(let lineIndex = sourceText.indexOf("\n"); lineIndex !== -1; lineIndex = sourceText.indexOf("\n", lineIndex + 1)) {
+		handlers.push(lineIndex + 1);
+	}
+	if(
+		position < sourceText.length && sourceText[position] !== "\n" &&
+		shouldBreakAfterExpandedBrace("\n}", sourceText.substring(position), languageMode)
+	) reportDiagnostic("the closing brace of an expanded block must not share its line with a following closing bracket", position);
+	return;
+}
+
+/**
+ *
+ * @param sourceText
+ * @param position
+ * @param languageMode
+ */
+function reportHandler(sourceText: string, position: number, languageMode: number): void {
+	if(
+		position < sourceText.length && sourceText[position] !== "\n" &&
+		shouldBreakAfterExpandedBrace("\n}", sourceText.substring(position), languageMode)
+	) {
+		reportDiagnostic(
+			"the closing brace of an expanded block must not share its line with any following closing bracket token",
+			position
+		);
+	}
+	return;
+}
+
+if(a) {
+	using r = res();
+}
+
+if(a) {
+	await using q = ares();
+}
+
+/**
+ *
+ * @param X
+ * @return
+ */
+function Classify(X: number): number {
+	if(X < 0) return -1;
+	else if(X === 0) return 0;
+	else if(X < 10) return 1;
+	else return 2;
+}
+
+/**
+ *
+ * @param A
+ * @param B
+ * @return
+ */
+function Nested(A: boolean, B: boolean): number {
+	let X = 0;
+	if(A) {
+		if(B) X = 1;
+		else if(A !== B) X = 2;
+		else X = 3;
+	}
+	return X;
+}
+
+/**
+ *
+ * @param a
+ * @return
+ */
+function f(a: number) {
+	let n = 0;
+	if(a > 0) {
+		if(a) n = a;
+		else n = 0;
+	// 説明
+	} else n = 2;
+	return n;
+}
+
+import {
+	alphaNumberWithLongName,
+	type BetaNumberWithLongName,
+	deltaNumberWithLongName,
+	type GammaNumberWithLongName
+} from "./box";
+
+/**
+ * 配列を作る
+ * @param count 配列の長さ
+ * @return 配列の組
+ */
+function alpha(count: number = 3): {
+	alphaCountWithLongNeutralNameForWidth: number[],
+	betaCountWithLongNeutralNameForWidth: number[]
+} {
+	const first: number[] = Array(count).fill(7), second: number[] = first.slice(1);
+	if(!second.length) throw new Error("alpha has no values");
+	// 配列の組の返戻
+	return { alphaCountWithLongNeutralNameForWidth: first, betaCountWithLongNeutralNameForWidth: second };
+}
+
+const {
+	alphaValueWithLongName,
+	betaValueWithLongName,
+	gammaValueWithLongName,
+	deltaValueWithLongName,
+	epsilonValueWithLongName,
+	zetaValue
+} = sourceObject;
+
+const mergedValue = {
+	alphaValueWithLongName: 1,
+	betaValueWithLongName: 2,
+	gammaValueWithLongName: 3,
+	deltaValueWithLongName: 4,
+	epsilonValueWithLongName: 5
+} || fallbackValue;
+
+const castedValue = {
+	alphaValueWithLongName: 1,
+	betaValueWithLongName: 2,
+	gammaValueWithLongName: 3,
+	deltaValueWithLongName: 4,
+	epsilonValueWithLongName: 5
+} as const;
+
+const pickedValue = {
+	alphaValueWithLongName: 1,
+	betaValueWithLongName: 2,
+	gammaValueWithLongName: 3,
+	deltaValueWithLongName: 4,
+	epsilonValueWithLongName: 5
+}[keyName];
+
+const accessValue = {
+	alphaValueWithLongName: 1,
+	betaValueWithLongName: 2,
+	gammaValueWithLongName: 3,
+	deltaValueWithLongName: 4,
+	epsilonValueWithLongName: 5
+}.alphaValueWithLongName;

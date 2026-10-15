@@ -1,0 +1,31 @@
+package main
+
+var x = 1
+// First sentence
+// Second sentence
+var y = 2
+
+// f
+func f() uint64 {
+	/* XXX */ return 0
+}
+
+// g
+func g(x int) {
+	switch {
+	case x == 0:
+		// No-op
+		if x > 1 {} else {
+			h()
+		}
+	case x == 1:
+		h()
+	}
+	return
+}
+
+// path C:\
+var x = 1
+
+var s = `a
+b` // note

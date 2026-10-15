@@ -1,26 +1,33 @@
 #include "GrammarNames.hpp"
 #include <algorithm>
+#include <cstddef>
+#include <cstdint>
+#include <initializer_list>
 #include <string_view>
 #include <vector>
 
-/** ========== 集合操作 ========== */
 /**
+ * ========== 集合操作 ==========
  * ハッシュ値算出関数
+ * 計算量：型名の長さ L に対し O(L)
  * @param Type 対象文字列
  * @return ハッシュ値
  */
 size_t GrammarProfile::Names::NameSet::HashOf(const std::string_view Type) {
-	// FNV-1a ６４ビット：オフセット基底に各バイトを XOR して素数を乗算
+	// FNV-1a ６４ビット：オフセット基底に各バイトを排他的論理和して素数を乗算
 	uint64_t Hash = 14695981039346656037ULL;
-	for(const char Char : Type) Hash = 1099511628211ULL * (Hash ^ static_cast<unsigned char>(Char));
+	for(const unsigned char Char : Type) Hash = 1099511628211ULL * (Hash ^ Char);
 	// 計算済ハッシュ値の返戻
 	return static_cast<size_t>(Hash);
 }
 
 /**
  * 要素列からの構築関数
- * 二つのコンストラクタが同じ表を作る為，索引の作り方を此処だけで定める
+ * 各コンストラクタが同じ表を作る為，インデックスの作方を此処だけで定める
+ * 計算量：要素数 N，型名の長さの和 L に対し平均 O(N + L)，衝突が続く場合は最悪 O(N² + L)
  * @param Items 収める要素の列（重複を含まない）
+ * @throws std::bad_alloc 処理又は呼出先のメモリを確保出来ない場合
+ * @throws std::length_error 本文又は作業列の要素数上限を超える場合
  */
 void GrammarProfile::Names::NameSet::Build(const std::vector<std::string_view> &Items) {
 	// 各要素の先頭文字ビット＋長さビットを立てた６４ビット集合を事前計算（検索時の早期除外用）
@@ -44,42 +51,12 @@ void GrammarProfile::Names::NameSet::Build(const std::vector<std::string_view> &
 }
 
 /**
- * コンストラクタ
- * @param Init 収める節点の型名
- */
-GrammarProfile::Names::NameSet::NameSet(const std::initializer_list<std::string_view> Init) : FirstCharMask(0), SizeMask(0) {
-	Build(std::vector<std::string_view>(Init));
-	// 終了
-	return;
-}
-
-/**
- * 和集合のコンストラクタ
- * 他の集合を土台とする集合を列挙で書くと土台の変更に追従せず乖離する為，計算で作る
- * @param Base 土台の集合
- * @param Extra 土台へ加える節点の型名
- */
-GrammarProfile::Names::NameSet::NameSet(
-	const NameSet &Base,
-	const std::initializer_list<std::string_view> Extra
-) : FirstCharMask(0), SizeMask(0) {
-	// 土台の要素（５要素以上は空きを含む表）と追加分を集めた要素列
-	std::vector<std::string_view> Items;
-	Items.reserve(Base.Slots.size() + Extra.size());
-	for(const std::string_view Item : Base.Slots) if(!Item.empty()) Items.push_back(Item);
-	// 土台に在る要素は表へ二度入れない
-	for(const std::string_view Item : Extra) if(!Base.Contains(Item)) Items.push_back(Item);
-	Build(Items);
-	// 終了
-	return;
-}
-
-/**
  * 包含判定関数
+ * 計算量：型名の長さ L，集合の要素数 N に対し平均 O(L)，衝突が続く場合は最悪 O(N L)
  * @param Type 判定対象
  * @return 含まれるなら true
  */
-bool GrammarProfile::Names::NameSet::Contains(const std::string_view Type) const {
+bool GrammarProfile::Names::NameSet::HasName(const std::string_view Type) const {
 	// 寸法と先頭字の事前検査で含まれない場合の返戻（空文字列は寸法ビットで短絡し，先頭を読まない）
 	if(
 		const size_t Len = Type.size();
@@ -96,16 +73,121 @@ bool GrammarProfile::Names::NameSet::Contains(const std::string_view Type) const
 			if(Slot == Type) return true;
 		}
 	}
-	// １〜４要素は分岐予測・局所性を活かす線形探索で，一致時に true の返戻
+	// １〜４要素は分岐予測・ローカル性を活かす線形探索で，一致時に true の返戻
 	for(const std::string_view Item : Slots) if(Item == Type) return true;
 	// 何れの要素にも一致しない為 false の返戻
 	return false;
 }
 
-/** ========== 節点型集合 ========== */
-// Java / C# / PHP のアクセス修飾子順序検査対象メンバ宣言（`LintAnalyzer::CheckAccessSpecifierOrder` が順序を比べる成員）
-const GrammarProfile::Names::NameSet GrammarProfile::Names::AccessOrderMember =
-{ "const_declaration", "constructor_declaration", "field_declaration", "method_declaration", "property_declaration" };
+/**
+ * コンストラクタ
+ * 計算量：要素数 N，型名の長さの和 L に対し平均 O(N + L)，衝突が続く場合は最悪 O(N² + L)
+ * @param Initializer 収めるノードの型名
+ * @throws std::bad_alloc 処理又は呼出先のメモリを確保出来ない場合
+ * @throws std::length_error 本文又は作業列の要素数上限を超える場合
+ */
+GrammarProfile::Names::NameSet::NameSet(const std::initializer_list<std::string_view> Initializer) : FirstCharMask(0),
+SizeMask(0) {
+	// 列挙した名前のインデックスの構築
+	Build(std::vector<std::string_view>(Initializer));
+	// 終了
+	return;
+}
+
+/**
+ * 和集合のコンストラクタ
+ * 他の集合を土台とする集合を列挙で書くと土台の変更に追従せず乖離する為，計算で作る
+ * 計算量：土台と追加分の要素数 N，型名の長さの和 L に対し平均 O(N + L)，衝突が続く場合は最悪 O(N² + N L)
+ * @param Base 土台の集合
+ * @param Extra 土台へ加えるノードの型名
+ * @throws std::bad_alloc 処理又は呼出先のメモリを確保出来ない場合
+ * @throws std::length_error 本文又は作業列の要素数上限を超える場合
+ */
+GrammarProfile::Names::NameSet::NameSet(
+	const NameSet &Base,
+	const std::initializer_list<std::string_view> Extra
+) : FirstCharMask(0), SizeMask(0) {
+	// 土台の要素（５要素以上は空きを含む表）と追加分を集めた要素列
+	std::vector<std::string_view> Items;
+	Items.reserve(Base.Slots.size() + Extra.size());
+	for(const std::string_view Item : Base.Slots) if(!Item.empty()) Items.push_back(Item);
+	// 土台に在る要素は表へ２度入れない
+	for(const std::string_view Item : Extra) if(!Base.HasName(Item)) Items.push_back(Item);
+	Build(Items);
+	// 終了
+	return;
+}
+
+/**
+ * ２つの集合と追加名を合成するコンストラクタ
+ * 計算量：要素数 N，名前の長さの和 L に対し平均 O(N + L)，衝突が続く場合は最悪 O(N² + N L)
+ * @param Base 土台の集合
+ * @param Added 合成する集合
+ * @param Extra 両集合へ加える名前
+ * @throws std::bad_alloc 要素の表を確保出来ない場合
+ * @throws std::length_error 要素の表の上限を超える場合
+ */
+GrammarProfile::Names::NameSet::NameSet(
+	const NameSet &Base,
+	const NameSet &Added,
+	const std::initializer_list<std::string_view> Extra
+) : FirstCharMask(0), SizeMask(0) {
+	std::vector<std::string_view> Items;
+	for(const std::string_view Item : Base.Slots) if(!Item.empty()) Items.push_back(Item);
+	for(const std::string_view Item : Added.Slots) if(!Item.empty() && !Base.HasName(Item)) Items.push_back(Item);
+	for(const std::string_view Item : Extra) if(!Base.HasName(Item) && !Added.HasName(Item)) Items.push_back(Item);
+	Build(Items);
+	// 終了
+	return;
+}
+
+/**
+ * ========== ノード型集合 ==========
+ */
+// アクセス修飾子又はアクセスセクションの公開範囲を持つメンバ
+const GrammarProfile::Names::NameSet GrammarProfile::Names::AccessOrderMember = {
+	"abstract_method_signature",
+	"alias_declaration",
+	"annotation_type_declaration",
+	"class_declaration",
+	"class_specifier",
+	"compact_constructor_declaration",
+	"companion_object",
+	"const_declaration",
+	"constant_declaration",
+	"constructor_declaration",
+	"conversion_operator_declaration",
+	"delegate_declaration",
+	"enum_declaration",
+	"enum_specifier",
+	"event_declaration",
+	"event_field_declaration",
+	"field_declaration",
+	"friend_declaration",
+	"function_declaration",
+	"function_definition",
+	"index_signature",
+	"indexer_declaration",
+	"init_declaration",
+	"interface_declaration",
+	"method_declaration",
+	"method_definition",
+	"method_signature",
+	"object_declaration",
+	"operator_declaration",
+	"property_declaration",
+	"public_field_definition",
+	"record_declaration",
+	"secondary_constructor",
+	"struct_declaration",
+	"struct_specifier",
+	"subscript_declaration",
+	"template_declaration",
+	"type_definition",
+	"typealias_declaration",
+	"union_specifier",
+	"using_declaration"
+};
 
 // 型の本体とは限らない本体
 const GrammarProfile::Names::NameSet GrammarProfile::Names::AmbiguousBodyContainer =
@@ -121,23 +203,33 @@ const GrammarProfile::Names::NameSet GrammarProfile::Names::AngleBracketList = {
 	"type_parameters"
 };
 
-// 関数型・ラムダ・match の腕を成す言語横断の矢印字句
+// 関数型・ラムダ・match の腕を成す言語横断の矢印トークン
 const GrammarProfile::Names::NameSet GrammarProfile::Names::ArrowToken = { "->", "=>" };
 
 // Kotlin と他言語を同じ変更文脈へ揃える代入式
-const GrammarProfile::Names::NameSet GrammarProfile::Names::AssignmentExpression =
-{ "assignment", "assignment_expression", "augmented_assignment_expression" };
+const GrammarProfile::Names::NameSet GrammarProfile::Names::AssignmentExpr =
+{ "assignment", "assignment_expression", "augmented_assignment", "augmented_assignment_expression" };
 
-// await・try・型キャストの式
-const GrammarProfile::Names::NameSet GrammarProfile::Names::AwaitTryCastExpression =
-{ "await_expression", "try_expression", "type_cast_expression" };
+// await・try・unsafe・型キャストの式
+const GrammarProfile::Names::NameSet GrammarProfile::Names::AwaitTryCastExpr =
+{ "await_expression", "try_expression", "type_cast_expression", "unsafe_expression" };
 
 // Java の寸法と C++ のラムダ捕獲で同じ隣接規則を使う `[` 直接連結ノード
 const GrammarProfile::Names::NameSet GrammarProfile::Names::AttachBracket = { "dimensions", "lambda_capture_specifier" };
 
-// `:` 又は `.` を直前トークンに直接連結するノード
-const GrammarProfile::Names::NameSet GrammarProfile::Names::AttachColonOrDot =
-{ "asserts_annotation", "navigation_suffix", "trait_bounds", "type_annotation", "type_predicate_annotation" };
+// `:`・`.` 又は型注釈の後置の指定を直前トークンに直接連結するノード
+const GrammarProfile::Names::NameSet GrammarProfile::Names::AttachColonOrDot = {
+	"adding_type_annotation",
+	"asserts_annotation",
+	"navigation_suffix",
+	"omitting_type_annotation",
+	"opting_type_annotation",
+	"pseudo_class_selector",
+	"pseudo_element_selector",
+	"trait_bounds",
+	"type_annotation",
+	"type_predicate_annotation"
+};
 
 // `(` を直接連結する引数／パラメータリスト
 const GrammarProfile::Names::NameSet GrammarProfile::Names::AttachParen = {
@@ -155,60 +247,79 @@ const GrammarProfile::Names::NameSet GrammarProfile::Names::AttachParen = {
 	"value_arguments"
 };
 
-// 後続要素に付く属性・注釈・デコレータ
+// 後続要素に付く属性・アノテーション・デコレータ
 const GrammarProfile::Names::NameSet GrammarProfile::Names::AttachPrefix =
 { "annotation", "attribute_item", "attribute_list", "decorator", "marker_annotation", "modifiers" };
 
-// auto を型名の代わりに書く外ない C++ の親（ジェネリックラムダの仮引数・範囲 for）
-const GrammarProfile::Names::NameSet GrammarProfile::Names::AutoParameterHost = { "for_range_loop", "parameter_declaration" };
-// 真偽値型の初期値を持ち得る C++ の宣言・欄
-const GrammarProfile::Names::NameSet GrammarProfile::Names::BoolInitContext = { "declaration", "field_declaration" };
+// 言語横断の二項演算又は其の連鎖のノード
+const GrammarProfile::Names::NameSet GrammarProfile::Names::BinaryExpr = {
+	"additive_expression",
+	"binary",
+	"binary_expression",
+	"binary_operator",
+	"bitwise_operation",
+	"boolean_operator",
+	"comparison_expression",
+	"comparison_operator",
+	"conjunction_expression",
+	"disjunction_expression",
+	"elvis_expression",
+	"equality_expression",
+	"infix_expression",
+	"multiplicative_expression",
+	"nil_coalescing_expression",
+	"range_expression"
+};
+
+// 真偽値型の初期値を持ち得る宣言・フィールド・仮引数
+const GrammarProfile::Names::NameSet GrammarProfile::Names::BoolInitCtx =
+{ "declaration", "field_declaration", "optional_parameter_declaration" };
 
 // `{` を型名直後に連結するリテラル
 const GrammarProfile::Names::NameSet GrammarProfile::Names::BraceAttach =
 { "composite_literal", "compound_literal_expression" };
 
-// 閉じ波括弧の後に続き本体の塊を持つ節（else・catch・finally の節）— 塊と節の間の独立したコメントの錨を節の本体の最初の文へ降ろす
+// 閉波括弧の後に続き本体のブロックを持つ節（else, catch, finally の節）— ブロックと節の間の独立したコメントのアンカーを節の本体の最初の文へ降ろす
 const GrammarProfile::Names::NameSet GrammarProfile::Names::BraceClause =
 { "catch_block", "catch_clause", "else", "else_clause", "else_if_clause", "elsif", "finally_clause" };
 
-// 空の本体を語へ密着させる型定義ノード（成員を持つ本体は展開して空白で区切る）
+// 空の本体を語へ密着させる型定義ノード（メンバを持つ本体は展開して空白で区切る）
 // Go の `interface{}` / Go の `struct{}`
 const GrammarProfile::Names::NameSet GrammarProfile::Names::BraceNoSpace = { "interface_type", "struct_type" };
 // `[` 始まりの型ノード（Go / Rust / Swift の配列・スライス型と Swift の辞書型 — `[` 直前の隣接判定）
 const GrammarProfile::Names::NameSet GrammarProfile::Names::BracketType = { "array_type", "dictionary_type", "slice_type" };
 
-// `:` が三項の演算子，鍵値の要素，範囲 for・assert の見出の区切りの何れかである親（其の他の用途の `:` は分割候補にしない）
+// `:` が三項の演算子，キー値の要素，範囲 for・assert の見出の区切の何れかである親（其の他の用途の `:` は分割候補にしない）
 const GrammarProfile::Names::NameSet GrammarProfile::Names::BreakColonHost = {
-	"argument", // C# / PHP f(name: value)
-	"assert_statement", // Java assert x : message
-	"conditional", // Ruby c ? a : b
+	"argument", // C# / PHP f(name: val)
+	"assert_statement", // Java の `assert x : msg`
+	"conditional", // Ruby の `c ? a : b`
 	"conditional_expression",
-	"conditional_type", // TS A extends B ? C : D
+	"conditional_type", // TS の `A extends B ? C : D`
 	"enhanced_for_statement",
-	"field_initializer", // Rust P { x: value }
+	"field_initializer", // Rust P { x: val }
 	"field_pattern", // Rust P { x: name }
 	"for_range_loop",
-	"keyed_element", // Go T{Key: value}
-	"keyword_parameter", // Ruby def f(key: value)
+	"keyed_element", // Go T{Key: val}
+	"keyword_parameter", // Ruby def f(key: val)
 	"keyword_pattern", // Ruby in {key: pattern}
-	"lambda", // Python lambda x: body
+	"lambda", // Python 無名関数 x: body
 	"pair",
 	"pair_pattern",
 	"ternary_expression",
-	"value_argument" // Swift f(label: value)
+	"value_argument" // Swift f(label: val)
 };
 
 // Kotlin のラベル付 `break@` を含む脱出の語
 const GrammarProfile::Names::NameSet GrammarProfile::Names::BreakKeyword = { "break", "break@" };
-// 改行で意味が変わる字句列・隣接連結の保護（任意字句列の Rust の sql!{...}・macro_rules!）
-const GrammarProfile::Names::NameSet GrammarProfile::Names::BreakOpaque = { "chained_string", "rescue_modifier", "token_tree" };
+// 改行で意味が変わる隣接文字列と修飾形式の保護
+const GrammarProfile::Names::NameSet GrammarProfile::Names::BreakOpaque = { "chained_string", "rescue_modifier" };
 
 // 関数・メソッドの呼出（言語横断） — `ControlFlow::IsNoReturnCall`
 const GrammarProfile::Names::NameSet GrammarProfile::Names::CallNode =
 { "call", "call_expression", "function_call_expression", "invocation_expression", "method_invocation" };
 
-// 例外を捕捉する節（言語横断） — `ControlFlow::DoesTryTerminate`
+// 例外を捕捉する節（言語横断） — `ControlFlow::IsTryTerminating`
 const GrammarProfile::Names::NameSet GrammarProfile::Names::CatchClause =
 { "catch_block", "catch_clause", "except_clause", "except_group_clause" };
 
@@ -229,31 +340,31 @@ const GrammarProfile::Names::NameSet GrammarProfile::Names::CCastTypeNameInner =
 { "identifier", "primitive_type", "sized_type_specifier", "type_descriptor", "type_identifier" };
 
 // C / C++ の関数定義の宣言子の前に置く指定・属性 — `ControlFlow::IsNoReturnDeclared`
-const GrammarProfile::Names::NameSet GrammarProfile::Names::CDeclarationSpecifier =
+const GrammarProfile::Names::NameSet GrammarProfile::Names::CDeclSpecifier =
 { "attribute_declaration", "attribute_specifier", "ms_declspec_modifier", "storage_class_specifier", "type_qualifier" };
 
 // C の宣言子を包む宣言子（関数定義の宣言子が関数の宣言子かを見る時に剥がす）
 const GrammarProfile::Names::NameSet GrammarProfile::Names::CDeclaratorWrapper =
 { "attributed_declarator", "parenthesized_declarator", "pointer_declarator" };
 
-// C/C++ の関数宣言子経路及び欄のメソッド判定用宣言子
+// C/C++ の関数宣言子経路及びフィールドのメソッド判定用宣言子
 const GrammarProfile::Names::NameSet GrammarProfile::Names::CFunctionOrFieldDeclarator =
 { "function_declarator", "init_declarator", "pointer_declarator", "reference_declarator" };
 
-// 名前を宣言する C / C++ の宣言と関数定義（宣言子の子を名前迄剥がして，同じファイルで宣言した名前を集める）
-const GrammarProfile::Names::NameSet GrammarProfile::Names::CNameDeclaration =
-{ "declaration", "function_definition", "parameter_declaration" };
+// 名前を宣言する C / C++ の宣言・フィールド・関数定義（宣言子を名前迄剥がして導入名を集める）
+const GrammarProfile::Names::NameSet GrammarProfile::Names::CNameDecl =
+{ "declaration", "field_declaration", "function_definition", "parameter_declaration" };
 
 // if の後続の枝の内で自身の条件を持つ節 (elif_clause / else_if_clause) — 更に後続の枝を要する
 const GrammarProfile::Names::NameSet GrammarProfile::Names::ConditionalBranchClause = { "elif_clause", "else_if_clause" };
 
-// `(` で始まり得る C の宣言子（型との間を空白で区切り，`int(*p)` を関数形式のキャストの字面にしない）
+// `(` で始まり得る C の宣言子（型との間を空白で区切，`int(*p)` を関数形式のキャストのテキストにしない）
 const GrammarProfile::Names::NameSet GrammarProfile::Names::CParenDeclarator =
 { "array_declarator", "function_declarator", "init_declarator", "parenthesized_declarator" };
 
 // 型の別名を宣言する C / C++ の宣言（同じファイルで宣言した型名を集める）
-const GrammarProfile::Names::NameSet GrammarProfile::Names::CTypeAliasDeclaration = { "alias_declaration", "type_definition" };
-// Java の矢印節と C 系のコロン節と Rust の照合の枝を同じ本体境界へ揃える字句
+const GrammarProfile::Names::NameSet GrammarProfile::Names::CTypeAliasDecl = { "alias_declaration", "type_definition" };
+// Java の矢印節と C 系のコロン節と Rust の照合の枝を同じ本体境界へ揃えるトークン
 const GrammarProfile::Names::NameSet GrammarProfile::Names::CaseBodyOpener = { "->", ":", "=>" };
 
 // switch の節（言語横断）
@@ -278,7 +389,7 @@ const GrammarProfile::Names::NameSet GrammarProfile::Names::CaseClause = {
 };
 
 // C 系の括弧キャストと Go の変換呼出を同じ密着判定へ渡すキャスト式
-const GrammarProfile::Names::NameSet GrammarProfile::Names::CastExpr = { "cast_expression", "type_cast_expression" };
+const GrammarProfile::Names::NameSet GrammarProfile::Names::CastLikeExpr = { "cast_expression", "type_cast_expression" };
 
 // クラス本体ノード（アクセス修飾子順序検査対象）
 const GrammarProfile::Names::NameSet GrammarProfile::Names::ClassBody =
@@ -325,21 +436,35 @@ const GrammarProfile::Names::NameSet GrammarProfile::Names::ClassLike = {
 	"union_specifier"
 };
 
-// アクセス指定順を検査する class・struct
-const GrammarProfile::Names::NameSet GrammarProfile::Names::ClassLikeStrict =
-{ "class_declaration", "class_specifier", "struct_specifier" };
+// 公開範囲を持つメンバの本体を所有する型（匿名型・別形式の型も含む）
+const GrammarProfile::Names::NameSet GrammarProfile::Names::ClassLikeStrict = {
+	"abstract_class_declaration",
+	"annotation_type_declaration",
+	"anonymous_class",
+	"class",
+	"class_declaration",
+	"class_specifier",
+	"companion_object",
+	"enum_declaration",
+	"extension_declaration",
+	"interface_declaration",
+	"object_creation_expression",
+	"object_declaration",
+	"object_literal",
+	"record_declaration",
+	"struct_declaration",
+	"struct_specifier",
+	"trait_declaration",
+	"union_specifier"
+};
 
 // 末尾コメントを最後の本体の後へ置く節
 const GrammarProfile::Names::NameSet GrammarProfile::Names::ClauseBody = { "colon_block", "else_clause", "else_if_clause" };
 
-// コメントを塊末尾へ留める閉じ字句（LayoutCloserToken と CloserWord の和に，前処理の条件を閉じる `#endif` を加えた物，何方かへの追加は此処にも反映）
+// コメントをブロック末尾へ留める閉トークン（LayoutCloserToken と CloserWord の和に，前処理の条件を閉じる `#endif` を加えた物，何方かへの追加は此処にも反映）
 // `CloserWord` は此の定義より後に在り，静的な初期化の順で空に為る為に計算で作れない
 const GrammarProfile::Names::NameSet GrammarProfile::Names::CloserToken =
 { "#endif", ")", "/>", "</", ">", "]", "end", "enddeclare", "endfor", "endforeach", "endif", "endswitch", "endwhile", "}" };
-
-// CmpBoundary Lint 対象（全言語横断の比較式／中置式ノード集合）
-const GrammarProfile::Names::NameSet GrammarProfile::Names::CmpBoundaryNode =
-{ "binary", "binary_expression", "comparison_expression", "comparison_operator", "infix_expression" };
 
 // `:` 前スペース不要な制御構文（case／ラベル／ラムダ等）
 const GrammarProfile::Names::NameSet GrammarProfile::Names::ColonControl = {
@@ -390,12 +515,8 @@ const GrammarProfile::Names::NameSet GrammarProfile::Names::Comment = {
 	"shebang"
 };
 
-// コメントを分離せず原文の儘残す節点（解析器が中身を字句の並びとしか読まず，錨と為る文が無い）
-const GrammarProfile::Names::NameSet GrammarProfile::Names::CommentLiteralHost = { "macro_definition" };
-
 // 内部スペース・改行を入れない密集型ノード（属性／単項演算子等）
 const GrammarProfile::Names::NameSet GrammarProfile::Names::Compact = {
-	"default_parameter",
 	"jsx_attribute",
 	"keyword_argument",
 	"pointer_expression",
@@ -405,25 +526,13 @@ const GrammarProfile::Names::NameSet GrammarProfile::Names::Compact = {
 	"unary_expression"
 };
 
-// 密集した節点の内で，内部に折返の候補を持ち得る節点
+// 密集したノードの内で，内部に折返の候補を持ち得るノード
 const GrammarProfile::Names::NameSet GrammarProfile::Names::CompactRecurse = { "jsx_attribute", "property_signature" };
-
-// `LintAnalyzer::CheckZeroComparisonCondition` 用の条件親（制御構文に加え `{x && <C/>}` の JSX 式コンテナも真偽文脈）
-const GrammarProfile::Names::NameSet GrammarProfile::Names::CondContextParent = {
-	"conditional_expression",
-	"do_statement",
-	"for_statement",
-	"if_statement",
-	"jsx_expression",
-	"ternary_expression",
-	"while_statement"
-};
-
 // 条件式を包む括弧ノード（Lint の条件文脈剥がし）
 const GrammarProfile::Names::NameSet GrammarProfile::Names::CondParenWrap = { "condition_clause", "parenthesized_expression" };
 
-// 条件を場 `condition` に持つ節点（条件以外の子は条件の文脈でない）
-const GrammarProfile::Names::NameSet GrammarProfile::Names::ConditionFieldHost =
+// 条件を場 `cond` に持つノード（条件以外の子は条件の文脈でない）
+const GrammarProfile::Names::NameSet GrammarProfile::Names::CondFieldHost =
 { "conditional_expression", "for_statement", "ternary_expression" };
 
 // else の位置で自身が条件と本体を持つ分岐（else 節に包まれない else if の if と，PHP の elseif 節）
@@ -447,11 +556,13 @@ const GrammarProfile::Names::NameSet GrammarProfile::Names::ConstructionReceiver
 	"subscript_expression"
 };
 
-// 継続の語（Kotlin はラベル付を `continue@` の字句で持つ）
-// Swift/Kotlin continue // Kotlin continue@outer
+// 継続の語（Kotlin はラベル付を `continue@` のトークンで持つ）
+// Swift/Kotlin continue
+// Kotlin continue@outer
 const GrammarProfile::Names::NameSet GrammarProfile::Names::ContinueKeyword = { "continue", "continue@" };
 
-// 後に続く字句を要し，後の改行で文を終えない JS/TS・Go の語（改行を読む囲みコメントを後に置ける，自動の `;` を補う語・直後の改行で読みが変わる語（`return` / `let` / TS の `interface` / `type` 等）は含めない）
+// JS/TS, Go の継続語（後続トークンを要し，ブロックコメントの後の改行でも文を終えない語）
+// 自動の `;` を補う語や，直後の改行で読みが変わる `return`・`let`・TS の `interface`・`type` 等は除く
 const GrammarProfile::Names::NameSet GrammarProfile::Names::ContinuingKeyword = {
 	"as",
 	"case",
@@ -553,29 +664,16 @@ const GrammarProfile::Names::NameSet GrammarProfile::Names::Control = {
 const GrammarProfile::Names::NameSet GrammarProfile::Names::ControlKeyword =
 { "catch", "elif", "elsif", "except", "for", "foreach", "if", "range", "switch", "when", "while" };
 
-// C++ の組込型
-const GrammarProfile::Names::NameSet GrammarProfile::Names::CppBuiltinType = { "primitive_type", "sized_type_specifier" };
-
-// C / C++ の `constexpr` 候補判定で初期化子に許すリテラル (`LintAnalyzer::CheckConstexprCandidate`)
-const GrammarProfile::Names::NameSet GrammarProfile::Names::CppConstLiteral =
-{ "char_literal", "false", "number_literal", "string_literal", "true" };
-
 // C/C++ 宣言の型部位（後置 const 検出時の型認識対象）
 const GrammarProfile::Names::NameSet GrammarProfile::Names::CppDeclTypeSpecifier =
 { "primitive_type", "qualified_identifier", "sized_type_specifier", "type_identifier" };
 
-// 構文木で異なる節点型を持つ `NULL` と `nullptr` の候補
-const GrammarProfile::Names::NameSet GrammarProfile::Names::CppNullCandidate = { "identifier", "null" };
 // C++ の型引数の遡りを止める範囲（文の本体とファイル）
 const GrammarProfile::Names::NameSet GrammarProfile::Names::CppScopeBoundary = { "compound_statement", "translation_unit" };
 
 // 型名を導入する C++ の指定子（同じファイルで宣言した型名を集める）
 const GrammarProfile::Names::NameSet GrammarProfile::Names::CppTypeSpecifier =
 { "class_specifier", "enum_specifier", "struct_specifier", "union_specifier" };
-
-// 型名を書けない C++ の初期化子（auto の検査の例外）
-const GrammarProfile::Names::NameSet GrammarProfile::Names::CppUnnamableInitializer =
-{ "lambda_expression", "structured_binding_declarator" };
 
 // キャストにも式にも読める C# の単純名と限定名
 const GrammarProfile::Names::NameSet GrammarProfile::Names::CsNameType = { "identifier", "qualified_name" };
@@ -584,20 +682,27 @@ const GrammarProfile::Names::NameSet GrammarProfile::Names::CsNameType = { "iden
 const GrammarProfile::Names::NameSet GrammarProfile::Names::CsPostfixChain =
 { "element_access_expression", "invocation_expression", "member_access_expression", "postfix_unary_expression" };
 
-// 名前空間の区切り `|` を持つ CSS の選択子の節点（`|` は選択子の字句の一部で空白を置けない）
+// 内側の改行が値を変えない括弧の並び
+const GrammarProfile::Names::NameSet GrammarProfile::Names::CssDelimitedList =
+{ "arguments", "grid_value", "list_value", "parameters", "parenthesized_value" };
+
+// 名前空間の区切 `|` を持つ CSS のセレクタのノード（`|` はセレクタのトークンの一部で空白を置けない）
 const GrammarProfile::Names::NameSet GrammarProfile::Names::CssNamespacePrefix = { "attribute_name", "namespace_selector" };
 // 整数と小数を直後の単位へ密着させる CSS/SCSS の数値値ノード
-const GrammarProfile::Names::NameSet GrammarProfile::Names::CssNumericValue = { "float_value", "integer_value" };
+const GrammarProfile::Names::NameSet GrammarProfile::Names::CssNumericVal = { "float_value", "integer_value" };
 // CSS/SCSS の分割不可セレクタ系（内部空白挿入禁止）
 const GrammarProfile::Names::NameSet GrammarProfile::Names::CssSelectorAtomic = { "class_name", "id_name", "placeholder" };
 
-// 選択子を取る節点（中の `#name` は色でなく ID 選択子で，大小を変えると別の要素を指す）
+// セレクタを取るノード（中の `#name` は色でなく ID セレクタで，大小を変えると別の要素を指す）
 const GrammarProfile::Names::NameSet GrammarProfile::Names::CssSelectorHost =
 { "extend_statement", "pseudo_class_selector", "pseudo_element_selector" };
 
-// CSS の選択子の名前（`&` や `.` へ密着させる）
-// CSS .a // CSS #a
+// CSS のセレクタの名前（`&` や `.` へ密着させる）
+// CSS .a
+// CSS #a
 const GrammarProfile::Names::NameSet GrammarProfile::Names::CssSelectorName = { "class_name", "id_selector" };
+// 前の値から空白で区切る CSS・SCSS の値の要素
+const GrammarProfile::Names::NameSet GrammarProfile::Names::CssSpacedValue = { "grid_value" };
 // 初期化子を伴う宣言子（初期化子の有無が混在する宣言の判別に用いる）
 const GrammarProfile::Names::NameSet GrammarProfile::Names::DeclInitDeclarator = { "init_declarator", "variable_declarator" };
 
@@ -651,36 +756,43 @@ const GrammarProfile::Names::NameSet GrammarProfile::Names::DeclTypeChild = {
 	"void_type"
 };
 
-// 宣言の中で宣言子を始める節点（Swift は名前の型式，其の他は宣言子）— 其の前の子を宣言子で共有する
+// 宣言の中で宣言子を始めるノード（Swift は名前の型式，其の他は宣言子）— 其の前の子を宣言子で共有する
 const GrammarProfile::Names::NameSet GrammarProfile::Names::DeclaratorHead = { "pattern", "variable_declarator" };
 
 // 括弧の有無で decltype の推論する型が変わる式（名前・メンバアクセスは括弧で包むと左辺値の参照に為る）
-const GrammarProfile::Names::NameSet GrammarProfile::Names::DecltypeIdExpression =
+const GrammarProfile::Names::NameSet GrammarProfile::Names::DecltypeIdExpr =
 { "field_expression", "identifier", "qualified_identifier" };
 
-// 切替の既定の枝の節点（語で既定を示す節は語で判定する）
+// 切替の既定の枝のノード（語で既定を示す節は語で判定する）
 const GrammarProfile::Names::NameSet GrammarProfile::Names::DefaultCase =
 { "default_case", "default_statement", "match_default_expression", "switch_default" };
 
-// 分割代入パターン（単一名を持たない為，文書化引数名抽出／let 変異解析で除外）
+// 分割代入パターン（単一名を持たない為，ドキュメント化引数名抽出／let 変異解析で除外）
 const GrammarProfile::Names::NameSet GrammarProfile::Names::DestructurePattern = { "array_pattern", "object_pattern" };
 
-// 文書を付ける名前付の関数・構築子の定義（関数定義と Swift の構築子）
-const GrammarProfile::Names::NameSet GrammarProfile::Names::DocumentedDefinition = {
+// ドキュメントを付ける名前付の関数・コンストラクタ・デストラクタ・演算子の定義
+const GrammarProfile::Names::NameSet GrammarProfile::Names::DocumentedDef = {
+	"compact_constructor_declaration",
 	"constructor_declaration",
+	"conversion_operator_declaration",
+	"deinit_declaration",
+	"destructor_declaration",
 	"function_declaration",
 	"function_definition",
 	"function_item",
+	"generator_function_declaration",
 	"init_declaration",
+	"local_function_statement",
 	"method",
 	"method_declaration",
 	"method_definition",
+	"operator_declaration",
 	"secondary_constructor",
 	"singleton_method"
 };
 
-// 既存の文書を付けれる型・成員・最上位の宣言（取込・前処理の指令・包装を含み，呼出・代入・名前だけの節点は配置の段が宣言として働く物に絞る）
-const GrammarProfile::Names::NameSet GrammarProfile::Names::DocumentableDeclaration = {
+// 既存のドキュメントを付けれる型・メンバ・最上位の宣言（インポート・前処理のディレクティブ・ラッパーを含み，呼出・代入・名前だけのノードは配置の段が宣言として働く物に絞る）
+const GrammarProfile::Names::NameSet GrammarProfile::Names::DocumentableDecl = {
 	"abstract_class_declaration",
 	"abstract_method_signature",
 	"alias",
@@ -748,6 +860,7 @@ const GrammarProfile::Names::NameSet GrammarProfile::Names::DocumentableDeclarat
 	"internal_module",
 	"lexical_declaration",
 	"linkage_specification",
+	"local_function_statement",
 	"macro_definition",
 	"method",
 	"method_declaration",
@@ -808,13 +921,14 @@ const GrammarProfile::Names::NameSet GrammarProfile::Names::DocumentableDeclarat
 	"variable_declaration"
 };
 
-// 文・成員を並べ，其の直前へ文書を置ける親（値の位置へ置いた定義を除く為の集合，構造を確かめれない `ERROR` を含む）
-const GrammarProfile::Names::NameSet GrammarProfile::Names::DocHostSequence = {
+// 文・メンバを並べ，其の直前へドキュメントを置ける親（値の位置へ置いた定義を除く為の集合，構造を確かめれない `ERROR` を含む）
+const GrammarProfile::Names::NameSet GrammarProfile::Names::DocHostSeq = {
 	"ERROR",
 	"annotation_type_body",
 	"block",
 	"body_statement",
 	"class_body",
+	"compilation_unit",
 	"compound_statement",
 	"constructor_body",
 	"control_structure_body",
@@ -848,6 +962,7 @@ const GrammarProfile::Names::NameSet GrammarProfile::Names::DocHostSequence = {
 	"statements",
 	"switch_case",
 	"switch_default",
+	"switch_section",
 	"then",
 	"translation_unit",
 	"unless_modifier",
@@ -856,12 +971,20 @@ const GrammarProfile::Names::NameSet GrammarProfile::Names::DocHostSequence = {
 	"while_modifier"
 };
 
-// 文書化コメントのアンカーを１階層包む包装ノード（定義本体でなく包装側へ先行コメントが束縛される）
-const GrammarProfile::Names::NameSet GrammarProfile::Names::DocWrapper =
-{ "ambient_declaration", "decorated_definition", "export_statement", "template_declaration" };
+// ドキュメントコメントのアンカーを１階層包むラッパーノード（定義本体でなくラッパー側へ先行コメントが束縛される）
+const GrammarProfile::Names::NameSet GrammarProfile::Names::DocWrapper = {
+	"ambient_declaration",
+	"decorated_definition",
+	"export_statement",
+	"friend_declaration",
+	"global_statement",
+	"linkage_specification",
+	"template_declaration"
+};
 
 // 既定の後続枝（else 系）
-// Ruby else // C/C++/Rust/Python/JS/TS else { }
+// Ruby else
+// C/C++/Rust/Python/JS/TS else { }
 const GrammarProfile::Names::NameSet GrammarProfile::Names::ElseAny = { "else", "else_clause" };
 
 // else 系の節
@@ -892,7 +1015,7 @@ const GrammarProfile::Names::NameSet GrammarProfile::Names::ExpandContainer = {
 const GrammarProfile::Names::NameSet GrammarProfile::Names::ExprStmtLiteral =
 { "char_literal", "false", "float_literal", "integer_literal", "number", "string_literal", "true" };
 
-// 被呼出側の欄の参照（括弧で包むと欄の持つ関数の呼出，外すとメソッドの呼出に為る言語の括弧の保持）
+// 被呼出側のフィールドの参照（括弧で包むとフィールドの持つ関数の呼出，外すとメソッドの呼出に為る言語の括弧の保持）
 const GrammarProfile::Names::NameSet GrammarProfile::Names::FieldCallee =
 { "field_expression", "member_access_expression", "navigation_expression" };
 
@@ -907,7 +1030,7 @@ const GrammarProfile::Names::NameSet GrammarProfile::Names::FlowExit =
 const GrammarProfile::Names::NameSet GrammarProfile::Names::FlowReturn =
 { "co_return_statement", "return", "return_expression", "return_statement" };
 
-// 反復の対象を区切 (`:` / `in` / `of`) の後に置く見出の文（見出の括弧は文の字句で，対象を包む括弧は冗長）
+// 反復の対象を区切 (`:` / `in` / `of`) の後に置く見出の文（見出の括弧は文のトークンで，対象を包む括弧は冗長）
 const GrammarProfile::Names::NameSet GrammarProfile::Names::ForEachHeader =
 { "enhanced_for_statement", "for_in_statement", "for_range_loop", "foreach_statement" };
 
@@ -915,10 +1038,11 @@ const GrammarProfile::Names::NameSet GrammarProfile::Names::ForEachHeader =
 const GrammarProfile::Names::NameSet GrammarProfile::Names::FunctionBodyContainer =
 { "block", "compound_statement", "constructor_body", "function_body", "statement_block" };
 
-// 定義の本体（`FunctionBodyContainer` ∪ Ruby の `body_statement` の統合済集合）— 見出の範囲は此の手前迄
-const GrammarProfile::Names::NameSet GrammarProfile::Names::DefinitionBody = { FunctionBodyContainer, { "body_statement" } };
+// 定義の本体（文の並び・式の本体・Ruby の本文）— 見出の範囲は此の手前迄
+const GrammarProfile::Names::NameSet GrammarProfile::Names::DefBody =
+{ FunctionBodyContainer, { "arrow_expression_clause", "body_statement" } };
 
-// 関数の範囲の境界（定義・関数式・ラムダ・局所関数，ネストの関数の中の `return` 等は外側の関数に属さない）
+// 関数の範囲の境界（定義・関数式・ラムダ・ローカル関数，ネストの関数の中の `return` 等は外側の関数に属さない）
 const GrammarProfile::Names::NameSet GrammarProfile::Names::FunctionLikeAny = {
 	"anonymous_function",
 	"anonymous_method_expression",
@@ -944,7 +1068,7 @@ const GrammarProfile::Names::NameSet GrammarProfile::Names::FunctionLikeAny = {
 };
 
 // 関数定義／メソッド定義ノード型（言語横断，コンストラクタ含む）
-const GrammarProfile::Names::NameSet GrammarProfile::Names::FunctionLikeDefinition = {
+const GrammarProfile::Names::NameSet GrammarProfile::Names::FunctionLikeDef = {
 	"constructor_declaration",
 	"function_declaration",
 	"function_definition",
@@ -960,11 +1084,11 @@ const GrammarProfile::Names::NameSet GrammarProfile::Names::FunctionLikeDefiniti
 const GrammarProfile::Names::NameSet GrammarProfile::Names::FunctionNameIdentifier =
 { "constant", "identifier", "name", "simple_identifier" };
 
-// 本体を生成器・コルーチンにする式・文 — 通常関数の末尾の返戻の対象外
+// 本体をジェネレータ・コルーチンにする式・文 — 通常関数の末尾の返戻の対象外
 const GrammarProfile::Names::NameSet GrammarProfile::Names::GeneratorMarker =
 { "co_await_expression", "co_return_statement", "co_yield_statement", "yield", "yield_expression", "yield_statement" };
 
-// JS/TS `*` 前置のジェネレータ印を持つ関数親
+// JS/TS `*` 前置のジェネレータマーカーを持つ関数親
 const GrammarProfile::Names::NameSet GrammarProfile::Names::GeneratorStarHost =
 { "generator_function", "generator_function_declaration", "method_definition" };
 
@@ -980,18 +1104,18 @@ const GrammarProfile::Names::NameSet GrammarProfile::Names::GoConversionType = {
 	"type_identifier"
 };
 
-// godoc が直前のコメントを文書とする Go の最上位の宣言（パッケージの文書を受けるパッケージ節を含む）
-const GrammarProfile::Names::NameSet GrammarProfile::Names::GoDocumentedDeclaration =
+// godoc が直前のコメントをドキュメントとする Go の最上位の宣言（パッケージのドキュメントを受けるパッケージ節を含む）
+const GrammarProfile::Names::NameSet GrammarProfile::Names::GoDocumentedDecl =
 { "const_declaration", "function_declaration", "method_declaration", "package_clause", "type_declaration", "var_declaration" };
 
-// 関数の指示子（`//go:noinline` 等）と cgo の `//export` を受ける Go の関数宣言
+// 関数のディレクティブ（`//go:noinline` 等）と cgo の `//export` を受ける Go の関数宣言
 const GrammarProfile::Names::NameSet GrammarProfile::Names::GoFunctionDecl = { "function_declaration", "method_declaration" };
 
 // Canonicalizer で `(` 後・`)` 前を改行する Go の一括宣言
 const GrammarProfile::Names::NameSet GrammarProfile::Names::GoGroupedDecl =
 { "const_declaration", "import_spec_list", "type_declaration", "var_spec_list" };
 
-// Go の構造体・インタフェースの要素の並び（改行が区切りを兼ねる）
+// Go の構造体・インタフェースの要素の並び（改行が区切を兼ねる）
 const GrammarProfile::Names::NameSet GrammarProfile::Names::GoMemberList = { "field_declaration_list", "interface_type" };
 
 // Go の多行展開時に末尾 `,` を補うコンテナ（gofmt 同様，自動セミコロン挿入に依る構文破壊を防止）
@@ -1019,8 +1143,8 @@ const GrammarProfile::Names::NameSet GrammarProfile::Names::GoType = {
 const GrammarProfile::Names::NameSet GrammarProfile::Names::GoTypeName =
 { "generic_type", "qualified_type", "type_identifier" };
 
-// 右端を貪欲に伸ばす又は呼び出されて初めて括弧が要る式（後に字句が続かない値の位置では括弧が冗長）
-const GrammarProfile::Names::NameSet GrammarProfile::Names::GreedyTailExpression = {
+// 右端を貪欲に伸ばす又は呼び出されて初めて括弧が要る式（後にトークンが続かない値の位置では括弧が冗長）
+const GrammarProfile::Names::NameSet GrammarProfile::Names::GreedyTailExpr = {
 	"arrow_function",
 	"if_expression",
 	"lambda",
@@ -1035,11 +1159,11 @@ const GrammarProfile::Names::NameSet GrammarProfile::Names::GreedyTailExpression
 const GrammarProfile::Names::NameSet GrammarProfile::Names::GroupingParen =
 { "parenthesized_expression", "parenthesized_statements", "tuple_expression" };
 
-// 型を包む括弧の節点（TS / Kotlin / Go の parenthesized_type，Swift / Rust は要素１つの tuple_type が括弧に当たる）
+// 型を包む括弧のノード（TS / Kotlin / Go の parenthesized_type，Swift / Rust は要素１つの tuple_type が括弧に当たる）
 const GrammarProfile::Names::NameSet GrammarProfile::Names::GroupingTypeParen = { "parenthesized_type", "tuple_type" };
 // Ruby `**hash` 系ノード（`** hash` だと冪乗演算子と解釈され構文崩壊する為，識別子との密着が必須）
 const GrammarProfile::Names::NameSet GrammarProfile::Names::HashSplat = { "hash_splat_argument", "hash_splat_parameter" };
-// 通常要素と埋込 script・style を同じ開閉要素として包む
+// 通常要素と埋込 `script`･`style` を同じ開閉要素として包む
 const GrammarProfile::Names::NameSet GrammarProfile::Names::HtmlElementWrap = { "element", "script_element", "style_element" };
 
 // tree-sitter-html が１バイトの種別で保持する要素名
@@ -1174,30 +1298,21 @@ const GrammarProfile::Names::NameSet GrammarProfile::Names::HtmlKnownTag = {
 // HTML の埋込 raw_text を持つ要素（Formatter の部分解析対象）
 const GrammarProfile::Names::NameSet GrammarProfile::Names::HtmlRawTextElement = { "script_element", "style_element" };
 
-// 構文解析器が内容を生の本文として読む HTML の要素の小文字のタグ名（内容の中のタグを数えない）
+// パーサーが内容を生の本文として読む HTML の要素の小文字のタグ名（内容の中のタグを数えない）
 // HTML タグ系ノード
 const GrammarProfile::Names::NameSet GrammarProfile::Names::HtmlTag =
 { "end_tag", "jsx_closing_element", "jsx_opening_element", "jsx_self_closing_element", "self_closing_tag", "start_tag" };
 
-// 葉識別子相当（言語横断で名前参照ノード判定）`LintAnalyzer::LooksLikeStringVariable` 等で識別子名比較対象
-// C/C++/Java/JS/TS 等 // Kotlin
+// 葉識別子相当（言語横断で名前参照ノード判定）名前の比較対象
+// C/C++/Java/JS/TS 等
+// Kotlin
 const GrammarProfile::Names::NameSet GrammarProfile::Names::IdentifierLeafLike = { "identifier", "simple_identifier" };
 // if 系のノード
 const GrammarProfile::Names::NameSet GrammarProfile::Names::IfNode = { "if_expression", "if_statement" };
 
-// インポート系 (import / using / use)（preproc_include は別構造種別の為，含めない）
-const GrammarProfile::Names::NameSet GrammarProfile::Names::ImportLike = {
-	"future_import_statement",
-	"import_declaration",
-	"import_from_statement",
-	"import_statement",
-	"use_declaration",
-	"use_statement",
-	"using_directive"
-};
-
 // インデントを付与するコンテナノード
 const GrammarProfile::Names::NameSet GrammarProfile::Names::IndentContainer = {
+	"accessor_list",
 	"annotation_type_body",
 	"block",
 	"block_body",
@@ -1243,7 +1358,7 @@ const GrammarProfile::Names::NameSet GrammarProfile::Names::IndentContainer = {
 };
 
 // 二項演算子・代入・アロー関数等，両側スペースを入れる
-const GrammarProfile::Names::NameSet GrammarProfile::Names::InfixOp = {
+const GrammarProfile::Names::NameSet GrammarProfile::Names::InfixOperator = {
 	"additive_expression",
 	"alias_declaration",
 	"alternative_pattern",
@@ -1309,14 +1424,22 @@ const GrammarProfile::Names::NameSet GrammarProfile::Names::InfixOp = {
 	"variadic_parameter_declaration"
 };
 
-// 初期化の文を持つ見出（子の文の終わりの `;` を見出の区切りと揃えて割る）
+// 初期化の文を持つ見出（子の文の終わりの `;` を見出の区切と揃えて割る）
 const GrammarProfile::Names::NameSet GrammarProfile::Names::InitHeader = { "condition_clause", "for_statement" };
 
-// 整数リテラル葉（`LintAnalyzer::CheckCmpBoundary` の境界値判定 — 浮動小数を含む `NumberLiteral` より狭い完全一致集合）
-const GrammarProfile::Names::NameSet GrammarProfile::Names::IntLiteralLike =
-{ "decimal_integer_literal", "int_literal", "integer", "integer_literal", "number", "number_literal" };
+// 整数リテラルの候補（数値の共通分類で全桁と型接尾辞を照合する）
+const GrammarProfile::Names::NameSet GrammarProfile::Names::IntLiteralLike = {
+	"decimal_integer_literal",
+	"int_literal",
+	"integer",
+	"integer_literal",
+	"long_literal",
+	"number",
+	"number_literal",
+	"unsigned_literal"
+};
 
-// 反復対象を導く `in`・`as` 等を演算子から除く見出
+// 反復対象を導く `in`, `as` 等を演算子から除く見出
 const GrammarProfile::Names::NameSet GrammarProfile::Names::IterationHeader = {
 	"for_expression",
 	"for_in_clause",
@@ -1328,25 +1451,30 @@ const GrammarProfile::Names::NameSet GrammarProfile::Names::IterationHeader = {
 	"join_clause"
 };
 
-// 空の実引数を省ける Java の節点（注釈は印の注釈，列挙の定数は引数の無い構築子の呼出と同じ）
-// Java @A() // Java X()
-const GrammarProfile::Names::NameSet GrammarProfile::Names::JavaEmptyArgumentHost = { "annotation", "enum_constant" };
+// 空の実引数を省ける Java のノード（アノテーションはマーカーのアノテーション，列挙の定数は引数の無いコンストラクタの呼出と同じ）
+// Java @A()
+// Java X()
+const GrammarProfile::Names::NameSet GrammarProfile::Names::JavaEmptyArgHost = { "annotation", "enum_constant" };
 
-// Java の字句化前 Unicode エスケープを中身として包む字句（`ParseAdapter::ExpandJavaUnicodeEscapes` の展開要否判定）
+// Java のトークン化前 Unicode エスケープを中身として包むトークン（`ParseAdapter::CanExpandJavaUnicodeEscapes` の展開要否判定）
 const GrammarProfile::Names::NameSet GrammarProfile::Names::JavaEscapeHost =
-// Java /* */ // Java 'a' // Java // // Java "s"
+// Java /* */
+// Java 'a'
+// Java
+// // Java "s"
 { "block_comment", "character_literal", "line_comment", "string_literal" };
 
 // 枝のラベルに置くと Java の切替へ網羅を要求する照合と null（処理系が網羅を検査し，全ての枝を抜ける切替の後は到達しない）
-// Java case null // Java case Circle c
+// Java case null
+// Java case Circle c
 const GrammarProfile::Names::NameSet GrammarProfile::Names::JavaExhaustiveCaseLabel = { "null_literal", "pattern" };
 
-// 仮引数のスコープを開く Java の節点
-const GrammarProfile::Names::NameSet GrammarProfile::Names::JavaParameterScope =
+// 仮引数のスコープを開く Java のノード
+const GrammarProfile::Names::NameSet GrammarProfile::Names::JavaParamScope =
 { "compact_constructor_declaration", "constructor_declaration", "lambda_expression", "method_declaration" };
 
 // 文の位置に置いた Java の switch の親（tree-sitter-java は switch の文と式を同じ switch_expression で表す）
-const GrammarProfile::Names::NameSet GrammarProfile::Names::JavaStatementHost = {
+const GrammarProfile::Names::NameSet GrammarProfile::Names::JavaStmtHost = {
 	"block",
 	"constructor_body",
 	"do_statement",
@@ -1379,7 +1507,7 @@ const GrammarProfile::Names::NameSet GrammarProfile::Names::JsInRestoring = {
 	"template_substitution"
 };
 
-// `let` の後の改行を文の終わりと読んだ解析器が分けた次の文の最初の名前（束縛の名前で，TS の型注釈の付く名前はラベルと読む）
+// `let` の後の改行を文の終わりと読んだパーサーが分けた次の文の最初の名前（束縛の名前で，TS の型注釈の付く名前はラベルと読む）
 const GrammarProfile::Names::NameSet GrammarProfile::Names::JsLetBindingHead = { "identifier", "statement_identifier" };
 
 // JS/TS のメンバ・添字の参照（代入しても受取側の変数は再束縛されない）
@@ -1388,7 +1516,7 @@ const GrammarProfile::Names::NameSet GrammarProfile::Names::JsMemberHost =
 
 // JS/TS のメンバ・添字の参照 (member_expression / subscript_expression) — 代入で変数を再束縛しない
 const GrammarProfile::Names::NameSet GrammarProfile::Names::JsMemberTarget = { "member_expression", "subscript_expression" };
-// JS/TS のモジュールの印の文（持たないファイルは古典スクリプトで，最上位の宣言を他のスクリプトと共有する）
+// JS/TS のモジュールのマーカーの文（持たないファイルは古典スクリプトで，最上位の宣言を他のスクリプトと共有する）
 const GrammarProfile::Names::NameSet GrammarProfile::Names::JsModuleStatement = { "export_statement", "import_statement" };
 
 // 後に改行を挟めない JS/TS の語（改行を挟むと自動の `;` を補うか別の意味に読む，其の他の語の後の改行は読みを変えない）
@@ -1398,11 +1526,11 @@ const GrammarProfile::Names::NameSet GrammarProfile::Names::JsRestrictedKeyword 
 // JS/TS の statement_block + Java/Go/Rust 等の block（単独コメント `{ /* */ }` block 親判定）
 const GrammarProfile::Names::NameSet GrammarProfile::Names::JsStatementBlockOrBlock = { "block", "statement_block" };
 
-// 文・成員を並べる JS/TS の節点（JSX の式の中から退避するコメントを其の子の文の前へ置き，改行が文・成員を区切り得る為に直下の改行を含むコメントの跡に改行を残す）
+// 文・メンバを並べる JS/TS のノード（JSX の式の中から退避するコメントを其の子の文の前へ置き，改行が文・メンバを区切得る為に直下の改行を含むコメントの跡に改行を残す）
 const GrammarProfile::Names::NameSet GrammarProfile::Names::JsStatementSequence =
 { "class_body", "interface_body", "object_type", "program", "statement_block", "switch_case", "switch_default" };
 
-// JSX の内容境界を通常の要素とは別集合で判定する
+// JSX の内容境界の通常の要素とは別集合で判定
 const GrammarProfile::Names::NameSet GrammarProfile::Names::JsxContainer = { "jsx_element" };
 
 // JSX 要素
@@ -1414,32 +1542,36 @@ const GrammarProfile::Names::NameSet GrammarProfile::Names::JsxHtmlTagOpenClose 
 { "end_tag", "jsx_closing_element", "jsx_opening_element", "start_tag" };
 
 // JSX タグ
-// JS/TS <C> // JS/TS <C/>
+// JS/TS <C>
+// JS/TS <C/>
 const GrammarProfile::Names::NameSet GrammarProfile::Names::JsxTag = { "jsx_opening_element", "jsx_self_closing_element" };
 // JSX の本文（文字参照と本文は１つの子文字列として連なる）
-// JSX &amp; // JSX text
+// JSX &amp;
+// JSX text
 const GrammarProfile::Names::NameSet GrammarProfile::Names::JsxTextLike = { "html_character_reference", "jsx_text" };
 // 語で始まる脱出の文（最初の子の語で break / continue / return / throw を見分ける）
 const GrammarProfile::Names::NameSet GrammarProfile::Names::KeywordJump = { "control_transfer_statement", "jump_expression" };
 
-// 語や記号で前置する単項の式（表の演算子を持たないか，別の演算子と同じ字面を持つ）
+// 語や記号で前置する単項の式（表の演算子を持たないか，別の演算子と同じテキストを持つ）
 const GrammarProfile::Names::NameSet GrammarProfile::Names::KeywordUnary =
 { "cast_expression", "co_await_expression", "delete_expression", "error_suppression_expression" };
 
-// Kotlin のアクセサ（直前のプロパティの一部で，解析器は型の本体の成員として並べる）
-// Kotlin val a get() = 1 // Kotlin var b = 0 private set
+// Kotlin のアクセサ（直前のプロパティの一部で，パーサーは型の本体のメンバとして並べる）
+// Kotlin val a get() = 1
+// Kotlin var b = 0 private set
 const GrammarProfile::Names::NameSet GrammarProfile::Names::KotlinAccessor = { "getter", "setter" };
 
-// 代入先を包む Kotlin の節点（中の名前が代入先）
+// 代入先を包む Kotlin のノード（中の名前が代入先）
 const GrammarProfile::Names::NameSet GrammarProfile::Names::KotlinAssignableWrapper =
-// Kotlin x = 1 の x // Kotlin (x) = 1
+// Kotlin x = 1 の x
+// Kotlin (x) = 1
 { "directly_assignable_expression", "parenthesized_expression" };
 
-// 本体の波括弧を包みの節点に入れず直接の子に持つ Kotlin の構文（本体の文だけを行毎に置き，見出と後続の節は同じ行に保つ）
+// 本体の波括弧を包みのノードに入れず直接の子に持つ Kotlin の構文（本体の文だけを行毎に置き，見出と後続の節は同じ行に保つ）
 const GrammarProfile::Names::NameSet GrammarProfile::Names::KotlinBraceBodyHost =
 { "anonymous_initializer", "secondary_constructor", "try_expression" };
 
-// Kotlin の型の本体の成員（最後の成員の後に同じ行で `}` が続くと，解析器が成員を `ERROR` に包む）
+// Kotlin の型の本体のメンバ（最後のメンバの後に同じ行で `}` が続くと，パーサーがメンバを `ERROR` に包む）
 const GrammarProfile::Names::NameSet GrammarProfile::Names::KotlinClassMember = {
 	"anonymous_initializer",
 	"class_declaration",
@@ -1454,22 +1586,22 @@ const GrammarProfile::Names::NameSet GrammarProfile::Names::KotlinClassMember = 
 	"type_alias"
 };
 
-// Kotlin の関数の見出の字句（後に続く型仮引数の `<` との間に空白を置く）
-// Kotlin fun <T> f() // Kotlin inline <T>
+// Kotlin の関数の見出のトークン（後に続く型仮引数の `<` との間に空白を置く）
+// Kotlin fun <T> f()
+// Kotlin inline <T>
 const GrammarProfile::Names::NameSet GrammarProfile::Names::KotlinFunctionHead = { "fun", "modifiers" };
-// `Lang::Kotlin` の文脈内で語彙判別する `import` の葉
-const GrammarProfile::Names::NameSet GrammarProfile::Names::KotlinImportLeaf = { "identifier", "import_header", "import_list" };
 
 // Kotlin で前後の行へ式を繋ぐ呼出と参照
 const GrammarProfile::Names::NameSet GrammarProfile::Names::KotlinJointSuffix =
 { "call_suffix", "callable_reference", "infix_expression", "jump_expression", "navigation_suffix" };
 
-// `!` を前置して否定する Kotlin の検査（`!is` / `!in` は１字句で，空白を挟めない）
+// `!` を前置して否定する Kotlin の検査（`!is` / `!in` は１トークンで，空白を挟めない）
 const GrammarProfile::Names::NameSet GrammarProfile::Names::KotlinNegatableTest =
 { "check_expression", "range_test", "type_test" };
 
 // Kotlin `!is` `!in` 演算子の右側キーワード（否定する検査の中で `!` 直後の密着判定）
-// Kotlin `!in` の `in` // Kotlin `!is` の `is`
+// Kotlin `!in` の `in`
+// Kotlin `!is` の `is`
 const GrammarProfile::Names::NameSet GrammarProfile::Names::KotlinNotIsIn = { "in", "is" };
 
 // Kotlin の数値リテラル接尾子付種別（数値部と接尾子の密着必須，`100L` → `100 L` 化で構文解析失敗）
@@ -1481,17 +1613,17 @@ const GrammarProfile::Names::NameSet GrammarProfile::Names::KotlinReturnType =
 { "dynamic_type", "function_type", "nullable_type", "parenthesized_type", "user_type" };
 
 // 改行が文を終える Kotlin の文脈（括弧の中と when の枝の条件では改行が意味を持たない）
-const GrammarProfile::Names::NameSet GrammarProfile::Names::KotlinStatementContext =
+const GrammarProfile::Names::NameSet GrammarProfile::Names::KotlinStmtCtx =
 { "class_body", "control_structure_body", "function_body", "source_file", "statements" };
 
 // 型の被演算子を取る Kotlin の型（関数の型・省略可能の型を括弧無で置くと結合が変わる）
 const GrammarProfile::Names::NameSet GrammarProfile::Names::KotlinTypeOperatorHost = { "nullable_type", "receiver_type" };
-// ラベル付の文（goto の飛先）
-const GrammarProfile::Names::NameSet GrammarProfile::Names::LabeledStatement = { "labeled_statement", "named_label_statement" };
-// 右辺を条件付で評価する論理演算子の字句
+// ラベル付の文（goto のジャンプ先）
+const GrammarProfile::Names::NameSet GrammarProfile::Names::LabeledStmt = { "labeled_statement", "named_label_statement" };
+// 右辺を条件付で評価する論理演算子のトークン
 const GrammarProfile::Names::NameSet GrammarProfile::Names::LazyLogicalOperator = { "&&", "||" };
-// 先頭の型引数を後ろの子へ密着させる節点
-const GrammarProfile::Names::NameSet GrammarProfile::Names::LeadingTypeArguments = { "method_invocation", "type_assertion" };
+// 先頭の型引数を後ろの子へ密着させるノード
+const GrammarProfile::Names::NameSet GrammarProfile::Names::LeadingTypeArgs = { "method_invocation", "type_assertion" };
 
 // 葉ノード（中身を再構築せず原文を其の儘使う）
 const GrammarProfile::Names::NameSet GrammarProfile::Names::Leaf = {
@@ -1541,11 +1673,11 @@ const GrammarProfile::Names::NameSet GrammarProfile::Names::Leaf = {
 	"verbatim_string_literal"
 };
 
-// ラベルを跳び先として持つ脱出の式（中に現れるラベルは定義でなく参照）
+// ラベルを跳先として持つ脱出の式（中に現れるラベルは定義でなく参照）
 const GrammarProfile::Names::NameSet GrammarProfile::Names::JumpWithLabel =
 { "break_expression", "continue_expression", "jump_expression" };
 
-// break・continue の境界となる全言語の反復構文
+// break, continue の境界に為る全言語の反復構文
 const GrammarProfile::Names::NameSet GrammarProfile::Names::Loop = {
 	"do_statement",
 	"do_while_statement",
@@ -1562,10 +1694,10 @@ const GrammarProfile::Names::NameSet GrammarProfile::Names::Loop = {
 };
 
 // 繰返を抜ける文（Rust は式）
-const GrammarProfile::Names::NameSet GrammarProfile::Names::LoopExitStatement =
+const GrammarProfile::Names::NameSet GrammarProfile::Names::LoopExitStmt =
 { "break_expression", "break_statement", "continue_expression", "continue_statement" };
 
-// break_statement の境界となる反復・switch 系構文
+// `break_statement` の境界と為る反復・switch 系構文
 const GrammarProfile::Names::NameSet GrammarProfile::Names::LoopOrSwitch = {
 	"do_statement",
 	"do_while_statement",
@@ -1585,10 +1717,10 @@ const GrammarProfile::Names::NameSet GrammarProfile::Names::LoopOrSwitch = {
 	"while_statement"
 };
 
-// 行末迄の字句を１つに呑むマクロの本体
+// 行末迄のトークンを１つに呑むマクロの本体
 const GrammarProfile::Names::NameSet GrammarProfile::Names::MacroBody = { "preproc_arg" };
-// マクロの定義（置換本体を持つ前処理指令）
-const GrammarProfile::Names::NameSet GrammarProfile::Names::MacroDefinition = { "preproc_def", "preproc_function_def" };
+// マクロの定義（置換本体を持つプリプロセッサディレクティブ）
+const GrammarProfile::Names::NameSet GrammarProfile::Names::MacroDef = { "preproc_def", "preproc_function_def" };
 
 // マクロ呼出風ノード
 const GrammarProfile::Names::NameSet GrammarProfile::Names::MacroLike =
@@ -1611,7 +1743,7 @@ const GrammarProfile::Names::NameSet GrammarProfile::Names::Member = {
 	"scoped_property_access_expression"
 };
 
-// アクセス順序検査の順位２に当たる C# のプロパティ・イベント欄
+// アクセス順序検査の順位２に当たる C# のプロパティ・イベントフィールド
 const GrammarProfile::Names::NameSet GrammarProfile::Names::MemberFieldRank =
 { "const_declaration", "event_field_declaration", "property_declaration" };
 
@@ -1619,7 +1751,7 @@ const GrammarProfile::Names::NameSet GrammarProfile::Names::MemberFieldRank =
 const GrammarProfile::Names::NameSet GrammarProfile::Names::MemberMethodRank =
 { "constructor_declaration", "function_definition", "method_declaration", "method_definition" };
 
-// 型別名＋ネスト型宣言（アクセス順序検査の順位 1）
+// 型エイリアス＋ネスト型宣言（アクセス順序検査の順位 1）
 const GrammarProfile::Names::NameSet GrammarProfile::Names::MemberTypeRank = {
 	"alias_declaration",
 	"class_declaration",
@@ -1640,14 +1772,13 @@ const GrammarProfile::Names::NameSet GrammarProfile::Names::MisparsedTemplateHos
 { "generic_name", "instantiation_expression", "template_function", "template_type" };
 
 // 変数を書き換える式
-const GrammarProfile::Names::NameSet GrammarProfile::Names::MutatingExpression =
-{ "assignment_expression", "update_expression" };
+const GrammarProfile::Names::NameSet GrammarProfile::Names::MutatingExpr = { "assignment_expression", "update_expression" };
 
 // 名前と初期値・型を包む宣言子（宣言の型を探す時に宣言へ遡る）
 const GrammarProfile::Names::NameSet GrammarProfile::Names::NameDeclarator =
 { "init_declarator", "pattern", "variable_declarator" };
 
-// 比較用の名前を投影する名前・ラベルの字句
+// 比較用の名前を投影する名前・ラベルのトークン
 const GrammarProfile::Names::NameSet GrammarProfile::Names::NameToken = {
 	"identifier",
 	"label",
@@ -1659,21 +1790,24 @@ const GrammarProfile::Names::NameSet GrammarProfile::Names::NameToken = {
 	"statement_label"
 };
 
-// 単一名を持つ仮引数ノード（`LintAnalyzer::FindParameterEvent` の対象種別）
-const GrammarProfile::Names::NameSet GrammarProfile::Names::NamedParameterKind =
-// Java/JS // Rust/Kotlin/Swift // C/C++ // TS
+// 共有の宣言子走査で仮引数を区別するノード
+const GrammarProfile::Names::NameSet GrammarProfile::Names::NamedParamKind =
+// Java/JS
+// Rust/Kotlin/Swift
+// C/C++
+// TS
 { "formal_parameter", "parameter", "parameter_declaration", "required_parameter" };
 
-// C++ / TS の名前空間／内部モジュール
+// 名前空間／内部モジュール（共有する本体を型のメンバ列と区別する）
 const GrammarProfile::Names::NameSet GrammarProfile::Names::NamespaceLike =
-{ "internal_module", "module", "namespace_definition" };
+{ "internal_module", "mod_item", "module", "namespace_declaration", "namespace_definition" };
 
 // C# `new()` 形の括弧付呼出文脈（ジェネリック制約と目標型推論 new）
 const GrammarProfile::Names::NameSet GrammarProfile::Names::NewParenCall =
 { "constructor_constraint", "implicit_object_creation_expression" };
 
-// 定数式に為れない式（呼出・代入・増減・型検査・生成・参照・空値・型のリテラル等，未知の名前や節点は未証明として扱う）
-const GrammarProfile::Names::NameSet GrammarProfile::Names::NonConstantExpression = {
+// 定数式に為れない式（呼出・代入・増減・型検査・生成・参照・空値・型のリテラル等，未知の名前やノードは未証明として扱う）
+const GrammarProfile::Names::NameSet GrammarProfile::Names::NonConstantExpr = {
 	"anonymous_object_creation_expression",
 	"array_access",
 	"array_creation_expression",
@@ -1746,7 +1880,7 @@ const GrammarProfile::Names::NameSet GrammarProfile::Names::NormColon = {
 };
 
 // 数値リテラル系ノード
-const GrammarProfile::Names::NameSet GrammarProfile::Names::NumberLiteral = {
+const GrammarProfile::Names::NameSet GrammarProfile::Names::NumLiteral = {
 	"binary_integer_literal",
 	"decimal_floating_point_literal",
 	"decimal_integer_literal",
@@ -1766,7 +1900,6 @@ const GrammarProfile::Names::NameSet GrammarProfile::Names::NumberLiteral = {
 
 // オブジェクトリテラル系ノード（{} 内側スペース挿入対象）
 const GrammarProfile::Names::NameSet GrammarProfile::Names::ObjectLike = {
-	"accessor_list",
 	"dictionary",
 	"dictionary_comprehension",
 	"enum_body",
@@ -1776,7 +1909,6 @@ const GrammarProfile::Names::NameSet GrammarProfile::Names::ObjectLike = {
 	"hash",
 	"initializer_expression",
 	"initializer_list",
-	"interface_body",
 	"literal_value",
 	"named_imports",
 	"object",
@@ -1789,11 +1921,11 @@ const GrammarProfile::Names::NameSet GrammarProfile::Names::ObjectLike = {
 	"switch_expression"
 };
 
-// 行末迄を本文が飲む節点と解析器が読めなかった区画（行形式のコメントが再読込で本文へ紛れる）
+// 行末迄を本文が飲むノードとパーサーが読めなかった領域（行形式のコメントが再読込で本文へ紛れる）
 const GrammarProfile::Names::NameSet GrammarProfile::Names::OpaqueLineText = { "ERROR", "preproc_arg" };
 
 // 語で始まり右の被演算子を式の終わり迄取る式（括弧を外すと後続の演算子を被演算子へ取り込む）
-const GrammarProfile::Names::NameSet GrammarProfile::Names::OpenPrefixExpression = {
+const GrammarProfile::Names::NameSet GrammarProfile::Names::OpenPrefixExpr = {
 	"arrow_function",
 	"break",
 	"break_expression",
@@ -1814,7 +1946,7 @@ const GrammarProfile::Names::NameSet GrammarProfile::Names::OpenPrefixExpression
 	"yield_expression"
 };
 
-// 宣言へ密着する記号及び Ruby で改行を式の継続と読ませる文末字句
+// 宣言へ密着する記号及び Ruby で改行を式の継続と読ませる文末トークン
 const GrammarProfile::Names::NameSet GrammarProfile::Names::OpenTailToken = { "&", "*", "**", "..", "...", ":" };
 // 直前トークンへ密着する省略可能性記号（TS `?.` / `?` / Swift の省略可能型）
 const GrammarProfile::Names::NameSet GrammarProfile::Names::OptionalMarker = { "optional_chain", "optional_type", "quest" };
@@ -1847,14 +1979,19 @@ const GrammarProfile::Names::NameSet GrammarProfile::Names::OrdinaryFunction = {
 	"willset_clause"
 };
 
-// 文書化引数列コンテナ（Ruby method_parameters を含む文書化解析用，C/C++ は CFunctionOrFieldDeclarator 経由で別取得）
+// ドキュメント化引数列コンテナ（Ruby method_parameters を含むドキュメント化解析用，C/C++ は CFunctionOrFieldDeclarator 経由で別取得）
 const GrammarProfile::Names::NameSet GrammarProfile::Names::ParamContainerLike =
-{ "formal_parameters", "function_value_parameters", "method_parameters" }; // JS/TS // Kotlin // Ruby def f(x)
+{ "formal_parameters", "function_value_parameters", "method_parameters" }; // JS/TS
 
+// Kotlin
+// Ruby def f(x)
 // 関数パラメータコンテナ（言語横断）
-const GrammarProfile::Names::NameSet GrammarProfile::Names::ParameterContainer =
-{ "formal_parameters", "function_value_parameters", "parameter_list", "parameters" }; // JS/TS // Kotlin // C/C++/Rust // Python
+const GrammarProfile::Names::NameSet GrammarProfile::Names::ParamContainer =
+{ "formal_parameters", "function_value_parameters", "parameter_list", "parameters" }; // JS/TS
 
+// Kotlin
+// C/C++/Rust
+// Python
 // 括弧除去で構文又は意味が変わる最左子孫
 const GrammarProfile::Names::NameSet GrammarProfile::Names::ParenInnerFirstChildNoUnwrap =
 { "left_assignment_list", "named_expression" };
@@ -1863,7 +2000,7 @@ const GrammarProfile::Names::NameSet GrammarProfile::Names::ParenInnerFirstChild
 const GrammarProfile::Names::NameSet GrammarProfile::Names::ParenInnerNoUnwrap = {
 	"arrow_function",
 	"comma_expression",
-	"compound_statement", // GNU C/C++ の文式 `({ int y = 1; y; })` — 括弧を外すと初期化子の並びや塊に為る
+	"compound_statement", // GNU C/C++ の文式 `({ int y = 1; y; })` — 括弧を外すと初期化子の並びやブロックに為る
 	"custom_operator", // Swift `(^^)` 演算子の参照 — 括弧を外すと演算子だけが残って構文が壊れる
 	"element",
 	"if_expression", // Kotlin/Rust `a + (if(c) 1 else 0) + b` — 括弧を外すと else 枝が右隣を飲込み値が変わる
@@ -1884,10 +2021,10 @@ const GrammarProfile::Names::NameSet GrammarProfile::Names::ParenInnerNoUnwrap =
 	"until_modifier", // Ruby `(a until c)` 同上
 	"when_expression", // Kotlin `a + (when { ... }) + b` — 同上
 	"while_modifier", // Ruby `(a while c)` 同上
-	"yield" // Python `[(yield)]` `f((yield))` 要素／引数位置の yield・yield from は括弧必須で剥がすと構文崩壊
+	"yield" // Python `[(yield)]` `f((yield))` 要素／引数位置の `yield`･`yield from` は括弧必須で剥がすと構文崩壊
 };
 
-// 見出と本体の構文上の区切り
+// 見出と本体の構文上の区切
 const GrammarProfile::Names::NameSet GrammarProfile::Names::StructuralParenBoundary = {
 	"begin",
 	"case",
@@ -1940,7 +2077,7 @@ const GrammarProfile::Names::NameSet GrammarProfile::Names::StructuralParenBound
 	"with_statement" // JS with(x) — 非推奨
 };
 
-// 型・値・模式の意味を定める括弧の群
+// 型・値・パターンの意味を定める括弧のグループ
 const GrammarProfile::Names::NameSet GrammarProfile::Names::MeaningfulParenGroup = {
 	"array_type",
 	"cast_expression",
@@ -1955,7 +2092,7 @@ const GrammarProfile::Names::NameSet GrammarProfile::Names::MeaningfulParenGroup
 	"type_cast_expression"
 };
 
-// 受け手を包む括弧が後置の結合を保つ式
+// 受手を包む括弧が後置の結合を保つ式
 const GrammarProfile::Names::NameSet GrammarProfile::Names::ReceiverParenHost = {
 	"array_access",
 	"call_expression",
@@ -1974,9 +2111,9 @@ const GrammarProfile::Names::NameSet GrammarProfile::Names::ReceiverParenHost = 
 	"member_call_expression",
 	"member_expression",
 	"method_invocation", // Java (a - b).m() — メソッド呼出は後置で受信側括弧を保持
-	"method_reference", // Java (c ? a : b)::m — メソッド参照は後置で受信側括弧を保持
+	"method_reference", // Java の `(c ? a : b)::m` — メソッド参照は後置で受信側括弧を保持
 	"navigation_expression",
-	"non_null_expression", // TS `(new a)!.c` — 非 null の表明は後置で受信側括弧を保持
+	"non_null_expression", // TS `(new a)!.c` — 非 null のアサーションは後置で受信側括弧を保持
 	"nullsafe_member_access_expression", // PHP `($a - $b)?->y` — メンバアクセスは後置で受信側括弧を保持
 	"nullsafe_member_call_expression", // PHP `($a - $b)?->f()` — 同上
 	"qualified_identifier",
@@ -1987,7 +2124,7 @@ const GrammarProfile::Names::NameSet GrammarProfile::Names::ReceiverParenHost = 
 	"slice_expression", // Go (a + b)[1:2] — 切出は後置で受信側の二項式を包む括弧を保持
 	"subscript",
 	"subscript_expression",
-	"type_assertion_expression" // Go (a + b).(T) — 型表明は後置で受信側の二項式を包む括弧を保持
+	"type_assertion_expression" // Go (a + b).(T) — 型アサーションは後置で受信側の二項式を包む括弧を保持
 };
 
 // `(` で始まる型（修飾子・属性・生存期間等に続く `(` は呼出の括弧ではない）
@@ -2014,8 +2151,8 @@ const GrammarProfile::Names::NameSet GrammarProfile::Names::ParenOptionalHeader 
 	"while_statement" // Swift/Python while (c) { } / while (c):
 };
 
-// 括弧が値の全体を包み，後に演算子や後置の字句が続かない値の位置（代入の右辺・実引数・戻値・要素）
-const GrammarProfile::Names::NameSet GrammarProfile::Names::ParenValueSlot = {
+// 括弧が値の全体を包み，後に演算子や後置のトークンが続かない値の位置（代入の右辺・実引数・戻値・要素）
+const GrammarProfile::Names::NameSet GrammarProfile::Names::ParenValSlot = {
 	"argument",
 	"argument_list",
 	"arguments",
@@ -2056,32 +2193,39 @@ const GrammarProfile::Names::NameSet GrammarProfile::Names::ParenValueSlot = {
 };
 
 // 変数を束縛するパターン
-const GrammarProfile::Names::NameSet GrammarProfile::Names::PatternKind = { "pattern", "tuple_pattern" }; // Rust match 1 | _ // Rust (a, b)
+// Rust match 1 | _
+// Rust (a, b)
+const GrammarProfile::Names::NameSet GrammarProfile::Names::PatternKind = { "pattern", "tuple_pattern" };
 
 // PHP の代替構文の終端語（本体の後で行頭に置く，足す時は CloserToken へも足す）
 const GrammarProfile::Names::NameSet GrammarProfile::Names::PhpAltCloser =
 { "enddeclare", "endfor", "endforeach", "endif", "endswitch", "endwhile" };
 
-// 構文を閉じる語（`PhpAltCloser` に Ruby・Lua 系の `end` を加えた物，見出の行に同居すると本体を置く行が残らない）
+// 構文を閉じる語（`PhpAltCloser` に Ruby, Lua 系の `end` を加えた物，見出の行に同居すると本体を置く行が残らない）
 const GrammarProfile::Names::NameSet GrammarProfile::Names::CloserWord = { PhpAltCloser, { "end" } };
 
 // PHP の代替構文の本体を開く `:` を直接の子に持つノード（`if` / `foreach` / `while` は `colon_block` に包む）
 const GrammarProfile::Names::NameSet GrammarProfile::Names::PhpAltHost =
 { "colon_block", "declare_statement", "for_statement", "switch_block" };
 
-// 本体を開く `:` を先頭の字句に持つ PHP の代替構文の本体（`for` / `declare` は直下の `:` が本体を開く）
-const GrammarProfile::Names::NameSet GrammarProfile::Names::PhpAltLeadingColon = { "colon_block", "switch_block" }; // PHP : stmts // PHP switch(...):
+// 本体を開く `:` を先頭のトークンに持つ PHP の代替構文の本体（`for` / `declare` は直下の `:` が本体を開く）
+// PHP の `: stmts`
+// PHP の `switch(...):`
+const GrammarProfile::Names::NameSet GrammarProfile::Names::PhpAltLeadingColon = { "colon_block", "switch_block" };
 // PHP の if の後続の枝の節（本体の後に並び，波括弧の無い本体の開いた if へ属し得る）
-const GrammarProfile::Names::NameSet GrammarProfile::Names::PhpIfBranch = { "else_clause", "else_if_clause" }; // PHP の名前空間取込ノード（`\` 区切と群括弧は名前の一部で，空白を挟むと名前解決が壊れる）
+// PHP の名前空間インポートノード（`\` 区切とグループ括弧は名前の一部で，空白を挟むと名前解決が壊れる）
+const GrammarProfile::Names::NameSet GrammarProfile::Names::PhpIfBranch = { "else_clause", "else_if_clause" };
 
 const GrammarProfile::Names::NameSet GrammarProfile::Names::PhpNamespaceUse =
 { "namespace_use_declaration", "namespace_use_group" };
 
 // PHP の開始タグで終わる子（地の文の後の開始タグ）
-const GrammarProfile::Names::NameSet GrammarProfile::Names::PhpOpenTagEnd = { "php_tag", "text_interpolation" }; // PHP <?php // PHP ?> ... <?php
+// PHP <?php
+// PHP の `?> ... <?php`
+const GrammarProfile::Names::NameSet GrammarProfile::Names::PhpOpenTagEnd = { "php_tag", "text_interpolation" };
 
-// 式等で終わり常に `;` で閉じる PHP の文（閉じタグが `;` の代わりに文を終え得，末尾の式が `}` で終わっても `;` を要する）
-const GrammarProfile::Names::NameSet GrammarProfile::Names::PhpSemicolonStatement = {
+// 式等で終わり常に `;` で閉じる PHP の文（閉タグが `;` の代わりに文を終え得，末尾の式が `}` で終わっても `;` を要する）
+const GrammarProfile::Names::NameSet GrammarProfile::Names::PhpSemicolonStmt = {
 	"break_statement",
 	"const_declaration",
 	"continue_statement",
@@ -2097,7 +2241,7 @@ const GrammarProfile::Names::NameSet GrammarProfile::Names::PhpSemicolonStatemen
 	"unset_statement" // PHP unset($x) ?>
 };
 
-// 型を合成する `|` / `&` を持つ節点（合併・交差・複数の捕捉型・型の制約・Go の型集合）
+// 型を合成する `|` / `&` を持つノード（合併・交差・複数の捕捉型・型の制約・Go の型集合）
 const GrammarProfile::Names::NameSet GrammarProfile::Names::TypeCombination = {
 	"catch_type",
 	"disjunctive_normal_form_type",
@@ -2110,15 +2254,15 @@ const GrammarProfile::Names::NameSet GrammarProfile::Names::TypeCombination = {
 	"union_type"
 };
 
-// 内側で改行出来ない PHP の節点（括弧と語が１つの字句に当たる）
+// 内側で改行出来ない PHP のノード（括弧と語が１つのトークンに当たる）
 const GrammarProfile::Names::NameSet GrammarProfile::Names::PhpUnsplittable = { "cast_expression", "visibility_modifier" };
 // `|` で囲まれる仮引数列（Ruby ブロック／Rust クロージャ — `|` 両側の密着判定）
-const GrammarProfile::Names::NameSet GrammarProfile::Names::PipeParamList = { "block_parameters", "closure_parameters" }; // Ruby |a, b| // Rust |a, b|
-// 型を構文から確定出来ない単純な変数（PHP は `$x` を variable_name で持つ）
-const GrammarProfile::Names::NameSet GrammarProfile::Names::PlainVariable = { "identifier", "variable_name" }; // C 系 x // PHP $x
+// Ruby |a, b|
+// Rust |a, b|
+const GrammarProfile::Names::NameSet GrammarProfile::Names::PipeParamList = { "block_parameters", "closure_parameters" };
 
 // ポインタ宣言子
-const GrammarProfile::Names::NameSet GrammarProfile::Names::PointerDecl = {
+const GrammarProfile::Names::NameSet GrammarProfile::Names::PtrDecl = {
 	"abstract_pointer_declarator",
 	"abstract_reference_declarator",
 	"block_parameter",
@@ -2129,7 +2273,7 @@ const GrammarProfile::Names::NameSet GrammarProfile::Names::PointerDecl = {
 	"list_splat_pattern",
 	"pointer_declarator",
 	"pointer_type",
-	"pointer_type_declarator", // C++ int S::*p（メンバへのポインタの宣言子を解析器が限定名と読む）
+	"pointer_type_declarator", // C++ int S::*p（メンバへのポインタの宣言子をパーサーが限定名と読む）
 	"reference_declarator",
 	"reference_pattern",
 	"reference_type",
@@ -2147,11 +2291,11 @@ const GrammarProfile::Names::NameSet GrammarProfile::Names::PointerDecl = {
 };
 
 // C/C++ ポインタ／参照宣言子（戻値型のポインタ／参照判定）
-const GrammarProfile::Names::NameSet GrammarProfile::Names::PointerOrRefDeclarator =
+const GrammarProfile::Names::NameSet GrammarProfile::Names::PtrOrRefDeclarator =
 { "pointer_declarator", "reference_declarator" };
 
 // 後置単項演算子及び前置・後置共通の更新式
-const GrammarProfile::Names::NameSet GrammarProfile::Names::PostfixOrUpdateExpression = {
+const GrammarProfile::Names::NameSet GrammarProfile::Names::PostfixOrUpdateExpr = {
 	"dec_statement",
 	"inc_statement",
 	"non_null_expression",
@@ -2163,7 +2307,7 @@ const GrammarProfile::Names::NameSet GrammarProfile::Names::PostfixOrUpdateExpre
 // 被呼出側を最初の子に持つ呼出（被呼出側を包む括弧の保持の判定）
 const GrammarProfile::Names::NameSet GrammarProfile::Names::PostfixCallHost = { "call_expression", "function_call_expression" };
 
-// 受け手（最初の子）を持つ後置の連鎖（受け手を包む括弧の除去で，最初の子を辿って受け手に置けるかを確かめる）
+// 受手（最初の子）を持つ後置の連鎖（受手を包む括弧の除去で，最初の子を辿って受手に置けるかを確かめる）
 const GrammarProfile::Names::NameSet GrammarProfile::Names::PostfixReceiverChain = {
 	"array_access",
 	"attribute",
@@ -2190,7 +2334,7 @@ const GrammarProfile::Names::NameSet GrammarProfile::Names::PostfixReceiverChain
 	"type_assertion_expression" // Go a.(T)
 };
 
-// 受け手を最初の子に持つ後置の式（メンバ参照・呼出・添字，受け手を包む括弧の除去の対象）
+// 受手を最初の子に持つ後置の式（メンバ参照・呼出・添字，受手を包む括弧の除去の対象）
 const GrammarProfile::Names::NameSet GrammarProfile::Names::PostfixReceiverHost = {
 	"array_access",
 	"call_expression",
@@ -2212,7 +2356,7 @@ const GrammarProfile::Names::NameSet GrammarProfile::Names::PostfixReceiverHost 
 	"subscript_expression" // C/C++/JS/TS/PHP (a.b)[0]
 };
 
-// 括弧無で後置の式の受け手に置ける名前・字句で閉じるリテラル（後置の連鎖の最初の子の終点）
+// 括弧無で後置の式の受手に置ける名前・トークンで閉じるリテラル（後置の連鎖の最初の子の終点）
 const GrammarProfile::Names::NameSet GrammarProfile::Names::PostfixReceiverLeaf = {
 	"array",
 	"array_literal",
@@ -2226,7 +2370,7 @@ const GrammarProfile::Names::NameSet GrammarProfile::Names::PostfixReceiverLeaf 
 	"list",
 	"meta_property",
 	"name",
-	"object", // JS/TS { a: 1 }（文頭は塊と読まれる為に別に保持）
+	"object", // JS/TS { a: 1 }（文頭はブロックと読まれる為に別に保持）
 	"parenthesized_expression",
 	"qualified_identifier",
 	"raw_string_literal",
@@ -2272,46 +2416,78 @@ const GrammarProfile::Names::NameSet GrammarProfile::Names::Preproc = {
 	"preproc_warning" // C#
 };
 
-// 前処理条件の根（elif・else は除外）
+// 前処理条件の根（elif, else は除外）
 const GrammarProfile::Names::NameSet GrammarProfile::Names::PreprocConditional = { "preproc_if", "preproc_ifdef" };
-// プリプロセッサ指令の閉じ系（単独指令で常に空行区切り）
-const GrammarProfile::Names::NameSet GrammarProfile::Names::PreprocDirectiveClose = { "#else", "#endif" }; // C/C++ #else // C/C++ #endif
+// プリプロセッサディレクティブの閉系（単独ディレクティブで常に空行区切）
+// C/C++ #else
+// C/C++ #endif
+const GrammarProfile::Names::NameSet GrammarProfile::Names::PreprocDirectiveClose = { "#else", "#endif" };
 
-// プリプロセッサ指令の開き／分岐系（後続の条件式と連結対象）
+// プリプロセッサディレクティブの開き／分岐系（後続の条件式と連結対象）
 const GrammarProfile::Names::NameSet GrammarProfile::Names::PreprocDirectiveOpen =
 { "#elif", "#elifdef", "#elifndef", "#if", "#ifdef", "#ifndef" };
 
-// 条件で名前がマクロかを問う前処理の節点 (preproc_defined / preproc_elifdef / preproc_ifdef)
+// 条件で名前がマクロかを問う前処理のノード (preproc_defined / preproc_elifdef / preproc_ifdef)
 const GrammarProfile::Names::NameSet GrammarProfile::Names::PreprocNameQuery =
 { "preproc_defined", "preproc_elifdef", "preproc_ifdef" };
 
-// Python の定義文 (function_definition / class_definition / decorated_definition) — 空行区切の構造種別判定で実行文と区別する
-const GrammarProfile::Names::NameSet GrammarProfile::Names::PyDefLike =
-{ "class_definition", "decorated_definition", "function_definition" };
+// Python の括弧内で改行を継続出来る式
+const GrammarProfile::Names::NameSet GrammarProfile::Names::PythonContinuationExpr {
+	"attribute",
+	"await",
+	"binary_operator",
+	"boolean_operator",
+	"call",
+	"comparison_operator",
+	"concatenated_string",
+	"conditional_expression",
+	"expression_list",
+	"false",
+	"float",
+	"identifier",
+	"integer",
+	"lambda",
+	"none",
+	"not_operator",
+	"pattern_list",
+	"string",
+	"subscript",
+	"true",
+	"tuple_expression",
+	"type",
+	"unary_operator"
+};
 
-// 本体の最初の文字列を文書文字列とする Python の定義 (class_definition / function_definition)
+// 本体の最初の文字列をドキュメンテーション文字列とする Python の定義 (class_definition / function_definition)
 const GrammarProfile::Names::NameSet GrammarProfile::Names::PythonDocstringOwner =
 { "class_definition", "function_definition" };
 
 // Python の数値リテラル (float / integer) — `.` の前の括弧が必須
-const GrammarProfile::Names::NameSet GrammarProfile::Names::PythonNumber = { "float", "integer" }; // Python (1.5).real // Python (1).bit_length
+// Python (1.5).real
+// Python (1).bit_length
+const GrammarProfile::Names::NameSet GrammarProfile::Names::PythonNum = { "float", "integer" };
 // 中身の無い事を表す Python の文・式 (pass_statement / ellipsis)
 const GrammarProfile::Names::NameSet GrammarProfile::Names::PythonPlaceholder = { "ellipsis", "pass_statement" };
 // Python の後置の式 (attribute / call) — 最高位の優先順位
-const GrammarProfile::Names::NameSet GrammarProfile::Names::PythonPostfix = { "attribute", "call" }; // Python (a + b).c // Python (a + b)(c)
-// 受け手を修飾する Java / C# の欄の参照 (field_access / member_access_expression)
+// Python (a + b).c
+// Python (a + b)(c)
+const GrammarProfile::Names::NameSet GrammarProfile::Names::PythonPostfix = { "attribute", "call" };
+// 受手を修飾する Java / C# のフィールドの参照 (field_access / member_access_expression)
 const GrammarProfile::Names::NameSet GrammarProfile::Names::QualifiedMember = { "field_access", "member_access_expression" };
 // 範囲式・範囲パターン（Rust `0..n` — `..` 両側の密着判定）
 const GrammarProfile::Names::NameSet GrammarProfile::Names::RangeLike = { "range", "range_expression", "range_pattern" };
 // 範囲の演算子（終端の無い範囲の判定）
-const GrammarProfile::Names::NameSet GrammarProfile::Names::RangeOperator = { "..", "..." }; // Ruby/Kotlin/Rust 1.. // Ruby/Swift 1...
+// Ruby/Kotlin/Rust `1..`
+// Ruby/Swift `1...`
+const GrammarProfile::Names::NameSet GrammarProfile::Names::RangeOperator = { "..", "..." };
 
 // Kotlin の増減式及び Swift の範囲式／単項演算子親
-const GrammarProfile::Names::NameSet GrammarProfile::Names::RangeOrUnaryExpression =
+const GrammarProfile::Names::NameSet GrammarProfile::Names::RangeOrUnaryExpr =
 { "open_end_range_expression", "open_start_range_expression", "postfix_expression", "prefix_expression", "range_expression" };
 
 // 値を返さない構築・破棄・設定・監視の操作
 const GrammarProfile::Names::NameSet GrammarProfile::Names::ResultlessRoutine = {
+	"compact_constructor_declaration",
 	"computed_setter",
 	"constructor_declaration",
 	"deinit_declaration",
@@ -2336,104 +2512,126 @@ const GrammarProfile::Names::NameSet GrammarProfile::Names::ReturnOrThrow = {
 };
 
 // 値を返す文（値の全体を包む括弧は，マクロの展開後も値を変えない）
-const GrammarProfile::Names::NameSet GrammarProfile::Names::ReturnStatement = { "co_return_statement", "return_statement" };
+const GrammarProfile::Names::NameSet GrammarProfile::Names::ReturnStmt = { "co_return_statement", "return_statement" };
 
 // 戻値が組型のノード
 const GrammarProfile::Names::NameSet GrammarProfile::Names::ReturnTuple =
 { "func_literal", "function_declaration", "function_type", "method_declaration", "method_elem" };
 
 // return の返す値の参照の有無を決める関数（C++ の decltype(auto) を返す関数・PHP の参照を返す関数）
-const GrammarProfile::Names::NameSet GrammarProfile::Names::ReturnValueHost =
+const GrammarProfile::Names::NameSet GrammarProfile::Names::ReturnValHost =
 { "anonymous_function", "arrow_function", "function_definition", "lambda_expression", "method_declaration" };
 
-// 返す値を直接の子に持つ節点（PHP の参照を返す関数の値を包む括弧の保持）
-const GrammarProfile::Names::NameSet GrammarProfile::Names::ReturnValueParent = { "arrow_function", "return_statement" };
+// 返す値を直接の子に持つノード（PHP の参照を返す関数の値を包む括弧の保持）
+const GrammarProfile::Names::NameSet GrammarProfile::Names::ReturnValParent = { "arrow_function", "return_statement" };
 
 // 名前を略して転送出来る Ruby の実引数（`&` / `*` / `**` だけの形）
 const GrammarProfile::Names::NameSet GrammarProfile::Names::RubyAnonymousForward =
 { "block_argument", "hash_splat_argument", "splat_argument" };
 
 // 命令形の呼出の実引数が左端から続く Ruby の式（実引数は式の終わり迄続く）
-const GrammarProfile::Names::NameSet GrammarProfile::Names::RubyArgumentExtent =
+const GrammarProfile::Names::NameSet GrammarProfile::Names::RubyArgExtent =
 { "binary", "call", "conditional", "element_reference", "range" };
 
 // 空白に依らず後続を実引数と読む Ruby の語（`return + x` も `return(+x)`）
-const GrammarProfile::Names::NameSet GrammarProfile::Names::RubyArgumentKeyword = { "break", "next", "return" };
-
-// 実引数の並びを子に持つ Ruby の節点（並びの括弧の読みを揃える）
-const GrammarProfile::Names::NameSet GrammarProfile::Names::RubyArgumentListHost =
-{ "break", "call", "next", "return", "yield" };
-
+const GrammarProfile::Names::NameSet GrammarProfile::Names::RubyArgKeyword = { "break", "next", "return" };
+// 実引数の並びを子に持つ Ruby のノード（並びの括弧の読みを揃える）
+const GrammarProfile::Names::NameSet GrammarProfile::Names::RubyArgListHost = { "break", "call", "next", "return", "yield" };
 // Ruby の要素の並び（名前の後の実引数が並びの残りの要素を取り込む）
-const GrammarProfile::Names::NameSet GrammarProfile::Names::RubyArgumentSequence = { "argument_list", "right_assignment_list" };
-// 名前の後に空白を置き，直後に空白を置かずに続けると実引数の始まりに為る Ruby の字句
-const GrammarProfile::Names::NameSet GrammarProfile::Names::RubyArgumentStart = { "&", "*", "**", "+", "-", "<<", "[" };
+const GrammarProfile::Names::NameSet GrammarProfile::Names::RubyArgSeq = { "argument_list", "right_assignment_list" };
+// 名前の後に空白を置き，直後に空白を置かずに続けると実引数の始まりに為る Ruby のトークン
+const GrammarProfile::Names::NameSet GrammarProfile::Names::RubyArgStart = { "&", "*", "**", "+", "-", "<<", "[" };
 // Ruby `%w[...]` / `%i[...]` 配列リテラル親（内部の `%w(` `%i(` `)` は密着必須）
-const GrammarProfile::Names::NameSet GrammarProfile::Names::RubyArrayLiteral = { "string_array", "symbol_array" }; // Ruby %w[a b c] // Ruby %i[:a :b]
+// Ruby %w[a b c]
+// Ruby の `%i[:a :b]`
+const GrammarProfile::Names::NameSet GrammarProfile::Names::RubyArrayLiteral = { "string_array", "symbol_array" };
 
 // Ruby の名前束縛式は修飾子化で解析順が変わる為に保つ
 const GrammarProfile::Names::NameSet GrammarProfile::Names::RubyBinding =
 { "assignment", "match_pattern", "operator_assignment", "regex", "test_pattern" };
 
-// Ruby 制御ブロック（end 区切り）
+// Ruby 制御ブロック（end 区切）
 const GrammarProfile::Names::NameSet GrammarProfile::Names::RubyBlock =
 { "begin", "block", "case", "case_match", "class", "do_block", "for", "if", "lambda", "module", "unless", "until", "while" };
 
 // １文なら１行に置く Ruby の波括弧ブロックと本体
 const GrammarProfile::Names::NameSet GrammarProfile::Names::RubyBraceBlock = { "block", "block_body" };
 // Ruby class 定義系（`< 親` 継承記法のスペース調整対象）
-const GrammarProfile::Names::NameSet GrammarProfile::Names::RubyClassDefLike = { "class", "singleton_class" }; // Ruby class C < Base // Ruby class << obj
+// Ruby class C < Base
+// Ruby class << obj
+const GrammarProfile::Names::NameSet GrammarProfile::Names::RubyClassDefLike = { "class", "singleton_class" };
 
-// Ruby で括弧除去に依り実引数の読みが変わる節点
-const GrammarProfile::Names::NameSet GrammarProfile::Names::RubyCommandArgumentHost =
+// Ruby で括弧除去に依り実引数の読みが変わるノード
+const GrammarProfile::Names::NameSet GrammarProfile::Names::RubyCommandArgHost =
 { "binary", "break", "call", "element_reference", "next", "range", "return", "yield" };
 
-// `condition` の欄を持ち本体が空なら ` then` で節の境を示す Ruby の節点
-const GrammarProfile::Names::NameSet GrammarProfile::Names::RubyConditionHost = { "elsif", "if", "unless" }; // Ruby elsif c // Ruby if c // Ruby unless c
-// Ruby の区切り文字付リテラル（開きが `%s{` 等の複数字句で閉じが１字句の為，括弧の深さ計算で内部へ降りない）
+// `cond` のフィールドを持ち本体が空なら ` then` で節の境を示す Ruby のノード
+// Ruby elsif c
+// Ruby if c
+// Ruby unless c
+const GrammarProfile::Names::NameSet GrammarProfile::Names::RubyCondHost = { "elsif", "if", "unless" };
+// Ruby の区切文字付リテラル（開きが `%s{` 等の複数トークンで閉じが１トークンの為，括弧の深さ計算で内部へ降りない）
 const GrammarProfile::Names::NameSet GrammarProfile::Names::RubyDelimitedLiteral = { "delimited_symbol", "regex", "subshell" };
 
 // Ruby の脱出式（値を持たず，範囲式の始端に置くと `return` の前置で意味が壊れる）
 const GrammarProfile::Names::NameSet GrammarProfile::Names::RubyFlowExpr =
 { "break", "next", "redo", "retry", "return", "yield" };
 
-// 外の局所変数を見ない新しいスコープを開く Ruby の節点（修飾子形式へ畳む時の局所変数の有無の判定で遡りを止める）
+// 外のローカル変数を見ない新しいスコープを開く Ruby のノード（修飾子形式へ畳む時のローカル変数の有無の判定で遡りを止める）
 const GrammarProfile::Names::NameSet GrammarProfile::Names::RubyFreshScope =
 { "class", "method", "module", "program", "singleton_class", "singleton_method" };
 
-// 局所変数のスコープを開く Ruby の節点（ブロックは外の局所変数も見るが，内側で導入した局所変数は外から見えない）
+// ローカル変数のスコープを開く Ruby のノード（ブロックは外のローカル変数も見るが，内側で導入したローカル変数は外から見えない）
 const GrammarProfile::Names::NameSet GrammarProfile::Names::RubyLocalScope =
 { "block", "class", "do_block", "lambda", "method", "module", "program", "singleton_class", "singleton_method" };
 
 // 命令形の呼出の実引数の外に在る Ruby の語の二項演算子（文の単位で結ぶ）
-const GrammarProfile::Names::NameSet GrammarProfile::Names::RubyLowBinary = { "and", "or" }; // Ruby foo +1 and x // Ruby foo +1 or x
+// Ruby foo +1 and x
+// Ruby foo +1 or x
+const GrammarProfile::Names::NameSet GrammarProfile::Names::RubyLowBinary = { "and", "or" };
 // 代入より弱い Ruby の単項の語（括弧を外すと後続の演算子・三項を被演算子へ取り込む）
-const GrammarProfile::Names::NameSet GrammarProfile::Names::RubyLowUnary = { "defined?", "not" }; // Ruby defined? x // Ruby not x
+// Ruby `defined? x`
+// Ruby not x
+const GrammarProfile::Names::NameSet GrammarProfile::Names::RubyLowUnary = { "defined?", "not" };
 // Ruby のメソッドの定義
 const GrammarProfile::Names::NameSet GrammarProfile::Names::RubyMethodDef = { "method", "singleton_method" };
 // Ruby の rational/complex リテラル親種別（数値部と接尾子 `r`/`i`/`ri` の密着必須，`3r` → `3 r` 化で SyntaxError）
-const GrammarProfile::Names::NameSet GrammarProfile::Names::RubyNumericLiteralSuffix = { "complex", "rational" }; // Ruby 3i / 1+2i // Ruby 3r / 1.5r
+// Ruby 3i / 1+2i
+// Ruby 3r / 1.5r
+const GrammarProfile::Names::NameSet GrammarProfile::Names::RubyNumericLiteralSuffix = { "complex", "rational" };
 
-// Ruby の仮引数の並び（仮引数の名前は局所変数を導入する）
-const GrammarProfile::Names::NameSet GrammarProfile::Names::RubyParameters =
+// Ruby の仮引数の並び（仮引数の名前はローカル変数を導入する）
+const GrammarProfile::Names::NameSet GrammarProfile::Names::RubyParams =
 { "block_parameters", "lambda_parameters", "method_parameters" };
 
 // Ruby のパターン照合の式（式の中で最も弱く，括弧を外すと代入等の左辺を取り込む）
-const GrammarProfile::Names::NameSet GrammarProfile::Names::RubyPatternTest = { "match_pattern", "test_pattern" }; // Ruby h => {a:} // Ruby h in {a:}
+// Ruby h => {a:}
+// Ruby h in {a:}
+const GrammarProfile::Names::NameSet GrammarProfile::Names::RubyPatternTest = { "match_pattern", "test_pattern" };
 
-// Ruby の文を直置するコンテナ（値位置の分岐を修飾子化して，偽の時に代入迄省かれる意味変更を防止）
-const GrammarProfile::Names::NameSet GrammarProfile::Names::RubyStatementHost =
-{ "block_body", "body_statement", "do", "else", "elsif", "ensure", "program", "then" };
+// Ruby の文を直接置くコンテナ（括弧内でも not の被演算子の不要なラッパーを外す）
+const GrammarProfile::Names::NameSet GrammarProfile::Names::RubyStmtHost =
+{ "block_body", "body_statement", "do", "else", "elsif", "ensure", "parenthesized_statements", "program", "then" };
 
-// Ruby の文の並び（区切り改行は子間に在る為，平坦化では実引数への誤読を防ぐ `;` で接続，条件と本体を持つ elsif は除外）
-const GrammarProfile::Names::NameSet GrammarProfile::Names::RubyStatementSequence =
-{ "begin_block", "block_body", "body_statement", "do", "else", "end_block", "ensure", "parenthesized_statements", "then" };
+// Ruby の文の並び（区切改行は子間に在る為，平坦化では実引数への誤読を防ぐ `;` で接続，条件と本体を持つ elsif は除外）
+const GrammarProfile::Names::NameSet GrammarProfile::Names::RubyStmtSeq = {
+	"begin_block",
+	"block_body",
+	"body_statement",
+	"do",
+	"else",
+	"end_block",
+	"ensure",
+	"interpolation",
+	"parenthesized_statements",
+	"then"
+};
 
 // 代入先を書き換える式（可変性の検査対象）
 const GrammarProfile::Names::NameSet GrammarProfile::Names::WritableAssignment =
 { "assignment_expression", "compound_assignment_expr" };
 
-// Rust mut 削除候補の判定で式木から変更対象になり得る基底識別子を辿る経路
+// Rust mut 削除候補の判定で式木から変更対象に為り得る基底識別子を辿る経路
 const GrammarProfile::Names::NameSet GrammarProfile::Names::RustBaseTraversal = {
 	"field_expression",
 	"generic_function",
@@ -2441,9 +2639,14 @@ const GrammarProfile::Names::NameSet GrammarProfile::Names::RustBaseTraversal = 
 	"parenthesized_expression",
 	"try_expression",
 	"unary_expression"
-}; // Rust x.y // Rust f::<T> // Rust x[i] // Rust (x) // Rust x? // Rust !x / -x
+}; // Rust x.y
 
-// 文頭に置くと `}` で文を終える Rust の塊の式（block / unsafe_block / if_expression / loop_expression 等）
+// Rust f::<T>
+// Rust x[i]
+// Rust (x)
+// Rust x?
+// Rust !x / -x
+// 文頭に置くと `}` で文を終える Rust のブロックの式（block / unsafe_block / if_expression / loop_expression 等）
 const GrammarProfile::Names::NameSet GrammarProfile::Names::RustBlockLike = {
 	"async_block",
 	"block",
@@ -2460,11 +2663,11 @@ const GrammarProfile::Names::NameSet GrammarProfile::Names::RustBlockLike = {
 
 // 条件と本体が独立した一時値の範囲に為る Rust の繰返 (loop_expression / while_expression)
 const GrammarProfile::Names::NameSet GrammarProfile::Names::RustBodyOnlyLoop = { "loop_expression", "while_expression" };
-// 被演算子を参照で受ける Rust の比較演算子の字句
+// 被演算子を参照で受ける Rust の比較演算子のトークン
 const GrammarProfile::Names::NameSet GrammarProfile::Names::RustBorrowingOperator = { "!=", "<", "<=", "==", ">", ">=" };
 
-// Rust の塊の中の宣言の文（値を与えない）
-const GrammarProfile::Names::NameSet GrammarProfile::Names::RustDeclarationStatement = {
+// Rust のブロックの中の宣言の文（値を与えない）
+const GrammarProfile::Names::NameSet GrammarProfile::Names::RustDeclStmt = {
 	"associated_type",
 	"attribute_item",
 	"const_item",
@@ -2490,41 +2693,49 @@ const GrammarProfile::Names::NameSet GrammarProfile::Names::RustDeclarationState
 // Rust の let の束縛（パターンが名前を束縛する）
 const GrammarProfile::Names::NameSet GrammarProfile::Names::RustLetBinding = { "let_condition", "let_declaration" };
 // 照合の対象を持つ Rust の条件 (let_chain / let_condition)
-const GrammarProfile::Names::NameSet GrammarProfile::Names::RustLetCondition = { "let_chain", "let_condition" };
+const GrammarProfile::Names::NameSet GrammarProfile::Names::RustLetCond = { "let_chain", "let_condition" };
 
-// 場所を要する文脈に置いても破棄を伴う一時値を作らない Rust の式（場所の式と字句）
-const GrammarProfile::Names::NameSet GrammarProfile::Names::RustPlaceOrPlainValue = {
+// 場所を要する文脈に置いても破棄を伴う一時値を作らない Rust の式（場所の式とトークン）
+const GrammarProfile::Names::NameSet GrammarProfile::Names::RustPlaceOrPlainVal = {
 	"boolean_literal",
 	"char_literal",
 	"field_expression",
 	"float_literal",
-	"identifier",
 	"index_expression",
 	"integer_literal",
 	"metavariable",
 	"raw_string_literal",
 	"reference_expression",
-	"scoped_identifier",
-	"self",
 	"string_literal",
 	"unit_expression"
 };
+
+const GrammarProfile::Names::NameSet GrammarProfile::Names::RustDestructurePattern =
+{ "captured_pattern", "slice_pattern", "struct_pattern", "tuple_struct_pattern" };
+
+const GrammarProfile::Names::NameSet GrammarProfile::Names::RustParamNameWrapper =
+{ "mut_pattern", "ref_pattern", "reference_pattern" };
+
+const GrammarProfile::Names::NameSet GrammarProfile::Names::RustParamPattern =
+{ RustDestructurePattern, RustParamNameWrapper, { "_", "identifier", "parameter", "self_parameter", "tuple_pattern" } }; // 型を明示出来る仮引数のパターン
 
 // 最初の子を場所として参照する Rust の式 (field_expression / index_expression)
 const GrammarProfile::Names::NameSet GrammarProfile::Names::RustPlaceProjection = { "field_expression", "index_expression" };
 // Rust の参照・フィールドのパターン（`ref mut` を探す）
 const GrammarProfile::Names::NameSet GrammarProfile::Names::RustRefPattern = { "field_pattern", "ref_pattern" };
-// 照合の対象を `value` 場に持つ Rust の式 (let_condition / match_expression)
+// 照合の対象を `val` 場に持つ Rust の式 (let_condition / match_expression)
 const GrammarProfile::Names::NameSet GrammarProfile::Names::RustScrutineeHost = { "let_condition", "match_expression" };
-// 文頭の式を持つ Rust の節点（式文と，末尾の式を持つ塊）
-const GrammarProfile::Names::NameSet GrammarProfile::Names::RustStatementHead = { "block", "expression_statement" }; // Rust { a; b } の b // Rust a;
+// 文頭の式を持つ Rust のノード（式文と，末尾の式を持つブロック）
+// Rust { a; b } の b
+// Rust a;
+const GrammarProfile::Names::NameSet GrammarProfile::Names::RustStmtHead = { "block", "expression_statement" };
 
 // 型の被演算子を取る Rust の型（`+` で境界を並べた型を括弧無で置くと境界が外へ掛かる）
 const GrammarProfile::Names::NameSet GrammarProfile::Names::RustTypeOperatorHost =
 { "abstract_type", "bounded_type", "dynamic_type", "pointer_type", "reference_type" };
 
 // 値を取り得る Rust の脱出の式（値を省くと後続の式を値として取り込む）
-const GrammarProfile::Names::NameSet GrammarProfile::Names::RustValueJump =
+const GrammarProfile::Names::NameSet GrammarProfile::Names::RustValJump =
 { "break_expression", "return_expression", "yield_expression" };
 
 // 言語固有の範囲本体
@@ -2545,34 +2756,39 @@ const GrammarProfile::Names::NameSet GrammarProfile::Names::ScopeContainer = {
 	"translation_unit" // C/C++ ファイル全体
 };
 
-// ミックスインの定義と取込の SCSS の規則（空の仮引数・実引数の括弧を省ける）
+// ミックスインの定義とインクルードの SCSS の規則（空の仮引数・実引数の括弧を省ける）
 const GrammarProfile::Names::NameSet GrammarProfile::Names::ScssMixinRule = { "include_statement", "mixin_statement" };
-// モジュールを読む SCSS の規則（解析器は `as *` 以外の節 `as ns` / `as p-*` / `show a` / `hide a` を読めない）
-const GrammarProfile::Names::NameSet GrammarProfile::Names::ScssModuleRule = { "forward_statement", "use_statement" };
-// 仮引数の並びを持つ SCSS の規則（解析器は空の並び `()` に空の仮引数を補って `MISSING` を立てる）
-const GrammarProfile::Names::NameSet GrammarProfile::Names::ScssParameterHost = { "function_statement", "mixin_statement" };
 
-// 手前の塊に続く節を開く語（節を節点で持たない Go の裸の塊・Kotlin の本体の容器を，閉じの後の語で見分ける）
+// 別名・公開する名前・設定の節と，設定の括弧を開く語
+const GrammarProfile::Names::NameSet GrammarProfile::Names::ScssModuleClause =
+{ "module_alias", "module_configuration", "module_members", "with" };
+
+// 別名・公開する名前・設定の節を伴う SCSS のモジュールの規則
+const GrammarProfile::Names::NameSet GrammarProfile::Names::ScssModuleRule = { "forward_statement", "use_statement" };
+// 修飾名の内部の記号を分割しない名前のノード
+const GrammarProfile::Names::NameSet GrammarProfile::Names::ScssNameAtom = { "module_name", "qualified_mixin_name" };
+// 仮引数の並びを持つ SCSS の規則（パーサーは空の並び `()` に空の仮引数を補って `MISSING` を立てる）
+const GrammarProfile::Names::NameSet GrammarProfile::Names::ScssParamHost = { "function_statement", "mixin_statement" };
+
+// 手前のブロックに続く節を開く語（節をノードで持たない Go の裸のブロック・Kotlin の本体のコンテナを，閉じの後の語で見分ける）
 const GrammarProfile::Names::NameSet GrammarProfile::Names::SectionKeyword =
 { "catch", "else", "elseif", "ensure", "finally", "rescue" };
 
-// 区切りの字句（中置演算子として空白で囲まない）
-const GrammarProfile::Names::NameSet GrammarProfile::Names::SeparatorToken = { ",", ":", ";" }; // 共通 a, b // 共通 a: b // 共通 a; b
+// 区切のトークン（中置演算子として空白で囲まない）
+const GrammarProfile::Names::NameSet GrammarProfile::Names::SeparatorToken = { ",", ":", ";" }; // 共通 a, b
 
-// 逐次実行される文の直接コンテナ（`FunctionBodyContainer` ∪ `statements` の統合済集合）
+// 共通 a: b
+// 共通 a; b
+// 逐次実行される文の直接コンテナ（`FunctionBodyContainer` ∪ `stmts` の統合済集合）
 const GrammarProfile::Names::NameSet GrammarProfile::Names::SequentialStmtContainer =
 { FunctionBodyContainer, { "statements" } };
 
 // 逐次文のコンテナ（`SequentialStmtContainer` ∪ `control_structure_body` ∪ Go の `statement_list`）— `ControlFlow::TerminationRuleOf`
-const GrammarProfile::Names::NameSet GrammarProfile::Names::StatementFlowContainer =
+const GrammarProfile::Names::NameSet GrammarProfile::Names::StmtFlowContainer =
 { SequentialStmtContainer, { "control_structure_body", "statement_list" } };
 
-// 単純型葉ノード（Lint の型注釈及び仮引数型の判定）
-const GrammarProfile::Names::NameSet GrammarProfile::Names::SimpleTypeLeaf =
-{ "integral_type", "predefined_type", "primitive_type", "type_identifier" };
-
-// 本体を一度だけ実行する文（言語横断） — 本体の終端で文の終端を判ずる
-const GrammarProfile::Names::NameSet GrammarProfile::Names::SingleBodyStatement = {
+// 本体を１度だけ実行する文（言語横断） — 本体の終端で文の終端を判ずる
+const GrammarProfile::Names::NameSet GrammarProfile::Names::SingleBodyStmt = {
 	"checked_statement",
 	"fixed_statement",
 	"lock_statement",
@@ -2606,8 +2822,6 @@ const GrammarProfile::Names::NameSet GrammarProfile::Names::SpaceSkip = {
 	"optional_parameter",
 	"pair",
 	"property_signature",
-	"pseudo_class_selector",
-	"pseudo_element_selector",
 	"public_field_definition",
 	"quoted_attribute_value",
 	"raw_string_literal",
@@ -2623,8 +2837,6 @@ const GrammarProfile::Names::NameSet GrammarProfile::Names::SpaceSkip = {
 	"style_element",
 	"template_string",
 	"text",
-	"token_tree",
-	"token_tree_pattern",
 	"trait_bounds",
 	"type_annotation",
 	"typed_default_parameter",
@@ -2666,12 +2878,13 @@ const GrammarProfile::Names::NameSet GrammarProfile::Names::SpaceKeyword = {
 const GrammarProfile::Names::NameSet GrammarProfile::Names::SpacelessBrace = { "jsx_expression" }; // JS/TS {expr}
 
 // 文リストノード（Go / Kotlin 等の括弧付宣言グループや Ruby のメソッド本体）
-const GrammarProfile::Names::NameSet GrammarProfile::Names::StatementList = {
+const GrammarProfile::Names::NameSet GrammarProfile::Names::StmtList = {
+	"accessor_list",
 	"body_statement",
 	"colon_block",
 	"const_declaration",
 	"enum_body_declarations",
-	"import_spec_list",
+	"import_list", // Kotlin のインポートの並び
 	"statement_list",
 	"statements",
 	"type_declaration",
@@ -2680,29 +2893,38 @@ const GrammarProfile::Names::NameSet GrammarProfile::Names::StatementList = {
 };
 
 // 文列の前でだけ改行し，見出の子（パターン・仮引数）を同じ行に保つ節
-const GrammarProfile::Names::NameSet GrammarProfile::Names::StatementsOnlyBreak = { "catch_block", "switch_entry" };
+const GrammarProfile::Names::NameSet GrammarProfile::Names::StmtsOnlyBreak = { "catch_block", "switch_entry" };
 // 式値を使わない純粋な文文脈の親
 const GrammarProfile::Names::NameSet GrammarProfile::Names::StmtCtxParent = { "expression_statement", "statements" };
-// 文字列を開閉する引用符の字句（`ERROR` の直接の子に在れば，文字列が閉じずに後続を飲み込んだ事を示す）
-const GrammarProfile::Names::NameSet GrammarProfile::Names::StringDelimiter = { "\"", "\"\"\"", "'", "'''", "`" };
+// 文字列を開閉する引用符のトークン（`ERROR` の直接の子に在れば，文字列が閉じずに後続を飲み込んだ事を示す）
+const GrammarProfile::Names::NameSet GrammarProfile::Names::StrDelimiter = { "\"", "\"\"\"", "'", "'''", "`" };
 
 // 文字列の中の埋込式（JS / TS の `${…}`・Ruby の `#{…}`・Python の f 文字列と C# の `{…}`・Kotlin の `${…}` と `$x`・Swift の `\(…)`）
-const GrammarProfile::Names::NameSet GrammarProfile::Names::StringInterpolation =
-{ "interpolated_expression", "interpolated_identifier", "interpolation", "template_substitution" };
+const GrammarProfile::Names::NameSet GrammarProfile::Names::StrInterpolation =
+{ "interpolated_expression", "interpolated_identifier", "interpolation", "raw_str_interpolation", "template_substitution" };
 
 // Lint 等の言語横断判定に使う，実効的な文字列値の全種
-const GrammarProfile::Names::NameSet GrammarProfile::Names::StringLikeAll = {
+const GrammarProfile::Names::NameSet GrammarProfile::Names::StrLikeAll = {
+	"encapsed_string", // PHP の補間文字列
+	"heredoc", // PHP のヒアドキュメント
 	"interpolated_string_expression",
 	"line_string_literal",
+	"multi_line_string_literal", // Swift の複数行の文字列
 	"raw_string_literal",
 	"string",
 	"string_literal",
 	"string_value",
 	"template_string"
-}; // C# $"..." // Kotlin "..." // Rust r"..." // Ruby/Python/JS/TS // C/C++/Java // CSS // JS/TS `...`
+}; // C# $"..."
 
+// Kotlin "..."
+// Rust r"..."
+// Ruby/Python/JS/TS
+// C/C++/Java
+// CSS
+// JS/TS `...`
 // 行末空白除去時に内部バイト範囲を保護する文字列／ヒアドキュメント／コメント系ノード
-const GrammarProfile::Names::NameSet GrammarProfile::Names::StringLikeInnerPreserve = {
+const GrammarProfile::Names::NameSet GrammarProfile::Names::StrLikeInnerPreserve = {
 	"block_comment",
 	"comment",
 	"heredoc_body",
@@ -2712,15 +2934,15 @@ const GrammarProfile::Names::NameSet GrammarProfile::Names::StringLikeInnerPrese
 	"multiline_comment",
 	"raw_string_content",
 	"string",
-	"string_array", // Ruby %w[a b]（内部の改行が要素区切り）
+	"string_array", // Ruby %w[a b]（内部の改行が要素区切）
 	"string_content",
-	"symbol_array", // Ruby %i[a b]（内部の改行が要素区切り）
+	"symbol_array", // Ruby %i[a b]（内部の改行が要素区切）
 	"template_string",
 	"verbatim_string_literal" // C# @"..."
 };
 
-// 文字列・シンボルを並べる節点
-const GrammarProfile::Names::NameSet GrammarProfile::Names::StringSeqContainer =
+// 文字列・シンボルを並べるノード
+const GrammarProfile::Names::NameSet GrammarProfile::Names::StrSeqContainer =
 { "concatenated_string", "string_array", "symbol_array" };
 
 // 本体の波括弧を直接の子に持つ Swift の制御構文（本体の文を展開する）
@@ -2728,18 +2950,18 @@ const GrammarProfile::Names::NameSet GrammarProfile::Names::SwiftBraceBodyHost =
 { "do_statement", "for_statement", "guard_statement", "if_statement", "repeat_while_statement", "while_statement" };
 
 // 見出の式を直接の子に持つ Swift の文・節（見出の式の全体を包む括弧は，本体と紛れるクロージャを持てば必須）
-const GrammarProfile::Names::NameSet GrammarProfile::Names::SwiftHeaderExpressionHost =
+const GrammarProfile::Names::NameSet GrammarProfile::Names::SwiftHeaderExprHost =
 { "for_statement", "guard_statement", "if_statement", "switch_statement", "where_clause", "while_statement" };
 
-// Swift の見出の式の前の字句（条件・束縛の値・反復の対象・switch の対象の直前）
+// Swift の見出の式の前のトークン（条件・束縛の値・反復の対象・switch の対象の直前）
 const GrammarProfile::Names::NameSet GrammarProfile::Names::SwiftHeaderLead =
 { ",", "=", "guard", "if", "in", "switch", "while" };
 
 // 見出の後に本体の波括弧が続く Swift の文（見出に括弧無で置いたクロージャが本体と紛れる）
-const GrammarProfile::Names::NameSet GrammarProfile::Names::SwiftHeaderStatement =
+const GrammarProfile::Names::NameSet GrammarProfile::Names::SwiftHeaderStmt =
 { "for_statement", "guard_statement", "if_statement", "switch_statement", "while_statement" };
 
-// 名前付の節点に為る Swift の語（後の括弧を呼出の実引数と紛れない様に空白で区切る）
+// 名前付のノードに為る Swift の語（後の括弧を呼出の実引数と紛れない様に空白で区切る）
 const GrammarProfile::Names::NameSet GrammarProfile::Names::SwiftKeywordNode =
 { "binding_pattern_kind", "value_binding_pattern", "where_keyword" };
 
@@ -2760,11 +2982,13 @@ const GrammarProfile::Names::NameSet GrammarProfile::Names::SwiftTypeOperatorHos
 const GrammarProfile::Names::NameSet GrammarProfile::Names::SwitchBody =
 { "compound_statement", "switch_block", "switch_body" };
 
-// C# の `goto case` / `goto default` の跳び先（`switch` の転送で，素通りを禁じる言語仕様が要求する）
-const GrammarProfile::Names::NameSet GrammarProfile::Names::SwitchGotoTarget = { "case", "default" }; // C# goto case 1; // C# goto default;
+// C# の `goto case` / `goto default` の跳先（`switch` の転送で，素通りを禁じる言語仕様が要求する）
+// C# goto case 1;
+// C# goto default;
+const GrammarProfile::Names::NameSet GrammarProfile::Names::SwitchGotoTarget = { "case", "default" };
 
 // switch に類する文（全節の終端判定の対象）
-const GrammarProfile::Names::NameSet GrammarProfile::Names::SwitchStatementLike = {
+const GrammarProfile::Names::NameSet GrammarProfile::Names::SwitchStmtLike = {
 	"expression_switch_statement",
 	"match_expression",
 	"match_statement",
@@ -2775,7 +2999,7 @@ const GrammarProfile::Names::NameSet GrammarProfile::Names::SwitchStatementLike 
 };
 
 // switch 式及び C# の with 式
-const GrammarProfile::Names::NameSet GrammarProfile::Names::SwitchOrWithExpression = { "switch_expression", "with_expression" };
+const GrammarProfile::Names::NameSet GrammarProfile::Names::SwitchOrWithExpr = { "switch_expression", "with_expression" };
 
 // 三項演算子系＋範囲 for 系（`?` `:` 周辺で特殊スペース処理対象として一括判定する為，統合）
 const GrammarProfile::Names::NameSet GrammarProfile::Names::ColonPairHost = {
@@ -2787,19 +3011,20 @@ const GrammarProfile::Names::NameSet GrammarProfile::Names::ColonPairHost = {
 	"enhanced_for_statement",
 	"field_initializer_list",
 	"for_range_loop",
-	"ternary_expression" // Java/JS/TS x ? a : b
+	"ternary_expression" // Java/JS/TS の `x ? a : b`
 };
 
 // `then` / `do` 等の制御本体開始キーワード
-const GrammarProfile::Names::NameSet GrammarProfile::Names::ThenDo = { "do", "then" }; // Ruby do // Ruby then
+const GrammarProfile::Names::NameSet GrammarProfile::Names::ThenDo = { "do", "then" }; // Ruby do
+// Ruby then
 // 自身の参照 (this / this_expression)
-const GrammarProfile::Names::NameSet GrammarProfile::Names::ThisReference = { "this", "this_expression" };
+const GrammarProfile::Names::NameSet GrammarProfile::Names::ThisRef = { "this", "this_expression" };
 
 // 透過ノード（深さを増やさず子を其の儘展開）
 const GrammarProfile::Names::NameSet GrammarProfile::Names::Transparent = {
 	"block_body",
 	"body_statement",
-	"chained_string", // Ruby 'a' "b" 隣接文字列リテラル連結（Ｎ個の子 string を親インデントで揃える）
+	"chained_string", // Ruby 'a' "b" 隣接文字列リテラル連結（Ｎ個の子 text を親インデントで揃える）
 	"compilation_unit",
 	"program",
 	"source_file",
@@ -2808,50 +3033,129 @@ const GrammarProfile::Names::NameSet GrammarProfile::Names::Transparent = {
 	"translation_unit" // C/C++ (file)
 };
 
-// `SourceProjector::Project` の錨を解包する透過包装
+// `SourceProjector::Project` のアンカーを解包する透過ラッパー
 // Kotlin と Swift の文リストを含む（`constructor_body` の漏れを防ぐ為，列挙でなく和集合で作る）
 const GrammarProfile::Names::NameSet GrammarProfile::Names::TransparentWrap =
 { FunctionBodyContainer, { "control_structure_body", "statements" } };
 
 // 例外処理の文・式（言語横断，Swift の do は別に判ずる）
-const GrammarProfile::Names::NameSet GrammarProfile::Names::TryStatement =
+const GrammarProfile::Names::NameSet GrammarProfile::Names::TryStmt =
 { "try_expression", "try_statement", "try_with_resources_statement" };
 
 // 戻値型の中で条件型を再び許す TS の関数型
-const GrammarProfile::Names::NameSet GrammarProfile::Names::TsFunctionType = { "constructor_type", "function_type" }; // TS new () => T // TS () => T
+// TS new () => T
+// TS () => T
+const GrammarProfile::Names::NameSet GrammarProfile::Names::TsFunctionType = { "constructor_type", "function_type" };
 
-// 右端を貪欲に伸ばす TS の型（条件の型の比べる型・矢印関数の戻値の型に括弧無で置くと後の `?` `=>` を取り込む）
+// 右端を貪欲に伸ばす TS の型（条件の型の比べる型・アロー関数の戻値の型に括弧無で置くと後の `?` `=>` を取り込む）
 const GrammarProfile::Names::NameSet GrammarProfile::Names::TsGreedyType =
 { "conditional_type", "constructor_type", "function_type", "infer_type" };
 
-// 型の被演算子を取る TS の型・式（演算子を持つ型を括弧無で置くと結合が変わる）
-const GrammarProfile::Names::NameSet GrammarProfile::Names::TsTypeOperatorHost = {
-	"array_type",
-	"as_expression",
-	"index_type_query",
-	"intersection_type",
-	"lookup_type",
-	"optional_type",
-	"readonly_type",
-	"rest_type",
-	"satisfies_expression",
-	"union_type" // TS (() => void) | null
-};
-
-// １要素組 `(x,)` で末尾カンマ必須となる組系（組リテラルと括弧付式の構文木区別）
+// １要素組 `(x,)` で末尾カンマ必須に為る組系（組リテラルと括弧付式の構文木区別）
 const GrammarProfile::Names::NameSet GrammarProfile::Names::TupleLike =
 { "tuple", "tuple_expression", "tuple_pattern", "tuple_struct_pattern", "tuple_type" };
 
 // 要素の `<` の比較が後の要素の `>` と対に為り，型引数の並びと読まれ得る一覧の要素の位置 (TS / C# / C++)
-const GrammarProfile::Names::NameSet GrammarProfile::Names::TypeArgumentLookalikeSlot =
+const GrammarProfile::Names::NameSet GrammarProfile::Names::TypeArgLookalikeSlot =
 { "argument", "argument_list", "arguments", "array", "initializer_expression", "initializer_list" };
 
 // 型を右に取る変換の式（後ろの `<` 等を型の続きと読む）
 const GrammarProfile::Names::NameSet GrammarProfile::Names::TypeCastRight =
 { "as_expression", "satisfies_expression", "type_cast_expression" };
 
-// `:` の右を値・型とする鍵値対・型の欄（優先順位の右端探索を止める）
+// `:` の右を値・型とするキー値対・型のフィールド（優先順位の右端探索を止める）
 const GrammarProfile::Names::NameSet GrammarProfile::Names::TypeColonParent = { "pair", "pair_pattern", "property_signature" };
+
+/**
+ * 無名の空文・空宣言を直接並べる文法毎のコンテナの取得関数
+ * 計算量：文法の識別子による取得は O(1)
+ * @param Lang 対象の文法
+ * @return 宣言の終端と別に独立したセミコロンを置けるコンテナの集合
+ * @throws std::bad_alloc 初回の集合のメモリを確保出来ない場合
+ * @throws std::length_error 集合の最大長を超える場合
+ */
+const GrammarProfile::Names::NameSet &GrammarProfile::Names::GetEmptyStmtContainers(const ::Lang Lang) {
+	// 言語識別子の順に，各文法が無名の空文を直接持つ場所を登録する
+	static const NameSet Containers[] {
+		{}, // C
+		{ "field_declaration_list" }, // C++
+		{}, // C#
+		{
+			"annotation_type_body",
+			"block",
+			"class_body",
+			"constructor_body",
+			"enum_body_declarations",
+			"interface_body",
+			"labeled_statement",
+			"program",
+			"switch_block_statement_group"
+		}, // Java
+		{}, // Go
+		{}, // Rust
+		{}, // Kotlin
+		{}, // Swift
+		{}, // PHP
+		{ "class_body" }, // JavaScript
+		{ "class_body" }, // TypeScript と TSX
+		{}, // Ruby
+		{}, // Python
+		{}, // JSON
+		{}, // HTML
+		{}, // CSS と SCSS
+		{} // 未確定の文法
+	};
+	// 文法毎の集合の返戻
+	return Containers[Lang.Id];
+}
+
+/**
+ * 文法毎の要素列の本体の登録集合の取得関数
+ * 計算量：文法の識別子による取得は O(1)
+ * @param Lang 対象の文法
+ * @return カンマ区切のメンバ又は実装を持たないアクセサを並べる本体の集合
+ * @throws std::bad_alloc 初回の登録集合のメモリを確保出来ない場合
+ * @throws std::length_error 登録集合の最大長を超える場合
+ */
+const GrammarProfile::Names::NameSet &GrammarProfile::Names::GetElementBodies(const ::Lang Lang) {
+	// 言語識別子の順に各文法の集合を登録し，同じノード名でも宣言列と要素列を区別する
+	static const NameSet Bodies[] {
+		{}, // C
+		{}, // C++
+		{ "accessor_list" }, // C#
+		{}, // Java
+		{}, // Go
+		{ "field_declaration_list", "ordered_field_declaration_list" }, // Rust
+		{}, // Kotlin
+		{ "protocol_property_requirements" }, // Swift
+		{}, // PHP
+		{}, // JavaScript
+		{ "interface_body", "object_type" }, // TypeScript と TSX
+		{}, // Ruby
+		{}, // Python
+		{}, // JSON
+		{}, // HTML
+		{}, // CSS と SCSS
+		{} // 未確定の文法
+	};
+	// 対象の文法の集合の返戻
+	return Bodies[Lang.Id];
+}
+
+// 型のメンバを並べる本体（宣言列と要素列の何方も含む）
+const GrammarProfile::Names::NameSet GrammarProfile::Names::TypeMemberBody = {
+	"accessor_list",
+	"annotation_type_body",
+	"class_body",
+	"declaration_list",
+	"field_declaration_list",
+	"interface_body",
+	"interface_type",
+	"object_type",
+	"ordered_field_declaration_list",
+	"protocol_body",
+	"protocol_property_requirements"
+};
 
 // 宣言の型の名前（比較境界の整数性・値域の確認に使う）
 const GrammarProfile::Names::NameSet GrammarProfile::Names::TypeNameNode = {
@@ -2865,7 +3169,7 @@ const GrammarProfile::Names::NameSet GrammarProfile::Names::TypeNameNode = {
 };
 
 // 名前に型を付ける宣言・仮引数
-const GrammarProfile::Names::NameSet GrammarProfile::Names::TypedDeclaration = {
+const GrammarProfile::Names::NameSet GrammarProfile::Names::TypedDecl = {
 	"declaration",
 	"formal_parameter",
 	"let_declaration",
@@ -2876,6 +3180,15 @@ const GrammarProfile::Names::NameSet GrammarProfile::Names::TypedDeclaration = {
 	"var_spec",
 	"variable_declaration"
 };
+
+const GrammarProfile::Names::NameSet GrammarProfile::Names::TypePrefixKeyword = { "readonly" }; // 内側の前置型の語
+const GrammarProfile::Names::NameSet GrammarProfile::Names::TypePrefixOperand = { "array_type", "tuple_type" }; // 前置型の被演算子
+const GrammarProfile::Names::NameSet GrammarProfile::Names::TypePrefixOperator = { "keyof" }; // 外側の前置型の語
+
+const GrammarProfile::Names::NameSet GrammarProfile::Names::TypePrefixWeak =
+{ "conditional_type", "intersection_type", "union_type" }; // 前置語より結合の弱い型
+
+const GrammarProfile::Names::NameSet GrammarProfile::Names::TypePrefixWrapper = { "readonly_type" }; // 内側の前置型を包む構文
 
 // 演算子を持つ型（型の演算子の被演算子に括弧無で置くと結合が変わる）
 const GrammarProfile::Names::NameSet GrammarProfile::Names::TypeOperatorInner = {
@@ -2928,8 +3241,15 @@ const GrammarProfile::Names::NameSet GrammarProfile::Names::UnaryPreOrUpdate = {
 };
 
 // 前置の単項式（C# は prefix_unary_expression で持つ）
-const GrammarProfile::Names::NameSet GrammarProfile::Names::UnaryPrefixExpression =
-{ "not_operator", "prefix_unary_expression", "unary", "unary_expression" };
+const GrammarProfile::Names::NameSet GrammarProfile::Names::UnaryPrefixExpr = {
+	"not_operator",
+	"prefix_expression",
+	"prefix_unary_expression",
+	"unary",
+	"unary_expression",
+	"unary_op_expression",
+	"unary_operator"
+};
 
 // 前置単項の記号（キャスト風の括弧の後で密着させる）
 const GrammarProfile::Names::NameSet GrammarProfile::Names::UnaryPrefixToken = { "!", "+", "-", "~" };
@@ -2938,18 +3258,18 @@ const GrammarProfile::Names::NameSet GrammarProfile::Names::UnaryPrefixToken = {
 const GrammarProfile::Names::NameSet GrammarProfile::Names::Unformattable =
 { "heredoc_beginning", "heredoc_body", "template_literal_type", "template_string", "template_substitution", "template_type" };
 
-// 変数宣言ノード（DeclLike に let_declaration / property_declaration を含めた拡張版）言語横断
-const GrammarProfile::Names::NameSet GrammarProfile::Names::VariableDeclaration = {
+// 変数宣言ノード（DeclLike に let_declaration / property_declaration を含めた拡張バージョン）言語横断
+const GrammarProfile::Names::NameSet GrammarProfile::Names::VarDecl = {
 	"declaration",
 	"let_declaration",
 	"lexical_declaration",
 	"local_variable_declaration",
 	"property_declaration",
-	"variable_declaration" // JS/TS var x = ...
+	"variable_declaration" // JS/TS の `var x = ...`
 };
 
 // 名前を `name` 場に持つ Java / C# の変数の宣言 — `ControlFlow::DeclarationsIn`
-const GrammarProfile::Names::NameSet GrammarProfile::Names::VariableDeclarator = {
+const GrammarProfile::Names::NameSet GrammarProfile::Names::VarDeclarator = {
 	"catch_declaration",
 	"catch_formal_parameter",
 	"enhanced_for_statement",
@@ -2958,7 +3278,73 @@ const GrammarProfile::Names::NameSet GrammarProfile::Names::VariableDeclarator =
 	"variable_declarator"
 };
 
-// 子から組み直さず原文を写す節点（`ERROR` は構造が信用出来ず，`shebang_line` は解釈系の経路を子に持たない）
+// 子から組み直さず原文をコピーするノード（`ERROR` は構造が信用出来ず，`shebang_line` は解釈系の経路を子に持たない）
 const GrammarProfile::Names::NameSet GrammarProfile::Names::VerbatimNode = { "ERROR", "shebang_line" };
 // 先に条件を判ずる繰返 (while_expression / while_statement)
 const GrammarProfile::Names::NameSet GrammarProfile::Names::WhileLoop = { "while_expression", "while_statement" };
+
+// Go の省略可能なセミコロンを持つ文・メンバ・インポートのコンテナ
+const GrammarProfile::Names::NameSet GrammarProfile::Names::GoSemicolonHost {
+	StmtList,
+	GoMemberList,
+	{ "import_spec_list", "source_file" }
+};
+
+// Go の自動の文終端の前で内部を１トークンとして読むリテラル
+const GrammarProfile::Names::NameSet GrammarProfile::Names::GoSemicolonLiteral {
+	"interpreted_string_literal",
+	"raw_string_literal",
+	"rune_literal"
+};
+
+// Go の自動の文終端を挿入する名前付のトークン（共通の識別子・数値ロール以外）
+const GrammarProfile::Names::NameSet GrammarProfile::Names::GoSemicolonNamedToken {
+	"blank_identifier",
+	"false",
+	"field_identifier",
+	"imaginary_literal",
+	"iota",
+	"label_name",
+	"nil",
+	"package_identifier",
+	"true",
+	"type_identifier"
+};
+
+// Go の自動の文終端を挿入する名前無のトークン
+const GrammarProfile::Names::NameSet GrammarProfile::Names::GoSemicolonToken {
+	")",
+	"++",
+	"--",
+	"]",
+	"break",
+	"continue",
+	"fallthrough",
+	"return",
+	"}"
+};
+
+// 投影でデコードするリテラルの部品
+const GrammarProfile::Names::NameSet GrammarProfile::Names::DecodedLiteralPart {
+	"escape_sequence",
+	"heredoc_end",
+	"heredoc_start",
+	"string_content",
+	"string_fragment"
+};
+
+// デコード対象の集合を変えず，逐語保持する本文を加えたリテラルの内容
+const GrammarProfile::Names::NameSet GrammarProfile::Names::LiteralContent {
+	DecodedLiteralPart,
+	{ "heredoc_content", "interpolated_string_text", "line_str_text", "multi_line_str_text", "raw_string_content", "string_value" }
+};
+
+// 型の導入を持つ仮引数（Python の同名の並びは使用側の文法で除く）
+const GrammarProfile::Names::NameSet GrammarProfile::Names::NamedTypeParam { "type_parameter", "type_parameter_pack" };
+
+// 型の仮引数の並び
+const GrammarProfile::Names::NameSet GrammarProfile::Names::GenericParamList {
+	"template_parameter_list",
+	"type_parameter_list",
+	"type_parameters"
+};

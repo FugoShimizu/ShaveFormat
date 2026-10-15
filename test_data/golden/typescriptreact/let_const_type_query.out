@@ -1,0 +1,118 @@
+/**
+ *
+ * @return
+ */
+function numberQuery() {
+	let x = 1;
+	type T = typeof x extends 1 ? string : number;
+	const y: T = 0;
+	return y;
+}
+
+/**
+ *
+ * @return
+ */
+function stringQuery() {
+	let x = "a";
+	type T = typeof x extends "a" ? string : number;
+	const y: T = 0;
+	return y;
+}
+
+/**
+ *
+ * @return
+ */
+function bigintQuery() {
+	let x = 1n;
+	type T = typeof x extends 1n ? string : number;
+	const y: T = 0;
+	return y;
+}
+
+/**
+ *
+ * @return
+ */
+function nestedQuery() {
+	let x = 1;
+	type Box<T> = T[];
+	type T = Box<{ value: typeof x }>;
+	const read = (): typeof x => x;
+	return read();
+}
+
+/**
+ *
+ * @return
+ */
+function runtimeQuery() {
+	let x = 1;
+	return typeof x;
+}
+
+/**
+ *
+ * @return
+ */
+function shadowedQuery() {
+	let x = 1;
+	{
+		let x = "a";
+		type T = typeof x;
+		const y: T = "a";
+		console.log(y);
+	}
+	return x;
+}
+
+/**
+ *
+ * @return
+ */
+function objectIsolation() {
+	let x = 1;
+	type Box<T> = T[];
+	type T = Box<{ value: typeof x }>;
+	return 0;
+}
+
+/**
+ *
+ * @return
+ */
+function runtimeAfterObject() {
+	let x = 1;
+	return typeof x;
+}
+
+/**
+ *
+ * @return
+ */
+function arrowIsolation() {
+	let x = 1;
+	const read = (): typeof x => x;
+	return read();
+}
+
+/**
+ *
+ * @return
+ */
+function runtimeAfterArrow() {
+	let x = 1;
+	return typeof x;
+}
+
+/**
+ *
+ * @return
+ */
+function signatureShadowing() {
+	let x = 1;
+	type T = (x: string) => typeof x;
+	type U = new (x: string) => typeof x;
+	return typeof x;
+}

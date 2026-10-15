@@ -1,5 +1,4 @@
 1:1: Violation: Documentation is missing a summary
-6:6: Review: Use PascalCase for function f; verify external contract
 6:12: Violation: Documentation is missing a description for parameter 'a'
 6:19: Violation: Documentation is missing a description for parameter 'b'
 11:2: Violation: Add the required comment before this `return`

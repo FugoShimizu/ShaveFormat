@@ -21,3 +21,17 @@ void Count(void) {
 	for(; x < 2; ++x) x = 1;
 	return;
 }
+
+/**
+ * 別名の組込演算を確認する
+ */
+void AliasNames(void) {
+	size_t Value;
+	++Value;
+	int8_t Narrow;
+	++Narrow;
+	ptrdiff_t Offset;
+	++Offset;
+	// 終了
+	return;
+}

@@ -1,0 +1,89 @@
+<div>
+<p>&#000065<!---->1</p>
+<p>&frac1<!---->3;</p>
+<p>&cop
+<!-- c -->
+y</p>
+<p>&#x41g<!---->z</p>
+</div>
+
+<p>a</p><!-- 。 -->
+<p>b</p><!-- 。乙 -->
+<p>c</p><!-- 甲。乙 -->
+<p>d</p><!-- 甲？乙 -->
+
+<p>a</p><!--文。-->
+<p>b</p><!-- 文。-->
+
+<!--  囲み  注記  と  HTMLの要素  -->
+<div>
+  <!-- 説明する。 -->
+  <p>a</p>
+  <!-- - 「稼働」の状態 -->
+</div>
+
+<p>x</p>
+<!-- Done. More text. -->
+<p>x</p>
+<!--
+    `文。`
+    説明。
+-->
+<!-- Read. Return. -->
+<!-- Read (once). Return. -->
+<!-- Dr. Smith reads. -->
+<!-- 処理する.結果を返す. -->
+<!-- 1. Read. Return. -->
+<!-- A. Read. Return. -->
+<!-- (Read. Return.) -->
+<!-- (Read. Return.). Next. -->
+<!-- "Read (once. Return.) then. Finish." -->
+<!-- 'Read "once. Return." then. Finish.' -->
+<!-- don't stop. users' cache. Next. -->
+<!-- Read \"once. Return. -->
+<!-- ('a.'b.'x.'c) -->
+<!-- 処理.. 続行. -->
+<!-- 処理.。 -->
+<!-- 処理.。次 -->
+<!-- (処理.。次) -->
+<!-- Read.続行. -->
+<!-- Read？Return！Next。 -->
+<!-- `Read. Return.` x = "Read. Return." -->
+<!-- ========== ==== ========== -->
+<script>
+// ========== ==== ==========
+const equalSection = 1;
+</script>
+<script>
+/**
+ * Summary
+ * @param a Value
+ */
+function defaultClass(a = class A {}) {}
+</script>
+<script>
+// "Read here." 日本語ABC "Return now."
+// 'Read here.' 甲, B '?Return now.' 日本語ABC '!Finish here.'
+const quoteAnchor = 1;
+</script>
+<style>
+/* "Read here." 日本語ABC "Return now." */
+a { color: red; }
+</style>
+<script>
+function /** Header */ headerDoc(){return 1;}
+</script>
+
+<script>
+/** A */
+/** ========== X ========== */
+/** B
+ * @param b B value
+ * @param a A value
+ */
+function sectionDocs(a,b){return a+b;}
+</script>
+<!-- {@code A.  B.} -->
+<!-- {@literal A.  B.} -->
+<!-- (@dot A.  B. @enddot) -->
+<!-- (@f$ A.  B. @f$) -->

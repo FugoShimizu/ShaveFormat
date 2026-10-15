@@ -1,1 +1,8 @@
 6:12: Violation: Documentation is missing a description for parameter 'a'
+18:1: Violation: Documentation is missing a summary
+22:11: Violation: Documentation is missing a return-value description
+34:10: Violation: Documentation is missing a return-value description
+42:10: Violation: Documentation is missing a return-value description
+50:10: Violation: Documentation is missing a return-value description
+58:23: Violation: Documentation is missing a description for parameter 'xs'
+63:24: Violation: Documentation is missing a description for parameter 'opts'

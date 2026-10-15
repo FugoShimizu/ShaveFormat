@@ -11,10 +11,48 @@ class Dispatcher {
 		default:
 			break;
 		}
-		// <summary>処理する</summary>
+		/**
+		 * <summary>&lt;summary&gt;処理する&lt;/summary&gt;</summary>
+		 */
 		void Run() {
 			return;
 		}
 		return;
+	}
+
+	/**
+	 * <summary>値の取得関数</summary>
+	 * <returns>取得した値</returns>
+	 */
+	static int EscapedReturn() {
+		int a = G();
+		return @a;
+	}
+
+	/**
+	 * <summary>値の取得関数</summary>
+	 * <returns>取得した値</returns>
+	 */
+	static int UnicodeDeclaration() {
+		int \u0061 = G();
+		return a;
+	}
+
+	/**
+	 * <summary>値の取得関数</summary>
+	 * <returns>取得した値</returns>
+	 */
+	static int LongEscapeReturn() {
+		int a = G();
+		return \U00000061;
+	}
+
+	/**
+	 * <summary>値の取得関数</summary>
+	 * <returns>取得した値</returns>
+	 */
+	static int FormatCharacterReturn() {
+		int a‌ = G();
+		return a;
 	}
 }

@@ -29,3 +29,24 @@ void Foo() {
 	const int X = 1; // x
 	const int Y = 2; // y
 }
+
+/**
+ * ネストした型の共有
+ */
+void NestedType(){
+decltype(static_cast<decltype([]{})*>(nullptr)) FirstObjectWithSharedLambdaTypeAndLongIdentifier,
+SecondObjectWithSharedLambdaTypeAndLongIdentifier;
+}
+
+/**
+ * 別々のラムダ型
+ */
+void DistinctTypes(){
+decltype([]{}) a;
+decltype([]{}) b;
+static_assert(!std::is_same_v<decltype(a),decltype(b)>);
+}
+
+template<int N> constexpr bool IsPositiveV<N + 1> = true;
+template<typename T>
+constexpr bool IsSameV<T, T> = true;

@@ -17,3 +17,55 @@ function dispatch(int $code): void {
 	}
 	return;
 }
+
+/**
+ * 初期値を返す関数
+ * @return int 初期値
+ */
+function firstBinding(): int {
+	$a = g();
+	return $a;
+}
+
+/**
+ * 書込後の値を返す関数
+ * @return int 書込後の値
+ */
+function reassignedBinding(): int {
+	$a = g();
+	$a = h();
+	// 値の返戻
+	return $a;
+}
+
+/**
+ * 使用後の値を返す関数
+ * @return int 使用後の値
+ */
+function referencedBinding(): int {
+	$a = g();
+	useValue($a);
+	// 値の返戻
+	return $a;
+}
+
+/**
+ * 仮引数を書き換えて返す関数
+ * @param int $a 元の値
+ * @return int 書込後の値
+ */
+function parameterBinding(int $a): int {
+	$a = g();
+	return $a;
+}
+
+/**
+ * 外部の束縛を書き換える関数
+ * @return int 書込後の値
+ */
+function globalBinding(): int {
+	global $a;
+	$a = g();
+	// 値の返戻
+	return $a;
+}

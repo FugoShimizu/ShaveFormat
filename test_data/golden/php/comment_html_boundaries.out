@@ -1,0 +1,29 @@
+<ul>
+<?php foreach($items as $item): // 各項目 ?>
+  <li><?php echo $item; /* 名前 */ ?></li>
+  <li><?php echo $item; // 名前 ?></li>
+  <li><?php /* 前 */ echo $item; ?></li>
+<?php endforeach; ?>
+</ul>
+
+<span><?php g(); /* c4 */ ?>x<?php h(); // c5 ?></span>
+<span><?php g(); // c4 ?>x<?php h(); ?></span>
+<span><?php g(); ?>x<?php h(); // c5 ?></span>
+<ul><?php foreach($xs as $x) { // TODO(security): escape output
+	echo $x;
+	echo $x;
+}
+?></ul>
+
+<ul>
+<?php foreach([1] as $x): /* loop */ ?>
+<b><?= $x; ?></b>
+<?php endforeach; /* end */ ?>
+</ul>
+<?php echo 1; ?>
+<?php echo 2; // c3 ?>
+<p><?php echo 3; // dropped with html line ?></p>
+
+<div>
+<?php $x = 1; // trailing hash // Next ?>
+</div>

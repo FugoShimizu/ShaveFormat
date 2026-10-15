@@ -26,10 +26,14 @@ enum class Color {
 	GREEN
 } // colors
 
-/** KDoc */
+/**
+ * KDoc
+ */
 abstract class Shape
 
 val name = "abc"
 
-/** KDoc2 */
+/**
+ * KDoc2
+ */
 abstract class Shape2

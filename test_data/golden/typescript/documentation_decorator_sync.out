@@ -1,0 +1,189 @@
+class C {
+	/**
+	 * 送る
+	 * @param b 値
+	 * @return 結果
+	 */
+	@Post()
+	post(b: number): number {
+		return b;
+	}
+
+	/**
+	 *
+	 * @param a
+	 */
+	@Get()
+	handle(a: number): void {
+		return;
+	}
+}
+
+class A {
+	/**
+	 * Doc
+	 * @param x
+	 * @return
+	 */
+	@dec
+	m(x: number): number {
+		return x;
+	}
+}
+
+class C {
+	/**
+	 * 経路
+	 */
+	@Get({ path: "x" })
+	find(): void {
+		return;
+	}
+}
+
+/**
+ * === rule_docgen_generate ===
+ * @param a
+ * @param b
+ * @return
+ */
+function add(a: number, b: number): number {
+	return a + b;
+}
+
+/**
+ *
+ */
+function reset(): void {
+	state = 0;
+	return;
+}
+
+/**
+ *
+ * @param value
+ * @return
+ */
+function infer(value: string) {
+	return value.length;
+}
+
+/**
+ * === rule_docgen_reconcile ===
+ * 範囲を切り詰める
+ * @param value 対象値
+ * @param lower
+ * @param upper
+ * @param gone 余分
+ * @return 切詰結果
+ */
+function clamp(value: number, lower: number, upper: number): number {
+	return Math.min(Math.max(value, lower), upper);
+}
+
+/**
+ * \@ts-expect-error 型定義が未整備
+ * @param alpha
+ * @return
+ */
+export function run(alpha: MissingType): number {
+	return 1;
+}
+
+/**
+ * eslint-disable-next-line @typescript-eslint/no-explicit-any
+ * @param beta
+ */
+export function loose(beta: any): void {
+	console.log(beta);
+	return;
+}
+
+/**
+ *
+ * @param c
+ * @return
+ */
+function h(c: boolean): number {
+	if(c) x(); // x // c2
+	/**
+	 *
+	 */
+	function g() {}
+	return 1;
+}
+
+class A {
+	/**
+	 *
+	 * @param y value
+	 */
+	m(@Inject() y: string) {}
+}
+
+/**
+ * 面積
+ * 幅
+ * TODO: 単位
+ * @param w
+ * @param h
+ * @return
+ */
+function area(w: number, h: number): number {
+	return w * h;
+}
+
+/**
+ * First
+ * Second
+ * @param a Alpha
+ */
+function docBoundary(a: number): void {}
+/**
+ * Summary
+ * @param a Value
+ * @param b Value
+ */
+function arrayBindings([\u0061 = 1, ...\u0062]: number[] = []): void {}
+/**
+ * Summary
+ * @param a Value
+ * @param b Value
+ */
+function nestedBindings({ outer: { inner: \u0061 }, ...\u0062 }: { outer: { inner: number } }): void {}
+/**
+ * Summary
+ * @param a Value
+ */
+function defaultClass(a: unknown = class A {}): void {}
+
+function /**
+ * Hello
+ * @param a
+ * @return
+ */ inlineFrame(a: number): number {
+	return a;
+}
+
+/**
+ * A
+ */
+/// <reference path="a.ts" />
+/**
+ * B
+ * @param a A value
+ * @param b B value
+ * @return
+ */
+function referenceDocs(a: number, b: number): number {
+	return a + b;
+}
+
+/**
+ * A
+ */
+/// <reference path="a.ts" />
+/**
+ * B
+ */
+function referenceTrailing(): void {}

@@ -20,3 +20,28 @@ fn check(a: u8, b: i64) {
 	}
 	return;
 }
+
+/**
+ * 条件分岐と指数の検査
+ */
+fn inspect() -> () {
+	if a { f(); }
+	if b { f(); }
+	if c { f(); }
+	if a { f(); } else if b { f(); } else if c { f(); }
+	if a { if b { f(); } }
+	if a { if b { if c { f(); } } }
+	x += 1E0_1;
+	x -= 1E+0_1;
+	x += 1E-0_1;
+	consume(x >= b + 1E0_1);
+	consume(x <= b - 1E-0_1);
+	consume(b + 1E+0_1 <= x);
+	consume(b - 1E0_1 >= x);
+	x += 1E0_0;
+	consume(x >= b + 1E0_0);
+	consume(x == 0E1_0);
+	x -= 1E+0_1f64;
+	// 終了
+	return;
+}

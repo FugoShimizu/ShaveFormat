@@ -5,7 +5,8 @@
 		<!-- in head -->
 		<title>T<!-- t --></title>
 		<!-- before meta -->
-		<meta charset="utf-8"><!-- after meta -->
+		<meta charset="utf-8">
+		<!-- after meta -->
 		<style>
 			/* s */ a {
 				color: red;

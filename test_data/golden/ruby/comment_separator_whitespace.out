@@ -9,3 +9,12 @@ form_feed_c = 3
 vertical_a = 1
 # vertical
 vertical_c = 3
+# ========== ASCII と日本語 ==========
+mixed_section = 1
+# 「ASCII と日本語」
+# 『Alpha Beta』
+# 【日本語と日本語】
+# ==========「ASCII と日本語」==========
+quoted_spacing = 2
+# ========== ==== ==========
+# ========== ==== ==========

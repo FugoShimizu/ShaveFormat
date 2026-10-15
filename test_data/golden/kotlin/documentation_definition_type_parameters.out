@@ -1,0 +1,154 @@
+class C {
+	/**
+	 * 値
+	 */
+	val value: Int = 1
+}
+
+/**
+ * === rule_docgen_generate ===
+ * @param a
+ * @param b
+ * @return
+ */
+fun add(a: Int, b: Int): Int {
+	return a + b
+}
+
+/**
+ *
+ */
+fun reset() {
+	total = 0
+	return
+}
+
+/**
+ * === rule_docgen_reconcile ===
+ * 値を倍にする
+ * @param value 入力値
+ * @param extra 余分
+ * @return 倍化結果
+ */
+fun double(value: Int): Int {
+	return value * 2
+}
+
+/**
+ *
+ * @param alpha
+ * @return
+ */
+fun compute(alpha: List<Int> = listOf(1)): Int {
+	return alpha.size
+}
+
+/**
+ * 幅
+ * TODO: 単位
+ * @param w
+ * @param h
+ * @return
+ */
+fun area(w: Int, h: Int): Int {
+	return w * h
+}
+
+// 説明
+println("x")
+
+/**
+ * 包む
+ * @param T 要素の型
+ * @param value 値
+ * @return 包んだ値
+ */
+fun <T> wrap(value: T): T {
+	return value
+}
+
+/**
+ * 式の結果
+ * @return 既存の結果
+ */
+fun exprResult() = readValue()
+/**
+ * 無値
+ */
+fun noValue(): Unit {}
+
+/**
+ * 戻らない
+ */
+fun halt(): Nothing {
+	throw IllegalStateException()
+}
+
+/**
+ * 型と値の対応を保つ
+ * @param B 先の型
+ * @param <A> 後の型
+ * @param A 後の型の補足
+ * @param first 先の値
+ * @param second 後の値
+ */
+fun <B, A> ordered(first: B, second: A) {}
+/**
+ * First
+ * Second
+ * @param a Alpha
+ */
+fun docBoundary(a: Int): Unit {}
+/**
+ * Summary
+ * @param class Value
+ */
+fun quoted(`class`: Int): Unit {}
+/**
+ * Summary
+ * @param `a b` Value
+ */
+fun quotedSpace(`a b`: Int): Unit {}
+
+/**
+ * Summary
+ * @param a A
+ * @param b B
+ * @return
+ */ fun inlineOrder(a: Int, b: Int): Int {
+	return a + b
+}
+
+fun /**
+ * Hello
+ * @param a
+ * @return
+ */ inlineFrame(a: Int): Int {
+	return a
+}
+
+/**
+ * A
+ * ========== X ==========
+ * B
+ * @param a A value
+ * @param b B value
+ * @return
+ */
+fun sectionDocs(a: Int, b: Int): Int {
+	return a + b
+}
+
+/**
+ * A
+ * ========== X ==========
+ * B
+ */
+fun trailing(): Unit {}
+
+/**
+ * Header description
+ */
+class Header {
+	val value = 1
+}

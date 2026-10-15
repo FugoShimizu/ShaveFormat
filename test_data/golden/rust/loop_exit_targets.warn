@@ -1,5 +1,4 @@
-1:1: Violation: Use outer Rust block documentation for this documentation
-15:2: Violation: Add the required comment before this `return`
-18:1: Violation: Use outer Rust block documentation for this documentation
-24:3: Review: Replace this jump with structured control flow; verify applicability, lifetime
-26:2: Violation: Add the required comment before this `return`
+7:10: Review: Add an explicit type to this declaration
+16:2: Violation: Add the required comment before this `return`
+26:3: Review: Replace this jump with structured control flow
+28:2: Violation: Add the required comment before this `return`

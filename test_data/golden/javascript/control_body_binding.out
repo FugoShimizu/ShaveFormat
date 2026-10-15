@@ -1,0 +1,145 @@
+/**
+ *
+ * @param a
+ */
+function foo(a) {
+	if(a === 1) {
+		const x = 1;
+	}
+	if(a === 2) {
+		var y = 2;
+	}
+	return;
+}
+
+/**
+ *
+ * @param a
+ * @param b
+ * @param c
+ */
+function f(a, b, c) {
+	if(a) {
+		if(b) x();
+		else if(c) y();
+	} else z();
+	if(a) {
+		while(true) if(b) y();
+	} else z();
+	if(true);
+	;
+	if(a) x();
+	// explains the else
+	else y();
+	return;
+}
+
+/**
+ *
+ * @param a
+ * @param b
+ */
+function f(a, b) {
+	if(a) if(b) {
+		const x = read(), /* first */ y = read();
+		/* second */ use(x, y);
+	}
+	return;
+}
+
+/**
+ *
+ * @param a
+ * @param b
+ */
+function f(a, b) {
+	if(a) {
+		if(b) x();
+		else y();
+	}
+	while(a) {
+		do x();
+		while(b);
+	}
+	if(a) x();
+	else {
+		do y();
+		while(b);
+	}
+	if(a) if(b) {} else {}
+	if(a) if(b) {} else {}
+	if(a) do {} while(b);
+	if(a) do {} while(b);
+	return;
+}
+
+/**
+ *
+ * @param X
+ * @return
+ */
+function Classify(X) {
+	if(X < 0) return -1;
+	else if(X === 0) return 0;
+	else if(X < 10) return 1;
+	else return 2;
+}
+
+/**
+ *
+ * @param A
+ * @param B
+ */
+function Nested(A, B) {
+	if(A) {
+		if(B) X = 1;
+		else if(A !== B) X = 2;
+		else X = 3;
+	}
+	return;
+}
+
+var t = R(
+	{
+		/**
+		 *
+		 */
+		a() {
+			var f = `
+`;
+			return;
+		}
+	}
+);
+
+var u = R(
+	{
+		/**
+		 *
+		 */
+		b() {
+			/**
+			 *
+			 */
+			function d() {
+				while(true) {
+					if(x) g();
+					else if(y) {
+						if(z) throw e;
+					} else x.type === "comma" ? (W.groups.push(Q), Q = { groups: [], type: "comma_group" }, M[M.length - 1] = Q) : Q.groups.push(x);
+				}
+			}
+			return;
+		}
+	}
+);
+
+/**
+ *
+ */
+function f() {
+	with(FBL) {
+		var x = 1, y = 2;
+	}
+	return;
+}

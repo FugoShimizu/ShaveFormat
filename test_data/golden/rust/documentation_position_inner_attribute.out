@@ -1,2 +1,9 @@
-//! 箱の説明
+/*!
+ * 箱の説明
+ */
 #![deny(missing_docs)]
+
+/**
+ * Header description
+ */
+struct Header { value: i32 }

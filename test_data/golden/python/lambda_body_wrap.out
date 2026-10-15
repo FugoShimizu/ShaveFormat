@@ -3,12 +3,14 @@ x = f(
 	g(a, b)
 )
 
-y = sorted(
-	xs,
-	key=lambda item:
-	(
-		item.a,
-		item.b
+y = (
+	sorted(
+		xs,
+		key=lambda item:
+		(
+			item.a,
+			item.b
+		)
 	)
 )
 
@@ -17,3 +19,8 @@ z = map(
 	{ v: 1 },
 	xs
 )
+
+x = (
+	lambda a:
+	aa + bb
+)(cc)

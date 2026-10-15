@@ -4,3 +4,112 @@
  * - Parameter date: The time
  */
 func log(message: String, date: Date) {}
+/**
+ * Resolve
+ * - Parameter Returns: return input
+ * - Parameter Returns: second input
+ * - Parameter Throws: failure input
+ * - Parameter other: other input
+ * - Parameter unknown: extra description
+ */
+func resolve(Returns: Int, Throws: Int, other: Int) -> Void {}
+/**
+ * 型と値の対応を保つ
+ * - Parameter B: 先の型
+ * - Parameter B: 先の型の補足
+ * - Parameter A: 後の型
+ * - Parameter first: 先の値
+ * - Parameter second: 後の値
+ */
+func ordered<B, A>(first: B, second: A) {}
+/**
+ * First
+ * Second
+ * - Parameter a: Alpha
+ */
+func docBoundary(a: Int) -> Void {}
+/**
+ * Summary
+ * - Parameter 数: Value
+ */
+func unicodeBareSingle(数: Int) -> Void {}
+/**
+ * Summary
+ * - Parameter 数: Value
+ */
+func unicodeBareGroup(数: Int) -> Void {}
+/**
+ * Summary
+ * - Parameter `数`: Value
+ */
+func unicodeQuotedSingle(`数`: Int) -> Void {}
+/**
+ * Summary
+ * - Parameter `数`: Value
+ */
+func unicodeQuotedGroup(`数`: Int) -> Void {}
+/**
+ * Summary
+ * - Parameter café: Value
+ */
+func accentBareSingle(café: Int) -> Void {}
+/**
+ * Summary
+ * - Parameter café: Value
+ */
+func accentBareGroup(café: Int) -> Void {}
+/**
+ * Summary
+ * - Parameter `café`: Value
+ */
+func accentQuotedSingle(`café`: Int) -> Void {}
+/**
+ * Summary
+ * - Parameter `café`: Value
+ */
+func accentQuotedGroup(`café`: Int) -> Void {}
+/**
+ * Summary
+ * - Parameter 😀: Value
+ */
+func emojiBareSingle(😀: Int) -> Void {}
+/**
+ * Summary
+ * - Parameter 😀: Value
+ */
+func emojiBareGroup(😀: Int) -> Void {}
+/**
+ * Summary
+ * - Parameter `😀`: Value
+ */
+func emojiQuotedSingle(`😀`: Int) -> Void {}
+/**
+ * Summary
+ * - Parameter `😀`: Value
+ */
+func emojiQuotedGroup(`😀`: Int) -> Void {}
+/**
+ * Summary
+ * - Parameter a: Value
+ */
+func asciiBareSingle(a: Int) -> Void {}
+/**
+ * Summary
+ * - Parameter a: Value
+ */
+func asciiBareGroup(a: Int) -> Void {}
+/**
+ * Summary
+ * - Parameter `a`: Value
+ */
+func asciiQuotedSingle(`a`: Int) -> Void {}
+/**
+ * Summary
+ * - Parameter `a`: Value
+ */
+func asciiQuotedGroup(`a`: Int) -> Void {}
+/**
+ * Summary
+ * - Parameter class: Value
+ */
+func quotedKeyword(`class`: Int) -> Void {}

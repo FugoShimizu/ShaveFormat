@@ -1,4 +1,24 @@
+8:2: Review: Merge the conditions of these identical branch bodies
+8:7: Review: Use a strict inequality with an equivalent adjusted boundary
 9:3: Violation: Add the required comment before this `return`
-10:13: Review: Use a strict inequality with an equivalent adjusted boundary; verify type, value range
+10:13: Review: Use a strict inequality with an equivalent adjusted boundary
 11:3: Violation: Add the required comment before this `return`
 12:2: Violation: Add the required comment before this `return`
+14:1: Review: Merge the conditions of these identical branch bodies
+23:1: Review: Merge the conditions of these identical branch bodies
+45:11: Review: Use a strict inequality with an equivalent adjusted boundary
+46:11: Review: Use the zero-test form required for this numeric type
+47:11: Review: Use a strict inequality with an equivalent adjusted boundary
+48:11: Review: Use a strict inequality with an equivalent adjusted boundary
+49:12: Review: Use a strict inequality with an equivalent adjusted boundary
+50:12: Review: Use a strict inequality with an equivalent adjusted boundary
+51:11: Review: Use a strict inequality with an equivalent adjusted boundary
+52:11: Review: Use a strict inequality with an equivalent adjusted boundary
+53:12: Review: Use a strict inequality with an equivalent adjusted boundary
+54:12: Review: Use a strict inequality with an equivalent adjusted boundary
+55:11: Review: Use a strict inequality with an equivalent adjusted boundary
+56:11: Review: Use a strict inequality with an equivalent adjusted boundary
+57:11: Review: Use a strict inequality with an equivalent adjusted boundary
+58:12: Review: Use a strict inequality with an equivalent adjusted boundary
+74:11: Review: Use the zero-test form required for this numeric type
+75:11: Review: Use the zero-test form required for this numeric type

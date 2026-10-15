@@ -1,0 +1,21 @@
+package p
+
+//line foo.go:0
+var a = 1
+//line foo.go:12
+var b = 2
+/*line x.go:3:0*/ var c = 3
+/*line x.go:3:4*/ var d = 4
+
+// main
+func main() {
+//line gen.go:100
+	a()
+	//line gen.go:200
+	b()
+//go:generate echo active
+	c()
+	//go:generate echo inactive
+	d()
+	return
+}

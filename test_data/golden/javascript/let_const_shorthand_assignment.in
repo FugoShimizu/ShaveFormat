@@ -1,6 +1,0 @@
-{
-	let b = 1;
-	({b} = o);
-	let c = 3;
-	console.log(b, c);
-}

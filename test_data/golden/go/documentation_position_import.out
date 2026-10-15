@@ -1,8 +1,13 @@
 package p
 
 // 取込
-//
 // 続き
 import "fmt"
 
 var _ = fmt.Println
+
+// ========== S ==========
+func F() {
+	fmt.Println()
+	return
+}

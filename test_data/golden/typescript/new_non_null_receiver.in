@@ -1,3 +1,0 @@
-declare const a: any;
-declare const x: number;
-export const r = [(new a)!.c, (new a)!(), (new a)![0], (new a)!, (new a())!.c, new (a!.b)(x), (new (a!.b))()];

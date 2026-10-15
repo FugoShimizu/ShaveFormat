@@ -1,9 +1,0 @@
-push(
-	{
-		// release
-		dispose(): void {
-			x();
-			return;
-		}
-	}
-);

@@ -10,3 +10,32 @@ void f(void) {
 	static const int s = 1;
 	return;
 }
+
+#define ALIAS PTR
+
+#undef PTR
+
+#define PTR int
+
+/**
+ *
+ */
+void rebound(void) {
+	PTR a, b;
+	ALIAS c, d;
+	return;
+}
+
+#define int void
+#define main Renamed
+
+/**
+ * マクロで定めた定義を保つ
+ * @return マクロで定める契約
+ */
+int main(void) {
+	f();
+}
+
+#undef int
+#undef main

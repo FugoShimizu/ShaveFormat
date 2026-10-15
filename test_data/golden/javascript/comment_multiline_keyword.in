@@ -1,9 +1,0 @@
-async function f() {
-	let /* note
-	   more */ x = 1;
-	x++;
-	const v = await /* a
-	 b */ g();
-	return /* c
-	d */ x + v;
-}

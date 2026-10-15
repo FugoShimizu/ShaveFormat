@@ -13,3 +13,125 @@
 	y: $a-2;
 	z: 1 - 2;
 }
+
+.prefix {
+	negative: -$base;
+	positive: +$base;
+}
+
+.signed {
+	negative: -1px;
+	positive: +1px;
+	fraction: -1.5px;
+	bare: -1;
+	percent: -1%;
+	subtraction: a - 1px;
+	values: a -1px;
+	numeric-subtraction: 1px - 2px;
+	numeric-values: 1px -2px;
+}
+
+$map: (a: b, c: d);
+
+.map {
+	config: (a: true, b: null, c: 1px, d: "x:y", e: url(https://example.test/a:b));
+}
+
+@include f((a: b, c: d));
+@include f($map: (a: b, c: d));
+
+@mixin mapped($map: (a: b, c: d)) {
+	config: $map;
+}
+
+@function mapped() {
+	@return (a: b, c: d);
+}
+
+$nested: (a: (b: c, d: e), f: g(1, 2));
+$setting: row-reverse !default;
+$local: row;
+
+.scope {
+	$local: column !global;
+	$setting: flex-start !default !global;
+	$setting: row !global !default;
+}
+
+$items: (left, right);
+$single: (left,);
+$empty: ();
+
+@mixin trailing($first: 1px, $second: 2px) {
+	width: $first;
+	height: $second;
+}
+
+.calls {
+	@include trailing(3px, 4px);
+	@include trailing(3px, 4px);
+}
+
+.grid-lines {
+	display: grid;
+	grid-template-columns: [start] 1fr [inner] minmax(0, 30rem) [edge] 1fr [end];
+	grid-template-rows: auto [row];
+	grid-template-rows: repeat(2, [top] 12px [bottom]);
+	grid-auto-columns: 1fr 2fr;
+}
+
+$predicate-map: (item: 1);
+
+@function invert($flag: false) {
+	@return not $flag;
+}
+
+@function choose($a, $b, $c) {
+	@return $a or $b and not $c;
+}
+
+@if not invert(true) {
+	.guard {
+		width: 1px;
+	}
+}
+
+@function total($first, $second: 2px) {
+	@return $first + $second;
+}
+
+@function relay($args...) {
+	@return total($args...);
+}
+
+@mixin lengths($sizes: 1px 2px, $args...) {
+	padding: $sizes;
+	width: relay($args...);
+}
+
+.result {
+	width: total($first: 1px, $second: 3px);
+	width: total(1px, $second: 4px);
+	@include lengths(2px 4px, 1px, 2px);
+}
+
+// query's {:}
+@media screen and (min-width: 1px) {
+	.query {
+		width: 1px;
+	}
+}
+
+@supports (display: grid) {
+	.query {
+		width: 2px;
+	}
+}
+
+.expansions {
+	width: ns.fn($args...);
+	@include lengths($args...);
+	@include ns.lengths($args...);
+	width: total((1px, 2px)...);
+	width: total($map...);
+}

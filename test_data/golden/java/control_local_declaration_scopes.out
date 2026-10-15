@@ -1,0 +1,328 @@
+class T {
+	/**
+	 *
+	 * @param a
+	 */
+	void f(int a) {
+		if(a == 1) {
+			final int x = 1;
+		}
+		return;
+	}
+}
+
+class A {
+	/**
+	 *
+	 * @param a
+	 * @param b
+	 * @param c
+	 */
+	void f(boolean a, boolean b, boolean c) {
+		if(a) {
+			if(b) x();
+			else if(c) y();
+		} else z();
+		if(a) {
+			if(b) x();
+		} else z();
+		if(a) x();
+		else if(b) y();
+		else z();
+		return;
+	}
+}
+
+class A {
+	/**
+	 *
+	 * @param a
+	 * @param b
+	 */
+	void f(boolean a, boolean b) {
+		if(a) {
+			if(b) x();
+			else y();
+		}
+		while(a) {
+			do x();
+			while(b);
+		}
+		if(a) x();
+		else {
+			do y();
+			while(b);
+		}
+		if(a) if(b) {} else {}
+		if(a) if(b) {} else {}
+		if(a) do {} while(b);
+		if(a) do {} while(b);
+		return;
+	}
+}
+
+class C {
+	/**
+	 *
+	 * @param a
+	 * @param b
+	 */
+	void f(boolean a, boolean b) {
+		if(a) if(b) {
+			final int x = read(), /* first */ y = read();
+			/* second */ use(x, y);
+		}
+		return;
+	}
+}
+
+class Registry {
+	/**
+	 *
+	 * @param sourceText
+	 * @param position
+	 * @param languageMode
+	 * @param handlers
+	 */
+	void register(String sourceText, int position, int languageMode, java.util.List<Integer> handlers) {
+		if(
+			position < sourceText.length() && sourceText.charAt(position) != '\n' &&
+			shouldBreakAfterExpandedBrace("\n}", sourceText.substring(position), languageMode)
+		) handlers.add(position);
+		return;
+	}
+}
+
+class Reader {
+	/**
+	 * 読む
+	 * @param path 経路
+	 */
+	void read(String path) {
+		try {
+			open(path);
+		} catch(IllegalArgumentException e) {
+			report(e);
+		} catch(IllegalStateException e) {
+			log(e);
+		} finally {
+			close();
+		}
+		return;
+	}
+}
+
+class A {
+	static final boolean RUN = true;
+
+	/**
+	 * 初期化部の同名の変数の後の定数条件の繰返
+	 */
+	void H() {
+		for(int RUN = 0; RUN < 1; ++RUN) G();
+		while(RUN) G();
+	}
+
+	/**
+	 * 仮引数が隠す定数条件の繰返
+	 * @param RUN 続けるか
+	 */
+	void P(boolean RUN) {
+		while(RUN) G();
+		return;
+	}
+
+	/**
+	 * 続けるかの判定
+	 * @return 続けるか
+	 */
+	boolean G() {
+		return true;
+	}
+}
+
+class Worker {
+	/**
+	 *
+	 */
+	public void run() {
+		// 無限 worker ループ
+		while(true) {
+			final Job job = queue.take();
+			if(job == null) break;
+			process(job);
+		}
+		return;
+	}
+
+	/**
+	 *
+	 */
+	public void labeled() {
+	// label 付き無限 for - label 付けても変換後 break label は valid
+	outer:
+		while(true) for(int i = 0; i < 10; ++i) if(done(i)) break outer;
+		return;
+	}
+
+	/**
+	 *
+	 * @param items
+	 */
+	public void enhancedFor(int[] items) {
+		// 拡張 for (foreach) は対象外
+		for(int x : items) use(x);
+		return;
+	}
+
+	/**
+	 *
+	 */
+	public void existing() {
+		// 既存の while(true) は不変
+		while(true) doWork();
+	}
+}
+
+class A {
+	/**
+	 *
+	 * @param n
+	 * @return
+	 */
+	int f(int n) {
+		int x = 0;
+		final int y = switch(n) {
+		case 0 -> x++;
+		default -> 1;
+		};
+		switch(n) {
+		case 0 -> ++x;
+		default -> {}
+		}
+		return x + y;
+	}
+}
+
+class A {
+	/**
+	 *
+	 * @param s
+	 */
+	void f(Shape s) {
+		switch(s) {
+		case Circle c -> {
+			return;
+		}
+		case Square q -> {
+			return;
+		}
+		}
+	}
+
+	/**
+	 *
+	 * @param o
+	 */
+	void g(Object o) {
+		switch(o) {
+		case null -> {
+			return;
+		}
+		case String t -> {
+			return;
+		}
+		case Object x -> {
+			return;
+		}
+		}
+	}
+}
+
+enum E {
+	A(1),
+	B(2);
+
+	private final int v;
+	private int w;
+
+	/**
+	 *
+	 * @param v
+	 */
+	E(int v) {
+		this.v = v;
+		return;
+	}
+
+	/**
+	 *
+	 * @return
+	 */
+	int get() {
+		return v;
+	}
+}
+
+enum F { A, B; }
+enum G { A; }
+
+enum H {
+	;
+	int x;
+}
+
+enum I {
+	A;
+
+	int x;
+	int y;
+}
+
+enum J {
+	A {
+		/**
+		 *
+		 * @return
+		 */
+		int f() {
+			return 1;
+		}
+	},
+
+	B;
+
+	abstract int f();
+}
+
+enum K {
+	A,
+	B;
+
+	int x;
+}
+
+enum N {
+	;
+	int y;
+}
+
+enum O { A; }
+
+enum P {
+	A;
+
+	/* c */ int x;
+}
+
+enum E7 { ; }
+
+;
+;
+
+enum EmptyDeclarations {
+	;
+	;
+	int x;
+	;
+}

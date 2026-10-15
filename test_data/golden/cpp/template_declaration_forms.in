@@ -1,0 +1,299 @@
+namespace a {
+	template<class T> struct v {};
+}
+
+struct s {};
+
+/**
+ * 作る
+ */
+void F() {
+	a::v< a::v<a::v<s>> > M;
+	G(M);
+}
+
+/**
+ * 生成
+ * @param size 大きさ
+ * @param values 初期値
+ */
+template<typename T = int, int N = 4> void Make(int size = 0, std::vector<T> values = Empty<T>()) {
+	Use(size, values);
+	// 終了
+	return;
+}
+
+template<typename TVeryLongTypeParameterNameHere> class SomeExtremelyLongClassNameForTesting : public AbstractBaseClassWithName<TVeryLongTypeParameterNameHere> { int memberField; };
+
+/**
+ * 後続の無関係な宣言との分離
+ */
+void BeforeShadows() {
+	a::v<a::v<a::v<s>>> m;
+	Use(m);
+}
+
+/**
+ * 別の関数のローカル変数
+ */
+void UnrelatedLocals() {
+	int v = 0, a = 0;
+	Use(v, a);
+}
+
+/**
+ * 別の関数の仮引数
+ * @param v 値
+ */
+void UnrelatedParameter(int v) {
+	Use(v);
+}
+
+struct unrelated_member {
+	int v;
+};
+
+namespace unrelated_type {
+	struct v {};
+}
+
+namespace unrelated_alias {
+	using v = int;
+}
+
+namespace unrelated_import {
+	using namespace unrelated_type;
+}
+
+/**
+ * 先行する無関係な宣言との分離
+ */
+void AfterShadows() {
+	::a::v<a::v<a::v<s>>> m;
+	Use(m);
+}
+
+/**
+ * 最も外の名前空間の修飾
+ */
+void GlobalQualification() {
+	int a = 0;
+	::a::v<::a::v<::a::v<s>>> m;
+	Use(a, m);
+}
+
+/**
+ * 到達する名前空間の導入
+ */
+void VisibleImport() {
+	using namespace a;
+	v<v<v<s>>> m;
+	Use(m);
+}
+
+namespace namespace_alias = a;
+
+/**
+ * 名前空間の別名の解決
+ */
+void NamespaceAlias() {
+	namespace_alias::v<a::v<a::v<s>>> m;
+	Use(m);
+}
+
+/**
+ * 四段の密着した閉じ
+ */
+void DenseFour() {
+	a::v<a::v<a::v<a::v<s>>>> m;
+	Use(m);
+}
+
+/**
+ * 四段の離した閉じ
+ */
+void SpacedFour() {
+	a::v<a::v<a::v<a::v<s> > > > m;
+	Use(m);
+}
+
+/**
+ * 四段全てのグローバル修飾と密着した閉じ
+ */
+void GlobalDenseFour() {
+	::a::v<::a::v<::a::v<::a::v<s>>>> m;
+	Use(m);
+}
+
+/**
+ * 四段全てのグローバル修飾と離した閉じ
+ */
+void GlobalSpacedFour() {
+	::a::v<::a::v<::a::v<::a::v<s> > > > m;
+	Use(m);
+}
+
+/**
+ * 五段の密着した閉じ
+ */
+void DenseFive() {
+	a::v<a::v<a::v<a::v<a::v<s>>>>> m;
+	Use(m);
+}
+
+/**
+ * 五段の離した閉じ
+ */
+void SpacedFive() {
+	a::v<a::v<a::v<a::v<a::v<s> > > > > m;
+	Use(m);
+}
+
+/**
+ * 六段の密着した閉じ
+ */
+void DenseSix() {
+	a::v<a::v<a::v<a::v<a::v<a::v<s>>>>>> m;
+	Use(m);
+}
+
+/**
+ * 六段の離した閉じ
+ */
+void SpacedSix() {
+	a::v<a::v<a::v<a::v<a::v<a::v<s> > > > > > m;
+	Use(m);
+}
+
+/**
+ * 七段の密着した閉じ
+ */
+void DenseSeven() {
+	a::v<a::v<a::v<a::v<a::v<a::v<a::v<s>>>>>>> m;
+	Use(m);
+}
+
+/**
+ * 七段の離した閉じ
+ */
+void SpacedSeven() {
+	a::v<a::v<a::v<a::v<a::v<a::v<a::v<s> > > > > > > m;
+	Use(m);
+}
+
+/**
+ * 八段の密着した閉じ
+ */
+void DenseEight() {
+	a::v<a::v<a::v<a::v<a::v<a::v<a::v<a::v<s>>>>>>>> m;
+	Use(m);
+}
+
+/**
+ * 八段の離した閉じ
+ */
+void SpacedEight() {
+	a::v<a::v<a::v<a::v<a::v<a::v<a::v<a::v<s> > > > > > > > m;
+	Use(m);
+}
+
+/**
+ * 値の演算の保持
+ * @param x 値
+ * @param limit 境界
+ */
+void ValueOperators(int x, int limit) {
+	Use(x >> limit);
+	Use(x >= limit);
+}
+
+/**
+ * 名前が値へ束縛された比較の保持
+ * @param v 左辺
+ * @param t 中央
+ * @param m 右辺
+ */
+void ValueComparison(int v, int t, int m) {
+	v<t>m;
+}
+
+template<typename T>
+class Container {
+public:
+	Container() : Size(0) {}
+	void Add(const T &Item) {
+		if(Size < Capacity) Items[Size++] = Item;
+		else if(CanGrow()) {
+			Grow();
+			Items[Size++] = Item;
+		}
+	}
+private:
+	T Items[100];
+	int Size;
+	int Capacity = 100;
+};
+
+template<typename... T>
+void Forward(T... Args) {
+	Sink(Args...);
+	int Count = sizeof...(T);
+	Sink(std::forward<T>(Args)...);
+}
+
+[...xs = args] {}();
+
+template <class... Ts>
+struct T : public Ts... {
+};
+
+template <typename T>
+// c
+T f(T x) {
+	return x;
+}
+
+template <typename T>
+/** Doc. */
+T g(T x) {
+	return x;
+}
+
+void Widen(const int x, void *const q, const Tuple t) {
+	const int n = static_cast<int>(x);
+	const std::vector<int> V;
+	const HashMap<String, List<Integer>> Map;
+	const auto p = dynamic_cast<Base *>(q);
+	const auto r = reinterpret_cast<const unsigned char *>(q);
+	Call<int>(1);
+	Call<3>(x);
+	Call<N>(x);
+	const auto z = std::get<0>(t);
+	// 誤解析（`>=` が `>` と `=` へ割れる形）で括弧の外の比較は空白を保つ
+	Use(a || (b < c && d >= e));
+	// 終了
+	return;
+}
+
+void h(int a, int b, int c, int d, int e) {
+	if(a || (b < c && d >= e)) return;
+	if(a || (b < c && d >> e)) return;
+	return;
+}
+
+void DeleteForms(int *q, int **rows, bool flag) {
+ delete [ ] q;
+ ::delete [ ] q;
+ delete q;
+ delete rows[0];
+ delete (flag ? q : rows[0]);
+}
+struct Deallocator { void operator delete[](void *p); };
+
+/**
+ * 作る
+ */
+void F() {
+	a::v< a::v<a::v<s>> > M(N);
+	G(M);
+}

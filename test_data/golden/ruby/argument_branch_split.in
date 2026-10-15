@@ -1,2 +1,36 @@
 foo(if a then 1 else 2 end, bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb, cccccc)
 x = [if a then 1 else 2 end, if b then 3 else 4 end, if c then 5 else 6 end, if d then 7 else 8 end]
+
+x = if condition_value_one then result_value_one else result_value_two end
+
+if cond1 then a elsif cond2
+  b1
+  b2
+else c end
+
+case x
+when alphaLongPatternName,betaLongPatternName,gammaLongPatternName,deltaLongPatternName
+  run
+else
+  stop
+end
+
+case x
+when MatchAlpha(first,second),MatchBeta(third,fourth),MatchGamma(fifth,sixth)
+  run
+else
+  stop
+end
+
+case x
+when *alphaLongPatternNames,*betaLongPatternNames,*gammaLongPatternNames,*deltaLongPatternNames
+  run
+  finish
+else
+  stop
+end
+
+case state when :a then a when :b
+  b1
+  b2
+else c end

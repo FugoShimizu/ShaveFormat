@@ -1,0 +1,62 @@
+package main
+
+// f
+func f(a int) {
+	if a > 0 {
+		g1()
+		g2()
+	// note
+	} else {
+		h1()
+		h2()
+	}
+	return
+}
+
+// f
+func f(a int) {
+	if a > 0 {
+		g()
+		g()
+	// 別の枝の説明
+	} else if a < -1 {
+		k()
+		k()
+	}
+	return
+}
+
+// f
+func f(x int) {
+	switch x {
+	case 1:
+		a()
+	case 2:
+	// b
+	default:
+	// c
+	}
+	return
+}
+
+// f
+func f() {
+	a()
+	/* x */ /* y */ b()
+	return
+}
+
+type T struct {}
+// d
+type U struct {}
+
+// f
+func f(a, b int) int {
+	return a + b // c1
+}
+
+// g
+func g() int {
+	// c2
+	return 1
+}

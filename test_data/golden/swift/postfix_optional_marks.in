@@ -1,3 +1,5 @@
+import struct Swift.Int64
+
 var x: Int? = 1
 let y = 1
 x!=y
@@ -13,3 +15,12 @@ print(e as Any, d as Any, g as Any, x ?? 0, f, h, i)
 
 let v: ((Int?)?)? = nil
 let w: Int??? = nil
+
+let u = unsafe f(a, b)
+let t = try unsafe f(a, b)
+let a = await unsafe f(a, b)
+let r = try await unsafe f(a, b)
+let c = copy x
+for e in unsafe items { print(e) }
+func send(x: sending Data, a: isolated MyActor) {}
+let g4: [4 of Int] = [0, 0, 0, 0]

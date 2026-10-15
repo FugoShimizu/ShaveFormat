@@ -1,0 +1,23 @@
+var await=x=>x;console.log(await(1));
+var yield=x=>x;console.log(yield(1));
+
+const stopped = () => { return
+(1 + 0); };
+const generated = function*() { yield
+(2 + 0); };
+
+abstract
+class Box {
+	/**
+	 * 値の取得
+	 * @return 値
+	 */
+	alpha
+	(): number { return 1; }
+	/**
+	 * 値の取得
+	 * @return 値
+	 */
+	async
+	(): number { return 2; }
+}

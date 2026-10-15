@@ -1,0 +1,80 @@
+const a = (<div>{x /* c */}<span>{y && (<B />)}</span>{cond ? <A /> : null /* d */}</div>); // show
+const a2 = <div>{x && (<B />)}</div>; // show
+const b = <div>{x /* c */}</div>;
+const c = <div>{cond ? <A /> : null /* c */}</div>;
+const d = <>{x /* e */}</>;
+const e = <A b={x /* c */} d={y} />; // e
+const b = (<p className="x">本文{/* 一 aaa
+ * 二 bbb */}<span className="y">説明</span></p>);
+// tail note
+const A = (value: string) => (<div>{value}</div>);
+// head note
+const B = (value: string) => (<div>{value}</div>);
+// block note
+const C = (value: string) => (<>{value}</>);
+const a = <div><span /><p className="x" /></div>; // t
+const b = <p className="x" />; // s
+const only = <div>{/* first */ /* second */ /* third */}</div>;
+const value = <div>{0 /* first */ /* second */}</div>;
+// note
+const A = () => (<a href="x">{}</a>);
+const f = () => (<div>{}{/* 乙 */}{/* 甲 */ /* 乙 */}{/* 甲？ */ /* 乙 */}<p>x</p></div>);
+const x = <span>a{/* first */ /* second */}b</span>;
+const y = <div>{/* note */}<span>A</span></div>;
+const z = <span>foo{/* note */}bar</span>;
+const w = <span>foo &amp; bar</span>;
+// generic note
+const selfGeneric: JSX.Element = <A<T> p={1} />;
+// array note
+const selfArray: JSX.Element = <A p={[1, 2]} />;
+// call note
+const selfCall: JSX.Element = <A p={f(1, 2)} />;
+// empty note
+const selfEmpty: JSX.Element = <A p={} />;
+const selfTrailing: JSX.Element = <A p={1} />; // tail note
+const selfInline: JSX.Element = <A p={1 /* inline note */} />;
+// fragment note
+const selfFragment: JSX.Element = <><A p={1} /></>;
+
+// Before header
+function /**
+ * Header
+ * @return
+ */ headerDoc(): number {
+	return 1;
+}
+
+/**
+ * Summary
+ * @param a Value
+ */
+function defaultClass(a: unknown = class A {}): void {}
+
+/**
+ * "Read here" 日本語 ABC "Return now"
+ * 'Read here' 甲，B '?Return now' 日本語 ABC '!Finish here'
+ * A
+ * ========== X ==========
+ * B
+ * @param a A value
+ * @param b B value
+ * @return
+ */
+function sectionDocs(a: number, b: number): number {
+	return a + b;
+}
+
+/**
+ * A
+ * ========== X ==========
+ * B
+ */
+function trailing(): void {}
+/**
+ * Keep expression boundaries
+ */
+function emptyBoundary() {/* Read */ /* Return */}
+/**
+ * Keep expression boundaries
+ */
+function emptyBoundaryPair() {/* Read */ /* Return */}

@@ -1,0 +1,247 @@
+#
+# @return
+def update
+	w
+	return transaction do
+		x
+		# y の説明
+		y
+	end
+rescue StandardError => e
+	return z
+end
+
+#
+# @return
+def update2
+	w
+	return items.each { |i|
+		x
+		# y2 の説明
+		y
+	}
+ensure
+	z
+end
+
+#
+# @return
+def output_value
+	return puts "x"
+end
+
+#
+# @return
+def assignment_value
+	return (x = 1)
+end
+
+#
+# @return
+def rescued_value
+	begin
+		return 1
+	rescue
+		return 2
+	ensure
+		h()
+	end
+end
+
+#
+# @return
+def rescued_else
+	begin
+		1
+	rescue
+		return 2
+	else
+		return 3
+	ensure
+		h()
+	end
+end
+
+#
+# @return
+def assignment_update
+	return (x += 1)
+end
+
+#
+# @return
+def self.rescued_else
+	1
+rescue
+	return 2
+else
+	return 3
+ensure
+	h()
+end
+
+# 読む
+# @param path [String] 経路
+# @return [String] 本文
+def read(path)
+	return load(path)
+rescue ArgumentError => e
+	return report(e)
+rescue IOError => e
+	return log(e)
+ensure
+	close
+end
+
+x = bar, foo rescue 1
+
+#
+# @param options
+# @param name
+# @return
+def parse(options, name)
+	opt = options[name] and (options[name] = Integer(opt)) rescue nil
+	return options
+end
+
+#
+# @return
+def f
+	g = -> { return 1 }
+	return puts g.call
+end
+
+#
+# @param a
+# @return
+def f(a)
+	return(
+		(+"x#{a}").tap do |s|
+			s << "y"
+		end
+	)
+end
+
+#
+# @param a
+# @return
+def g(a)
+	return((+"x").concat(a))
+end
+
+#
+# @param a
+# @return
+def h(a)
+	return (a + 1).tap { |s| p s }
+end
+
+#
+# @return
+def f1
+	x = 1
+	return(- 1.abs)
+end
+
+#
+# @return
+def f2
+	x = 1
+	return(+ 1.to_s)
+end
+
+#
+# @return
+def f3
+	x = 1
+	return -2 ** 2
+end
+
+#
+# @return
+def f4
+	x = 1
+	return -1
+end
+
+#
+# @return
+def f5
+	x = 1
+	return -x.abs
+end
+
+#
+# @return
+def f6
+	x = 1
+	return -1.abs
+end
+
+#
+# @return
+def g1
+	x = 1
+	return -x + 1
+end
+
+#
+# @return
+def g3
+	x = 1
+	return -x.abs + 1
+end
+
+#
+# @return
+def g6
+	x = 1
+	return(+x * 2)
+end
+
+#
+# @return
+def g7
+	x = 1
+	return(- 1.abs + 1)
+end
+
+#
+# @return
+def g8
+	x = 1
+	return(+1 + 2)
+end
+
+#
+# @return
+def h1
+	x = 1
+	return(+ 1.to_s.freeze.frozen?)
+rescue NoMethodError
+	return :err
+end
+
+#
+# @return
+def h2
+	x = 1
+	return(+1.to_s.freeze.frozen?)
+end
+
+#
+# @return
+def h3
+	x = 1
+	y = + 1[0]
+	return y
+end
+
+#
+# @return
+def h5
+	x = 1
+	return(- 1[0] + 2)
+end
+
+p [f1, f2, f3, f4, f5, f6, g1, g3, g6, g7, g8, h1, h2, h3, h5]

@@ -16,3 +16,63 @@ int Add(int a) {
 int Sub(int b) {
 	return b;
 }
+
+/**
+ * @brief Sum
+ * header
+ * @param x value
+ * @return result
+ */
+int f(int x) {
+	return x;
+}
+
+void /**
+ * Purpose
+ */ HeaderDoc() {}
+void ParamDoc(/**
+ * Purpose
+ * @param a Value
+ */ int a) {}
+
+template<class T> void /**
+ * Purpose
+ * @tparam T Type
+ */ HeaderTemplate() {}
+
+void ParamSkeleton(/** @param a */ int a) {}
+
+/**
+ * S @inheritdocExtra
+ * @param a Alpha
+ * @param b Beta
+ * @return
+ */
+int InheritancePrefix(int a, int b) {
+	return a + b;
+}
+
+/**
+ * Use `@inheritdoc` here
+ * @param a Alpha
+ * @param b Beta
+ * @return
+ */
+int InheritanceCode(int a, int b) {
+	return a + b;
+}
+
+/**
+ * Use {@link @inheritdoc} here
+ * @param a Alpha
+ * @param b Beta
+ * @return
+ */
+int InheritanceReference(int a, int b) {
+	return a + b;
+}
+
+/**
+ * @inheritdoc
+ */
+void ActualInheritance(int a) {}

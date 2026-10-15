@@ -1,0 +1,6 @@
+package p
+
+func f() int {
+	return (1 /* c2
+	*/ )
+}

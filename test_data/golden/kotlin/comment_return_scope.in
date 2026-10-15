@@ -18,3 +18,33 @@ fun Dispatch(Code: Int) {
 	}
 	return
 }
+
+val MissingType = externalValue
+val ExplicitType: Int = externalValue
+
+/**
+ * 値の取得関数
+ * @return 取得した値
+ */
+fun EscapedReturn(): Int {
+	val a: Int = g()
+	return `a`
+}
+
+/**
+ * ラムダの束縛を区別する関数
+ * @return 取得した値
+ */
+fun ExplicitBinding(): Int {
+	val a: Int = g { a: Int -> a }
+	return a
+}
+
+/**
+ * 暗黙の仮引数が未確定の関数
+ * @return 取得した値
+ */
+fun UncertainBinding(): Int {
+	val it: Int = g { it }
+	return it
+}

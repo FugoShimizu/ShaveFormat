@@ -1,6 +1,5 @@
-/** ========== 算術 ========== */
 /**
- *
+ * ========== 算術 ==========
  * @param A
  * @param B
  * @return
@@ -38,4 +37,153 @@ int Mid(int A) {
  */
 int Line(int A) {
 	return A;
+}
+
+/**
+ * Doc A
+ */
+/**
+ * Doc B
+ */
+template<class T> class X {
+	T x;
+};
+
+/**
+ *
+ * @param x
+ * @param y
+ * @return
+ */
+int Both(int x, int y) {
+	return x + y;
+}
+
+/**
+ * First
+ * ========== S ==========
+ * Second
+ */
+void Separated() {}
+/**
+ * Single summary
+ */
+void SingleSummary() {}
+/**
+ * First
+ * Second
+ */
+void SplitSummary() {}
+/**
+ * First
+ * Second
+ * @param a Alpha
+ */
+void DocBoundary(int a) {}
+
+/**
+ * First
+ * Second
+ * @param a Alpha
+ * @return Value
+ */
+int MixedDocs(int a) {
+	return a;
+}
+
+/**
+ * First
+ * Second
+ * @return Value
+ */
+void ReturnDocs() {}
+/**
+ * First
+ * Second
+ * @throws Error Failure
+ */
+void ThrowDocs() {}
+/**
+ * First
+ * Second
+ * @custom Hint
+ */
+void CustomDocs() {}
+
+/**
+ * First
+ * Second
+ * @tparam T Type
+ */
+template<class T> void TypeDocs() {}
+
+/**
+ * Body summary
+ * 本体の注記
+ */
+void BodyComment() {}
+/**
+ * 本体だけの注記
+ */
+void BodyOnly() {}
+/**
+ * A
+ * ========== X ==========
+ * B
+ */
+void Trailing() {}
+/**
+ * A
+ * ========== X ==========
+ * B
+ */
+void BodyBoundary() {}
+/**
+ * A
+ * ========== X ==========
+ * B
+ */
+void HeaderBoundary() {}
+/**
+ * A
+ * <reference path="unregistered" />
+ * B
+ * @param a Alpha
+ */
+void Covered(int a) {}
+/**
+ * \@param Ghost
+ * @param x
+ */
+void LiteralTag(int x) {}
+/**
+ * \@param Ghost
+ * Existing
+ * \\param Other
+ * @param x Value
+ */
+void MixedLiteralTags(int x) {}
+/**
+ * Summary
+ * @param [out] x Value
+ * @arg ghost
+ */
+void DirectionAndUnknown(int x) {}
+/**
+ * \code
+ * @param Example
+ * \endcode
+ */
+void LiteralCode() {}
+
+/**
+ * @brief Adds
+ * @brief Details
+ * @brief More
+ * @param a: First
+ * @return: Sum
+ * \returnMore Other
+ */
+int TaggedSummary(int a) {
+	return a;
 }

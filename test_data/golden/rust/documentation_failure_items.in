@@ -39,3 +39,24 @@ mod m {
 	/** 何もしない */
 	fn g() {}
 }
+
+/**
+ * 型と値の対応を保つ
+ *
+ * # Panics
+ * 入力の説明を保つ
+ *
+ * # Arguments
+ * * `second` - 後の値
+ * * `A` - 後の型
+ * * `B` - 先の型
+ * * `B` - 先の型の補足
+ * * `first` - 先の値
+ *
+ * # Returns
+ * 戻値の説明を保つ
+ *
+ * # Errors
+ * 失敗条件の説明を保つ
+ */
+fn ordered<B, A>(first: B, second: A) {}

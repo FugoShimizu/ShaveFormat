@@ -1,4 +1,0 @@
-class C {
-	/** 値 */
-	val value: Int = 1
-}

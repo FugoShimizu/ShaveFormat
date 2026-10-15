@@ -1,9 +1,8 @@
 {
 	"name": "shavefmt",
 	"displayName": "Shave Format",
-	"description":
-	"Opinionated multi-language code formatter for 16 languages (C/C++/C#/Java/Go/Rust/Kotlin/Swift/PHP/JS/TS/Ruby/Python/JSON/HTML/CSS).",
-	"version": "0.1.0",
+	"description": "Opinionated multi-language code formatter and linter.",
+	"version": "0.2.0",
 	"publisher": "foogoo",
 	"license": "MIT",
 	"icon": "icon.png",
@@ -12,7 +11,7 @@
 	"bugs": { "url": "https://github.com/FugoShimizu/ShaveFormat/issues" },
 	"homepage": "https://github.com/FugoShimizu/ShaveFormat#readme",
 	"engines": { "vscode": "^1.80.0" },
-	"categories": ["Formatters", "Linters", "Programming Languages"],
+	"categories": ["Formatters", "Linters"],
 	"keywords": [
 		"formatter",
 		"format",
@@ -71,13 +70,20 @@
 	"main": "./out/extension.js",
 	"contributes": {
 		"configuration": {
-			"title": "ShaveFormat",
+			"title": "Shave Format",
 			"properties": {
-				"shavefmt.chars":
-				{ "type": "integer", "default": 128, "minimum": 0, "description": "Maximum characters per line (0 = unlimited)" }
+				"shavefmt.chars": {
+					"type": "integer",
+					"default": 128,
+					"minimum": 0,
+					"scope": "language-overridable",
+					"description": "Maximum characters per line (0 = unlimited)"
+				},
+				"shavefmt.notifyLineEndingChanges":
+				{ "type": "boolean", "default": true, "description": "Notify when successful formatting changes CRLF to LF" }
 			}
 		}
 	},
 	"scripts": { "build": "tsc -p .", "watch": "tsc -watch -p .", "vscode:prepublish": "npm run build" },
-	"devDependencies": { "@types/node": "^20.0.0", "@types/vscode": "^1.80.0", "@vscode/vsce": "3.9.2", "typescript": "^5.0.0" }
+	"devDependencies": { "@types/node": "^20.0.0", "@types/vscode": "1.80.0", "@vscode/vsce": "3.9.2", "typescript": "^5.0.0" }
 }

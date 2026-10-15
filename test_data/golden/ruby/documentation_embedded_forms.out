@@ -1,0 +1,57 @@
+# 値を返す
+# @return 値
+def f
+=begin
+	frozen_string_literal: true
+	=end coding: utf-8
+=end
+	return x
+end
+
+# 引数を返す
+# @param x 値
+# @return 値
+def g(x) = x
+
+x = 1
+# * item one
+# continued
+# * item two
+# code block
+y = 2
+z = 3
+# indented head
+# body
+# tail
+w = 4
+
+# Para
+# code1
+# code2
+# @param x
+# @return
+def f(x)
+	return x
+end
+
+# Para
+# a = b
+# Tail
+# @param x
+# @return
+def g(x)
+	return x
+end
+
+# a
+# b
+# @param x
+# @return
+def h(x)
+	return x
+end
+
+# Para
+# a = b
+# Tail
+x = 1

@@ -1,4 +1,18 @@
 interface Item {
-	/** 名前 */
+	/**
+	 * 名前
+	 */
 	someLongPropertyName: SomeLongTypeName
 }
+
+type LiteralUnion =
+// union note
+{ k: 1, d: D }|{ k: 2, d: D }|
+{ k: 3, d: D };
+
+/**
+ * Save handle
+ */
+type HeaderHandle = {
+	savedValueName: SomeLongTypeName
+};

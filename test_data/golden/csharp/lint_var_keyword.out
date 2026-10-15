@@ -9,3 +9,17 @@ class A {
 		return;
 	}
 }
+
+namespace NamedType {
+	class var {}
+
+	class Factory {
+		/**
+		 * <summary>型の名前を推論の指定と区別する</summary>
+		 * <returns>新しいインスタンス</returns>
+		 */
+		var Make() {
+			return new var();
+		}
+	}
+}

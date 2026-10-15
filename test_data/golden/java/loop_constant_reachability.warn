@@ -1,3 +1,1 @@
-15:7: Review: Determine whether the function needs an explicit trailing return; verify type, reachability
 28:3: Violation: Add the required comment before this `return`
-35:10: Review: Use boolean-query naming for function G; verify external contract, intent

@@ -1,0 +1,134 @@
+/* * doc-ish */
+.a {
+	color: red;
+} /* # sourceMappingURL=a.css.map */
+
+a {
+	color: red; /* One */ /* Two */
+}
+
+/*
+ * a
+ * b
+ */
+a {
+	color: red;
+}
+
+/* 囲み注記と CSS の規則 */
+a {
+	color: red; /* 値（注） */
+/* 規則の終わり */
+}
+
+/* ========== ASCII と日本語 ========== */
+b {
+	color: blue;
+}
+
+/* 「ASCII と日本語」 */
+/* 『Alpha Beta』 */
+/* 【日本語と日本語】 */
+/* ==========「ASCII と日本語」========== */
+c {
+	color: green;
+}
+
+/* d */ /* e */ .a.b, a .b {
+	x: 1;
+}
+
+a {
+	margin: 1px/**/-2px /* c */;
+	width: calc(1px +/**/2px) /* c */;
+	padding: 1px/**/.5px /* c */;
+}
+
+b {
+	margin: 0/**/auto /* c */;
+	width: 10/**/% /* d */;
+}
+
+a {
+	width: 10/**/% /* a */ /* b */;
+}
+
+a {
+	color: /* c */ #FFF;
+}
+
+a {
+	font: bold/**/-apple-system /* e */;
+	b: a/**/b /* c */;
+	c: red/**/blue /* c */;
+	d: a -b /* c */;
+	e: bold /* e */ -apple-system;
+}
+
+b {
+	color: red;
+}
+
+.boundary {/* Read */ /* Return */}
+.boundary-pair {/* Read */ /* Return */}
+/* Read */
+/* Return */
+/* Read (once) */
+/* Return */
+/* Dr */
+/* Smith reads */
+/* 処理する.結果を返す */
+/* 1. Read */
+/* Return */
+/* A. Read */
+/* Return */
+/* (Read Return) */
+/* (Read Return) */
+/* Next */
+/* "Read (once Return) then Finish" */
+/* 'Read "once Return" then Finish' */
+/* don't stop */
+/* users' cache */
+/* Next */
+/* Read \"once */
+/* Return */
+/* ('a 'b.'x 'c) */
+/* 処理 */
+/* 続行 */
+/* 処理 */
+/* 処理 */
+/* 次 */
+/* (処理.次) */
+/* Read.続行 */
+/* Read？ */
+/* Return！ */
+/* Next */
+/* `Read. Return.` x = "Read. Return." */
+/* ========== ==== ========== */
+/* "Read here" 日本語 ABC "Return now" */
+/* 'Read here' 甲，B '?Return now' 日本語 ABC '!Finish here' */
+/* {@code A B} */
+/* {@literal A B} */
+/* (@dot A B @enddot) */
+/* (@f$ A B @f$) */
+/* Head
+ * Tail */
+/*
+ * Head
+ * Tail */
+/* Head
+ * Tail
+ */
+/*
+ * Head
+ * Tail
+ */
+/* Single
+ */
+/*
+ * Single */
+/*
+ * Single
+ */
+/* Single
+ */

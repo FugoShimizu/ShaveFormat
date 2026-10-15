@@ -1,8 +1,0 @@
-package p
-
-// f は変数を使う
-func f() {
-	var a, c int
-	var b /* 型の説明 */ int
-	use(a, b, c)
-}

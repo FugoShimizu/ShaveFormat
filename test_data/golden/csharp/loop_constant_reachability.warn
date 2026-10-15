@@ -1,2 +1,0 @@
-7:7: Review: Determine whether the function needs an explicit trailing return; verify type, reachability
-23:7: Review: Use boolean-query naming for function G; verify external contract, intent

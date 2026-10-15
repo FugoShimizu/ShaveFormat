@@ -1,5 +1,4 @@
 // General:
-//
 // %v	the value
 // (floating-point infinities print as ± Inf and NaN)
 package p

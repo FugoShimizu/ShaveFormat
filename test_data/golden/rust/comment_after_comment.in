@@ -1,12 +1,0 @@
-fn f() {
-	g(); /* a */ /* b */
-	h(); /* c */ // d
-	/* e */ /* f */
-	i();
-	loop { /* l */ // m
-		j();
-	}
-	let form_feed_a = 1;
-// own
-	let form_feed_c = 3;
-}

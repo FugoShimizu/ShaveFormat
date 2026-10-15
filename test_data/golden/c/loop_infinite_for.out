@@ -40,3 +40,61 @@ void f(void) {
 	bool b = 1;
 	while(1) g(b);
 }
+
+/**
+ *
+ */
+void LiteralWhile() {
+	while(2) {}
+}
+
+/**
+ *
+ */
+void LiteralFor() {
+	for(; 0X2;) {}
+}
+
+/**
+ *
+ */
+void LiteralDo() {
+	do {} while(-1);
+}
+
+/**
+ *
+ */
+void LiteralFloat() {
+	while(1.0) {}
+}
+
+/**
+ *
+ */
+void LiteralString() {
+	while("x") {}
+}
+
+/**
+ *
+ */
+void LiteralWrapped() {
+	while(2) {}
+}
+
+/**
+ *
+ */
+void LiteralZero() {
+	while(0) {}
+	return;
+}
+
+/**
+ *
+ */
+void LiteralBreak() {
+	while(2) break;
+	return;
+}

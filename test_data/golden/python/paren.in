@@ -40,5 +40,148 @@ g((await x).y.z)
 g((await a) + b)
 g((yield from sub()) + 1)
 g(a & (b ^ c) ^ d)
+g(x and ((a or b) or d))
+g((a or b) or d)
+g(x and (a or (b or d)))
+g(((a or b)) or d)
+g((a and b) and d)
+g(x or ((a and b) and d))
+g(((a or b) or d) or e)
+g(a and (b and d))
+g((a and b) or d)
+g((a in b) == c)
+g(a in (b == c))
 g(y-(-1))
 g(a if (b if a else c) else c)
+
+async def f(a, b, c, p, x):
+    y = ((a + b)) * c
+    z = (p[b - 1]) / c
+    w = await ((-x))
+    v = ((3571)).bit_length()
+    u = [q for q in p if ((q if b else c))]
+    return y, z, w, v, u
+
+v = [a for a in range(3) if (1 if a else 2)]
+n = (3571).bit_length()
+d = (2 +
+	3)
+async def f(x):
+	return await (-x)
+
+def g():
+    print((yield))
+    x = [(yield)]
+    y = {(yield from a)}
+
+c = True
+x = (y := 0 if c else 2)
+
+def f(a=(z := 1 if c else 2)):
+	return a
+
+print(x, y, f(), f"{(w := 3 if c else 4)}")
+
+f = (lambda x: x)
+g((lambda: 1), k=(lambda: 2))
+d = {(lambda: 1): 2, 3: (lambda: 4)}
+h = (lambda: 1)()
+
+f((value := 1))
+items = [(value := 2)]
+(value := 3)
+assigned = (value := 4)
+f(key=(value := 5))
+indexed = array[(value := 6)]
+unique = {(value := 7)}
+
+packed = ((value := 8),)
+
+class A():
+    x = 1
+
+
+class B(A):
+    pass
+
+
+print(A().x, B().x)
+
+class A(): # c
+    pass
+
+f((x for x in values))
+sum((x for x in values))
+@decorate((x for x in values))
+def generated():
+    pass
+f((x for x in values), other)
+class Generated((x for x in values)):
+    pass
+
+f((((x for x in values))))
+
+starred_name = (*items,)
+starred_type = (*tuple[int],)
+starred_attribute = (*obj.items, other)
+starred_call = (*produce(),)
+starred_sum = (*left + right,)
+starred_unary = (*-items,)
+plain_tuple = (items,)
+f((*items,))
+
+g((a ^ b & c) & d)
+g((a & b) ^ c)
+g(a ^ (b & c))
+g((a ^ b) & c)
+g(a & (b ^ c))
+g(a | (b ^ c & d))
+g((a | b ^ c) & d)
+g(((a ^ b) & c) & d)
+g((a ^ (b & c)) & d)
+g(a ^ ((b & c) & d))
+g(a ^ (b & (c & d)))
+g(a ^ (b & c & d))
+g(a << (b ^ c & d))
+g((a ^ b & c) < d)
+g(a < b ^ c & d < e)
+g((a ^ b & c).bit_length())
+g(table[(a ^ b & c) & d])
+
+bitwise_value = ((1 ^ 0 & 0) & 0)
+bitwise_items = [((a ^ b & c) & d) for d in values]
+bitwise_value &= (a ^ b & c) & d
+
+if (a ^ b & c) & d:
+    g(a)
+
+def bitwise_return(a, b, c, d):
+    return (((a ^ b & c) & d))
+
+tuple_first = (lambda: 1), 2
+tuple_middle = 1, (lambda: 2), 3
+tuple_last = 1, (lambda: 2)
+tuple_single = (lambda: 1),
+tuple_group = ((lambda: 1), 2)
+tuple_body = (lambda: (1, 2)), 3
+tuple_nested = (lambda: lambda: 1), 2
+conditional_lambda = (lambda: x) if c else y
+operator_lambda = (lambda: x) + y
+right_lambda = x + (lambda: y), 1
+unary_lambda = +(lambda: y), 1
+
+if flag:
+    branch_tuple = 1, (lambda: 2)
+else:
+    branch_tuple = (lambda: 1), 2
+
+def tuple_return():
+    return 1, (lambda: 2)
+
+after_tuple = 3
+
+filter_list = [x for x in values if ((lambda: x))]
+filter_set = {x for x in values if (lambda x=x: x)}
+filter_dict = {x: x for x in values if (lambda: lambda: x)}
+filter_generator = (x for x in values if (lambda: x if flag else y))
+filter_following = [x for x in values if (lambda: x) if flag]

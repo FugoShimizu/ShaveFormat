@@ -1,1 +1,11 @@
 let r = try await foo.bar.baz(from: x)
+let u = unsafe buffer[i]
+let v = try unsafe f()
+let w = await unsafe g()
+let s = (unsafe h()) ?? 0
+let c = copy u
+for e in unsafe items { print(e) }
+func send(x: sending Data, a: isolated MyActor) {}
+let grid: [4 of Int] = [0, 0, 0, 0]
+let joined = try await unsafe f(a, b)
+func fixedArrays() { let small: [4 of Int] = [0, 0, 0, 0], other: [4 of Int] = [1, 1, 1, 1]; print(small, other) }

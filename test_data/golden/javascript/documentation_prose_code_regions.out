@@ -1,0 +1,35 @@
+/**
+ * Example:
+ * const a = 1;
+ */
+function f() {}
+/**
+ * 使用例
+ * 値を保持
+ * const value = "甲。乙、丙";
+ * `value` の説明
+ * 続き
+ */
+function example() {}
+/**
+ * 使用例
+ * ```python
+ * value = """甲  
+ * 乙"""
+ * ```
+ */
+function trailingExample() {}
+
+/**
+ *
+ * @param x
+ * @return
+ */
+function f(x) {
+	return /* First */ /* Second */ x;
+}
+
+/**
+ * {@link String First Second}
+ */
+function inlineReference() {}

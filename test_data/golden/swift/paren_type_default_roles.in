@@ -1,0 +1,143 @@
+func f(x: Int?, y: Int) -> Int {
+	switch y {
+	case (1):
+		return 1
+	default:
+		break
+	}
+	if case (let v?) = x {
+		return v
+	}
+	return 0
+}
+let x: Int? = 1
+if case .some(let v) = x { print(v) }
+if case (let w) = x { print(w as Any) }
+if case .some(1) = x { print(1) }
+if case (.some(let u)) = x { print(u) }
+switch x {
+case (.some(let k)):
+	print(k)
+case (nil):
+	break
+default:
+	break
+}
+switch p {
+case let (x, y):
+	print(x, y)
+default:
+	break
+}
+if case let (x, y) = p { print(x) }
+
+class C {
+	public init(options: WritingOptions = []) {
+		self.options = options
+	}
+	public init(items: [Int] = [1, 2, 3]) {
+		self.items = items
+	}
+}
+
+struct Config {
+	init(origin: (Int, Int) = (0, 0)) {}
+}
+
+enum Kind {
+	case entry(_ meta: [String: String] = [:])
+}
+
+func f(a: Any, b: Int, c: Int) -> Int {
+	let x = (a as! Int) * 2
+	let p = (b &+ c) * 2
+	let q = b << (c + 1)
+	let r = b & (c + 1)
+	let y = (a as? Int) ?? 0
+	let z = (a as! Int) << 1
+	return x + p + q + r + y + z
+}
+
+func f(_ x: inout Int?, a: Any) -> Bool {
+    let b = (a as? Int) ?? 0
+    let c = (a as! Int) < 5
+    return a is Int?
+}
+
+let xs = [1, 2, 3]
+let a = xs.map { (x) in x + 1 }
+let b = xs.reduce(0) { (s, x) in s + x }
+let c = xs.map { (x: Int) in x }
+let d: (Int) -> Int = { (x) -> Int in x }
+let e = xs.map() { $0 * 2 }
+let f = xs.filter() { $0 > 1 }.count
+let k = xs.map { (_) in 0 }
+print(a, b, c, d(4), e, f, k)
+
+let x = (a.b).c + (g()).h + (a[0]).b + (f)(1) + (a.b)(2) + (self).x + (1).description + (a?.b).c + ((a.b)).c + (a!).b
+let y = (a * g()).signum() + (-(y)).advanced(by: 10) + (a + b[0]).d + (!g()).h
+
+func f(g: @escaping (Int) -> Void, h: @Sendable () -> Void) {}
+func run() {
+    let c = g();
+    { print("x") }()
+    print(c)
+}
+
+protocol P {}
+protocol Q {}
+struct S: P, Q {}
+let a: (Int) = 1
+let b: ((Int)) -> Int = { $0 }
+let c: (Int)? = nil
+let d: [(Int)] = []
+let e: (() -> Void)? = nil
+let f: (Int)! = 1
+let g: (P & Q)? = nil
+let h: [String: (Int)] = [:]
+func k(x: (Int)) -> (Int) { x }
+let m: () -> ((Int) -> Int) = { { $0 } }
+typealias T = (Int)
+let n: (P).Type = S.self
+print(a, b(1), c as Any, d, e as Any, f!, g as Any, h, k(x: 2), m()(3), n)
+let f2: ((() -> Int))? = nil
+let g2: ((Int)) = 1
+let h2: ((Int, Int)) = (1, 2)
+let v: ( Int )? = nil
+let w: (
+	Int
+)? = nil
+let u: (Int?)? = nil
+let t: (Int?).Type = Int?.self
+var s: (Int?)! = nil
+print(v as Any, w as Any, u as Any, t, s as Any)
+
+func f(a: Int, b: Int, c: Int, p: [Int], x: Int?) -> Int {
+	let y = ((a + b)) * c
+	let z = (p[b + c]) * a
+	let w = ((x!))!
+	return ((y + z + w))
+}
+func t(_ x: Int) throws -> Int { return x }
+let a = (try? t(1)) ?? 5
+let dd: Int?? = 3
+let b = (dd!)!
+print(a, b)
+
+print(((x.a).b).c, ((x.a)[0]).c, ((x.a)()).c)
+print((((x.a).b)[0]).c)
+print(((x?.a).b).c, ((try? x.a()).b).c)
+
+let a = 1, b = 2, c = true, d = false
+let x = (a <= b) && c
+let y = (a >= b) == d
+let w = (b != 2)
+let v = (a != b) && c
+let u = (a + b) != 3
+let s = (a != b) != c
+
+let a = 1, b = 2, c: Int? = 3
+print("\(a-(-b))")
+print("\(a - (-b))")
+print("\((c!)+b)")
+print("\((a))")

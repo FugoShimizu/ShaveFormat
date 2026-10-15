@@ -5,3 +5,27 @@ void f(void) {
 	PTR const q = 0;
 	static int const s = 1;
 }
+
+#define ALIAS PTR
+#undef PTR
+#define PTR int
+void rebound(void) {
+	PTR a;
+	PTR b;
+	ALIAS c;
+	ALIAS d;
+}
+
+#define int void
+#define main Renamed
+
+/**
+ * マクロで定めた定義を保つ
+ * @return マクロで定める契約
+ */
+int main(void) {
+	f();
+}
+
+#undef int
+#undef main

@@ -17,3 +17,5 @@ fun f() {
 	else h() // 偽
 	return
 }
+// "Read here" 日本語 ABC "Return now"
+// 'Read here' 甲，B '?Return now' 日本語 ABC '!Finish here'

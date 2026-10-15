@@ -1,6 +1,0 @@
-try {
-	foo()
-// comment
-} catch(e: Exception) {} finally {
-	close()
-}

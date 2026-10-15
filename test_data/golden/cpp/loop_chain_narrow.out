@@ -1,0 +1,89 @@
+/**
+ * 連鎖の見出を保つ
+ */
+void f() {
+	for(int i = 0; i < n; ++i) while(b) {
+		act(first_argument, second_argument);
+	}
+	return;
+}
+
+/**
+ * 範囲の見出を保つ
+ */
+void g() {
+	for(const Item &x : items) while(b) {
+		act(first_argument, second_argument);
+	}
+	return;
+}
+
+/**
+ * 三段の見出を保つ
+ */
+void h() {
+	while(a) while(b) if(c) {
+		act(first_argument_value, second_argument_value);
+	}
+	return;
+}
+
+/**
+ * 呼出を含む見出を保つ
+ */
+void j() {
+	while(g(first_condition, second_condition)) if(c) {
+		act(first_argument, second_argument);
+	}
+	return;
+}
+
+int x = FirstNamespaceWithANameLongEnoughToRequireWrapping
+::SecondNamespaceWithANameLongEnoughToRequireWrapping::value;
+
+using T = FirstNamespaceWithANameLongEnoughToRequireWrapping
+::SecondNamespaceWithANameLongEnoughToRequireWrapping::Type;
+
+auto call = FirstNamespaceWithANameLongEnoughToRequireWrapping
+::SecondNamespaceWithANameLongEnoughToRequireWrapping::make();
+
+int FirstNamespaceWithANameLongEnoughToRequireWrapping
+::SecondNamespaceWithANameLongEnoughToRequireWrapping::*member;
+
+auto z = FirstNamespaceWithANameLongEnoughToRequireWrapping
+::SecondNamespaceWithANameLongEnoughToRequireWrapping
+::template make<int>();
+
+/**
+ * 何もしない
+ */
+void FirstNamespaceWithANameLongEnoughToRequireWrapping
+::SecondNamespaceWithANameLongEnoughToRequireWrapping::run() {}
+
+int a = ::FirstNamespaceWithANameLongEnoughToRequireWrapping
+::SecondNamespaceWithANameLongEnoughToRequireWrapping::value;
+
+auto address =
+&FirstNamespaceWithANameLongEnoughToRequireWrapping
+::SecondNamespaceWithANameLongEnoughToRequireWrapping::value;
+
+void consume(
+	FirstNamespaceWithANameLongEnoughToRequireWrapping
+	::SecondNamespaceWithANameLongEnoughToRequireWrapping::Type x
+); // 修飾した型を取る
+
+const Store::Pair<FirstArgumentType, SecondArgumentType> exact =
+BuildPairForArguments();
+
+const Catalog
+::Pair<FirstArgumentType, SecondArgumentType> split =
+BuildPairForArguments();
+
+/**
+ * 絶対修飾の呼出を使う
+ */
+void absolute_calls() {
+	if(ready) ::notify();
+	for(int i = 0; i < n; ++i) ::notify();
+	return;
+}

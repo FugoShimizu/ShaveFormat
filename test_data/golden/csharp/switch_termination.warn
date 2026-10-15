@@ -1,1 +1,8 @@
 29:3: Violation: Remove the unreachable trailing `return`
+40:4: Review: Replace this jump with structured control flow
+54:4: Review: Replace this jump with structured control flow
+69:16: Review: Replace this jump with structured control flow
+125:4: Review: Replace this jump with structured control flow
+127:4: Review: Replace this jump with structured control flow
+140:4: Review: Replace this jump with structured control flow
+142:4: Review: Replace this jump with structured control flow

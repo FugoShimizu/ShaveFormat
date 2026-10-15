@@ -1,8 +1,4 @@
-2:2: Violation: Document the failure types and conditions visible to callers
-11:2: Violation: Document the failure types and conditions visible to callers
 29:4: Violation: Add the required comment before this `return`
 31:3: Violation: Add the required comment before this `return`
-34:2: Review: Document the failure types and conditions visible to callers; verify reachability
 42:4: Violation: Add the required comment before this `return`
 44:3: Violation: Add the required comment before this `return`
-66:2: Violation: Document the failure types and conditions visible to callers

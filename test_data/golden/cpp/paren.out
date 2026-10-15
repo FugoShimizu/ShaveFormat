@@ -2,18 +2,19 @@
  *
  */
 void h() {
+	g((a < b), (a < b), c > d);
+	G((a < b), (a < b), c > d);
+	(F(a & b));
+	(F(a && b));
+	(F(a * b));
+	(F(a < b));
+	(F(a > b));
+	(F(a >> b));
+	F(a + b);
 	g(a / (b * c));
 	g(a % (b * c));
 	g(a * (b % c));
-	g(a - (b + c));
-	g(a - (b - c));
-	g(a - b * c);
 	g(a * (b + c));
-	g(a + b - c);
-	g(a * b % c);
-	g(a - (b + c) * d);
-	g(a / (b * c));
-	g(a + b);
 	g(a & b + c);
 	g(a | b + c);
 	g(a ^ b + c);
@@ -26,11 +27,6 @@ void h() {
 	g(a & b + c);
 	g(a && (b || c));
 	g(a || b && c);
-	g(a && (b && c));
-	g(a || (b || c));
-	g(a && b && c);
-	g(a && (b || c) || d);
-	g(a && b || c);
 	return;
 }
 
@@ -46,4 +42,197 @@ int f(int a, int b, int c, int *p) {
 	int x = (a + b) * c, y = p[b + c] * a;
 	decltype(auto) r = (x);
 	return y;
+}
+
+/**
+ *
+ * @param c
+ */
+void parenthesized_body(bool c) {
+	if(c) (g)(1);
+	if(c) (int)*p;
+	if(c) {
+		int local = 1;
+	}
+	return;
+}
+
+/**
+ *
+ * @return
+ */
+int main() {
+	auto f = [](int x) {
+		return x;
+	};
+	int v = (
+		[] {
+			return 1;
+		}
+	)();
+	return f(v);
+}
+
+auto f = [] {
+	return 1;
+};
+
+auto g = []() mutable {
+	return 2;
+};
+
+auto h = []() -> int {
+	return 3;
+};
+
+auto k = [&]() noexcept {
+	return 4;
+};
+
+auto m = []<class T> {
+	return sizeof(T);
+};
+
+auto n = [](int x) {
+	return x;
+};
+
+auto f = [] { // 本体
+	return 1;
+};
+
+struct S {
+	int F(int);
+	int X;
+};
+
+/**
+ *
+ * @param s
+ * @param p
+ * @param Pmf
+ * @param Pm
+ * @return
+ */
+int f(S s, S *p, int (S::*Pmf)(int), int S::*Pm) {
+	int x =
+	a.b.c + g().h + a[0].b + p->q->r + f(1) + a.b(2) + this->x + (new A)->b + a.b.c + (s .* Pmf)(1) + s .* Pm + p->max(1, 2);
+	return x;
+}
+
+int x = 1;
+decltype((x)) y = x;
+
+/**
+ *
+ * @param i
+ * @param n
+ * @return
+ */
+bool g(int i, int n) {
+	return i < (n >> 1);
+}
+
+struct S {
+	int v = x;
+	int a = b;
+	int c = d;
+};
+
+/**
+ *
+ * @param c
+ * @param b
+ * @param d
+ */
+void h(int c, int b, int d) {
+	(c ? b : d) = 5;
+	return;
+}
+
+/**
+ *
+ * @return
+ */
+bool f() {
+	return a.b and c.b;
+}
+
+namespace LiteralCalls {
+	int g(int);
+
+	template<class T> int Convert(int);
+}
+
+/**
+ * 宣言子に為らない実引数と曖昧な実引数を区別する
+ */
+void LiteralArguments() {
+	int g(int);
+	g(1);
+	g(g(1));
+	g(g(1));
+	int x(g(1));
+	int(1);
+	LiteralCalls::g(1);
+	LiteralCalls::Convert<int>(1);
+	(T(x));
+	g((T(x)));
+	int y((T(x)));
+	(T(x[1]));
+	(T(*x));
+	(T(&x));
+	return;
+}
+
+namespace BitFields {
+	enum class Flag : unsigned int { Off, On };
+
+	struct S {
+		int b : 1 = 0;
+	};
+
+	struct Widths {
+		int a : 1 = 0;
+		int b : 1 = 0;
+		int c : 1 + 1 = 0;
+		int d : sizeof(char) = 0;
+		int e : sizeof(char) + 1 = 0;
+	};
+
+	class Types {
+		bool a : 1 = false;
+		unsigned int b : 1 = 0;
+		Flag c : 1 = Flag::Off;
+	};
+
+	union U {
+		int b : 1 = 0;
+	};
+
+	struct Initializers {
+		int a : 1 = 0;
+		int b : 1 { 0 };
+		int c : 1 = { 0 };
+		int d : 1;
+		int e : sizeof(char) { 0 };
+		int data[2] { 0, 0 };
+	};
+
+	struct Branches {
+		int a : (true ? 1 : 2) = 0;
+		int b : true ? 1 : 2 { 0 };
+		int c : true ? 1 : 2;
+	};
+
+	struct WidthComma {
+		int a : (1, 2) = 0;
+		int b : (1, 2) { 0 };
+		int c : (1, 2);
+	};
+
+	struct Comments {
+		int a : /* 幅 */ 1 = /* 値 */ 0;
+		int b : 1 /* 境界 */ { 0 };
+	};
 }

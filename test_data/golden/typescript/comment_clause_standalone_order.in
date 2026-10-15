@@ -38,3 +38,126 @@ function f() {
 		m();
 	}
 }
+
+declare function foo(x: number): number;
+declare function bar(x: number, y: number): number;
+export function f(a: boolean): number {
+	let r = 0;
+	if (a) { // @ts-expect-error
+		r = foo("s");
+	} else { // @ts-expect-error
+		r = foo("t");
+	}
+	r += foo("real bug");
+	for (const k of [1]) { // @ts-expect-error
+		r += foo("u");
+	}
+	r = bar(1, // @ts-expect-error
+		"t");
+	r += foo("real bug 2");
+	const x = 1; // eslint-disable-next-line no-eval
+	eval("x");
+	return r;
+}
+
+declare function h(n: number): void;
+declare function g(a: number, b?: number): void;
+declare const s: string;
+declare let c: boolean;
+declare let n: number;
+function a(): void {}
+export function t1(): void {
+	while (c) {
+		a();
+		// @ts-ignore
+	}
+	h(s);
+}
+export function t2(): void {
+	g(1, // @ts-ignore
+	);
+	h(s);
+}
+export function t3(): void {
+	while (n-- // @ts-expect-error
+	) h("1");
+}
+export function t4(): void {
+	const x1 = 1; // @ts-expect-error
+	function k(a: number = "s"): void {}
+	k(x1);
+}
+export function t5(): void {
+	// @ts-expect-error
+	function k2(a: number = "s"): void {}
+	k2(1);
+}
+
+declare function useEffectLike(f: () => void, deps: number[]): void;
+declare function g(): void;
+useEffectLike(() => {
+  g();
+  // @ts-expect-error deps are intentionally strings here
+}, ["x"]);
+
+declare function x(): void;
+declare function h(v: string): void;
+function f(a: boolean, b: boolean) {
+	if (a) {
+		x();
+		// @ts-expect-error
+	} else if (b) { const bad: number = "s"; }
+	try {
+		x();
+		// @ts-ignore
+	} catch (e) {
+		h("1");
+		x();
+	}
+	/* @ts-expect-error 理由。二文目 */
+	const worse: number = "t";
+}
+
+function f() {
+	x();
+	{ // bare
+		y();
+	}
+	try { // t
+		g();
+	} catch(e) { // c
+		k();
+	} finally { // f
+		m();
+	}
+	do { // d
+		g();
+	} while(c);
+	for(;;) { // e
+		g();
+	}
+	if (a === 1) { // 一
+		g();
+	} else if (a === 2) { // 二
+		h();
+	} else { // 他
+		i();
+	}
+	switch (a) {
+	case 1:
+		g();
+		break;
+	default: // 他
+		h();
+	}
+	const o = { // obj
+		a: 1,
+		b: 2,
+	};
+	foo(a, { // arg
+		x: 1,
+	});
+	return ( // ret
+		aaaa + bbbb
+	);
+}

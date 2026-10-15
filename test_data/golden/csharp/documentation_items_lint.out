@@ -3,10 +3,339 @@ class A {
 	 * <summary>
 	 * </summary>
 	 * <param name="a"></param>
+	 * <param name="a,b"></param>
 	 * <param name="b">右</param>
+	 * <returns></returns>
 	 * <returns></returns>
 	 */
 	private int Add(int a, int b) {
 		return a + b;
+	}
+}
+
+class XmlDocumentation {
+	/**
+	 * <summary>Summary</summary>
+	 * <param name="old" data="/>">Keep this explanation</param>
+	 * <returns data="/>">Keep this explanation</returns>
+	 */
+	public void Obsolete() {}
+	/**
+	 * <summary>Summary</summary>
+	 * <param name='old' data='/>'>Keep this explanation</param>
+	 * <returns data='/>'>Keep this explanation</returns>
+	 */
+	public void SingleQuoted() {}
+	/**
+	 * <summary>Summary</summary>
+	 * <param name="x" data="/>">Value</param>
+	 */
+	public void Existing(int x) {}
+	/**
+	 * <summary>Summary</summary>
+	 * <param name="old" data="a
+	 * >b">Keep this explanation</param>
+	 * <returns data="a>b">Keep this explanation</returns>
+	 */
+	public void Multiline() {}
+	/**
+	 * <summary>Summary</summary>
+	 */
+	public void EmptyObsolete() {}
+	/**
+	 * <summary>Summary</summary>
+	 * <param name="&#120;">Decimal</param>
+	 * <param name="&#x79;">Hex</param>
+	 * <param name="&#x03B1;">Unicode</param>
+	 * <param name="&#99;lass">Prefix</param>
+	 * <param name="&#120;&#121;">Continuous</param>
+	 */
+	public void Names(int x, int y, int α, int @class, int xy) {}
+	/**
+	 * <summary>Summary</summary>
+	 * <param name='&#x78;'>Value</param>
+	 */
+	public void BlockName(int x) {}
+	/**
+	 * <summary>Summary</summary>
+	 * <typeparam name="&#84;">First</typeparam>
+	 * <typeparam name="U">Second</typeparam>
+	 */
+	public void Types<T, U>() {}
+	/**
+	 * <summary>Summary</summary>
+	 * <param name="old&amp;new">Entity</param>
+	 */
+	public void NamedEntity() {}
+}
+
+class XmlEmpty {
+	/**
+	 * <summary>Summary</summary>
+	 * <param name="x" data=">"></param>
+	 * <returns data='>'></returns>
+	 */
+	public int Empty(int x) {
+		return x;
+	}
+
+	/**
+	 * <summary>Summary</summary>
+	 * <param name="x" data="a>b"></param>
+	 * <returns data="a
+	 * >b"></returns>
+	 */
+	public int Across(int x) {
+		return x;
+	}
+
+	/**
+	 * <summary>Summary</summary>
+	 * <param name="x" data="/>"/>
+	 * <returns data="/>"/>
+	 */
+	public int SelfClosing(int x) {
+		return x;
+	}
+
+	/**
+	 * <summary />
+	 */
+	public void BareSummary() {}
+	/**
+	 * <summary xml:lang="ja"></summary>
+	 */
+	public void AttributeSummary() {}
+	/**
+	 * <summary xml:lang="ja"/>
+	 */
+	public void ClosedSummary() {}
+	/**
+	 * <summary data="/>"></summary>
+	 */
+	public void QuotedSummary() {}
+}
+
+class XmlDescriptionContent {
+	/**
+	 * <summary><![CDATA[]]></summary>
+	 * <param name="x"><![CDATA[]]></param>
+	 * <returns><![CDATA[]]></returns>
+	 */
+	int EmptyCdata(int x) {
+		return x;
+	}
+
+	/**
+	 * <summary><![CDATA[ ]]></summary>
+	 * <param name="x"><![CDATA[ ]]></param>
+	 * <returns><![CDATA[ ]]></returns>
+	 */
+	int SpaceCdata(int x) {
+		return x;
+	}
+
+	/**
+	 * <summary><!-- --></summary>
+	 * <param name="x"><!-- --></param>
+	 * <returns><!-- --></returns>
+	 */
+	int EmptyComment(int x) {
+		return x;
+	}
+
+	/**
+	 * <summary><!-- explanation --></summary>
+	 * <param name="x"><!-- explanation --></param>
+	 * <returns><!-- explanation --></returns>
+	 */
+	int TextComment(int x) {
+		return x;
+	}
+
+	/**
+	 * <summary><para></para></summary>
+	 * <param name="x"><para></para></param>
+	 * <returns><para></para></returns>
+	 */
+	int EmptyPara(int x) {
+		return x;
+	}
+
+	/**
+	 * <summary><para/></summary>
+	 * <param name="x"><para/></param>
+	 * <returns><para/></returns>
+	 */
+	int ClosedPara(int x) {
+		return x;
+	}
+
+	/**
+	 * <summary><code></code></summary>
+	 * <param name="x"><code></code></param>
+	 * <returns><code></code></returns>
+	 */
+	int EmptyCode(int x) {
+		return x;
+	}
+
+	/**
+	 * <summary><code/></summary>
+	 * <param name="x"><code/></param>
+	 * <returns><code/></returns>
+	 */
+	int ClosedCode(int x) {
+		return x;
+	}
+
+	/**
+	 * <summary><![CDATA[
+	 * ]]></summary>
+	 * <param name="x"><![CDATA[
+	 * ]]></param>
+	 * <returns><![CDATA[
+	 * ]]></returns>
+	 */
+	int AcrossCdata(int x) {
+		return x;
+	}
+
+	/**
+	 * <summary><!--
+	 * explanation
+	 * --></summary>
+	 * <param name="x"><!--
+	 * explanation
+	 * --></param>
+	 * <returns><!--
+	 * explanation
+	 * --></returns>
+	 */
+	int AcrossComment(int x) {
+		return x;
+	}
+
+	/**
+	 * <summary><para>
+	 * </para></summary>
+	 * <param name="x"><para>
+	 * </para></param>
+	 * <returns><para>
+	 * </para></returns>
+	 */
+	int AcrossPara(int x) {
+		return x;
+	}
+
+	/**
+	 * <summary><code>
+	 * </code></summary>
+	 * <param name="x"><code>
+	 * </code></param>
+	 * <returns><code>
+	 * </code></returns>
+	 */
+	int AcrossCode(int x) {
+		return x;
+	}
+
+	/**
+	 * <summary><code>
+	 * <!-- explanation -->
+	 * </code></summary>
+	 * <param name="x"><code>
+	 * <!-- explanation -->
+	 * </code></param>
+	 * <returns><code>
+	 * <!-- explanation -->
+	 * </code></returns>
+	 */
+	int CodeComment(int x) {
+		return x;
+	}
+
+	/**
+	 * <summary><see cref=""/></summary>
+	 * <param name="x"><see cref=""/></param>
+	 * <returns><see cref=""/></returns>
+	 */
+	int EmptyReference(int x) {
+		return x;
+	}
+
+	/**
+	 * <summary><![CDATA[Value]]></summary>
+	 * <param name="x"><![CDATA[Value]]></param>
+	 * <returns><![CDATA[Value]]></returns>
+	 */
+	int CdataText(int x) {
+		return x;
+	}
+
+	/**
+	 * <summary><para>Value</para></summary>
+	 * <param name="x"><para>Value</para></param>
+	 * <returns><para>Value</para></returns>
+	 */
+	int ParaText(int x) {
+		return x;
+	}
+
+	/**
+	 * <summary><code>x &lt; y</code></summary>
+	 * <param name="x"><code>x &lt; y</code></param>
+	 * <returns><code>x &lt; y</code></returns>
+	 */
+	int CodeText(int x) {
+		return x;
+	}
+
+	/**
+	 * <summary><para><see cref="T"/></para></summary>
+	 * <param name="x"><para><see cref="T"/></para></param>
+	 * <returns><para><see cref="T"/></para></returns>
+	 */
+	int Reference(int x) {
+		return x;
+	}
+
+	/**
+	 * <summary><see cref='
+	 * T'/></summary>
+	 * <param name="x"><see cref='
+	 * T'/></param>
+	 * <returns><see cref='
+	 * T'/></returns>
+	 */
+	int AcrossReference(int x) {
+		return x;
+	}
+
+	/**
+	 * <summary><paramref name="x"/></summary>
+	 * <param name="x"><paramref name="x"/></param>
+	 * <returns><paramref name="x"/></returns>
+	 */
+	int ParamReference(int x) {
+		return x;
+	}
+
+	/**
+	 * <summary><typeparamref name="T"/></summary>
+	 * <param name="x"><typeparamref name="T"/></param>
+	 * <returns><typeparamref name="T"/></returns>
+	 */
+	int TypeReference(int x) {
+		return x;
+	}
+
+	/**
+	 * <summary><see langword="null"/></summary>
+	 * <param name="x"><see langword="null"/></param>
+	 * <returns><see langword="null"/></returns>
+	 */
+	int KeywordReference(int x) {
+		return x;
 	}
 }

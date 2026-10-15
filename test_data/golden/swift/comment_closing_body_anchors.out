@@ -1,0 +1,125 @@
+/**
+ *
+ * - Parameter flag:
+ */
+func commentedBoundary(_ flag: Bool) {
+	if flag {
+		print(10)
+	} // boundary
+	print(11)
+	if flag {
+		print(12)
+	} // next boundary
+	print(13)
+	print("} ;", #"} ;"#)
+	return
+}
+
+/**
+ *
+ * - Parameter x:
+ * - Returns:
+ */
+func f(x: Int) -> Int {
+	if x > 0 {
+		return 1
+	// 分岐の終わり
+	}
+	return 0
+// 関数の終わり
+}
+
+/**
+ *
+ */
+func f() {
+	if c {
+		g()
+	// own
+	} else { // d1
+		h()
+	}
+	return
+}
+
+/**
+ *
+ */
+func f() {
+	do {
+		try g()
+	} catch { // t1
+		h()
+	} // t2
+	if c {
+		g()
+	} else { // c1
+		h()
+	}
+	return
+}
+
+for x in xs {
+	a()
+	b()
+} // c
+
+next()
+
+if a {
+	x()
+} else {
+	y()
+	z()
+} // d
+
+let xs = [1, 2]
+
+if (
+	xs.contains {
+		/* c1 */ $0 > 1
+	}
+) {
+	print(1)
+}
+
+let b = xs.map { x in
+	/* c2 */ x + 1
+}
+
+let a = xs.map { // c3
+	$0 + 1
+}
+
+print(a, b)
+
+/**
+ *
+ * - Returns:
+ */
+func f() -> Int {
+	// m
+	// l
+	return x
+}
+
+/**
+ *
+ */
+func f() {
+	var x = 1
+	/* c */ x = 2
+	print(x)
+	return
+}
+
+/**
+ * Keep boundaries
+ */
+func emptyBoundary() {/* Read */ /* Return */}
+/**
+ * Keep boundaries
+ */
+func emptyBoundaryPair() {/* Read */ /* Return */}
+// "Read here" 日本語 ABC "Return now"
+// 'Read here' 甲，B '?Return now' 日本語 ABC '!Finish here'

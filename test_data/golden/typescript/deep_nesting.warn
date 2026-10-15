@@ -1,3 +1,3 @@
-6:6: Review: Add an explicit type to this declaration; verify type, external contract
+6:6: Review: Add an explicit type to this declaration
 134:66: Violation: Nesting depth 65 exceeds the limit of 64
 201:2: Violation: Add the required comment before this `return`

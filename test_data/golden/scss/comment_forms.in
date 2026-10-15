@@ -1,0 +1,52 @@
+a {
+	/* xy */
+	color: red;
+}
+
+a {
+	font: bold/* e */-apple-system;
+	b: a/* c */b;
+	c: red/* c */blue;
+	d: a /* c */-b;
+	e: bold /* e */ -apple-system;
+}
+b { color: red; }
+
+/*! Copyright 2026 Foo */
+.a { color: red; } /* trailing. Two. */
+
+.a {
+	margin: 1px/* c */ /* d */-2px;
+	padding: 1px /* c */-2px;
+	b: 1px/* c */-2px;
+	c: 1px /* c */ -2px;
+	d: 1px/* c *//* d */-2px;
+	e: 1px /* c */ /* d */-2px;
+}
+
+$a: 1 -/* d */2;
+$b: 3 +/* e */4;
+.x { w: $a; v: $b; }
+.x/* c */.y { p1: 1px/* c */-2px; p2: $a/* c */-1px; p3: 1px/* c */+2px; p4: 1px /* c */-2px; }
+.p { &/* d */.q { b: 1; } }
+b { margin: 0/* c */auto; width: 10/* d */%; }
+
+.a {
+	color: //Z1 red;
+	background: blue; //Z2
+}
+.b {
+	//Z3
+	margin: 0;
+}
+/* "Read here." 日本語ABC "Return now." */
+/* 'Read here.' 甲, B '?Return now.' 日本語ABC '!Finish here.' */
+
+.protected {
+	content: "a\b";
+	background: url(a);
+	mask: url(http://host/a);
+}
+
+.boundary { /* Read. Return. */ }
+.boundary-pair { /* Read */ /* Return */ }

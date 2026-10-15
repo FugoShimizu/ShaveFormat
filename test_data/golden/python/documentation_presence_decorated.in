@@ -4,3 +4,11 @@ import functools
 @functools.cache
 def compute(x):
     return x
+
+class C:
+    @staticmethod
+    def f(x, y):
+        return x + y
+
+    def g(self, x):
+        return x

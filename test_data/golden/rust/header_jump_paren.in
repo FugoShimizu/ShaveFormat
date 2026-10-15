@@ -1,7 +1,0 @@
-fn f() {
-	while (return) {}
-	if (x == return) {}
-	match (break 'a) { _ => {} }
-	if (return x) {}
-	if (f(|| return)) {}
-}

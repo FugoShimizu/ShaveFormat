@@ -1,0 +1,142 @@
+/**
+ *
+ * @param props
+ * @return
+ */
+function Card(props: { title: string, visible: boolean }): JSX.Element {
+	if(!props.visible) return <span />;
+	else if(!props.title) return <div className="empty" />;
+	// before div close
+	return (<div className="card"><h2>{props.title}</h2><p>Body</p>{}</div>);
+}
+
+const Label = (props: { y: string, x: string }) => <p title={props.y}>{props.x}</p>;
+const Button = (props: { f: () => void }) => <b onClick={() => props.f()} />;
+
+const v0 = <p>
+	　全角空白で字下げした段落
+</p>;
+
+const v1 = <p>
+	foo　
+	{x}
+</p>;
+
+const v2 = <p>
+	&#32;leading entity
+</p>;
+
+const v3 = <p>
+	foo&#32;
+	{x}
+</p>;
+
+const v4 = <p> foo{x}</p>;
+const v5 = <p>foo {x}</p>;
+const v6 = <p>{x} {y}</p>;
+const v8 = <p>a	{x}</p>;
+
+const v9 = <p>
+	a&#9;
+	{x}
+</p>;
+
+const v10 = <p>
+	 nbsp start
+</p>;
+
+const v11 = <p>foo bar</p>;
+const a = <p>Hello, {name}!</p>;
+const b = <p> hi </p>;
+const c = <p>Hello, <b>x</b> world</p>;
+const d = <p> {name} </p>;
+const e = <p>a{" "}b</p>;
+const f = <p>Hello,{" "}{name}</p>;
+const g = <pre>a	{x}	b</pre>;
+
+const h = <p
+	className="aaaaaaaaaaaaaa"
+	id="bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb"
+> hi </p>;
+
+const i = <> hi {x} </>;
+const j = <p> {x} </p>;
+const k = <p>{a}{" "}{b}</p>;
+const l = <p>a{"\t"}{x}</p>;
+const m = <p>&amp; {x}</p>;
+const n = <ul><li>one</li> <li>two</li></ul>;
+const a = <p><b>x</b>{" "}{" "}<i>y</i></p>;
+const e = <p><b>x</b>{"   "}<i>y</i></p>;
+const c = <p>{" "}{" "}</p>;
+const d2 = <p>a{" " /* c */}b</p>;
+const f2 = <p>a{" "}b</p>; // c
+const tight = <p>Hello <b>x</b> world</p>;
+const siblings = <p><b>x</b><i>y</i></p>;
+const literalTab = <p>a	{x}</p>;
+const control = <Widget>a&#13;b{}c</Widget>;
+const braces = <Widget>a&#123;b&#125;{}c</Widget>;
+
+interface Props { items: { id: number, name: string }[] }
+
+/**
+ *
+ * @param props
+ * @return
+ */
+export function List(props: Props): JSX.Element {
+	return (
+		<ul className="list">
+			{
+				props.items.map(
+					item => (
+						<li key={item.id}>
+							<span>{item.name}</span>
+							{item.id > 0 ? <span className="positive">+</span> : <span className="zero">0</span>}
+						</li>
+					)
+				)
+			}
+		</ul>
+	);
+}
+
+/**
+ * 数値の入力を表示する
+ * @return 要素
+ */
+export function Box(): JSX.Element {
+	// 要素の返戻
+	return (
+		<aside>
+			<input
+				value={alpha(3)}
+				onChange={
+					(): void => {
+						count = 7;
+						beta(count);
+					}
+				}
+			/>
+			<p title={"alpha"}>x</p>
+		</aside>
+	);
+}
+
+const b =
+<AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA> hi </AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA>;
+
+const c =
+<AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA />;
+
+const d =
+<AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+	x={1}
+/>;
+
+const x = <pre>a	b</pre>;
+const y = <pre>a	{/* c */}	b</pre>;
+
+const z = <span>foo 
+	　bar</span>;
+
+const w = <span>😀{/* c */}😠</span>;

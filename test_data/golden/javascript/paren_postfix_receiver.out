@@ -2,3 +2,45 @@ const x =
 a.b.c + g().h + a[0].b + f(1) + a.b(2) + this.x + (1).x + (a?.b).c + (new A).b + new A().b + "abc".length + [1].length + a.b.c;
 
 const y = /re/.test(s) + import.meta.url + f(a?.b).c + g("a?.b").c + { a: 1 }.a;
+
+value = function() {}();
+value = function() {}.call(this);
+f(function() {}());
+value = class {}.name;
+value = function*() {}();
+value = async function() {}();
+(function() {})();
+
+export default (function() {})();
+
+value = (() => 1)();
+
+/**
+ * 括弧付の更新対象を保持する関数
+ * @return {number} 更新後の値
+ */
+function countUpdates() {
+	let count = 0;
+	count += 2;
+	++count;
+	++count;
+	const values = [count];
+	++values[0];
+	// 更新結果の返戻
+	return values[0];
+}
+
+class EmptyDeclarations {
+	;
+	a;
+	;
+}
+
+const logicalConstructor = new (A || B)(1);
+const conditionalConstructor = new (c ? A : B)(1);
+const nullishConstructor = new (A ?? B);
+const bareConstructor = new (A || B);
+const memberConstructor = new (c ? A.x : B.x)(1).value;
+const awaitedConstructor = new (await load())(1);
+const calledConstructor = new (factory())(1);
+const plainConstructor = new A(1);

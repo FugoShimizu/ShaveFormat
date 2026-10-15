@@ -1,9 +1,0 @@
-fun foo(list: List<Int>) {
-	list.map
-		/* CA */ // CB
-		{ it * 2 }
-}
-
-val x = obj
-/* p */ // q
-as String

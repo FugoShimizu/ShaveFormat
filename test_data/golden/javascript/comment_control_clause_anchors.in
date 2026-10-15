@@ -1,0 +1,202 @@
+if (x)
+{ // 条件
+	f();
+	g();
+}
+function h()
+{ // 本体
+	return { // 値
+		a: 1
+	};
+}
+
+function f() {
+	try { g(); } // t1
+	catch(e) { h(); } // t2
+	finally { k(); }
+}
+
+function f(c, d) {
+	if (c) {
+		g();
+	} else if (d) {
+		/*
+		 * a
+		 */
+		h();
+	} else {
+		/** b
+		 * c */
+		if (e) k();
+	}
+}
+
+if (x) {
+	y();
+	v();
+} else if (
+	a &&
+	b
+	// c
+) {
+	z();
+	w();
+}
+
+function f(a) {
+	if (a) {
+		x();
+		z();
+		// before else
+	} else {
+		y();
+		w();
+	}
+	try {
+		x();
+		// before catch
+	} catch (e) {
+		y();
+	}
+}
+function g(a, b) {
+	if (a) {
+		x();
+		z();
+	}
+	// before bare else
+	else y();
+	if (a) {
+		x();
+		z();
+	}
+	// before else if
+	else if (b) y();
+	if (a) x();
+	else {
+		// 一つ目。二つ目
+		y();
+	}
+}
+
+async function f() {
+	let /* note
+	   more */ x = 1;
+	x++;
+	const v = await /* a
+	 b */ g();
+	return /* c
+	d */ x + v;
+}
+
+function map(elems, callback) {
+	var i = 0, ret = [];
+	if (isArray) {
+		for (; i < elems.length; ++i) {
+			ret.push(callback(elems[i]));
+			count++;
+		}
+	// Go through every key on the object
+	} else {
+		for (i in elems) {
+			ret.push(callback(elems[i]));
+			count++;
+		}
+	}
+	return ret;
+}
+
+function f() {
+	a: b: for (;;) {
+		g();
+		// tail
+	}
+}
+
+function f() {
+	if (a) {
+		g();
+		h();
+	} // d1
+	// own
+	else {
+		k();
+		m();
+	}
+	try {
+		g();
+		h();
+	}
+	// before catch
+	catch (e) {
+		k();
+		m();
+	}
+}
+
+function SameLine() {
+	try {
+		g();
+		h();
+		// clause
+	} catch {}
+}
+function NextLine() {
+	try {
+		g();
+		h();
+		// clause
+	} catch {
+	}
+}
+
+function f() {
+	x();
+	{ // bare
+		y();
+	}
+	try { // t
+		g();
+	} catch(e) { // c
+		k();
+	} finally { // f
+		m();
+	}
+	do { // d
+		g();
+	} while(c);
+	for(;;) { // e
+		g();
+	}
+	if (a === 1) { // 一
+		g();
+	} else if (a === 2) { // 二
+		h();
+	} else { // 他
+		i();
+	}
+	switch (a) {
+	case 1:
+		g();
+		break;
+	default: // 他
+		h();
+	}
+	const o = { // obj
+		a: 1,
+		b: 2,
+	};
+	foo(a, { // arg
+		x: 1,
+	});
+	return ( // ret
+		aaaa + bbbb
+	);
+}
+
+useEffect(() => {
+	// TODO
+}, [
+	// deps
+	a,
+]);

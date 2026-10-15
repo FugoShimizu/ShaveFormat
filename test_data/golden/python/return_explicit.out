@@ -32,3 +32,586 @@ def nested():
 	# t1
 	# t2
 	return inner
+
+def imported_member():
+	from other import sys
+	sys.exit()
+	return
+
+def imported_alias():
+	from other import sys as sys
+	sys.exit()
+	return
+
+def imported_module():
+	import sys
+	sys.exit()
+
+def imported_callable_module():
+	import exit
+	exit()
+	return
+
+def imported_dotted():
+	import other.sys
+	other.sys.exit()
+	return
+
+def imported_dotted_alias():
+	import other.sys as sys
+	sys.exit()
+	return
+
+def imported_module_alias():
+	import sys as sys
+	sys.exit()
+
+def imported_standard_member():
+	from sys import exit
+	exit()
+
+def standard_alias():
+	import sys as system
+	system.exit()
+
+def standard_member_alias():
+	from sys import exit as leave
+	leave()
+
+def reassigned_exit():
+	from sys import exit as leave
+	leave = resume
+	leave()
+	return
+
+def caught_exit():
+	import sys
+	try:
+		sys.exit()
+	except SystemExit:
+		pass
+	return
+
+def site_names():
+	exit()
+	quit()
+	return
+
+def exit_value_error():
+	import sys
+	try:
+		sys.exit(0)
+	except ValueError:
+		print("x")
+
+def exit_exception():
+	import sys
+	try:
+		sys.exit(0)
+	except Exception:
+		print("x")
+
+def exit_base_exception():
+	import sys
+	try:
+		sys.exit(0)
+	except BaseException:
+		print("x")
+	return
+
+def exit_finally():
+	import sys
+	try:
+		sys.exit(0)
+	finally:
+		return
+
+def exit_unknown(handler):
+	import sys
+	try:
+		sys.exit(0)
+	except handler:
+		pass
+	return
+
+def division_caught():
+	try:
+		1 / 0
+		return
+	except ZeroDivisionError:
+		print("caught")
+	return
+
+def argument_caught():
+	import sys
+	try:
+		sys.exit(1 / 0)
+	except ZeroDivisionError:
+		print("caught")
+	return
+
+def exit_suppressed():
+	import sys
+	from contextlib import suppress
+	with suppress(SystemExit):
+		sys.exit()
+	return
+
+def return_not_suppressed(manager):
+	with manager:
+		return
+
+def required_condition() -> None:
+	import sys
+	if sys.exit():
+		print(1)
+
+def ordinary_condition() -> None:
+	import sys
+	if maybe():
+		print(1)
+	return
+
+def required_argument() -> None:
+	import sys
+	print(sys.exit())
+
+def required_initializer() -> None:
+	import sys
+	value = sys.exit()
+	print(value)
+
+def required_loop() -> None:
+	import sys
+	while sys.exit():
+		print(1)
+
+def short_circuit(a) -> None:
+	import sys
+	a and sys.exit()
+	return
+
+def both_branches(a) -> None:
+	import sys
+	sys.exit() if a else sys.exit(1)
+
+def one_branch(a) -> None:
+	import sys
+	sys.exit() if a else 0
+	return
+
+def deferred_lambda() -> None:
+	import sys
+	action = lambda: sys.exit()
+	print(action)
+	return
+
+def required_receiver():
+	import sys
+	sys.exit().x
+
+def required_list():
+	import sys
+	[sys.exit()]
+
+def required_default():
+	import sys
+	def action(x = sys.exit()):
+		pass
+
+def required_decorator():
+	import sys
+	@decorate(sys.exit())
+	def action():
+		pass
+
+def required_manager():
+	import sys
+	with sys.exit():
+		pass
+
+def required_expansion():
+	import sys
+	print(*sys.exit())
+
+def required_interpolation():
+	import sys
+	text = f"{sys.exit()}"
+
+def required_iteration_source():
+	import sys
+	values = [value for value in sys.exit()]
+
+def conditional_exit(flag) -> None:
+	if flag:
+		from sys import exit
+	exit(1)
+
+def doc_paren():
+	"""a"""
+
+def doc_layers():
+	"""a"""
+
+def doc_concat():
+	"""a""" "b"
+
+def doc_concat_paren():
+	"""a""" "b"
+
+def doc_raw():
+	r"""a"""
+
+def doc_raw_upper():
+	R"""a"""
+
+def doc_unicode():
+	u"""a"""
+
+def doc_unicode_upper():
+	U"""a"""
+
+def ellipsis_paren():
+	...
+
+def ellipsis_layers():
+	...
+
+def placeholder_mixed():
+	"""a""" "b"
+	pass
+	...
+
+def placeholder_ellipsis_first():
+	...
+	pass
+	...
+
+def bytes_concat():
+	b"a" b"b"
+	return
+
+def formatted_concat():
+	"a" f"{g()}"
+	return
+
+def string_tuple():
+	("a",)
+	return
+
+def string_after_pass():
+	pass
+	"a"
+	return
+
+def bytes_with_pass():
+	b"a"
+	pass
+	return
+
+def formatted_with_ellipsis():
+	f"{g()}"
+	...
+	return
+
+def prefix_0():
+	b"a"
+	return
+
+def prefix_1():
+	B"a"
+	return
+
+def prefix_2():
+	br"a"
+	return
+
+def prefix_3():
+	Br"a"
+	return
+
+def prefix_4():
+	bR"a"
+	return
+
+def prefix_5():
+	BR"a"
+	return
+
+def prefix_6():
+	rb"a"
+	return
+
+def prefix_7():
+	Rb"a"
+	return
+
+def prefix_8():
+	rB"a"
+	return
+
+def prefix_9():
+	RB"a"
+	return
+
+def prefix_10():
+	f"{g()}"
+	return
+
+def prefix_11():
+	F"{g()}"
+	return
+
+def prefix_12():
+	fr"{g()}"
+	return
+
+def prefix_13():
+	Fr"{g()}"
+	return
+
+def prefix_14():
+	fR"{g()}"
+	return
+
+def prefix_15():
+	FR"{g()}"
+	return
+
+def prefix_16():
+	rf"{g()}"
+	return
+
+def prefix_17():
+	Rf"{g()}"
+	return
+
+def prefix_18():
+	rF"{g()}"
+	return
+
+def prefix_19():
+	RF"{g()}"
+	return
+
+def nested_string_tuple():
+	("a",)
+	return
+
+def bare_string_tuple():
+	"a",
+	return
+
+def bare_ellipsis_tuple():
+	...,
+	return
+
+def reassigned_attribute():
+	import sys
+	sys.exit = lambda: None
+	sys.exit()
+	return
+
+def reassigned_import_alias():
+	import sys as s
+	s.exit = lambda: None
+	s.exit()
+	return
+
+def reassigned_receiver_alias():
+	import sys
+	alias = sys
+	alias.exit = lambda: None
+	sys.exit()
+	return
+
+def receiver_alias_after_reassignment():
+	import sys
+	alias = sys
+	sys.exit = lambda: None
+	alias.exit()
+	return
+
+def callee_alias_after_reassignment():
+	import sys
+	sys.exit = lambda: None
+	g = sys.exit
+	g()
+	return
+
+def reassigned_tuple():
+	import sys
+	sys.exit, other = lambda: None, 1
+	sys.exit()
+	return
+
+def reassigned_chain():
+	import sys
+	sys.exit = other = lambda: None
+	sys.exit()
+	return
+
+def conditional_reassignment():
+	import sys
+	if ready:
+		sys.exit = lambda: None
+	sys.exit()
+	return
+
+def captured_original_callee():
+	import sys
+	g = sys.exit
+	sys.exit = lambda: None
+	g()
+
+def supplied_chain():
+	import sys
+	sys.exit = other = lambda: None
+	sys.exit()
+	return
+
+def supplied_chain_alias():
+	import sys
+	g = other = sys.exit = lambda: None
+	g()
+	return
+
+def captured_chain_callee():
+	import sys
+	g = other = sys.exit
+	sys.exit = lambda: None
+	g()
+
+def conditionally_supplied_loop():
+	import sys
+	g = lambda: None
+	for value in []:
+		g = sys.exit
+	g()
+	return
+
+def conditionally_supplied_while():
+	import sys
+	g = lambda: None
+	while False:
+		g = sys.exit
+	g()
+	return
+
+def conditionally_supplied_handler():
+	import sys
+	g = lambda: None
+	try:
+		pass
+	except ValueError:
+		g = sys.exit
+	g()
+	return
+
+def deleted_function_alias():
+	import sys
+	g = sys.exit
+	del g
+	try:
+		g()
+	except NameError:
+		pass
+	return
+
+def deleted_module_alias():
+	import sys as s
+	del s
+	try:
+		s.exit()
+	except NameError:
+		pass
+	return
+
+def deleted_member_alias():
+	import sys
+	s = sys
+	del sys.exit
+	try:
+		s.exit()
+	except AttributeError:
+		pass
+	return
+
+def captured_before_deletion():
+	import sys
+	g = sys.exit
+	del sys.exit
+	g()
+
+def catch_type_exit() -> None:
+	import sys
+	try:
+		sys.exit()
+	except (BaseException, sys.exit()):
+		pass
+
+def catch_type_exit_alias() -> None:
+	from sys import exit as stop
+	try:
+		stop()
+	except (SystemExit, stop()):
+		pass
+
+def catch_type_exit_outer() -> None:
+	import sys
+	try:
+		try:
+			sys.exit()
+		except (BaseException, sys.exit()):
+			pass
+	except SystemExit:
+		pass
+	return
+
+def literal_while():
+	while 2:
+		pass
+
+def literal_negative():
+	while -1:
+		pass
+
+def literal_hex():
+	while 0X2:
+		pass
+
+def literal_float():
+	while 1.0:
+		pass
+
+def literal_string():
+	while "x":
+		pass
+
+def literal_wrapped():
+	while 2:
+		pass
+
+def literal_zero():
+	while 0:
+		pass
+	return
+
+def literal_break():
+	while 2:
+		break
+	return
+
+def forward_local_module() -> None:
+	import sys
+	def inner() -> None:
+		sys.exit()
+		sys: object = object()
+	return
+
+def forward_local_alias() -> None:
+	from sys import exit as leave
+	def inner() -> None:
+		leave()
+		leave: object = object()
+	return

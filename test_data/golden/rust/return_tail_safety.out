@@ -1,42 +1,190 @@
+/**
+ *
+ * # Arguments
+ * * `x`
+ * # Returns
+ */
 fn simple(x: i32) -> i32 {
 	return x + 1;
 }
 
+/**
+ *
+ * # Arguments
+ * * `x`
+ * # Returns
+ */
 fn place(x: Data) -> i32 {
 	return x.value;
 }
 
+/**
+ *
+ * # Arguments
+ * * `x`
+ * # Returns
+ */
 fn borrowed_local(x: &String) -> usize {
 	return x.len();
 }
 
+/**
+ *
+ * # Returns
+ */
 fn borrowed() -> usize {
 	(&String::from("x")).len()
 }
 
+/**
+ *
+ * # Returns
+ */
 fn projected() -> i32 {
 	make().value
 }
 
+/**
+ *
+ * # Returns
+ */
 fn drop_order() -> i32 {
 	let guard = Guard::new();
 	make().value
 }
 
+/**
+ *
+ * # Returns
+ */
 fn compared() -> bool {
 	String::from("a") == "a"
 }
 
+/**
+ *
+ * # Returns
+ */
 fn opaque() -> String {
 	format!("{}", 1)
 }
 
+/**
+ *
+ * # Arguments
+ * * `x`
+ * # Returns
+ */
 fn macro_scope(x: i32) -> i32 {
 	opaque!();
 	x
 }
 
+/**
+ *
+ * # Arguments
+ * * `x`
+ * # Returns
+ */
 #[rewrite]
 fn attributed(x: i32) -> i32 {
 	x
+}
+
+/**
+ *
+ * # Arguments
+ * * `x`
+ * # Returns
+ */
+#[allow(unused)]
+fn printed(x: i32) -> i32 {
+	println!("{}", x);
+	return 2;
+}
+
+/**
+ *
+ * # Returns
+ */
+fn printed_return() -> i32 {
+	println!("{}", { return 1; });
+	2
+}
+
+/**
+ *
+ * # Arguments
+ * * `x`
+ * # Returns
+ */
+fn printed_try(x: Option<i32>) -> Option<i32> {
+	println!("{}", x?);
+	return Some(0);
+}
+
+/**
+ *
+ * # Returns
+ */
+fn printed_opaque() -> i32 {
+	println!("{}", opaque!());
+	1
+}
+
+/**
+ *
+ * # Returns
+ */
+fn printed_cfg() -> i32 {
+	println!("{}", { #[cfg(feature = "x")] return 1; 2 });
+	3
+}
+
+/**
+ *
+ * # Arguments
+ * * `x`
+ * # Returns
+ */
+fn indexed_group(x: [i32; 1]) -> i32 {
+	return x[0];
+}
+
+/**
+ *
+ * # Arguments
+ * * `x`
+ * # Returns
+ */
+fn field_group(x: Data) -> i32 {
+	return x.value;
+}
+
+/**
+ *
+ * # Arguments
+ * * `x`
+ * # Returns
+ */
+fn deref_group(x: &i32) -> i32 {
+	return *x;
+}
+
+/**
+ *
+ * # Arguments
+ * * `x`
+ */
+fn assign_group(x: &mut i32) -> () {
+	*x = 1;
+	return;
+}
+
+/**
+ * トークン列のマクロ
+ */
+fn opaque_tokens() {
+	m!(opaque!(), opaque![], opaque!{});
+	return;
 }

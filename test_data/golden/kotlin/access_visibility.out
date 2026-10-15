@@ -1,0 +1,88 @@
+object Reverse {
+	public val A: Int = 1
+	private val B: Int = 2
+}
+
+class Companion {
+	companion object {
+		public val A: Int = 1
+		private val B: Int = 2
+	}
+}
+
+val Value: Any = object {
+	public val A: Int = 1
+	private val B: Int = 2
+}
+
+enum class ReverseEnum {
+	X;
+
+	public val A: Int = 1
+	private val B: Int = 2
+}
+
+class Nested0 {
+	public class N {}
+
+	private val B: Int = 2
+}
+
+class Nested1 {
+	public enum class N {}
+
+	private val B: Int = 2
+}
+
+class Nested2 {
+	public object N {}
+
+	private val B: Int = 2
+}
+
+object Forward {
+	private val A: Int = 1
+	public val B: Int = 2
+}
+
+object ReverseForward {
+	private val B: Int = 2
+	public val A: Int = 1
+}
+
+class CompanionForward {
+	companion object {
+		private val B: Int = 2
+		public val A: Int = 1
+	}
+}
+
+val ValueForward: Any = object {
+	private val B: Int = 2
+	public val A: Int = 1
+}
+
+enum class ReverseEnumForward {
+	X;
+
+	private val B: Int = 2
+	public val A: Int = 1
+}
+
+class Nested0Forward {
+	private val B: Int = 2
+
+	public class N {}
+}
+
+class Nested1Forward {
+	private val B: Int = 2
+
+	public enum class N {}
+}
+
+class Nested2Forward {
+	private val B: Int = 2
+
+	public object N {}
+}

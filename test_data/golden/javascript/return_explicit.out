@@ -17,7 +17,57 @@ function g(x) {
 
 /**
  * 生成する
+ * @return
  */
-function *h() {
+function* h() {
 	yield 1;
+}
+
+/**
+ * 後判定の本体で終える
+ * @param c 条件
+ */
+function postStop(c) {
+	do return;
+	while(c);
+}
+
+/**
+ * 属性の送出を捕捉して復帰する
+ * @param value 対象
+ */
+function propertyInTry(value) {
+	try {
+		value.missing;
+		return;
+	} catch(e) {
+		work();
+	}
+	return;
+}
+
+/**
+ *
+ */
+function outer() {
+	/**
+	 *
+	 * @return
+	 */
+	function* g() {
+		return 1;
+	}
+	g();
+	return;
+}
+
+/**
+ *
+ */
+function outer2() {
+	const g = function*() {
+		return 1;
+	};
+	g();
+	return;
 }

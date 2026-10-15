@@ -1,0 +1,31 @@
+#ifdef A
+int a;
+#elifdef B
+int b;
+#elifndef C
+int c;
+#endif
+#if defined(FEATURE_ALPHA_ENABLED) && defined(FEATURE_BETA_ENABLED) && defined(FEATURE_GAMMA_ENABLED) && !defined(FEATURE_DELTA_DISABLED)
+int Mode = 1;
+#endif
+
+#if - 1
+int NegativeCondition;
+#endif
+#if + 1
+int PositiveCondition;
+#endif
+
+#ifndef FEATURE_H
+#define FEATURE_H
+int Value;
+#undef TRANSIENT
+#endif
+
+enum E {
+	A,
+#ifdef X
+	B,
+#endif
+	C
+};

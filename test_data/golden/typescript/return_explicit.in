@@ -47,3 +47,87 @@ async function p(): Promise<void> {
 function r(x: unknown): asserts x {
 	check(x);
 }
+
+/**
+ * 未確定の結果
+ * @return 既存の説明
+ */
+function unknownResult() { resolveResult(); }
+
+/**
+ * 無値
+ * @return
+ */
+function noValue(): void {}
+
+/**
+ * 戻らない
+ * @return
+ */
+function stop(): never { throw new Error("stop"); }
+
+/**
+ * 後判定の本体で終える
+ * @param c 条件
+ */
+function postStop(c: boolean): void {
+	do return;
+	while(c);
+}
+
+function outer() { function* g() { return 1; } g(); }
+function outer2() { const g = function* () { return 1; }; g(); }
+
+const anonymousAsyncGenerator = async function*() {};
+
+function eventLoop(): void {
+	// 無限ループ
+	for(;;) {
+		const evt = queue.pop();
+		if(!evt) break;
+		dispatch(evt);
+	}
+}
+
+class Worker {
+	private running = true;
+
+	run(): void {
+		// クラスメソッド内の無限ループ
+		for(;;) {
+			if(!this.running) break;
+			this.tick();
+		}
+	}
+}
+
+function existingWhile(): void {
+	// 既存の while(true) は不変
+	while(true) doWork();
+}
+
+function forIn(obj: Record<string, number>): void {
+	// for-in は対象外
+	for(const k in obj) use(k);
+}
+
+function regularFor(n: number): void {
+	// 通常 for は対象外
+	for(let i = 0; i < n; ++i) use(i);
+}
+
+function LiteralWhile(): void{while(2){}}
+
+function LiteralFor(): void{for(;0x2;){}}
+
+function LiteralDo(): void{do{}while(-1);}
+
+function LiteralFloat(): void{while(1.0){}}
+
+function LiteralString(): void{while("x"){}}
+
+function LiteralWrapped(): void{while(((2))){}}
+
+function LiteralZero(): void{while(0){}}
+
+function LiteralBreak(): void{while(2){break;}}

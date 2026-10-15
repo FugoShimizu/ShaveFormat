@@ -1,3 +1,0 @@
-// 赤
-// 青
-enum class E { Red, Blue };

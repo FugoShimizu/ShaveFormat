@@ -1,5 +1,5 @@
-/** 読む
- *
+/**
+ * 読む
  * # Returns
  * 読んだ値
  */
@@ -9,14 +9,11 @@ fn read_value() -> std::io::Result<i32> {
 
 /**
  * 分ける
- *
  * # Arguments
  * * `a` - 割られる数
  * * `b` - 割る数
- *
  * # Returns
  * 商
- *
  * # Panics
  * `b` が 0 の場合
  */
@@ -34,7 +31,28 @@ fn stop() {
 }
 
 mod m {
-	//! 内側の文書
-	/** 何もしない */
+	/*!
+	 * 内側の文書
+	 */
+	/**
+	 * 何もしない
+	 */
 	fn g() {}
 }
+
+/**
+ * 型と値の対応を保つ
+ * # Panics
+ * 入力の説明を保つ
+ * # Arguments
+ * * `B` - 先の型
+ * * `B` - 先の型の補足
+ * * `A` - 後の型
+ * * `first` - 先の値
+ * * `second` - 後の値
+ * # Returns
+ * 戻値の説明を保つ
+ * # Errors
+ * 失敗条件の説明を保つ
+ */
+fn ordered<B, A>(first: B, second: A) {}

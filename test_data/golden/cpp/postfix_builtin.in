@@ -17,3 +17,21 @@ void f(int *p, std::vector<int> &v) {
 	it++;
 	for(int k = 0; k < 3; k++) g(k);
 }
+
+/**
+ * 型の別名の増減を確認する
+ */
+void AliasNames() {
+ size_t Value;
+ Value++;
+ int8_t Narrow;
+ Narrow++;
+ ptrdiff_t Offset;
+ Offset++;
+ char16_t Character;
+ Character++;
+ size_t *Pointer;
+ Pointer++;
+ // 終了
+ return;
+}

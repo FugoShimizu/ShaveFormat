@@ -6,8 +6,11 @@ func F(v int) *T {
 	return new(T(v))
 }
 
-// G
 func G() {
-	for p := 0; p < 1; p += int(unsafe.Sizeof(T(0))) {}
-	return
+	for p := 0; p < 1; p += int(unsafe.Sizeof(T(0))) {
+	}
+}
+
+func call() {
+	foo(
 }

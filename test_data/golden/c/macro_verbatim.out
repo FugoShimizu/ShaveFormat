@@ -3,7 +3,7 @@
 #define SWAP(a, b) t = a; a = b; b = t
 
 const char *s = GLSL({int a; int b;});
-const char *t = STR(m/*x*/+n);
+const char *t = STR(m /* x */ +n);
 
 /**
  *

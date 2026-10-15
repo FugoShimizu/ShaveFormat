@@ -3,8 +3,11 @@
 // 日本 語 の 文 ， 次 （括弧） の 後
 // 値xを返す，UTF-8の文字，16進の値，0x10個
 // 型  (`int`)  を返す，引用「a  b」 は保つ
-// リンク[説明](https://example.com/a)の後
 // 第１章 基本方針 と 8.6 スペースの入れ方 ，a → b
+// 第1章 説明
+// 第 1 章 説明
+// 第1２章 説明
+// 第章 説明
 // 例の区切り（注記） // TS x = 1
 /*  囲み  注記  */
 /// <summary>要素の記法</summary>
@@ -23,7 +26,6 @@
 // 文字列"a  b"と'c  d'を保つ，${x}の展開
 // - 箇条  書き
 // 1. 番号  付き
-// ❌  誤りの例
 // | 列1  | 列2 |
 // 前の値(x)は[a]に入り{b}となる
 int x = 1;
@@ -69,3 +71,103 @@ int PathSpacing;
  * @return N回
  */
 int Count(int N);
+// 赤, blue, green
+// red，blue，green
+// red, blue, 緑
+// A, B 及び 群
+// 定数には，5.8, 5.9 が
+// 数量は 3個, N回, 5 ms
+// `a,b`, `c.d`, https://example.com/a,b と 1,000
+// read cache. write result.
+// Read cache. `write()` stores result.
+// Stores config.json and 0.25. next step.
+// 1. item
+int CommentCases;
+
+/**
+ * 列挙を返す
+ * @param [in,out] x,y 赤, blue, green
+ * @return red，blue，green
+ */
+int ReadValues(int x, int y) {
+	return x + y;
+}
+
+// a が真なら 1，b が真なら 2，其の他は 3 を返す
+// 整形仕様 3.3, 3.4, 7.3
+// 整形仕様 1.5, 2.1，行分割仕様 2.3
+// linux,amd64 と a,b
+// fmt.Println("a. b.")
+// fmt.Printf("%s", "a. b.")
+// TODO: care? unlike http/1, it won't mess up our framing, so it's
+// more safe smuggling-wise to ignore.
+int RegressionCases;
+
+// 列挙：A, B, にんじん
+// apple, にんじん, banana
+// apple, はと, banana
+// apple, わに, banana
+// 列挙：A, B, 菜の花
+// 条件には，A, B が続く
+// 赤, https://example.com/に, banana
+int EnumerationWords;
+
+// 文書を付けれる宣言（同じ節点名が文法毎に異なる構文を表す物は宣言を表す文法だけに付け，CSS, SCSS の性質の宣言と Python の根を除く）
+// 宣言を取る，CSS, SCSS の性質を除く
+// 宣言を取る，CSS, SCSS と Python の根を除く
+// 宣言を取る，CSS, SCSS, Python の性質を除く
+// 赤, CSS, SCSS の性質を比べる
+int EnumerationDescriptions;
+// "a\"x  y"
+// 'a\'x  y'
+// "a\\" outside  text
+int EscapedValues;
+
+// 「ASCIIと日本語」
+// 『Alpha  Beta』
+// 【日本語 と 日本語】
+// 「外『ASCIIと日本語  の説明』内」
+// 「`ASCIIと日本語  x`」
+// 『"a\"x  y"』
+// 【<code>日本語 と 日本語</code>】
+int QuotedSpacing;
+// と'a  b'を保つ
+// 漢'a  b'字を保つ
+// ｶ'a  b'を保つ
+int JapaneseQuoteValues;
+
+// 𐐀と𐐁
+// A҂B
+// 𐐀, 𐐁
+// 𐐀, 日本語, 𐐁
+// 記号҂を使う
+// 記号᠀を使う
+// caféとβ
+// 한글と𞤀
+// ªとµ
+// `𐐀と𐐁  A҂B`を保つ
+// α，β
+// α, 日本語, β
+// m²の面積，x³の値，a⁰の値，b¹の値，c⁹の値，x₀の値，y₉の値
+int PhoneticWords;
+// 𐒰と𐓘，𐲀と𐳀，𑢠と𑣀，𖹀と𖹠，𞤀と𞤢，𝼀と𝼁
+// 象形文字𓀀を示す
+// A𒀀B
+int SupplementaryWords;
+int PhoneticTrailing; // 𐐀と𐐁
+int /* A҂B */ PhoneticInline;
+// 日本語, English words, more words
+// English, （日本語）, Other
+// English, [日本語, other], Other
+// Call f() (see A Then B) now
+// nolint:errcheck
+// go: embeddata/*.json
+// g();
+// @overload doc_boundary(a)
+// Read( the result )Now
+// Input:ready; output:done
+int EnumerationPhrases;
+
+// N回 N日
+// Ｎ回 Ｎ日
+int QuantityWords;

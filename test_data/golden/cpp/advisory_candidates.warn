@@ -1,3 +1,0 @@
-9:6: Review: Make this local binding `const`; verify type, binding, lifetime
-13:17: Review: Replace `NULL` with `nullptr`; verify type, binding
-17:67: Review: Simplify the redundant unary signs; verify type, evaluation

@@ -4,3 +4,118 @@ def f(n, flag):
 	if n != 0:
 		flag = not flag
 	return flag
+
+def compatibility_return() -> object:
+	K: object = g()
+	# 値の返戻
+	return K
+
+def compatibility_declaration() -> object:
+	K: object = g()
+	# 値の返戻
+	return K
+
+def compatibility_capture() -> object:
+	K: object = g(lambda: K)
+	# 値の返戻
+	return K
+
+def typed_parameter(K: int) -> int:
+	K = 1
+	use(K)
+	# 値の返戻
+	return K
+
+def typed_local() -> int:
+	K: int = 1
+	K = 2
+	use(K)
+	# 値の返戻
+	return K
+
+def compatibility_flip(K: bool) -> None:
+	K = not K
+	# 終了
+	return
+
+def composed_return() -> object:
+	é: object = g()
+	# 値の返戻
+	return é
+
+def ligature_return() -> object:
+	ﬃ: object = g()
+	# 値の返戻
+	return ffi
+
+def hangul_return() -> object:
+	가: object = g()
+	# 値の返戻
+	return 가
+
+def ordered_return() -> object:
+	à̕: object = g()
+	# 値の返戻
+	return à̕
+
+def literal_preservation() -> str:
+	# K・ﬃ・é は本文の儘に保つ
+	text: str = "K ﬃ é 가 à̕"
+	use(text)
+	# テキストの返戻
+	return text
+
+def lambda_binding() -> object:
+	a: object = g(lambda a: a)
+	# 値の返戻
+	return a
+
+def default_binding() -> object:
+	a: object = g(lambda a = 1: a)
+	# 値の返戻
+	return a
+
+def rest_binding() -> object:
+	a: object = g(lambda *a: a)
+	# 値の返戻
+	return a
+
+def keyword_binding() -> object:
+	a: object = g(lambda **a: a)
+	# 値の返戻
+	return a
+
+def list_binding() -> object:
+	a: object = [a for a in xs]
+	# 値の返戻
+	return a
+
+def set_binding() -> object:
+	a: object = { a for a in xs }
+	# 値の返戻
+	return a
+
+def dict_binding() -> object:
+	a: object = { a: a for a in xs }
+	# 値の返戻
+	return a
+
+def generator_binding() -> object:
+	a: object = (a for a in xs)
+	# 値の返戻
+	return a
+
+def captured_binding() -> object:
+	a: object = g(lambda b: a)
+	# 値の返戻
+	return a
+
+def default_capture() -> object:
+	a: object = g(lambda a = a: a)
+	# 値の返戻
+	return a
+
+def iterable_capture() -> object:
+	a: object = [a for a in a]
+	# 値の返戻
+	return a

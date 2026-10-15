@@ -8,3 +8,136 @@ export function View(): JSX.Element {
 	++changed;
 	return <span>{fixed + changed}</span>;
 }
+
+/**
+ *
+ */
+export function bindingTypeBoundary(): void {
+	let literal = 1, text = "a", flag = true, template = `a`, negative = -1;
+	use(literal, text, flag, template, negative);
+	let symbol = Symbol(), generic = id(1), genericString = id("x"), assertion = 1 as const, ordinary = read();
+	use(symbol, generic, genericString, assertion, ordinary);
+	const typed: number = 1;
+	let inferred = 2;
+	use(typed, inferred);
+	const { first, second }: { first: number, second: string } = { first: 1, second: "a" };
+	use(first, second);
+	const [head, ...tail]: number[] = [1, 2];
+	use(head, tail);
+	let { mutable, stable }: { mutable: number, stable: number } = { mutable: 1, stable: 2 };
+	mutable = 2;
+	use(mutable, stable);
+	let { unknown, other } = read();
+	use(unknown, other);
+	const object = { value: 1 }, array = [1], regex = /a/;
+	use(object, array, regex);
+	const arrow = () => 1;
+	use(arrow);
+	const fn = function() {};
+	use(fn);
+	const typedCall: number = id(1);
+	use(typedCall);
+	return;
+}
+
+export let exportedLiteral = 1;
+export const exportedTyped: number = 1;
+export let exportedSymbol = Symbol();
+export const { left, right }: { left: number, right: string } = { left: 1, right: "a" };
+export let { unknownExport } = read();
+
+/**
+ *
+ */
+export function narrowingCaptures(): void {
+	type Choice = boolean|string;
+	let arrowValue: boolean = true;
+	const arrow = () => {
+		const narrowed: true = arrowValue;
+		use(narrowed);
+	};
+	use(arrow);
+	let functionValue: string|number = "a";
+	/**
+	 *
+	 */
+	function readFunction(): void {
+		const narrowed: string = functionValue;
+		use(narrowed);
+		return;
+	}
+	use(readFunction);
+	let methodValue: boolean = true;
+	const object = {
+		/**
+		 *
+		 */
+		read(): void {
+			const local: boolean = true;
+			use(local);
+			const narrowed: true = methodValue, own: true = local;
+			use(narrowed, own);
+			return;
+		}
+	};
+	use(object);
+	let generatorValue: Choice = true;
+	/**
+	 *
+	 * @return
+	 */
+	function* readGenerator() {
+		const narrowed: true = generatorValue;
+		yield narrowed;
+	}
+	use(readGenerator);
+	let callbackValue: boolean = true;
+	invoke(() => use(callbackValue));
+	let fieldValue: boolean = true;
+	class Deferred {
+		value: true = fieldValue;
+	}
+	use(Deferred);
+	let { captured, uncaptured }: { captured: boolean, uncaptured: number } = { captured: true, uncaptured: 1 };
+	invoke(() => use(captured));
+	use(uncaptured);
+	return;
+}
+
+/**
+ *
+ */
+export function narrowingSameFlow(): void {
+	type Choice = boolean|string;
+	const localBoolean: boolean = true, localUnion: string|number = "a", localAlias: Choice = true;
+	use(localBoolean, localUnion, localAlias);
+	const asTrue: true = localBoolean, asString: string = localUnion, aliasTrue: true = localAlias;
+	use(asTrue, asString, aliasTrue);
+	const shadowed: boolean = true;
+	use(shadowed);
+	const shadow = (shadowed: boolean) => use(shadowed);
+	use(shadowed, shadow);
+	return;
+}
+
+/**
+ *
+ */
+export function aggregateCaptures(): void {
+	let array = [1], object = { value: 1 }, regex = /a/, arrow = () => 1, fn = function() {};
+	invoke(() => use(array, object, regex, arrow, fn));
+	return;
+}
+
+/**
+ *
+ * @param action
+ */
+export function correlatedBindings(action: { kind: "num", payload: number }|{ kind: "str", payload: string }): void {
+	type Action = { kind: "num", payload: number }|{ kind: "str", payload: string };
+	let { kind, payload }: Action = action;
+	if(kind === "num") use(payload);
+	let [{ kind: nestedKind, payload: nestedPayload }]: Action[] = [action];
+	if(nestedKind === "num") use(nestedPayload);
+	return;
+}

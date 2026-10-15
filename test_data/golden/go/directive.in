@@ -53,3 +53,12 @@ func c() int { return 3 }
 
 //go:linkname   mt runtime.nanotime
 func mt() int64
+
+type A struct{}
+type B struct{}
+
+//go:noinline
+func (A) f() {}
+
+//go:noinline
+func (B)   f() {}

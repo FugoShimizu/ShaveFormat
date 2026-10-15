@@ -1,0 +1,74 @@
+f(
+	{
+		# 成員の深さ
+		"first_collection_member_with_a_long_name": 1,
+		"second_collection_member_with_a_long_name": 2,
+		"third_collection_member_with_a_long_name": 3
+	}
+)
+
+if a:
+	x()
+# before elif
+elif b:
+	y()
+
+try:
+	z()
+# before except
+except E:
+	w()
+# before finally
+finally:
+	v()
+
+# c
+f()
+g()
+
+# a
+# b
+x = 1
+
+# 日本語の注記と Python の型
+def f(x):
+	if x:
+		return 1 # 値を返す
+
+# 関数の終わり
+# - 箇条書き
+x = f(1)
+# 参照は https://example.com/a b と src/a.py の２つ
+# noSpacePy
+# tooMany
+x = 1 # inlineNoSpace
+form_feed_a = 1
+# own
+form_feed_c = 3
+# 赤，blue，green
+# red, blue, green
+# read cache
+# write result
+# Read cache
+# `write()` stores result
+comment_cases = 1
+
+class A:
+	# : doc of x
+	x = 1
+
+x = 1 # First one # Second two
+# ========== ==== ==========
+# A, B and 日本語
+# A, B or にほんご
+# A, B, C and ニホンゴ
+# A, B and 日本語
+# `A, B and日本語`
+tight_enumeration: int = 1 # A, B or １２３
+# 甲，乙？
+# 甲，乙丙
+# A, B
+# {@code A B}
+# {@literal A B}
+# (@dot A B @enddot)
+# (@f$ A B @f$)

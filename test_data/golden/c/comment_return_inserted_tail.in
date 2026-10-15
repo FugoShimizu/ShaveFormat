@@ -1,4 +1,0 @@
-void g(int a) {
-  x();
-  // end of void
-}

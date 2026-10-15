@@ -1,28 +1,20 @@
-8:3: Review: Merge the conditions of these identical branch bodies; verify lifetime
-21:10: Review: Add an explicit return type to this function; verify type, external contract
-21:25: Review: Add an explicit type to parameter 'x'; verify type, external contract
-22:5: Review: Describe the termination or returned value in the return comment; verify documentation, intent
-23:2: Review: Merge the conditions of these identical branch bodies; verify lifetime
-24:5: Review: Describe the termination or returned value in the return comment; verify documentation, intent
-26:5: Review: Describe the termination or returned value in the return comment; verify documentation, intent
-28:5: Review: Describe the termination or returned value in the return comment; verify documentation, intent
-37:10: Review: Add an explicit return type to this function; verify type, external contract
-37:19: Review: Add an explicit type to parameter 'o'; verify type, external contract
-38:5: Review: Describe the termination or returned value in the return comment; verify documentation, intent
-39:2: Review: Merge the conditions of these identical branch bodies; verify lifetime
-40:5: Review: Describe the termination or returned value in the return comment; verify documentation, intent
-42:5: Review: Describe the termination or returned value in the return comment; verify documentation, intent
-51:10: Review: Add an explicit return type to this function; verify type, external contract
-51:23: Review: Add an explicit type to parameter 'o'; verify type, external contract
-52:5: Review: Describe the termination or returned value in the return comment; verify documentation, intent
-54:5: Review: Describe the termination or returned value in the return comment; verify documentation, intent
-56:5: Review: Describe the termination or returned value in the return comment; verify documentation, intent
-64:10: Review: Add an explicit return type to this function; verify type, external contract
-65:5: Review: Describe the termination or returned value in the return comment; verify documentation, intent
-66:2: Review: Merge the conditions of these identical branch bodies; verify lifetime
-67:5: Review: Describe the termination or returned value in the return comment; verify documentation, intent
-69:5: Review: Describe the termination or returned value in the return comment; verify documentation, intent
-78:10: Review: Add an explicit return type to this function; verify type, external contract
-79:5: Review: Describe the termination or returned value in the return comment; verify documentation, intent
-80:2: Review: Merge the conditions of these identical branch bodies; verify lifetime
-81:5: Review: Describe the termination or returned value in the return comment; verify documentation, intent
+8:3: Review: Merge the conditions of these identical branch bodies
+21:10: Review: Add an explicit return type to this function
+21:25: Review: Add an explicit type to parameter 'x'
+23:2: Review: Merge the conditions of these identical branch bodies
+37:10: Review: Add an explicit return type to this function
+37:19: Review: Add an explicit type to parameter 'o'
+39:2: Review: Merge the conditions of these identical branch bodies
+51:10: Review: Add an explicit return type to this function
+51:23: Review: Add an explicit type to parameter 'o'
+53:2: Review: Merge the conditions of these identical branch bodies
+64:10: Review: Add an explicit return type to this function
+66:2: Review: Merge the conditions of these identical branch bodies
+78:10: Review: Add an explicit return type to this function
+80:2: Review: Merge the conditions of these identical branch bodies
+110:2: Review: Merge the conditions of these identical branch bodies
+121:4: Review: Use the increment or decrement form required for this target
+122:12: Review: Use a strict inequality with an equivalent adjusted boundary
+123:12: Review: Use the zero-test form required for this numeric type
+124:2: Review: Merge the conditions of these identical branch bodies
+127:2: Review: Merge the conditions of these identical branch bodies

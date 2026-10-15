@@ -21,3 +21,11 @@ item2: (
 		str
 	]
 )
+
+def result() -> (
+	typing.Receiver[
+		int,
+		str
+	]
+):
+	return None

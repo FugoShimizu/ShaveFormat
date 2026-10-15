@@ -1,0 +1,187 @@
+.a {
+	margin:
+	1px
+	2px
+	3px
+	4px;
+}
+
+.include {
+	@include f(
+		111,
+		222,
+		333
+	);
+}
+
+@mixin f(
+	$first,
+	$second
+) {}
+
+@function f(
+	$first,
+	$second
+) {
+	@return 1;
+}
+
+$round: (
+	111,
+	222,
+	333
+);
+
+$square: [
+	111,
+	222,
+	333
+];
+
+.start {
+	--abcdefgh:
+	initial;
+	width:
+	123456px;
+	content:
+	"abcdefghi";
+	background:
+	url(abcdefgh);
+	transform:
+	translate(
+		0,
+		0
+	);
+	color:
+	red
+	!important;
+	c: red;
+	--empty: ;
+	--zero:;
+}
+
+.nested {
+	.b {
+		width:
+		123456px;
+	}
+}
+
+@font-face {
+	font-family:
+	"abcdefghi";
+}
+
+@media all {
+	.b {
+		width:
+		123456px;
+	}
+}
+
+@media (
+	x:
+	123456px
+) {
+	.b {
+		c: red;
+	}
+}
+
+@supports (
+	width:
+	123456px
+) {
+	.b {
+		c: red;
+	}
+}
+
+$longname:
+initial;
+
+:is(
+	.abcdefghij,
+	.klmnopqrst
+) {
+	x: 1;
+}
+
+:where(
+	.abcdefghij,
+	.klmnopqrst
+) {
+	x: 1;
+}
+
+:not(
+	#Abcdefghij,
+	#Klmnopqrst
+) {
+	x: 1;
+}
+
+:has(
+	.abcdefghij,
+	.klmnopqrst
+) {
+	x: 1;
+}
+
+:lang(
+	abcdefghij,
+	klmnopqrst
+) {
+	x: 1;
+}
+
+::slotted(
+	.abcdefghij
+) {
+	x: 1;
+}
+
+::part(
+	abcdefghij
+) {
+	x: 1;
+}
+
+:nth-child(
+	2n+1
+) {
+	x: 1;
+}
+
+:is(.a .b) {
+	x: 1;
+}
+
+@include f(
+	1234567890
+);
+
+@include f(
+	bar(
+		abcdefghij
+	)
+);
+
+@include f(
+	abcdefghij,
+	klmnopqrst
+);
+
+@include f(
+	"a,b",
+	$a: 1234567
+);
+
+$map: (
+	a: b,
+	c: d
+);
+
+@include f(
+	(a: b, c: d)
+);

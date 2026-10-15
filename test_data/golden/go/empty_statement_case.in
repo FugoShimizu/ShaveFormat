@@ -7,3 +7,7 @@ func h(v any){switch v.(type){case int:
 // e
 ; default: ;}}
 func i(x int){switch x{case 1:; default: /* f */ ;}}
+
+func j(x int){switch x{case 0: /* empty case */ ; default:}}
+
+func f(){if true{/* c */;}}

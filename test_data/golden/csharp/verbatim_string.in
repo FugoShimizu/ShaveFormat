@@ -28,3 +28,28 @@ end";
         return false;
     }
 }
+
+class Edge {
+	void F() {
+		var s = $@"line1
+{x // trailing
+}
+line3";
+	}
+}
+
+class Boundary {
+	void F() {
+		var s = $@"{x // final
+}
+text";
+		next(); // outside
+	}
+}
+
+class C {
+#if DEBUG
+	string s = @"a  
+b  ";
+#endif
+}

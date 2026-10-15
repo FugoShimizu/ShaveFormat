@@ -4,3 +4,60 @@ oct = 0O17
 a = "x"
 b = "it's \#{y} \\ \\d \"q\" \#@v"
 c = %q(z)
+
+%s{a{b}c}
+%s(a(b)c)
+
+%r{a{b}c}
+%r(a(b)c)
+
+x = %s{a}
+y = 2
+x = %w{.. lib}
+y = %w{foo bar}
+z = %i{.. sym}
+
+p %w[>> [] []= ^]
+p %i[a (b) [c]]
+
+y = /a\) }b/
+z = /\} <b/
+y = %w(a ,b ;c (d) -e .f)
+z = %i(a ,b)
+
+class Config
+	#
+	# @param seconds
+	# @return
+	def maximum_retry_interval=(seconds)
+		return (@maximum_retry_interval = seconds)
+	end
+
+	#
+	# @param other
+	# @return
+	def ==(other)
+		return @maximum_retry_interval == other
+	end
+
+	#
+	# @param index
+	# @return
+	def [](index)
+		return @values[index]
+	end
+end
+
+class Cmp
+	#
+	# @param other
+	# @return
+	def <=>(other)
+		return other
+	end
+end
+
+a = 3r
+b = 1 + 2i
+m = [1r, 2i, 3.5r]
+position = __LINE__

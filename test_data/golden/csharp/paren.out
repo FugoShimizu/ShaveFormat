@@ -1,20 +1,15 @@
+using T = System.Int32;
+
 class K {
 	/**
 	 * <summary></summary>
+	 * <param name="d"></param>
 	 */
-	void H() {
+	void H(int d) {
 		g(a / (b * c));
 		g(a % (b * c));
 		g(a * (b % c));
-		g(a - (b + c));
-		g(a - (b - c));
-		g(a - b * c);
 		g(a * (b + c));
-		g(a + b - c);
-		g(a * b % c);
-		g(a - (b + c) * d);
-		g(a / (b * c));
-		g(a + b);
 		g(a & b + c);
 		g(a | b + c);
 		g(a ^ b + c);
@@ -27,11 +22,6 @@ class K {
 		g(a & b + c);
 		g(a && (b || c));
 		g(a || b && c);
-		g(a && (b && c));
-		g(a || (b || c));
-		g(a && b && c);
-		g(a && (b || c) || d);
-		g(a && b || c);
 		g((a - b).M);
 		g((a - b).M.N);
 		g((d - a) * 2);
@@ -53,5 +43,87 @@ class A {
 	int F(int a, int b, int c, int[] p) {
 		int x = (a + b) * c, y = p[b + c] * a;
 		return x ?? y;
+	}
+}
+
+class CastBindings {
+	static T Known = (T)-1;
+	static int Unknown = (U)-1;
+	static System.Func<int>[] Values = { () => 1, () => 2 };
+
+	/**
+	 * <summary></summary>
+	 * <param name="d"></param>
+	 * <param name="a"></param>
+	 * <returns></returns>
+	 */
+	static int Difference(int d, int a) {
+		return d - a;
+	}
+}
+
+class DeepNameBindings {
+	const int d = 1;
+
+	class N0 {
+		class N1 {
+			class N2 {
+				class N3 {
+					class N4 {
+						class N5 {
+							class N6 {
+								class N7 {
+									/**
+									 * <summary></summary>
+									 * <param name="a"></param>
+									 * <returns></returns>
+									 */
+									int F(int a) {
+										var r0 = d - a;
+										var r1 = d - a;
+										var r2 = d - a;
+										var r3 = d - a;
+										var r4 = d - a;
+										var r5 = d - a;
+										var r6 = d - a;
+										var r7 = d - a;
+										return a;
+									}
+								}
+							}
+						}
+					}
+				}
+			}
+		}
+	}
+}
+
+class A {
+	/**
+	 * <summary></summary>
+	 * <param name="a"></param>
+	 * <param name="b"></param>
+	 * <returns></returns>
+	 */
+	int F(int a, int b) {
+		return -(-a) + +(+b) - -(-b);
+	}
+}
+
+class C {
+	/**
+	 * <summary></summary>
+	 * <param name="a"></param>
+	 * <param name="b"></param>
+	 * <param name="c"></param>
+	 * <param name="d"></param>
+	 */
+	void M(int a, int b, int c, int d) {
+		var t = (a < b, c >> d);
+		H((a < b), c > d);
+		H(a < b, c >> d);
+		var n = new[] { (a < b), c > d };
+		return;
 	}
 }

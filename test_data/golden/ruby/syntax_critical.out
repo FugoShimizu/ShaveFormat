@@ -2,34 +2,56 @@
 # @param name
 # @param age
 # @param opts
+# @return
 def initialize(name:, age: 0, **opts)
 	@name = name
-	@age = age
+	return (@age = age)
 end
 
 #
 # @param value
+# @return
 def name=(value)
-	@name = value
+	return (@name = value)
 end
 
-#
-# @return
-def fetch
-	yield(row, dry_run) if block_given?
-	user&.id
-	return obj&.method(arg)
+# 配列の先頭を文字列へ変える
+# @param box 対象の配列
+# @return 先頭の文字列又は nil
+def alpha(box)
+	yield(3, count: 7) if block_given?
+	return box&.first&.to_s
 end
 
-#
-# @param value
-# @return
-def parse_datetime(value)
-	return nil if value.blank?
-	return Time.zone.parse(value.to_s)
-rescue ArgumentError
-	return nil
+# 配列を整数として読み積を求める
+# @param alpha 対象の配列
+# @return 積又は 0
+def count(alpha)
+	# 空の配列の場合の返戻
+	return 0 if alpha.empty?
+	# 積の返戻
+	return alpha.reduce(1) do |count, value|
+		count * Integer(value, 10)
+	end
+rescue TypeError
+	# 読めない値の場合の返戻
+	return 0
 end
 
 h = { name: "alice", age: 30 }
 proc = ->(x:, y: 1) { x + y }
+
+class Box
+	# 数値をブロックへ渡す
+	# @param count 渡す数値
+	# @return 外側の呼出の値
+	def alpha(count)
+		beta :a, bounds: { low: 1, high: 3 }
+		# 呼出の値の返戻
+		return gamma :b, values: %i[x y] do |box|
+			box.each do |value|
+				delta(value, count)
+			end
+		end
+	end
+end

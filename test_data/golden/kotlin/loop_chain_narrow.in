@@ -1,0 +1,6 @@
+/** 連鎖の見出を保つ */
+fun f(): Unit {while(a&&b) if(c) act(first_argument,second_argument)
+return}
+/** 三段の見出を保つ */
+fun g(): Unit {while(a) while(b) if(c) act(first_argument,second_argument)
+return}

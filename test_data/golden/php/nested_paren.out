@@ -11,6 +11,9 @@
  * @return
  */
 function f($a, $b, $c, $d, $e, $p) {
+	g($e && ($a || $b || $d));
+	g($a || $b || $d);
+	g($e && ($a || ($b || $d)));
 	$x = ($a + $b) * $c;
 	$y = $p[$b + $c] * $a;
 	return $a ? $b : ($c ? $d : $e);

@@ -34,3 +34,48 @@ for x in (a or b) do p x end
 for x in (0..n) do p x end
 x = (1..)
 p x
+
+while 1
+  g
+  h
+end
+
+while 1
+  g
+end
+g while 1
+
+if a
+ f
+end
+if b
+ f
+end
+if c
+ f
+end
+
+if a
+ f
+elsif b
+ f
+elsif c
+ f
+end
+
+if a
+ if b
+  f
+ end
+end
+
+x += 1E0_1
+x -= 1E+0_1
+x += 1E-0_1
+consume(x >= b + 1E0_1)
+consume(x <= b - 1E-0_1)
+consume(b + 1E+0_1 <= x)
+consume(b - 1E0_1 >= x)
+x += 1E0_0
+consume(x >= b + 1E0_0)
+consume(x == 0E1_0)

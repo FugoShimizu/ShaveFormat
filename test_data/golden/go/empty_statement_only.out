@@ -1,7 +1,0 @@
-package p
-
-// f
-func f() {
-	if true {/* c */}
-	return
-}

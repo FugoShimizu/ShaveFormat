@@ -1,0 +1,215 @@
+fun f(a: Int) { if (a == 1) { val x = 1 } }
+
+/**
+ * 件数計算関数
+ * @param IsReady 加算条件
+ * @return 計算後の件数
+ */
+fun CountSteps(IsReady:Boolean):Int {
+var Count: Int =0
+if(IsReady){++Count}
+for(Index: Int in 1..2){Count+=Index}
+do{--Count}while(Count>2)
+// 件数の返戻
+return Count
+}
+
+/**
+ * 文字数選択関数
+ * @param IsReady 選択条件
+ * @return 選択した文字列の長さ
+ */
+fun SelectLength(IsReady:Boolean):Int {
+val Value: Int =if(IsReady){"abc"}else{"de"}.length
+// 文字数の返戻
+return Value
+}
+
+/**
+ * ラムダ生成検証関数
+ * @param IsReady 生成条件
+ * @return 未変更の件数
+ */
+fun PreserveLambda(IsReady:Boolean):Int {
+var Count: Int =0
+if(IsReady){Tag@ {++Count}}
+// 件数の返戻
+	return Count
+}
+
+/**
+ * 入子分岐検証関数
+ * @param IsReady 外側の条件
+ * @param IsSelected 内側の条件
+ * @return 選択値への加算結果
+ */
+fun NestedValue(IsReady: Boolean, IsSelected: Boolean): Int {
+	// 加算結果の返戻
+	return (if(IsReady) (if(IsSelected) 2 else 3) + 10 else 4) + 1
+}
+
+fun f() {
+	if (a) if (b) x() else { if (c) y() } else z()
+	if (a) while (b) { g() } else z()
+	val x = a
+	/* block */
+	// line
+	.foo()
+}
+
+fun f() {
+	if(a) if(b) x() else y()
+	while(a) do x() while(b)
+	if(a) { if(b) {} else {} }
+	if(a) if(b) {} else {}
+	if(a) { do {} while(b) }
+	if(a) do {} while(b)
+}
+
+fun ClosedLoops() {
+ if(a) while(b) g() else z()
+ if(a) for(i in items) g() else z()
+}
+
+/**
+ * do 本体のループを処理する
+ * @param N 初期値
+ */
+fun G(N: Int) {
+	var X = N
+	do {
+		while(X > 0) {
+			--X
+		}
+	} while(X > 0)
+	// 終了
+	return
+}
+
+fun register(sourceText: String, position: Int, languageMode: Int, handlers: MutableList<Int>) {
+	if(position < sourceText.length && sourceText[position] != '\n' && shouldBreakAfterExpandedBrace("\n}", sourceText.substring(position), languageMode)) handlers.add(position)
+}
+
+fun f() {
+	val r = when (n) {
+		1 -> { if (a) { g() } }
+		2 -> { for (i in 0..2) g() }
+		3 -> { while (a) g() }
+		else -> 0
+	}
+	val v = if (c) { for (i in 0..2) g() } else 0
+	val w = if (c) 0 else { while (a) g() }
+	when (n) {
+		1 -> { for (i in 0..2) g() }
+		else -> {}
+	}
+	if (c) { for (i in 0..2) g() } else { while (a) g() }
+}
+
+/**
+ * 分岐値に応じて順に出力する
+ * @param Code 分岐値
+ */
+fun PrintBranch(Code:Int){when(Code){
+0 -> {println(0);println(1)};
+1 -> when(Code){1 -> {println(2);println(3)};else -> println(4);};
+else -> run{println("else -> { text }; ");println(5)};
+}
+// 終了
+return}
+
+fun f(a: Boolean, n: Int): Any {
+    var x = 0
+    val y = if (a) { x = 1 } else { 2 }
+    if (a) { x = 2 }
+    when (n) {
+        1 -> { foo() }
+        2 -> { x = 3 }
+        3 -> { if (a) bar() else baz() }
+        else -> { }
+    }
+    val z = when (n) {
+        1 -> { "a" }
+        2 -> { x = 4 }
+        else -> { "b" }
+    }
+    listOf(1).forEach { if (a) { x = 5 } }
+    return y
+}
+
+/**
+ * 値を捨てる本体と値を返す枝を区別する
+ * @param c 継続条件
+ * @param xs 反復対象
+ */
+fun PostfixBodies(c: Boolean, xs: List<Int>): Unit {
+    var y: Int = 0
+    if(c) y++ else y--
+    if(c) { y++ } else { y-- }
+    while(c) y++
+    while(c) { y++ }
+    for(z: Int in xs) y--
+    for(z: Int in xs) { y-- }
+    do y++ while(c)
+    do { y++ } while(c)
+    if(c) while(c) y--
+    val r: Int = if(c) y++ else y--
+    // 終了
+    return
+}
+
+fun f(c: Boolean, d: Boolean, x: Int) {
+    val h = xs.map { x -> if (x > 0) "p" else "n" }
+    val a = when (x) {
+        1 ->
+            if (c) "a" else "b"
+        2 -> if (c) "a" else if (d) "b" else "c"
+        3 -> if (c) { "b" } else "o"
+        4 -> if (c) { "b" } else { "o" }
+        else -> if (c) {
+            "b"
+        } else "o"
+    }
+    val b = if (c) { "b" } else "o"
+}
+
+val joined = when (value) {
+    1 -> if (flag) first() else if (other) second() else third()
+    else -> fallback()
+}
+
+fun f(enabled: Boolean, list: List<Int>) {
+    if (!enabled) return
+    (list as MutableList<*>).clear()
+    g()
+    (list).size
+    return
+    (list)
+}
+fun g(items: List<Int>, c: Boolean): Int {
+    var next = 0
+    items.forEach { next++ }
+    val a = items.map { next++ }
+    val r = if (c) { next++ } else { 0 }
+    val w = when (c) { true -> { next-- } else -> 0 }
+    lateinit var s: String
+    next++
+    return r + w + a.size
+}
+fun k(x: Any) = when (x) {
+    !is String -> 1
+    !in listOf(1) -> 2
+    else -> 3
+}
+
+fun compute(a: Int): Int {
+	val result = run { firstOperationWithLongName(a); secondOperationWithLongName(a); thirdOperationWithLongName(a) } ?: defaultValue
+	return result
+}
+
+fun f(a: Boolean, b: Boolean) {
+	if(a) { g(); h() }
+	if(a) Action = {} else Action = {}
+	do Action = {} while(b)
+	while(b);
+}

@@ -1,0 +1,380 @@
+class Field0  {
+    internal protected int A;
+    private int B;
+}
+
+class Constant0  {
+    internal protected const int A = 1;
+    private const int B = 2;
+}
+
+abstract class Method0  {
+    internal protected abstract void F();
+
+    private int B;
+}
+
+class Constructor0  {
+    /**
+     * <summary>初期化関数</summary>
+     */
+    internal protected Constructor0() {}
+
+    private int B;
+}
+
+class Property0  {
+    internal protected int A { get; set; }
+
+    private int B;
+}
+
+class Field1  {
+    protected internal int A;
+    private int B;
+}
+
+class Field2  {
+    protected private int A;
+    private int B;
+}
+
+class Field3  {
+    private protected int A;
+    private int B;
+}
+
+abstract class SameVisibility0  {
+    protected internal abstract void F();
+
+    internal protected int B;
+}
+
+abstract class SameVisibility2  {
+    private protected abstract void F();
+
+    protected private int B;
+}
+
+struct StructReverse  {
+    public int A;
+    private int B;
+}
+
+interface InterfaceReverse  {
+    public static int A;
+    private static int B;
+}
+
+record RecordReverse  {
+    public int A;
+    private int B;
+}
+
+record struct RecordStructReverse  {
+    public int A;
+    private int B;
+}
+
+class Nested0  {
+    public class N {}
+
+    private int B;
+}
+
+class Nested1  {
+    public struct N {}
+
+    private int B;
+}
+
+class Nested2  {
+    public interface N {}
+
+    private int B;
+}
+
+class Nested3  {
+    public enum N {}
+
+    private int B;
+}
+
+class Nested4  {
+    public record N {}
+
+    private int B;
+}
+
+class Nested5  {
+    public delegate void D();
+
+    private int B;
+}
+
+class Nested6  {
+    public event System.Action E;
+
+    private int B;
+}
+
+class EventAccessor  {
+    public event System.Action E  {
+        add {}
+        remove {}
+    }
+
+    private int B;
+}
+
+abstract class Indexer  {
+    public abstract int this[int x] { get; }
+
+    private int B;
+}
+
+class Operator  {
+    /**
+     * <summary>左の値の取得関数</summary>
+     * <param name="x">左の値</param>
+     * <param name="y">右の値</param>
+     * <returns>左の値</returns>
+     */
+    public static Operator operator +(Operator x, Operator y)  {
+        // 左の値の返戻
+        return x;
+    }
+
+    private int B;
+}
+
+class Conversion  {
+    /**
+     * <summary>値の変換関数</summary>
+     * <param name="x">値</param>
+     * <returns>変換した値</returns>
+     */
+    public static implicit operator int(Conversion x)  {
+        // 変換した値の返戻
+        return 1;
+    }
+
+    private int B;
+}
+
+class Forward  {
+    private int A;
+    protected private int B;
+    private protected int C;
+    protected int D;
+    internal int E;
+    internal protected int F;
+    protected internal int G;
+    public int H;
+}
+
+interface ImplicitPublic  {
+    void F();
+
+    private static int B;
+}
+
+interface InterfaceForward  {
+    private static int B;
+
+    void F();
+}
+
+class AccessorVisibility  {
+    public int P { get; private set; }
+
+    private int B;
+}
+
+abstract class AccessorSameVisibility  {
+    public abstract void F();
+
+    public int P { get; private set; }
+}
+
+class Field0Forward  {
+    private int B;
+    internal protected int A;
+}
+
+class Constant0Forward  {
+    private const int B = 2;
+    internal protected const int A = 1;
+}
+
+abstract class Method0Forward  {
+    private int B;
+
+    internal protected abstract void F();
+}
+
+class Constructor0Forward  {
+    private int B;
+
+    /**
+     * <summary>初期化関数</summary>
+     */
+    internal protected Constructor0Forward() {}
+}
+
+class Property0Forward  {
+    private int B;
+
+    internal protected int A { get; set; }
+}
+
+class Field1Forward  {
+    private int B;
+    protected internal int A;
+}
+
+class Field2Forward  {
+    private int B;
+    protected private int A;
+}
+
+class Field3Forward  {
+    private int B;
+    private protected int A;
+}
+
+abstract class SameVisibility0Forward  {
+    internal protected int B;
+
+    protected internal abstract void F();
+}
+
+abstract class SameVisibility2Forward  {
+    protected private int B;
+
+    private protected abstract void F();
+}
+
+struct StructReverseForward  {
+    private int B;
+    public int A;
+}
+
+interface InterfaceReverseForward  {
+    private static int B;
+    public static int A;
+}
+
+record RecordReverseForward  {
+    private int B;
+    public int A;
+}
+
+record struct RecordStructReverseForward  {
+    private int B;
+    public int A;
+}
+
+class Nested0Forward  {
+    private int B;
+
+    public class N {}
+}
+
+class Nested1Forward  {
+    private int B;
+
+    public struct N {}
+}
+
+class Nested2Forward  {
+    private int B;
+
+    public interface N {}
+}
+
+class Nested3Forward  {
+    private int B;
+
+    public enum N {}
+}
+
+class Nested4Forward  {
+    private int B;
+
+    public record N {}
+}
+
+class Nested5Forward  {
+    private int B;
+
+    public delegate void D();
+}
+
+class Nested6Forward  {
+    private int B;
+
+    public event System.Action E;
+}
+
+class EventAccessorForward  {
+    private int B;
+
+    public event System.Action E  {
+        add {}
+        remove {}
+    }
+}
+
+abstract class IndexerForward  {
+    private int B;
+
+    public abstract int this[int x] { get; }
+}
+
+class OperatorForward  {
+    private int B;
+
+    /**
+     * <summary>左の値の取得関数</summary>
+     * <param name="x">左の値</param>
+     * <param name="y">右の値</param>
+     * <returns>左の値</returns>
+     */
+    public static OperatorForward operator +(OperatorForward x, OperatorForward y)  {
+        // 左の値の返戻
+        return x;
+    }
+}
+
+class ConversionForward  {
+    private int B;
+
+    /**
+     * <summary>値の変換関数</summary>
+     * <param name="x">値</param>
+     * <returns>変換した値</returns>
+     */
+    public static implicit operator int(ConversionForward x)  {
+        // 変換した値の返戻
+        return 1;
+    }
+}
+
+interface ImplicitPublicForward  {
+    private static int B;
+
+    void F();
+}
+
+class AccessorVisibilityForward  {
+    private int B;
+
+    public int P { get; private set; }
+}
+
+abstract class AccessorSameVisibilityForward  {
+    public int P { get; private set; }
+
+    public abstract void F();
+}

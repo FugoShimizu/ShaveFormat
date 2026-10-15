@@ -4,3 +4,10 @@ package p
 
 // not preamble
 import "C"
+
+import (
+	// one
+	"fmt"
+	// two
+	"os"
+)

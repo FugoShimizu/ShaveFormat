@@ -19,5 +19,9 @@ void f(int a) {
 			int m;
 		};
 	}
+	if(a == 1) if(a == 2) {} else {}
+	if(a == 1) if(a == 2) {} else {}
+	if(a == 1) do {} while(a == 2);
+	if(a == 1) do {} while(a == 2);
 	return;
 }

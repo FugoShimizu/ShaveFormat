@@ -1,5 +1,16 @@
 cmake_minimum_required(VERSION 3.20)
-project(ShaveFormat VERSION 0.1.0 LANGUAGES C CXX)
+# macOS の標準ライブラリが提供するメモリリソースを使う為，下限を SDK の既定値へ委ねない
+set(CMAKE_OSX_DEPLOYMENT_TARGET "14.0" CACHE STRING "Minimum macOS version")
+project(ShaveFormat VERSION 0.2.0 LANGUAGES C CXX)
+
+# 静的な C++ ランタイムでも，スレッドの依存を全環境で明示する
+set(THREADS_PREFER_PTHREAD_FLAG TRUE)
+find_package(Threads REQUIRED)
+
+# glibc の下限は CI の構築環境で固定し，C++ と例外処理のランタイムは配布先に要求しない
+if(CMAKE_SYSTEM_NAME STREQUAL "Linux")
+	add_link_options($<$<LINK_LANGUAGE:CXX>:-static-libstdc++> $<$<LINK_LANGUAGE:CXX>:-static-libgcc>)
+endif()
 
 set(CMAKE_C_STANDARD 17)
 set(CMAKE_C_STANDARD_REQUIRED ON)
@@ -7,32 +18,32 @@ set(CMAKE_CXX_STANDARD 20)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
 # C は C17 とし，bool は <stdbool.h> を用い，nullptr・constexpr・２進リテラルは用いない
 set(CMAKE_EXPORT_COMPILE_COMMANDS ON)
-# 複数の構成を持つ生成器 (Visual Studio) も Release の実行ファイルを build/ の直下に置き，検査の道具と CI の経路を環境で分けない
+# 複数の構成を持つジェネレータ (Visual Studio) も Release の実行ファイルを build/ の直下に置き，検査のツールと CI の経路を環境で分けない
 set(CMAKE_RUNTIME_OUTPUT_DIRECTORY_RELEASE "${CMAKE_BINARY_DIR}")
-# 配布物は開発の道具の無い計算機で動く必要が有る為，MSVC は C / C++ の実行時を静的に結合する
+# 配布物は開発のツールの無い計算機で動く必要が有る為，MSVC は C / C++ の実行時を静的に結合する
 set(CMAKE_MSVC_RUNTIME_LIBRARY "MultiThreaded$<$<CONFIG:Debug>:Debug>")
-# MSVC は源を実行環境の符号頁で読み，狭い文字列の `\u2028` 等を其の符号頁へ変換する為，源と実行の文字集合を UTF-8 に揃える
+# MSVC は源を実行環境の符号ページで読み，狭い文字列の `\u2028` 等を其の符号ページへ変換する為，源と実行の文字集合を UTF-8 に揃える
 if(MSVC)
 	add_compile_options(/utf-8)
 endif()
 
 # 未使用引数・死枝等を機械検出する為，GCC / Clang では自プロジェクトの翻訳単位に警告を有効にする
-# 誤りにはせず（`-Werror` を付けず）環境差で構築が落ちない様にする
+# エラーにはせず（`-Werror` を付けず）環境差で構築が落ちない様にする
 # MSVC は既定の警告水準を用いる
-# vendor の構文解析器は生成コードで手を入れない為，対象外とする（此処では変数だけ定め各ターゲットへ個別に付与する）
-# `-Wparentheses` 系（`&&` を `||` で囲む等の冗長括弧を促す群）は演算子の優先順位から不要な括弧を要求する為，抑止する
-# 抑止しないと本群だけで百件超が出て，未使用変数・符号比較等の実際の誤りを示す警告が埋もれる
+# vendor のパーサーは生成コードで手を入れない為，対象外とする（此処では変数だけ定め各ターゲットへ個別に付与する）
+# `-Wparentheses` 系（`&&` を `||` で囲む等の冗長括弧を促すグループ）は演算子の優先順位から不要な括弧を要求する為，抑止する
+# 抑止しないと本グループだけで１００件超が出て，未使用変数・符号比較等の実際のエラーを示す警告が埋もれる
 # `-Wswitch`（列挙型の switch が扱わない列挙子）は，処理の無い `default` を書かない規約と衝突する為，抑止する
 if(MSVC)
 	set(SHAVEFMT_WARNINGS "")
 elseif(CMAKE_CXX_COMPILER_ID MATCHES "Clang")
-	# 冗長括弧を促す下位群だけを抑止する（`-Wno-parentheses` で群全体止めると `if(x = y)` の代入誤りと対応する if の無い else の検出迄失う）
+	# 冗長括弧を促す下位グループだけを抑止する（`-Wno-parentheses` でグループ全体止めると `if(x = y)` の代入エラーと対応する if の無い else の検出迄失う）
 	set(SHAVEFMT_WARNINGS
 		-Wall -Wextra -Wno-logical-op-parentheses -Wno-bitwise-op-parentheses -Wno-shift-op-parentheses
 		-Wno-overloaded-shift-op-parentheses -Wno-parentheses-equality -Wno-switch
 	)
 else()
-	# GCC は下位群を持たず群全体の抑止しか出来ない
+	# GCC は下位グループを持たずグループ全体の抑止しか出来ない
 	set(SHAVEFMT_WARNINGS -Wall -Wextra -Wno-parentheses -Wno-switch)
 endif()
 if(MSVC)
@@ -86,81 +97,29 @@ if(NOT PGO_MODE STREQUAL "off" AND NOT CMAKE_CXX_COMPILER_ID MATCHES "GNU|Clang"
 	message(FATAL_ERROR "PGO_MODE is supported only with GCC or Clang")
 endif()
 if(PGO_MODE STREQUAL "generate")
-	add_compile_options(-fprofile-generate=${PGO_DATA})
-	add_link_options(-fprofile-generate=${PGO_DATA})
+	set(SHAVEFMT_PGO_COMPILE_OPTIONS -fprofile-generate=${PGO_DATA} -fprofile-update=atomic) # 並列の整形でも計数を原子的に更新し，実行記録の食違いを防ぐ
+	set(SHAVEFMT_PGO_LINK_OPTIONS -fprofile-generate=${PGO_DATA})
 	message(STATUS "PGO: profile-generate enabled (data dir: ${PGO_DATA})")
 elseif(PGO_MODE STREQUAL "use")
-	add_compile_options(-fprofile-use=${PGO_DATA})
-	add_link_options(-fprofile-use=${PGO_DATA})
-	# 実行記録に含まれない関数等の警告だけは誤りへ格上げせず，構築器固有の警告名を他の構築器へ渡さない
+	set(SHAVEFMT_PGO_COMPILE_OPTIONS -fprofile-use=${PGO_DATA})
+	set(SHAVEFMT_PGO_LINK_OPTIONS -fprofile-use=${PGO_DATA})
+	# 実行記録に含まれない関数等の警告だけはエラーへ格上げせず，コンパイラ固有の警告名を他のコンパイラへ渡さない
 	if(CMAKE_CXX_COMPILER_ID MATCHES "Clang")
-		add_compile_options(-Wno-error=profile-instr-out-of-date -Wno-error=profile-instr-unprofiled)
+		list(APPEND SHAVEFMT_PGO_COMPILE_OPTIONS -Wno-error=profile-instr-out-of-date -Wno-error=profile-instr-unprofiled)
 	elseif(CMAKE_CXX_COMPILER_ID STREQUAL "GNU")
-		add_compile_options(-Wno-error=coverage-mismatch -Wno-error=missing-profile)
+		list(APPEND SHAVEFMT_PGO_COMPILE_OPTIONS -Wno-error=coverage-mismatch -Wno-error=missing-profile)
 	endif()
 	message(STATUS "PGO: profile-use enabled (data dir: ${PGO_DATA})")
 endif()
 
-# 他人の書いたソースを手書きの外部走査器へ直接渡す為，実行時の防御を有効にする
-# 対応しない環境では旗自体が誤りに為る為，使える物だけを選ぶ
-include(CheckCCompilerFlag)
-include(CheckCXXCompilerFlag)
-set(SHAVEFMT_C_HARDENING "")
-set(SHAVEFMT_HARDENING "")
-if(MSVC)
-	set(SHAVEFMT_C_HARDENING /guard:cf)
-	set(SHAVEFMT_HARDENING /guard:cf) # /GS は既定で有効
-else()
-	# 受け付けるが働かない旗（Apple の clang の `-fstack-clash-protection`）は警告を誤りに格上げして落とす
-	# 警告の名前は clang 固有で，GCC は未知の名前を誤りとし全ての旗を非対応と判定する為，clang でのみ格上げする
-	# 呼出側の値を壊さない様に控えてから足し，検査の後に戻す
-	set(SHAVEFMT_SAVED_REQUIRED_FLAGS "${CMAKE_REQUIRED_FLAGS}")
-	set(SHAVEFMT_C_REQUIRED_FLAGS "${SHAVEFMT_SAVED_REQUIRED_FLAGS}")
-	set(SHAVEFMT_CXX_REQUIRED_FLAGS "${SHAVEFMT_SAVED_REQUIRED_FLAGS}")
-	if(CMAKE_C_COMPILER_ID MATCHES "Clang")
-		string(APPEND SHAVEFMT_C_REQUIRED_FLAGS " -Werror=unused-command-line-argument")
-	endif()
-	if(CMAKE_CXX_COMPILER_ID MATCHES "Clang")
-		string(APPEND SHAVEFMT_CXX_REQUIRED_FLAGS " -Werror=unused-command-line-argument")
-	endif()
-	# `-fcf-protection` は x86 専用，`-mbranch-protection` は arm64 専用の為，双方を候補に置いて対応する側だけを採る
-	set(SHAVEFMT_HARDENING_CANDIDATES -fstack-protector-strong -fstack-clash-protection -fcf-protection=full)
-	# Apple の arm64 の巻戻しは署名した戻り番地を読めず，`-mbranch-protection` を付けた関数を通る C++ の例外を捕捉出来なく為る為に候補から除く
-	if(NOT APPLE)
-		list(APPEND SHAVEFMT_HARDENING_CANDIDATES -mbranch-protection=standard)
-	endif()
-	foreach(HARDENING_FLAG IN LISTS SHAVEFMT_HARDENING_CANDIDATES)
-		string(MAKE_C_IDENTIFIER "SHAVEFMT_C_HAS${HARDENING_FLAG}" C_HARDENING_VAR)
-		string(MAKE_C_IDENTIFIER "SHAVEFMT_CXX_HAS${HARDENING_FLAG}" HARDENING_VAR)
-		set(CMAKE_REQUIRED_FLAGS "${SHAVEFMT_C_REQUIRED_FLAGS}")
-		check_c_compiler_flag("${HARDENING_FLAG}" ${C_HARDENING_VAR})
-		set(CMAKE_REQUIRED_FLAGS "${SHAVEFMT_CXX_REQUIRED_FLAGS}")
-		check_cxx_compiler_flag("${HARDENING_FLAG}" ${HARDENING_VAR})
-		if(${C_HARDENING_VAR})
-			list(APPEND SHAVEFMT_C_HARDENING ${HARDENING_FLAG})
-		endif()
-		if(${HARDENING_VAR})
-			list(APPEND SHAVEFMT_HARDENING ${HARDENING_FLAG})
-		endif()
-	endforeach()
-	set(CMAKE_REQUIRED_FLAGS "${SHAVEFMT_SAVED_REQUIRED_FLAGS}")
-endif()
+# 他人の書いたソースを手書きの外部スキャナーへ直接渡す為，実行時の防御を有効にする
+# 対応しない環境ではフラグ自体がエラーに為る為，使える物だけを選ぶ
+include("${CMAKE_CURRENT_SOURCE_DIR}/tools/Hardening.cmake")
 
-# 標準ライブラリの境界検査は最適化と組で働く為，最適化を掛ける構成にだけ足す
-# 処理系が既に水準を決めて居る場合（新しい GCC の既定は 3）は，重ねると再定義の警告が出た上に水準が下がる為に触らない
 include(CheckCXXSourceCompiles)
-set(SHAVEFMT_SAVED_FORTIFY_FLAGS "${CMAKE_REQUIRED_FLAGS}")
-set(CMAKE_REQUIRED_FLAGS "-O2")
-check_cxx_source_compiles("#ifndef _FORTIFY_SOURCE\n#error none\n#endif\nint main() { return 0; }" SHAVEFMT_HAS_DEFAULT_FORTIFY)
-set(CMAKE_REQUIRED_FLAGS "${SHAVEFMT_SAVED_FORTIFY_FLAGS}")
-if(SHAVEFMT_HAS_DEFAULT_FORTIFY)
-	set(SHAVEFMT_HARDENING_DEFINITIONS "")
-else()
-	set(SHAVEFMT_HARDENING_DEFINITIONS "$<$<NOT:$<CONFIG:Debug>>:_FORTIFY_SOURCE=2>")
-endif()
 
-# 標準ライブラリの添字参照の境界検査（節点位置の算術と添字が多い為に費用対効果が高い）
-# libc++ と libstdc++ で印が違う為，実際に効く方だけを足す
+# 標準ライブラリの添字参照の境界検査（ノード位置の算術と添字が多い為に費用対効果が高い）
+# libc++ と libstdc++ でマーカーが違う為，実際に効く方だけを足す
 check_cxx_source_compiles(
 	"#include <version>\n#if !defined(_LIBCPP_VERSION)\n#error not libc++\n#endif\nint main() { return 0; }"
 	SHAVEFMT_HAS_LIBCPP
@@ -183,85 +142,12 @@ elseif(SHAVEFMT_HAS_LIBSTDCXX)
 	list(APPEND SHAVEFMT_HARDENING_DEFINITIONS "_GLIBCXX_ASSERTIONS")
 endif()
 
-# tree-sitter 言語解析器（文法毎に独立した静的ライブラリ）
-# 各文法が独自の `tree_sitter/parser.h`（ABI バージョン依存）を持つ為，取込経路を文法単位に閉じる事でヘッダ衝突を回避する
-# 第３引数は１つの文法の集まりから複数の文法を作る時の対象名（省略時は文法名：tree-sitter-typescript の typescript / tsx）
-function(add_ts_grammar GRAMMAR_NAME SRC_SUBDIR)
-	set(SRC_DIR "${CMAKE_SOURCE_DIR}/vendor/tree-sitter-${GRAMMAR_NAME}/${SRC_SUBDIR}")
-	file(GLOB GRAMMAR_SOURCES
-		"${SRC_DIR}/parser.c" "${SRC_DIR}/scanner.c" "${SRC_DIR}/scanner.cc" "${SRC_DIR}/schema.generated.cc"
-	)
-	if(GRAMMAR_NAME STREQUAL "scss")
-		find_program(TREE_SITTER_CLI NAMES tree-sitter tree-sitter.cmd REQUIRED)
-		find_program(NODE_EXECUTABLE NAMES node node.exe REQUIRED)
-		set(GENERATED_DIR "${CMAKE_CURRENT_BINARY_DIR}/generated/scss")
-		add_custom_command(
-			OUTPUT "${GENERATED_DIR}/parser.c" "${GENERATED_DIR}/tree_sitter/parser.h"
-			BYPRODUCTS "${GENERATED_DIR}/grammar.json" "${GENERATED_DIR}/node-types.json"
-				"${GENERATED_DIR}/tree_sitter/alloc.h" "${GENERATED_DIR}/tree_sitter/array.h"
-			COMMAND "${NODE_EXECUTABLE}" "${CMAKE_SOURCE_DIR}/tools/prepareScss.mjs"
-				"${SRC_DIR}/grammar.json" "${GENERATED_DIR}"
-			COMMAND "${TREE_SITTER_CLI}" generate --abi 14 "${GENERATED_DIR}/grammar.json" -o "${GENERATED_DIR}"
-			DEPENDS "${SRC_DIR}/grammar.json" "${CMAKE_SOURCE_DIR}/tools/prepareScss.mjs"
-				"${TREE_SITTER_CLI}" "${NODE_EXECUTABLE}"
-			VERBATIM
-		)
-		list(REMOVE_ITEM GRAMMAR_SOURCES "${SRC_DIR}/parser.c")
-		list(APPEND GRAMMAR_SOURCES "${GENERATED_DIR}/parser.c")
-	endif()
-	if(ARGC GREATER 2)
-		set(TARGET_SUFFIX "${ARGV2}")
-	else()
-		string(REPLACE "-" "_" TARGET_SUFFIX "${GRAMMAR_NAME}")
-	endif()
-	set(TARGET_NAME "ts_${TARGET_SUFFIX}")
-	add_library(${TARGET_NAME} STATIC ${GRAMMAR_SOURCES})
-	if(GRAMMAR_NAME STREQUAL "scss")
-		target_include_directories(${TARGET_NAME} PRIVATE "${GENERATED_DIR}")
-	endif()
-	target_include_directories(${TARGET_NAME} PRIVATE ${SRC_DIR})
-	# 生成した構文解析器と共に人が書いた外部走査器を含む為，走査器も防御の対象にする
-	foreach(HARDENING_FLAG IN LISTS SHAVEFMT_C_HARDENING)
-		target_compile_options(${TARGET_NAME} PRIVATE "$<$<COMPILE_LANGUAGE:C>:${HARDENING_FLAG}>")
-	endforeach()
-	foreach(HARDENING_FLAG IN LISTS SHAVEFMT_HARDENING)
-		target_compile_options(${TARGET_NAME} PRIVATE "$<$<COMPILE_LANGUAGE:CXX>:${HARDENING_FLAG}>")
-	endforeach()
-	# 境界検査が最も要るのは手書きの走査器を含む此処の為，実行ファイルと同じ定義を渡す
-	target_compile_definitions(${TARGET_NAME} PRIVATE ${SHAVEFMT_HARDENING_DEFINITIONS})
-	# 生成物の parser.c は対象外の儘とし，人が書いた走査器にだけ警告を掛ける（未使用引数は上流の書き方で直せない為に除く）
-	if(NOT MSVC)
-		set_source_files_properties("${SRC_DIR}/scanner.c"
-			TARGET_DIRECTORY ${TARGET_NAME}
-			PROPERTIES COMPILE_OPTIONS "${SHAVEFMT_C_WARNINGS};-Wno-unused-parameter")
-		set_source_files_properties("${SRC_DIR}/scanner.cc"
-			TARGET_DIRECTORY ${TARGET_NAME}
-			PROPERTIES COMPILE_OPTIONS "${SHAVEFMT_WARNINGS};-Wno-unused-parameter")
-	endif()
-	# 静的ライブラリでも動的リンクされる shavefmt 経由で extern される為 PIC 必須
-	set_target_properties(${TARGET_NAME} PROPERTIES POSITION_INDEPENDENT_CODE ON)
-endfunction()
-
-add_ts_grammar(c src)
-add_ts_grammar(cpp src)
-add_ts_grammar(c-sharp src)
-add_ts_grammar(java src)
-add_ts_grammar(go src)
-add_ts_grammar(rust src)
-add_ts_grammar(kotlin src)
-add_ts_grammar(swift src)
-# tree-sitter-php は PHP 単体 (php_only) と HTML 混在 (php) の２文法を持ち，後者が `<?php ... ?>` を含む実ファイルを扱える
-add_ts_grammar(php php/src)
-add_ts_grammar(javascript src)
-# TypeScript は JSX の有無で文法が分かれる（`.ts` の型表明 `<T>x` は `.tsx` の文法では JSX と読まれる）
-add_ts_grammar(typescript typescript/src)
-add_ts_grammar(typescript tsx/src tsx)
-add_ts_grammar(ruby src)
-add_ts_grammar(python src)
-add_ts_grammar(json src)
-add_ts_grammar(html src)
-# CSS / SCSS は tree-sitter-scss で統一する（SCSS は CSS の上位集合で，純 CSS も解析出来る）
-add_ts_grammar(scss src)
+include(CTest)
+set(SHAVEFMT_SOURCE_DIR "${CMAKE_SOURCE_DIR}")
+include("${CMAKE_SOURCE_DIR}/tools/Grammars.cmake")
+get_property(GRAMMAR_PARSERS GLOBAL PROPERTY SHAVEFMT_GRAMMAR_PARSERS)
+string(JOIN "" GRAMMAR_PARSERS ${GRAMMAR_PARSERS})
+file(GENERATE OUTPUT "${CMAKE_CURRENT_BINARY_DIR}/grammar-parsers.tsv" CONTENT "${GRAMMAR_PARSERS}")
 
 # 全文法を１つに纏めたインタフェースライブラリ（shavefmt / dumpast からのリンク用）
 add_library(ts_parsers INTERFACE)
@@ -271,10 +157,20 @@ target_link_libraries(ts_parsers INTERFACE
 	ts_rust ts_kotlin ts_swift ts_ruby ts_python ts_php ts_html ts_scss
 )
 
-# 整形器の本体（実行ファイルと試験が共有し，同じ翻訳単位を二度翻訳しない）
+# フォーマッターの本体（実行ファイルとテストが共有し，同じ翻訳単位を２度翻訳しない）
+# 可変事実の保持を持つ翻訳単位だけは，テスト専用の基準側（整形仕様 11.1）の為に別の定義でも翻訳する
+set(SHAVEFMT_FACT_SOURCES
+	src/Core/ControlFlow.cpp
+	src/Core/LineBreaker.cpp
+	src/Core/SignatureExtractor.cpp
+	src/Core/SourceProjector.cpp
+	src/Core/SyntaxModel.cpp
+	src/Core/SyntaxModelBinding.cpp
+	src/Core/SyntaxNormalizer.cpp
+	src/Core/SyntaxNormalizerParen.cpp
+)
 # 翻訳単位のリンク順が静的初期化順に作用し得る為に既存の列を保つ
-add_library(shavefmt_core OBJECT
-	src/Formatter.cpp
+add_library(shavefmt_common OBJECT
 	src/Core/Canonicalizer.cpp
 	src/Core/CanonicalizerEmitter.cpp
 	src/Core/CanonicalizerFlat.cpp
@@ -285,20 +181,15 @@ add_library(shavefmt_core OBJECT
 	src/Core/CodeLayout.cpp
 	src/Core/CommentPlacer.cpp
 	src/Core/CommentRepository.cpp
-	src/Core/ControlFlow.cpp
+	src/Core/CoreObservation.cpp
 	src/Core/DocCommentSynchronizer.cpp
-	src/Core/DocCommentSynchronizerItems.cpp
+	src/Core/DocCommentReader.cpp
 	src/Core/FormatIR.cpp
-	src/Core/LineBreaker.cpp
 	src/Core/OutputPosition.cpp
-	src/Core/SignatureExtractor.cpp
-	src/Core/SourceProjector.cpp
 	src/Core/SourceProjectorComments.cpp
-	src/Core/SyntaxModel.cpp
-	src/Core/SyntaxNormalizer.cpp
+	src/Core/SyntaxGeneration.cpp
 	src/Core/SyntaxNormalizerBrace.cpp
 	src/Core/SyntaxNormalizerDeclaration.cpp
-	src/Core/SyntaxNormalizerParen.cpp
 	src/Lint/LintAnalyzer.cpp
 	src/Lint/LintSyntax.cpp
 	src/Profile/GrammarNames.cpp
@@ -315,27 +206,38 @@ add_library(shavefmt_core OBJECT
 	src/Util/ParseAdapterBindings.cpp
 	src/Util/ParseAdapterRepair.cpp
 	src/Util/ParsedTree.cpp
-	src/Util/SyntaxParser.cpp
+	src/Util/ParserAllocator.cpp
 	src/Util/SyntaxValidator.cpp
 	src/Util/TextEdit.cpp
 	src/Util/TextMetrics.cpp
+	src/Util/WorkingMemory.cpp
+	src/Util/LineDiff.cpp
 )
+add_library(shavefmt_core OBJECT ${SHAVEFMT_FACT_SOURCES})
+target_link_libraries(shavefmt_common PUBLIC Threads::Threads)
+target_link_libraries(shavefmt_core PUBLIC Threads::Threads)
+target_compile_options(shavefmt_common PRIVATE ${SHAVEFMT_PGO_COMPILE_OPTIONS})
+target_compile_options(shavefmt_core PRIVATE ${SHAVEFMT_PGO_COMPILE_OPTIONS})
+target_link_options(shavefmt_core INTERFACE ${SHAVEFMT_PGO_LINK_OPTIONS})
+# 共通部分の物も，実行ファイル・既存の検証ツールへ１度だけ渡す
+target_sources(shavefmt_core INTERFACE $<TARGET_OBJECTS:shavefmt_formatter> $<TARGET_OBJECTS:shavefmt_common>)
 target_compile_options(shavefmt_core PUBLIC ${SHAVEFMT_WARNINGS} ${SHAVEFMT_HARDENING})
 target_compile_definitions(shavefmt_core PUBLIC ${SHAVEFMT_HARDENING_DEFINITIONS})
 add_executable(shavefmt src/Main.cpp)
+target_compile_options(shavefmt PRIVATE ${SHAVEFMT_PGO_COMPILE_OPTIONS})
 target_link_libraries(shavefmt PRIVATE shavefmt_core)
 # 実行ファイルも位置独立にし，再配置表を読取専用へ固定して遅延結合を使わない（対応する環境だけ）
 # `POSITION_INDEPENDENT_CODE` は `check_pie_supported()` を呼ばないと翻訳時の `-fPIE` だけに為り，結合段の `-pie` が付かない
 include(CheckPIESupported)
 check_pie_supported(LANGUAGES C CXX)
-set_target_properties(shavefmt_core shavefmt PROPERTIES POSITION_INDEPENDENT_CODE ON)
+set_target_properties(shavefmt_common shavefmt_core shavefmt PROPERTIES POSITION_INDEPENDENT_CODE ON)
 if(CMAKE_SYSTEM_NAME STREQUAL "Linux")
 	target_link_options(shavefmt PRIVATE -Wl,-z,relro,-z,now -Wl,-z,noexecstack)
 endif()
-# 版はプロジェクト宣言を唯一の出所とし，定数を持つヘッダへ書き出す
+# バージョンはプロジェクト宣言を唯一の出所とし，定数を持つヘッダへ書き出す
 configure_file(src/Version.hpp.in "${CMAKE_CURRENT_BINARY_DIR}/Version.hpp" @ONLY)
 
-# tree-sitter の実行時ライブラリを検索（README の手順で源から構築した 0.27.0 を想定，パッケージ管理の物は版が異なる）
+# tree-sitter の実行時ライブラリを検索（README の手順で源から構築した 0.27.0 を想定，パッケージ管理の物はバージョンが異なる）
 # 環境変数 TREE_SITTER_ROOT 又は CMake 変数 TREE_SITTER_ROOT で明示指定可能
 find_path(TREE_SITTER_INCLUDE_DIR tree_sitter/api.h
 	HINTS ${TREE_SITTER_ROOT}/include $ENV{TREE_SITTER_ROOT}/include
@@ -383,41 +285,148 @@ endif()
 message(STATUS "tree-sitter include: ${TREE_SITTER_INCLUDE_DIR}")
 message(STATUS "tree-sitter library: ${TREE_SITTER_LIBRARY}")
 
+target_compile_options(shavefmt_common PUBLIC ${SHAVEFMT_WARNINGS} ${SHAVEFMT_HARDENING})
+target_compile_definitions(shavefmt_common PUBLIC ${SHAVEFMT_HARDENING_DEFINITIONS})
+target_include_directories(shavefmt_common PUBLIC src "${CMAKE_CURRENT_BINARY_DIR}" ${TREE_SITTER_INCLUDE_DIR})
+# 性能の計測が計測付で翻訳し直す解析を別の目的ファイルの組にし，CMake のジェネレーターの目的ファイルの名付に依らず差し替える
+add_library(shavefmt_parser OBJECT src/Util/SyntaxParser.cpp)
+add_library(shavefmt_formatter OBJECT src/Formatter.cpp)
+target_compile_options(shavefmt_formatter PRIVATE ${SHAVEFMT_PGO_COMPILE_OPTIONS})
+target_compile_options(shavefmt_parser PRIVATE ${SHAVEFMT_PGO_COMPILE_OPTIONS})
+target_compile_options(shavefmt_formatter PRIVATE $<TARGET_PROPERTY:shavefmt_common,INTERFACE_COMPILE_OPTIONS>)
+target_compile_definitions(shavefmt_formatter PRIVATE $<TARGET_PROPERTY:shavefmt_common,INTERFACE_COMPILE_DEFINITIONS>)
+target_include_directories(shavefmt_formatter PRIVATE $<TARGET_PROPERTY:shavefmt_common,INTERFACE_INCLUDE_DIRECTORIES>)
+set_target_properties(shavefmt_formatter PROPERTIES POSITION_INDEPENDENT_CODE ON)
+target_compile_options(shavefmt_parser PRIVATE $<TARGET_PROPERTY:shavefmt_common,INTERFACE_COMPILE_OPTIONS>)
+target_compile_definitions(shavefmt_parser PRIVATE $<TARGET_PROPERTY:shavefmt_common,INTERFACE_COMPILE_DEFINITIONS>)
+target_include_directories(shavefmt_parser PRIVATE $<TARGET_PROPERTY:shavefmt_common,INTERFACE_INCLUDE_DIRECTORIES>)
+set_target_properties(shavefmt_parser PROPERTIES POSITION_INDEPENDENT_CODE ON)
+target_sources(shavefmt_core INTERFACE $<TARGET_OBJECTS:shavefmt_parser>)
 target_include_directories(shavefmt_core PUBLIC src "${CMAKE_CURRENT_BINARY_DIR}" ${TREE_SITTER_INCLUDE_DIR})
 # 静的な文法ライブラリの未解決記号を解決する為に tree-sitter 本体を最後に置く
 target_link_libraries(shavefmt_core PUBLIC ts_parsers ${TREE_SITTER_LIBRARY})
 if(WIN32)
 	target_link_libraries(shavefmt_core PUBLIC advapi32)
-	target_compile_definitions(shavefmt_core PUBLIC NOMINMAX)
+	target_compile_definitions(shavefmt_core PUBLIC NOMINMAX _WIN32_WINNT=0x0602)
+	target_compile_definitions(shavefmt_common PUBLIC NOMINMAX _WIN32_WINNT=0x0602)
 endif()
 if(MSVC)
 	# 制御フローガードは翻訳とリンクの双方へ指定して初めて表が入る
-	target_link_options(shavefmt PRIVATE /GUARD:CF)
+	# Windows 8 の API の下限と PE の宣言を揃える
+	target_link_options(shavefmt PRIVATE /GUARD:CF /SUBSYSTEM:CONSOLE,6.02 /OSVERSION:6.2)
 endif()
 
 # 翻訳単位のリンク順が静的初期化順に作用し得る為に既存の列を保つ
-add_executable(dumpast tools/DumpAst.cpp src/Util/Lang.cpp)
-target_compile_options(dumpast PRIVATE ${SHAVEFMT_WARNINGS} ${SHAVEFMT_HARDENING})
-target_compile_definitions(dumpast PRIVATE ${SHAVEFMT_HARDENING_DEFINITIONS})
-
-target_include_directories(dumpast PRIVATE src ${TREE_SITTER_INCLUDE_DIR})
-target_link_libraries(dumpast PRIVATE ts_parsers ${TREE_SITTER_LIBRARY})
-
-# 読込後の外部保存を決定論的に検査する（整形の所要時間へ依存させない）
-include(CTest)
+set(DUMPAST_TARGETS dumpast)
 if(BUILD_TESTING)
-	# 翻訳単位のリンク順が静的初期化順に作用し得る為に既存の列を保つ
-	add_executable(verify_fileio tools/VerifyFileIO.cpp src/Util/FileIO.cpp)
+	list(APPEND DUMPAST_TARGETS dumpast_original)
+	get_target_property(ORIGINAL_PARSERS ts_parsers INTERFACE_LINK_LIBRARIES)
+	foreach(GRAMMAR IN LISTS EXTENDED_GRAMMARS)
+		string(REPLACE "|" ";" GRAMMAR "${GRAMMAR}")
+		list(GET GRAMMAR 2 TARGET_SUFFIX)
+		list(TRANSFORM ORIGINAL_PARSERS REPLACE "^ts_${TARGET_SUFFIX}$" "ts_${TARGET_SUFFIX}_original")
+	endforeach()
+	add_library(ts_parsers_original INTERFACE)
+	target_link_libraries(ts_parsers_original INTERFACE ${ORIGINAL_PARSERS})
+endif()
+foreach(DUMPAST_TARGET IN LISTS DUMPAST_TARGETS)
+	add_executable(${DUMPAST_TARGET} tools/DumpAst.cpp src/Util/Lang.cpp src/Util/ParserAllocator.cpp
+		src/Util/FormatLimitExceeded.cpp
+	)
+	target_compile_options(${DUMPAST_TARGET} PRIVATE ${SHAVEFMT_WARNINGS} ${SHAVEFMT_HARDENING})
+	target_compile_definitions(${DUMPAST_TARGET} PRIVATE ${SHAVEFMT_HARDENING_DEFINITIONS})
+	if(WIN32)
+		target_compile_definitions(${DUMPAST_TARGET} PRIVATE NOMINMAX)
+	endif()
+
+	target_include_directories(${DUMPAST_TARGET} PRIVATE src ${TREE_SITTER_INCLUDE_DIR})
+	if(DUMPAST_TARGET STREQUAL "dumpast_original")
+		target_link_libraries(${DUMPAST_TARGET} PRIVATE ts_parsers_original ${TREE_SITTER_LIBRARY} Threads::Threads)
+	else()
+		target_link_libraries(${DUMPAST_TARGET} PRIVATE ts_parsers ${TREE_SITTER_LIBRARY} Threads::Threads)
+	endif()
+endforeach()
+
+if(BUILD_TESTING)
+	# 可変事実と幅要約の再利用を無効にしたテスト専用の基準側（整形仕様 11.1，製品には切替の入口を設けない）
+	add_library(shavefmt_reference_core OBJECT ${SHAVEFMT_FACT_SOURCES})
+	# 基準側とフック付の検査は，製品の実行記録を別の制御フローへ流用しない
+	target_link_libraries(shavefmt_reference_core PUBLIC Threads::Threads)
+	target_link_options(shavefmt_reference_core INTERFACE ${SHAVEFMT_PGO_LINK_OPTIONS})
+	target_sources(shavefmt_reference_core INTERFACE $<TARGET_OBJECTS:shavefmt_formatter> $<TARGET_OBJECTS:shavefmt_common>
+		$<TARGET_OBJECTS:shavefmt_parser>
+	)
+	target_compile_options(shavefmt_reference_core PUBLIC ${SHAVEFMT_WARNINGS} ${SHAVEFMT_HARDENING})
+	target_compile_definitions(shavefmt_reference_core PUBLIC ${SHAVEFMT_HARDENING_DEFINITIONS} ShaveFormatRefFacts)
+	target_include_directories(shavefmt_reference_core PUBLIC src "${CMAKE_CURRENT_BINARY_DIR}" ${TREE_SITTER_INCLUDE_DIR})
+	target_link_libraries(shavefmt_reference_core PUBLIC ts_parsers ${TREE_SITTER_LIBRARY})
+	add_executable(shavefmt_reference src/Main.cpp)
+	target_link_libraries(shavefmt_reference PRIVATE shavefmt_reference_core)
+	set_target_properties(shavefmt_reference_core shavefmt_reference PROPERTIES POSITION_INDEPENDENT_CODE ON)
+	if(WIN32)
+		target_link_libraries(shavefmt_reference_core PUBLIC advapi32)
+		target_compile_definitions(shavefmt_reference_core PUBLIC NOMINMAX)
+	endif()
+	if(MSVC)
+		target_link_options(shavefmt_reference PRIVATE /GUARD:CF)
+	elseif(CMAKE_SYSTEM_NAME STREQUAL "Linux")
+		target_link_options(shavefmt_reference PRIVATE -Wl,-z,relro,-z,now -Wl,-z,noexecstack)
+	endif()
+	# 読込後の外部保存を決定論的に検査する（整形の所要時間へ依存させない）
+	add_executable(verify_fileio tools/VerifyFileIO.cpp src/Util/FileIO.cpp src/Util/ParserAllocator.cpp
+		src/Util/FormatLimitExceeded.cpp
+	)
+	target_include_directories(verify_fileio PRIVATE ${TREE_SITTER_INCLUDE_DIR})
+	target_link_libraries(verify_fileio PRIVATE ${TREE_SITTER_LIBRARY} Threads::Threads)
 	target_compile_options(verify_fileio PRIVATE ${SHAVEFMT_WARNINGS} ${SHAVEFMT_HARDENING})
 	target_compile_definitions(verify_fileio PRIVATE ${SHAVEFMT_HARDENING_DEFINITIONS})
 	target_compile_definitions(verify_fileio PRIVATE ShaveFormatFileIoTestHooks)
 	target_include_directories(verify_fileio PRIVATE src)
 	if(WIN32)
 		target_link_libraries(verify_fileio PRIVATE advapi32)
-		target_compile_definitions(verify_fileio PRIVATE NOMINMAX)
+		target_compile_definitions(verify_fileio PRIVATE NOMINMAX _WIN32_WINNT=0x0602)
 	endif()
 	add_test(NAME fileio COMMAND verify_fileio)
-	# 通常コメントへ変換した文書の本文・順序・移動先の照合を，欠落・複製・順序違反・移動先の不一致の形で検査する（整形仕様 8.1, 11.2）
+	# 確保失敗はテスト専用の翻訳単位へ注入し，製品の入口へ環境変数を追加しない
+	add_executable(verify_parser_allocator tools/VerifyParserAllocator.cpp src/Util/ParserAllocator.cpp src/Util/FileIO.cpp
+		src/Util/FormatLimitExceeded.cpp src/Util/Lang.cpp
+	)
+	target_compile_options(verify_parser_allocator PRIVATE ${SHAVEFMT_WARNINGS} ${SHAVEFMT_HARDENING})
+	target_compile_definitions(verify_parser_allocator PRIVATE ${SHAVEFMT_HARDENING_DEFINITIONS}
+		ShaveFormatParserAllocationTestHooks ShaveFormatFileIoTestHooks
+	)
+	target_include_directories(verify_parser_allocator PRIVATE src ${TREE_SITTER_INCLUDE_DIR})
+	target_link_libraries(verify_parser_allocator PRIVATE ts_parsers ${TREE_SITTER_LIBRARY} Threads::Threads)
+	if(WIN32)
+		target_compile_definitions(verify_parser_allocator PRIVATE NOMINMAX _WIN32_WINNT=0x0602)
+		target_link_libraries(verify_parser_allocator PRIVATE advapi32)
+	endif()
+	find_package(Python3 3.10 COMPONENTS Interpreter REQUIRED)
+	add_test(NAME grammar_extensions COMMAND "${Python3_EXECUTABLE}" -B "${CMAKE_SOURCE_DIR}/tools/verify_grammar_extensions.py"
+		--original $<TARGET_FILE:dumpast_original> --extended $<TARGET_FILE:dumpast>
+		--source-dir "${CMAKE_SOURCE_DIR}" --work-dir "${CMAKE_CURRENT_BINARY_DIR}")
+
+	add_test(NAME parser_allocator COMMAND
+		"${CMAKE_COMMAND}" -E env --unset=PYTHONOPTIMIZE
+		"${Python3_EXECUTABLE}" -B "${CMAKE_SOURCE_DIR}/tools/verify_parser_allocator.py"
+		--binary $<TARGET_FILE:verify_parser_allocator>
+	)
+	if(NOT WIN32)
+		# 信号テストの待機だけを別の入口へ置き，配布する入口へ環境変数を持ち込まない
+		add_executable(verify_interruption src/Main.cpp)
+		target_compile_definitions(verify_interruption PRIVATE ShaveFormatInterruptionTestHooks)
+		target_link_libraries(verify_interruption PRIVATE shavefmt_core)
+		add_test(NAME interruption COMMAND "${Python3_EXECUTABLE}" "${CMAKE_SOURCE_DIR}/tools/verify_interruption.py"
+			--binary $<TARGET_FILE:shavefmt> --write-binary $<TARGET_FILE:verify_interruption>)
+	else()
+		add_test(NAME interruption COMMAND "${Python3_EXECUTABLE}" "${CMAKE_SOURCE_DIR}/tools/verify_interruption.py" --binary
+			$<TARGET_FILE:shavefmt>
+		)
+	endif()
+	set_tests_properties(interruption PROPERTIES TIMEOUT 90)
+	add_test(NAME limited_process COMMAND "${Python3_EXECUTABLE}" "${CMAKE_SOURCE_DIR}/tools/run_limited.py" --self-check)
+	set_tests_properties(limited_process PROPERTIES TIMEOUT 10)
+	# 通常コメントへ変換したドキュメントの本文・順序・移動先の照合を，欠落・複製・順序違反・移動先の不一致の形で検査する（整形仕様 8.1, 11.2）
 	add_executable(verify_document_conversion tools/VerifyDocumentConversion.cpp)
 	target_link_libraries(verify_document_conversion PRIVATE shavefmt_core)
 	add_test(NAME document_conversion COMMAND verify_document_conversion)
@@ -425,6 +434,25 @@ if(BUILD_TESTING)
 	add_executable(verify_line_breaking_reuse tools/VerifyLineBreakingReuse.cpp)
 	target_link_libraries(verify_line_breaking_reuse PRIVATE shavefmt_core)
 	add_test(NAME line_breaking_reuse COMMAND verify_line_breaking_reuse)
+	add_test(NAME performance_sources COMMAND "${Python3_EXECUTABLE}" "${CMAKE_SOURCE_DIR}/tools/build_10k.py" --self-test)
+	add_test(NAME performance_baseline COMMAND "${Python3_EXECUTABLE}" "${CMAKE_SOURCE_DIR}/tools/measure_10k.py" --self-test)
+	# 工程とパーサーの観測は計数ツールだけへ結合し，通常の製品と他の検査へ持ち込まない
+	add_executable(verify_performance tools/VerifyPerformance.cpp src/Formatter.cpp src/Util/SyntaxParser.cpp)
+	# 通常の工程と解析の組を結合せず，計測付で翻訳し直した工程・解析と中核・共通部分の目的ファイルで組む
+	target_sources(verify_performance PRIVATE $<TARGET_OBJECTS:shavefmt_core> $<TARGET_OBJECTS:shavefmt_common>)
+	target_link_libraries(verify_performance PRIVATE ts_parsers ${TREE_SITTER_LIBRARY} Threads::Threads)
+	target_link_options(verify_performance PRIVATE ${SHAVEFMT_PGO_LINK_OPTIONS})
+	target_compile_options(verify_performance PRIVATE $<TARGET_PROPERTY:shavefmt_common,INTERFACE_COMPILE_OPTIONS>)
+	target_compile_definitions(verify_performance PRIVATE $<TARGET_PROPERTY:shavefmt_common,INTERFACE_COMPILE_DEFINITIONS>)
+	target_include_directories(verify_performance PRIVATE tools $<TARGET_PROPERTY:shavefmt_common,INTERFACE_INCLUDE_DIRECTORIES>)
+	target_compile_definitions(verify_performance PRIVATE SHAVEFMT_PERFORMANCE_PROBE)
+	if(WIN32)
+		target_link_libraries(verify_performance PRIVATE advapi32)
+	endif()
+	# 投影・束縛・制御の流れ，規則適用及びエラー領域喪失時の分類を手記述の期待で検査する
+	add_executable(verify_syntax_model tools/VerifySyntaxModel.cpp)
+	target_link_libraries(verify_syntax_model PRIVATE shavefmt_core)
+	add_test(NAME syntax_model COMMAND verify_syntax_model)
 endif()
 
 # OS/arch を Node.js 形式に正規化（process.platform / process.arch と一致）
@@ -459,7 +487,7 @@ add_custom_command(TARGET shavefmt POST_BUILD
 	COMMENT "Copying shavefmt to vscode-extension/bin/${VSCODE_BIN_NAME}"
 )
 
-# 拡張機能の再パッケージ + 再インストール（vsce は package-lock.json で版を固定した開発依存を使い，VS Code は PATH の `code` か macOS の既定の場所の物を使う）
+# 拡張機能の再パッケージ + 再インストール（vsce は package-lock.json でバージョンを固定した開発依存を使い，VS Code は PATH の `code` か macOS の既定の場所の物を使う）
 # 使い方：cmake --build build --target extension-reinstall
 find_program(VSCODE_CLI NAMES code code.cmd PATHS "/Applications/Visual Studio Code.app/Contents/Resources/app/bin")
 # 命令が見付からない時は理由を示して止める（見付からない値の儘実行すると分かり難く失敗する）

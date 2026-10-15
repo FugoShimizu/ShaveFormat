@@ -1,0 +1,51 @@
+f(
+	(int[]){
+		// 成員の深さ
+		FirstCollectionMemberWithANameLongEnoughForWrapping,
+		SecondCollectionMemberWithANameLongEnoughForWrapping,
+		ThirdCollectionMemberWithANameLongEnoughForWrapping
+	}
+);
+
+void f() {
+	const /* c */ int a = 1;
+	const /* d */ int b = 2;
+	const int /* e */ c = 3;
+	const /* f */ int d = 4;
+}
+
+int g(int K) { return K; }
+/* xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx */
+#include "k.h"
+int h(void) { return (K) / 2; }
+
+// a
+//
+// b
+int x;
+
+void g(int a) {
+  x();
+  // end of void
+}
+
+int f(int a, int b) {
+	int c = 1; // i
+	return ( // 和
+		a + b
+	);
+}
+
+struct P { int b; };
+int f(struct P *p, int a) {
+	int s = a /* c */ + 1;
+	return p
+		/* m */
+		->b + s;
+}
+
+/** Keep boundaries */
+void EmptyBoundary() { /* Read. Return. */ }
+
+/** Keep boundaries */
+void EmptyBoundaryPair() { /* Read */ /* Return */ }

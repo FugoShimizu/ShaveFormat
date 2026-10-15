@@ -1,3 +1,4 @@
+import func other.fatalError
 import class SomeModule.SomeClass
 
 /**
@@ -7,5 +8,13 @@ import class SomeModule.SomeClass
 func Invoke(target: Handler?) {
 	target.hello?("world")
 	target.list?[3]
+	return
+}
+
+/**
+ * 取込んだ呼出から戻る
+ */
+func ImportedFatalError() {
+	fatalError()
 	return
 }

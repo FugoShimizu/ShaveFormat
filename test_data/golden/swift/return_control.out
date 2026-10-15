@@ -93,3 +93,83 @@ func chained(_ a: Bool, _ b: Bool) -> Int {
 		return 3
 	}
 }
+
+/**
+ *
+ */
+func Loop() {
+	repeat {} while Something()
+	return
+}
+
+/**
+ *
+ * - Parameter flag:
+ */
+func spacedBoundary(_ flag: Bool) {
+	if flag {
+		print(1)
+	}
+	let value = 2
+	print(value)
+	return
+}
+
+/**
+ *
+ * - Parameter flag:
+ */
+func nestedBoundary(_ flag: Bool) {
+	if flag {
+		while flag {
+			break
+		}
+		print(3)
+	}
+	print(4)
+	return
+}
+
+/**
+ *
+ */
+func closureBoundary() {
+	let action = {
+		print(5)
+	}
+	action()
+	return
+}
+
+/**
+ *
+ */
+func localBoundary() {
+	/**
+	 *
+	 */
+	func action() {
+		print(6)
+		return
+	}
+	action()
+	return
+}
+
+/**
+ *
+ */
+func trailingBoundary() {
+	run {
+		print(7)
+	}
+	print(8)
+	return
+}
+
+/**
+ *
+ */
+func emptyBoundary() {}
+
+let boundaryValue = 9

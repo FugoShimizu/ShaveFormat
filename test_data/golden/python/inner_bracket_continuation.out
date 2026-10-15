@@ -1,0 +1,47 @@
+y = first_value_name + compute(
+	alpha_argument,
+	beta_argument,
+	gamma_argument,
+	delta
+)
+
+groups: tuple = (
+	(
+		"first_value_name",
+		"second_value_name",
+		"third_value_name"
+	),
+	("c", "source", ("// note", "/* note */")),
+	("cpp", "source", ("// note", "/** doc */")),
+	("go", "source", ("// note", "//go:build linux"))
+)
+
+for x in (
+	LLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLL(
+		a,
+		b
+	)
+):
+	a()
+
+for x in (
+	LLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLL()
+):
+	a()
+
+for x in (
+	LLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLL[0]
+):
+	a()
+
+for x in (
+	-LLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLL
+):
+	a()
+
+for x in (
+	LLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLL
+):
+	a()
+
+atom = XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX

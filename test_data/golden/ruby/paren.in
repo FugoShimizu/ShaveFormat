@@ -25,6 +25,9 @@ g(a || (b || c))
 g((a && b) && c)
 g(a && (b || c) || d)
 g(((a && b)) || c)
+g(x && ((a || b) || d))
+g((a || b) || d)
+g(x && (a || (b || d)))
 g((a ** b) ** c)
 g(a ** (b ** c))
 g(a ** (b * c))
@@ -72,3 +75,90 @@ x = (a)?b:c
 y = (a)?1:2
 z = (a.abs)?1:2
 w = a.b()?x:y
+
+g (/ a/)
+g (/
+ a/)
+g((/ a/))
+
+R = (def m(a)
+end)
+S = (class A
+end)
+T = (if true
+end)
+
+class A; def b(x = 10) = x; def c = [5, 6]; def d? = true; end
+def e()
+  1
+end
+def k() = 2
+def m() 3 end
+a = A.new()
+f = ->(x) { x + 1 }
+g = ->(x, y) { x + y }
+h = ->() { 4 }
+j = ->(&blk) { blk.call }
+p a.b(), a.b() -1, a.c() [1], a.c()[0], (a.b() ? 7 : 8), a.d?(), a&.b(), e(), k(), m(), f.(1), g.(1, 2), h.(), A::new().b
+p a.b() {}, a.b().to_s, (a.b()..12).to_a.size
+def t; yield(); end
+p(t { 9 })
+
+def f() # note
+  1
+end
+
+def first(x) x[0] end
+
+def pick(c) c ? 1 : 2 end
+
+x.y() # c
+q = (a.c) [1]
+r = (a.c()) [0]
+p q, r
+
+def control_return(a,b,c)
+  return (if a then b else c end)
+  return ((unless a then b else c end))
+  return (while a do b end)
+  return ((until a do b end))
+end
+
+def control_break(a,b,c)
+  while a
+    break (if a then b else c end)
+    break ((unless a then b else c end))
+    break (while a do b end)
+    break ((until a do b end))
+  end
+  return 0
+end
+
+def control_next(a,b,c)
+  while a
+    next (if a then b else c end)
+    next ((unless a then b else c end))
+    next (while a do b end)
+    next ((until a do b end))
+  end
+  return 0
+end
+
+def control_yield(a,b,c)
+  yield (if a then b else c end)
+  yield ((unless a then b else c end))
+  yield (while a do b end)
+  yield ((until a do b end))
+  return 0
+end
+
+x=(if a then b else c end)
+g((if a then b else c end))
+
+closure_items = [(-> {}), (-> {})]
+
+defined?((@first)) && @second
+defined?(@first + @second) || @third
+defined?(@first) + @second
+defined?(@first) and @second
+probe(defined?(@first), @second)

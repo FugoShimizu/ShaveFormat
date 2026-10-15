@@ -1,14 +1,14 @@
 <div>
 	<script>
 		if(a) f(/* First */ /* Second */ x);
-		// script close
+	// script close
 	</script>
 	<style>
 		.a {
 			color: red;
 		/* rule close */
 		}
-		/* style close */
+	/* style close */
 	</style>
 	<SCRIPT>
 		// 大文字タグ内
@@ -26,3 +26,59 @@
 
 	console.log(a);
 </script>
+<script type="module">
+	const a = 1;
+
+	a < !--b;
+</script>
+<script type="module">
+	const fresh = 1;
+
+	consume(fresh);
+</script>
+<style>
+	﻿a {
+		color: red;
+	}
+</style>
+<script type="text&#47;javascript">
+	let x = 1 + 2;
+</script>
+<script type="text/javascript; charset=utf-8">
+	let x = 1 + 2;
+</script>
+<script type="text&sol;javascript">
+	let x = 1 + 2;
+</script>
+<script>
+	f();
+// zero script
+</script>
+<style>
+	.b {
+		color: blue;
+	}
+/* zero style */
+</style>
+<style type="text/less">.x { color: @color; }</style>
+<script type="text&bogus;javascript">untouched(  x  )</script>
+<script type="'text/javascript'">foo(  x  )</script>
+<script type="&#39;text/javascript&#39;">foo(  x  )</script>
+<script type="&quot;text/javascript&quot;">foo(  x  )</script>
+<script type="''text/javascript''">foo(  x  )</script>
+<script type=" ' ' ">foo(  x  )</script>
+<script type="'module'">foo(  x  )</script>
+<script type="'application/json'">{ "x" : 1 }</script>
+<script type="'importmap'">{ "x" : 1 }</script>
+<script type="'speculationrules'">{ "x" : 1 }</script>
+<script type="'application/ld+json'">{ "x" : 1 }</script>
+<style type="'text/css'">a { color : red }</style>
+<style type=" ' ' ">a { color : red }</style>
+<script type=" text/javascript ">
+	foo(x);
+</script>
+<style type=" text/css ">
+	a {
+		color: red;
+	}
+</style>

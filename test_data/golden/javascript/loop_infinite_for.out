@@ -48,3 +48,61 @@ function regularFor(n) {
 	for(let i = 0; i < n; ++i) use(i);
 	return;
 }
+
+/**
+ *
+ */
+function LiteralWhile() {
+	while(2) {}
+}
+
+/**
+ *
+ */
+function LiteralFor() {
+	for(; 0X2;) {}
+}
+
+/**
+ *
+ */
+function LiteralDo() {
+	do {} while(-1);
+}
+
+/**
+ *
+ */
+function LiteralFloat() {
+	while(1.0) {}
+}
+
+/**
+ *
+ */
+function LiteralString() {
+	while("x") {}
+}
+
+/**
+ *
+ */
+function LiteralWrapped() {
+	while(2) {}
+}
+
+/**
+ *
+ */
+function LiteralZero() {
+	while(0) {}
+	return;
+}
+
+/**
+ *
+ */
+function LiteralBreak() {
+	while(2) break;
+	return;
+}

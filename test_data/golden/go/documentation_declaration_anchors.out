@@ -1,0 +1,64 @@
+package p
+
+type (
+	// T の説明
+	// 続き
+	T int
+)
+
+const (
+	// A の説明
+	// 続き
+	A = 1
+)
+
+var (
+	// X の説明
+	X int
+)
+
+type I interface {
+	// M の説明
+	M()
+}
+
+// f は検体
+func f() {
+	// T doc
+	// more
+	type T struct {
+		X int
+	}
+	// A は別名
+	// 続き
+	type A = int
+	_ = T{}
+	var _ A
+	return
+}
+
+type T struct {
+	// X の説明
+	// 続き
+	X int
+}
+
+// Existing は既存の文書を持つ
+func Existing() {}
+
+// Hot
+//go:noinline
+func Hot(a int) int {
+	return a
+}
+
+type T struct {}
+
+// Method
+func (t T) Method() {}
+
+// ========== Section ==========
+func F(x int) int {
+	return x
+}
+// ========== ==== ==========

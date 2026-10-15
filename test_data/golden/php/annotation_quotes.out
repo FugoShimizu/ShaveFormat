@@ -6,4 +6,16 @@ class Form {
 	 * @Assert\Regex(pattern="/^[^、。]+$/u", message="句読点は使えません。")
 	 */
 	public $nick;
+	/**
+	 * @Assert\Choice("a\")甲。乙")
+	 */
+	public $escapedDouble;
+	/**
+	 * @Assert\Choice('a\')甲。乙')
+	 */
+	public $escapedSingle;
+	/**
+	 * @Assert\Choice("a\\", n=(2)) tail
+	 */
+	public $escapedBackslash;
 }

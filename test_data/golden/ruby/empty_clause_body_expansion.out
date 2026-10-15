@@ -1,0 +1,112 @@
+if a then end
+
+unless b then end
+
+while c do end
+
+until d do end
+
+#
+# @param a
+def m(a) end
+
+#
+def n
+end
+
+class A end
+
+class B < C
+end
+
+module M end
+
+begin end
+
+foo do |x| end
+
+class << obj
+end
+
+#
+# @param a
+def m a
+end
+
+#
+# @param b
+def n(b) end
+
+#
+def p
+end
+
+if a then 1 elsif b then end
+if a then 1 elsif b then end
+
+if a
+	1
+	2
+elsif b then elsif c then end
+
+if a then elsif b then else 2 end
+if x > 1 then else puts 1 end
+
+unless y then else puts 2 end
+
+case x
+in [a]
+end
+
+case y
+in [b] if c
+end
+
+case z
+in [d] then e
+end
+
+open(T) do |f|
+	while l = f.gets
+		c1 = from_hex(c1)
+		# # NFC TEST
+		if c2 == Unicode.nfc(c1) && c2 == Unicode.nfc(c2) && c2 == Unicode.nfc(c3) && c4 == Unicode.nfc(c4) &&
+			# #puts "NFC OK: " + code
+			c4 == Unicode.nfc(c4) then else
+			puts "NFC NG: " + to_hex(c1)
+			printf(
+				"  c2=%s NFC(c1)=%s NFC(c2)=%s NFC(c3)=%s\n",
+				to_hex(c2),
+				to_hex(Unicode.nfc(c1)),
+				to_hex(Unicode.nfc(c2)),
+				to_hex(Unicode.nfc(c3))
+			)
+		end
+	end
+end
+
+# 条件に応じて数値を渡す
+# @param box 対象の値
+# @param count 条件の値
+# @return 呼出の値
+def alpha(box, count)
+	return (
+		if count then beta(
+			box,
+			"alpha beta gamma delta epsilon zeta eta theta iota kappa lambda mu nu xi omicron pi",
+			[1, 3, 7],
+			count: count
+		) else gamma(box, count: 0) end # 空の場合
+	)
+end
+
+x = if aaaaaaaaaaaaaaaaaaaaaaaaaaaaa then bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb
+else cccccccccccccccccccccccccccccccccccccccccccccccccc end
+
+if a then b elsif ccccccccccccccccccccccccccccccccccccccccc then dddddddddddddddddddddddddddddddddddddddddd
+else eeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee end
+
+if aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa then
+else bbbbbbbbbbbbbbbbbbbbbbbbbbbbbb end
+
+y = if a then 1 else 2 end

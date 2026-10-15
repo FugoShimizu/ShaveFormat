@@ -6,7 +6,9 @@ abstract class Foo {
 	 */
 	abstract fun thing(): Int
 
-	/** Kinds */
+	/**
+	 * Kinds
+	 */
 	enum class Kind {
 		A,
 		B

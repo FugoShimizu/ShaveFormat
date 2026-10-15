@@ -1,0 +1,124 @@
+class A {
+public:
+  int a;
+  // before private
+private:
+  int b;
+};
+
+void f(int x) {
+	for (;;) /* forever */ {
+		a();
+		b();
+	}
+	while (x) /* w */ {
+		a();
+	}
+	if (x) /* i */ {
+		a();
+		b();
+	}
+}
+
+/**
+ * 値の選択関数
+ * @param Value 値
+ * @return 選択した値
+ */
+int Select(int Value) {
+	for(;;) {
+		if(Value) {
+			Value = 1;
+			Value = 3;
+		// 其の他の値
+		} else return 0;
+	}
+}
+
+int f(int a) {
+	if(
+		alphaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa(a) > 1 && bravoooooooooooooooooooooooooooooooooooooooooooooooooo(a) > 2
+		// 条件の閉じの前の注記
+	) return 1;
+	return 0;
+}
+
+void f(int a) {
+	if(a) { g(); g(); } else if(
+		// 別の枝の説明
+		a > 1) { k(); k(); }
+}
+
+/**
+ * 読む
+ * @param Path 経路
+ */
+void Read(const std::string &Path) {
+	try {
+		Open(Path);
+	}
+	// 引数の誤り
+	catch (const std::invalid_argument &E) {
+		Report(E);
+	} // 其の他の例外
+	catch (...) {
+		throw;
+	}
+	return;
+}
+/**
+ * 確かめる
+ * @param value 値
+ */
+void Check(int value) {
+	try {
+		if(value < 0) throw 1;
+	} catch(...) {
+		return;
+	}
+	return;
+}
+
+void f(int a) {
+	{ // bare
+		g();
+	}
+	do { // d
+		g();
+	} while(a);
+	if (a) { // 真
+		g();
+	} else { // 偽
+		h();
+	}
+	switch (a) {
+	default: // 他
+		h();
+	}
+}
+
+void f(int x) {
+	if (x > 0) {
+		g();
+		// NOLINTNEXTLINE
+	} else if (x > 1) { int y = 42; }
+}
+
+/** Keep boundaries */
+void EmptyBoundary() { /* Read. Return. */ }
+
+/** Keep boundaries */
+void EmptyBoundaryPair() { /* Read */ /* Return */ }
+/** Keep parameter boundaries */
+void EmptyParameters(/* Seventh */ /* Eighth */) {}
+
+
+/**
+ * Keep branch boundaries
+ * @param a Branch condition
+ */
+void BoundaryBranches(bool a) {
+	if(a) { /* First. Second. */ } else { /* Third */ /* Fourth */ }
+	EmptyBoundary(/* Fifth. Sixth. */);
+	return;
+}

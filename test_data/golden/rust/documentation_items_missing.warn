@@ -1,6 +1,5 @@
-1:1: Violation: Use outer Rust block documentation for this documentation
-6:16: Violation: Documentation is missing a description for parameter 'b'
-6:27: Violation: Documentation is missing a return-value description
-10:1: Violation: Use outer Rust block documentation for this documentation
-19:1: `# Returns` documents a function that returns no value
-19:4: Review: Add an explicit return type to this function; verify type, external contract
+8:16: Violation: Documentation is missing a description for parameter 'b'
+8:27: Violation: Documentation is missing a return-value description
+19:4: Review: Add an explicit return type to this function
+20:2: Review: Add an explicit type to this declaration
+24:1: Violation: Documentation is missing a summary

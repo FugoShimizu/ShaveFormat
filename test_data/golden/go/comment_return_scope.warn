@@ -1,1 +1,10 @@
+5:2: Review: Add an explicit type to this declaration
 13:2: Violation: Add the required comment before this `return`
+23:2: Violation: Remove the unreachable trailing `return`
+30:2: Violation: Remove the unreachable trailing `return`
+35:2: Review: Inline immediately returned variable a
+35:2: Review: Add an explicit type to this declaration
+41:2: Review: Add an explicit type to this declaration
+49:2: Review: Add an explicit type to this declaration
+57:2: Review: Inline immediately returned variable a
+57:2: Review: Add an explicit type to this declaration

@@ -1,18 +1,50 @@
-1:4: Violation: Function is missing a documentation comment
-5:4: Violation: Function is missing a documentation comment
-9:4: Violation: Function is missing a documentation comment
-13:4: Review: Determine whether the function needs an explicit trailing return; verify type, reachability
-13:4: Violation: Function is missing a documentation comment
-17:4: Review: Determine whether the function needs an explicit trailing return; verify type, reachability
-17:4: Violation: Function is missing a documentation comment
-21:4: Review: Determine whether the function needs an explicit trailing return; verify type, reachability
-21:4: Violation: Function is missing a documentation comment
-26:4: Review: Determine whether the function needs an explicit trailing return; verify type, reachability
-26:4: Review: Use boolean-query naming for function compared; verify external contract, intent
-26:4: Violation: Function is missing a documentation comment
-30:4: Review: Determine whether the function needs an explicit trailing return; verify type, reachability
-30:4: Violation: Function is missing a documentation comment
-34:4: Review: Determine whether the function needs an explicit trailing return; verify type, reachability
-34:4: Violation: Function is missing a documentation comment
-40:4: Review: Determine whether the function needs an explicit trailing return; verify type, reachability
-40:4: Violation: Function is missing a documentation comment
+1:1: Violation: Documentation is missing a summary
+7:11: Violation: Documentation is missing a description for parameter 'x'
+7:22: Violation: Documentation is missing a return-value description
+11:1: Violation: Documentation is missing a summary
+17:10: Violation: Documentation is missing a description for parameter 'x'
+17:22: Violation: Documentation is missing a return-value description
+21:1: Violation: Documentation is missing a summary
+27:19: Violation: Documentation is missing a description for parameter 'x'
+27:34: Violation: Documentation is missing a return-value description
+31:1: Violation: Documentation is missing a summary
+35:18: Violation: Documentation is missing a return-value description
+39:1: Violation: Documentation is missing a summary
+43:19: Violation: Documentation is missing a return-value description
+47:1: Violation: Documentation is missing a summary
+51:20: Violation: Documentation is missing a return-value description
+52:6: Review: Add an explicit type to this declaration
+56:1: Violation: Documentation is missing a summary
+60:18: Violation: Documentation is missing a return-value description
+64:1: Violation: Documentation is missing a summary
+68:16: Violation: Documentation is missing a return-value description
+72:1: Violation: Documentation is missing a summary
+78:16: Violation: Documentation is missing a description for parameter 'x'
+78:27: Violation: Documentation is missing a return-value description
+83:1: Violation: Documentation is missing a summary
+90:15: Violation: Documentation is missing a description for parameter 'x'
+90:26: Violation: Documentation is missing a return-value description
+94:1: Violation: Documentation is missing a summary
+101:12: Violation: Documentation is missing a description for parameter 'x'
+101:23: Violation: Documentation is missing a return-value description
+106:1: Violation: Documentation is missing a summary
+110:24: Violation: Documentation is missing a return-value description
+115:1: Violation: Documentation is missing a summary
+121:16: Violation: Documentation is missing a description for parameter 'x'
+121:35: Violation: Documentation is missing a return-value description
+126:1: Violation: Documentation is missing a summary
+130:24: Violation: Documentation is missing a return-value description
+135:1: Violation: Documentation is missing a summary
+139:21: Violation: Documentation is missing a return-value description
+144:1: Violation: Documentation is missing a summary
+150:18: Violation: Documentation is missing a description for parameter 'x'
+150:34: Violation: Documentation is missing a return-value description
+154:1: Violation: Documentation is missing a summary
+160:16: Violation: Documentation is missing a description for parameter 'x'
+160:28: Violation: Documentation is missing a return-value description
+164:1: Violation: Documentation is missing a summary
+170:16: Violation: Documentation is missing a description for parameter 'x'
+170:28: Violation: Documentation is missing a return-value description
+174:1: Violation: Documentation is missing a summary
+179:17: Violation: Documentation is missing a description for parameter 'x'
+187:4: Review: Add an explicit return type to this function

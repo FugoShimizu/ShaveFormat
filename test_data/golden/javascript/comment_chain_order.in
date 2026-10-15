@@ -1,5 +1,0 @@
-const r = foo
-	/* a */ // b
-	.bar()
-	// c
-	.baz();

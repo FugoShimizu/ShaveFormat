@@ -1,0 +1,121 @@
+val x = 1
+// First sentence
+// Second sentence
+val y = 2
+
+/**
+ *
+ * @param x
+ * @return
+ */
+fun f(x: Int): Int {
+	if(x > 0) return 1
+	// 分岐の終わり
+	return 0
+// 関数の終わり
+}
+
+/**
+ *
+ * @param b
+ * @param c
+ * @return
+ */
+fun sub(b: Int, c: Int): Int {
+	val a = b /* x
+	 * y */ - c
+	return a
+}
+
+/**
+ *
+ * @param g
+ * @return
+ */
+fun call(g: (Int) -> Int): Int {
+	val r = g /* x
+	 * y */ (7)
+	return r
+}
+
+/**
+ *
+ * @param a
+ */
+fun f(a: Int) {
+	try {
+		g1()
+		g2()
+	// note
+	} catch(e: Exception) {
+		h1()
+		h2()
+	}
+	return
+}
+
+/**
+ *
+ */
+fun f() {
+	try {
+		g()
+	} catch(e: Exception) { // t1
+		h()
+	} finally { // t2
+		k()
+	}
+	try {
+		g()
+	} catch(e: Exception) {} finally { // c1
+		close()
+	}
+	return
+}
+
+try {
+	foo()
+// comment
+} catch(e: Exception) {} finally {
+	close()
+}
+
+/**
+ *
+ * @return
+ */
+fun f(): Int {
+	// m
+	// l
+	return x
+}
+
+/**
+ * 面積
+ * 幅
+ * @param w
+ * @param h
+ * @return
+ */
+fun area(w: Int, h: Int): Int {
+	return w * h
+}
+
+/**
+ * 名前
+ */
+data class P(val name: String, val age: Int)
+
+/**
+ * Keep boundaries
+ */
+fun emptyBoundary() {/* Read */ /* Return */}
+/**
+ * Keep boundaries
+ */
+fun emptyBoundaryPair() {/* Read */ /* Return */}
+// ========== ==== ==========
+// {@code A B}
+// {@literal A B}
+// (@dot A B @enddot)
+// (@f$ A B @f$)

@@ -1,0 +1,8 @@
+13:8: Review: Inline immediately returned variable a
+40:2: Review: Merge the conditions of these identical branch bodies
+46:12: Review: Combine the `null` and `undefined` checks
+47:21: Review: Combine the `null` and `undefined` checks
+48:12: Review: Combine the `null` and `undefined` checks
+49:22: Review: Combine the `null` and `undefined` checks
+50:21: Review: Combine the `null` and `undefined` checks
+51:11: Review: Combine the `null` and `undefined` checks

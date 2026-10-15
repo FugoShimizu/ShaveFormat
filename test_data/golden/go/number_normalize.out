@@ -6,3 +6,20 @@ var oct = 0O17
 var exp = 1E10
 var hexfloat = 0X1P-2
 var imag = 3i
+var trailingHex float64 = 0X1.P+2
+var leadingHex float64 = -0X.8P-2
+var letterHex float64 = 0X.AP0
+var fractionHex float64 = 0X1.FP-1
+var Slice = []int{ 1, 2 }
+var Empty = []int{}
+var Grid = [][]int{ { 1, 2 }, { 3 }, {} }
+var Lookup = map[string]string{ "left": "{x}", "right": "y;z" }
+
+var Functions = []func() int{
+	func() int {
+		return 2
+	},
+	func() int {
+		return 3
+	},
+}

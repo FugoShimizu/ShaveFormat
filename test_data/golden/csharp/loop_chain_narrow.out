@@ -1,0 +1,24 @@
+using ScopeAlias = global
+::ReceiverWithANameLongEnoughForScopeReferences;
+
+class C {
+	/**
+	 * <summary>連鎖の見出を保つ</summary>
+	 */
+	void F() {
+		while(a && b) if(c) {
+			Act(first_argument, second_argument);
+		}
+		return;
+	}
+
+	/**
+	 * <summary>三段の見出を保つ</summary>
+	 */
+	void G() {
+		while(a) while(b) if(c) {
+			Act(first_argument, second_argument);
+		}
+		return;
+	}
+}

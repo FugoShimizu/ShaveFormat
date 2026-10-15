@@ -1,0 +1,67 @@
+/**
+ * 呼ぶ
+ */
+void F() {
+	G();
+	// `x` is used
+	// a = b
+	H();
+	return;
+}
+
+// a
+// b
+// c
+// d
+// e
+// f
+// `g  h` の値
+int x; // y
+// z
+char w;
+
+/**
+ * 面積
+ * 幅
+ * @param w
+ * @param h
+ * @return
+ */
+int area(int w, int h) {
+	return w * h;
+}
+
+enum class E { A, B, C }; // a // b // c
+
+/**
+ *
+ */
+void Next() {
+	return;
+}
+
+/**
+ *
+ * @return
+ */
+int Sum() {
+	const int A = 1, B = 2, C = 3; // first // second // third // fourth
+	return A + B + C;
+}
+
+/**
+ *
+ */
+void Foo() {
+	const int A = 1, B = 2; // a // line1 // line2
+	return;
+}
+
+/**
+ *
+ * @return
+ */
+int f() {
+	B(); // First // Second
+	return 1;
+}

@@ -1,0 +1,199 @@
+class T {
+	/**
+	 * <summary></summary>
+	 * <param name="a"></param>
+	 */
+	void F(int a) {
+		if(a == 1) {
+			int x = 1;
+		}
+		return;
+	}
+}
+
+class T {
+	/**
+	 * <summary></summary>
+	 * <param name="a"></param>
+	 */
+	void F(int a) {
+		if(a == 1) {
+			/**
+			 * <summary></summary>
+			 */
+			void Local() {}
+		}
+		return;
+	}
+}
+
+class A {
+	/**
+	 * <summary></summary>
+	 * <param name="a"></param>
+	 * <param name="b"></param>
+	 * <param name="c"></param>
+	 */
+	void f(bool a, bool b, bool c) {
+		if(a) {
+			if(b) x();
+			else if(c) y();
+		} else z();
+		if(a) {
+			if(b) x();
+		} else z();
+		if(a) x();
+		else if(b) y();
+		else z();
+		return;
+	}
+}
+
+class A {
+	/**
+	 * <summary></summary>
+	 * <param name="a"></param>
+	 * <param name="b"></param>
+	 */
+	void f(bool a, bool b) {
+		if(a) {
+			if(b) x();
+			else y();
+		}
+		while(a) {
+			do x();
+			while(b);
+		}
+		if(a) x();
+		else {
+			do y();
+			while(b);
+		}
+		if(a) if(b) {} else {}
+		if(a) if(b) {} else {}
+		if(a) do {} while(b);
+		if(a) do {} while(b);
+		return;
+	}
+}
+
+class C {
+	/**
+	 * <summary></summary>
+	 * <param name="a"></param>
+	 * <param name="b"></param>
+	 */
+	void F(bool a, bool b) {
+		if(a) if(b) {
+			int x = Read(), /* first */ y = Read();
+			/* second */ Use(x, y);
+		}
+		return;
+	}
+}
+
+class Registry {
+	/**
+	 * <summary></summary>
+	 * <param name="SourceText"></param>
+	 * <param name="Position"></param>
+	 * <param name="LanguageMode"></param>
+	 * <param name="Handlers"></param>
+	 */
+	void Register(string SourceText, int Position, int LanguageMode, System.Collections.Generic.List<int> Handlers) {
+		if(
+			Position < SourceText.Length && SourceText[Position] != '\n' &&
+			ShouldBreakAfterExpandedBrace("\n}", SourceText.Substring(Position), LanguageMode)
+		) Handlers.Add(Position);
+		return;
+	}
+}
+
+class A {
+	const bool Run = true;
+
+	/**
+	 * <summary>仮引数が定数を隠す繰返</summary>
+	 * <param name="Run">続けるか</param>
+	 */
+	void F(bool Run) {
+		while(Run) Run = G();
+		return;
+	}
+
+	/**
+	 * <summary>続けるかの判定</summary>
+	 * <returns>続けるか</returns>
+	 */
+	bool G() {
+		return true;
+	}
+}
+
+class A {
+	const bool Run = true;
+
+	/**
+	 * <summary>脱出の無い定数条件の繰返</summary>
+	 */
+	void H() {
+		while(Run) G();
+	}
+
+	/**
+	 * <summary>脱出の有る定数条件の繰返</summary>
+	 */
+	void F() {
+		while(Run) if(G()) break;
+		return;
+	}
+
+	/**
+	 * <summary>続けるかの判定</summary>
+	 * <returns>続けるか</returns>
+	 */
+	bool G() {
+		return true;
+	}
+}
+
+class Service {
+	/**
+	 * <summary></summary>
+	 */
+	public void Run() {
+		// 単純な無限ループ
+		while(true) {
+			if(token.IsCancellationRequested) break;
+			Process();
+		}
+		return;
+	}
+
+	/**
+	 * <summary></summary>
+	 */
+	public void Idempotent() {
+		// 既存の while(true) は不変
+		while(true) DoWork();
+	}
+
+	/**
+	 * <summary></summary>
+	 * <param name="items"></param>
+	 */
+	public void Foreach(int[] items) {
+		// foreach は別 AST 種別の為対象外
+		foreach(int x in items) Use(x);
+		return;
+	}
+
+	/**
+	 * <summary></summary>
+	 */
+	public void RegularFor() {
+		// 通常の for は対象外
+		for(int i = 0; i < 10; ++i) Use(i);
+		return;
+	}
+}

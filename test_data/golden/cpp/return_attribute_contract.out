@@ -1,0 +1,88 @@
+enum { noreturn = 16 };
+
+__attribute__((noreturn)) void StandardStop();
+__attribute__((aligned(noreturn))) void ArgumentTarget();
+
+/**
+ * 普通の関数からの返戻
+ */
+void ArgumentCheck() {
+	ArgumentTarget();
+	// 通常復帰後の返戻
+	return;
+}
+
+[[gnu::aligned(noreturn)]] void NamespacedArgumentTarget();
+
+/**
+ * 普通の関数からの返戻
+ */
+void NamespacedArgumentCheck() {
+	NamespacedArgumentTarget();
+	// 通常復帰後の返戻
+	return;
+}
+
+[[vendor::noreturn]] void ForeignTarget();
+
+/**
+ * 普通の関数からの返戻
+ */
+void ForeignCheck() {
+	ForeignTarget();
+	// 通常復帰後の返戻
+	return;
+}
+
+[[noreturn::unused]] void QualifierTarget();
+
+/**
+ * 普通の関数からの返戻
+ */
+void QualifierCheck() {
+	QualifierTarget();
+	// 通常復帰後の返戻
+	return;
+}
+
+[[using vendor: aligned(16), noreturn]] void SharedQualifierTarget();
+
+/**
+ * 属性の共有する名前空間を確認する
+ */
+void SharedQualifierCheck() {
+	SharedQualifierTarget();
+	// 通常復帰後の返戻
+	return;
+}
+
+/**
+ * 標準の非復帰契約の対照
+ */
+void StandardCheck() {
+	StandardStop();
+	// 非復帰の呼出後の返戻
+	return;
+}
+
+/**
+ * 導入前の値の返戻
+ * @return 終了状態
+ */
+int UnintroducedResult() {
+	std::abort();
+	// 通常復帰後の値の返戻
+	return 0;
+}
+
+#include <cstdlib>
+
+/**
+ * 導入後も宣言した戻値の説明を保つ
+ * @return 終了状態
+ */
+int IntroducedResult() {
+	std::abort();
+	// 非復帰の呼出後の値の返戻
+	return 0;
+}

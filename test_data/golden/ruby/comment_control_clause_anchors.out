@@ -1,0 +1,231 @@
+#
+# @return
+def f
+	if a
+		b
+		c
+	# then end
+	elsif d
+		e
+		g
+	# elsif end
+	else
+		h
+		i
+	end
+	begin
+		j
+		return k
+	# begin end
+	rescue StandardError
+		l
+		return m
+	# rescue end
+	ensure
+		n
+	end
+end
+
+#
+# @return
+def g
+	a
+	return b
+# def body end
+rescue StandardError
+	return c
+end
+
+x = 1
+
+begin end # c3 # c4
+
+y = 2
+
+begin # c5
+rescue # c6
+end
+
+begin
+	x
+rescue E
+	# failed to chmod
+	if mode then elsif uid
+		uid = nil
+		retry # gid
+	end
+end
+
+# expression continues
+if a then b elsif c then elsif d then e end
+
+#
+# @return
+def f
+	return (
+		if a
+			b = 1
+			z = 2
+		# Continue
+		elsif c then elsif d then b = 2 end
+	)
+end
+
+# 本体の空の if
+if a then end
+
+# 一文目
+# 二文目
+# 三文目
+# @param a
+def m(a) end
+
+begin
+	g
+rescue ArgumentError => e
+# 一文目
+# 二文目
+# 三文目
+rescue
+# 例外を略した rescue
+else
+# 空の else
+ensure
+# 空の ensure
+end
+
+# 空の when
+case x when 1 then when 2 then y end
+
+# 空の elsif
+if a then x elsif b then else z end
+
+class A < B
+# 空の class
+end
+
+# 空の while
+while a do end
+
+# 空の begin
+begin end
+
+# 空の do
+foo do |x| end
+
+#
+# @return
+def f
+	z
+	# C1
+	if a then b else end
+	return y
+end
+
+if a
+	x
+	y
+# c
+else end
+
+# w
+while a do end
+
+#
+# @param v
+# @return
+def f(v)
+	# before elsif
+	# before end
+	if v then a elsif w then b end
+	return z
+end
+
+#
+# @param a
+# @return
+def f(a)
+	# shallow
+	return (if a then g elsif b then h end)
+end
+
+#
+# @param v
+# @return
+def f(v)
+	case v when 1
+		w
+		z
+	# when の注記
+	end
+	# elsif の注記
+	if v then a elsif w then b end
+	begin
+		c
+	rescue StandardError
+		d
+	# rescue の注記
+	end
+	return case v
+	in Integer then e
+	# in の注記
+	end
+end
+
+#
+# @return
+def g
+	return 1
+rescue StandardError
+	return 2
+# def の rescue の注記
+end
+
+class Box
+	# 配列の条件を比べる
+	# @param alpha 対象の配列
+	# @return 条件に合う呼出の値
+	def count(alpha)
+		alpha.each do |count|
+			beta :a,
+			[count, 3],
+			note: "alpha beta gamma delta epsilon zeta eta theta iota kappa lambda mu nu xi omicron pi rho sigma tau",
+			count: 7 unless count.zero?
+		end
+		# 条件に合う値の返戻
+		return (
+			gamma :b,
+			values: %i[a b c],
+			note: "alpha beta gamma delta epsilon zeta eta theta iota kappa lambda mu nu",
+			count: 7 unless alpha.last == 7
+		)
+	end
+end
+
+if in_part then end # c
+
+x = 1
+
+while x do end # d
+
+# e
+if a then end
+
+# f
+while y do end
+
+#
+# @param s
+# @param e
+# @return
+def f(s, e)
+	# 一文目
+	# 二文目
+	case s when "a" then return e when "b"
+		g
+		h
+	# 三文目
+	# 四文目
+	else e.destroy! end
+	return nil
+end

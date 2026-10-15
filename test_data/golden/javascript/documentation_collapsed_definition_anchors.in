@@ -1,0 +1,74 @@
+function outer() {
+	if (a) {
+		x();
+		// c
+	}
+
+	function inner() {}
+}
+
+const s = `a
+
+b`;
+const o = {
+	/** 値 */
+	a: 1,
+};
+
+if(a) {
+	f();
+	f();
+} else if(g({
+	/** 値 */
+	b: 1
+})) {
+	h();
+	h();
+}
+
+/**
+ * 作る
+ * @return 結果
+ */
+function build() {
+	const name = "x";
+	const options = {
+		/** 詳細を出す */
+		verbose: true,
+	};
+	return run(name, options);
+}
+
+const label = "y", flags = {
+	/** 詳細を出す */
+	verbose: true,
+};
+
+do {
+	f();
+	g();
+} while(h({
+	/** 値 */
+	a: 1,
+}));
+
+const o = {
+	/** 値を返す */
+	m() {}
+};
+
+const p = {
+	/** First. Second. */
+	n() {}
+};
+
+const o = {
+	/** @deprecated 旧 */
+	old: 1,
+	new1: 2,
+};
+
+const f = {
+	/** 値 */
+	f: 1,
+};

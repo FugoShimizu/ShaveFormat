@@ -15,10 +15,23 @@ end
 
 # Adds things
 # @param a first
-# @param x inner
 # @return [Integer] outer
-# @return [Integer] inner
 # @overload add(x)
+# @param x inner
+# @return [Integer] inner
 def over(a)
 	return a
+end
+
+# Overloaded
+# @param value outer input
+# @return [Integer] outer result
+# @overload typed(text)
+# @param [String] text
+# @return [String]
+# @overload typed(count)
+# @param [Integer] count
+# @return [Integer]
+def typed(value)
+	return value
 end

@@ -1,2 +1,0 @@
-// <summary>赤</summary>
-enum E { [Obsolete] Red, Blue }

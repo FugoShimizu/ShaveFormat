@@ -1,2 +1,16 @@
 # 一つ目の注記
 # 二つ目の注記
+# "Read here." 日本語ABC "Return now."
+# 'Read here.' 甲, B '?Return now.' 日本語ABC '!Finish here.'
+# A, B and日本語
+# A, B orにほんご
+# A, B, C andニホンゴ
+# A, B and 日本語
+# `A, B and日本語`
+# 甲,乙 ？
+# 甲,乙 丙
+# A, B
+# {@code A.  B.}
+# {@literal A.  B.}
+# (@dot A.  B. @enddot)
+# (@f$ A.  B. @f$)

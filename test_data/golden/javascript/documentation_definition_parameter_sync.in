@@ -1,0 +1,233 @@
+class Registry {
+	[someConfigurationObject.namespaceIdentifierWithAVeryLongName + someConfigurationObject.featureIdentifierWithAVeryLongName + "x"]() {
+		return 3;
+	}
+	// note
+	[ k ]() {
+		return 4;
+	}
+}
+
+// === rule_docgen_generate ===
+function add(a, b) {
+	return a + b;
+}
+
+function logMessage(message) {
+	console.log(message);
+}
+
+class Widget {
+	constructor(id) {
+		this.id = id;
+	}
+	find(key) {
+		return this.lookup(key);
+	}
+}
+
+// === rule_docgen_reconcile ===
+/**
+ * 合計を求める
+ * @param a 第一項
+ * @param obsolete 余分な引数
+ * @returns 合計
+ */
+function total(a, b, c) {
+	return a + b + c;
+}
+
+function h() {
+	let a = 1; // x
+	let b = 2; /** b */
+
+	function g(p) { return p; }
+	return g(a + b);
+}
+
+/**
+ * 生成する
+ * @return 生成物
+ */
+function make() {
+	// 生成物の返戻
+	return {
+		/**
+		 * 名前を返す
+		 * @returns 名前
+		 */
+		name() {
+			// 名前の返戻
+			return "x";
+		}
+	};
+}
+
+const object = {
+/** @param old */
+m(x) { return x; }
+};
+
+/**
+ * 設定する
+ * @param {Object} opts 設定
+ * @param {string} opts.name 名前
+ * @param {number} [count=1] 回数
+ * @arg {number} step 刻み
+ * @returns{number} 結果
+ */
+function set(opts, count, step) {
+	return count;
+}
+
+/**
+ * Overloaded
+ * @param value outer input
+ * @return outer result
+ * @overload
+ * @param {string} text
+ * @returns {string}
+ * ```
+ * @returns example
+ * ```
+ * @overload
+ * @param {number} count inner input
+ * @return {number} inner result
+ */
+function overloaded(value) { return value; }
+
+/** 面積 */
+function area(
+	/** 幅 */
+	// TODO: 単位
+	w,
+	h,
+) { return w * h; }
+
+/** First
+ * @param a Alpha
+ */
+/** Second */
+function docBoundary(a) { return a; }
+
+/**
+ * Summary
+ * @param {{x: number}} opts Options
+ */
+function nestedRecord(opts) {}
+
+/**
+ * Summary
+ * @arg {{x: number}} opts Options
+ */
+function nestedAlias(opts) {}
+
+/**
+ * Summary
+ * @param {Array<{x: number}>} opts Options
+ */
+function nestedArray(opts) {}
+
+/**
+ * Summary
+ * @param {function({x: number}): void} opts Options
+ */
+function nestedFunction(opts) {}
+
+/**
+ * Summary
+ * @param {{x: "}"}} opts Options
+ */
+function nestedQuote(opts) {}
+
+/**
+ * Summary
+ * @param {{x: "\"}"}} opts Options
+ */
+function escapedQuote(opts) {}
+
+/** Summary
+ * @param b B
+ * @param a A
+ */ function inlineOrder(a,b){return a+b;}
+
+function /** Hello */ inlineFrame(a){return a;}
+
+/** A */
+/** ========== X ========== */
+/** B
+ * @param b B value
+ * @param a A value
+ */
+function sectionDocs(a,b){return a+b;}
+
+/** A */
+/** ========== X ========== */
+// B
+function trailing() {}
+
+/** Summary
+ * @param [out] Value
+ */
+function optionalOut(out) { return out; }
+/** Summary
+ * @param [inout] Alpha, 和文
+ */
+function optionalInout(inout) { return inout; }
+/** Summary
+ * @arg out Value
+ * @returns Result
+ */
+function registeredAlias(out) { return out; }
+
+// @param Ghost
+function literalTag(x) { return x; }
+
+/** @summary Only Summary */
+function shortSummary() { return 1; }
+
+/**
+ * Card
+ * @param {Object} props Properties
+ * @return {string} Title
+ */
+function card({title, body}) { return title; }
+
+/**
+ * Card properties
+ * @param {Object} props Properties
+ * @param {string} props.title Title
+ * @param {string} props.body Body
+ * @return {string} Title
+ */
+function cardProperties({title, body}) { return title; }
+
+/**
+ * Named root
+ * @param {Object} root0 Properties
+ * @param {string} root0.title Title
+ * @return {string} Title
+ */
+function namedRoot({title, body}) { return title; }
+
+/**
+ * Multiple parameters
+ * @param prefix Prefix
+ * @param {Object} props Properties
+ * @param {string} props.key Value
+ * @param {Array} entries Entries
+ * @return Result
+ */
+function multipleParameters(prefix, {key: value}, [tail]) { return prefix + value + tail; }
+
+class Header
+/** Header description */
+{ value = 1; }
+
+/**
+ * @desc Adds.
+ * @param a First
+ * @return Sum
+ * @returns: Literal tag
+ */
+function taggedSummary(a) { return a; }

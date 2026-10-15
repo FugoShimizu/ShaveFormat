@@ -1,21 +1,15 @@
-<svg>
-	<text xml:space="preserve">  keep
-  spaces </text>
-	<text xml:space="not-preserve"> format  spaces </text>
-	<text xml:space='preserved'> format too </text>
-	<text xml:space=preserve>  keep too </text>
-	<text style="WHITE-SPACE: pre-wrap !IMPORTANT; white-space: normal">  keep
-  line </text>
-	<text style="white-space: pre; white-space: normal"> format  spaces </text>
-	<text style="white-space-collapse: preserve-breaks">  keep
-  break </text>
-	<text style="white-space-collapse: preserve-spaces">  keep  spaces </text>
-	<text style="white-space: break-spaces">  keep  more </text>
-	<text style="white-space: var(--mode)">  uncertain  value </text>
-	<text style="white-space: pre; white-space-collapse: collapse"> format  again </text>
-	<text STYLE="white-space /* c */ : pre-line ! important"><tspan>  nested
-  content </tspan></text>
-	<text style="white-space: collapse nowrap"> collapse  words </text>
-	<text style="white-space: pre; white-space: ">  keep  prior </text>
-	<text style="white-space&#58;pre">  keep  entity </text>
-</svg>
+<svg><text xml:space="preserve">  keep
+  spaces </text><text xml:space="not-preserve">  format  spaces </text><text xml:space='preserved'>  format too </text><text
+	xml:space=preserve
+>  keep too </text><text style="WHITE-SPACE: pre-wrap !IMPORTANT; white-space: normal">  keep
+  line </text><text style="white-space: pre; white-space: normal">  format  spaces </text><text
+	style="white-space-collapse: preserve-breaks"
+>  keep
+  break </text><text style="white-space-collapse: preserve-spaces">  keep  spaces </text><text
+	style="white-space: break-spaces"
+>  keep  more </text><text style="white-space: var(--mode)">  uncertain  value </text><text
+	style="white-space: pre; white-space-collapse: collapse"
+>  format  again </text><text STYLE="white-space /* c */ : pre-line ! important"><tspan>  nested
+  content </tspan></text><text style="white-space: collapse nowrap">  collapse  words </text><text
+	style="white-space: pre; white-space: "
+>  keep  prior </text><text style="white-space&#58;pre">  keep  entity </text></svg>

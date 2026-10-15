@@ -1,0 +1,47 @@
+package p
+
+// inspect 条件分岐と指数の検査
+func inspect() {
+	if a {
+		f()
+	}
+	if b {
+		f()
+	}
+	if c {
+		f()
+	}
+	if a {
+		f()
+	} else if b {
+		f()
+	} else if c {
+		f()
+	}
+	if a {
+		if b {
+			f()
+		}
+	}
+	if a {
+		if b {
+			if c {
+				f()
+			}
+		}
+	}
+	x += 1E0_1
+	x -= 1E+0_1
+	x += 1E-0_1
+	consume(x >= b + 1E0_1)
+	consume(x <= b - 1E-0_1)
+	consume(b + 1E+0_1 <= x)
+	consume(b - 1E0_1 >= x)
+	x += 1E0_0
+	consume(x >= b + 1E0_0)
+	consume(x == 0E1_0)
+	x += 0X1P0_1
+	consume(x >= b + 0X1P-0_1)
+	// 終了
+	return
+}

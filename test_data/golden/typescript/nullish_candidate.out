@@ -5,3 +5,15 @@ const otherValue: unknown = undefined;
 const isMixedSubject: boolean = value === null || otherValue === undefined;
 const isRepeatedNull: boolean = value === null || value === null;
 const isConjunctiveStrict: boolean = value === null && value === undefined;
+const escapedEqual: boolean = value === null || \u{76}alue === undefined;
+const escapedDifferent: boolean = \u0076alue !== null && value !== undefined;
+const differentEscaped: boolean = value === null || \u006ftherValue === undefined;
+
+x === null || x === \u0075ndefined;
+x == \u{75}ndefined || x == null;
+x !== null && x !== un\u0064efined;
+undefine\u0064 !== x && null !== x;
+\u0075ndefined == x || null == x;
+null != x && \u{75}ndefined != x;
+x === null || x === \u0075ndefinedExtra;
+x === \u0075ndefined || x === \u{75}ndefined;

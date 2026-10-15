@@ -1,6 +1,0 @@
-const s = `a
-
-b`;
-
-// 値
-const o = { a: 1 };

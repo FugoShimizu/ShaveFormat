@@ -30,16 +30,89 @@ class A {
 		return
 	}
 
+	/**
+	 *
+	 */
 	deinit {
 		c()
 		return
 	}
 
 	var w: Int {
-		get { return 1 }
+		get {
+			return 1
+		}
 		set {
 			v = newValue
 			return
 		}
 	}
+
+	var ignored: Int {
+		get {
+			return 1
+		}
+		set {}
+	}
+
+	var named: Int {
+		get {
+			return 2
+		}
+		set(newValue) {}
+	}
+
+	var observed: Int = 0 {
+		willSet(next) {}
+		didSet(old) {}
+	}
+}
+
+struct Void {}
+
+/**
+ *
+ * - Returns:
+ */
+func userVoid() -> Void {
+	Void()
+}
+
+/**
+ *
+ */
+func standardVoid() -> Swift.Void {
+	print(1)
+	return
+}
+
+struct ResultNamespace {
+	struct Void {}
+	struct Never {}
+}
+
+/**
+ *
+ * - Returns:
+ */
+func qualifiedUserVoid() -> ResultNamespace.Void {
+	ResultNamespace.Void()
+}
+
+/**
+ *
+ * - Returns:
+ */
+func qualifiedUserNever() -> ResultNamespace.Never {
+	ResultNamespace.Never()
+}
+
+/**
+ * 後判定の本体で終える
+ * - Parameter c: 条件
+ */
+func postStop(_ c: Bool) {
+	repeat {
+		return
+	} while c
 }

@@ -1,0 +1,4 @@
+/// doc ??/
+int hidden = 1;
+/** doc */
+int g(void);

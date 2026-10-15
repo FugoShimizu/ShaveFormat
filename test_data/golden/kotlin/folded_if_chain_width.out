@@ -43,3 +43,14 @@ fun h(n: Int) = when(n) {
 	}
 	else -> "x"
 }
+
+val joined = when(value) {
+	1 -> if(flag) {
+		"aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"
+	} else if(other) {
+		"bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb"
+	} else {
+		"cccccccccccccccccccccccccccccccccccccccc"
+	}
+	else -> "fallback"
+}

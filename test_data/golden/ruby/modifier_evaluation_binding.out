@@ -1,0 +1,111 @@
+if x = 1 then p x end
+
+unless y = nil then p y end
+
+#
+# @return
+def items
+	return []
+end
+
+#
+# @param k
+# @return
+def f(k)
+	if items.empty? then items = [2] end
+	x = 1
+	x = 2 if x > 0
+	k = 5 if k
+	[1].each { m = 1 }
+	if m then m = 3 end
+	return [items, x, k]
+end
+
+x = 1
+
+if x then y = 1.. end
+
+while false do m 1.. end
+
+if x then p m a: end
+
+#
+# @param s
+# @return
+def f(s)
+	if x then x, y = 1, 2 end
+	if z then /(?<z>a)/ =~ s end
+	if q then (a, q), b = [1, 2], 3 end
+	/(?<k>a)/ =~ s if r
+	return [x, y, z, a, q, b, k]
+end
+
+#
+# @param s
+# @return
+def f(s)
+	if z then /(?'z'a)/ =~ s end
+	if 名 then /(?<名>a)/ =~ s end
+	/(?'k'a)/ =~ s if r
+	return [z, 名, k]
+end
+
+#
+# @param x
+# @return
+def m_guard(x)
+	return 1 if x
+	return 2
+end
+
+#
+# @param x
+# @return
+def m_unless(x)
+	return (1 unless x)
+end
+
+#
+# @param x
+# @return
+def m_while(x)
+	i = 0
+	i += 1 while x && i < 3
+	return i
+end
+
+#
+# @param x
+# @return
+def m_value(x)
+	y = if x then 1 end
+	return y
+end
+
+#
+# @param x
+# @return
+def m_if(x)
+	return (if x then 1 end + 3)
+end
+
+#
+# @param x
+# @return
+def m_unless(x)
+	return (1 unless x)
+end
+
+#
+# @param x
+# @return
+def m_case(x)
+	return case x when 1 then 2 end
+end
+
+#
+# @param x
+# @return
+def m_while(x)
+	return (break while x)
+end

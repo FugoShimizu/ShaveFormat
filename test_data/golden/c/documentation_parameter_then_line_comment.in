@@ -1,5 +1,0 @@
-int area(
-	/** 幅 */
-	// TODO: 単位
-	int w,
-	int h) { return w * h; }

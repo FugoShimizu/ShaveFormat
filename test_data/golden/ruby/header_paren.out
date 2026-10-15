@@ -38,3 +38,33 @@ for x in 0..n do p x end
 x = (1..)
 
 p x
+
+while true
+	g
+	h
+end
+
+g while true
+g while true
+
+f if a
+f if b
+f if c
+
+if a then f elsif b then f elsif c then f end
+
+f if b if a
+
+x += 1E0_1
+x -= 1E+0_1
+x += 1E-0_1
+
+consume(x >= b + 1E0_1)
+consume(x <= b - 1E-0_1)
+consume(b + 1E+0_1 <= x)
+consume(b - 1E0_1 >= x)
+
+x += 1E0_0
+
+consume(x >= b + 1E0_0)
+consume(x == 0E1_0)

@@ -1,0 +1,62 @@
+#define F(a, b) g(a, /* c */ b)
+
+#define X /* mid */ 1
+
+#include /* w */ <stdio.h>
+
+#define F(a) f(/* c */ a)
+#define G(a /* p */, b) a /* q */ + b
+
+#if A /* c */ && B
+
+#endif
+
+#pragma omp parallel /* c */ for
+
+#define H 1 /* e */
+#define I /* m
+n */ 2
+
+#define STR(e)
+
+// c
+#error
+
+// c
+#define Y 1 + 2
+
+int z = Y;
+
+#define X 1 // keep
+
+int y = X;
+
+#define G(a, b) 1
+#define H(a, b) 2
+#define I(a /* c */ /* p */, b) 3
+
+/**
+ * 検査関数
+ * @param a 値
+ * @return 結果
+ */
+int f(int a) {
+	int x = a;
+	x = x * 2;
+	#ifdef X
+	++x;
+	#endif
+	return x;
+}
+
+/**
+ * 検査関数
+ * @param a 値
+ * @return 結果
+ */
+int g(int a) {
+	int y = a;
+	y = y + 1;
+	/* 説明 */ y = y * 2; // 結果の返戻
+	return y;
+}

@@ -1,0 +1,24 @@
+// 内側
+mod m {}
+// 内側の囲み
+mod n {}
+
+mod populated {
+	/*!
+	 * モジュールの説明
+	 */
+	/**
+	 * 項目の説明
+	 */
+	fn f() {}
+}
+
+fn inner(x: i32) -> i32 {
+	/*!
+	 * 値を返す
+	 * # Arguments
+	 * * `x` - 値
+	 * # Returns
+	 */
+	return x;
+}

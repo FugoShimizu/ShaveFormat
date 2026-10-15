@@ -53,3 +53,346 @@ void Merge() { Record b; Record c; int *p; int *q; Record *x; Record *y; Alias *
 void Keep(Record T, Record b, Record c, int x, int y) { T<1>b;
 // 次の比較
 T<1>c; T*b; T*c; Factory*b; Factory*c; Item*x; Item*y; Global*b; Global*c; Hidden*b; Hidden*c; Unknown<1>b; Unknown<1>c; Unknown&b; Unknown&c; Space::Box<Item> m; Space::Box<Item> n; }
+
+/**
+ * 値と型の遮蔽を宣言位置と有効範囲で区別する
+ * @param Alias 外側の型を遮蔽する値
+ * @param Other 演算の右辺
+ */
+void Shadowed(int Alias, int Other) {
+	Alias*Other;
+	Alias&Other;
+	{
+		Alias*Other;
+		using Alias = int;
+		Alias *Ptr;
+	}
+	Alias*Other;
+}
+
+/**
+ * 見出の値の有効範囲の後で外側の型を使う
+ * @param Other 反復の上限と演算の右辺
+ */
+void HeaderScope(int Other) {
+	for(int Alias = 0; Alias < Other; ++Alias) {
+		Alias*Other;
+	}
+	Alias *Ptr;
+}
+
+/**
+ * 型の名前を遮蔽する関数ポインタを呼ぶ
+ * @param Alias 呼出先
+ * @param Other 実引数
+ */
+void Called(void (*Alias)(int), int Other) { Alias(Other); }
+
+/**
+ * 型の有効位置より前の初期値で内側の型を使う
+ * @param Alias 外側の型を遮蔽する値
+ */
+void Deferred(int Alias) {
+	{
+		typedef decltype([]() { using Alias = int; Alias *Ptr; return 1; }()) Alias;
+		Alias *Ptr;
+	}
+}
+
+/**
+ * 型名から始まる括弧付宣言子を宣言として纏める
+ */
+void Parenthesized() {
+	Alias *First;
+	Alias(Second);
+	Alias((Third));
+	Alias(*Fourth);
+	Alias(Fifth)[2];
+}
+
+/**
+ * 宣言子でない実引数を持つ型の変換を保つ
+ */
+void Casts() {
+	Alias(1);
+	Alias(2 + 3);
+}
+
+/**
+ * scoped enum の列挙子を外側の型と区別する
+ */
+void ScopedEnums() {
+	using T = int;
+	enum class E { T = 1, Next = T * 2 };
+	enum struct S { T = 1 };
+	T *p;
+	T *q;
+}
+
+/**
+ * 閉じたクラスの値で外側の型を遮蔽しない
+ */
+void ClosedScopes() {
+	using T = int;
+	struct C { int T; };
+	T *p;
+	T *q;
+}
+
+namespace Names {
+	int Alias;
+}
+
+/**
+ * 閉じた名前空間の後で型のポインタ宣言を統合する
+ */
+void NamespaceScope() { Alias *p; Alias *q; }
+
+int RangeValues[1];
+struct RangePair { int First; int Second; };
+RangePair RangePairs[1];
+
+/**
+ * 反復対象では外側の型，本体では導入した値を使う
+ */
+void RangeBinding() {
+ for(int Alias : []()->int(&)[1]{ Alias *P; Alias *Q; return RangeValues; }()) { Alias*2; }
+ Alias *P; Alias *Q;
+}
+
+/**
+ * 構造化束縛も反復対象の評価後に導入する
+ */
+void StructuredRangeBinding() {
+ for(auto [Alias, Other] : []()->RangePair(&)[1]{ Alias *P; Alias *Q; return RangePairs; }()) { Alias*Other; }
+}
+
+namespace Reopened {
+ template<int> struct Box {};
+ using LocalAlias = int;
+}
+namespace Reopened {
+ /**
+  * 再開した名前空間で型の確かな宣言を纏める
+  */
+ void Merge() { Box<1> P; Box<1> Q; LocalAlias *R; LocalAlias *S; }
+ /**
+  * 再開した名前空間でも内側の値で型を遮蔽する
+  * @param LocalAlias 外側の型を遮蔽する値
+  * @param Other 乗算の右辺
+  */
+ void Shadow(int LocalAlias, int Other) { LocalAlias*Other; }
+}
+
+int ScopeName;
+namespace PrivateType { using ScopeName = int; }
+namespace Separate {
+ /**
+  * 別の名前空間の型を外側の値へ漏らさない
+  * @param Other 乗算の右辺
+  */
+ void Isolated(int Other) { ScopeName*Other; }
+}
+
+namespace { using AnonymousAlias = int; }
+namespace {
+ /**
+  * 再開した無名名前空間で型の宣言を纏める
+  */
+ void Anonymous() { AnonymousAlias *P; AnonymousAlias *Q; }
+}
+
+namespace Outer::Inner { using NestedAlias = int; }
+namespace Outer { namespace Inner {
+ /**
+  * 同じ所属のネストした名前空間で型を解決する
+  */
+ void Nested() { NestedAlias *P; NestedAlias *Q; }
+} }
+
+namespace Versioned { inline namespace V1 { using VisibleAlias = int; } }
+namespace Versioned::inline V1 {
+ /**
+  * インライン名前空間も同じ所属で再開する
+  */
+ void Inline() { VisibleAlias *P; VisibleAlias *Q; }
+}
+
+/**
+ * 非型の仮引数は外側の型を遮蔽する
+ * @param Other 乗算の右辺
+ */
+template<int Alias> void ValueTemplate(int Other) { Alias*Other; }
+
+/**
+ * 既定値を持つ非型の仮引数も値として使う
+ * @param Other 乗算の右辺
+ */
+template<int Alias = 1> void DefaultTemplate(int Other) { Alias*Other; }
+
+/**
+ * 非型のパックの要素を値として使う
+ * @param Other 乗算の右辺
+ */
+template<int... Alias> void PackTemplate(int Other) { ((Alias*Other), ...); }
+
+int TypeParam;
+
+/**
+ * 型の仮引数は外側の値を遮蔽する
+ */
+template<class TypeParam = int> void TypeTemplate() { TypeParam *P; TypeParam *Q; }
+
+struct BindingBase { using Member = int; };
+struct BindingClass : BindingBase {
+ using Own = int;
+ void Merge();
+ void Shadow(int Member, int Other);
+};
+
+/**
+ * クラス外でも直接と継承したメンバの型を使う
+ */
+void BindingClass::Merge() { Member *P; Member *Q; Own *R; Own *S; }
+
+/**
+ * クラス外の定義でも仮引数がメンバの型を遮蔽する
+ * @param Member 型を遮蔽する値
+ * @param Other 乗算の右辺
+ */
+void BindingClass::Shadow(int Member, int Other) { Member*Other; }
+
+namespace ImportedNames { using ImportedType = int; }
+namespace ImportedAlias = ImportedNames;
+
+/**
+ * ディレクティブが導入した型で宣言を纏める
+ */
+void ImportDirective() {
+ using namespace ImportedAlias;
+ ImportedType *P; ImportedType *Q;
+}
+
+/**
+ * 単一の名前の導入も型の所属を解決する
+ */
+void ImportDeclaration() {
+ using ImportedNames::ImportedType;
+ ImportedType *P; ImportedType *Q;
+}
+
+/**
+ * 導入位置より前と終了後は外側の値を使う
+ * @param ImportedType 外側の値
+ * @param Other 乗算の右辺
+ */
+void ImportLifetime(int ImportedType, int Other) {
+ ImportedType*Other;
+ {
+  using ImportedNames::ImportedType;
+  ImportedType *P; ImportedType *Q;
+ }
+ ImportedType*Other;
+}
+
+namespace InlineNames { inline namespace V1 { using InlineType = int; } }
+namespace InlineNames {
+ /**
+  * インラインの所属から外側へ型を導入する
+  */
+ void Merge() { InlineType *P; InlineType *Q; }
+}
+
+namespace { using ImplicitType = int; }
+
+/**
+ * 無名の所属から外側へ型を導入する
+ */
+void AnonymousImport() { ImplicitType *P; ImplicitType *Q; }
+
+/**
+ * 無名の所属から導入した型もローカルの値で遮蔽する
+ * @param ImplicitType 外側の型を遮蔽する値
+ * @param Other 乗算の右辺
+ */
+void AnonymousShadow(int ImplicitType, int Other) { ImplicitType*Other; }
+
+namespace EnumNames {
+ enum Unscoped { Alias = 1 };
+ using Indirect = Unscoped;
+}
+
+/**
+ * 限定名の列挙子の導入で乗算とビット演算を保つ
+ * @param P 第１の右辺
+ * @param Q 第２の右辺
+ */
+void EnumQualified(int P, int Q) {
+ using enum EnumNames::Unscoped;
+ Alias*P; Alias*Q;
+ Alias&P; Alias&Q;
+}
+
+/**
+ * 非限定名の列挙子の導入で型を遮蔽する
+ * @param P 乗算の右辺
+ */
+void EnumUnqualified(int P) {
+ using EnumNames::Unscoped;
+ using enum Unscoped;
+ Alias*P;
+}
+
+/**
+ * 型エイリアスを通る列挙子の導入と範囲の終わりを区別する
+ * @param P 第１の右辺
+ * @param Q 第２の右辺
+ */
+void EnumAliasScope(int P, int Q) {
+ Alias *Before;
+ {
+  using enum EnumNames::Indirect;
+  Alias*P; Alias*Q;
+ }
+ Alias *After; Alias *Restored;
+}
+
+/**
+ * 畳込の結合を保つ
+ * @tparam T 要素の型
+ * @param A 要素
+ * @return 畳込の値
+ */
+template<class... T> auto FoldRight(T... A) {return (A + ...);}
+
+/**
+ * 畳込の結合を保つ
+ * @tparam T 要素の型
+ * @param A 要素
+ * @return 畳込の値
+ */
+template<class... T> auto FoldLeft(T... A) {return (... + A);}
+
+/**
+ * 畳込の結合を保つ
+ * @tparam T 要素の型
+ * @param A 要素
+ * @return 畳込の値
+ */
+template<class... T> auto FoldInitial(T... A) {return (0 + ... + A);}
+
+/**
+ * 畳込の結合を保つ
+ * @tparam T 要素の型
+ * @param A 要素
+ * @return 畳込の値
+ */
+template<class... T> auto FoldLogical(T... A) {return (A && ...);}
+
+/**
+ * 畳込の結合を保つ
+ * @tparam T 要素の型
+ * @param A 要素
+ * @return 畳込の値
+ */
+template<class... T> auto FoldShift(T... A) {return (1 << ... << A);}

@@ -1,0 +1,83 @@
+val x = 1
+/*
+	First sentence. Second sentence
+*/
+val y = 2
+
+fun f(x: Int): Int {
+	if (x > 0) {
+		return 1
+		// 分岐の終わり
+	}
+	return 0
+	// 関数の終わり
+}
+
+fun sub(b: Int, c: Int): Int {
+	val a = b /* x
+	y */ - c
+	return a
+}
+
+fun call(g: (Int) -> Int): Int {
+	val r = g /* x
+	y */ (7)
+	return r
+}
+
+fun f(a: Int) {
+	try {
+		g1()
+		g2()
+	// note
+	} catch(e: Exception) {
+		h1()
+		h2()
+	}
+}
+
+fun f() {
+	try { g() } // t1
+	catch (e: Exception) { h() } // t2
+	finally { k() }
+	try { g() } catch (e: Exception) { } // c1
+	finally { close() }
+}
+
+try { foo() }
+catch (e: Exception) { }
+// comment
+finally { close() }
+
+fun f(): Int {
+	return (
+		/* m
+		l */
+		x
+	)
+}
+
+/** 面積 */
+fun area(
+	/** 幅 */
+	w: Int,
+	h: Int,
+): Int {
+	return w * h
+}
+data class P(
+	/** 名前 */
+	val name: String,
+	val age: Int,
+)
+
+/** Keep boundaries */
+fun emptyBoundary() { /* Read. Return. */ }
+
+/** Keep boundaries */
+fun emptyBoundaryPair() { /* Read */ /* Return */ }
+// ========== ==== ==========
+// {@code A.  B.}
+// {@literal A.  B.}
+// (@dot A.  B. @enddot)
+// (@f$ A.  B. @f$)

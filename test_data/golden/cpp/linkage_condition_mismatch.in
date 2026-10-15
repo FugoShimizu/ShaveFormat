@@ -1,0 +1,7 @@
+#ifdef OPEN_LINKAGE
+extern "C++" {
+#endif
+int conditional(void);
+#ifdef CLOSE_LINKAGE
+}
+#endif

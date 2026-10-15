@@ -1,2 +1,0 @@
-// @deprecated 旧
-enum E { RED, BLUE }

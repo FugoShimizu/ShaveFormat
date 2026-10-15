@@ -1,4 +1,0 @@
-int f() {
-	B(); /** First. Second. */
-	return 1;
-}

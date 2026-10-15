@@ -1,9 +1,0 @@
-/// 値の選択
-/// - Parameters:
-///   - x: 候補
-///   - y: 既定値
-/// - Returns: 選んだ値
-func pick(x: Int? = nil, y: Int = 0) -> Int {
-	// 選んだ値の返戻
-	return x ?? y
-}

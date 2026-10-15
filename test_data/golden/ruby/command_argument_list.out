@@ -1,8 +1,0 @@
-#
-# @param a
-# @return
-def foo(*a) = a
-
-x = foo(+1, 2)
-
-p x

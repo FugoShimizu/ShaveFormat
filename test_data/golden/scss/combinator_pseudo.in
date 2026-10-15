@@ -29,3 +29,45 @@
 .z ::after {
 	x: 1;
 }
+
+:is(.a,.b){color:red}
+
+:where(.a,
+.b){color:red}
+
+:not(#Id,#aB){color:red}
+
+:has(.a,.b){color:red}
+
+:lang(en,fr){color:red}
+
+:dir(ltr){color:red}
+
+:nth-child(2n + 1){color:red}
+
+:nth-last-child(2n - 1){color:red}
+
+:nth-of-type(2n + 1){color:red}
+
+:nth-last-of-type(2n + 1){color:red}
+
+::slotted(.a){color:red}
+
+::part(first second){color:red}
+
+:is(.aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa,.bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb){color:red}
+
+:is(#fade,#aBc){x:1}
+
+:nth-child(n + 1){x:y}
+
+:nth-last-child(-n + 3){x:y}
+
+:not([x*="a b"],[x$="a b"],[x="a b"],[x^="a b"],[x|="a b"],[x~="a b"]){width:1px}
+:not([x*='a b'],[x$='a b'],[x='a b'],[x^='a b'],[x|='a b'],[x~='a b']){width:2px}
+:has([x*="a b"],[x$="a b"],[x="a b"],[x^="a b"],[x|="a b"],[x~="a b"]){width:3px}
+:has([x*='a b'],[x$='a b'],[x='a b'],[x^='a b'],[x|='a b'],[x~='a b']){width:4px}
+:is([x*="a b"],[x$="a b"],[x="a b"],[x^="a b"],[x|="a b"],[x~="a b"]){width:5px}
+:is([x*='a b'],[x$='a b'],[x='a b'],[x^='a b'],[x|='a b'],[x~='a b']){width:6px}
+:where([x*="a b"],[x$="a b"],[x="a b"],[x^="a b"],[x|="a b"],[x~="a b"]){width:7px}
+:where([x*='a b'],[x$='a b'],[x='a b'],[x^='a b'],[x|='a b'],[x~='a b']){width:8px}

@@ -6,3 +6,9 @@ if b then
 else
   x
 end
+
+def v(o, p)
+  (o * p)..
+    # note
+    ((o + 1) * p - 1)
+end

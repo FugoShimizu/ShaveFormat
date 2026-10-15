@@ -1,0 +1,237 @@
+type Pair<T, U> = [T, U];
+
+declare class Holder {
+	first: Pair<string, number>;
+	second: Pair<number, string>;
+}
+
+enum Kind { First = 1, Second = 2 }
+
+declare namespace N {
+	const value: Pair<string, number>;
+}
+
+interface LongFields {
+	firstReasonablyLongPropertyNameToPreventCollapse: string,
+	secondReasonablyLongPropertyNameToPreventCollapse: number,
+	thirdReasonablyLongPropertyNameToPreventCollapse: boolean
+}
+
+type LongObject = {
+	firstReasonablyLongPropertyNameToPreventCollapse: string,
+	secondReasonablyLongPropertyNameToPreventCollapse: number,
+	thirdReasonablyLongPropertyNameToPreventCollapse: boolean
+};
+
+type A = { a: 1 };
+type B = { b: 2 };
+type C = { c: 3 };
+
+const a: string = "a";
+const b: (A|B)[] = [];
+const c: (() => void)|null = null;
+const d: string = "d";
+const e: Array<number> = [];
+
+/**
+ *
+ * @param x
+ * @return
+ */
+function f(x: number): string {
+	return "";
+}
+
+type T = A;
+type U = (keyof A)[];
+
+let g: A&B|C;
+let h: A|B&C;
+const i: A[] = [];
+let j: A|B|C;
+let k: (A|B)&C;
+let l: A["a"];
+const m = (): (() => void) => () => {};
+let n: [(A|B)?];
+let o: () => A|B;
+
+type V<X> = X extends A|B ? 1 : 2;
+type W<X> = X extends () => void ? 1 : 2;
+
+let p = null as A|null;
+let q = null as A;
+const a2: (string|number)[] = [];
+const e2: (() => void)|null = null;
+
+type K = keyof (A|B);
+type L = string;
+
+const x = [1, "a"] as const;
+
+type A1 = keyof typeof x;
+type B1 = typeof x[number];
+type Q1 = typeof x[];
+type D1<T> = T extends string ? () => void : () => number;
+type G1<T> = (() => void) extends T ? 1 : 2;
+type H1<T> = T extends (A extends B ? 1 : 2) ? 1 : 2;
+type D3<T> = T extends ((x: T) => infer R extends string) ? R : 0;
+type D7<T> = T extends (new () => infer R extends object) ? R : 0;
+type D8<T> = T extends () => (infer R extends string) ? R : 0;
+type D9<T> = T extends (x: T) => infer R ? R : 0;
+type I1<T> = T extends infer U extends string ? U : 0;
+type I7<T> = T extends (() => infer R extends string)|null ? R : 0;
+type C1<T> = T extends (() => infer R extends string) ? R : 0;
+type C2<T> = T extends (new () => infer R extends string) ? R : 0;
+type C3<T> = T extends ((x: T) => infer R extends string) ? R : 0;
+type C4<T> = T extends (() => () => infer R extends string) ? R : 0;
+
+export interface Base<T> { value: T, get(): T }
+
+interface Derived extends Base<number> { ok: boolean }
+interface Merge { a: number }
+interface Merge { b: string }
+
+declare interface Ambient { readonly key: string }
+
+declare namespace Types {
+	interface Nested { a: number }
+}
+
+interface LongMembers {
+	firstReasonablyLongPropertyNameToPreventCollapse: string,
+	secondReasonablyLongMethodNameToPreventCollapse(): number,
+	thirdReasonablyLongPropertyNameToPreventCollapse: boolean
+}
+
+type NestedKey = keyof keyof A;
+type ReadonlyKey = keyof readonly A[];
+type UnionKey = keyof A|B;
+type UnionRightKey = A|keyof B;
+type IntersectionKey = keyof A&B;
+type IntersectionRightKey = A&keyof B;
+type UnionReadonly = readonly A[]|B;
+type IntersectionReadonly = A&readonly B[];
+type LookupKey = A[keyof A];
+type LookupUnion = A["a"|"a"];
+type LookupConditional<X> = A[X extends A ? "a" : "a"];
+type RestReadonly = [...readonly A[]];
+type RestUnion = [...A[]|B[]];
+type RestIntersection = [...A[]&B[]];
+type KeepKey = keyof (A|B);
+type KeepArray = (keyof A)[];
+type KeepOptional = [(A|B)?];
+type KeepFunction = (() => A)|B;
+type KeepConstructor = (new () => A)&B;
+type KeepIntersection = A&(B&C);
+type KeepInfer<X> = X extends (() => infer R extends string) ? R : 0;
+type PrefixUnion = keyof readonly A[]|B;
+type PrefixIntersection = keyof readonly A[]&B;
+type PrefixConditional = keyof readonly A[] extends B ? A : C;
+type PrefixMany = keyof readonly A[]|B|C;
+type PrefixMiddle = C|keyof readonly A[]|B;
+type PrefixRight = B|keyof readonly A[];
+type PrefixTuple = keyof readonly [A, B]|C;
+type PrefixArray = (keyof readonly A[])[];
+type PrefixRawUnion = keyof readonly A[]|B;
+type PrefixRawArray = (keyof readonly A[])[];
+
+let prefixUnion: keyof readonly A[]|B;
+let prefixIntersection: keyof readonly A[]&B;
+let prefixConditional: keyof readonly A[] extends B ? A : C;
+let prefixMany: keyof readonly A[]|B|C;
+let prefixMiddle: C|keyof readonly A[]|B;
+let prefixRight: B|keyof readonly A[];
+let prefixTuple: keyof readonly [A, B]|C;
+let prefixArray: (keyof readonly A[])[];
+
+null as keyof readonly A[]|B;
+null as keyof readonly A[]&B;
+null as keyof readonly A[] extends B ? A : C;
+null as keyof readonly A[]|B|C;
+null as C|keyof readonly A[]|B;
+null as B|keyof readonly A[];
+null as keyof readonly [A, B]|C;
+null as (keyof readonly A[])[];
+
+foo(
+	class {
+		/**
+		 *
+		 */
+		@dec()
+		m(): void {}
+	}
+);
+
+const C = class A<T> {
+	/**
+	 *
+	 * @return
+	 */
+	m(): T {
+		return this.x;
+	}
+};
+
+const D = class<T> extends B<T> implements I {};
+
+class A {
+	static x = 1;
+
+	/**
+	 *
+	 * @return
+	 */
+	get v() {
+		return 1;
+	}
+
+	/**
+	 *
+	 * @param v
+	 */
+	set w(v: number) {}
+
+	accessor;
+	r = 4;
+}
+
+class B {
+	[k: string]: unknown;
+
+	y = 2;
+}
+
+class C {
+	[k: string]: unknown;
+
+	y = 2;
+}
+
+let x!: number;
+
+class A {
+	y!: string;
+}
+
+class AsyncFields {
+	async;
+
+	/**
+	 *
+	 * @return
+	 */
+	["isAdmin"]() {
+		return false;
+	}
+
+	static async;
+
+	/**
+	 *
+	 * @return
+	 */
+	*g() {
+		yield 1;
+	}
+}

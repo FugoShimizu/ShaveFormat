@@ -1,0 +1,14 @@
+export
+function f(x) {
+	return x;
+}
+const a = 1;
+export
+{ a };
+
+/** 説明 */
+export default foo();
+
+import a from "a";
+x = 1 <!-- c
+y = 2

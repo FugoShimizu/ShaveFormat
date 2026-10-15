@@ -34,3 +34,9 @@ declare class D {
 	m(): number;
 	n(): string;
 }
+
+class EmptyDeclarations {
+	;
+	a: number;
+	;
+}

@@ -1,1 +1,1 @@
-1:1: File mixes CRLF and LF line endings; they become LF outside literals
+[notice] <stdin>: File mixes CRLF and LF line endings; they become LF outside literals

@@ -1,0 +1,133 @@
+f(
+	[
+		// 成員の深さ
+		FirstCollectionMemberWithANameLongEnoughForWrapping,
+		SecondCollectionMemberWithANameLongEnoughForWrapping,
+		ThirdCollectionMemberWithANameLongEnoughForWrapping
+	]
+);
+
+class C {
+	/**
+	 * <summary></summary>
+	 */
+	void F() {
+		List< /* c */ /* d */ int> a = null, b = null;
+		System.Console.WriteLine(a == b);
+		return;
+	}
+}
+
+int A = 1;
+int B = 2 /* top */;
+
+class K {
+	int S = 1;
+	int T = 2 /* c1 */;
+
+	/**
+	 * <summary></summary>
+	 */
+	void M() {
+		int P = 1 /* c2 */, R = 2, Q = 3, U = 4; // c3
+		return;
+	}
+}
+
+int C;
+int D = 2; // note3
+int E = 1;
+int G = 2; // note4
+
+class C {
+	/**
+	 * <summary></summary>
+	 * <param name="a"></param>
+	 */
+	void F(int a) {
+		if(a > 0) {
+			G();
+			G();
+		// 別の枝の説明
+		} else if(a < -1) {
+			K();
+			K();
+		}
+		return;
+	}
+}
+
+class A {
+	/**
+	 * <summary></summary>
+	 */
+	void F() {
+		G(
+			x => { // 本体
+				H();
+				I();
+			}
+		);
+		return;
+	}
+}
+
+class A {
+	/**
+	 * <summary>独立</summary>
+	 * <param name="a"></param>
+	 * <param name="b"></param>
+	 */
+	void F(int a /* 文中 */, int b) { // 行末
+		var x = new[] { 1, /* 文中 */ 2 };
+		F(a, /* c */ b);
+		return;
+	// 塊の末尾
+	}
+}
+
+class A {
+	/**
+	 * <summary></summary>
+	 * <param name="a"></param>
+	 */
+	void F(int a) {
+		try { // t
+			G();
+		} finally { // f
+			H();
+		}
+		if(a > 0) G(); // 真
+		else H(); // 偽
+		return;
+	}
+}
+
+class BoundaryProbe {
+	/**
+	 * <summary>Keep boundaries</summary>
+	 */
+	void EmptyBoundary() {/* Read */ /* Return */}
+	/**
+	 * <summary>Keep boundaries</summary>
+	 */
+	void EmptyBoundaryPair() {/* Read */ /* Return */}
+}
+// "Read here" 日本語 ABC "Return now"
+// 'Read here' 甲，B '?Return now' 日本語 ABC '!Finish here'
+// {@code A B}
+// {@literal A B}
+// (@code A B @endcode)
+// (@dot A B @enddot)
+// (@msc A B @endmsc)
+// (@verbatim A B @endverbatim)
+// (\code A B \endcode)
+// (\dot A B \enddot)
+// (\msc A B \endmsc)
+// (\verbatim A B \endverbatim)
+// (@f$ A B @f$)
+// (@f[ A B @f])
+// (@f{ A B @f})
+// (\f$ A B \f$)
+// (\f[ A B \f])
+// (\f{ A B \f})

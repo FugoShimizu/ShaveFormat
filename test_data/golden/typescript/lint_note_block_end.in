@@ -1,6 +1,0 @@
-declare function useEffectLike(f: () => void, deps: number[]): void;
-declare function g(): void;
-useEffectLike(() => {
-  g();
-  // @ts-expect-error deps are intentionally strings here
-}, ["x"]);

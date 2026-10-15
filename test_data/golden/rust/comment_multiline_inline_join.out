@@ -1,9 +1,0 @@
-fn main() {
-	let v = vec![1 /* c
-	 * x */ , 2];
-	return;
-}
-
-#[derive(Debug /* d
- * e */ )]
-struct S;

@@ -1,7 +1,12 @@
 3:1: Violation: Documentation is missing a summary
-11:3: Review: Replace this jump with structured control flow; verify applicability, lifetime
+11:3: Review: Replace this jump with structured control flow
 13:2: Violation: Add the required comment before this `return`
+19:6: Review: Add an explicit type to this declaration
+22:4: Review: Replace this jump with structured control flow
 25:2: Violation: Add the required comment before this `return`
-33:4: Review: Replace this jump with structured control flow; verify applicability, lifetime
+31:6: Review: Add an explicit type to this declaration
+33:4: Review: Replace this jump with structured control flow
 36:2: Violation: Add the required comment before this `return`
-47:2: Review: Replace this jump with structured control flow; verify applicability, lifetime
+42:2: Review: Add an explicit type to this declaration
+43:6: Review: Add an explicit type to this declaration
+47:2: Review: Replace this jump with structured control flow

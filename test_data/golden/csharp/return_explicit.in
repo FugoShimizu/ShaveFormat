@@ -1,3 +1,6 @@
+using Environment = Other.Environment;
+using static System.Environment;
+
 class A {
 	A() { X(); }
 	~A() { Y(); }
@@ -6,4 +9,72 @@ class A {
 	int P { get { return 1; } set { _x = value; } }
 	IEnumerable<int> I() { yield return 1; }
 	int E() => 1;
+}
+
+class ImportedEnvironment {
+	/**
+	 * <summary>取込んだ呼出から戻る</summary>
+	 */
+	void Call() {
+		Environment.Exit(0);
+	}
+}
+
+class PostLoop {
+	/**
+	 * <summary>後判定の本体で終える</summary>
+	 * <param name="c">条件</param>
+	 */
+	void PostStop(bool c) {
+		do return;
+		while(c);
+	}
+}
+
+class StaticExit {
+	/**
+	 * <summary>標準の終了を呼ぶ</summary>
+	 */
+	void Stop() {
+		Exit(0);
+	}
+
+	/**
+	 * <summary>標準の異常終了を呼ぶ</summary>
+	 */
+	void Fail() {
+		FailFast("stop");
+	}
+}
+
+class ShadowedStaticExit {
+	/**
+	 * <summary>通常復帰する</summary>
+	 * <param name="code">終了番号</param>
+	 */
+	void Exit(int code) {}
+
+	/**
+	 * <summary>同名のメソッドを呼ぶ</summary>
+	 */
+	void Stop() {
+		Exit(0);
+	}
+}
+
+class ProcessExit {
+	/**
+	 * <summary>プロセス終了を捕捉しない</summary>
+	 */
+	void Stop() { try { System.Environment.Exit(0); } catch(System.Exception e) { Work(); } }
+}
+
+class DeclarationHeaders {
+	/**
+	 * <summary>初期化子内の定数を後続へ伝えない</summary>
+	 */
+	void LocalConstant() {
+		int a = F(() => { const int z = 0; return z; }), b = 0;
+		while(b < 1) ++b;
+	}
 }

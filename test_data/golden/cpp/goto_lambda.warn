@@ -1,3 +1,3 @@
 1:1: Violation: Documentation is missing a summary
-4:6: Review: Use PascalCase for function f; verify external contract
-7:4: Review: Replace this jump with structured control flow; verify applicability, lifetime
+6:12: Review: Add an explicit return type to this function
+7:4: Review: Replace this jump with structured control flow

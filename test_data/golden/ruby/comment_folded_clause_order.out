@@ -1,9 +1,0 @@
-#
-# @param v
-# @return
-def f(v)
-	# before elsif
-	# before end
-	if v then a elsif w then b end
-	return z
-end

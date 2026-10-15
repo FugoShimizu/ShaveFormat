@@ -1,0 +1,67 @@
+package p
+
+type T struct{ a int }
+
+func f(a, b, c int, p []int, x T) int {
+	y := ((a + b)) * c
+	z := (p[b+c]) * a
+	if ((T{})) == x {
+		return y
+	}
+	return ((z))
+}
+
+type T struct{ n int }
+
+type L struct{ xs []int }
+
+func main() {
+	var x T
+	for range ([]int{1, 2}) {
+	}
+	if ([]int{1})[0] == 1 {
+	}
+	if (T{}) == x {
+	}
+	for range (L{}.xs) {
+	}
+	for i := range (L{}.xs) {
+		_ = i
+	}
+	switch ([2]int{1, 2}) {
+	}
+	a := [...]int{1}
+	b := struct{}{}
+	c := map[string]struct{}{}
+	_, _, _ = a, b, c
+}
+
+type T struct{ a int }
+
+func f(x bool, y int, t T) {
+	if (x) {
+		g()
+	}
+	switch (y) {
+	}
+	if t == (T{a: 1}) {
+		g()
+	}
+}
+
+func g() {}
+
+func f(x bool) {
+	if (x) { // 条件
+		y()
+		z()
+	}
+}
+
+func Expression(Value int) int{Count:=0;switch X:=Value+1;X{case 1:Count=2;case 2:Count=3;default:Count=4};return Count}
+func Condition(Value int) int{switch X:=Value+1;{case X>1:return X;default:return 0}}
+func Type(Value any) int{switch Copy:=Value;X:=Copy.(type){case int:return X;case string:return len(X);default:return -1}}
+func Falling(Value int) int{Count:=0;switch X:=Value;X{case 1:Count++;fallthrough;case 2:Count+=2;case 3:default:Count=4};return Count}
+func Initializer() int{switch X:=(func() int{return 2})();X{case 2:return X;default:return 0}}
+
+func F(x int){switch x {case 1:if x>0{println(x)};case 2:println(x);default:println(0)}}

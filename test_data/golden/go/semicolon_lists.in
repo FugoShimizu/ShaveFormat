@@ -1,5 +1,8 @@
 package p;
 import("reflect";"strconv";)
+import(
+// LB37close
+)
 const(First=iota;Second;)
 type Pair struct{A int;B string `json:"b;key"`;}
 type(Number int;Text string;)

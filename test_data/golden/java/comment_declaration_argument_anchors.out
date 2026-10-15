@@ -1,0 +1,92 @@
+f(
+	new int[] {
+		// 成員の深さ
+		FirstCollectionMemberWithANameLongEnoughForWrapping,
+		SecondCollectionMemberWithANameLongEnoughForWrapping,
+		ThirdCollectionMemberWithANameLongEnoughForWrapping
+	}
+);
+
+class A {
+	int w = 1;
+	int /* 幅 */ h = 2;
+	int a = 1; // A
+	int b = 2; // B
+	int c = 1;
+	// D の説明
+	int d = 2;
+}
+
+class A {
+	int c = 1;
+	/**
+	 * D の説明
+	 */
+	int d = 2;
+	int e = 1;
+	int /* E */ f = 2;
+}
+
+class C {
+	/**
+	 *
+	 */
+	void f() {
+		final /* c */ /* d */ int a = 1, b = 2;
+		System.out.println(a + b);
+		return;
+	}
+}
+
+class A {
+	Runnable r = () -> {
+		// inside
+		g(); // tail
+	};
+
+	Runnable s = null;
+}
+
+class A {
+	/**
+	 *
+	 */
+	void f() {
+		g(
+			x -> { // 本体
+				h();
+				i();
+			}
+		);
+		return;
+	}
+}
+
+class A {
+	/**
+	 *
+	 */
+	void f() {
+		run(
+			() -> { // task
+				g();
+			}
+		);
+		return;
+	}
+}
+
+class A {
+	/**
+	 *
+	 * @param b
+	 * @param a
+	 * @return
+	 */
+	int f(B b, int a) {
+		final int s = a /* c */ + 1;
+		// z
+		return b.baz();
+	}
+}
+// ========== ==== ==========

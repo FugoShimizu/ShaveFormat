@@ -1,7 +1,0 @@
-/**
- *
- * @return
- */
-bool f() {
-	return a.b and c.b;
-}

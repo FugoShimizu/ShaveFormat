@@ -1,2 +1,0 @@
-function outer() { function* g() { return 1; } g(); }
-function outer2() { const g = function* () { return 1; }; g(); }

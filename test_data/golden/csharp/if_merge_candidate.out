@@ -30,4 +30,52 @@ class C {
 		// 終了
 		return;
 	}
+
+	/**
+	 * トークンの境界の照合
+	 */
+	void TokenBoundaries() {
+		if(A) Z = X++ + Y;
+		if(B) Z = X + ++Y;
+		if(A) Z = X-- - Y;
+		else if(B) Z = X - --Y;
+		if(A) {
+			Z = X++ + Y;
+			Touch();
+		}
+		if(B) {
+			Z = X + ++Y;
+			Touch();
+		}
+		if(A) {
+			Z = X-- - Y;
+			Touch();
+		} else if(B) {
+			Z = X - --Y;
+			Touch();
+		}
+		if(A) Z = X + Y;
+		else if(B) Z = X + Y;
+		if(A) if(B) Consume();
+		if(A) if(B) if(C) Consume();
+		X += 1E0_1;
+		X -= 1E+0_1;
+		X += 1E-0_1;
+		Consume(X >= B + 1E0_1);
+		Consume(X <= B - 1E-0_1);
+		Consume(B + 1E+0_1 <= X);
+		Consume(B - 1E0_1 >= X);
+		X += 1E0_0;
+		Consume(X >= B + 1E0_0);
+		Consume(X == 0E1_0);
+		X -= 1E+0_1F;
+		if(A) Consume();
+		if(B) Consume();
+		if(C) Consume();
+		if(A) Consume();
+		else if(B) Consume();
+		else if(C) Consume();
+		// 終了
+		return;
+	}
 }

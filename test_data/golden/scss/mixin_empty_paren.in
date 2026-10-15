@@ -1,6 +1,11 @@
 @mixin m() {
   color: red;
 }
+@mixin empty() {}
+@mixin spaced ( ) {}
+@include empty();
+@include spaced( );
+@include ns.empty( );
 @mixin n($a) { width: $a; }
 @function f() {
   @return 1px;

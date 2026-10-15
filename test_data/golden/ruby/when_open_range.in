@@ -1,3 +1,0 @@
-case 7
-when 1.. then p :a; p :b
-end

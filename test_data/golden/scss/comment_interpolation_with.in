@@ -1,16 +1,87 @@
-.subscription-gift-form {
-	--text-secondary: #{$gf-text-muted};
+.alpha {
+  --count: #{$a};
 
-	// ダークモード基調の global base.scss を流用しないため、テキスト系要素を明示的に黒寄りに上書き
-	input, textarea, select {
-		color: $gf-text;
-	}
+  // 配列の幅を比べる為、値を揃える
+  & > .box, & + .box {
+    width: $b;
+  }
 
-	&__field {
-		margin: 8px;
-	}
+  @media (min-width: 3px) {
+    height: 7px;
+  }
+}
 
-	&--disabled {
-		opacity: 0.5;
-	}
+$a: 12px;
+$b: 2px;
+
+.values {
+	color: red;
+	width: #{$a};
+	--w: #{$a};
+	margin: 0 #{$a};
+	width: calc(100% - #{$a});
+	content: "x #{$a + $b} y";
+	content: 'x #{$a + $b} y';
+	height: 1px;
+}
+
+.first {
+	width: #{$a};
+	color: red;
+}
+
+.last {
+	color: red;
+	width: #{$a};
+}
+
+.name-#{$a} {
+	color: red;
+}
+
+$prefix: bs-;
+$n: up;
+$size: 3;
+$prop: width;
+$value: 12px;
+
+.joined {
+ color: var(--#{$prefix}body-color);
+ animation-name: slide-#{$n}-in;
+ font-family: f#{$n}-b;
+ margin: 0 -#{$size}px;
+ top: +#{$size}px;
+ --v: -#{$size}px;
+ width: #{$size}px;
+ opacity: #{$size}#{$size};
+ .nested {
+  --#{$prefix}x: #{$value};
+  #{$prop}: #{$value};
+ }
+}
+
+@each $token, $tone in (a: #123, b: #456) {
+ .root-#{$token} {
+  --#{$prefix}#{$token}: #{$tone};
+  @if $tone {
+   color: #{$tone};
+  }
+ }
+}
+
+$img: "icons";
+
+.urls {
+ background: url(#{$img}/a.png) no-repeat;
+ src: URL(//cdn/#{$img}/x.woff2);
+ background-image: url(#{$img}/#{$img}.png);
+ width: #{$a}px;
+}
+
+.omitted-semicolon {
+ width: #{$a}px
+}
+
+.omitted-margin {
+ margin: 0 #{$a} #{$b}
 }

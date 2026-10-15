@@ -14,3 +14,16 @@ z = (alpha < bravo) > [charlie];
 const g = (x << 2) < 3;
 const x = (a ?? b)<string>;
 const y = (a || b)<T>;
+
+/**
+ *
+ * @param x
+ * @param kind
+ * @return
+ */
+function f(x: any, kind: string) {
+	if(typeof x === "string") return 1;
+	if(typeof x == kind) return 4;
+	if(typeof x != new String("undefined")) return 5;
+	if(typeof x === typeof kind) return 6;
+}

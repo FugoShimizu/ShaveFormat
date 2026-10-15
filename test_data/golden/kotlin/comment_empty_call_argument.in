@@ -1,5 +1,0 @@
-fun m() {
-  val a = listOf(
-    // c
-  )
-}

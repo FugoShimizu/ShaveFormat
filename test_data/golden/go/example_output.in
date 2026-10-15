@@ -23,3 +23,74 @@ func f(x int) int {
 	return 0
 	// 関数の終わり
 }
+
+func Examplefoo() {
+	return
+	// Output: A. B.
+}
+
+func Exampleé() {
+	return
+	// Output: A. B.
+}
+
+func ExampleArg(x int) {
+	return
+	// Output: A. B.
+}
+
+func ExampleVariadic(x ...int) {
+	return
+	// Output: A. B.
+}
+
+func ExampleResult() int {
+	return 1
+	// Output: A. B.
+}
+
+func ExampleNamedResult() (value int) {
+	return 1
+	// Unordered output: A. B.
+}
+
+type ExampleType struct{}
+
+// ExampleMethod
+func (ExampleType) ExampleMethod() {
+	return
+	// Output: A. B.
+}
+
+func Example() {
+	return
+	// Output: A. B.
+}
+
+func Example_suffix() {
+	return
+	// Output: A. B.
+}
+
+func ExampleÉ() {
+	return
+	// Output: A. B.
+}
+
+func Exampleǅ() {
+	return
+	// Output: A. B.
+}
+
+func ExampleEmptyResult() () {
+	return
+	// Output: A. B.
+}
+
+func ExampleGeneric[T any]() {
+	return
+	// Output: A. B.
+}
+
+func ExampleNoBody()
+// Output: A. B.

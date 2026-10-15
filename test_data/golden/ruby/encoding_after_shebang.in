@@ -1,3 +1,10 @@
-#!/usr/bin/env ruby
+#!/usr/bin/env ruby -Ks
 # -*- coding: utf-8 -*- 説明。二文目
 x = 1
+
+# encoding: Shift_JIS
+# -*- coding: cp932 -*-
+# coding: Big5
+# coding: GBK
+# coding: GB18030
+# coding: nonexistent-encoding

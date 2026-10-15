@@ -1,0 +1,5 @@
+7:2: Review: Merge the conditions of these identical branch bodies
+17:4: Review: Use the increment or decrement form required for this target
+18:12: Review: Use a strict inequality with an equivalent adjusted boundary
+19:12: Review: Use the zero-test form required for this numeric type
+24:2: Review: Merge the conditions of these identical branch bodies

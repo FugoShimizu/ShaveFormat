@@ -1,5 +1,0 @@
-// close bracket
-const a = [1];
-
-// call close
-f(1);

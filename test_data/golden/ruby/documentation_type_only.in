@@ -22,3 +22,16 @@ end
 def over(a)
   a
 end
+
+# Overloaded
+# @param value outer input
+# @return [Integer] outer result
+# @overload typed(text)
+#   @param [String] text
+#   @return [String]
+# @overload typed(count)
+#   @param [Integer] count
+#   @return [Integer]
+def typed(value)
+  value
+end

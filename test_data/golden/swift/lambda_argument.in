@@ -1,3 +1,19 @@
 g({ 1 })
 g(1, { 2 })
 let y = xs.map({ $0 + 1 })
+
+let trailingResult = (f()) { 42 }
+let nestedTrailingResult = ((f())) { 42 }
+let ordinaryResult = (f())()
+let argumentResult = (f())(1) { 42 }
+
+let closureItems = [({ 1 }), ({ 2 })]
+
+func compute(a: Int) -> Int {
+	let computed: Int = { let firstValue = firstOperationWithLongName(a); let secondValue = secondOperationWithLong(a); return firstValue + secondValue }()
+	return computed
+}
+
+let emptyValue=()
+let nestedEmpty=wrap(())
+let tupleItems=((),(1,()))

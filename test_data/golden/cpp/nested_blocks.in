@@ -15,4 +15,57 @@ void Nested(int A, int B, int C) {
 			else Sum -= Jdx;
 		}
 	}
+	if(A) { if(B) {} else {} }
+	if(A) if(B) {} else {}
+	if(A) { do {} while(B); }
+	if(A) do {} while(B);
+}
+
+void F() { while(X) while(X) while(X) while(X) while(X) while(X) while(X) while(X) while(X) while(X) while(X) while(X) while(X) while(X) while(X) while(X) while(X) while(X) while(X) while(X) Call(FirstArgumentWithLongIdentifierForWrapping, SecondArgumentWithLongIdentifierForWrapping, ThirdArgumentWithLongIdentifierForWrapping); }
+
+// Regression: cfb7cfb で iterative Walk が unnamed `else` を SectionStartBytes に混入させ，
+// `else if` インデントが 1 タブ過小になった．bc91d21 で修正．
+void Foo(int A, int B, int C) {
+	if(A) {
+		if(B) X = 1;
+		else if(C) Y = 2;
+	} else {
+		Z = 3;
+	}
+}
+int Bar(int X) {
+	if(X > 10) return 1;
+	else if(X > 5) return 2;
+	else if(X > 0) return 3;
+	return 0;
+}
+
+/**
+ * 導入名の引用記号の除去
+ * @param Introduced 導入名
+ * @return 引用記号を除いた導入名
+ */
+std::string_view TrimBinding(std::string_view Introduced) {
+	if(
+		const std::string_view Quote = Syntax.Rules().BindingNameQuote;
+		!Quote.empty() && Introduced.starts_with(Quote) && Introduced.ends_with(Quote)
+	) {
+		Introduced = Introduced.substr(Quote.size(), Introduced.size() - (Quote.size() << 1));
+	}
+	// 導入名の返戻
+	return Introduced;
+}
+
+/**
+ * 宣言の形の照合
+ * @param Value 照合値
+ * @return 宣言の形が一致すれば true
+ */
+bool HasDeclarationShape(int Value) {
+	if(
+		IsDeclaratorParameter || Syntax.Is(Part, Role::VariadicParameterDeclaration) || Syntax.Is(Part, Role::TypedDeclaration) ||
+		FinalPredicate(Value)
+	) return true;
+	// 一致しない形の返戻
+	return false;
 }

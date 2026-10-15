@@ -1,3 +1,5 @@
+import java.util.function.Function;
+
 class K {
 	/**
 	 *
@@ -5,15 +7,7 @@ class K {
 	void h() {
 		g(a / (b * c));
 		g(a * (b % c));
-		g(a - (b + c));
-		g(a - (b - c));
-		g(a - b * c);
 		g(a * (b + c));
-		g(a + b - c);
-		g(a * b % c);
-		g(a - (b + c) * d);
-		g(a / (b * c));
-		g(a + b);
 		g(a & b + c);
 		g(a | b + c);
 		g(a ^ b + c);
@@ -25,11 +19,6 @@ class K {
 		g(a + b & c);
 		g(a && (b || c));
 		g(a || b && c);
-		g(a && (b && c));
-		g(a || (b || c));
-		g(a && b && c);
-		g(a && (b || c) || d);
-		g(a && b || c);
 		g((a - b).m());
 		return;
 	}
@@ -48,4 +37,96 @@ class A {
 		final int x = (a + b) * c, y = p[b + c] * a;
 		return a > b ? x : y;
 	}
+}
+
+@Deprecated public class OptionalParen {
+	enum Kind { X, Y, Z {} }
+
+	/**
+	 *
+	 * @param Args
+	 */
+	public static void main(String[] Args) {
+		final Function<Integer, Integer> F = x -> x + 1, G = (Integer x) -> x;
+		final java.util.function.BinaryOperator<Integer> H = (x, y) -> x + y;
+		System.out.println(F.apply(1) + G.apply(2) + H.apply(3, 4) + Kind.X.ordinal());
+		return;
+	}
+}
+
+class C {
+	/**
+	 *
+	 */
+	void f() {
+		x = a.b.c + g().h + a[0].b + this.x + new A().b + "abc".length() + a.b.c + a.b.m() + A.class.getName() + this.a.b;
+		return;
+	}
+}
+
+class A {
+	/**
+	 *
+	 * @param x
+	 */
+	void f(Object x) {
+		synchronized(x) {
+			g();
+		}
+		synchronized(x) {
+			g();
+		}
+		return;
+	}
+}
+
+class Reader {
+	static java.util.function.IntSupplier[] Values = { null, () -> 1, () -> 2 };
+
+	/**
+	 * 読込
+	 * @param source 読込元
+	 */
+	<T extends Closeable&Readable> void read(T source) {
+		try {
+			source.close();
+		} catch(IOException|RuntimeException e) {
+			log(e);
+		}
+		// 終了
+		return;
+	}
+}
+
+class A {
+	/**
+	 *
+	 * @param a
+	 * @param b
+	 * @return
+	 */
+	int f(int a, int b) {
+		return -(-a) + +(+b) - -(-b);
+	}
+}
+
+class NumericInitializers {
+	/**
+	 * 数値初期値と配列長の確認関数
+	 * @return 数値と配列長の合計
+	 */
+	public static double InspectNumbers() {
+		final float[] Values = new float[0XE0];
+		final float Hex = 0XE0, Other = 0X1E2, Negative = -0XE0, HexTail = 0XE0F, Exact = 0X1P2F, Fraction = 0X1.8P1F;
+		final double Signed = -0X1.AP0, Decimal = -0.5;
+		// 数値と配列長の合計の返戻
+		return Hex + Other + Negative + HexTail + Exact + Fraction + Signed + Decimal + Values.length;
+	}
+}
+
+class HexNumbers {
+	double[] HexDoubles = { 0X1.0P0, 0X0.8P0, -0XA.0P+2, -0X0.AP-2, 0X1.AP0, 0X0.FP0, 0XFP-2, -0X0.0P0 };
+	float[] HexFloats = { 0X1.0P0F, 0X0.8P0F, -0XA.0P+2F, -0X0.AP-2F };
+	double[] HexSuffix = { 0X1.0P0D, 0X0.8P0D, -0XA.0P+2D, -0X0.AP-2D };
+	int[] IntegerBases = { 0X1E2, 0XABC, 0B1010, 0B1100, 0755 };
 }

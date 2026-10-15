@@ -41,3 +41,72 @@ g((a * b) ** c);
 g(a * b ** c);
 g(a ** b * c);
 g(a ** b ** c);
+
+let x = 5;
+let y = 3;
+
+console.log(typeof -x, void -x, -(-x), +(+x), !!x, y - -1, -(--y), +(++y));
+
+for(const x of xs) {}
+for(const k in o) {}
+
+const v = a[i] + a[i + 1];
+
+for(k in o) {}
+for(let in o) {}
+for((let) of xs) {}
+for((async) of xs) {}
+for(const k in a ? o : {}) {}
+for(var y in "k" in o, o) {}
+for(const x of (xs, [9])) {}
+for(const x of xs) (a || b)();
+
+const o = { x: 1 };
+
+for(var i = ("x" in o) ? 1 : 0; i < 2; ++i) console.log(i);
+for(var i2 = ("x" in o) ? 1 : 0;;) break;
+for(var k = f("x" in o);;) break;
+
+for(var f = () => ("x" in o);;) {
+	console.log(f());
+	break;
+}
+
+for(var h = (a = ("x" in o)) => a;;) {
+	console.log(h());
+	break;
+}
+
+for(var i = [("x" in o)];;) break;
+
+for(
+	var j = {
+		/**
+		 *
+		 * @param a
+		 * @return
+		 */
+		m(a = ("x" in o)) {
+			return a;
+		},
+		k: "x" in o,
+		["x" in o]: 1
+	};
+	;
+) break;
+
+for(
+	var C = class {
+		/**
+		 *
+		 * @param a
+		 * @return
+		 */
+		m(a = ("x" in o)) {
+			return a;
+		}
+
+		x = "x" in o;
+	};
+	;
+) break;

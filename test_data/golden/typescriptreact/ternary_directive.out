@@ -1,10 +1,13 @@
-const a = (
-	<div>
+const alpha: JSX.Element = (
+	<Box>
 		{
-			items.length > 0 ?
-			// eslint-disable-next-line jsx-a11y/no-static-element-interactions
-			items.map(item => (<div key={item}>{c ? (<div onClick={f} onKeyDown={f}><span>a</span></div>) : (<div>b</div>)}</div>)) :
-			(<p>none</p>)
+			count ?
+			beta ?
+			// note: alpha
+			// beta
+			(<span title="alpha beta gamma delta epsilon zeta eta theta iota kappa lambda mu nu xi omicron pi">x</span>) :
+			(<i>y</i>) :
+			(<b>z</b>)
 		}
-	</div>
+	</Box>
 );

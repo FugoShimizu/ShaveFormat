@@ -1,3 +1,12 @@
 function f(a /* c */ : T) {
 	return a;
 }
+
+/**
+ *
+ */
+function independent() {
+	const x = 1;
+	consume(x);
+	return;
+}

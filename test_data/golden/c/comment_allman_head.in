@@ -1,5 +1,0 @@
-int f(int a)
-// between
-{
-  return a;
-}

@@ -30,3 +30,7 @@ int main(void) {
     printf("%d %d %d %s %s %d\n", x, y, vw, s, XSTR(SWAP(p, q)), OK);
     return 0;
 }
+
+const char *p = "C:\\dir\\\
+file";
+int   f(void) { return 1; }

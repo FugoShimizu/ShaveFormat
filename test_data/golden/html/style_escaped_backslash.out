@@ -1,4 +1,6 @@
 <style>
+	@charset "Shift_JIS";
+
 	a::before {
 		content: "\\";
 	}

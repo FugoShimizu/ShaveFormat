@@ -1,0 +1,213 @@
+/**
+ * 計算
+ */
+void Compute(void) {
+	// Read the cache
+	// Return the result
+	// Tolerance is 0.25
+	// See config.json for details
+	// Use e.g
+	// a cache, etc
+	// Then continue
+	// 1. First item
+	// Visit https://example.com/a.b now
+	// Is it done?
+	// Yes!
+	// Wait
+	// then go
+	// Call f() (see A Then B) now
+	// 「、」と「」は記号の例
+	// Read
+	// Next
+	// Read?
+	// Next!
+	// (Read Return)
+	Run(/* In */ /* Out */ 1);
+	Stop(); // One // Two
+	Halt(); // Only one
+	return;
+}
+
+int a = 1; // Alpha one // Beta two
+int b = 2; // Gamma three // Delta four
+int c = 3; // Shared C++
+int d = 4; // Uses C++ // Uses C++.h and a.b with v1.2 // Use e.g // a cache
+// Uses C++
+// Uses C#
+// Uses F#
+// Use C++.h
+// Use a.b
+// Version v1.2
+// Uses C++
+// Uses C#
+// +
+int e = 5;
+
+/**
+ *
+ */
+void g(void) {
+	f(); // He said "Stop now Go home" to me
+	f(); // 例として "設定を読む結果を返す" と書く
+	f(); // Prints "Done." on success
+	f(); // The answer is no // Then stop
+	f(); // Read from x.y // Then close
+	return;
+}
+
+// "Read the cache"
+// '説明です次です'
+// "cache/config.json"
+// label = "Read the cache."
+// <see label="Read the cache."/>
+int cache;
+
+/**
+ *
+ * @param a
+ */
+void f(int a) {
+	// 一文目
+	// 二文目
+	g();
+	// 空の塊
+	// 二文目
+	if(a) {}
+	while(a) g();
+	// 五文目
+	// 六文目
+	// （通すフォローは出さない）
+	h(); // 末尾 // 二文
+	// 括弧（甲）乙
+	// 丙
+	k();
+	return;
+}
+
+// Box の値 (alpha=3beta=7) を比べる (count の順空の配列は除く)
+// 甲 (乙丙)
+// 丁
+// 甲）
+// 丁
+// 戊
+// （全角括弧）
+int x;
+int x; // 文
+int y; // 文
+int z;
+// 甲
+// 文
+int w;
+// Last)
+// 乙」
+// 丙』
+// 丁】
+// First
+// "Second sentence"
+// 戊）
+char Closers;
+double TrailingCloser; // 末尾）
+
+/**
+ *
+ */
+void f(void) {
+	// 一文目？
+	// 二文目！
+	// 三文目
+	// 四文目
+	// 疑問で終わる？
+	// 感嘆で終わる！
+	// 括弧の中（本当？）は分けない
+	// あ？？
+	// い
+	// 重要！！
+	// 必ず読む
+	// 本当に！？
+	// 確認する
+	// 末尾だけ！！
+	int x = 1; // 行末は分けない？ // 其の儘
+	g(x);
+	return;
+}
+
+/**
+ *
+ */
+void f(void) {
+	// 甲？！
+	// 乙
+	// 甲！？
+	// 乙
+	// 甲？！
+	// 乙
+	// 甲！
+	// 乙
+	// 甲！？
+	// 乙
+	// 甲
+	// 乙
+	// 甲？
+	// 乙
+	// 乙
+	// ？乙
+	// ！！！乙
+	int x = 1;
+	g(x);
+	return;
+}
+
+/**
+ *
+ * @param p
+ */
+void f(int *p) {
+	// cppcheck-suppress nullPointer 理由
+	// 二文目
+	*p = 1;
+	return;
+}
+// Read
+// Return
+// Read (once)
+// Return
+// Dr
+// Smith reads
+// 処理する.結果を返す
+// 1. Read
+// Return
+// A. Read
+// Return
+// (Read Return)
+// (Read Return)
+// Next
+// "Read (once Return) then Finish"
+// 'Read "once Return" then Finish'
+// don't stop
+// users' cache
+// Next
+// Read \"once
+// Return
+// ('a 'b.'x 'c)
+// 処理
+// 続行
+// 処理
+// 処理
+// 次
+// (処理.次)
+// Read.続行
+// Read？
+// Return！
+// Next
+// `Read. Return.` x = "Read. Return."
+// operator
+// Read
+// (see)
+// Read
+// operator
+// (Read)
+// First
+// 'Next step'
+// 'First step'
+// Next
+// `... operator` `Read ...`

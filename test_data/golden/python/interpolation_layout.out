@@ -1,0 +1,30 @@
+f"p{aaaaaaaaa + bbbbbbbbb + ccccccccc + ddddddddd}q"
+f"p{aaaaaaaaa + bbbbbbbbb + ccccccccc + ddddddddd}q"
+
+f"""p{
+	aaaaaaaaa + bbbbbbbbb +
+	ccccccccc + ddddddddd
+}q"""
+
+f"""p{
+	aaaaaaaaa + bbbbbbbbb +
+	ccccccccc + ddddddddd
+}q"""
+
+rf"p{aaaaaaaaa + bbbbbbbbb + ccccccccc + ddddddddd}q"
+
+rf"""p{
+	aaaaaaaaa + bbbbbbbbb +
+	ccccccccc + ddddddddd
+}q"""
+
+F"p{aaaaaaaaa + bbbbbbbbb + ccccccccc + ddddddddd}q"
+
+F"""p{
+	aaaaaaaaa + bbbbbbbbb +
+	ccccccccc + ddddddddd
+}q"""
+
+f"{ a + b = :>10}"
+f"{d['key']}"
+f"p{fn(aaaaaaaaa, bbbbbbbbb, ccccccccc, ddddddddd)}q"

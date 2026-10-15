@@ -1,2 +1,2 @@
-6:11: Review: Replace this jump with structured control flow; verify applicability, lifetime
-14:3: Review: Replace this jump with structured control flow; verify applicability, binding, lifetime
+6:11: Review: Replace this jump with structured control flow
+14:3: Review: Replace this jump with structured control flow

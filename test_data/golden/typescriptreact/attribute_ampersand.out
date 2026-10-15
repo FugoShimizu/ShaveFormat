@@ -1,1 +1,13 @@
 const A = () => <a href="https://example.com/p?a=1&b=2">text</a>;
+
+const attr = (
+	// before tag end
+	<div>
+		<span>aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa</span>
+		<span>aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa</span>
+		<li key={i}>item</li>
+	</div>
+);
+
+const markers = "";
+const markerText = <p>{" "}</p>;

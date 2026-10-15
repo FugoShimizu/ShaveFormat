@@ -1,4 +1,0 @@
-package p
-
-// ========== Section ==========
-func F(x int) int { return x }

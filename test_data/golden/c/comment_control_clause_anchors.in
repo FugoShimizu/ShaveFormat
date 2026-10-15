@@ -1,0 +1,92 @@
+int f(int a)
+// between
+{
+  return a;
+}
+
+void f(void) {
+	if (a) {
+		g();
+	} // c
+	else {
+		h();
+		i();
+	}
+	if (a) {
+		g();
+	} // d
+	else {
+		h();
+	}
+}
+
+void f(int a)
+{
+	if (a == 1) {
+		g(); // 理由
+	} // 終端注記
+	return;
+}
+
+void f() {
+	a: b: for (;;) {
+		g();
+		// tail
+	}
+}
+
+void f(int x) {
+  switch (x) {
+    case 1:
+      a();
+      // before case 2
+    case 2:
+      b();
+      break;
+  }
+}
+
+void f(int a) {
+  if(a) {
+    g1();
+    g2();
+  // note
+  } else {
+    h1();
+    h2();
+  }
+}
+
+int f(int a) {
+	if(
+		alphaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa(a) > 1 && bravoooooooooooooooooooooooooooooooooooooooooooooooooo(a) > 2
+		// 条件の閉じの前の注記
+	) return 1;
+	return 0;
+}
+
+void f(int a) {
+	{ // bare
+		g();
+	}
+	do { // d
+		g();
+	} while(a);
+	if (a) { // 真
+		g();
+	} else { // 偽
+		h();
+	}
+	switch (a) {
+	default: // 他
+		h();
+	}
+}
+
+void f(char *d, const char *s, int a) {
+	if (a) { // NOLINTNEXTLINE(clang-analyzer-security.insecureAPI.strcpy)
+		strcpy(d, s);
+	}
+	g(1, // NOLINTNEXTLINE
+		s);
+}

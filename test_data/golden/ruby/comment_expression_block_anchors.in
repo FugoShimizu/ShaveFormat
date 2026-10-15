@@ -1,0 +1,146 @@
+f(
+	{
+		# 成員の深さ
+		first_collection_member_with_a_long_name: 1,
+		second_collection_member_with_a_long_name: 2,
+		third_collection_member_with_a_long_name: 3
+	}
+)
+
+x = 1..
+	# c
+	2
+
+b = (1..
+  # c
+  5)
+
+def v(o, p)
+  (o * p)..
+    # note
+    ((o + 1) * p - 1)
+end
+
+def f
+  if a
+    b
+    # c
+  end
+  x = 1
+  if a
+    # d
+  end
+  y
+  # e
+end
+
+class A
+  for_formats(
+    :hash => [Representable::Hash, {"title" => "Wie Es Geht"}, {"title" => "Revolution"}],
+    # :xml => [Representable::XML],
+    # :yaml => [Representable::YAML]
+  ) do |format, mod, input, output|
+    x
+  end
+end
+
+r = /a#{foo(1,
+# c
+2)}/
+y = :"s#{foo(1,
+# c
+2)}"
+
+s = "abc
+#{foo 1..
+# c
+2}"
+
+r_nested = /head#{x # regex trailing
+}
+tail/
+y_nested = :"head#{x # symbol trailing
+}
+tail"
+command_nested = `head#{x # command trailing
+}
+tail`
+
+foo 1..
+# c
+2
+
+foo 1...
+
+# exclusive
+2
+
+range_value = 1..
+# assigned
+2
+
+foo 1...
+2
+
+s_range = "head
+#{foo 1...
+
+# string range
+2}"
+r_range = /#{foo 1...
+# regex range
+2}/
+y_range = :"#{foo 1..
+# symbol range
+2}"
+command_range = `#{foo 1..
+# command range
+2}`
+
+def f
+  puts <<~EOS
+    text
+  EOS
+  # c1
+end
+
+#: (Integer) -> String
+def g(x) = x.to_s
+
+# Doc
+#--
+# hidden
+#++
+def h(y) = y
+
+R = # note
+  /\A
+b/
+S = # c2
+  <<~T
+    text
+  T
+p R.source, S
+
+class Z
+  ITEMS = # :nodoc:
+    %w[
+      css/fonts.css
+      fonts/Lato-Light.ttf
+      fonts/Lato-LightItalic.ttf
+      fonts/Lato-Regular.ttf
+      fonts/Lato-RegularItalic.ttf
+      fonts/SourceCodePro-Bold.ttf
+      fonts/SourceCodePro-Regular.ttf
+    ]
+end
+
+DIRECT = <<~T # start
+    text
+  T
+p DIRECT
+
+SUBSTITUTION = <<~U # start with substitution
+  #{value}
+U
+p SUBSTITUTION

@@ -1,0 +1,129 @@
+const a = (
+  <div>
+    {x /* c */}
+    <span>{y && ( // show
+      <B/>
+    )}</span>
+    {cond ? <A/> : null /* d */}
+  </div>
+);
+const a2 = <div>{x && ( // show
+  <B/>
+)}</div>;
+const b = <div>{x /* c */}</div>;
+const c = <div>{cond ? <A/> : null /* c */}</div>;
+const d = <>{x /* e */}</>;
+const e = <A b={x /* c */} d={y // e
+} />;
+const b = (
+  <p className="x">
+    本文
+    {/* 一 aaa
+        二 bbb */}
+    <span className="y">説明</span>
+  </p>
+);
+
+const A = (value: string) => (
+	<div>{
+		value
+		// tail note
+	}</div>
+);
+
+const B = (value: string) => (
+	<div>{
+		// head note
+		value
+	}</div>
+);
+
+const C = (value: string) => (
+	<>{
+		value
+		/* block note */
+	}</>
+);
+
+const a = <div><span /><p className="x" // t
+/></div>;
+const b = <p className="x" // s
+/>;
+
+const only = <div>{/* first */ /* second */ /* third */}</div>;
+const value = <div>{0 /* first */ /* second */}</div>;
+
+const A = () => (
+	<a href="x">
+		{
+			// note
+		}
+	</a>
+);
+
+const f = () => (
+	<div>
+		{/* 。 */}
+		{/* 。乙 */}
+		{/* 甲。乙 */}
+		{/* 甲？乙 */}
+		<p>x</p>
+	</div>
+);
+
+const x = <span>a{/* first */ /* second */}b</span>;
+const y = <div>{/* note */}<span>A</span></div>;
+const z = <span>foo
+{/* note */}
+bar</span>;
+const w = <span>foo
+&amp;
+bar</span>;
+const selfGeneric: JSX.Element = <A<T> p={1
+// generic note
+} />;
+const selfArray: JSX.Element = <A p={[1,
+// array note
+2]} />;
+const selfCall: JSX.Element = <A p={f(1,
+// call note
+2)} />;
+const selfEmpty: JSX.Element = <A p={
+// empty note
+} />;
+const selfTrailing: JSX.Element = <A p={1 // tail note
+} />;
+const selfInline: JSX.Element = <A p={1 /* inline note */} />;
+const selfFragment: JSX.Element = <><A p={1
+// fragment note
+} /></>;
+
+// Before header
+function /** Header */ headerDoc(): number {return 1;}
+
+/**
+ * Summary
+ * @param a Value
+ */
+function defaultClass(a: unknown = class A {}): void {}
+// "Read here." 日本語ABC "Return now."
+// 'Read here.' 甲, B '?Return now.' 日本語ABC '!Finish here.'
+
+/** A */
+/** ========== X ========== */
+/** B
+ * @param b B value
+ * @param a A value
+ */
+function sectionDocs(a: number,b: number): number {return a+b;}
+
+/** A */
+/** ========== X ========== */
+// B
+function trailing(): void {}
+
+/** Keep expression boundaries */
+function emptyBoundary() { /* Read. Return. */ }
+
+/** Keep expression boundaries */
+function emptyBoundaryPair() { /* Read */ /* Return */ }

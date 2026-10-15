@@ -1,0 +1,9 @@
+{
+	"items": [
+		// 成員の深さ
+		"FirstCollectionMemberWithANameLongEnoughForWrapping",
+		"SecondCollectionMemberWithANameLongEnoughForWrapping",
+		"ThirdCollectionMemberWithANameLongEnoughForWrapping"
+	// 閉じの深さ
+	]
+}

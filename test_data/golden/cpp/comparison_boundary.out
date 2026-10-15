@@ -16,3 +16,17 @@ void Check(int n, unsigned int u, double d, char c) {
 	if(c >= 97) return;
 	return;
 }
+
+/**
+ * 文字の境界と数量の境界を照合する
+ * @param Code 文字
+ * @param Score 数量
+ */
+void CharacterBounds(const char Code, const int Score) {
+	if(Code >= 'a' && Code <= 'z') Consume(Code);
+	constexpr char First = 'a';
+	if(Code >= First) Observe(Code);
+	if(Score >= 0X80) Store(Score);
+	// 終了
+	return;
+}

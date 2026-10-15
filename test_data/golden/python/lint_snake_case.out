@@ -11,3 +11,12 @@ def café() -> int:
 	"""値を返す"""
 	# 値の返戻
 	return 1
+
+class Holder:
+	"""値の保持"""
+
+	def __init__(self) -> None:
+		"""保持の初期化"""
+		self.value: int = 1
+		# 終了
+		return

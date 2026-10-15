@@ -1,0 +1,87 @@
+class A {
+	/**
+	 * Example: {@code
+	 * @param z
+	 * }
+	 * @param x the value
+	 */
+	void f(int x) {}
+}
+
+class C {
+	/// 説明
+	void f() {}
+
+	/// 引数の説明
+	/// @param a 値
+	/// @return
+	int g(int a) {
+		return a;
+	}
+}
+
+class A {
+	/// Example:
+	/// int y = f(1);
+	/// Adds one
+	/// @param x
+	/// @return
+	int f(int x) {
+		return x + 1;
+	}
+}
+
+/**
+ * A widget
+ * Does things
+ */
+class W {
+	/**
+	 * The count
+	 * Must be positive
+	 */
+	int count;
+}
+
+/**
+ * One widget
+ */
+class Single {}
+/**
+ * First item
+ * Second item
+ */
+class Pair {}
+/**
+ * Summary
+ * {@link java.lang.String First Second}
+ * {@linkplain java.lang.String Alpha Beta Third}
+ * {@link java.lang.String [First Second]}
+ * {@link java.lang.String First
+ * Second Third}
+ * {@link java.lang.String Read Return}
+ * {@link java.lang.String Read (once) Return}
+ * {@link java.lang.String Dr Smith reads}
+ * {@link java.lang.String 処理する.結果を返す}
+ * {@link java.lang.String 1 Read Return}
+ * {@link java.lang.String A Read Return}
+ * {@link java.lang.String (Read Return)}
+ * {@link java.lang.String (Read Return) Next}
+ * {@link java.lang.String "Read (once Return) then Finish"}
+ * {@link java.lang.String 'Read "once Return" then Finish'}
+ * {@link java.lang.String don't stop users' cache Next}
+ * {@link java.lang.String Read \"once Return}
+ * {@link java.lang.String ('a 'b.'x 'c)}
+ * {@link java.lang.String 処理続行}
+ * {@link java.lang.String 処理}
+ * {@link java.lang.String 処理.次}
+ * {@link java.lang.String (処理.次)}
+ * {@link java.lang.String Read.続行}
+ * {@link java.lang.String Read？Return！Next}
+ * {@link java.lang.String `Read. Return.` x = "Read. Return."}
+ * {@code First.  Second.}
+ * {@literal First.  Second.}
+ */
+class InlineReferences {}
+// (@dot A B @enddot)
+// (@f$ A B @f$)

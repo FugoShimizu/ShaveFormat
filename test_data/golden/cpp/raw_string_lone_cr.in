@@ -1,2 +1,0 @@
-const char *s = R"(ab)";
-int x = 1;

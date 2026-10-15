@@ -9,3 +9,307 @@ void Verify() {
 	// 終了
 	return;
 }
+
+#define Ignore(Value) "#Value"
+
+const char *Ignored = Ignore(1 + 2);
+
+#define Subject(Value) /* #Value */ Value
+
+const int Expanded = Subject(1 + 2);
+
+#define TEXT(x) #x
+#define FORWARD(x) TEXT(x)
+
+const char *Before = FORWARD(a+b);
+
+#undef TEXT
+
+#define TEXT(x) x
+
+const int After = FORWARD(1 + 2);
+
+/**
+ *
+ * @param x
+ * @param i
+ * @param j
+ * @param a
+ * @param b
+ */
+void MacroUpdates(int x, int i, int j, int *a, int *b) {
+	++x;
+	#define x i + j
+	x++;
+	x--;
+	for(; i < 3; x++) i = 3;
+	for(; i < 3; x--) i = 3;
+	#undef x
+	#define x *a
+	(x)++;
+	for(; i < 3; (x)--) i = 3;
+	#undef x
+	++x;
+	--x;
+	#define GET() i + j
+	GET()++;
+	GET()--;
+	for(; i < 3; GET()++) i = 3;
+	for(; i < 3; GET()--) i = 3;
+	#undef GET
+	#define A a + b
+	A[0]++;
+	A[0]--;
+	for(; i < 3; A[0]++) i = 3;
+	for(; i < 3; A[0]--) i = 3;
+	#undef A
+	#define x -i
+	x++;
+	x--;
+	#undef x
+	return;
+}
+
+struct Holder {
+	int i;
+};
+
+/**
+ *
+ * @param s
+ * @param i
+ * @param j
+ */
+void MacroField(struct Holder s, int i, int j) {
+	#define field i + j
+	s.field++;
+	s.field--;
+	for(; i < 3; s.field++) i = 3;
+	for(; i < 3; s.field--) i = 3;
+	#undef field
+	return;
+}
+
+#define lowercase i + j
+
+/**
+ *
+ * @param i
+ * @param j
+ * @return
+ */
+int MacroValue(int i, int j) {
+	return (lowercase);
+}
+
+#undef lowercase
+
+/**
+ *
+ * @param p
+ * @param r
+ * @param i
+ * @param j
+ */
+void MacroTyped(int *p, int &r, int i, int j) {
+	#define p i + j
+	p++;
+	#undef p
+	#define r *p
+	(r)--;
+	#undef r
+	#define int long
+	int value;
+	value++;
+	#undef int
+	return;
+}
+
+/**
+ *
+ * @param replacement
+ * @param i
+ * @param j
+ */
+void ConditionalMacro(int replacement, int i, int j) {
+	#if CHOICE
+	#define replacement i + j
+	#else
+	#define replacement j
+	#endif
+	replacement++;
+	for(; i < 3; replacement--) i = 3;
+	#undef replacement
+	return;
+}
+
+struct MacroCounter {
+	MacroCounter &operator++();
+	MacroCounter operator++(int);
+	MacroCounter &operator--();
+	MacroCounter operator--(int);
+};
+
+/**
+ *
+ * @param x
+ * @param p
+ * @param r
+ */
+void MacroOverload(int x, int *p, int &r) {
+	MacroCounter y;
+	#define x y
+	x++;
+	(x)++;
+	for(int i = 0; i < 2; (x)--) i = 2;
+	#undef x
+	#define p y
+	p++;
+	#undef p
+	#define r y
+	(r)--;
+	#undef r
+	return;
+}
+
+#define bool int
+
+bool Flag = 1;
+
+#undef bool
+
+#define Kind unsigned
+
+Kind const Value = 1;
+
+#undef Kind
+
+/**
+ * 使用位置の定義と取消だけで括弧を判断する
+ * @param Name 値
+ * @param Function 呼出先
+ * @return 使用位置で保持した値の和
+ */
+int MacroNamePosition(int Name, int (*Function)(int)) {
+	#undef Name
+	#undef Function
+	const int Before = Name;
+	Function(Name);
+	struct FunctionReceiver {
+		int (*Invoke)(int);
+	};
+	const struct FunctionReceiver Receiver = { Function };
+	Receiver.Invoke(Name);
+	#define Invoke(Value) Value
+	(Receiver.Invoke)(Name);
+	#undef Invoke
+	Receiver.Invoke(Name);
+	#define Name 7
+	const int During = (Name);
+	#undef Name
+	const int After = Name;
+	#if 0
+	#define Name 8
+	#endif
+	const int Inactive = Name;
+	#if Name
+	#endif
+	const int Condition = Name;
+	#define Function(Value) Value
+	(Function)(Name);
+	#undef Function
+	Function(Name);
+	// 値の和の返戻
+	return Before + During + After + Inactive + Condition;
+}
+
+/**
+ * 呼出先の前処理の状態で実引数の括弧を判断する
+ */
+void CallArgumentStates() {
+	RAW_CALL(1 + 2);
+	raw_call(1 + 2);
+	MixedCall(1 + 2);
+	RAW_CALL(1 + 2, 3, 4 + 5);
+	Api::RAW_CALL(1 + 2);
+	#define raw_call(Value) Value
+	raw_call((1 + 2));
+	#define RAW_CALL raw_call
+	RAW_CALL((1 + 2));
+	#undef raw_call
+	raw_call(1 + 2);
+	RAW_CALL(1 + 2);
+	#include "unread.h"
+	#undef RAW_CALL
+	#if CHOICE
+	#define RAW_CALL(Value) Value
+	#endif
+	RAW_CALL((1 + 2));
+	#undef RAW_CALL
+	RAW_CALL(1 + 2);
+	// 終了
+	return;
+}
+
+#include "unread.h"
+
+/**
+ * 未読のインクルード後の実引数の括弧を保つ
+ */
+void IncludedCallArguments() {
+	RAW_CALL((1));
+	raw_call((1));
+	MixedCall((1));
+	// 終了
+	return;
+}
+
+#define STRING(Value) #Value
+
+const char *Spacing = STRING(alpha +beta);
+const char *Comment = STRING(alpha /* note */ +beta);
+
+/**
+ * 条件の検査
+ * @param a
+ * @param b
+ */
+void Checked(int a, int b) {
+	assert(a +b);
+	assert(a /* note */ +b);
+	return;
+}
+
+#define ONLY_TEXT(Left, Right) #Right
+#define FLIP_TEXT(First, Second) ONLY_TEXT(Second, First)
+#define VAR_TEXT(...) #__VA_ARGS__
+
+const char *Selected = ONLY_TEXT(a + b, c+d);
+const char *Flipped = FLIP_TEXT(a+b, c + d);
+const char *Variadic = VAR_TEXT(a+b ,c+d);
+const char *Separated = ONLY_TEXT /* call */ (a + b, c+d);
+
+#define THIRD_TEXT(First, Second, Third) #Third
+
+const char *Partitioned = THIRD_TEXT(kind<int, int>(), alpha+beta);
+
+#define PAIR_TEXT(Left, Right) #Left Right
+
+const char *Nested = PAIR_TEXT(a+b, STRING(c+d));
+
+#define TOKEN_TEXT(Value) #Value
+
+/**
+ * マクロ実引数
+ */
+void TokenArguments() {
+	puts(TOKEN_TEXT(a+b));
+	puts(TOKEN_TEXT(c*d));
+	puts(TOKEN_TEXT /* call */ (e*f));
+	return;
+}
+
+const char *Declarations = TOKEN_TEXT(({ int a; int b; }));
+const char *Combined = TOKEN_TEXT(({ int a=1,b=2;a; }));
+// 項目
+const char *Annotated = TOKEN_TEXT(( alpha));

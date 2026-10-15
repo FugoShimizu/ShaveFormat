@@ -1,10 +1,6 @@
-1:5: Review: Add an explicit return type to this function; verify type, evaluation, external contract
-1:5: Violation: Function is missing a documentation comment
-1:7: Review: Add an explicit type to parameter 'x'; verify type, evaluation, external contract
-8:5: Review: Add an explicit return type to this function; verify type, evaluation, external contract
-8:5: Violation: Function is missing a documentation comment
-8:7: Review: Add an explicit type to parameter 'x'; verify type, evaluation, external contract
-15:5: Review: Determine whether the function needs an explicit trailing return; verify type, reachability
-15:5: Review: Add an explicit return type to this function; verify type, evaluation, external contract
-15:5: Violation: Function is missing a documentation comment
-15:7: Review: Add an explicit type to parameter 'x'; verify type, evaluation, external contract
+1:5: Review: Add an explicit return type to this function
+1:7: Review: Add an explicit type to parameter 'x'
+8:5: Review: Add an explicit return type to this function
+8:7: Review: Add an explicit type to parameter 'x'
+15:5: Review: Add an explicit return type to this function
+15:7: Review: Add an explicit type to parameter 'x'

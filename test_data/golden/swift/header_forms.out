@@ -1,0 +1,359 @@
+/**
+ *
+ */
+func t() {
+	if let a = f(
+		x: {
+			1
+		}
+	), let b = g(y) {
+		print(a, b)
+	}
+	guard let a = f(
+		x: {
+			1
+		}
+	), let b = g(y) else {
+		return
+	}
+	return
+}
+
+let xs = [1, 2]
+var it = xs.makeIterator()
+
+if (
+	xs.filter {
+		$0 > 1
+	}.count > 0
+) {
+	print(1)
+}
+
+if (
+	xs.first {
+		$0 > 1
+	} != nil
+), let y = (
+	xs.first {
+		$0 > 2
+	}
+) {
+	print(y)
+}
+
+for x in (
+	xs.filter {
+		$0 > 1
+	}
+) {
+	print(x)
+}
+
+while let w = it.next() {
+	print(w)
+}
+
+switch (
+	xs.first {
+		$0 > 1
+	}
+) {
+default:
+	break
+}
+
+if (
+	xs.first {
+		$0 > 1
+	} != nil
+) {
+	print(1)
+}
+
+if (
+	xs.first {
+		$0 > 1
+	} != nil
+) {
+	print(2)
+}
+
+if xs.contains(
+	where: {
+		$0 > 1
+	}
+) {
+	print(3)
+}
+
+if (
+	!xs.contains {
+		$0 > 1
+	}
+) {
+	print(4)
+}
+
+for x in xs where (
+	xs.contains {
+		$0 == x
+	}
+) {
+	print(x)
+}
+
+if (
+	xs.contains {
+		$0 > 1
+	}
+) {
+	print(5)
+} else {
+	print(6)
+}
+
+if (
+	xs.contains { x in
+		x > 1
+	}
+) {
+	print(7)
+}
+
+if case .some(let v) = (
+	xs.first {
+		$0 > 1
+	}
+) {
+	print(v)
+}
+
+if let q = (
+	xs.first {
+		$0 > 1
+	} ?? 0 as Int?
+) {
+	print(q)
+}
+
+if true {
+	if (
+		xs.contains {
+			$0 > 1
+		}
+	) {
+		print(8)
+	}
+}
+
+if (
+	xs.contains {
+		/* keep me */ $0 > 1
+	}
+) {
+	print(1)
+}
+
+if (
+	xs.filter /* c9 */ {
+		$0 > 1
+	}.isEmpty
+) {
+	print(2)
+}
+
+if a {
+	f()
+} else if (
+	xs.contains {
+		$0 == 2
+	}
+) {
+	g()
+}
+
+if a {
+	f()
+} else if b {
+	h()
+} else if (
+	xs.contains {
+		$0 == 3
+	}
+) {
+	g()
+}
+
+for v in (
+	xs.enumerated().filter {
+		$0.offset > 0
+	}
+) {
+	print(v)
+}
+
+let w = 1
+
+while (
+	[w, 2].contains {
+		$0 > 5
+	}
+) {
+	break
+}
+
+/**
+ *
+ * - Parameter x:
+ * - Parameter y:
+ * - Parameter xs:
+ */
+func f(x: Bool, y: Int, xs: [Int]) {
+	if x {
+		g()
+	}
+	while x {
+		g()
+	}
+	guard x else {
+		return
+	}
+	switch y {
+	default:
+		g()
+	}
+	repeat {
+		g()
+	} while x
+	if (
+		xs.contains {
+			$0 > 1
+		}
+	) {
+		g()
+	}
+	return
+}
+
+/**
+ *
+ */
+func g() {}
+
+/**
+ *
+ * - Parameter a:
+ * - Parameter b:
+ * - Parameter c:
+ */
+func h(a: [Int]?, b: [Int], c: Bool) {
+	for x in a ?? b {
+		g()
+	}
+	for x in c ? b : [] {
+		g()
+	}
+	return
+}
+
+infix operator ^^
+
+/**
+ *
+ * - Parameter l:
+ * - Parameter r:
+ * - Returns:
+ */
+func ^^(l: Int, r: Int) -> Int {
+	return l ^ r
+}
+
+let op: (Int, Int) -> Int = (^^)
+let table = [1: 2] as Any
+let dict = table as! [Int: Int]
+let maybe = table as? [Int: Int]
+
+/**
+ *
+ * - Parameter n:
+ */
+func r(n: Int) {
+	for x in 0..<n {
+		g()
+	}
+	let whole = 0..<n
+	return
+}
+
+if x { // 条件
+	y()
+	z()
+}
+
+xs.map { // 各要素
+	$0
+}
+
+/**
+ *
+ * - Parameter someVeryLongConditionValue:
+ * - Parameter anotherExtremelyLongConditionValue:
+ * - Parameter yetAnotherQuiteLongName:
+ */
+func f(someVeryLongConditionValue: Int?, anotherExtremelyLongConditionValue: Int?, yetAnotherQuiteLongName: Int?) {
+	// 何もしない
+	if let a = someVeryLongConditionValue, let b = anotherExtremelyLongConditionValue, let c = yetAnotherQuiteLongName {} else {
+		print("x")
+	}
+	if let a = someVeryLongConditionValue {} else {}
+	return
+}
+
+if x {} else {
+	print("single")
+}
+
+/**
+ *
+ * - Parameter a:
+ * - Parameter c:
+ */
+func f(a: Bool, c: Bool) {
+	do {
+		try g()
+	} catch let e as MyError {
+		h(e)
+	// C1
+	// C2
+	} catch {}
+	if a {
+		g()
+	// A
+	// T1
+	// T2
+	} else if c {} else {}
+	return
+}
+
+enum ComputeError : Error {
+	case bad
+}
+
+/**
+ *
+ * - Parameter alpha:
+ * - Parameter beta:
+ * - Returns:
+ */
+func sum(alpha: Int!, beta: [Int]!) -> Int {
+	return alpha + beta.count
+}
+
+/**
+ *
+ * - Returns:
+ */
+func compute() throws(ComputeError) -> Int {
+	return 1
+}

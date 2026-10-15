@@ -1,0 +1,141 @@
+/**
+ * 使用例
+ * const char *Value = "甲。乙";
+ */
+class Documentation {};
+
+/**
+ * 足す
+ * @param a
+ * @return
+ */
+int Add(int a) {
+	return a;
+}
+
+/**
+ * ******************
+ * Utilities
+ * *****************
+ * @param a
+ * @return
+ */
+int f(int a) {
+	return a;
+}
+
+class A {
+	int x;
+
+	/**
+	 * Returns a
+	 * @param a
+	 * @return
+	 */ int m(int a) {
+		return a;
+	}
+};
+
+class A {
+public:
+
+	/**
+	 * 取得する
+	 * @param a 引数
+	 * @return 値
+	 */
+	int Get(int a) {
+		return a;
+	}
+
+	/**
+	 * 設定する
+	 * @param a
+	 */
+	void Set(int a) {
+		X = a;
+		return;
+	}
+
+	/**
+	 * //////////////////
+	 * @return
+	 */
+	int Reset() {
+		X = 0;
+		return X;
+	}
+
+	int X;
+};
+
+/**
+ * 呼ぶ
+ */
+void F() {
+	// @brief x
+	G();
+	return;
+}
+
+int /**
+ * Hello
+ * @param a
+ * @return
+ */ InlineFrame(int a) {
+	return a;
+}
+
+/**
+ * A
+ * ========== X ==========
+ * B
+ * @param a A value
+ * @param b B value
+ * @return
+ */
+int SectionDocs(int a, int b) {
+	return a + b;
+}
+
+/**
+ * First
+ * ========== Y ==========
+ * Second
+ * @param a A value
+ * @param b B value
+ * @param c C value
+ * @return Result
+ */
+int CoveredDocs(int a, int b, int c) {
+	return a + b + c;
+}
+
+/**
+ * A
+ * B
+ * @param a A value
+ * @param b B value
+ * @return
+ */
+int AdjacentDocs(int a, int b) {
+	return a + b;
+}
+
+/**
+ *
+ */
+int EmptyVariable;
+/**
+ *
+ */
+int ExplicitEmptyVariable;
+
+/**
+ *
+ */
+void EmptyFunction() {}
+/**
+ *
+ */
+void NormalizedEmptyFunction() {}

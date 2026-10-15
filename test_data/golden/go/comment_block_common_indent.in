@@ -1,8 +1,0 @@
-package main
-
-var x = 1
-
-/*
-	First sentence. Second sentence
-*/
-var y = 2

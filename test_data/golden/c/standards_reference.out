@@ -4,7 +4,18 @@
  * @return 境界を超えて居れば真
  */
 int Compare(const int Value) {
-	// 規約 4.11 例外
+	// 規約 9.4 例外
 	// 境界の比較結果の返戻
 	return Value > 59;
+}
+
+/**
+ * ヘッダの判定関数
+ * @param Value 値
+ * @return ヘッダの値
+ */
+int Header(const int Value) {
+	// RFC 7230 § 3.2 に従う
+	// ヘッダの値の返戻
+	return Value;
 }

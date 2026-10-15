@@ -8,3 +8,6 @@ def f(configuration):
     with eeeeeeeeeeeeeeee as e, ffffffffffffffff as h:
         pass
     return
+
+def dependency_order():
+	return aaaa + bbbb + cccc + dddd + eeee + ffff + gggg + hhhh

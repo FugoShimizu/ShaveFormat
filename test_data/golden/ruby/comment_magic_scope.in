@@ -6,3 +6,10 @@ module M
     puts A
   end
 end
+
+module N
+  module Inner
+    # shareable_constant_value: literal
+    B = [3, 4]
+  end
+end

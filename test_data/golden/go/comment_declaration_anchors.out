@@ -1,0 +1,30 @@
+package main
+
+f(
+	map[string]int{
+		// 成員の深さ
+		"first_collection_member_with_a_long_name": 1,
+		"second_collection_member_with_a_long_name": 2,
+		"third_collection_member_with_a_long_name": 3,
+	},
+)
+
+// main
+func main() {
+	go func() { // worker
+		g()
+	}()
+	return
+}
+
+// f は変数を使う
+func f() {
+	var a, c, b /* 型の説明 */ int
+	use(a, b, c)
+	return
+}
+
+// EmptyBoundary keeps boundaries
+func EmptyBoundary() {/* Read */ /* Return */}
+// EmptyBoundaryPair keeps boundaries
+func EmptyBoundaryPair() {/* Read */ /* Return */}

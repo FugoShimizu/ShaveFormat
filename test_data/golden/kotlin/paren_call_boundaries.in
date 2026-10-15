@@ -1,0 +1,118 @@
+fun m(a: Int, xs: List<Int>) {
+	if ((a > 1)) { f() }
+	while ((a > 1)) { f() }
+	for (x in (xs)) { f() }
+	val v = xs[(a)]
+	for (i in (0..a)) { f() }
+}
+
+fun f(c: Boolean, a: Int, b: Int): Int {
+	val y = (if (c) 1 else 0)
+	g((if (c) 1 else 0))
+	val z = (if (c) 1 else 0) + 1
+	val s = (
+		a
+		+ b
+	)
+	return (when (c) {
+		true -> 1
+		else -> 0
+	})
+}
+
+fun compute(cond: Boolean, alpha: Int, beta: Int): Int {
+	val total = if(cond) 1 else 0
+	val mixed = alpha + (if(cond) 1 else 0) + beta
+	foo(if(cond) 1 else 0)
+	if(cond) {
+		return total
+	} else {
+		return mixed
+	}
+}
+
+annotation class Marker()
+
+@Marker()
+class Shape() {
+	fun f() = listOf(1, 2).map() { it + 1 }
+}
+
+class Other() {
+	constructor(x: Int) : this()
+}
+
+enum class Kind { X(), Y }
+
+fun g(): () -> () -> Int = { { 1 } }
+
+val h = g()() { }
+
+fun f() {
+	val x = (a.b).c + (g()).h + (a[0]).b + (f)(1) + (a.b)(2) + (this).x + (1).toString() + (a?.b).c + ((a.b)).c
+}
+
+/**
+ * 数える
+ */
+fun count() {
+	var x = 0
+	(x++)
+	val g = { (x++) }
+	g()
+}
+
+fun f() {
+	val x = (a)in(b)
+}
+
+/**
+ * 括弧付の更新対象を保持する関数
+ * @return 更新後の値
+ */
+fun CountUpdates(): Int {
+	var Counter: Int = 1
+	++((Counter))
+	// 更新結果の返戻
+	return Counter
+}
+
+/**
+ * 引用付の識別子を照合する関数
+ * @return 更新後の値
+ */
+fun CountQuoted(): Int {
+	var Count: Int = 1
+	`Count`++
+	// 更新結果の返戻
+	return Count
+}
+
+/**
+ * 配列要素を更新する関数
+ * @return 更新後の値
+ */
+fun CountElements(): Int {
+	var Values: IntArray = intArrayOf(7)
+	Values[0]++
+	// 更新結果の返戻
+	return Values[0]
+}
+
+val a: (Int) = 1
+val b: (() -> Unit)? = null
+val c: List<(Int)> = listOf()
+val d: ((Int) -> Int) = { it }
+val e: (Int)? = null
+val f: (A?).() -> Unit = {}
+val g: (A).() -> Unit = {}
+fun h(x: (Int)): (Int) = x
+typealias T = (Int)
+
+val f: ((() -> Unit))? = null
+val g: ((Int)) = 1
+
+val trailingResult = (f()) {}
+val nestedTrailingResult = ((f())) {}
+val ordinaryResult = (f())()
+val argumentResult = (f())(1) { 42 }

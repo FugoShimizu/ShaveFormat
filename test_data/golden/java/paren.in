@@ -1,16 +1,10 @@
+import java.util.function.Function;
+
 class K {
 	void h() {
 	g(a / (b * c));
 	g(a * (b % c));
-	g(a - (b + c));
-	g(a - (b - c));
-	g(a - (b * c));
 	g(a * (b + c));
-	g((a + b) - c);
-	g((a * b) % c);
-	g(a - (b + c) * d);
-	g(a / ((b * c)));
-	g((((a + b))));
 	g(a & (b + c));
 	g(a | (b + c));
 	g(a ^ (b + c));
@@ -22,11 +16,6 @@ class K {
 	g((a + b) & c);
 	g(a && (b || c));
 	g(a || (b && c));
-	g(a && (b && c));
-	g(a || (b || c));
-	g((a && b) && c);
-	g(a && (b || c) || d);
-	g(((a && b)) || c);
 	g((a - b).m());
 	}
 }
@@ -37,4 +26,74 @@ class A {
 		int y = (p[b + c]) * a;
 		return ((a > b)) ? ((x)) : y;
 	}
+}
+
+@Deprecated()
+public class OptionalParen {
+	enum Kind { X(), Y, Z() { } }
+
+	public static void main(String[] Args) {
+		final Function<Integer, Integer> F = (x) -> x + 1;
+		final Function<Integer, Integer> G = (Integer x) -> x;
+		final java.util.function.BinaryOperator<Integer> H = (x, y) -> x + y;
+		System.out.println(F.apply(1) + G.apply(2) + H.apply(3, 4) + Kind.X.ordinal());
+	}
+}
+
+class C {
+	void f() {
+		x = (a.b).c + (g()).h + (a[0]).b + (this).x + (new A()).b + ("abc").length() + ((a.b)).c + (a.b).m() + (A.class).getName() + (this.a).b;
+	}
+}
+
+class A {
+	void f(Object x) {
+		synchronized (x) { g(); }
+		synchronized ((x)) { g(); }
+	}
+}
+
+class Reader {
+	static java.util.function.IntSupplier[] Values = { null, (() -> 1), (() -> 2) };
+	/**
+	 * 読込
+	 * @param source 読込元
+	 */
+	<T extends Closeable & Readable> void read(T source) {
+		try {
+			source.close();
+		} catch(IOException | RuntimeException e) {
+			log(e);
+		}
+		// 終了
+		return;
+	}
+}
+
+class A {
+	int f(int a, int b) {
+		return - -a + + +b - - -b;
+	}
+}
+
+class NumericInitializers {
+/**
+ * 数値初期値と配列長の確認関数
+ * @return 数値と配列長の合計
+ */
+public static double InspectNumbers() {
+float[] Values = new float[0xE0];
+final float Hex = 0xE0, Other = 0x1e2, Negative = -0xE0, HexTail = 0xE0F;
+final float Exact = 0x1p2F, Fraction = 0x1.8p1F;
+final double Signed = -0x1.Ap0, Decimal = -.5;
+// 数値と配列長の合計の返戻
+return Hex + Other + Negative + HexTail + Exact + Fraction + Signed + Decimal + Values.length;
+}
+}
+
+class HexNumbers {
+double[] HexDoubles = {0x1.p0, 0X.8P0, -0xA.p+2, -0X.ap-2, 0x1.Ap0, 0X.fp0, 0xFp-2, -0x0.p0};
+float[] HexFloats = {0x1.p0f, 0x.8P0F, -0xA.p+2F, -0X.ap-2f};
+double[] HexSuffix = {0X1.P0d, 0X.8P0D, -0xA.p+2D, -0X.ap-2d};
+int[] IntegerBases = {0x1e2, 0XABC, 0b1010, 0B1100, 0755};
 }

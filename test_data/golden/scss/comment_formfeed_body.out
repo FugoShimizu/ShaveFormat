@@ -1,0 +1,7 @@
+.a {
+	margin: 0;
+	// note
+	color: red;
+	// second
+	content: "// literal\b";
+}

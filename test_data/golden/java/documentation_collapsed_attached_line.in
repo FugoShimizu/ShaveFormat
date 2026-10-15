@@ -1,5 +1,0 @@
-enum E {
-	///@deprecated 旧
-	RED,
-	BLUE
-}

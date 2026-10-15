@@ -20,3 +20,8 @@ const unicodeObject = { x: 1, /* c */ y: 2 };
 const formValue = 1;
 // own
 const afterForm = 2;
+// ========== ==== ==========
+// {@code A.  B.}
+// {@literal A.  B.}
+// (@dot A.  B. @enddot)
+// (@f$ A.  B. @f$)

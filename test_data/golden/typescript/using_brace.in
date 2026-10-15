@@ -1,2 +1,0 @@
-if (a) { using r = res(); }
-if (a) { await using q = ares(); }

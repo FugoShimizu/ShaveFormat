@@ -1,0 +1,2 @@
+21:2: Violation: Remove the unreachable trailing `return`
+43:2: Violation: Remove the unreachable trailing `return`

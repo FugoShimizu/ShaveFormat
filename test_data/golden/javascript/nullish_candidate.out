@@ -5,3 +5,20 @@ const otherValue = undefined;
 const isMixedSubject = value === null || otherValue === undefined;
 const isRepeatedNull = value === null || value === null;
 const isConjunctiveStrict = value === null && value === undefined;
+const escapedEqual = value === null || \u0076alue === undefined;
+const escapedDifferent = undefined !== \u{76}alue && null !== value;
+const differentEscaped = value === null || \u006ftherValue === undefined;
+let flag = true;
+
+flag = \u0066lag ^ true;
+flag = true ^ \u{66}lag;
+x === null || x === \u0075ndefined;
+x == \u{75}ndefined || x == null;
+x !== null && x !== un\u0064efined;
+undefine\u0064 !== x && null !== x;
+\u0075ndefined == x || null == x;
+null != x && \u{75}ndefined != x;
+x === null || x === \u0075ndefinedExtra;
+x === \u0075ndefined || x === \u{75}ndefined;
+
+const privatePoints = "";

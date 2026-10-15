@@ -23,3 +23,22 @@ def g(x) = x
 case line when /^=end/ then if in_part then end end # if in non-RD part
 
 x = 1
+
+# Single line
+class C end
+
+# Module line
+module M end
+
+# Constant line
+Y = 2
+
+# Reader line
+attr_reader :a
+
+# first
+# Body
+# last
+class Edges end
+# ???
+class Symbols end

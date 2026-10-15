@@ -1,0 +1,9 @@
+package p
+
+// f
+func f() {
+	result :=
+	someObject.FirstMethod(argumentOne).
+	SecondMethod(argumentTwo)
+	return
+}

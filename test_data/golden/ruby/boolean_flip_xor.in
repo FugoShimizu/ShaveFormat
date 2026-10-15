@@ -23,3 +23,7 @@ class Counter
 		return @count
 	end
 end
+
+@flag = !@flag
+@@flag = !@@flag
+$flag = !$flag

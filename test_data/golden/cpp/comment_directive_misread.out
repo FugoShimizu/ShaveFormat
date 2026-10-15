@@ -1,0 +1,7 @@
+#if 0
+int first;
+#elif A && \
+    /* CA */ // CB
+    B
+int second;
+#endif

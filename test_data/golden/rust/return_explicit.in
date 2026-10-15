@@ -1,3 +1,5 @@
+use std::panic as stop;
+
 fn f() {
 	a();
 }
@@ -29,4 +31,38 @@ fn p() {
 
 fn q() -> String {
 	format!("{}", 1)
+}
+
+use other::process;
+
+fn imported_process() {
+	process::exit(0);
+}
+
+fn imported_standard_panic() {
+	stop!("stop");
+}
+
+enum EmptyFlow {}
+
+fn empty_match(x: EmptyFlow) {
+	match x {}
+}
+
+fn inner_attribute() {
+	#![rewrite]
+	g();
+}
+
+fn ordinary_after_attribute() {
+	g();
+}
+
+const SCOPE_VALUE: usize = first_namespace_with_a_name_long_enough_to_need_reference_wrapping::second_namespace_with_a_name_long_enough_to_need_reference_wrapping::VALUE;
+type ScopeType = first_namespace_with_a_name_long_enough_to_need_reference_wrapping::second_namespace_with_a_name_long_enough_to_need_reference_wrapping::Thing;
+use first_namespace_with_a_name_long_enough_to_need_reference_wrapping::second_namespace_with_a_name_long_enough_to_need_reference_wrapping::Thing;
+fn scope_calls() {
+    first_namespace_with_a_name_long_enough_to_need_reference_wrapping::second_namespace_with_a_name_long_enough_to_need_reference_wrapping::make::<u32>();
+    first_namespace_with_a_name_long_enough_to_need_reference_wrapping::second_namespace_with_a_name_long_enough_to_need_reference_wrapping::make!();
+    return;
 }

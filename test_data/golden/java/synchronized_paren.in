@@ -1,6 +1,0 @@
-class A {
-	void f(Object x) {
-		synchronized (x) { g(); }
-		synchronized ((x)) { g(); }
-	}
-}

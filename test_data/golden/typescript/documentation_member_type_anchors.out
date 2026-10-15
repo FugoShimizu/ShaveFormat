@@ -1,0 +1,181 @@
+/**
+ * 生成する
+ * x
+ * @param o 値
+ */
+function f(o: { a: number }): void {
+	g(o);
+	return;
+}
+
+/**
+ * 混在
+ * first
+ * second
+ * @param o 値
+ */
+function g(o: { a: number }): void {}
+/**
+ * 初期値
+ * value
+ * @param o 値
+ */
+function h(o = { a: 1 }): void {}
+
+// @deprecated use key
+// TODO: rename
+interface Props { id: string }
+// 値
+interface PendingProcess { bytes: number, isQueued: boolean, tryStart(): boolean } // 待機 // 起動
+
+// a の説明
+// b の説明
+type T = { a: number, b: string };
+
+enum Color {
+	/**
+	 * 赤
+	 */
+	RedColorValue,
+	GreenColorValue,
+	BlueColorValue,
+	YellowColorValue,
+	BlackColorValue,
+	WhiteColorValue,
+	PurpleColorValue,
+	OrangeColorValue
+}
+
+/**
+ * 別名
+ */
+export type Alias = string;
+
+/**
+ * 名前空間
+ */
+namespace N {
+	/**
+	 * 値
+	 */
+	export const y = 1;
+}
+
+declare global {
+	/**
+	 * 窓の値
+	 */
+	const x: number;
+}
+
+declare module "m" {
+	/**
+	 * 関数
+	 */
+	function f(): void;
+}
+
+/**
+ * 型と値の対応を保つ
+ * @template B 先の型
+ * @template A 後の型
+ * @template A 後の型の補足
+ * @param first 先の値
+ * @param second 後の値
+ */
+function ordered<B, A>(first: B, second: A): void {}
+
+export const alpha: unknown = async (
+	box?: {
+		alphaCountWithLongName?: number[],
+		/**
+		 *
+		 */
+		betaCountWithLongName?: number[],
+		/**
+		 * 値
+		 */
+		gammaCountWithLongName?: number[],
+		deltaCountWithLongName?: number[]
+	}
+): Promise<number[]|undefined> => {};
+
+/**
+ * Summary
+ * @param {{x: number}} opts Options
+ */
+function nestedRecord(opts: object): void {}
+/**
+ * Summary
+ * @param {{x: number}} opts Options
+ */
+function nestedAlias(opts: object): void {}
+/**
+ * Summary
+ * @param {Array<{x: number}>} opts Options
+ */
+function nestedArray(opts: object): void {}
+/**
+ * Summary
+ * @param {function({x: number}): void} opts Options
+ */
+function nestedFunction(opts: object): void {}
+/**
+ * Summary
+ * @param {{x: "}"}} opts Options
+ */
+function nestedQuote(opts: object): void {}
+/**
+ * Summary
+ * @param a Value
+ */
+function escaped(\u0061: number): void {}
+/**
+ * Summary
+ * @template T First
+ * @template U Second
+ */
+function escapedTypes<\u0054, U>(): void {}
+/**
+ * Summary
+ * @template {{x: number}} T First
+ * @template U Second
+ */
+function nestedTypes<T, U>(): void {}
+
+/**
+ * Summary
+ * @param a A
+ * @param b B
+ * @return
+ */ function inlineOrder(a: number, b: number): number {
+	return a + b;
+}
+
+// union note
+type LiteralUnion = { k: 1, d: D }|{ k: 2, d: D }|{ k: 3, d: D };
+
+/**
+ * Card
+ * @param {Object} props Properties
+ * @param {string} props.title Title
+ * @return {string} Title
+ */
+function card({ title, body }: { title: string, body: string }): string {
+	return title;
+}
+
+/**
+ * Interface header
+ */
+interface HeaderInterface { value: string }
+
+/**
+ * Alias header
+ */
+type HeaderAlias = { value: string };
+
+/**
+ * Value header
+ */
+const headerValue = 1;

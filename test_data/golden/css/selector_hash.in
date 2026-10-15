@@ -13,3 +13,7 @@ a[xlink|href] { color: blue; }
 .a/**/.b { x: y; }
 .a/* x */ .b { x: y; }
 .a /* x */.b { x: y; }
+.missing{--empty:}
+.space{--blank: }
+.nested{.inner{--empty:;--blank: ;}}
+@media all{.inner{--empty:;--blank: ;color:red;}}

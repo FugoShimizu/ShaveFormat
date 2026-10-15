@@ -85,7 +85,9 @@ class SwitchTermination {
 		default:
 			return;
 		}
-		// <summary>呼出元へ戻る</summary>
+		/**
+		 * <summary>呼出元へ戻る</summary>
+		 */
 		void Local() {
 			return;
 		}
@@ -101,7 +103,9 @@ class SwitchTermination {
 		case 0:
 			Local();
 			return;
-			// <summary>呼出元へ戻る</summary>
+			/**
+			 * <summary>呼出元へ戻る</summary>
+			 */
 			void Local() {
 				return;
 			}

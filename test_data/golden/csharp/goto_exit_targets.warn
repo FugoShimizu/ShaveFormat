@@ -1,9 +1,9 @@
 24:3: Violation: Add the required comment before this `return`
-32:16: Review: Replace this jump with structured control flow; verify applicability, lifetime
-43:16: Review: Replace this jump with structured control flow; verify applicability, lifetime
+32:16: Review: Replace this jump with structured control flow
+43:16: Review: Replace this jump with structured control flow
 48:3: Violation: Remove the unreachable trailing `return`
-58:15: Review: Replace this jump with structured control flow; verify applicability, lifetime
-66:4: Review: Replace this jump with structured control flow; verify applicability, binding, lifetime
-77:4: Review: Replace this jump with structured control flow; verify applicability, binding, lifetime
-88:4: Review: Replace this jump with structured control flow; verify applicability, binding, lifetime
-99:4: Review: Replace this jump with structured control flow; verify applicability, binding, lifetime
+58:15: Review: Replace this jump with structured control flow
+66:4: Review: Replace this jump with structured control flow
+77:4: Review: Replace this jump with structured control flow
+88:4: Review: Replace this jump with structured control flow
+99:4: Review: Replace this jump with structured control flow

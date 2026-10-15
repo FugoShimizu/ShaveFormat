@@ -1,0 +1,2153 @@
+{
+	"c": {
+		"sources": [
+			{
+				"url": "https://raw.githubusercontent.com/redis/redis/7.2.4/src/t_zset.c",
+				"version": "7.2.4",
+				"sha256": "c87dcf66de88ca176280cf546c0fad25d1ee4cf20b4efccda00b51a60f7ed5c7",
+				"license": { "type": "BSD-3-Clause", "url": "https://raw.githubusercontent.com/redis/redis/7.2.4/COPYING" }
+			},
+			{
+				"url": "https://raw.githubusercontent.com/redis/redis/7.2.4/src/db.c",
+				"version": "7.2.4",
+				"sha256": "84fd7f44d0971cfea3d2a8cca9edd5d90ef59262635c7b3bcbaedbfcfb1365d9",
+				"license": { "type": "BSD-3-Clause", "url": "https://raw.githubusercontent.com/redis/redis/7.2.4/COPYING" }
+			},
+			{
+				"url": "https://raw.githubusercontent.com/redis/redis/7.2.4/src/rdb.c",
+				"version": "7.2.4",
+				"sha256": "3826ce59a403beb1632e94915dd618bc2c9842ab4bc9d0f11916c21f15f2c9ad",
+				"license": { "type": "BSD-3-Clause", "url": "https://raw.githubusercontent.com/redis/redis/7.2.4/COPYING" }
+			},
+			{
+				"url": "https://raw.githubusercontent.com/redis/redis/7.2.4/src/t_hash.c",
+				"version": "7.2.4",
+				"sha256": "e506d6f1ce57ea8fa7aa13406865fe1b5c0816357b22ffe97e8b969abe4d24f6",
+				"license": { "type": "BSD-3-Clause", "url": "https://raw.githubusercontent.com/redis/redis/7.2.4/COPYING" }
+			},
+			{
+				"url": "https://raw.githubusercontent.com/redis/redis/7.2.4/src/t_list.c",
+				"version": "7.2.4",
+				"sha256": "b7d249362d651fbd3113b9100655c8c11014e015eecfc78fb6f887141510757e",
+				"license": { "type": "BSD-3-Clause", "url": "https://raw.githubusercontent.com/redis/redis/7.2.4/COPYING" }
+			},
+			{
+				"url": "https://raw.githubusercontent.com/redis/redis/7.2.4/src/t_set.c",
+				"version": "7.2.4",
+				"sha256": "ed2aa4cd4cfe9a9a0f020e3bc0b51bff2d32aafd9736f2445302514575d8bb31",
+				"license": { "type": "BSD-3-Clause", "url": "https://raw.githubusercontent.com/redis/redis/7.2.4/COPYING" }
+			},
+			{
+				"url": "https://raw.githubusercontent.com/redis/redis/7.2.4/src/t_stream.c",
+				"version": "7.2.4",
+				"sha256": "6d842b49400c169ab0df73e56e08d5a7a5c5ffdd18dff451c8b1a987695c7c24",
+				"license": { "type": "BSD-3-Clause", "url": "https://raw.githubusercontent.com/redis/redis/7.2.4/COPYING" }
+			},
+			{
+				"url": "https://raw.githubusercontent.com/redis/redis/7.2.4/src/sort.c",
+				"version": "7.2.4",
+				"sha256": "51978f42796765bc40a0330e44fe66f57a0f1029f6e5c8a3a810c691b846235e",
+				"license": { "type": "BSD-3-Clause", "url": "https://raw.githubusercontent.com/redis/redis/7.2.4/COPYING" }
+			},
+			{
+				"url": "https://raw.githubusercontent.com/redis/redis/7.2.4/src/geo.c",
+				"version": "7.2.4",
+				"sha256": "571dd1f2d2170d327131c0880ad84af64cd3a5dfa270e84c05e2be9fd9386a00",
+				"license": { "type": "BSD-3-Clause", "url": "https://raw.githubusercontent.com/redis/redis/7.2.4/COPYING" }
+			}
+		],
+		"samples": {
+			"5000": [{ "source": 0, "ranges": [[0, 152417]] }, { "source": 3, "ranges": [[0, 39709]] }],
+			"10000":
+			[{ "source": 0, "ranges": [[0, 152417]] }, { "source": 1, "ranges": [[0, 94055]] }, { "source": 2, "ranges": [[0, 144303]] }],
+			"20000": [
+				{ "source": 0, "ranges": [[0, 152417]] },
+				{ "source": 1, "ranges": [[0, 94055]] },
+				{ "source": 2, "ranges": [[0, 144303]] },
+				{ "source": 3, "ranges": [[0, 39709]] },
+				{ "source": 4, "ranges": [[0, 49973]] },
+				{ "source": 5, "ranges": [[0, 63314]] },
+				{ "source": 6, "ranges": [[0, 160636]] },
+				{ "source": 7, "ranges": [[0, 23829]] },
+				{ "source": 8, "ranges": [[0, 38153]] }
+			]
+		}
+	},
+	"cpp": {
+		"sources": [
+			{
+				"url": "https://raw.githubusercontent.com/google/re2/2023-03-01/re2/regexp.cc",
+				"version": "2023-03-01",
+				"sha256": "c3ce0f0ba22639ea04378d5e43fdc76024c238e523c07ba570ab6ecbae8a80de",
+				"license": { "type": "BSD-3-Clause", "url": "https://raw.githubusercontent.com/google/re2/2023-03-01/LICENSE" }
+			},
+			{
+				"url": "https://raw.githubusercontent.com/google/re2/2023-03-01/re2/parse.cc",
+				"version": "2023-03-01",
+				"sha256": "5700a24e1bdce9e4a5f4ebb1731ed9d37ff6a0c83af1919c6aad22a51cd2048c",
+				"license": { "type": "BSD-3-Clause", "url": "https://raw.githubusercontent.com/google/re2/2023-03-01/LICENSE" }
+			},
+			{
+				"url": "https://raw.githubusercontent.com/google/re2/2023-03-01/re2/compile.cc",
+				"version": "2023-03-01",
+				"sha256": "bf2c838c7713840308f4e4e797994471da982cd95599c775f5eaca4de1716a0b",
+				"license": { "type": "BSD-3-Clause", "url": "https://raw.githubusercontent.com/google/re2/2023-03-01/LICENSE" }
+			},
+			{
+				"url": "https://raw.githubusercontent.com/google/re2/2023-03-01/re2/prog.cc",
+				"version": "2023-03-01",
+				"sha256": "d2673a25c0ccc59893d0f19e5c3a62ee871618370e84537a950c044a61fd9419",
+				"license": { "type": "BSD-3-Clause", "url": "https://raw.githubusercontent.com/google/re2/2023-03-01/LICENSE" }
+			},
+			{
+				"url": "https://raw.githubusercontent.com/google/re2/2023-03-01/re2/simplify.cc",
+				"version": "2023-03-01",
+				"sha256": "744b800977ccfab08157bd5ec480e13f63080d3b4a94f9cb7a7dc7f3a3d99531",
+				"license": { "type": "BSD-3-Clause", "url": "https://raw.githubusercontent.com/google/re2/2023-03-01/LICENSE" }
+			},
+			{
+				"url": "https://raw.githubusercontent.com/google/re2/2023-03-01/re2/onepass.cc",
+				"version": "2023-03-01",
+				"sha256": "588aa5cbe467b4c0868d8531c6daaeb7cfb260e494a0ba969b0781bf6650d3c7",
+				"license": { "type": "BSD-3-Clause", "url": "https://raw.githubusercontent.com/google/re2/2023-03-01/LICENSE" }
+			},
+			{
+				"url": "https://raw.githubusercontent.com/google/re2/2023-03-01/re2/prefilter.cc",
+				"version": "2023-03-01",
+				"sha256": "09eaf60ec3abc00f67686ef337f2d84b89083e0f03b3a78e14f6055479a0bd33",
+				"license": { "type": "BSD-3-Clause", "url": "https://raw.githubusercontent.com/google/re2/2023-03-01/LICENSE" }
+			},
+			{
+				"url": "https://raw.githubusercontent.com/google/re2/2023-03-01/re2/prefilter_tree.cc",
+				"version": "2023-03-01",
+				"sha256": "622d86a924d28980a4c9e70b0b5f29fecd23d0e17cae3c8f2dae14231fd1aee0",
+				"license": { "type": "BSD-3-Clause", "url": "https://raw.githubusercontent.com/google/re2/2023-03-01/LICENSE" }
+			},
+			{
+				"url": "https://raw.githubusercontent.com/ninja-build/ninja/v1.12.1/src/build.cc",
+				"version": "v1.12.1",
+				"sha256": "8cd8210aa7cccdc882167437fba8ab74863bc03c8e8686981c7c674ae3b42f9c",
+				"license": { "type": "Apache-2.0", "url": "https://raw.githubusercontent.com/ninja-build/ninja/v1.12.1/COPYING" }
+			},
+			{
+				"url": "https://raw.githubusercontent.com/ninja-build/ninja/v1.12.1/src/manifest_parser.cc",
+				"version": "v1.12.1",
+				"sha256": "57e3af895b5c6cf0d047a779f82b56b0fbd28b08a07c2cab03bf3e41740b892d",
+				"license": { "type": "Apache-2.0", "url": "https://raw.githubusercontent.com/ninja-build/ninja/v1.12.1/COPYING" }
+			},
+			{
+				"url": "https://raw.githubusercontent.com/ninja-build/ninja/v1.12.1/src/deps_log.cc",
+				"version": "v1.12.1",
+				"sha256": "32a468840eb30e493a95f5f9818ee12391895674f95bf82c9f565a475d155867",
+				"license": { "type": "Apache-2.0", "url": "https://raw.githubusercontent.com/ninja-build/ninja/v1.12.1/COPYING" }
+			},
+			{
+				"url": "https://raw.githubusercontent.com/google/leveldb/1.23/db/version_edit.cc",
+				"version": "1.23",
+				"sha256": "ccbf9b13750b2a6ce9ffbda5338c15aefac9aa19c9f01d1cbb1fb3e0563a2d06",
+				"license": { "type": "BSD-3-Clause", "url": "https://raw.githubusercontent.com/google/leveldb/1.23/LICENSE" }
+			},
+			{
+				"url": "https://raw.githubusercontent.com/ceres-solver/ceres-solver/2.2.0/internal/ceres/covariance_impl.cc",
+				"version": "2.2.0",
+				"sha256": "c467dc39b76a2f289986119a409fa594cbdf63f3c7835376bb2bf88961cd56c0",
+				"license": { "type": "BSD-3-Clause", "url": "https://raw.githubusercontent.com/ceres-solver/ceres-solver/2.2.0/LICENSE" }
+			},
+			{
+				"url": "https://raw.githubusercontent.com/ceres-solver/ceres-solver/2.2.0/internal/ceres/gradient_checker.cc",
+				"version": "2.2.0",
+				"sha256": "67d98564a1631af07b04b8769a16b83cb68eaca5058a7416ab1851a443e18397",
+				"license": { "type": "BSD-3-Clause", "url": "https://raw.githubusercontent.com/ceres-solver/ceres-solver/2.2.0/LICENSE" }
+			},
+			{
+				"url": "https://raw.githubusercontent.com/ceres-solver/ceres-solver/2.2.0/internal/ceres/line_search.cc",
+				"version": "2.2.0",
+				"sha256": "1133be785dc5f60be9705b3fe371f6060c250819db7cb930886f2e54b0dc3b91",
+				"license": { "type": "BSD-3-Clause", "url": "https://raw.githubusercontent.com/ceres-solver/ceres-solver/2.2.0/LICENSE" }
+			},
+			{
+				"url": "https://raw.githubusercontent.com/ceres-solver/ceres-solver/2.2.0/internal/ceres/problem_impl.cc",
+				"version": "2.2.0",
+				"sha256": "71e61ca625bd0491d5b06d2bbe708075f32847d334c5af5941945a930fdd75fd",
+				"license": { "type": "BSD-3-Clause", "url": "https://raw.githubusercontent.com/ceres-solver/ceres-solver/2.2.0/LICENSE" }
+			},
+			{
+				"url": "https://raw.githubusercontent.com/ceres-solver/ceres-solver/2.2.0/internal/ceres/program.cc",
+				"version": "2.2.0",
+				"sha256": "d6c9f0c8b1a9baf4097e497b574f4d126a590efe28ff2a5f847aae31fa6a8f81",
+				"license": { "type": "BSD-3-Clause", "url": "https://raw.githubusercontent.com/ceres-solver/ceres-solver/2.2.0/LICENSE" }
+			},
+			{
+				"url": "https://raw.githubusercontent.com/ceres-solver/ceres-solver/2.2.0/internal/ceres/schur_complement_solver.cc",
+				"version": "2.2.0",
+				"sha256": "8977fdf44e9c4cffd3d4593cafeee368557f30edc2a67ddd50d4d4c2531c7306",
+				"license": { "type": "BSD-3-Clause", "url": "https://raw.githubusercontent.com/ceres-solver/ceres-solver/2.2.0/LICENSE" }
+			},
+			{
+				"url": "https://raw.githubusercontent.com/ceres-solver/ceres-solver/2.2.0/internal/ceres/trust_region_minimizer.cc",
+				"version": "2.2.0",
+				"sha256": "461e15859319822b4f968ce889dd4a2d657b0f1b518a2dea7ce2fd7310d9e33d",
+				"license": { "type": "BSD-3-Clause", "url": "https://raw.githubusercontent.com/ceres-solver/ceres-solver/2.2.0/LICENSE" }
+			},
+			{
+				"url": "https://raw.githubusercontent.com/ceres-solver/ceres-solver/2.2.0/internal/ceres/trust_region_preprocessor.cc",
+				"version": "2.2.0",
+				"sha256": "b268ef859b45636128d013bdceffcb0de8928eb551ed151ed08b948b3648bc23",
+				"license": { "type": "BSD-3-Clause", "url": "https://raw.githubusercontent.com/ceres-solver/ceres-solver/2.2.0/LICENSE" }
+			},
+			{
+				"url": "https://raw.githubusercontent.com/ceres-solver/ceres-solver/2.2.0/internal/ceres/line_search_minimizer.cc",
+				"version": "2.2.0",
+				"sha256": "27bc59909a6ee4a493ca067cd65363a9bad3a356f7efb3b9b0631ca877233812",
+				"license": { "type": "BSD-3-Clause", "url": "https://raw.githubusercontent.com/ceres-solver/ceres-solver/2.2.0/LICENSE" }
+			},
+			{
+				"url": "https://raw.githubusercontent.com/ceres-solver/ceres-solver/2.2.0/internal/ceres/coordinate_descent_minimizer.cc",
+				"version": "2.2.0",
+				"sha256": "2a1a281d07b0ecf63abf20f5ea3e22f765f5293315f44c5b4cfa5acc8250c4cc",
+				"license": { "type": "BSD-3-Clause", "url": "https://raw.githubusercontent.com/ceres-solver/ceres-solver/2.2.0/LICENSE" }
+			},
+			{
+				"url": "https://raw.githubusercontent.com/ceres-solver/ceres-solver/2.2.0/internal/ceres/levenberg_marquardt_strategy.cc",
+				"version": "2.2.0",
+				"sha256": "cbd16267631579e3e026867dcd91bd4b76de20451da6ea97d5fbe1f81af1193a",
+				"license": { "type": "BSD-3-Clause", "url": "https://raw.githubusercontent.com/ceres-solver/ceres-solver/2.2.0/LICENSE" }
+			},
+			{
+				"url": "https://raw.githubusercontent.com/ceres-solver/ceres-solver/2.2.0/internal/ceres/dogleg_strategy.cc",
+				"version": "2.2.0",
+				"sha256": "c203cdd6eb8cff9331a1dd2f5b38972dddc2605b2996f5dd3aefe69e32b92458",
+				"license": { "type": "BSD-3-Clause", "url": "https://raw.githubusercontent.com/ceres-solver/ceres-solver/2.2.0/LICENSE" }
+			},
+			{
+				"url": "https://raw.githubusercontent.com/ceres-solver/ceres-solver/2.2.0/internal/ceres/sparse_normal_cholesky_solver.cc",
+				"version": "2.2.0",
+				"sha256": "470aa84e94f04be82677943b3984850e858525f9b11987dbf2d45298f19129af",
+				"license": { "type": "BSD-3-Clause", "url": "https://raw.githubusercontent.com/ceres-solver/ceres-solver/2.2.0/LICENSE" }
+			},
+			{
+				"url": "https://raw.githubusercontent.com/ceres-solver/ceres-solver/2.2.0/internal/ceres/sparse_matrix.cc",
+				"version": "2.2.0",
+				"sha256": "85928f0b1f23e194273611ac75705f70b95c31932e3ecbf3950a418fc8a68543",
+				"license": { "type": "BSD-3-Clause", "url": "https://raw.githubusercontent.com/ceres-solver/ceres-solver/2.2.0/LICENSE" }
+			},
+			{
+				"url": "https://raw.githubusercontent.com/ceres-solver/ceres-solver/2.2.0/internal/ceres/compressed_row_sparse_matrix.cc",
+				"version": "2.2.0",
+				"sha256": "429d45d80264b60fd18c59e30129c13d0943dc41c3e7fb60f1048aa17ff105af",
+				"license": { "type": "BSD-3-Clause", "url": "https://raw.githubusercontent.com/ceres-solver/ceres-solver/2.2.0/LICENSE" }
+			},
+			{
+				"url": "https://raw.githubusercontent.com/ceres-solver/ceres-solver/2.2.0/internal/ceres/reorder_program.cc",
+				"version": "2.2.0",
+				"sha256": "d60999ed8c7a1416969a74885a099d4e8531c59903f0e5b3d00c06885a14ce73",
+				"license": { "type": "BSD-3-Clause", "url": "https://raw.githubusercontent.com/ceres-solver/ceres-solver/2.2.0/LICENSE" }
+			},
+			{
+				"url": "https://raw.githubusercontent.com/ceres-solver/ceres-solver/2.2.0/internal/ceres/block_sparse_matrix.cc",
+				"version": "2.2.0",
+				"sha256": "fa48a4bed5c3dc468142b901ecde8958a7733b5984c0f7c8ad7e841903f1150c",
+				"license": { "type": "BSD-3-Clause", "url": "https://raw.githubusercontent.com/ceres-solver/ceres-solver/2.2.0/LICENSE" }
+			},
+			{
+				"url": "https://raw.githubusercontent.com/ceres-solver/ceres-solver/2.2.0/internal/ceres/implicit_schur_complement.cc",
+				"version": "2.2.0",
+				"sha256": "b8f2cb0e52510b98c880e4a227017347ea513b040221468e154a90773d103d3c",
+				"license": { "type": "BSD-3-Clause", "url": "https://raw.githubusercontent.com/ceres-solver/ceres-solver/2.2.0/LICENSE" }
+			}
+		],
+		"samples": {
+			"5000": [
+				{ "source": 0, "ranges": [[0, 26795]] },
+				{ "source": 1, "ranges": [[0, 76137]] },
+				{ "source": 2, "ranges": [[0, 38767]] },
+				{ "source": 7, "ranges": [[0, 12395]] }
+			],
+			"10000": [
+				{ "source": 0, "ranges": [[0, 26795]] },
+				{ "source": 1, "ranges": [[0, 76137]] },
+				{ "source": 2, "ranges": [[0, 38767]] },
+				{ "source": 3, "ranges": [[0, 37481]] },
+				{ "source": 4, "ranges": [[0, 20270]] },
+				{ "source": 5, "ranges": [[0, 22871]] },
+				{ "source": 6, "ranges": [[0, 17641]] },
+				{ "source": 7, "ranges": [[0, 12395]] },
+				{ "source": 8, "ranges": [[0, 34460]] },
+				{ "source": 9, "ranges": [[0, 12075]] },
+				{ "source": 10, "ranges": [[0, 13121]] }
+			],
+			"20000": [
+				{ "source": 0, "ranges": [[0, 26795]] },
+				{ "source": 1, "ranges": [[0, 76137]] },
+				{ "source": 2, "ranges": [[0, 38767]] },
+				{ "source": 3, "ranges": [[0, 37481]] },
+				{ "source": 4, "ranges": [[0, 20270]] },
+				{ "source": 5, "ranges": [[0, 22871]] },
+				{ "source": 6, "ranges": [[0, 17641]] },
+				{ "source": 7, "ranges": [[0, 12395]] },
+				{ "source": 8, "ranges": [[0, 34460]] },
+				{ "source": 9, "ranges": [[0, 12075]] },
+				{ "source": 10, "ranges": [[0, 13121]] },
+				{ "source": 11, "ranges": [[0, 6749]] },
+				{ "source": 12, "ranges": [[0, 33772]] },
+				{ "source": 13, "ranges": [[0, 11121]] },
+				{ "source": 14, "ranges": [[0, 39073]] },
+				{ "source": 15, "ranges": [[0, 35839]] },
+				{ "source": 16, "ranges": [[0, 19908]] },
+				{ "source": 17, "ranges": [[0, 14683]] },
+				{ "source": 18, "ranges": [[0, 32457]] },
+				{ "source": 19, "ranges": [[0, 16433]] },
+				{ "source": 20, "ranges": [[0, 19599]] },
+				{ "source": 21, "ranges": [[0, 10719]] },
+				{ "source": 22, "ranges": [[0, 7021]] },
+				{ "source": 23, "ranges": [[0, 27218]] },
+				{ "source": 24, "ranges": [[0, 4254]] },
+				{ "source": 25, "ranges": [[0, 2282]] },
+				{ "source": 26, "ranges": [[0, 26779]] },
+				{ "source": 27, "ranges": [[0, 25876]] },
+				{ "source": 28, "ranges": [[0, 31130]] },
+				{ "source": 29, "ranges": [[0, 11354]] }
+			]
+		}
+	},
+	"csharp": {
+		"sources": [
+			{
+				"url":
+				"https://raw.githubusercontent.com/dotnet/roslyn/Visual-Studio-2022-Version-17.12/src/Compilers/CSharp/Portable/Generated/BoundNodes.xml.Generated.cs",
+				"version": "Visual-Studio-2022-Version-17.12",
+				"sha256": "df099fc04c385fc79266e583cec32e626a3d49e20a3ed829fd89d3a57bcbfbe3",
+				"license":
+				{ "type": "MIT", "url": "https://raw.githubusercontent.com/dotnet/roslyn/Visual-Studio-2022-Version-17.12/License.txt" }
+			},
+			{
+				"url":
+				"https://raw.githubusercontent.com/dotnet/roslyn/Visual-Studio-2022-Version-17.12/src/Compilers/CSharp/Portable/Syntax/SyntaxFactory.cs",
+				"version": "Visual-Studio-2022-Version-17.12",
+				"sha256": "cf624ce53ecba32b9b8df6382753d4549eab38066f02e19184f9d806297645cd",
+				"license":
+				{ "type": "MIT", "url": "https://raw.githubusercontent.com/dotnet/roslyn/Visual-Studio-2022-Version-17.12/License.txt" }
+			}
+		],
+		"samples": {
+			"5000": [{ "source": 0, "ranges": [[0, 300387], [964338, 964340]] }],
+			"10000": [{ "source": 0, "ranges": [[0, 596745], [964338, 964340]] }],
+			"20000": [{ "source": 0, "ranges": [[0, 964340]] }, { "source": 1, "ranges": [[687, 152884]] }]
+		}
+	},
+	"java": {
+		"sources": [
+			{
+				"url": "https://raw.githubusercontent.com/google/guava/v33.3.1/guava/src/com/google/common/collect/Maps.java",
+				"version": "v33.3.1",
+				"sha256": "028068cfd537e54d3b172b0a189e5892a0f632af639f7a8d5e2b4f6dcf56fe7b",
+				"license": { "type": "Apache-2.0", "url": "https://raw.githubusercontent.com/google/guava/v33.3.1/LICENSE" }
+			},
+			{
+				"url": "https://raw.githubusercontent.com/google/guava/v33.3.1/guava/src/com/google/common/collect/FluentIterable.java",
+				"version": "v33.3.1",
+				"sha256": "5d5caf52cdfcbe13048da9c3c0fd7e6e9619012e7fe0106fde3f755111f81850",
+				"license": { "type": "Apache-2.0", "url": "https://raw.githubusercontent.com/google/guava/v33.3.1/LICENSE" }
+			},
+			{
+				"url": "https://raw.githubusercontent.com/google/guava/v33.3.1/guava/src/com/google/common/collect/ImmutableList.java",
+				"version": "v33.3.1",
+				"sha256": "a5012324a2c0f9deae963d6945be5522ff719fcf31577205aa4df448d4fe0f8f",
+				"license": { "type": "Apache-2.0", "url": "https://raw.githubusercontent.com/google/guava/v33.3.1/LICENSE" }
+			},
+			{
+				"url": "https://raw.githubusercontent.com/google/guava/v33.3.1/guava/src/com/google/common/collect/ImmutableMap.java",
+				"version": "v33.3.1",
+				"sha256": "c4e9d9e1ddab92e6a06ab404ed71b548c2c0891623c4a3bad0f9e2cb5f5b2704",
+				"license": { "type": "Apache-2.0", "url": "https://raw.githubusercontent.com/google/guava/v33.3.1/LICENSE" }
+			},
+			{
+				"url": "https://raw.githubusercontent.com/google/guava/v33.3.1/guava/src/com/google/common/collect/Iterables.java",
+				"version": "v33.3.1",
+				"sha256": "993ce2471c97841104f2ba272b0aa3edb36769c9e879ff6ce1ecfd28ed619f3e",
+				"license": { "type": "Apache-2.0", "url": "https://raw.githubusercontent.com/google/guava/v33.3.1/LICENSE" }
+			},
+			{
+				"url": "https://raw.githubusercontent.com/google/guava/v33.3.1/guava/src/com/google/common/collect/Lists.java",
+				"version": "v33.3.1",
+				"sha256": "37f6de76841e14e1cf6c92e26ac378782ce3f3b7daac81625a0d217ee927b08c",
+				"license": { "type": "Apache-2.0", "url": "https://raw.githubusercontent.com/google/guava/v33.3.1/LICENSE" }
+			},
+			{
+				"url": "https://raw.githubusercontent.com/google/guava/v33.3.1/guava/src/com/google/common/collect/MapMakerInternalMap.java",
+				"version": "v33.3.1",
+				"sha256": "57dee107a5cab98411484e4efe977220650b8454284dc93997ff477b6521e222",
+				"license": { "type": "Apache-2.0", "url": "https://raw.githubusercontent.com/google/guava/v33.3.1/LICENSE" }
+			},
+			{
+				"url":
+				"https://raw.githubusercontent.com/google/guava/v33.3.1/guava/src/com/google/common/collect/AbstractMapBasedMultimap.java",
+				"version": "v33.3.1",
+				"sha256": "c4ba2117316377d16d76ce0e46702a38c20c9377a14adede9c8d62e30a4a5d24",
+				"license": { "type": "Apache-2.0", "url": "https://raw.githubusercontent.com/google/guava/v33.3.1/LICENSE" }
+			},
+			{
+				"url": "https://raw.githubusercontent.com/google/guava/v33.3.1/guava/src/com/google/common/collect/Multimaps.java",
+				"version": "v33.3.1",
+				"sha256": "81002ea634e9fe4a7101c923d0358de42bd100b140424192a7ab47ccfad11e72",
+				"license": { "type": "Apache-2.0", "url": "https://raw.githubusercontent.com/google/guava/v33.3.1/LICENSE" }
+			},
+			{
+				"url": "https://raw.githubusercontent.com/google/guava/v33.3.1/guava/src/com/google/common/collect/Ordering.java",
+				"version": "v33.3.1",
+				"sha256": "ef080a71fcbe0886d79a346a5d89338a0a5a4b6295d6712a9224c5fc6c4963ba",
+				"license": { "type": "Apache-2.0", "url": "https://raw.githubusercontent.com/google/guava/v33.3.1/LICENSE" }
+			},
+			{
+				"url": "https://raw.githubusercontent.com/google/guava/v33.3.1/guava/src/com/google/common/collect/Sets.java",
+				"version": "v33.3.1",
+				"sha256": "36686320c04bc6e8aa83ad340febe8914fff61199feb37576378cbb884bbb6ff",
+				"license": { "type": "Apache-2.0", "url": "https://raw.githubusercontent.com/google/guava/v33.3.1/LICENSE" }
+			},
+			{
+				"url": "https://raw.githubusercontent.com/google/guava/v33.3.1/guava/src/com/google/common/collect/Streams.java",
+				"version": "v33.3.1",
+				"sha256": "03ed23110fc245847d27ba7d967f991f3398b2606134a555599cc1d95b15ecd2",
+				"license": { "type": "Apache-2.0", "url": "https://raw.githubusercontent.com/google/guava/v33.3.1/LICENSE" }
+			},
+			{
+				"url": "https://raw.githubusercontent.com/google/guava/v33.3.1/guava/src/com/google/common/collect/TreeMultiset.java",
+				"version": "v33.3.1",
+				"sha256": "cd4ca3bb371e59cb3a420e9f098952fa57a9e569301673ba02fd0127b25e5f59",
+				"license": { "type": "Apache-2.0", "url": "https://raw.githubusercontent.com/google/guava/v33.3.1/LICENSE" }
+			}
+		],
+		"samples": {
+			"5000": [
+				{ "source": 1, "ranges": [[1457, 36112]] },
+				{ "source": 4, "ranges": [[1657, 43561]] },
+				{ "source": 8, "ranges": [[2350, 88667]] },
+				{ "source": 11, "ranges": [[2022, 37381]] }
+			],
+			"10000": [
+				{ "source": 1, "ranges": [[1457, 36112]] },
+				{ "source": 2, "ranges": [[2102, 31280]] },
+				{ "source": 3, "ranges": [[2256, 45622]] },
+				{ "source": 4, "ranges": [[1657, 43561]] },
+				{ "source": 5, "ranges": [[2188, 44022]] },
+				{ "source": 7, "ranges": [[1796, 49140]] },
+				{ "source": 8, "ranges": [[2350, 88667]] },
+				{ "source": 9, "ranges": [[1604, 40169]] }
+			],
+			"20000": [
+				{ "source": 0, "ranges": [[3091, 171237]] },
+				{ "source": 1, "ranges": [[1457, 36112]] },
+				{ "source": 2, "ranges": [[2102, 31280]] },
+				{ "source": 3, "ranges": [[2256, 45622]] },
+				{ "source": 4, "ranges": [[1657, 43561]] },
+				{ "source": 5, "ranges": [[2188, 44022]] },
+				{ "source": 6, "ranges": [[2146, 92964]] },
+				{ "source": 8, "ranges": [[2350, 88667]] },
+				{ "source": 9, "ranges": [[1604, 40169]] },
+				{ "source": 10, "ranges": [[2232, 82244]] },
+				{ "source": 11, "ranges": [[2022, 37381]] },
+				{ "source": 12, "ranges": [[1763, 35395]] }
+			]
+		}
+	},
+	"go": {
+		"sources": [
+			{
+				"url": "https://raw.githubusercontent.com/golang/go/go1.26.3/src/cmd/compile/internal/ssa/rewriteARM64.go",
+				"version": "go1.26.3",
+				"sha256": "ef456764c90d82399931fc2794dd05d4878aee17eec9d534a2da0759511673ab",
+				"license": { "type": "BSD-3-Clause", "url": "https://raw.githubusercontent.com/golang/go/go1.26.3/LICENSE" }
+			}
+		],
+		"samples": {
+			"5000": [{ "source": 0, "ranges": [[0, 116833]] }],
+			"10000": [{ "source": 0, "ranges": [[0, 233597]] }],
+			"20000": [{ "source": 0, "ranges": [[0, 462554]] }]
+		}
+	},
+	"rust": {
+		"sources": [
+			{
+				"url": "https://raw.githubusercontent.com/rust-lang/rust/1.85.0/library/core/src/iter/traits/iterator.rs",
+				"version": "1.85.0",
+				"sha256": "426473dccc0ae8f9c8a16ae045c7191d31291e39baa39a32d14f88eb18ca9235",
+				"license": { "type": "MIT", "url": "https://raw.githubusercontent.com/rust-lang/rust/1.85.0/LICENSE-MIT" }
+			},
+			{
+				"url": "https://raw.githubusercontent.com/rust-lang/rust/1.85.0/library/alloc/src/vec/mod.rs",
+				"version": "1.85.0",
+				"sha256": "cea08df91f705b5cf0f527b4430d298c2c151203f85af718660943cd05d3465f",
+				"license": { "type": "MIT", "url": "https://raw.githubusercontent.com/rust-lang/rust/1.85.0/LICENSE-MIT" }
+			},
+			{
+				"url": "https://raw.githubusercontent.com/rust-lang/rust/1.85.0/library/core/src/option.rs",
+				"version": "1.85.0",
+				"sha256": "a31b16cccfa14bb5aea26f0d9fe8c73cc4df0c213221277c9a7157f41e2813a9",
+				"license": { "type": "MIT", "url": "https://raw.githubusercontent.com/rust-lang/rust/1.85.0/LICENSE-MIT" }
+			},
+			{
+				"url": "https://raw.githubusercontent.com/rust-lang/rust/1.85.0/library/core/src/slice/mod.rs",
+				"version": "1.85.0",
+				"sha256": "1b87f68a216a75a309067c2975082f4f1a7a064a0558d780b30e772c6e4d2518",
+				"license": { "type": "MIT", "url": "https://raw.githubusercontent.com/rust-lang/rust/1.85.0/LICENSE-MIT" }
+			},
+			{
+				"url": "https://raw.githubusercontent.com/rust-lang/rust/1.85.0/library/core/src/str/mod.rs",
+				"version": "1.85.0",
+				"sha256": "53780233160c5568767def0837e2429739b1f7fe2db50e677ca6e0344f86fe43",
+				"license": { "type": "MIT", "url": "https://raw.githubusercontent.com/rust-lang/rust/1.85.0/LICENSE-MIT" }
+			},
+			{
+				"url": "https://raw.githubusercontent.com/rust-lang/rust/1.85.0/library/alloc/src/string.rs",
+				"version": "1.85.0",
+				"sha256": "e2d2a18642ec8dafeab41429e1328c4add470bd245e6d9a61925219e0f8c953e",
+				"license": { "type": "MIT", "url": "https://raw.githubusercontent.com/rust-lang/rust/1.85.0/LICENSE-MIT" }
+			}
+		],
+		"samples": {
+			"5000": [{ "source": 0, "ranges": [[0, 136135]] }, { "source": 1, "ranges": [[0, 147744]] }],
+			"10000":
+			[{ "source": 0, "ranges": [[0, 136135]] }, { "source": 1, "ranges": [[0, 147744]] }, { "source": 2, "ranges": [[0, 84062]] }],
+			"20000": [
+				{ "source": 0, "ranges": [[0, 136135]] },
+				{ "source": 1, "ranges": [[0, 147744]] },
+				{ "source": 2, "ranges": [[0, 84062]] },
+				{ "source": 3, "ranges": [[0, 182168], [183030, 187207]] },
+				{ "source": 4, "ranges": [[0, 97609]] },
+				{ "source": 5, "ranges": [[0, 99041], [99531, 102251]] }
+			]
+		}
+	},
+	"kotlin": {
+		"sources": [
+			{
+				"url": "https://raw.githubusercontent.com/JetBrains/kotlin/v2.0.21/libraries/stdlib/common/src/generated/_Arrays.kt",
+				"version": "v2.0.21",
+				"sha256": "187efa0db341e0d8298531c19ebc240f4ecd579f26499e6d0d58631a34ae3f27",
+				"license": { "type": "Apache-2.0", "url": "https://raw.githubusercontent.com/JetBrains/kotlin/v2.0.21/license/LICENSE.txt" }
+			}
+		],
+		"samples": {
+			"5000": [{ "source": 0, "ranges": [[0, 154620]] }],
+			"10000": [{ "source": 0, "ranges": [[0, 331018]] }],
+			"20000": [{ "source": 0, "ranges": [[0, 667902]] }]
+		}
+	},
+	"swift": {
+		"sources": [
+			{
+				"url": "https://raw.githubusercontent.com/Alamofire/Alamofire/5.9.1/Source/Core/AFError.swift",
+				"version": "5.9.1",
+				"sha256": "b61da08d741100a9748477f4c451cffadd999281ed2cd6c1c7facf1945502a1a",
+				"license": { "type": "MIT", "url": "https://raw.githubusercontent.com/Alamofire/Alamofire/5.9.1/LICENSE" }
+			},
+			{
+				"url": "https://raw.githubusercontent.com/Alamofire/Alamofire/5.9.1/Source/Features/AlamofireExtended.swift",
+				"version": "5.9.1",
+				"sha256": "8c94279642a63fa1754c767c97b14cff1bedd324116ef694bd78cbc45fea67cd",
+				"license": { "type": "MIT", "url": "https://raw.githubusercontent.com/Alamofire/Alamofire/5.9.1/LICENSE" }
+			},
+			{
+				"url": "https://raw.githubusercontent.com/Alamofire/Alamofire/5.9.1/Source/Features/AuthenticationInterceptor.swift",
+				"version": "5.9.1",
+				"sha256": "1a22d54380dcfd7f2b08b382c872336bc6b80f1058fd794e2b5f2eadaf379230",
+				"license": { "type": "MIT", "url": "https://raw.githubusercontent.com/Alamofire/Alamofire/5.9.1/LICENSE" }
+			},
+			{
+				"url": "https://raw.githubusercontent.com/Alamofire/Alamofire/5.9.1/Source/Features/CachedResponseHandler.swift",
+				"version": "5.9.1",
+				"sha256": "bd667721f4746f2d42544b818da480e7e72ac22607b6b65e8d710c8a2ecb1808",
+				"license": { "type": "MIT", "url": "https://raw.githubusercontent.com/Alamofire/Alamofire/5.9.1/LICENSE" }
+			},
+			{
+				"url": "https://raw.githubusercontent.com/Alamofire/Alamofire/5.9.1/Source/Features/Combine.swift",
+				"version": "5.9.1",
+				"sha256": "0f64659617148901cb79e67e20b4a1869228385322f37fc427b7362e2ffccde4",
+				"license": { "type": "MIT", "url": "https://raw.githubusercontent.com/Alamofire/Alamofire/5.9.1/LICENSE" }
+			},
+			{
+				"url": "https://raw.githubusercontent.com/Alamofire/Alamofire/5.9.1/Source/Features/Concurrency.swift",
+				"version": "5.9.1",
+				"sha256": "f02443de0363bd527fa7a204c44f26a50e694f853a172dc9c764f4f9cc7427ab",
+				"license": { "type": "MIT", "url": "https://raw.githubusercontent.com/Alamofire/Alamofire/5.9.1/LICENSE" }
+			},
+			{
+				"url": "https://raw.githubusercontent.com/Alamofire/Alamofire/5.9.1/Source/Core/DataRequest.swift",
+				"version": "5.9.1",
+				"sha256": "c701defd2080f7ac9c178965096ca875e1e19c5404b2ba922cc8fb3758959d25",
+				"license": { "type": "MIT", "url": "https://raw.githubusercontent.com/Alamofire/Alamofire/5.9.1/LICENSE" }
+			},
+			{
+				"url": "https://raw.githubusercontent.com/Alamofire/Alamofire/5.9.1/Source/Core/DataStreamRequest.swift",
+				"version": "5.9.1",
+				"sha256": "74b015da20ac35dd4e3f81badb4da0129ba87874907488fe9cbb5af0b51a5071",
+				"license": { "type": "MIT", "url": "https://raw.githubusercontent.com/Alamofire/Alamofire/5.9.1/LICENSE" }
+			},
+			{
+				"url": "https://raw.githubusercontent.com/Alamofire/Alamofire/5.9.1/Source/Extensions/DispatchQueue+Alamofire.swift",
+				"version": "5.9.1",
+				"sha256": "3b8a4c48f2304be000e4cb2c39346143d585da8ca39de842997590304589c9dd",
+				"license": { "type": "MIT", "url": "https://raw.githubusercontent.com/Alamofire/Alamofire/5.9.1/LICENSE" }
+			},
+			{
+				"url": "https://raw.githubusercontent.com/Alamofire/Alamofire/5.9.1/Source/Core/DownloadRequest.swift",
+				"version": "5.9.1",
+				"sha256": "508af7b17ff3692c599ded36e2322eaa313fda4ca536560d82a9448817ddffbf",
+				"license": { "type": "MIT", "url": "https://raw.githubusercontent.com/Alamofire/Alamofire/5.9.1/LICENSE" }
+			},
+			{
+				"url": "https://raw.githubusercontent.com/Alamofire/Alamofire/5.9.1/Source/Features/EventMonitor.swift",
+				"version": "5.9.1",
+				"sha256": "99c7f8c445f83a8a488412ccc83d548f984c3395a1a7589cc05638de14afa809",
+				"license": { "type": "MIT", "url": "https://raw.githubusercontent.com/Alamofire/Alamofire/5.9.1/LICENSE" }
+			},
+			{
+				"url": "https://raw.githubusercontent.com/Alamofire/Alamofire/5.9.1/Source/Core/HTTPHeaders.swift",
+				"version": "5.9.1",
+				"sha256": "99e1c2b91f104debde539a60f385beeed449e82df9386148f73848f28554436c",
+				"license": { "type": "MIT", "url": "https://raw.githubusercontent.com/Alamofire/Alamofire/5.9.1/LICENSE" }
+			},
+			{
+				"url": "https://raw.githubusercontent.com/Alamofire/Alamofire/5.9.1/Source/Core/HTTPMethod.swift",
+				"version": "5.9.1",
+				"sha256": "38a11f5cc3ef4beafe86a18debe0b9b3588ff054a3cd3681bd6371dfe5e6f64f",
+				"license": { "type": "MIT", "url": "https://raw.githubusercontent.com/Alamofire/Alamofire/5.9.1/LICENSE" }
+			},
+			{
+				"url": "https://raw.githubusercontent.com/Alamofire/Alamofire/5.9.1/Source/Features/MultipartFormData.swift",
+				"version": "5.9.1",
+				"sha256": "6a78b8809289a8df5da68676c45b41d54d97723be5b22284d81236ec49dbe698",
+				"license": { "type": "MIT", "url": "https://raw.githubusercontent.com/Alamofire/Alamofire/5.9.1/LICENSE" }
+			},
+			{
+				"url": "https://raw.githubusercontent.com/Alamofire/Alamofire/5.9.1/Source/Features/MultipartUpload.swift",
+				"version": "5.9.1",
+				"sha256": "8b4ee1f3813d0818a8d9e286653e83f3d6584e932e66c0074dc96e3e197aefc8",
+				"license": { "type": "MIT", "url": "https://raw.githubusercontent.com/Alamofire/Alamofire/5.9.1/LICENSE" }
+			},
+			{
+				"url": "https://raw.githubusercontent.com/Alamofire/Alamofire/5.9.1/Source/Features/NetworkReachabilityManager.swift",
+				"version": "5.9.1",
+				"sha256": "22d309f90a4eee69c4d2e60dfe20d5b3a48811b47fe42ec942a2fd3d6083a868",
+				"license": { "type": "MIT", "url": "https://raw.githubusercontent.com/Alamofire/Alamofire/5.9.1/LICENSE" }
+			},
+			{
+				"url": "https://raw.githubusercontent.com/Alamofire/Alamofire/5.9.1/Source/Core/Notifications.swift",
+				"version": "5.9.1",
+				"sha256": "a402ae5b72ddc984781ebe42d8cb987a1b900475f833c3fa52b4f515d47e870d",
+				"license": { "type": "MIT", "url": "https://raw.githubusercontent.com/Alamofire/Alamofire/5.9.1/LICENSE" }
+			},
+			{
+				"url": "https://raw.githubusercontent.com/Alamofire/Alamofire/5.9.1/Source/Extensions/OperationQueue+Alamofire.swift",
+				"version": "5.9.1",
+				"sha256": "c66856160c5f5bcd1b0021908e33a8ffe29c4887008a314654e0351d5d684049",
+				"license": { "type": "MIT", "url": "https://raw.githubusercontent.com/Alamofire/Alamofire/5.9.1/LICENSE" }
+			},
+			{
+				"url": "https://raw.githubusercontent.com/Alamofire/Alamofire/5.9.1/Source/Core/ParameterEncoder.swift",
+				"version": "5.9.1",
+				"sha256": "e17b8f89b569b2cca2ca4ae7c7cd27a0abf2b3f78c478612327d34024b8b5f8c",
+				"license": { "type": "MIT", "url": "https://raw.githubusercontent.com/Alamofire/Alamofire/5.9.1/LICENSE" }
+			},
+			{
+				"url": "https://raw.githubusercontent.com/Alamofire/Alamofire/5.9.1/Source/Core/ParameterEncoding.swift",
+				"version": "5.9.1",
+				"sha256": "fe278fe968f81c362e29827faa02ef3acf41f1d9aa62737076bc4f9b12fa9a9f",
+				"license": { "type": "MIT", "url": "https://raw.githubusercontent.com/Alamofire/Alamofire/5.9.1/LICENSE" }
+			},
+			{
+				"url": "https://raw.githubusercontent.com/Alamofire/Alamofire/5.9.1/Source/Core/Protected.swift",
+				"version": "5.9.1",
+				"sha256": "c31bc7197fde10b11c4cac6108df456aebac0703f217e184dace105d737c42d8",
+				"license": { "type": "MIT", "url": "https://raw.githubusercontent.com/Alamofire/Alamofire/5.9.1/LICENSE" }
+			},
+			{
+				"url": "https://raw.githubusercontent.com/Alamofire/Alamofire/5.9.1/Source/Features/RedirectHandler.swift",
+				"version": "5.9.1",
+				"sha256": "ed8e3c61dc7ab212332db49db9e5e04d2dc7cb4f3c9a9521143a71dce7675d01",
+				"license": { "type": "MIT", "url": "https://raw.githubusercontent.com/Alamofire/Alamofire/5.9.1/LICENSE" }
+			},
+			{
+				"url": "https://raw.githubusercontent.com/Alamofire/Alamofire/5.9.1/Source/Core/Request.swift",
+				"version": "5.9.1",
+				"sha256": "4aab822361862c5967971ed9b17f1c26a998afc396caf97a8461ee8bf4d38f68",
+				"license": { "type": "MIT", "url": "https://raw.githubusercontent.com/Alamofire/Alamofire/5.9.1/LICENSE" }
+			},
+			{
+				"url": "https://raw.githubusercontent.com/Alamofire/Alamofire/5.9.1/Source/Features/RequestCompression.swift",
+				"version": "5.9.1",
+				"sha256": "afdb821dbd3c295e61f42430fc49ddf2d2e8548f2a52896a6de112d7c3be23d1",
+				"license": { "type": "MIT", "url": "https://raw.githubusercontent.com/Alamofire/Alamofire/5.9.1/LICENSE" }
+			},
+			{
+				"url": "https://raw.githubusercontent.com/Alamofire/Alamofire/5.9.1/Source/Features/RequestInterceptor.swift",
+				"version": "5.9.1",
+				"sha256": "5c148055d6b512ad0382da7cf18fbd2e39ae9502b4d2064d540b19f545b593f0",
+				"license": { "type": "MIT", "url": "https://raw.githubusercontent.com/Alamofire/Alamofire/5.9.1/LICENSE" }
+			},
+			{
+				"url": "https://raw.githubusercontent.com/Alamofire/Alamofire/5.9.1/Source/Core/RequestTaskMap.swift",
+				"version": "5.9.1",
+				"sha256": "1740c4eb350b8f8c883ab081f4a5db6e20544169ec4bb7255d66e4705b8ae461",
+				"license": { "type": "MIT", "url": "https://raw.githubusercontent.com/Alamofire/Alamofire/5.9.1/LICENSE" }
+			},
+			{
+				"url": "https://raw.githubusercontent.com/Alamofire/Alamofire/5.9.1/Source/Core/Response.swift",
+				"version": "5.9.1",
+				"sha256": "69154d3efb729ab5622be8a9f6064e0c4128f473817d8a4ed340642a7c96b55a",
+				"license": { "type": "MIT", "url": "https://raw.githubusercontent.com/Alamofire/Alamofire/5.9.1/LICENSE" }
+			},
+			{
+				"url": "https://raw.githubusercontent.com/Alamofire/Alamofire/5.9.1/Source/Features/ResponseSerialization.swift",
+				"version": "5.9.1",
+				"sha256": "0f2d621050d68701abd5c946bdce6d4b4966bc8758e6ecc93f29b1d9732bc6aa",
+				"license": { "type": "MIT", "url": "https://raw.githubusercontent.com/Alamofire/Alamofire/5.9.1/LICENSE" }
+			},
+			{
+				"url": "https://raw.githubusercontent.com/Alamofire/Alamofire/5.9.1/Source/Extensions/Result+Alamofire.swift",
+				"version": "5.9.1",
+				"sha256": "795202d519b4d972d3add6716b18a3e4dec618873b974a4c6e0e59d520211ff8",
+				"license": { "type": "MIT", "url": "https://raw.githubusercontent.com/Alamofire/Alamofire/5.9.1/LICENSE" }
+			},
+			{
+				"url": "https://raw.githubusercontent.com/Alamofire/Alamofire/5.9.1/Source/Features/RetryPolicy.swift",
+				"version": "5.9.1",
+				"sha256": "ba00e49de09024e062d83fb70cdf02f4085fac1274b8189789b33ac43fe5992d",
+				"license": { "type": "MIT", "url": "https://raw.githubusercontent.com/Alamofire/Alamofire/5.9.1/LICENSE" }
+			},
+			{
+				"url": "https://raw.githubusercontent.com/Alamofire/Alamofire/5.9.1/Source/Features/ServerTrustEvaluation.swift",
+				"version": "5.9.1",
+				"sha256": "482a8fc56fe748afc4abd0ca1eee352fbea89e77bd3a6b3b2cd8dd2b6ec73ff8",
+				"license": { "type": "MIT", "url": "https://raw.githubusercontent.com/Alamofire/Alamofire/5.9.1/LICENSE" }
+			},
+			{
+				"url": "https://raw.githubusercontent.com/Alamofire/Alamofire/5.9.1/Source/Core/Session.swift",
+				"version": "5.9.1",
+				"sha256": "ff7773a7b7decd1683511ec16adf408d704192b9d6c5379a18b3724af4204c5c",
+				"license": { "type": "MIT", "url": "https://raw.githubusercontent.com/Alamofire/Alamofire/5.9.1/LICENSE" }
+			},
+			{
+				"url": "https://raw.githubusercontent.com/Alamofire/Alamofire/5.9.1/Source/Core/SessionDelegate.swift",
+				"version": "5.9.1",
+				"sha256": "c1f6c223866ab05fcda0f149982502ebbf2b5304d8a455d32ad2a47cfc6e1894",
+				"license": { "type": "MIT", "url": "https://raw.githubusercontent.com/Alamofire/Alamofire/5.9.1/LICENSE" }
+			},
+			{
+				"url": "https://raw.githubusercontent.com/Alamofire/Alamofire/5.9.1/Source/Extensions/StringEncoding+Alamofire.swift",
+				"version": "5.9.1",
+				"sha256": "b6d048e3b624120f3d06798202ec54f87497fb53542bfa9b931e16ee9d01131d",
+				"license": { "type": "MIT", "url": "https://raw.githubusercontent.com/Alamofire/Alamofire/5.9.1/LICENSE" }
+			},
+			{
+				"url": "https://raw.githubusercontent.com/Alamofire/Alamofire/5.9.1/Source/Core/URLConvertible+URLRequestConvertible.swift",
+				"version": "5.9.1",
+				"sha256": "436efa66e6709b8d76991e337616ca5bd9f5100168abc16983aeb78d6f721b29",
+				"license": { "type": "MIT", "url": "https://raw.githubusercontent.com/Alamofire/Alamofire/5.9.1/LICENSE" }
+			},
+			{
+				"url": "https://raw.githubusercontent.com/Alamofire/Alamofire/5.9.1/Source/Features/URLEncodedFormEncoder.swift",
+				"version": "5.9.1",
+				"sha256": "7f6d93f690c513c14d53ab5d8a9f2a9fec3d9f470b312b545d579576efa9bea1",
+				"license": { "type": "MIT", "url": "https://raw.githubusercontent.com/Alamofire/Alamofire/5.9.1/LICENSE" }
+			},
+			{
+				"url": "https://raw.githubusercontent.com/Alamofire/Alamofire/5.9.1/Source/Extensions/URLRequest+Alamofire.swift",
+				"version": "5.9.1",
+				"sha256": "c377b13d71f1c4adcf80a45ca333ad89bb52718ce2b0eb320e89eddb52a3f74e",
+				"license": { "type": "MIT", "url": "https://raw.githubusercontent.com/Alamofire/Alamofire/5.9.1/LICENSE" }
+			},
+			{
+				"url": "https://raw.githubusercontent.com/Alamofire/Alamofire/5.9.1/Source/Extensions/URLSessionConfiguration+Alamofire.swift",
+				"version": "5.9.1",
+				"sha256": "56e509e3dbe0fd0ce09761d9ae72a71b5a5333ef0f36c6f49bec82442c1c8990",
+				"license": { "type": "MIT", "url": "https://raw.githubusercontent.com/Alamofire/Alamofire/5.9.1/LICENSE" }
+			},
+			{
+				"url": "https://raw.githubusercontent.com/Alamofire/Alamofire/5.9.1/Source/Core/UploadRequest.swift",
+				"version": "5.9.1",
+				"sha256": "fe954faaf0e27166bf55a831346345a8dd179c85c20620d44d88c2518b954714",
+				"license": { "type": "MIT", "url": "https://raw.githubusercontent.com/Alamofire/Alamofire/5.9.1/LICENSE" }
+			},
+			{
+				"url": "https://raw.githubusercontent.com/Alamofire/Alamofire/5.9.1/Source/Features/Validation.swift",
+				"version": "5.9.1",
+				"sha256": "b594967ee7cb134761559265c4d314f8274e4ac684da9e2931eaee55d2b4ad6a",
+				"license": { "type": "MIT", "url": "https://raw.githubusercontent.com/Alamofire/Alamofire/5.9.1/LICENSE" }
+			},
+			{
+				"url": "https://raw.githubusercontent.com/Alamofire/Alamofire/5.9.1/Source/Core/WebSocketRequest.swift",
+				"version": "5.9.1",
+				"sha256": "eadffda15ce2055bcf1f79b4b0b0c0dc6167b0bf600995e5fd4a845f8718ad68",
+				"license": { "type": "MIT", "url": "https://raw.githubusercontent.com/Alamofire/Alamofire/5.9.1/LICENSE" }
+			},
+			{
+				"url": "https://raw.githubusercontent.com/apple/swift-nio/2.65.0/Sources/NIOCore/ByteBuffer-core.swift",
+				"version": "2.65.0",
+				"sha256": "67afb87d3715c3286ac60fecc2e20052e3a031671379222b9a8d2b95d3a32b05",
+				"license": { "type": "Apache-2.0", "url": "https://raw.githubusercontent.com/apple/swift-nio/2.65.0/LICENSE.txt" }
+			},
+			{
+				"url": "https://raw.githubusercontent.com/apple/swift-nio/2.65.0/Sources/NIOCore/Channel.swift",
+				"version": "2.65.0",
+				"sha256": "ad36fe45794ab89561cfaacb038076aebc2de1b6b5d943b5da95eba177bad9a7",
+				"license": { "type": "Apache-2.0", "url": "https://raw.githubusercontent.com/apple/swift-nio/2.65.0/LICENSE.txt" }
+			},
+			{
+				"url": "https://raw.githubusercontent.com/apple/swift-nio/2.65.0/Sources/NIOCore/EventLoopFuture.swift",
+				"version": "2.65.0",
+				"sha256": "cf18460003070185aa84cdbf6838c673fe5ed336ce447212cf1192c004bc2056",
+				"license": { "type": "Apache-2.0", "url": "https://raw.githubusercontent.com/apple/swift-nio/2.65.0/LICENSE.txt" }
+			},
+			{
+				"url": "https://raw.githubusercontent.com/apple/swift-nio/2.65.0/Sources/NIOCore/ChannelPipeline.swift",
+				"version": "2.65.0",
+				"sha256": "5e5d0af5c7bacc8d692c63f3784eea7194c1271566c3074e3800430104ad792c",
+				"license": { "type": "Apache-2.0", "url": "https://raw.githubusercontent.com/apple/swift-nio/2.65.0/LICENSE.txt" }
+			}
+		],
+		"samples": {
+			"5000": [
+				{ "source": 0, "ranges": [[0, 37603]] },
+				{ "source": 1, "ranges": [[0, 2374]] },
+				{ "source": 2, "ranges": [[0, 20262]] },
+				{ "source": 3, "ranges": [[0, 4835]] },
+				{ "source": 4, "ranges": [[0, 36897]] },
+				{ "source": 5, "ranges": [[0, 48741]] },
+				{ "source": 6, "ranges": [[0, 23828]] },
+				{ "source": 7, "ranges": [[0, 25730]] },
+				{ "source": 8, "ranges": [[0, 1615]] },
+				{ "source": 9, "ranges": [[0, 31478]] },
+				{ "source": 10, "ranges": [[0, 45572]] }
+			],
+			"10000": [
+				{ "source": 0, "ranges": [[0, 37603]] },
+				{ "source": 1, "ranges": [[0, 2374]] },
+				{ "source": 2, "ranges": [[0, 20262]] },
+				{ "source": 3, "ranges": [[0, 4835]] },
+				{ "source": 4, "ranges": [[0, 36897]] },
+				{ "source": 5, "ranges": [[0, 48741]] },
+				{ "source": 6, "ranges": [[0, 23828]] },
+				{ "source": 7, "ranges": [[0, 25730]] },
+				{ "source": 8, "ranges": [[0, 1615]] },
+				{ "source": 9, "ranges": [[0, 31478]] },
+				{ "source": 10, "ranges": [[0, 45572]] },
+				{ "source": 11, "ranges": [[0, 16412]] },
+				{ "source": 12, "ranges": [[0, 2439]] },
+				{ "source": 13, "ranges": [[0, 24281]] },
+				{ "source": 14, "ranges": [[0, 3423]] },
+				{ "source": 15, "ranges": [[0, 11610]] },
+				{ "source": 16, "ranges": [[0, 6019]] },
+				{ "source": 17, "ranges": [[0, 2479]] },
+				{ "source": 18, "ranges": [[0, 9789]] },
+				{ "source": 19, "ranges": [[0, 14539]] },
+				{ "source": 20, "ranges": [[0, 5192]] },
+				{ "source": 21, "ranges": [[0, 4905]] },
+				{ "source": 22, "ranges": [[0, 44044]] },
+				{ "source": 23, "ranges": [[0, 6773]] },
+				{ "source": 24, "ranges": [[0, 14733]] },
+				{ "source": 25, "ranges": [[0, 6227]] },
+				{ "source": 26, "ranges": [[0, 21118]] }
+			],
+			"20000": [
+				{ "source": 0, "ranges": [[0, 37603]] },
+				{ "source": 1, "ranges": [[0, 2374]] },
+				{ "source": 2, "ranges": [[0, 20262]] },
+				{ "source": 3, "ranges": [[0, 4835]] },
+				{ "source": 4, "ranges": [[0, 36897]] },
+				{ "source": 5, "ranges": [[0, 48741]] },
+				{ "source": 6, "ranges": [[0, 23828]] },
+				{ "source": 7, "ranges": [[0, 25730]] },
+				{ "source": 8, "ranges": [[0, 1615]] },
+				{ "source": 9, "ranges": [[0, 31478]] },
+				{ "source": 10, "ranges": [[0, 45572]] },
+				{ "source": 11, "ranges": [[0, 16412]] },
+				{ "source": 12, "ranges": [[0, 2439]] },
+				{ "source": 13, "ranges": [[0, 24281]] },
+				{ "source": 14, "ranges": [[0, 3423]] },
+				{ "source": 15, "ranges": [[0, 11610]] },
+				{ "source": 16, "ranges": [[0, 6019]] },
+				{ "source": 17, "ranges": [[0, 2479]] },
+				{ "source": 18, "ranges": [[0, 9789]] },
+				{ "source": 19, "ranges": [[0, 14539]] },
+				{ "source": 20, "ranges": [[0, 5192]] },
+				{ "source": 21, "ranges": [[0, 4905]] },
+				{ "source": 22, "ranges": [[0, 44044]] },
+				{ "source": 23, "ranges": [[0, 6773]] },
+				{ "source": 24, "ranges": [[0, 14733]] },
+				{ "source": 25, "ranges": [[0, 6227]] },
+				{ "source": 26, "ranges": [[0, 21118]] },
+				{ "source": 27, "ranges": [[0, 26066]] },
+				{ "source": 28, "ranges": [[0, 4621]] },
+				{ "source": 29, "ranges": [[0, 24695]] },
+				{ "source": 30, "ranges": [[0, 39061]] },
+				{ "source": 31, "ranges": [[0, 75833]] },
+				{ "source": 32, "ranges": [[0, 17862]] },
+				{ "source": 33, "ranges": [[0, 2146]] },
+				{ "source": 34, "ranges": [[0, 3849]] },
+				{ "source": 35, "ranges": [[0, 48464]] },
+				{ "source": 36, "ranges": [[0, 1658]] },
+				{ "source": 37, "ranges": [[0, 2089]] },
+				{ "source": 38, "ranges": [[0, 7215]] },
+				{ "source": 39, "ranges": [[0, 12443]] },
+				{ "source": 40, "ranges": [[0, 20810]] },
+				{ "source": 41, "ranges": [[0, 55402]] },
+				{ "source": 42, "ranges": [[0, 17338]] },
+				{ "source": 43, "ranges": [[0, 83078]] },
+				{ "source": 44, "ranges": [[0, 83171]] }
+			]
+		}
+	},
+	"php": {
+		"sources": [
+			{
+				"url": "https://raw.githubusercontent.com/laravel/framework/v11.0.0/src/Illuminate/Foundation/Application.php",
+				"version": "v11.0.0",
+				"sha256": "90af8956a5f62ba29f73777cc716de9592a5211ceed2dfcc8abd89d4252a9b18",
+				"license": { "type": "MIT", "url": "https://raw.githubusercontent.com/laravel/framework/v11.0.0/LICENSE.md" }
+			},
+			{
+				"url": "https://raw.githubusercontent.com/laravel/framework/v11.0.0/src/Illuminate/Collections/Arr.php",
+				"version": "v11.0.0",
+				"sha256": "5b1da4f4f7a6d3ed11da8f624be77f50a3b7332ae10ef487e38dbba94dfde52a",
+				"license": { "type": "MIT", "url": "https://raw.githubusercontent.com/laravel/framework/v11.0.0/LICENSE.md" }
+			},
+			{
+				"url": "https://raw.githubusercontent.com/laravel/framework/v11.0.0/src/Illuminate/Validation/Concerns/ValidatesAttributes.php",
+				"version": "v11.0.0",
+				"sha256": "31b1f249d41afaeadfc1a430fe662fca25f39e291327d8f4864a4c089de66a73",
+				"license": { "type": "MIT", "url": "https://raw.githubusercontent.com/laravel/framework/v11.0.0/LICENSE.md" }
+			},
+			{
+				"url": "https://raw.githubusercontent.com/laravel/framework/v11.0.0/src/Illuminate/View/Compilers/BladeCompiler.php",
+				"version": "v11.0.0",
+				"sha256": "391bac367d7a9e185308921965016d4f9e2ab5d7bcee85e6ce923faa76b0ef6c",
+				"license": { "type": "MIT", "url": "https://raw.githubusercontent.com/laravel/framework/v11.0.0/LICENSE.md" }
+			},
+			{
+				"url": "https://raw.githubusercontent.com/laravel/framework/v11.0.0/src/Illuminate/Database/Schema/Blueprint.php",
+				"version": "v11.0.0",
+				"sha256": "1744cb9e00037f35f55405f2c47f3edb5101f6f86a9a12337c5d8fba9120cd20",
+				"license": { "type": "MIT", "url": "https://raw.githubusercontent.com/laravel/framework/v11.0.0/LICENSE.md" }
+			},
+			{
+				"url": "https://raw.githubusercontent.com/laravel/framework/v11.0.0/src/Illuminate/Database/Query/Builder.php",
+				"version": "v11.0.0",
+				"sha256": "9c62a117f6e794fbd35a0a342aa783c31cc1d4852a907f466667de25d8315e69",
+				"license": { "type": "MIT", "url": "https://raw.githubusercontent.com/laravel/framework/v11.0.0/LICENSE.md" }
+			},
+			{
+				"url": "https://raw.githubusercontent.com/laravel/framework/v11.0.0/src/Illuminate/Collections/Collection.php",
+				"version": "v11.0.0",
+				"sha256": "069e1dd33153cca19b384d28f4056901c162c659a04f9c9c5c468376baabb2e9",
+				"license": { "type": "MIT", "url": "https://raw.githubusercontent.com/laravel/framework/v11.0.0/LICENSE.md" }
+			},
+			{
+				"url": "https://raw.githubusercontent.com/laravel/framework/v11.0.0/src/Illuminate/Database/Connection.php",
+				"version": "v11.0.0",
+				"sha256": "90a37047bc32686983a6494aa847c68747bf74e9567ea664ba2f10032390f23e",
+				"license": { "type": "MIT", "url": "https://raw.githubusercontent.com/laravel/framework/v11.0.0/LICENSE.md" }
+			},
+			{
+				"url": "https://raw.githubusercontent.com/laravel/framework/v11.0.0/src/Illuminate/Database/Eloquent/Builder.php",
+				"version": "v11.0.0",
+				"sha256": "e72549b2db9656dfa9c79b6fb5d888e690f75204d3db3777676c571ab0179074",
+				"license": { "type": "MIT", "url": "https://raw.githubusercontent.com/laravel/framework/v11.0.0/LICENSE.md" }
+			},
+			{
+				"url": "https://raw.githubusercontent.com/laravel/framework/v11.0.0/src/Illuminate/Database/Query/Grammars/Grammar.php",
+				"version": "v11.0.0",
+				"sha256": "ce4b49795dce1e74b53f9d14a696f17d90c35c2a3e525bb91c2cda03a08f41f0",
+				"license": { "type": "MIT", "url": "https://raw.githubusercontent.com/laravel/framework/v11.0.0/LICENSE.md" }
+			},
+			{
+				"url": "https://raw.githubusercontent.com/laravel/framework/v11.0.0/src/Illuminate/Database/Eloquent/Model.php",
+				"version": "v11.0.0",
+				"sha256": "e71f1660b1ba4e4522a41e6390a8beb732843c09895089f060508f59ddaa6ef2",
+				"license": { "type": "MIT", "url": "https://raw.githubusercontent.com/laravel/framework/v11.0.0/LICENSE.md" }
+			},
+			{
+				"url": "https://raw.githubusercontent.com/laravel/framework/v11.0.0/src/Illuminate/Validation/Validator.php",
+				"version": "v11.0.0",
+				"sha256": "544edebe24f4318d3c2430f4d6555ab1026b8f63b997a3dda3f48c35f2554013",
+				"license": { "type": "MIT", "url": "https://raw.githubusercontent.com/laravel/framework/v11.0.0/LICENSE.md" }
+			}
+		],
+		"samples": {
+			"5000": [{ "source": 2, "ranges": [[0, 75952]] }, { "source": 10, "ranges": [[6, 63611]] }],
+			"10000": [
+				{ "source": 0, "ranges": [[0, 44056]] },
+				{ "source": 1, "ranges": [[6, 23175]] },
+				{ "source": 2, "ranges": [[6, 75952]] },
+				{ "source": 7, "ranges": [[6, 41853]] },
+				{ "source": 9, "ranges": [[6, 42396]] },
+				{ "source": 11, "ranges": [[6, 42146]] }
+			],
+			"20000": [
+				{ "source": 0, "ranges": [[0, 44056]] },
+				{ "source": 1, "ranges": [[6, 23175]] },
+				{ "source": 2, "ranges": [[6, 75952]] },
+				{ "source": 3, "ranges": [[6, 27035]] },
+				{ "source": 4, "ranges": [[6, 48497]] },
+				{ "source": 5, "ranges": [[6, 121021]] },
+				{ "source": 6, "ranges": [[6, 48221]] },
+				{ "source": 8, "ranges": [[6, 59005]] },
+				{ "source": 10, "ranges": [[6, 63611]] },
+				{ "source": 11, "ranges": [[6, 42146]] }
+			]
+		}
+	},
+	"javascript": {
+		"sources": [
+			{
+				"url": "https://raw.githubusercontent.com/jquery/jquery-ui/1.13.3/ui/widgets/datepicker.js",
+				"version": "1.13.3",
+				"sha256": "e72ab820991d4bbda45d80bc4b5edeb0d5a7275a863e27d83938dc0df34857db",
+				"license": { "type": "MIT", "url": "https://raw.githubusercontent.com/jquery/jquery-ui/1.13.3/LICENSE.txt" }
+			},
+			{
+				"url": "https://raw.githubusercontent.com/jquery/jquery-ui/1.13.3/ui/widgets/accordion.js",
+				"version": "1.13.3",
+				"sha256": "c0a0455e47203df9ab5d067782272240c2185130220c616bc55a28c91699578a",
+				"license": { "type": "MIT", "url": "https://raw.githubusercontent.com/jquery/jquery-ui/1.13.3/LICENSE.txt" }
+			},
+			{
+				"url": "https://raw.githubusercontent.com/jquery/jquery-ui/1.13.3/ui/widgets/autocomplete.js",
+				"version": "1.13.3",
+				"sha256": "3d5733cbc39c03fcbd6010238ebf90e58452d11467f25661082c12628759f3b9",
+				"license": { "type": "MIT", "url": "https://raw.githubusercontent.com/jquery/jquery-ui/1.13.3/LICENSE.txt" }
+			},
+			{
+				"url": "https://raw.githubusercontent.com/jquery/jquery-ui/1.13.3/ui/widgets/button.js",
+				"version": "1.13.3",
+				"sha256": "7346746435ec9f450c7e55245958e35193c8b73e56094ca5a7b13f6e10041384",
+				"license": { "type": "MIT", "url": "https://raw.githubusercontent.com/jquery/jquery-ui/1.13.3/LICENSE.txt" }
+			},
+			{
+				"url": "https://raw.githubusercontent.com/jquery/jquery-ui/1.13.3/ui/widgets/checkboxradio.js",
+				"version": "1.13.3",
+				"sha256": "825f572edc175945c7e3c656f100539c04cb2766bb68bd9da38e83ff3c274797",
+				"license": { "type": "MIT", "url": "https://raw.githubusercontent.com/jquery/jquery-ui/1.13.3/LICENSE.txt" }
+			},
+			{
+				"url": "https://raw.githubusercontent.com/jquery/jquery-ui/1.13.3/ui/widgets/controlgroup.js",
+				"version": "1.13.3",
+				"sha256": "ad2003de4142edcaa7d67bdaa9997cf2f073593bd6c94f638fbb8a18fb3543db",
+				"license": { "type": "MIT", "url": "https://raw.githubusercontent.com/jquery/jquery-ui/1.13.3/LICENSE.txt" }
+			},
+			{
+				"url": "https://raw.githubusercontent.com/jquery/jquery-ui/1.13.3/ui/widgets/dialog.js",
+				"version": "1.13.3",
+				"sha256": "b718fbd2597beb7aa05802d97b9232bde6f2a90203032c5cf74489bc8ce1d80c",
+				"license": { "type": "MIT", "url": "https://raw.githubusercontent.com/jquery/jquery-ui/1.13.3/LICENSE.txt" }
+			},
+			{
+				"url": "https://raw.githubusercontent.com/jquery/jquery-ui/1.13.3/ui/widgets/draggable.js",
+				"version": "1.13.3",
+				"sha256": "c1135a4e533486be8ff6388c7ee516426d0dd7dbeb98ddcf7398e37c8c4166c6",
+				"license": { "type": "MIT", "url": "https://raw.githubusercontent.com/jquery/jquery-ui/1.13.3/LICENSE.txt" }
+			},
+			{
+				"url": "https://raw.githubusercontent.com/jquery/jquery-ui/1.13.3/ui/widgets/droppable.js",
+				"version": "1.13.3",
+				"sha256": "7cd1932545522347ef217bcbc7774c4c03553b0cb6369f2b9f9b32b5a717e5ce",
+				"license": { "type": "MIT", "url": "https://raw.githubusercontent.com/jquery/jquery-ui/1.13.3/LICENSE.txt" }
+			},
+			{
+				"url": "https://raw.githubusercontent.com/jquery/jquery-ui/1.13.3/ui/widgets/menu.js",
+				"version": "1.13.3",
+				"sha256": "58a011569ad35ba9e1d02ebf78fda6bef1c4fdb7e87cedf2ceb01d9309a3cced",
+				"license": { "type": "MIT", "url": "https://raw.githubusercontent.com/jquery/jquery-ui/1.13.3/LICENSE.txt" }
+			},
+			{
+				"url": "https://raw.githubusercontent.com/jquery/jquery-ui/1.13.3/ui/widgets/progressbar.js",
+				"version": "1.13.3",
+				"sha256": "0b3ac04f7be3acdbd734483f111953d649ebe89c454ed37917c9f2c66c96edd6",
+				"license": { "type": "MIT", "url": "https://raw.githubusercontent.com/jquery/jquery-ui/1.13.3/LICENSE.txt" }
+			},
+			{
+				"url": "https://raw.githubusercontent.com/jquery/jquery-ui/1.13.3/ui/widgets/resizable.js",
+				"version": "1.13.3",
+				"sha256": "8bad5da8db91181346a861f3dd5332b20131374a94fdccc19f0cbb5cb43f174f",
+				"license": { "type": "MIT", "url": "https://raw.githubusercontent.com/jquery/jquery-ui/1.13.3/LICENSE.txt" }
+			},
+			{
+				"url": "https://raw.githubusercontent.com/jquery/jquery-ui/1.13.3/ui/widgets/selectable.js",
+				"version": "1.13.3",
+				"sha256": "47d95f4448bace9f2b3bb1480a6280727fa3f9388d1c24f7ac5241a1825015b2",
+				"license": { "type": "MIT", "url": "https://raw.githubusercontent.com/jquery/jquery-ui/1.13.3/LICENSE.txt" }
+			},
+			{
+				"url": "https://raw.githubusercontent.com/jquery/jquery-ui/1.13.3/ui/widgets/selectmenu.js",
+				"version": "1.13.3",
+				"sha256": "3754610bac80d13d2ca920c5766d8577f67e54ea20687acda98856ef4a173c48",
+				"license": { "type": "MIT", "url": "https://raw.githubusercontent.com/jquery/jquery-ui/1.13.3/LICENSE.txt" }
+			},
+			{
+				"url": "https://raw.githubusercontent.com/jquery/jquery-ui/1.13.3/ui/widgets/slider.js",
+				"version": "1.13.3",
+				"sha256": "a1952264c64f212cf42e2e4a40d1870b86821e8f701cdffa1716737d1b65b5b9",
+				"license": { "type": "MIT", "url": "https://raw.githubusercontent.com/jquery/jquery-ui/1.13.3/LICENSE.txt" }
+			},
+			{
+				"url": "https://raw.githubusercontent.com/jquery/jquery/3.7.1/dist/jquery.js",
+				"version": "3.7.1",
+				"sha256": "78a85aca2f0b110c29e0d2b137e09f0a1fb7a8e554b499f740d6744dc8962cfe",
+				"license": { "type": "MIT", "url": "https://raw.githubusercontent.com/jquery/jquery/3.7.1/LICENSE.txt" }
+			}
+		],
+		"samples": {
+			"5000": [
+				{ "source": 0, "ranges": [[0, 82523]] },
+				{ "source": 1, "ranges": [[0, 16138]] },
+				{ "source": 2, "ranges": [[0, 17530]] },
+				{ "source": 3, "ranges": [[0, 11706]] },
+				{ "source": 4, "ranges": [[0, 7589]] },
+				{ "source": 5, "ranges": [[0, 8626]] },
+				{ "source": 6, "ranges": [[0, 23896]] }
+			],
+			"10000": [
+				{ "source": 0, "ranges": [[0, 82523]] },
+				{ "source": 1, "ranges": [[0, 16138]] },
+				{ "source": 2, "ranges": [[0, 17530]] },
+				{ "source": 3, "ranges": [[0, 11706]] },
+				{ "source": 4, "ranges": [[0, 7589]] },
+				{ "source": 5, "ranges": [[0, 8626]] },
+				{ "source": 6, "ranges": [[0, 23896]] },
+				{ "source": 7, "ranges": [[0, 35546]] },
+				{ "source": 8, "ranges": [[0, 12899]] },
+				{ "source": 9, "ranges": [[0, 18960]] },
+				{ "source": 10, "ranges": [[0, 4239]] },
+				{ "source": 11, "ranges": [[0, 30490]] },
+				{ "source": 12, "ranges": [[0, 8129]] },
+				{ "source": 13, "ranges": [[0, 16346]] }
+			],
+			"20000": [
+				{ "source": 0, "ranges": [[0, 82523]] },
+				{ "source": 1, "ranges": [[0, 16138]] },
+				{ "source": 2, "ranges": [[0, 17530]] },
+				{ "source": 3, "ranges": [[0, 11706]] },
+				{ "source": 4, "ranges": [[0, 7589]] },
+				{ "source": 5, "ranges": [[0, 8626]] },
+				{ "source": 6, "ranges": [[0, 23896]] },
+				{ "source": 7, "ranges": [[0, 35546]] },
+				{ "source": 10, "ranges": [[0, 4239]] },
+				{ "source": 11, "ranges": [[0, 30490]] },
+				{ "source": 12, "ranges": [[0, 8129]] },
+				{ "source": 14, "ranges": [[0, 19599]] },
+				{ "source": 15, "ranges": [[0, 285314]] }
+			]
+		}
+	},
+	"typescript": {
+		"sources": [
+			{
+				"url":
+				"https://raw.githubusercontent.com/cloudflare/cloudflare-typescript/v4.2.0/src/resources/zero-trust/access/applications/applications.ts",
+				"version": "v4.2.0",
+				"sha256": "6ef51cbb515f1300119662a444e73997558e5bfde39207c600cecd3f333bab53",
+				"license": { "type": "Apache-2.0", "url": "https://raw.githubusercontent.com/cloudflare/cloudflare-typescript/v4.2.0/LICENSE" }
+			},
+			{
+				"url": "https://raw.githubusercontent.com/cloudflare/cloudflare-typescript/v4.2.0/src/resources/zero-trust/access/policies.ts",
+				"version": "v4.2.0",
+				"sha256": "21adf38aa7aa13eb58faba0018b6dac56fab56cbd3dbaf5fe3b61633772d59b9",
+				"license": { "type": "Apache-2.0", "url": "https://raw.githubusercontent.com/cloudflare/cloudflare-typescript/v4.2.0/LICENSE" }
+			},
+			{
+				"url": "https://raw.githubusercontent.com/cloudflare/cloudflare-typescript/v4.2.0/src/resources/zero-trust/access/groups.ts",
+				"version": "v4.2.0",
+				"sha256": "2aa50fef4c79aef5d499f4b5dd55ce168f1d901ad23a4cd3e2fe194bb3705876",
+				"license": { "type": "Apache-2.0", "url": "https://raw.githubusercontent.com/cloudflare/cloudflare-typescript/v4.2.0/LICENSE" }
+			}
+		],
+		"samples": {
+			"5000": [{ "source": 0, "ranges": [[0, 138988]] }],
+			"10000": [{ "source": 0, "ranges": [[0, 290664]] }],
+			"20000":
+			[{ "source": 0, "ranges": [[0, 551830]] }, { "source": 1, "ranges": [[0, 19155]] }, { "source": 2, "ranges": [[0, 14632]] }]
+		}
+	},
+	"ruby": {
+		"sources": [
+			{
+				"url": "https://raw.githubusercontent.com/rails/rails/v7.1.3/activerecord/lib/active_record/aggregations.rb",
+				"version": "v7.1.3",
+				"sha256": "4d716461c80bcea913dde8d96cd7142d9de957015dd23a52371ffe0a975866b3",
+				"license": { "type": "MIT", "url": "https://raw.githubusercontent.com/rails/rails/v7.1.3/MIT-LICENSE" }
+			},
+			{
+				"url": "https://raw.githubusercontent.com/rails/rails/v7.1.3/activerecord/lib/active_record/associations.rb",
+				"version": "v7.1.3",
+				"sha256": "40dcfa9f812c4bf1d7c89d6ea7fe4b8034a07af8a4f88cfe17d3c5a9de298dc2",
+				"license": { "type": "MIT", "url": "https://raw.githubusercontent.com/rails/rails/v7.1.3/MIT-LICENSE" }
+			},
+			{
+				"url": "https://raw.githubusercontent.com/rails/rails/v7.1.3/activerecord/lib/active_record/attribute_methods.rb",
+				"version": "v7.1.3",
+				"sha256": "bf394beec42739e1ca2fd3ce0dc87ce21ae8cbd13f25b8d4ac6fc288abc331fa",
+				"license": { "type": "MIT", "url": "https://raw.githubusercontent.com/rails/rails/v7.1.3/MIT-LICENSE" }
+			},
+			{
+				"url": "https://raw.githubusercontent.com/rails/rails/v7.1.3/activerecord/lib/active_record/attributes.rb",
+				"version": "v7.1.3",
+				"sha256": "d72df435be6925198805e5cce5adfdf67b5224f0d02e91da51ffc303a6ac5ad6",
+				"license": { "type": "MIT", "url": "https://raw.githubusercontent.com/rails/rails/v7.1.3/MIT-LICENSE" }
+			},
+			{
+				"url": "https://raw.githubusercontent.com/rails/rails/v7.1.3/activerecord/lib/active_record/autosave_association.rb",
+				"version": "v7.1.3",
+				"sha256": "cce0c0f0885de80938db78235c1559fd6e0686aaa1807b185927ea38bf723eb5",
+				"license": { "type": "MIT", "url": "https://raw.githubusercontent.com/rails/rails/v7.1.3/MIT-LICENSE" }
+			},
+			{
+				"url": "https://raw.githubusercontent.com/rails/rails/v7.1.3/activerecord/lib/active_record/base.rb",
+				"version": "v7.1.3",
+				"sha256": "01260982a23d55314bf7d60a0f67a752aedec86bf2c0d88622c12e085e7d534b",
+				"license": { "type": "MIT", "url": "https://raw.githubusercontent.com/rails/rails/v7.1.3/MIT-LICENSE" }
+			},
+			{
+				"url": "https://raw.githubusercontent.com/rails/rails/v7.1.3/activerecord/lib/active_record/relation/calculations.rb",
+				"version": "v7.1.3",
+				"sha256": "0e6796097f82d27b9f099efa14999de2f7a218237a6abbd6d430695c158ed694",
+				"license": { "type": "MIT", "url": "https://raw.githubusercontent.com/rails/rails/v7.1.3/MIT-LICENSE" }
+			},
+			{
+				"url": "https://raw.githubusercontent.com/rails/rails/v7.1.3/activerecord/lib/active_record/callbacks.rb",
+				"version": "v7.1.3",
+				"sha256": "6657ea64729284488c00f94fd46ba1731bf43efc5d1f86305e463cdb4359143a",
+				"license": { "type": "MIT", "url": "https://raw.githubusercontent.com/rails/rails/v7.1.3/MIT-LICENSE" }
+			},
+			{
+				"url": "https://raw.githubusercontent.com/rails/rails/v7.1.3/activerecord/lib/active_record/connection_handling.rb",
+				"version": "v7.1.3",
+				"sha256": "9d6071eeca3ed2ecea88e0c01ca3b407be81be0aee0ba9cf2244817e61904586",
+				"license": { "type": "MIT", "url": "https://raw.githubusercontent.com/rails/rails/v7.1.3/MIT-LICENSE" }
+			},
+			{
+				"url": "https://raw.githubusercontent.com/rails/rails/v7.1.3/activerecord/lib/active_record/core.rb",
+				"version": "v7.1.3",
+				"sha256": "fe514426c96839b0f2e10d5c9c9aaa0e577ccb2004114ab3da89f87ad7c1bdca",
+				"license": { "type": "MIT", "url": "https://raw.githubusercontent.com/rails/rails/v7.1.3/MIT-LICENSE" }
+			},
+			{
+				"url": "https://raw.githubusercontent.com/rails/rails/v7.1.3/activerecord/lib/active_record/counter_cache.rb",
+				"version": "v7.1.3",
+				"sha256": "4fdaff0b56caf06554bfc149c1dc7e0eca8165942373a4e33869b66d432cb8f6",
+				"license": { "type": "MIT", "url": "https://raw.githubusercontent.com/rails/rails/v7.1.3/MIT-LICENSE" }
+			},
+			{
+				"url": "https://raw.githubusercontent.com/rails/rails/v7.1.3/activerecord/lib/active_record/database_configurations.rb",
+				"version": "v7.1.3",
+				"sha256": "d0469725dbfa5c40e0eabc50aa501e7e26f7919bfbd30a2c30ecb80211f50e8b",
+				"license": { "type": "MIT", "url": "https://raw.githubusercontent.com/rails/rails/v7.1.3/MIT-LICENSE" }
+			},
+			{
+				"url": "https://raw.githubusercontent.com/rails/rails/v7.1.3/activerecord/lib/active_record/delegated_type.rb",
+				"version": "v7.1.3",
+				"sha256": "6d7569aef159c7b5bba880fc75124a0c0d5d5b0bca7c944335e36a6a856fd9bb",
+				"license": { "type": "MIT", "url": "https://raw.githubusercontent.com/rails/rails/v7.1.3/MIT-LICENSE" }
+			},
+			{
+				"url": "https://raw.githubusercontent.com/rails/rails/v7.1.3/activerecord/lib/active_record/enum.rb",
+				"version": "v7.1.3",
+				"sha256": "3822404e7b275407cb12c8a2a5719f4a0d12260dc059f471d304f9faaf702cb9",
+				"license": { "type": "MIT", "url": "https://raw.githubusercontent.com/rails/rails/v7.1.3/MIT-LICENSE" }
+			},
+			{
+				"url": "https://raw.githubusercontent.com/rails/rails/v7.1.3/activerecord/lib/active_record/errors.rb",
+				"version": "v7.1.3",
+				"sha256": "0fcc05c5c11e5372009ef899ab8701321ceb94b4acbf2e7abe0947be6b029b97",
+				"license": { "type": "MIT", "url": "https://raw.githubusercontent.com/rails/rails/v7.1.3/MIT-LICENSE" }
+			},
+			{
+				"url": "https://raw.githubusercontent.com/rails/rails/v7.1.3/activerecord/lib/active_record/fixtures.rb",
+				"version": "v7.1.3",
+				"sha256": "2f451f493d0c4d77cca852a912ee56769c89a839b384fee406eb5f0c90191b21",
+				"license": { "type": "MIT", "url": "https://raw.githubusercontent.com/rails/rails/v7.1.3/MIT-LICENSE" }
+			},
+			{
+				"url": "https://raw.githubusercontent.com/rails/rails/v7.1.3/activerecord/lib/active_record/inheritance.rb",
+				"version": "v7.1.3",
+				"sha256": "7ff6ad13c4a0fde97aaca1bd075ce2c0d8114be064840f07e0f448dac30c98ae",
+				"license": { "type": "MIT", "url": "https://raw.githubusercontent.com/rails/rails/v7.1.3/MIT-LICENSE" }
+			},
+			{
+				"url": "https://raw.githubusercontent.com/rails/rails/v7.1.3/activerecord/lib/active_record/insert_all.rb",
+				"version": "v7.1.3",
+				"sha256": "0f4832b1fa4d38f49a06271af8a477a6c67f983a176a8eaf8ea0bec3294bee8e",
+				"license": { "type": "MIT", "url": "https://raw.githubusercontent.com/rails/rails/v7.1.3/MIT-LICENSE" }
+			},
+			{
+				"url": "https://raw.githubusercontent.com/rails/rails/v7.1.3/activerecord/lib/active_record/integration.rb",
+				"version": "v7.1.3",
+				"sha256": "6798aa1aca50df6503cf85454ca2cce8073338c59614d0dfa11fb6356f8c6186",
+				"license": { "type": "MIT", "url": "https://raw.githubusercontent.com/rails/rails/v7.1.3/MIT-LICENSE" }
+			},
+			{
+				"url": "https://raw.githubusercontent.com/rails/rails/v7.1.3/activerecord/lib/active_record/migration.rb",
+				"version": "v7.1.3",
+				"sha256": "9bf57792ee887d14e12e031cee33830717e82856cd841b96f1d71870284e5ee8",
+				"license": { "type": "MIT", "url": "https://raw.githubusercontent.com/rails/rails/v7.1.3/MIT-LICENSE" }
+			},
+			{
+				"url": "https://raw.githubusercontent.com/rails/rails/v7.1.3/activerecord/lib/active_record/model_schema.rb",
+				"version": "v7.1.3",
+				"sha256": "df5f101e3b994937fdfa15659c0964abc17190257a27321ee1606cab4396157a",
+				"license": { "type": "MIT", "url": "https://raw.githubusercontent.com/rails/rails/v7.1.3/MIT-LICENSE" }
+			},
+			{
+				"url": "https://raw.githubusercontent.com/rails/rails/v7.1.3/activerecord/lib/active_record/nested_attributes.rb",
+				"version": "v7.1.3",
+				"sha256": "e3a6d48528c0b3f651d6185c6d60c8e025b0556e62afb3f45515046e12dd2bed",
+				"license": { "type": "MIT", "url": "https://raw.githubusercontent.com/rails/rails/v7.1.3/MIT-LICENSE" }
+			},
+			{
+				"url": "https://raw.githubusercontent.com/rails/rails/v7.1.3/activerecord/lib/active_record/persistence.rb",
+				"version": "v7.1.3",
+				"sha256": "72ba18d95f35c92572d3dce3b3d116457c49fd03c0a1e62af203f6b635fe85f0",
+				"license": { "type": "MIT", "url": "https://raw.githubusercontent.com/rails/rails/v7.1.3/MIT-LICENSE" }
+			},
+			{
+				"url": "https://raw.githubusercontent.com/rails/rails/v7.1.3/activerecord/lib/active_record/relation/query_methods.rb",
+				"version": "v7.1.3",
+				"sha256": "ba9dc538b248f51254cda2574bb90c6eeabd742ca9e884c6e50fcc42419abfd3",
+				"license": { "type": "MIT", "url": "https://raw.githubusercontent.com/rails/rails/v7.1.3/MIT-LICENSE" }
+			},
+			{
+				"url": "https://raw.githubusercontent.com/rails/rails/v7.1.3/activerecord/lib/active_record/railtie.rb",
+				"version": "v7.1.3",
+				"sha256": "895dd418450cc94b8fdb8e956240b7eb08bacf7f94b8b54779d91401168ba99f",
+				"license": { "type": "MIT", "url": "https://raw.githubusercontent.com/rails/rails/v7.1.3/MIT-LICENSE" }
+			},
+			{
+				"url": "https://raw.githubusercontent.com/rails/rails/v7.1.3/activerecord/lib/active_record/reflection.rb",
+				"version": "v7.1.3",
+				"sha256": "1165de639bfb23e72392925888ffc5fcf511d1a8a4c4a361664a0fe243a9547b",
+				"license": { "type": "MIT", "url": "https://raw.githubusercontent.com/rails/rails/v7.1.3/MIT-LICENSE" }
+			},
+			{
+				"url": "https://raw.githubusercontent.com/rails/rails/v7.1.3/activerecord/lib/active_record/relation.rb",
+				"version": "v7.1.3",
+				"sha256": "7d76256ea97e4e5fca192505915815504e73690043873ecf55a132cf07cd82a7",
+				"license": { "type": "MIT", "url": "https://raw.githubusercontent.com/rails/rails/v7.1.3/MIT-LICENSE" }
+			},
+			{
+				"url": "https://raw.githubusercontent.com/rails/rails/v7.1.3/activerecord/lib/active_record/sanitization.rb",
+				"version": "v7.1.3",
+				"sha256": "44968292dd2cf009651a1f59af715330f71f39f50de865216a89710a2d59d3e3",
+				"license": { "type": "MIT", "url": "https://raw.githubusercontent.com/rails/rails/v7.1.3/MIT-LICENSE" }
+			},
+			{
+				"url": "https://raw.githubusercontent.com/rails/rails/v7.1.3/activerecord/lib/active_record/schema_dumper.rb",
+				"version": "v7.1.3",
+				"sha256": "62b0ed4112103f65ad65b518664b312d35ae1c6bcbb01fb30b14d8e8de1e3073",
+				"license": { "type": "MIT", "url": "https://raw.githubusercontent.com/rails/rails/v7.1.3/MIT-LICENSE" }
+			},
+			{
+				"url": "https://raw.githubusercontent.com/rails/rails/v7.1.3/activerecord/lib/active_record/store.rb",
+				"version": "v7.1.3",
+				"sha256": "7664843b3395cd3fa7fb8340cae5d5ee42a5a1966d3cf5a4750526676d65ee1b",
+				"license": { "type": "MIT", "url": "https://raw.githubusercontent.com/rails/rails/v7.1.3/MIT-LICENSE" }
+			},
+			{
+				"url": "https://raw.githubusercontent.com/rails/rails/v7.1.3/activerecord/lib/active_record/test_fixtures.rb",
+				"version": "v7.1.3",
+				"sha256": "a30f093f2a33b823470572b55e97f8673fd995e1d3503e458d070e284d0db857",
+				"license": { "type": "MIT", "url": "https://raw.githubusercontent.com/rails/rails/v7.1.3/MIT-LICENSE" }
+			},
+			{
+				"url": "https://raw.githubusercontent.com/rails/rails/v7.1.3/activerecord/lib/active_record/transactions.rb",
+				"version": "v7.1.3",
+				"sha256": "48692ee77dc094df86609303811c3509ad00810a194a2439732ae2652892d31f",
+				"license": { "type": "MIT", "url": "https://raw.githubusercontent.com/rails/rails/v7.1.3/MIT-LICENSE" }
+			}
+		],
+		"samples": {
+			"5000": [
+				{ "source": 0, "ranges": [[0, 14706]] },
+				{ "source": 1, "ranges": [[0, 110361], [111878, 111899]] },
+				{ "source": 2, "ranges": [[0, 1500], [1829, 1996], [2693, 19178]] },
+				{ "source": 3, "ranges": [[0, 11176]] },
+				{ "source": 4, "ranges": [[0, 22130]] },
+				{ "source": 5, "ranges": [[0, 14890]] },
+				{ "source": 6, "ranges": [[0, 22769]] },
+				{ "source": 7, "ranges": [[0, 16334]] }
+			],
+			"10000": [
+				{ "source": 0, "ranges": [[0, 14706]] },
+				{ "source": 1, "ranges": [[0, 110361], [111878, 111899]] },
+				{ "source": 2, "ranges": [[0, 1500], [1829, 1996], [2693, 19178]] },
+				{ "source": 3, "ranges": [[0, 11176]] },
+				{ "source": 4, "ranges": [[0, 22130]] },
+				{ "source": 5, "ranges": [[0, 14890]] },
+				{ "source": 6, "ranges": [[0, 22769]] },
+				{ "source": 7, "ranges": [[0, 16334]] },
+				{ "source": 8, "ranges": [[0, 14755]] },
+				{ "source": 9, "ranges": [[0, 27036]] },
+				{ "source": 10, "ranges": [[0, 9227]] },
+				{ "source": 11, "ranges": [[0, 11340]] },
+				{ "source": 12, "ranges": [[0, 11161]] },
+				{ "source": 13, "ranges": [[0, 14419]] },
+				{ "source": 14, "ranges": [[0, 20784]] },
+				{ "source": 15, "ranges": [[0, 26656]] },
+				{ "source": 16, "ranges": [[0, 13874]] },
+				{ "source": 17, "ranges": [[0, 10559]] },
+				{ "source": 18, "ranges": [[0, 7080]] },
+				{ "source": 19, "ranges": [[0, 54433]] }
+			],
+			"20000": [
+				{ "source": 0, "ranges": [[0, 14706]] },
+				{ "source": 1, "ranges": [[0, 110361], [111878, 111899]] },
+				{ "source": 2, "ranges": [[0, 1500], [1829, 1996], [2693, 19178]] },
+				{ "source": 3, "ranges": [[0, 11176]] },
+				{ "source": 4, "ranges": [[0, 22130]] },
+				{ "source": 5, "ranges": [[0, 14890]] },
+				{ "source": 6, "ranges": [[0, 22769]] },
+				{ "source": 7, "ranges": [[0, 16334]] },
+				{ "source": 8, "ranges": [[0, 14755]] },
+				{ "source": 9, "ranges": [[0, 27036]] },
+				{ "source": 10, "ranges": [[0, 9227]] },
+				{ "source": 11, "ranges": [[0, 11340]] },
+				{ "source": 12, "ranges": [[0, 11161]] },
+				{ "source": 13, "ranges": [[0, 14419]] },
+				{ "source": 14, "ranges": [[0, 20784]] },
+				{ "source": 15, "ranges": [[0, 26656]] },
+				{ "source": 16, "ranges": [[0, 13874]] },
+				{ "source": 17, "ranges": [[0, 10559]] },
+				{ "source": 18, "ranges": [[0, 7080]] },
+				{ "source": 19, "ranges": [[0, 54433]] },
+				{ "source": 20, "ranges": [[0, 25272]] },
+				{ "source": 21, "ranges": [[0, 16040], [16459, 26353]] },
+				{ "source": 22, "ranges": [[0, 51324]] },
+				{ "source": 23, "ranges": [[0, 5338], [6367, 72104]] },
+				{ "source": 24, "ranges": [[0, 18356]] },
+				{ "source": 25, "ranges": [[0, 41453]] },
+				{ "source": 26, "ranges": [[0, 38157]] },
+				{ "source": 27, "ranges": [[0, 10026]] },
+				{ "source": 28, "ranges": [[0, 12676]] },
+				{ "source": 29, "ranges": [[0, 11220]] },
+				{ "source": 30, "ranges": [[0, 11610]] },
+				{ "source": 31, "ranges": [[0, 18940]] }
+			]
+		}
+	},
+	"python": {
+		"sources": [
+			{
+				"url": "https://raw.githubusercontent.com/python/cpython/v3.13.7/Lib/test/test_typing.py",
+				"version": "v3.13.7",
+				"sha256": "4d309cc57b29c912a74a08b023fd9fd45064854bd4843ae31fd61b1c772a3f0e",
+				"license": { "type": "Python-2.0", "url": "https://raw.githubusercontent.com/python/cpython/v3.13.7/LICENSE" }
+			},
+			{
+				"url": "https://raw.githubusercontent.com/python/cpython/v3.13.7/Lib/test/test_asyncio/test_tasks.py",
+				"version": "v3.13.7",
+				"sha256": "48793b91bb8dad98f0ea09e5db838ecf30af7dfe44a679889c278632a82ff52c",
+				"license": { "type": "Python-2.0", "url": "https://raw.githubusercontent.com/python/cpython/v3.13.7/LICENSE" }
+			},
+			{
+				"url": "https://raw.githubusercontent.com/python/cpython/v3.13.7/Lib/test/test_coroutines.py",
+				"version": "v3.13.7",
+				"sha256": "161fbe91f6a7c92cdc887a4c824e6c76b33eb7bae449e58203c6ef98960279e5",
+				"license": { "type": "Python-2.0", "url": "https://raw.githubusercontent.com/python/cpython/v3.13.7/LICENSE" }
+			},
+			{
+				"url": "https://raw.githubusercontent.com/python/cpython/v3.13.7/Lib/test/test_generators.py",
+				"version": "v3.13.7",
+				"sha256": "c296c46042c0978cb5104229d206e5f7bc815c8867a6fd167ffc0b2be0cfa999",
+				"license": { "type": "Python-2.0", "url": "https://raw.githubusercontent.com/python/cpython/v3.13.7/LICENSE" }
+			},
+			{
+				"url": "https://raw.githubusercontent.com/python/cpython/v3.13.7/Lib/test/test_functools.py",
+				"version": "v3.13.7",
+				"sha256": "0c8604f28d817eb207f7f88c56651e8b56728e496ac4ab89dc9c6acc4cbf0c7b",
+				"license": { "type": "Python-2.0", "url": "https://raw.githubusercontent.com/python/cpython/v3.13.7/LICENSE" }
+			}
+		],
+		"samples": {
+			"5000": [{ "source": 0, "ranges": [[0, 205972]] }],
+			"10000": [{ "source": 0, "ranges": [[0, 361030]] }],
+			"20000": [
+				{ "source": 0, "ranges": [[0, 380698]] },
+				{ "source": 1, "ranges": [[0, 118925]] },
+				{ "source": 2, "ranges": [[0, 69213]] },
+				{ "source": 3, "ranges": [[0, 74775]] },
+				{ "source": 4, "ranges": [[0, 121268]] }
+			]
+		}
+	},
+	"json": {
+		"sources": [
+			{
+				"url": "https://raw.githubusercontent.com/twbs/bootstrap/v5.3.3/package-lock.json",
+				"version": "v5.3.3",
+				"sha256": "f3d7d0e230be072db8d8e9bf12061540ce59ebe4121256b12e974c4788209d99",
+				"license": { "type": "MIT", "url": "https://raw.githubusercontent.com/twbs/bootstrap/v5.3.3/LICENSE" }
+			}
+		],
+		"samples": {
+			"5000": [{ "source": 0, "ranges": [[0, 189849], [785219, 785226]] }],
+			"10000": [{ "source": 0, "ranges": [[0, 370688], [785219, 785226]] }],
+			"20000": [{ "source": 0, "ranges": [[0, 780298], [785219, 785226]] }]
+		}
+	},
+	"html": {
+		"sources": [
+			{
+				"url": "https://raw.githubusercontent.com/tc39/ecma262/5345883164f463e87f8b40aca4956157ecba8783/spec.html",
+				"version": "5345883164f463e87f8b40aca4956157ecba8783",
+				"sha256": "5194892f5a5f595962929b7099e028b1db44c8b68c44f4ce20f77b266507d57d",
+				"license": {
+					"type": "LicenseRef-Ecma-Text-and-Software",
+					"url": "https://raw.githubusercontent.com/tc39/ecma262/5345883164f463e87f8b40aca4956157ecba8783/LICENSE.md"
+				}
+			}
+		],
+		"samples": {
+			"5000": [{ "source": 0, "ranges": [[0, 296286]] }],
+			"10000": [{ "source": 0, "ranges": [[0, 556573]] }],
+			"20000": [{ "source": 0, "ranges": [[0, 1159235]] }]
+		}
+	},
+	"css": {
+		"sources": [
+			{
+				"url": "https://raw.githubusercontent.com/Semantic-Org/Semantic-UI-CSS/2.5.0/semantic.css",
+				"version": "2.5.0",
+				"sha256": "5b76b1b8189d8df7ada46dd8319f172eb9681fce658ba26ee0646ae1cafe7a08",
+				"license": { "type": "MIT", "url": "https://raw.githubusercontent.com/Semantic-Org/Semantic-UI-CSS/2.5.0/LICENSE" }
+			}
+		],
+		"samples": {
+			"5000": [{ "source": 0, "ranges": [[0, 108500]] }],
+			"10000": [{ "source": 0, "ranges": [[0, 185762]] }],
+			"20000": [{ "source": 0, "ranges": [[0, 363826]] }]
+		}
+	},
+	"scss": {
+		"sources": [
+			{
+				"url":
+				"https://raw.githubusercontent.com/carbon-design-system/carbon/v11.0.0/packages/styles/scss/components/accordion/_accordion.scss",
+				"version": "v11.0.0",
+				"sha256": "f22688bce8808e2621d651599814d587322048f34a1671cdfd36bd5bf6586ef0",
+				"license": { "type": "Apache-2.0", "url": "https://raw.githubusercontent.com/carbon-design-system/carbon/v11.0.0/LICENSE" }
+			},
+			{
+				"url":
+				"https://raw.githubusercontent.com/carbon-design-system/carbon/v11.0.0/packages/styles/scss/components/aspect-ratio/_aspect-ratio.scss",
+				"version": "v11.0.0",
+				"sha256": "479791dcf9bc94210c5da9e7b2debd7acdb75fad34ed80d109b693d508acffcf",
+				"license": { "type": "Apache-2.0", "url": "https://raw.githubusercontent.com/carbon-design-system/carbon/v11.0.0/LICENSE" }
+			},
+			{
+				"url":
+				"https://raw.githubusercontent.com/carbon-design-system/carbon/v11.0.0/packages/styles/scss/components/breadcrumb/_breadcrumb.scss",
+				"version": "v11.0.0",
+				"sha256": "35593d61b0fbf2d4562984235b30e1c4b0e20d2129fef2df9424b0d767fe9097",
+				"license": { "type": "Apache-2.0", "url": "https://raw.githubusercontent.com/carbon-design-system/carbon/v11.0.0/LICENSE" }
+			},
+			{
+				"url":
+				"https://raw.githubusercontent.com/carbon-design-system/carbon/v11.0.0/packages/styles/scss/components/button/_button.scss",
+				"version": "v11.0.0",
+				"sha256": "0d861b6d2090408f85fae8fbfaa194297ebc215b9e44ed81a2d3602155a94609",
+				"license": { "type": "Apache-2.0", "url": "https://raw.githubusercontent.com/carbon-design-system/carbon/v11.0.0/LICENSE" }
+			},
+			{
+				"url":
+				"https://raw.githubusercontent.com/carbon-design-system/carbon/v11.0.0/packages/styles/scss/components/checkbox/_checkbox.scss",
+				"version": "v11.0.0",
+				"sha256": "6785cae282e4fd1e2ced2651084e77b63b3c9a9b697ba60150c1cc63a7a6529a",
+				"license": { "type": "Apache-2.0", "url": "https://raw.githubusercontent.com/carbon-design-system/carbon/v11.0.0/LICENSE" }
+			},
+			{
+				"url":
+				"https://raw.githubusercontent.com/carbon-design-system/carbon/v11.0.0/packages/styles/scss/components/code-snippet/_code-snippet.scss",
+				"version": "v11.0.0",
+				"sha256": "eecee7060db29cc901d9a61295d5040e941b6627b3d558245138a19acb63ca3f",
+				"license": { "type": "Apache-2.0", "url": "https://raw.githubusercontent.com/carbon-design-system/carbon/v11.0.0/LICENSE" }
+			},
+			{
+				"url":
+				"https://raw.githubusercontent.com/carbon-design-system/carbon/v11.0.0/packages/styles/scss/components/combo-box/_combo-box.scss",
+				"version": "v11.0.0",
+				"sha256": "b6e8d251d44f96ab0b6b061c1e38f8b889029b6bd9a97a3ba33e7a7ac1d35c98",
+				"license": { "type": "Apache-2.0", "url": "https://raw.githubusercontent.com/carbon-design-system/carbon/v11.0.0/LICENSE" }
+			},
+			{
+				"url":
+				"https://raw.githubusercontent.com/carbon-design-system/carbon/v11.0.0/packages/styles/scss/components/content-switcher/_content-switcher.scss",
+				"version": "v11.0.0",
+				"sha256": "43349b06f231d9081fdd19f8e0ad056cb6d12bb4bb9b04c9a4a0de8dea353bf8",
+				"license": { "type": "Apache-2.0", "url": "https://raw.githubusercontent.com/carbon-design-system/carbon/v11.0.0/LICENSE" }
+			},
+			{
+				"url":
+				"https://raw.githubusercontent.com/carbon-design-system/carbon/v11.0.0/packages/styles/scss/components/copy-button/_copy-button.scss",
+				"version": "v11.0.0",
+				"sha256": "797ab1b9a36d5b9c015675e9608ed7d4927276f843ca8b1364ca5441c1b989ee",
+				"license": { "type": "Apache-2.0", "url": "https://raw.githubusercontent.com/carbon-design-system/carbon/v11.0.0/LICENSE" }
+			},
+			{
+				"url":
+				"https://raw.githubusercontent.com/carbon-design-system/carbon/v11.0.0/packages/styles/scss/components/data-table/_data-table.scss",
+				"version": "v11.0.0",
+				"sha256": "7276bb66e495d65d661d8163b3f331b68ee4bca8b1cda364f06427a4963158ff",
+				"license": { "type": "Apache-2.0", "url": "https://raw.githubusercontent.com/carbon-design-system/carbon/v11.0.0/LICENSE" }
+			},
+			{
+				"url":
+				"https://raw.githubusercontent.com/carbon-design-system/carbon/v11.0.0/packages/styles/scss/components/date-picker/_date-picker.scss",
+				"version": "v11.0.0",
+				"sha256": "fbb6f18fd6fac21e15a0b751983006ecf3c0f202f7fc7e775e4be99be1362ce8",
+				"license": { "type": "Apache-2.0", "url": "https://raw.githubusercontent.com/carbon-design-system/carbon/v11.0.0/LICENSE" }
+			},
+			{
+				"url":
+				"https://raw.githubusercontent.com/carbon-design-system/carbon/v11.0.0/packages/styles/scss/components/dropdown/_dropdown.scss",
+				"version": "v11.0.0",
+				"sha256": "c02a75777da3753bc473bd2faec6afcc2e76130416297d02da6d29577da61545",
+				"license": { "type": "Apache-2.0", "url": "https://raw.githubusercontent.com/carbon-design-system/carbon/v11.0.0/LICENSE" }
+			},
+			{
+				"url": "https://raw.githubusercontent.com/carbon-design-system/carbon/v11.0.0/packages/styles/scss/_layer.scss",
+				"version": "v11.0.0",
+				"sha256": "535184c0430029d546170a4874bd01efb2afa5654fa5d67cb26f04a322c2819c",
+				"license": { "type": "Apache-2.0", "url": "https://raw.githubusercontent.com/carbon-design-system/carbon/v11.0.0/LICENSE" }
+			},
+			{
+				"url": "https://raw.githubusercontent.com/carbon-design-system/carbon/v11.0.0/packages/styles/scss/_reset.scss",
+				"version": "v11.0.0",
+				"sha256": "7b23e8fbcf2f36da8e2f8571a405c021bc83b229bedf60c3e343ed08fcfac78c",
+				"license": { "type": "Apache-2.0", "url": "https://raw.githubusercontent.com/carbon-design-system/carbon/v11.0.0/LICENSE" }
+			},
+			{
+				"url":
+				"https://raw.githubusercontent.com/carbon-design-system/carbon/v11.0.0/packages/styles/scss/components/button/_mixins.scss",
+				"version": "v11.0.0",
+				"sha256": "a5153ca86f6fbf8ed7fdcd34743c47199f4ef6279e078664ff91beda2b560650",
+				"license": { "type": "Apache-2.0", "url": "https://raw.githubusercontent.com/carbon-design-system/carbon/v11.0.0/LICENSE" }
+			},
+			{
+				"url":
+				"https://raw.githubusercontent.com/carbon-design-system/carbon/v11.0.0/packages/styles/scss/components/button/_tokens.scss",
+				"version": "v11.0.0",
+				"sha256": "351c3d1d2d85053bd1058ec43caad4ea79386b5889007ab2d25619f419d6834b",
+				"license": { "type": "Apache-2.0", "url": "https://raw.githubusercontent.com/carbon-design-system/carbon/v11.0.0/LICENSE" }
+			},
+			{
+				"url":
+				"https://raw.githubusercontent.com/carbon-design-system/carbon/v11.0.0/packages/styles/scss/components/data-table/action/_data-table-action.scss",
+				"version": "v11.0.0",
+				"sha256": "c55463ef386b44308c492a3ad2c70083f033770fe8683b7a07162f240b501276",
+				"license": { "type": "Apache-2.0", "url": "https://raw.githubusercontent.com/carbon-design-system/carbon/v11.0.0/LICENSE" }
+			},
+			{
+				"url":
+				"https://raw.githubusercontent.com/carbon-design-system/carbon/v11.0.0/packages/styles/scss/components/data-table/expandable/_data-table-expandable.scss",
+				"version": "v11.0.0",
+				"sha256": "df5d110ac87624a79038f99734cc5bde170e9cd449f6c9abe0970878ac694d9b",
+				"license": { "type": "Apache-2.0", "url": "https://raw.githubusercontent.com/carbon-design-system/carbon/v11.0.0/LICENSE" }
+			},
+			{
+				"url":
+				"https://raw.githubusercontent.com/carbon-design-system/carbon/v11.0.0/packages/styles/scss/components/data-table/sort/_data-table-sort.scss",
+				"version": "v11.0.0",
+				"sha256": "dda3ced8d7881b1d3c855a81a210e6311205bb82b09653fb1523e0c1f700f630",
+				"license": { "type": "Apache-2.0", "url": "https://raw.githubusercontent.com/carbon-design-system/carbon/v11.0.0/LICENSE" }
+			},
+			{
+				"url":
+				"https://raw.githubusercontent.com/carbon-design-system/carbon/v11.0.0/packages/styles/scss/components/date-picker/_flatpickr.scss",
+				"version": "v11.0.0",
+				"sha256": "9e71ab8cccb61989c821439cd953b5304c8b94f84eee439a3bf076999f3138e2",
+				"license": { "type": "Apache-2.0", "url": "https://raw.githubusercontent.com/carbon-design-system/carbon/v11.0.0/LICENSE" }
+			},
+			{
+				"url":
+				"https://raw.githubusercontent.com/carbon-design-system/carbon/v11.0.0/packages/styles/scss/components/notification/_actionable-notification.scss",
+				"version": "v11.0.0",
+				"sha256": "52fa21b6c43f3567edf046af8d1d3c48736de4257de78e56d14b61b70ddd1b69",
+				"license": { "type": "Apache-2.0", "url": "https://raw.githubusercontent.com/carbon-design-system/carbon/v11.0.0/LICENSE" }
+			},
+			{
+				"url":
+				"https://raw.githubusercontent.com/carbon-design-system/carbon/v11.0.0/packages/styles/scss/components/notification/_inline-notification.scss",
+				"version": "v11.0.0",
+				"sha256": "da83e31963011792d6e5137016053f21d52f5ca6bf9697cebe39bc4e70bd9882",
+				"license": { "type": "Apache-2.0", "url": "https://raw.githubusercontent.com/carbon-design-system/carbon/v11.0.0/LICENSE" }
+			},
+			{
+				"url":
+				"https://raw.githubusercontent.com/carbon-design-system/carbon/v11.0.0/packages/styles/scss/components/notification/_toast-notification.scss",
+				"version": "v11.0.0",
+				"sha256": "ffc62beb636b3c3204a407d4e711c37df30581b56c7ac4603121d32005f2473e",
+				"license": { "type": "Apache-2.0", "url": "https://raw.githubusercontent.com/carbon-design-system/carbon/v11.0.0/LICENSE" }
+			},
+			{
+				"url":
+				"https://raw.githubusercontent.com/carbon-design-system/carbon/v11.0.0/packages/styles/scss/components/notification/_tokens.scss",
+				"version": "v11.0.0",
+				"sha256": "7a809f44f7654fb90236251b54e9e61678a018c4de956b83c3c221b7c5c65d9e",
+				"license": { "type": "Apache-2.0", "url": "https://raw.githubusercontent.com/carbon-design-system/carbon/v11.0.0/LICENSE" }
+			},
+			{
+				"url":
+				"https://raw.githubusercontent.com/carbon-design-system/carbon/v11.0.0/packages/styles/scss/components/pagination/_unstable_pagination.scss",
+				"version": "v11.0.0",
+				"sha256": "595d934607d3162c22fa1385e60e882ef2fc7cddebf9f3d514f64738c61c2f82",
+				"license": { "type": "Apache-2.0", "url": "https://raw.githubusercontent.com/carbon-design-system/carbon/v11.0.0/LICENSE" }
+			},
+			{
+				"url": "https://raw.githubusercontent.com/carbon-design-system/carbon/v11.0.0/packages/styles/scss/components/tag/_tokens.scss",
+				"version": "v11.0.0",
+				"sha256": "3005bd875f2076851d20cf239f43b7bc85deefafa526c28d33cabc2eefd5beaf",
+				"license": { "type": "Apache-2.0", "url": "https://raw.githubusercontent.com/carbon-design-system/carbon/v11.0.0/LICENSE" }
+			},
+			{
+				"url":
+				"https://raw.githubusercontent.com/carbon-design-system/carbon/v11.0.0/packages/styles/scss/components/ui-shell/header/_header.scss",
+				"version": "v11.0.0",
+				"sha256": "a6386dc3acf3a63cb73f53a7811f4ccbf091461170333cff15517811ca6a8f60",
+				"license": { "type": "Apache-2.0", "url": "https://raw.githubusercontent.com/carbon-design-system/carbon/v11.0.0/LICENSE" }
+			},
+			{
+				"url":
+				"https://raw.githubusercontent.com/carbon-design-system/carbon/v11.0.0/packages/styles/scss/components/ui-shell/side-nav/_side-nav.scss",
+				"version": "v11.0.0",
+				"sha256": "77d9a79d591b4864e42f30190d946192007ea28667ad33c819e2bca29e6f356e",
+				"license": { "type": "Apache-2.0", "url": "https://raw.githubusercontent.com/carbon-design-system/carbon/v11.0.0/LICENSE" }
+			},
+			{
+				"url": "https://raw.githubusercontent.com/carbon-design-system/carbon/v11.0.0/packages/styles/scss/fonts/_mono.scss",
+				"version": "v11.0.0",
+				"sha256": "3df1fba79f5cd331d52c7ce586e11c233c7089d81f7f940b9cd2ddab8ede3670",
+				"license": { "type": "Apache-2.0", "url": "https://raw.githubusercontent.com/carbon-design-system/carbon/v11.0.0/LICENSE" }
+			},
+			{
+				"url": "https://raw.githubusercontent.com/carbon-design-system/carbon/v11.0.0/packages/styles/scss/fonts/_sans-arabic.scss",
+				"version": "v11.0.0",
+				"sha256": "c73626d3a3ef7d6ac18cf3e481b0f8f790ea1908a5e33bb3e02e50f2398eb892",
+				"license": { "type": "Apache-2.0", "url": "https://raw.githubusercontent.com/carbon-design-system/carbon/v11.0.0/LICENSE" }
+			},
+			{
+				"url": "https://raw.githubusercontent.com/carbon-design-system/carbon/v11.0.0/packages/styles/scss/fonts/_sans-devanagari.scss",
+				"version": "v11.0.0",
+				"sha256": "532ada12b2f1d07feb1f834c58d7202105957685d4fb1d6eca69ebf06155138c",
+				"license": { "type": "Apache-2.0", "url": "https://raw.githubusercontent.com/carbon-design-system/carbon/v11.0.0/LICENSE" }
+			},
+			{
+				"url": "https://raw.githubusercontent.com/carbon-design-system/carbon/v11.0.0/packages/styles/scss/fonts/_sans-hebrew.scss",
+				"version": "v11.0.0",
+				"sha256": "b82dc980d6873985f5487a6886f037376f0b67ceab028ed4257776551e191e52",
+				"license": { "type": "Apache-2.0", "url": "https://raw.githubusercontent.com/carbon-design-system/carbon/v11.0.0/LICENSE" }
+			},
+			{
+				"url": "https://raw.githubusercontent.com/carbon-design-system/carbon/v11.0.0/packages/styles/scss/fonts/_sans.scss",
+				"version": "v11.0.0",
+				"sha256": "153b618238c1418cf928727a7ca6fafa7b6b9fbc32e5d6552dff33fa69858463",
+				"license": { "type": "Apache-2.0", "url": "https://raw.githubusercontent.com/carbon-design-system/carbon/v11.0.0/LICENSE" }
+			},
+			{
+				"url":
+				"https://raw.githubusercontent.com/carbon-design-system/carbon/v11.0.0/packages/styles/scss/fonts/_sans-thai-looped.scss",
+				"version": "v11.0.0",
+				"sha256": "5108378bded601d7a768b12712c0b93adf327fe3c2271f02a2ba621cc0b6a632",
+				"license": { "type": "Apache-2.0", "url": "https://raw.githubusercontent.com/carbon-design-system/carbon/v11.0.0/LICENSE" }
+			},
+			{
+				"url": "https://raw.githubusercontent.com/carbon-design-system/carbon/v11.0.0/packages/styles/scss/fonts/_sans-thai.scss",
+				"version": "v11.0.0",
+				"sha256": "78a68680eb1a04ea9b1239d59418d72e945d99c7541d6bdc289fd3f74cc5a194",
+				"license": { "type": "Apache-2.0", "url": "https://raw.githubusercontent.com/carbon-design-system/carbon/v11.0.0/LICENSE" }
+			},
+			{
+				"url": "https://raw.githubusercontent.com/carbon-design-system/carbon/v11.0.0/packages/styles/scss/fonts/_serif.scss",
+				"version": "v11.0.0",
+				"sha256": "7dfca4eb5b4abc2b435599059fcf305c02ab5935c01c61604247af929a30c86c",
+				"license": { "type": "Apache-2.0", "url": "https://raw.githubusercontent.com/carbon-design-system/carbon/v11.0.0/LICENSE" }
+			},
+			{
+				"url": "https://raw.githubusercontent.com/carbon-design-system/carbon/v11.0.0/packages/styles/scss/fonts/_src.scss",
+				"version": "v11.0.0",
+				"sha256": "55b59d12a41dbeb0a01466d028dbcef3f13cf58bd62746791a21862c91cabd4f",
+				"license": { "type": "Apache-2.0", "url": "https://raw.githubusercontent.com/carbon-design-system/carbon/v11.0.0/LICENSE" }
+			},
+			{
+				"url": "https://raw.githubusercontent.com/carbon-design-system/carbon/v11.0.0/packages/styles/scss/fonts/unicode/_index.scss",
+				"version": "v11.0.0",
+				"sha256": "3b281b7682743fc06e0452b393982c91b187121bbdbb2532f6bb01b0781c4e19",
+				"license": { "type": "Apache-2.0", "url": "https://raw.githubusercontent.com/carbon-design-system/carbon/v11.0.0/LICENSE" }
+			},
+			{
+				"url":
+				"https://raw.githubusercontent.com/carbon-design-system/carbon/v11.0.0/packages/styles/scss/utilities/_component-tokens.scss",
+				"version": "v11.0.0",
+				"sha256": "f14e7676c734e77b944f95db5dffb1c07f28052cc9741f807a3f9810f20d1163",
+				"license": { "type": "Apache-2.0", "url": "https://raw.githubusercontent.com/carbon-design-system/carbon/v11.0.0/LICENSE" }
+			},
+			{
+				"url": "https://raw.githubusercontent.com/carbon-design-system/carbon/v11.0.0/packages/styles/scss/utilities/_tooltip.scss",
+				"version": "v11.0.0",
+				"sha256": "59f5619467646b705ab4917bf085ee6eebe8d3e1b5394772134a47a7291e6265",
+				"license": { "type": "Apache-2.0", "url": "https://raw.githubusercontent.com/carbon-design-system/carbon/v11.0.0/LICENSE" }
+			},
+			{
+				"url":
+				"https://raw.githubusercontent.com/carbon-design-system/carbon/v11.0.0/packages/styles/scss/components/file-uploader/_file-uploader.scss",
+				"version": "v11.0.0",
+				"sha256": "c6b1280a4c6741a57063f8c09589a8fb9a5479d4246a1d87b891783a0af7fb6c",
+				"license": { "type": "Apache-2.0", "url": "https://raw.githubusercontent.com/carbon-design-system/carbon/v11.0.0/LICENSE" }
+			},
+			{
+				"url": "https://raw.githubusercontent.com/carbon-design-system/carbon/v11.0.0/packages/styles/scss/components/form/_form.scss",
+				"version": "v11.0.0",
+				"sha256": "d1398393bcd0062f2ecca628b0d227e61c48c1f45d9d1bca854a3f4af110d078",
+				"license": { "type": "Apache-2.0", "url": "https://raw.githubusercontent.com/carbon-design-system/carbon/v11.0.0/LICENSE" }
+			},
+			{
+				"url":
+				"https://raw.githubusercontent.com/carbon-design-system/carbon/v11.0.0/packages/styles/scss/components/inline-loading/_inline-loading.scss",
+				"version": "v11.0.0",
+				"sha256": "95233f2e3c772be3e1c8a425a087d4347cd564bf738851ed7d74dddcfcc0d851",
+				"license": { "type": "Apache-2.0", "url": "https://raw.githubusercontent.com/carbon-design-system/carbon/v11.0.0/LICENSE" }
+			},
+			{
+				"url": "https://raw.githubusercontent.com/carbon-design-system/carbon/v11.0.0/packages/styles/scss/components/link/_link.scss",
+				"version": "v11.0.0",
+				"sha256": "c52b55302532ed880afc1cf45dabc53efc65b244a432d13b13f35fbc74bff128",
+				"license": { "type": "Apache-2.0", "url": "https://raw.githubusercontent.com/carbon-design-system/carbon/v11.0.0/LICENSE" }
+			},
+			{
+				"url": "https://raw.githubusercontent.com/carbon-design-system/carbon/v11.0.0/packages/styles/scss/components/list/_list.scss",
+				"version": "v11.0.0",
+				"sha256": "1975cd736d82a12cc281c0e1e39122f244b7a620d5d85f310360d58628942e92",
+				"license": { "type": "Apache-2.0", "url": "https://raw.githubusercontent.com/carbon-design-system/carbon/v11.0.0/LICENSE" }
+			},
+			{
+				"url":
+				"https://raw.githubusercontent.com/carbon-design-system/carbon/v11.0.0/packages/styles/scss/components/list-box/_list-box.scss",
+				"version": "v11.0.0",
+				"sha256": "af9ce72ba132fc9d45d92b266a9af5370d25086b0a181da5d3664daf3bbdd89b",
+				"license": { "type": "Apache-2.0", "url": "https://raw.githubusercontent.com/carbon-design-system/carbon/v11.0.0/LICENSE" }
+			},
+			{
+				"url":
+				"https://raw.githubusercontent.com/carbon-design-system/carbon/v11.0.0/packages/styles/scss/components/loading/_loading.scss",
+				"version": "v11.0.0",
+				"sha256": "937c72eeb83b6a80f5496a5ea9fe109478972eaac29882c82c83259b389f096c",
+				"license": { "type": "Apache-2.0", "url": "https://raw.githubusercontent.com/carbon-design-system/carbon/v11.0.0/LICENSE" }
+			},
+			{
+				"url": "https://raw.githubusercontent.com/carbon-design-system/carbon/v11.0.0/packages/styles/scss/components/menu/_menu.scss",
+				"version": "v11.0.0",
+				"sha256": "df1a127f1af31495ea5daadb97f7142cd94c741edc7f0f0a9ae8ce30bcab5705",
+				"license": { "type": "Apache-2.0", "url": "https://raw.githubusercontent.com/carbon-design-system/carbon/v11.0.0/LICENSE" }
+			},
+			{
+				"url":
+				"https://raw.githubusercontent.com/carbon-design-system/carbon/v11.0.0/packages/styles/scss/components/modal/_modal.scss",
+				"version": "v11.0.0",
+				"sha256": "51b6829d940e21391a62ab76b19d8d1a1df6620e4aae41b86e1fe557b03728f5",
+				"license": { "type": "Apache-2.0", "url": "https://raw.githubusercontent.com/carbon-design-system/carbon/v11.0.0/LICENSE" }
+			},
+			{
+				"url":
+				"https://raw.githubusercontent.com/carbon-design-system/carbon/v11.0.0/packages/styles/scss/components/multiselect/_multiselect.scss",
+				"version": "v11.0.0",
+				"sha256": "79e4eed3a4d3bac504cc0f79448d1548702b96cafd5ae9069a83452d16eeda69",
+				"license": { "type": "Apache-2.0", "url": "https://raw.githubusercontent.com/carbon-design-system/carbon/v11.0.0/LICENSE" }
+			},
+			{
+				"url":
+				"https://raw.githubusercontent.com/carbon-design-system/carbon/v11.0.0/packages/styles/scss/components/number-input/_number-input.scss",
+				"version": "v11.0.0",
+				"sha256": "c13ffabab8a1e0c63eada54d3ac44d2ac647d8c3110187034584357b3d64f166",
+				"license": { "type": "Apache-2.0", "url": "https://raw.githubusercontent.com/carbon-design-system/carbon/v11.0.0/LICENSE" }
+			},
+			{
+				"url":
+				"https://raw.githubusercontent.com/carbon-design-system/carbon/v11.0.0/packages/styles/scss/components/overflow-menu/_overflow-menu.scss",
+				"version": "v11.0.0",
+				"sha256": "294bd09c2c3b39d2c4187df7482c2e71baf431b1fcbad15146bc5aba6442d1f3",
+				"license": { "type": "Apache-2.0", "url": "https://raw.githubusercontent.com/carbon-design-system/carbon/v11.0.0/LICENSE" }
+			},
+			{
+				"url":
+				"https://raw.githubusercontent.com/carbon-design-system/carbon/v11.0.0/packages/styles/scss/components/pagination/_pagination.scss",
+				"version": "v11.0.0",
+				"sha256": "d45e77137d6080a4fabb6eb2b2870d5cd5f3b70320f89f158db8f9cc1370f134",
+				"license": { "type": "Apache-2.0", "url": "https://raw.githubusercontent.com/carbon-design-system/carbon/v11.0.0/LICENSE" }
+			},
+			{
+				"url":
+				"https://raw.githubusercontent.com/carbon-design-system/carbon/v11.0.0/packages/styles/scss/components/pagination-nav/_pagination-nav.scss",
+				"version": "v11.0.0",
+				"sha256": "739c4e946aed5afe3664d3b54c6303a50c407267c4efeb120ea566a8e3378418",
+				"license": { "type": "Apache-2.0", "url": "https://raw.githubusercontent.com/carbon-design-system/carbon/v11.0.0/LICENSE" }
+			},
+			{
+				"url":
+				"https://raw.githubusercontent.com/carbon-design-system/carbon/v11.0.0/packages/styles/scss/components/popover/_popover.scss",
+				"version": "v11.0.0",
+				"sha256": "b7eb20e368dd0450626bc2871e5c219f4f4683514356a35852a15aab8782d652",
+				"license": { "type": "Apache-2.0", "url": "https://raw.githubusercontent.com/carbon-design-system/carbon/v11.0.0/LICENSE" }
+			},
+			{
+				"url":
+				"https://raw.githubusercontent.com/carbon-design-system/carbon/v11.0.0/packages/styles/scss/components/progress-bar/_progress-bar.scss",
+				"version": "v11.0.0",
+				"sha256": "72abb05bf97281dc0a442a7927d523441bb182bc2280562a59fcdeb44ee3bf0d",
+				"license": { "type": "Apache-2.0", "url": "https://raw.githubusercontent.com/carbon-design-system/carbon/v11.0.0/LICENSE" }
+			},
+			{
+				"url":
+				"https://raw.githubusercontent.com/carbon-design-system/carbon/v11.0.0/packages/styles/scss/components/progress-indicator/_progress-indicator.scss",
+				"version": "v11.0.0",
+				"sha256": "abd41c1871b99244d395b1d6b465258628e8db50e1d24f1cf265918f16fe1d51",
+				"license": { "type": "Apache-2.0", "url": "https://raw.githubusercontent.com/carbon-design-system/carbon/v11.0.0/LICENSE" }
+			},
+			{
+				"url":
+				"https://raw.githubusercontent.com/carbon-design-system/carbon/v11.0.0/packages/styles/scss/components/radio-button/_radio-button.scss",
+				"version": "v11.0.0",
+				"sha256": "0d5bc923382b185af091beefb58e80ac03eb41c9672605ed25addf7ad00e0eb3",
+				"license": { "type": "Apache-2.0", "url": "https://raw.githubusercontent.com/carbon-design-system/carbon/v11.0.0/LICENSE" }
+			},
+			{
+				"url":
+				"https://raw.githubusercontent.com/carbon-design-system/carbon/v11.0.0/packages/styles/scss/components/search/_search.scss",
+				"version": "v11.0.0",
+				"sha256": "2cf86150d1c052aa7314daaa18a6594e9d9afae366a1a2f6324f6f0333eb4ef5",
+				"license": { "type": "Apache-2.0", "url": "https://raw.githubusercontent.com/carbon-design-system/carbon/v11.0.0/LICENSE" }
+			},
+			{
+				"url":
+				"https://raw.githubusercontent.com/carbon-design-system/carbon/v11.0.0/packages/styles/scss/components/select/_select.scss",
+				"version": "v11.0.0",
+				"sha256": "36ca9108f18cb4357be7416b9694c847181930045853cf1560cc39a64b51f01a",
+				"license": { "type": "Apache-2.0", "url": "https://raw.githubusercontent.com/carbon-design-system/carbon/v11.0.0/LICENSE" }
+			},
+			{
+				"url":
+				"https://raw.githubusercontent.com/carbon-design-system/carbon/v11.0.0/packages/styles/scss/components/skeleton-styles/_skeleton-styles.scss",
+				"version": "v11.0.0",
+				"sha256": "9f4157597c68adbc7aaf849044ffc67d9177bdf39dd8b48d3056e60d0ed194d6",
+				"license": { "type": "Apache-2.0", "url": "https://raw.githubusercontent.com/carbon-design-system/carbon/v11.0.0/LICENSE" }
+			},
+			{
+				"url":
+				"https://raw.githubusercontent.com/carbon-design-system/carbon/v11.0.0/packages/styles/scss/components/slider/_slider.scss",
+				"version": "v11.0.0",
+				"sha256": "c01e39a69716980f9027aa380ece14e82061a90dbec07b0431f164e54f3f7e2f",
+				"license": { "type": "Apache-2.0", "url": "https://raw.githubusercontent.com/carbon-design-system/carbon/v11.0.0/LICENSE" }
+			},
+			{
+				"url":
+				"https://raw.githubusercontent.com/carbon-design-system/carbon/v11.0.0/packages/styles/scss/components/stack/_stack.scss",
+				"version": "v11.0.0",
+				"sha256": "4a2f4d29385b18ac209493ef62af6685e5594fafbf45f3222221cb0433208652",
+				"license": { "type": "Apache-2.0", "url": "https://raw.githubusercontent.com/carbon-design-system/carbon/v11.0.0/LICENSE" }
+			},
+			{
+				"url":
+				"https://raw.githubusercontent.com/carbon-design-system/carbon/v11.0.0/packages/styles/scss/components/structured-list/_structured-list.scss",
+				"version": "v11.0.0",
+				"sha256": "52ae5d9d2bc2d4edd9f4aba28c71a431143e4b3146195748c08d9091dee49cf7",
+				"license": { "type": "Apache-2.0", "url": "https://raw.githubusercontent.com/carbon-design-system/carbon/v11.0.0/LICENSE" }
+			},
+			{
+				"url": "https://raw.githubusercontent.com/carbon-design-system/carbon/v11.0.0/packages/styles/scss/components/tabs/_tabs.scss",
+				"version": "v11.0.0",
+				"sha256": "579499fe625f86e0803b09ad5c7f6a9d54bf23e4fbe5a57f47375b471e3e5121",
+				"license": { "type": "Apache-2.0", "url": "https://raw.githubusercontent.com/carbon-design-system/carbon/v11.0.0/LICENSE" }
+			},
+			{
+				"url": "https://raw.githubusercontent.com/carbon-design-system/carbon/v11.0.0/packages/styles/scss/components/tag/_tag.scss",
+				"version": "v11.0.0",
+				"sha256": "bfef4dae3ef8945904da79e5d8232d69c5b53b33b19af6512c27cf6132ab0a5b",
+				"license": { "type": "Apache-2.0", "url": "https://raw.githubusercontent.com/carbon-design-system/carbon/v11.0.0/LICENSE" }
+			},
+			{
+				"url":
+				"https://raw.githubusercontent.com/carbon-design-system/carbon/v11.0.0/packages/styles/scss/components/text-area/_text-area.scss",
+				"version": "v11.0.0",
+				"sha256": "fb2785b721df1d4ec85853ba995b61c31976712c22cd69444d4c17e3b9b2bf8e",
+				"license": { "type": "Apache-2.0", "url": "https://raw.githubusercontent.com/carbon-design-system/carbon/v11.0.0/LICENSE" }
+			},
+			{
+				"url":
+				"https://raw.githubusercontent.com/carbon-design-system/carbon/v11.0.0/packages/styles/scss/components/text-input/_text-input.scss",
+				"version": "v11.0.0",
+				"sha256": "7f03fe45e0644055d05246a71ba08081e2be7c47861ac78445cf4990b11c0d0d",
+				"license": { "type": "Apache-2.0", "url": "https://raw.githubusercontent.com/carbon-design-system/carbon/v11.0.0/LICENSE" }
+			},
+			{
+				"url": "https://raw.githubusercontent.com/carbon-design-system/carbon/v11.0.0/packages/styles/scss/components/tile/_tile.scss",
+				"version": "v11.0.0",
+				"sha256": "5d1b9c1cfbd30291937766f1e07899c532a2bed4752f445c90147938124a45bf",
+				"license": { "type": "Apache-2.0", "url": "https://raw.githubusercontent.com/carbon-design-system/carbon/v11.0.0/LICENSE" }
+			},
+			{
+				"url":
+				"https://raw.githubusercontent.com/carbon-design-system/carbon/v11.0.0/packages/styles/scss/components/time-picker/_time-picker.scss",
+				"version": "v11.0.0",
+				"sha256": "f06e19ad6ea7123a4ac2979a24bf2064db3fc2287e26c9e7a1cb7277553f844d",
+				"license": { "type": "Apache-2.0", "url": "https://raw.githubusercontent.com/carbon-design-system/carbon/v11.0.0/LICENSE" }
+			},
+			{
+				"url":
+				"https://raw.githubusercontent.com/carbon-design-system/carbon/v11.0.0/packages/styles/scss/components/toggle/_toggle.scss",
+				"version": "v11.0.0",
+				"sha256": "e2445cbbc22d07e81124eeeae0d78cca1cf1c5f0f367eec029c2b06088cc798e",
+				"license": { "type": "Apache-2.0", "url": "https://raw.githubusercontent.com/carbon-design-system/carbon/v11.0.0/LICENSE" }
+			},
+			{
+				"url":
+				"https://raw.githubusercontent.com/carbon-design-system/carbon/v11.0.0/packages/styles/scss/components/toggletip/_toggletip.scss",
+				"version": "v11.0.0",
+				"sha256": "dce7608969a255f1e4f7d487d793d18694acffd3ee246355f1d075f4e1fd399b",
+				"license": { "type": "Apache-2.0", "url": "https://raw.githubusercontent.com/carbon-design-system/carbon/v11.0.0/LICENSE" }
+			},
+			{
+				"url":
+				"https://raw.githubusercontent.com/carbon-design-system/carbon/v11.0.0/packages/styles/scss/components/tooltip/_tooltip.scss",
+				"version": "v11.0.0",
+				"sha256": "2a254994aaa9c8b6f1efdaf4ab3a3c5fb34e189d0a3da57e2789b48ab9ba5ca0",
+				"license": { "type": "Apache-2.0", "url": "https://raw.githubusercontent.com/carbon-design-system/carbon/v11.0.0/LICENSE" }
+			}
+		],
+		"samples": {
+			"5000": [
+				{ "source": 0, "ranges": [[0, 7642]] },
+				{ "source": 1, "ranges": [[0, 1755]] },
+				{ "source": 2, "ranges": [[0, 3404]] },
+				{ "source": 3, "ranges": [[0, 9280]] },
+				{ "source": 4, "ranges": [[0, 7001]] },
+				{ "source": 5, "ranges": [[0, 14619]] },
+				{ "source": 6, "ranges": [[0, 1246]] },
+				{ "source": 7, "ranges": [[0, 5602]] },
+				{ "source": 8, "ranges": [[0, 2215]] },
+				{ "source": 9, "ranges": [[0, 23595]] },
+				{ "source": 10, "ranges": [[0, 5000]] },
+				{ "source": 11, "ranges": [[0, 11632]] },
+				{ "source": 12, "ranges": [[0, 2608]] },
+				{ "source": 13, "ranges": [[0, 2231]] },
+				{ "source": 14, "ranges": [[0, 2704]] },
+				{ "source": 15, "ranges": [[0, 7334]] },
+				{ "source": 16, "ranges": [[0, 18066]] }
+			],
+			"10000": [
+				{ "source": 0, "ranges": [[0, 7642]] },
+				{ "source": 1, "ranges": [[0, 1755]] },
+				{ "source": 2, "ranges": [[0, 3404]] },
+				{ "source": 3, "ranges": [[0, 9280]] },
+				{ "source": 4, "ranges": [[0, 7001]] },
+				{ "source": 5, "ranges": [[0, 14619]] },
+				{ "source": 6, "ranges": [[0, 1246]] },
+				{ "source": 7, "ranges": [[0, 5602]] },
+				{ "source": 8, "ranges": [[0, 2215]] },
+				{ "source": 9, "ranges": [[0, 23595]] },
+				{ "source": 10, "ranges": [[0, 5000]] },
+				{ "source": 11, "ranges": [[0, 11632]] },
+				{ "source": 12, "ranges": [[0, 2608]] },
+				{ "source": 13, "ranges": [[0, 2231]] },
+				{ "source": 14, "ranges": [[0, 2704]] },
+				{ "source": 15, "ranges": [[0, 7334]] },
+				{ "source": 16, "ranges": [[0, 18066]] },
+				{ "source": 17, "ranges": [[0, 13073]] },
+				{ "source": 18, "ranges": [[0, 5752]] },
+				{ "source": 19, "ranges": [[0, 11115]] },
+				{ "source": 20, "ranges": [[0, 14136]] },
+				{ "source": 21, "ranges": [[0, 8037]] },
+				{ "source": 22, "ranges": [[0, 5875]] },
+				{ "source": 23, "ranges": [[0, 6566]] },
+				{ "source": 24, "ranges": [[0, 4573]] },
+				{ "source": 25, "ranges": [[0, 15586]] },
+				{ "source": 26, "ranges": [[0, 10248]] },
+				{ "source": 27, "ranges": [[0, 14635]] },
+				{ "source": 28, "ranges": [[0, 4459]] },
+				{ "source": 29, "ranges": [[0, 2780]] },
+				{ "source": 30, "ranges": [[0, 2788]] },
+				{ "source": 31, "ranges": [[0, 2780]] }
+			],
+			"20000": [
+				{ "source": 0, "ranges": [[0, 7642]] },
+				{ "source": 1, "ranges": [[0, 1755]] },
+				{ "source": 2, "ranges": [[0, 3404]] },
+				{ "source": 3, "ranges": [[0, 9280]] },
+				{ "source": 4, "ranges": [[0, 7001]] },
+				{ "source": 5, "ranges": [[0, 14619]] },
+				{ "source": 6, "ranges": [[0, 1246]] },
+				{ "source": 7, "ranges": [[0, 5602]] },
+				{ "source": 8, "ranges": [[0, 2215]] },
+				{ "source": 9, "ranges": [[0, 23595]] },
+				{ "source": 10, "ranges": [[0, 5000]] },
+				{ "source": 11, "ranges": [[0, 11632]] },
+				{ "source": 12, "ranges": [[0, 2608]] },
+				{ "source": 13, "ranges": [[0, 2231]] },
+				{ "source": 14, "ranges": [[0, 2704]] },
+				{ "source": 15, "ranges": [[0, 7334]] },
+				{ "source": 16, "ranges": [[0, 18066]] },
+				{ "source": 17, "ranges": [[0, 13073]] },
+				{ "source": 18, "ranges": [[0, 5752]] },
+				{ "source": 19, "ranges": [[0, 11115]] },
+				{ "source": 20, "ranges": [[0, 14136]] },
+				{ "source": 21, "ranges": [[0, 8037]] },
+				{ "source": 22, "ranges": [[0, 5875]] },
+				{ "source": 23, "ranges": [[0, 6566]] },
+				{ "source": 24, "ranges": [[0, 4573]] },
+				{ "source": 25, "ranges": [[0, 15586]] },
+				{ "source": 26, "ranges": [[0, 10248]] },
+				{ "source": 27, "ranges": [[0, 14635]] },
+				{ "source": 28, "ranges": [[0, 4459]] },
+				{ "source": 29, "ranges": [[0, 2780]] },
+				{ "source": 30, "ranges": [[0, 2788]] },
+				{ "source": 31, "ranges": [[0, 2780]] },
+				{ "source": 32, "ranges": [[0, 4459]] },
+				{ "source": 33, "ranges": [[0, 2790]] },
+				{ "source": 34, "ranges": [[0, 2776]] },
+				{ "source": 35, "ranges": [[0, 4461]] },
+				{ "source": 36, "ranges": [[0, 4998]] },
+				{ "source": 37, "ranges": [[0, 2216]] },
+				{ "source": 38, "ranges": [[0, 2635]] },
+				{ "source": 39, "ranges": [[0, 9523]] },
+				{ "source": 40, "ranges": [[0, 7998]] },
+				{ "source": 41, "ranges": [[0, 5344]] },
+				{ "source": 42, "ranges": [[0, 2112]] },
+				{ "source": 43, "ranges": [[0, 2440]] },
+				{ "source": 44, "ranges": [[0, 2191]] },
+				{ "source": 45, "ranges": [[0, 21581]] },
+				{ "source": 46, "ranges": [[0, 2973]] },
+				{ "source": 47, "ranges": [[0, 3249]] },
+				{ "source": 48, "ranges": [[0, 9386]] },
+				{ "source": 49, "ranges": [[0, 2588]] },
+				{ "source": 50, "ranges": [[0, 11463]] },
+				{ "source": 51, "ranges": [[0, 8681]] },
+				{ "source": 52, "ranges": [[0, 6564]] },
+				{ "source": 53, "ranges": [[0, 4389]] },
+				{ "source": 54, "ranges": [[0, 11763]] },
+				{ "source": 55, "ranges": [[0, 2623]] },
+				{ "source": 56, "ranges": [[0, 7464]] },
+				{ "source": 57, "ranges": [[0, 4881]] },
+				{ "source": 58, "ranges": [[0, 9253]] },
+				{ "source": 59, "ranges": [[0, 6446]] },
+				{ "source": 60, "ranges": [[0, 889]] },
+				{ "source": 61, "ranges": [[0, 5531]] },
+				{ "source": 62, "ranges": [[0, 769]] },
+				{ "source": 63, "ranges": [[0, 6323]] },
+				{ "source": 64, "ranges": [[0, 13433]] },
+				{ "source": 65, "ranges": [[0, 6154]] },
+				{ "source": 66, "ranges": [[0, 2539]] },
+				{ "source": 67, "ranges": [[0, 10125]] },
+				{ "source": 68, "ranges": [[0, 7040]] },
+				{ "source": 69, "ranges": [[0, 2140]] },
+				{ "source": 70, "ranges": [[0, 18372]] },
+				{ "source": 71, "ranges": [[0, 1892]] },
+				{ "source": 72, "ranges": [[0, 2108]] }
+			]
+		}
+	}
+}

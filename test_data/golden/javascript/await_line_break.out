@@ -10,3 +10,43 @@ function h() {
 	g();
 	return;
 }
+
+var await = x => x;
+
+console.log(await(1));
+
+var yield = x => x;
+
+console.log(yield(1));
+
+const stopped = () => {
+	return;
+	1 + 0;
+};
+
+const generated = function*() {
+	yield;
+	2 + 0;
+};
+
+class AsyncFields {
+	async;
+
+	/**
+	 *
+	 * @return
+	 */
+	["isAdmin"]() {
+		return false;
+	}
+
+	static async;
+
+	/**
+	 *
+	 * @return
+	 */
+	*g() {
+		yield 1;
+	}
+}

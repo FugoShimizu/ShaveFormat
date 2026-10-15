@@ -1,0 +1,7 @@
+<?php
+
+echo "p{$o->f(aaaaaaaaa, bbbbbbbbb, ccccccccc, ddddddddd)}q";
+echo "p$aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaq";
+echo <<<TEXT
+p{$o->f(aaaaaaaaa, bbbbbbbbb, ccccccccc, ddddddddd)}q
+TEXT;

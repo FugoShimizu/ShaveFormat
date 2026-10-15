@@ -4,3 +4,6 @@ $a = "x\t
 y"; // c1
 
 var_dump($a);
+
+echo __LINE__;
+echo __line__;

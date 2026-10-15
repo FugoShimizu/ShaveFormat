@@ -1,0 +1,39 @@
+f(
+	[
+		// 成員の深さ
+		FirstCollectionMemberWithANameLongEnoughForWrapping,
+		SecondCollectionMemberWithANameLongEnoughForWrapping,
+		ThirdCollectionMemberWithANameLongEnoughForWrapping
+	]
+)
+
+fun foo(list: List<Int>) {
+	list.map
+		/* CA */ // CB
+		{ it * 2 }
+}
+
+val x = obj
+/* p */ // q
+as String
+
+fun main() {
+    val x = listOf(1)
+        .filter { it > 0 }
+        // filter done
+        .map { it * 2 }
+        // map done
+        .sorted()
+}
+
+fun f() {
+    xs.map() { // 各要素
+        it
+    }
+}
+
+fun m() {
+  val a = listOf(
+    // c
+  )
+}

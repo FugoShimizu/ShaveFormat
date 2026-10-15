@@ -1,9 +1,0 @@
-/**
- *
- * @param a
- */
-void g(int a) {
-	x();
-	return;
-// end of void
-}

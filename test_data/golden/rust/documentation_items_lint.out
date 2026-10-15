@@ -1,11 +1,100 @@
-/// 足す
-///
-/// # Arguments
-///
-/// * `a` - 左
-/// * `b`
-///
-/// # Returns
+/**
+ * 足す
+ * # Arguments
+ * * `a` - 左
+ * * `b`
+ * # Returns
+ */
 fn add(a: i32, b: i32) -> i32 {
 	return a + b;
+}
+
+/**
+ * Summary
+ * # Arguments
+ * * `x` - value
+ */
+fn summary_blocks(x: i32) -> () {}
+/**
+ * Summary
+ * More details
+ * # Arguments
+ * * `x` - value
+ */
+fn parameter_blocks(x: i32) -> () {}
+
+/**
+ * Summary
+ * More details
+ * # Returns
+ * Value
+ */
+fn return_blocks() -> i32 {
+	return 1;
+}
+
+/**
+ * Summary
+ * # Arguments
+ * * `x` - value
+ */
+fn line_then_block(x: i32) -> () {}
+/**
+ * Summary
+ * # Arguments
+ * * `x` - value
+ */
+fn block_then_line(x: i32) -> () {}
+
+struct DocCases;
+
+impl DocCases {
+	/**
+	 * Summary
+	 * # Arguments
+	 * * `x` - value
+	 */
+	fn method_blocks(x: i32) -> () {}
+}
+
+/**
+ * Summary
+ * # Arguments
+ * * `x`
+ */
+fn missing_split(x: i32) -> () {}
+/**
+ * Summary
+ * # Arguments
+ * - 数: Value
+ */
+fn unicode(数: i32) -> () {}
+/**
+ * Summary
+ * # Arguments
+ * - café: Value
+ */
+fn accent(café: i32) -> () {}
+/**
+ * Summary
+ * # Arguments
+ * - type: Value
+ */
+fn raw(r#type: i32) -> () {}
+/**
+ * Summary
+ * # Arguments
+ * - type: Value
+ * - other: Value
+ */
+fn raw_pattern((r#type, other): (i32, i32)) -> () {}
+
+/**
+ * クロージャのパターンを検査する
+ */
+fn closure_patterns() -> () {
+	let f = |_, (x, y)| -> () {};
+	consume(f);
+	// 終了
+	return;
 }

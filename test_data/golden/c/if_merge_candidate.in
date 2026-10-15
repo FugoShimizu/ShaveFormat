@@ -1,0 +1,29 @@
+/**
+ * 条件分岐と指数の検査
+ */
+void Inspect(void) {
+	if(A) if(B) Consume();
+	if(A) if(B) if(C) Consume();
+	if(A) Consume();
+	else if(B) Consume();
+	else if(C) Consume();
+	X += 1E0'1;
+	X -= 1E+0'1;
+	X += 1E-0'1;
+	Consume(X >= B + 1E0'1);
+	Consume(X <= B - 1E-0'1);
+	Consume(B + 1E+0'1 <= X);
+	Consume(B - 1E0'1 >= X);
+	X += 1E0'0;
+	Consume(X >= B + 1E0'0);
+	Consume(X == 0E1'0);
+	X += 0X1P0'1;
+	Consume(X >= B + 0X1P-0'1);
+	X -= 1E+0'1L;
+	Consume(X >= B + 0X1P0'1L);
+	if(A) Consume();
+	if(B) Consume();
+	if(C) Consume();
+	// 終了
+	return;
+}

@@ -1,0 +1,59 @@
+/**
+ *
+ */
+void f() { // c
+	{
+		g();
+	}
+	return;
+}
+
+int x;
+// First sentence
+// Second sentence
+int y;
+
+/**
+ *
+ */
+void f(void) {
+	int b; // three // four
+	g();
+	return;
+}
+
+int x; /* dir C:\ */ // next
+int y;
+
+/**
+ *
+ */
+void f(void) {
+	// c
+	if(a) {} else {
+		x();
+		y();
+	}
+	// d1
+	// d2
+	if(a) {}
+	// w
+	while(b) {}
+	return;
+}
+
+/**
+ * 面積
+ * 幅
+ * @param w
+ * @param h
+ * @return
+ */
+int area(int w, int h) {
+	return w * h;
+}
+
+// Para
+// a = b
+// Tail
+int x;

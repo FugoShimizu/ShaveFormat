@@ -5,22 +5,338 @@
  * 文 C
  * 文 D
  * 末尾の句点のみ
- * 引用「、」と「。」は保つ
- * 『二重鉤括弧』
- * 『内も保つ』
+ * 引用「、」と「」は保つ
+ * 『二重鉤括弧内も保つ』
  * 【隅付括弧，内も保つ】
  * 一行ブロックは閉じて開き直す
  * 二文目
- * 引用「一」
- * 「二」は保つ
+ * 引用「一二」は保つ
  * 説明 A
  * 説明 B
+ * 「ASCII と日本語」
+ * 『Alpha Beta』
+ * Wait..?!
+ * Continue
+ * Read
+ * Next
+ * Read
+ * Next
+ * Read?
+ * Next!
+ * (Read Return)
+ * "Read Return"
+ * 'Read Return'
+ * `Read.　Return.` value = "Read.　Return."
+ * Read
+ * Return
+ * Read (once)
+ * Return
+ * Dr
+ * Smith reads
+ * 処理する.結果を返す
+ * 1. Read
+ * Return
+ * A. Read
+ * Return
+ * (Read Return)
+ * (Read Return)
+ * Next
+ * "Read (once Return) then Finish"
+ * 'Read "once Return" then Finish'
+ * don't stop
+ * users' cache
+ * Next
+ * Read \"once
+ * Return
+ * ('a 'b.'x 'c)
+ * 処理
+ * 続行
+ * 処理
+ * 処理
+ * 次
+ * (処理.次)
+ * Read.続行
+ * Read？
+ * Return！
+ * Next
+ * `Read. Return.` x = "Read. Return."
  * @param X 引数の説明
  * 続き
+ * 【日本語と日本語】
  * @return 結果
  */
 int F(int X) {
-	// 小数点０．５は句点でない
+	// 小数点０
+	// ５は句点でない
 	// 返戻する
 	return X;
 }
+
+// [First Second]
+// {First Second}
+// ［一文二文］
+// ｛一文二文｝
+// [First {Second Third}]
+// Close}
+// next
+// "a\"x Next"
+// 'a\'x Next'
+// "First\\"
+// next
+// Is it ready?
+// yes it is
+// It works!
+// then continue
+// First
+// next
+// "a\"x  y"
+// `a? b! c. d` https://example.com/path?
+// Read
+// Next
+// Read
+// Read
+// Next
+// Finish
+int SentenceCases;
+// Use it when a < b
+// Then c > d
+// ‘First Second’
+// “First Second”
+// 〈First Second〉
+// 《First Second》
+// 〔First Second〕
+// 〖First Second〗
+// 〘First Second〙
+// 〚First Second〛
+// ＜First Second＞
+long PairedComments;
+// Wait..?!
+// Continue
+// Wait.?!
+// Continue
+// Wait...?!
+// Continue
+// Wait …?!
+// Continue
+// Wait?!
+// Continue
+// Wait?
+// Continue
+// Wait!
+// Continue
+// Wait
+// Continue
+// Wait
+// Wait..?!Continue
+// a..b a...b a?b a!b
+// [Wait..?! Continue]
+// [Wait]
+// `Wait..?! Continue.`
+int MarkRuns; // Wait..?! // Continue // Read // Next // Read // Next // Read? // Next! // (Read Return)
+/**
+ * operator
+ * Read
+ * (see)
+ */
+int LeadingDots;
+// (Read
+// Return Close) Next
+int GroupParen;
+// "Read
+// Return Close" Next
+int GroupQuote;
+// 'Read
+// ("Return
+// Continue Close") Finish' Next
+int GroupNested;
+// (Read
+// Return Close) Next
+int GroupMixed;
+// (`Read. Return.`
+// Close End) Next
+int GroupCode;
+// (Open
+int GroupOpen;
+// Close
+// Next
+int GroupReset;
+// 「一文
+// 二文終わり」次
+int GroupWide;
+/**
+ * (Read
+ * Return Close) Next
+ */
+int GroupDoc;
+// "Read here" 日本語 ABC "Return now"
+// 'Read here' 甲，B '?Return now' 日本語 ABC '!Finish here'
+double QuoteTail; // "Read here" 日本語 ABC "Return now"
+float /* "Read here" 日本語 ABC "Return now" */ QuoteInline;
+// "Read here" 日本語 ABC "Return now"
+long QuoteBlock;
+/**
+ * "Read here" 日本語 ABC "Return now"
+ */
+short QuoteDoc;
+// ========== "Read here" 日本語 ABC "Return now" ==========
+char QuoteSection;
+// ("Read here" 日本語 ABC "Return now")
+// "Read 'Inner now' here" 日本語 ABC "Return now"
+// x = "Read here." 日本語 ABC y = "Return now."
+// A, B and 日本語
+// A, B or にほんご
+// A, B, C and ニホンゴ
+// A, B and ＡＢＣ
+// A, B or １２３
+// A, B and 日本語
+// A, B or にほんご
+int TightEnumeration;
+int TightTrailing; // A, B and 日本語
+int /* A, B or 日本語 */ TightInline;
+// A, B and 日本語
+int TightBlock;
+
+/**
+ * A, B and 日本語
+ * @param x A, B or 日本語
+ * @return A, B and 日本語
+ */
+int TightDocumentation(int x) {
+	return x;
+}
+
+// ========== A, B and 日本語 ==========
+int TightSection;
+// A, N 回
+// A, B andN 回
+// `A, B and日本語`
+// https://example.com/and日本語
+int TightProtected;
+// 甲，乙？
+// 甲，乙丙
+// 甲，乙丙の説明
+// 甲，乙！
+// 甲，乙・説明
+// 甲，乙※説明
+// 甲，乙％
+// 甲，乙／説明
+// 甲，乙＋説明
+// 甲，乙－説明
+// 甲，乙＝説明
+// 甲，乙＊説明
+// 甲，乙＆説明
+// 甲，乙＠説明
+// 甲，乙＃説明
+// 甲，乙＄説明
+// 甲，乙＾説明
+// 甲，乙＿説明
+// 甲，乙｜説明
+// 甲，乙～説明
+// 甲，乙￥説明
+// 甲，乙［説明］
+// 甲，乙｛説明｝
+// 甲，乙…説明
+// 甲，乙‥説明
+// 甲，乙×説明
+// 甲，乙©説明
+// 甲，乙😀
+// 甲，乙にほんご
+// 甲，乙ニホンゴ
+// 甲，乙ＡＢＣ
+// 甲，乙１２３
+// 甲，乙，丙丁
+// 甲，乙 C
+// A, B
+// A, B 丙
+// 1.5, 2.1 説明
+// `甲,乙 ？`
+float BoundaryEnumeration;
+double BoundaryTrailing; // 甲，乙？
+long /* 甲，乙丙 */ BoundaryInline;
+// 甲，乙？
+short BoundaryBlock;
+
+/**
+ * 甲，乙丙
+ * @param x 甲，乙？
+ */
+void BoundaryDocumentation(int x) {}
+
+// ========== 甲，乙丙 ==========
+char BoundarySection;
+// 設定を読む
+// .NET を使う
+int LeadingPoint;
+// 設定を読む
+// ..Next を使う
+int LeadingPoints;
+// (Read! Next)
+// "Read? Next"
+int MarkWhitespace;
+int MarkTail; // 設定を読む // .NET を使う
+int /* (Read! Next) */ MarkInline;
+// café's result
+// Next
+// 'café's result Return' Next
+// 'a'é result Return' Next
+// Ａ'Ｂ result
+// Next
+// １'２ result
+// Next
+// 𝔄'𝔅 result
+// Next
+int UnicodeApostrophes;
+// (café 's result Next)
+int UnicodeOpeningRole;
+// 'a 'é result
+// Return.' Next
+int UnicodeClosingRole;
+int UnicodeApostropheTail; // café's result // Next
+int /* 'café's result Return' Next */ UnicodeApostropheInline;
+
+/**
+ * 'café's result Return' Next
+ */
+void UnicodeApostropheDocumentation() {}
+
+// １２. First
+// Next
+// Ａ. First
+// Next
+// é. First
+// Next
+// ١٢. First
+// Next
+// १२. First
+// Next
+// 𝟙𝟚. First
+// Next
+// ＡＢ
+// First
+// Next
+// と
+// First
+// Next
+// 漢
+// First
+// Next
+int UnicodeEnumeration;
+int UnicodeEnumerationTail; // １２. First // Next
+int /* １２. First */ /* Next */ UnicodeEnumerationInline;
+// 第١٢章 説明
+int UnicodeChapter;
+
+/**
+ * １２. First
+ * Next
+ */
+void UnicodeEnumerationDocumentation() {}
+
+// （整形仕様 3.4，4.3，7.1）
+int SectionNumberEnumeration;
+// A, B plus 日本語
+// apple，花と，banana
+// apple，花も，banana
+int StructuralWords;
+// {@code A B}
+// {@literal A B}

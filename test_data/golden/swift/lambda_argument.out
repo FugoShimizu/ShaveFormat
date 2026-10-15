@@ -16,3 +16,43 @@ let y = xs.map(
 		$0 + 1
 	}
 )
+
+let trailingResult = (f()) {
+	42
+}
+
+let nestedTrailingResult = (f()) {
+	42
+}
+
+let ordinaryResult = f()()
+
+let argumentResult = f()(1) {
+	42
+}
+
+let closureItems = [
+	{
+		1
+	},
+	{
+		2
+	}
+]
+
+/**
+ *
+ * - Parameter a:
+ * - Returns:
+ */
+func compute(a: Int) -> Int {
+	let computed: Int = {
+		let firstValue = firstOperationWithLongName(a), secondValue = secondOperationWithLong(a)
+		return firstValue + secondValue
+	}()
+	return computed
+}
+
+let emptyValue = ()
+let nestedEmpty = wrap(())
+let tupleItems = ((), (1, ()))

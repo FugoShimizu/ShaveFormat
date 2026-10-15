@@ -1,0 +1,186 @@
+class CallTarget {
+/// <summary>警告抑止を介して取得した関数を呼出す</summary>
+/// <param name="Factory">関数を取得する処理</param>
+/// <returns>呼出結果</returns>
+static int? InvokePostfix(System.Func<System.Func<int>> Factory) {
+// 条件アクセス後の呼出結果の返戻
+return (Factory?.Invoke())!();
+}
+/// <summary>条件付で取得した関数を呼出す</summary>
+/// <param name="Factory">関数を取得する処理</param>
+/// <returns>呼出結果</returns>
+static int? InvokeConditionalAccess(System.Func<System.Func<int>> Factory) {
+// 条件アクセス後の呼出結果の返戻
+return ((Factory?.Invoke()))();
+}
+/// <summary>null 警告を抑止した関数を呼出す</summary>
+/// <param name="Factory">関数を取得する処理</param>
+/// <returns>呼出結果</returns>
+static int? InvokeSuppressed(System.Func<System.Func<int>> Factory) {
+// 条件アクセス後の呼出結果の返戻
+return ((Factory?.Invoke())!)();
+}
+/// <summary>非同期に取得した関数を呼出す</summary>
+/// <param name="Value">関数を取得する処理</param>
+/// <returns>呼出結果を返す処理</returns>
+static async System.Threading.Tasks.Task<int> InvokeAwait(System.Threading.Tasks.Task<System.Func<int>> Value) {
+// 取得した関数の呼出結果の返戻
+return (await Value)();
+}
+/// <summary>パターンで選択した関数を呼出す</summary>
+/// <param name="Number">照合対象</param>
+/// <param name="Function">選択する関数</param>
+/// <returns>呼出結果</returns>
+static int InvokeSwitch(int Number, System.Func<int> Function) {
+// 選択した関数の呼出結果の返戻
+return (Number switch { _ => Function })();
+}
+/// <summary>指定した関数を呼出す</summary>
+/// <param name="Function">呼出対象</param>
+/// <returns>呼出結果</returns>
+static int InvokePlain(System.Func<int> Function) {
+// 呼出結果の返戻
+return ((Function))();
+}
+/// <summary>変換した関数を呼出す</summary>
+/// <param name="Value">呼出対象</param>
+/// <returns>呼出結果</returns>
+static int InvokeCast(object Value) {
+// 呼出結果の返戻
+return ((System.Func<int>)Value)();
+}
+/// <summary>変換した匿名関数を呼出す</summary>
+/// <param name="Number">匿名関数が返す値</param>
+/// <returns>呼出結果</returns>
+static int InvokeLambda(int Number) {
+// 引数を返す匿名関数の呼出結果の返戻
+return ((System.Func<int>)(() => Number))();
+}
+/// <summary>選択した関数を呼出す</summary>
+/// <param name="IsFirst">先行関数を選ぶか</param>
+/// <param name="First">先行関数</param>
+/// <param name="Second">後続関数</param>
+/// <returns>呼出結果</returns>
+static int InvokeConditional(bool IsFirst, System.Func<int> First, System.Func<int> Second) {
+// 選択した関数の呼出結果の返戻
+return (IsFirst ? First : Second)();
+}
+/// <summary>結合した関数を呼出す</summary>
+/// <param name="First">先行関数</param>
+/// <param name="Second">後続関数</param>
+/// <returns>後続関数の呼出結果</returns>
+static int InvokeCombined(System.Func<int> First, System.Func<int> Second) {
+// 結合した関数の呼出結果の返戻
+return (First + Second)();
+}
+}
+
+class C {
+	unsafe void f(dynamic d, int a) {
+		g(((d) - a) * 2);
+		g((d) + a);
+		g((d) * a);
+		g((d) & a);
+		g((d) ^ a);
+		g((int) - a);
+		g((d?) - a);
+		g((d) !a);
+		g((A.B) - a * 2);
+		g(x * (d) - a);
+		g(-(d) - a);
+		g(d * a);
+		g(out d* a);
+		var t = (d * a, 1);
+		(int* p, int q) = (x, y);
+		h(x: d * a);
+		g((d[0]) - a);
+		g((global::A.B) - a);
+		g((global::A) - a);
+		g((A<int>.B) - a);
+		g((A.B<int>) - a);
+		var (m, n) = (1, 2);
+		g((d) /* c */ + a);
+		g((d) // e
+			* a);
+	}
+}
+
+class C {
+	int M(int d, int a) {
+		var x = (d) /* c */ - a;
+		return (d) // c
+			- a;
+	}
+	void N() {
+		var s = $"{(x == @"\" ? 1 : 2)}";
+		var t = $"{(a ? b : c)}";
+		var u = $"{(f(a ? b : c))}";
+		G((x => x));
+	}
+}
+
+class T {
+	static string F(int n) {
+		return $"{(global::System.Math.PI):F2} {(n > 0 ? 1 : 2)} {(n + 1)}";
+	}
+}
+
+class C {
+	void M(int a, int[] xs) {
+		if ((a > 1)) { A(); }
+		while ((a > 1)) { a--; }
+		switch ((a)) { default: break; }
+		foreach (var x in (xs)) { A(); }
+		var v = xs[(a)];
+		foreach (var x in (xs ?? ys)) { A(); }
+		var r = (a) switch { 1 => 2, _ => 3 };
+		var s = (a + 1) switch { _ => 0 };
+		var q = from x in (xs ?? ys) join y in (ys ?? xs) on x equals y select x;
+		var u = xs[(1..)];
+		var w = (1..);
+	}
+}
+
+class Sample {
+	void Slice(int[] values, int alpha, int bravo, int charlie, int delta) {
+		var part = values[(alpha + bravo)..(charlie + delta)];
+	}
+}
+
+class A { void f() { var a = new[] { 1, 2 }; var c = new[,] { { 1 } }; } }
+
+[Serializable()]
+class Point {
+	public int X;
+	void F() {
+		Func<int, int> f = (x) => x;
+		var g = async (x) => x;
+		var h = static (x) => x;
+		var k = [A] (x) => x;
+		var m = int (x) => x;
+		var n = async (x, y) => x;
+		var p = new Point() { X = 1 };
+		var q = new Point();
+		var r = new List<int>() { 1 };
+	}
+}
+
+class C {
+	void F() {
+		x = (a.b).c + (g()).h + (a[0]).b + (this).x + (new A()).b + (1).ToString() + (a?.b).c + ("abc").Length + ((a.b)).c;
+	}
+}
+
+class C {
+    public (int, int) Foo() { return (1, 2); }
+    private readonly (int a, string b) _t;
+    static (int, int)[] Arr;
+    ~C() { Dispose(); }
+    void M() {
+        var a = (ref x) => x;
+        var b = (text, out result) => Int32.TryParse(text, out result);
+        var c = async (ref readonly q, scoped p) => { await Task.Yield(); return q; };
+    }
+}
+
+public abstract record VeryLongGenericRecordTypeNameThatExceedsLimit<TParam> : SomeAbstractBaseGenericClassName<TParam> { int FieldValueHere; }

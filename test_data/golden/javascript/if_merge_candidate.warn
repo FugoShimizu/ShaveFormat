@@ -1,17 +1,11 @@
-8:3: Review: Merge the conditions of these identical branch bodies; verify lifetime
-22:5: Review: Describe the termination or returned value in the return comment; verify documentation, intent
-23:2: Review: Merge the conditions of these identical branch bodies; verify lifetime
-24:5: Review: Describe the termination or returned value in the return comment; verify documentation, intent
-26:5: Review: Describe the termination or returned value in the return comment; verify documentation, intent
-28:5: Review: Describe the termination or returned value in the return comment; verify documentation, intent
-38:5: Review: Describe the termination or returned value in the return comment; verify documentation, intent
-39:2: Review: Merge the conditions of these identical branch bodies; verify lifetime
-40:5: Review: Describe the termination or returned value in the return comment; verify documentation, intent
-42:5: Review: Describe the termination or returned value in the return comment; verify documentation, intent
-52:5: Review: Describe the termination or returned value in the return comment; verify documentation, intent
-54:5: Review: Describe the termination or returned value in the return comment; verify documentation, intent
-56:5: Review: Describe the termination or returned value in the return comment; verify documentation, intent
-65:5: Review: Describe the termination or returned value in the return comment; verify documentation, intent
-66:2: Review: Merge the conditions of these identical branch bodies; verify lifetime
-67:5: Review: Describe the termination or returned value in the return comment; verify documentation, intent
-69:5: Review: Describe the termination or returned value in the return comment; verify documentation, intent
+8:3: Review: Merge the conditions of these identical branch bodies
+23:2: Review: Merge the conditions of these identical branch bodies
+39:2: Review: Merge the conditions of these identical branch bodies
+53:2: Review: Merge the conditions of these identical branch bodies
+66:2: Review: Merge the conditions of these identical branch bodies
+96:2: Review: Merge the conditions of these identical branch bodies
+107:4: Review: Use the increment or decrement form required for this target
+108:12: Review: Use a strict inequality with an equivalent adjusted boundary
+109:12: Review: Use the zero-test form required for this numeric type
+110:2: Review: Merge the conditions of these identical branch bodies
+113:2: Review: Merge the conditions of these identical branch bodies

@@ -1,5 +1,15 @@
+# frozen_string_literal: 説明
+# 二文目です
+MAGIC_PROSE = 1
+
 # 説明
 =begin
 frozen_string_literal: true
 =end
 puts 1
+# Wait..?!
+# Continue
+=begin
+Warn_indent: true
+=end
+puts 2

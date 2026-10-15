@@ -1,0 +1,129 @@
+describe(
+	"suite",
+	() => { // group
+		it(
+			"works",
+			() => { // check
+				expect(1).toBe(1);
+			}
+		);
+	}
+);
+
+useEffect(
+	() => { // init
+		start();
+	},
+	[]
+);
+
+setTimeout(
+	() => { // later
+		done();
+	},
+	10
+);
+
+// d
+const a = [];
+
+g();
+
+/**
+ *
+ */
+function f() {
+	// c
+	if(a) {} else {
+		x();
+		y();
+	}
+	// d1
+	// d2
+	if(a) {} else x();
+	try {
+		g();
+	// e
+	} catch {}
+	try {
+		g();
+	// f1
+	// f2
+	} catch {}
+	// bare
+	{}
+	// obj
+	const o = {};
+	// arg
+	f();
+	return;
+}
+
+/**
+ *
+ * @param x
+ */
+function f(x) {
+	switch(x) {
+	case 1:
+		a();
+	case 2:
+	// b
+	default:
+	// c
+	}
+	return;
+}
+
+/**
+ *
+ */
+function f() {
+	a();
+	;
+	/* s2 */;
+	return;
+}
+
+/**
+ *
+ */
+function g() {
+	b();
+	/* s3 */;
+	return;
+}
+
+/**
+ *
+ * @param x
+ */
+function m(x) {
+	if(x) return;
+	else {/* empty else */}
+	g();
+	return /* d */;
+}
+
+try {
+	g();
+} catch(e) {/* ignore */}
+
+const a = [/* empty */];
+const f = () => {/* noop */};
+
+foo(/* nothing */);
+
+const n = new A /* nothing */;
+const f /* a */ = (/* b */) => 1;
+
+g(/* c */);
+
+/**
+ * Keep boundaries
+ */
+function emptyBoundary() {/* Read */ /* Return */}
+/**
+ * Keep boundaries
+ */
+function emptyBoundaryPair() {/* Read */ /* Return */}

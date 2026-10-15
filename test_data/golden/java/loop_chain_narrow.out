@@ -1,0 +1,35 @@
+class C {
+	/**
+	 * 連鎖の見出を保つ
+	 */
+	void f() {
+		while(a && b) if(c) {
+			act(first_argument, second_argument);
+		}
+		return;
+	}
+
+	/**
+	 * 三段の見出を保つ
+	 */
+	void g() {
+		while(a) while(b) if(c) {
+			act(first_argument, second_argument);
+		}
+		return;
+	}
+}
+
+class References {
+	Factory method =
+	ReceiverWithANameLongEnoughForScopeReferences
+	::make;
+
+	Factory constructor =
+	ReceiverWithANameLongEnoughForScopeReferences
+	::new;
+
+	Factory generic =
+	ReceiverWithANameLongEnoughForScopeReferences
+	::<Item> make;
+}

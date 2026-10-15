@@ -1,9 +1,0 @@
-/**
- *
- * @return
- */
-fun f(): Int {
-	// m
-	// l
-	return x
-}

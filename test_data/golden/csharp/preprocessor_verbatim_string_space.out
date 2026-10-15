@@ -1,6 +1,0 @@
-class C {
-	#if DEBUG
-	string s = @"a  
-b  ";
-	#endif
-}

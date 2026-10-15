@@ -1,1 +1,3 @@
 5:8: Violation: Function is missing an explicit trailing return
+27:6: Review: Inline immediately returned variable α
+36:6: Review: Inline immediately returned variable α

@@ -92,3 +92,198 @@ int Sum(const int Count) {
 	// 値の返戻
 	return 1;
 }
+
+namespace Other {}
+using namespace Other;
+
+/**
+ * 整数部分の取得関数
+ * 計算量：O(1)
+ * @param Value 値
+ * @return 整数部分
+ */
+int GetTruncated(const double Value) {
+	// 整数部分の返戻
+	return (int)Value;
+}
+
+/**
+ * 初期化した値を共有する
+ * @return 共有する値
+ */
+int Cached() {
+	static const int Value = Read();
+	// 共有する値の返戻
+	return Value;
+}
+
+/**
+ * 呼出毎に値を読む
+ * @return 読んだ値
+ */
+int Fresh() {
+	const int Value = Read();
+	// 読んだ値の返戻
+	return Value;
+}
+
+/**
+ * スレッド毎に値を共有する
+ * @return スレッド毎の値
+ */
+int ThreadCached() {
+	thread_local const int Value = Read();
+	// スレッド毎の値の返戻
+	return Value;
+}
+
+/**
+ * 明示した後置戻値の取得関数
+ * @return
+ */
+auto ExplicitResult() -> int {
+	return 1;
+}
+
+auto DeclaredResult() -> int; // 明示した後置戻値を持つ関数の宣言
+
+class ForwardOnly {
+private:
+
+	class Detail;
+	struct Record;
+	enum class Mode : int;
+	union Payload;
+};
+
+class ForwardDefinitions {
+private:
+
+	struct Record;
+	class Detail;
+	enum class Mode : int;
+	union Payload;
+
+	using RecordAlias = Record;
+
+	typedef Record RecordType;
+
+	enum class Mode : int { None };
+	struct Record {};
+	class Detail {};
+};
+
+class ForwardHistory {
+private:
+
+	struct First {};
+	class Pending;
+
+	using LateAlias = First;
+
+	enum class Later : int { None };
+	struct Final {};
+};
+
+/**
+ * 値の取得関数
+ * @return 取得した値
+ */
+int EscapedReturn() {
+	int α = G();
+	return \U000003B1;
+}
+
+/**
+ * 捕捉した値の取得関数
+ * @return 取得した値
+ */
+int EscapedCapture() {
+	int α = G(
+		[&]() -> int {
+			return \u03B1;
+		}
+	);
+	// 捕捉した値の返戻
+	return α;
+}
+
+/**
+ * 真偽値の反転関数
+ * @param α 反転する値
+ */
+void EscapedFlip(bool &α) {
+	α = !\u03B1;
+	return;
+}
+
+class CompleteDependency {
+private:
+	class Storage {};
+	struct ValueOwner { Storage value; };
+	struct ArrayOwner { Storage values[2]; };
+	struct PointerOwner { Storage *value; };
+	struct ReferenceOwner { Storage &value; };
+	struct StaticOwner { static Storage value; };
+	struct ShadowOwner { struct Storage {}; Storage value; };
+	using LateAlias = Storage;
+};
+
+/**
+ * フィールドを読んだ値の取得関数
+ * @return 取得した値
+ */
+int FieldReference() {
+	int α = G(obj.\u03B1);
+	return α;
+}
+
+class SplitDependency { private: class Storage {}; protected: class Other {}; struct Owner { Storage value; }; };
+
+class ComparisonNameProjection {
+private:
+	enum class SpacingRule : uint8_t {};
+	class FramePool {};
+	struct Builder {
+		size_t NextStructured = StructuredBlockSize; // 最後の領域の次の未使用の枠
+		int Count = 1;
+		bool Enabled = false;
+	};
+	struct Dependent {
+		size_t Count = 1;
+		FramePool Frames;
+	};
+};
+
+#define EXPONENT 1.0e1'0
+#define HEX_EXPONENT 0x1p1'0
+#define POSITIVE_EXPONENT (+(1.0e+1'0F))
+#define NEGATIVE_EXPONENT (-0x1p-0'1L)
+
+union UnionReverse  {
+public:
+
+    int A;
+
+private:
+
+    int B;
+};
+
+union UnionForward  {
+private:
+
+    int B;
+
+public:
+
+    int A;
+};
+
+union UnionImplicit  {
+    int A;
+
+private:
+
+    int B;
+};

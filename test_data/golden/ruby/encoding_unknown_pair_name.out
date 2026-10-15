@@ -1,2 +1,3 @@
+#! /usr/bin/ruby -Ku -I-Ks -- -Ks
 # xcoding: euc-jp
 x = 1

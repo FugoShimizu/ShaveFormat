@@ -1,0 +1,28 @@
+let b = a /* x y */ ++c;
+
+/** 面積 */
+function area(
+	/** 幅 */
+	w: number,
+	h: number,
+): number {
+	return w * h;
+}
+const L = import(
+	/* webpackChunkName: "page" */
+	"./Page"
+);
+function g2() {
+	const a = g();
+	/** b の説明 */
+	const b = g();
+	return a + b;
+}
+
+const provider = { run(x: number): number { return x + 1; } };
+console.log(provider.run(1));
+
+const object = {
+/** @param old */
+m(x: number): number { return x; }
+};

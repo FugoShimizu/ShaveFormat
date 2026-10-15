@@ -6,7 +6,7 @@
  * @return
  */
 int g(int K) {
-	return K / 2;
+	return (K) / 2;
 }
 
 #include "k.h"
@@ -41,7 +41,7 @@ int m(void) {
  * @return
  */
 int n(int N) {
-	return (N) / 2;
+	return N / 2;
 }
 
 /**
@@ -50,5 +50,13 @@ int n(int N) {
  * @return
  */
 int p(int P) {
-	return P / 2;
+	return (P) / 2;
+}
+
+/**
+ *
+ * @return
+ */
+int q(void) {
+	return g((1));
 }

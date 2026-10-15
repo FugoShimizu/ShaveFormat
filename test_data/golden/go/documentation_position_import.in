@@ -6,3 +6,6 @@ package p
 import "fmt"
 
 var _ = fmt.Println
+
+// ========== S ==========
+func F() { fmt.Println() }

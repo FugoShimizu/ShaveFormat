@@ -1,5 +1,11 @@
 #include <stdbool.h>
 
+_Bool Scalar = {0};
+bool Array[2] = {0,1};
+_Bool Matrix[2][2] = {{0,1},{1,0}};
+bool Selected[2] = {[0]=1,[1]={0}};
+bool *Pointers[2] = {0,0};
+
 /**
  * 回す
  */
@@ -9,4 +15,51 @@ void f(void) {
 	int d = 1;
 	for(;;) g(b, c, d);
 	while(1) h();
+}
+
+#undef true
+
+/**
+ * 取り消した名前を生成しない
+ * @return 偽の値
+ */
+int cancelled(void) {
+ _Bool b=0;
+ while(1) { break; }
+ return b;
+}
+
+#include <stdbool.h>
+#define true 0
+#undef false
+#define false 7
+
+/**
+ * 再定義の値を生成しない
+ * @return １
+ */
+int redefined(void) {
+ _Bool b=0;
+ int n=0;
+ while(1) { ++n; break; }
+ return n+b;
+}
+
+#undef true
+#define true 1
+#undef false
+#define false 0
+#if OPTION
+#undef true
+#define true 0
+#endif
+
+/**
+ * 条件分岐後の未確定な名前を生成しない
+ * @return 偽の値
+ */
+int conditional(void) {
+ _Bool b=0;
+ while(1) { break; }
+ return b;
 }

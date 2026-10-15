@@ -1,0 +1,4 @@
+5:2: Review: Merge the conditions of these identical branch bodies
+8:2: Review: Merge the conditions of these identical branch bodies
+20:4: Review: Use the increment or decrement form required for this target
+21:12: Review: Use a strict inequality with an equivalent adjusted boundary

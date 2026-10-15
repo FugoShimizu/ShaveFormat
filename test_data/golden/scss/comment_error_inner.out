@@ -1,6 +1,10 @@
 .a {
-	/* 註 */
+	// 註
 	.\!bg-x {
 		color: red;
 	}
+}
+
+.\32 1unit, .word\+tail, .\000032unit, #\32 key > \61 tag {
+	color: red;
 }

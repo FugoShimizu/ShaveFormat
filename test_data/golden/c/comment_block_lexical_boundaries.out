@@ -2,3 +2,10 @@
 int a;
 /* note ??/ */
 int x = 1;
+int First; /* ab */
+int Second;
+/* // note ??/
+ * still a block */
+const char *SpliceText = "// note ??/";
+// note ??/ next
+long SpliceValue = 2;

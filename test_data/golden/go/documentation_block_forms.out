@@ -1,0 +1,32 @@
+package p
+
+// Run runs
+// code()
+// more
+func Run() {}
+
+// F does x
+// More
+func F() {
+	// a
+	// b
+	g()
+	return
+}
+
+// Run runs x
+// more
+func Run() {}
+// Stop stops now
+// fmt.Println("a. b.")
+// fmt.Printf("%s", "a. b.")
+// value = "a. b."
+func Stop() {}
+// * doc
+func f() {}
+// g documents g
+func g() {}
+// Boundary first
+//go:noinline
+// Boundary second
+func Boundary() {}

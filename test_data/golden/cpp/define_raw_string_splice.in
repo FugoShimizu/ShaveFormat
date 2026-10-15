@@ -1,3 +1,7 @@
 #define S R"(a\
 b)"
 const char *s = S;
+auto SpliceText = R"tag(// note ??/
+still a raw string)tag";
+auto SpacedText = R"tag(a\ 
+b)tag";

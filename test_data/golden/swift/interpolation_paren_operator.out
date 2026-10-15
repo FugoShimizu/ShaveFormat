@@ -1,8 +1,0 @@
-let a = 1
-let b = 2
-let c: Int? = 3
-
-print("\(a - -b)")
-print("\(a - -b)")
-print("\(c! + b)")
-print("\(a)")

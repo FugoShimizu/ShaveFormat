@@ -1,74 +1,152 @@
 #!/usr/bin/env bash
-# 文書が引用する名前が実装に在る事の検査
-# 関数を別の層へ移したり工程を改名した時に，仕様書の名前空間が古い儘残る事を防ぐ
+# ドキュメントが引用する型とメンバの宣言の検査
 set -u;
-
 ROOT="$(cd "$(dirname "${BASH_SOURCE[0]}")/.." && pwd)";
-TOTAL=0;
-FAIL=0;
+python3 -B - "${ROOT}" "$@" <<'PYTHON'
+from pathlib import Path
 
-# 整形仕様 3.1 の責務の表が挙げる工程は，実装に同じ名前の型を持つ
-# 表は責務の分担其の物の為，名前が無い工程は「実装がまだ其の責務を型として持って居ない」事を表す
-while read -r NAME; do
-	[ -n "${NAME}" ] || continue;
-	: "$((++TOTAL))";
-	if ! grep -rqE "^[[:space:]]*(class|struct) ${NAME}\b" "${ROOT}/src"; then
-		echo "FAIL doc symbol: ${NAME} は仕様書 3.1 の工程だが実装に型が無い" >&2;
-		: "$((++FAIL))";
-	fi;
-done < <(
-	sed -n '/^## 3\.1 /,/^## 3\.2 /p' "${ROOT}/docs/formatter_spec.md" |
-	grep -oE '^\| `[A-Za-z][A-Za-z0-9_]*` \|' | tr -d '|` ' | sort -u
-);
+import re
+import sys
 
-# 整形仕様 3.3 のクラス図が挙げる型の内，未だ実装に無い物の一覧（移行の残りを毎回出す台帳）
-# 図は再設計の到達点であり，名前が無い型は退行ではなく未着手の移行の為，此処では失敗にしない
-PENDING="";
-while read -r NAME; do
-	[ -n "${NAME}" ] || continue;
-	: "$((++TOTAL))";
-	if ! grep -rqE "^[[:space:]]*(class|struct|enum class|using) ${NAME}\b" "${ROOT}/src"; then
-		PENDING="${PENDING}${PENDING:+|}${NAME}";
-	fi;
-done < <(
-	sed -n '/^```mermaid$/,/^```$/p' "${ROOT}/docs/formatter_spec.md" |
-	grep -oE "^	class [A-Za-z][A-Za-z0-9_]*" | awk '{print $2}' | sort -u
-);
-[ -n "${PENDING}" ] && echo "doc symbols: 仕様書 3.3 の未実装の型（移行の残り）：${PENDING//|/, }" >&2;
+sys.path.insert(0, str(Path(sys.argv[1]) / "tools"))
 
-# 文書の中の `Class::Name` の形の引用を取り出して照合する
-# 名前は修飾付 (`ParseAdapter::PrepareCSource`) でも，欄の宣言 (`bool IsScss`) でも良い
-while read -r NAME; do
-	[ -n "${NAME}" ] || continue;
-	: "$((++TOTAL))";
-	# 未実装の型の成員は上の台帳が挙げる為，改名の検出からは除く
-	if [[ "|${PENDING}|" == *"|${NAME%%::*}|"* ]]; then continue; fi
-	# 修飾付の字面で見付からない場合は，型が在り且つ成員の名前が在る事で照合する（成員変数は修飾せずに宣言する）
-	if
-		! grep -rqE "\b${NAME}\b" "${ROOT}/src" && ! {
-			grep -rqE "^[[:space:]]*(class|struct|enum class|using) ${NAME%%::*}\b" "${ROOT}/src" &&
-			grep -rqE "\b${NAME##*::}\b" "${ROOT}/src";
-		};
-	then
-		echo "FAIL doc symbol: ${NAME} is cited in the docs but not found in src/" >&2;
-		: "$((++FAIL))";
-	fi;
-done < <(
-	grep -rhoE "\`[A-Za-z][A-Za-z0-9_]*::[A-Za-z_]+\`" "${ROOT}/docs" "${ROOT}/README.md" 2>/dev/null |
-	tr -d '`' | grep -v '^std::' | sort -u
-);
+from verify_design_invariants import cpp_code, cpp_decls, cpp_fields, cpp_type_idx
 
-# 改名で消えたクラス名が注記へ残る事の検査（修飾無の関数名は現存する為，上の照合では見付からない）
-GONE='CommentAttach|DocSig|Edit|Layout|LayoutComment|LineSplit|Lint|ParseRepair|Postprocess|Preprocess|Structure|SyntaxCheck|TsSource';
-while read -r LINE; do
-	[ -n "${LINE}" ] || continue;
-	: "$((++TOTAL))";
-	echo "FAIL doc symbol: ${LINE} は改名で消えたクラス名を引用して居る" >&2;
-	: "$((++FAIL))";
-done < <(
-	grep -rnoE "\b(${GONE})::[A-Za-z_]+" "${ROOT}/src" "${ROOT}/docs" "${ROOT}/README.md" 2>/dev/null | sort -u
-);
+def declared_symbols(codes: dict[Path, str]) -> tuple[set[str], set[str]]:
+	"""コメントとリテラルを除いたソースの型・直接のメンバ宣言を得る
+	計算量：総文字数 L・型数 V に対して O(L+V)
+	引数：
+		codes: ファイル毎のコード
+	戻値：
+		宣言した型名と所有型で修飾したメンバ名の集合
+	送出例外：
+		ValueError: 宣言の囲みを確認出来ない場合
+	"""
+	# 同名の型の曖昧さを残した宣言のインデックス
+	bodies: dict[str, list[tuple[Path, str]]]
+	aliases: dict[str, str]
+	bodies, aliases, _ = cpp_type_idx(codes)
+	types: set[str] = set(bodies) | set(aliases)
+	members: set[str] = set()
+	for code in codes.values():
+		types.update(re.findall(r"\benum\s+(?:class\s+|struct\s+)?([A-Za-z_]\w*)\b", code))
+	for owner, entries in bodies.items():
+		if len(entries) != 1:
+			continue
+		body: str = entries[0][1]
+		members.update(f"{owner}::{name}" for name, _ in cpp_fields(body))
+		# 本体の呼出でなく，直接の関数宣言の見出だけでの照合
+		for decl in cpp_decls(body):
+			opening: int = -1
+			depth: int = 0
+			for pos, char in enumerate(decl):
+				if char in "={":
+					break
+				depth += (char == "<") - (char == ">")
+				if char == "(" and not depth:
+					opening = pos
+					break
+			if opening < 0:
+				continue
+			match: re.Match[str]|None = re.search(r"\b([A-Za-z_]\w*)\s*$", decl[:opening])
+			if match:
+				members.add(f"{owner}::{match.group(1)}")
+	# 宣言に基づく名前の返戻
+	return types, members
 
-echo "doc symbols: ${TOTAL} cited, ${FAIL} missing";
+def self_check() -> list[str]:
+	"""宣言の有無を手書きの正誤対で照合する
+	計算量：正誤対の数 F・最大解析費用 P に対して O(FP)
+	戻値：
+		欠落の見逃し又は宣言の誤拒否の一覧
+	送出例外：
+		ValueError: 宣言の囲みを確認出来ない場合
+	"""
+	# コメント・リテラル・呼出と，実際の宣言の区別
+	found: list[str] = []
+	for text, has_type, has_member in (
+		("struct Actual {};", False, False),
+		("/\\\n/ struct Missing { int Value; };", False, False),
+		("struct Mis\\\nsing { int Val\\\nue; };", True, True),
+		("/* struct Missing { int Value; }; */", False, False),
+		("struct Missing {}; // Missing::Value", True, False),
+		("struct Missing {}; const char *s = \"Missing::Value\";", True, False),
+		("struct Missing {}; void f(){Missing::Value();}", True, False),
+		("struct Missing { int x = Value(); };", True, False),
+		("struct Missing { int x{Other::Value()}; };", True, False),
+		("struct Missing { std::function<void()> x; };", True, False),
+		("struct Missing { void f(){Other::Value();} };", True, False),
+		("struct Missing { int Value; };", True, True),
+		("struct Missing { struct Nested { int Value; }; };", True, False),
+		("struct Missing { struct Nested { int Child; }; int Value; };", True, True),
+		("constexpr int A=1'000;\nstruct Missing { int Value; };\nconstexpr int B=2'000;", True, True),
+		("constexpr int A=1000;\nstruct Missing { int Value; };\nconstexpr int B=2000;", True, True),
+		("constexpr int A=1'000; const char *s=\"struct Missing { int Value; };\";", False, False),
+		("struct Missing { static void Value(); };", True, True),
+		("struct Missing { static void Value() {} };", True, True)
+	):
+		types: set[str]
+		members: set[str]
+		types, members = declared_symbols({ Path("case.cpp"): cpp_code(text) })
+		if ("Missing" in types) != has_type or ("Missing::Value" in members) != has_member:
+			found.append(text)
+	# 正誤対の食違の返戻
+	return found
 
-(( !FAIL ));
+def main(root: Path) -> int:
+	"""仕様とドキュメントの引用を実際の宣言と照合する
+	計算量：総文字数 L・型数 V・引用数 Q に対して O(L+V+Q)
+	引数：
+		root: 作業ツリーの経路
+	戻値：
+		欠落又は自己検査の失敗が有れば１，其れ以外は０
+	送出例外：
+		OSError: ファイルを読めない場合
+		UnicodeDecodeError: ソースを指定の文字コードで読めない場合
+		ValueError: 宣言の囲みを確認出来ない場合
+	"""
+	# 実際の宣言と欠落の反例の照合
+	problems: list[str] = self_check()
+	if problems or "--self-check" in sys.argv[2:]:
+		for problem in problems:
+			print(f"FAIL doc symbol self-check: {problem}", file=sys.stderr)
+		print(f"doc symbols self-check: {len(problems)} failed")
+		# 自己検査の終了値の返戻
+		return int(bool(problems))
+	paths: list[Path] = sorted((*root.joinpath("src").rglob("*.cpp"), *root.joinpath("src").rglob("*.hpp")))
+	codes: dict[Path, str] = { path: cpp_code(path.read_text(encoding="utf-8")) for path in paths }
+	types: set[str]
+	members: set[str]
+	types, members = declared_symbols(codes)
+	# 責務の表とクラス図が定める型の契約
+	spec: str = root.joinpath("docs/formatter_spec.md").read_text(encoding="utf-8")
+	section: str = spec.split("## 3.1 ", 1)[1].split("## 3.2 ", 1)[0]
+	cited_types: set[str] = set(re.findall(r"^\| `([A-Za-z]\w*)` \|", section, re.M))
+	for diagram in re.findall(r"^```mermaid\n(.*?)^```", spec, re.M | re.S):
+		cited_types.update(re.findall(r"^\s*class ([A-Za-z]\w*)", diagram, re.M))
+	for name in sorted(cited_types - types):
+		problems.append(f"{name} は仕様上の型だが実装に宣言が無い")
+	# 修飾名の引用と直接のメンバ宣言の対応
+	documents: list[Path] = sorted(root.joinpath("docs").rglob("*")) + [root / "README.md"]
+	cited_members: set[str] = set()
+	for path in documents:
+		if path.is_file():
+			cited_members.update(re.findall(r"`([A-Za-z]\w*::[A-Za-z_]+)`", path.read_text(encoding="utf-8")))
+	cited_members = { name for name in cited_members if not name.startswith("std::") }
+	for name in sorted(cited_members - members):
+		problems.append(f"{name} はドキュメントの引用だが所有型にメンバ宣言が無い")
+	# 改名前の型を引用する残存コードとドキュメントの検査
+	gone: str = "CommentAttach|DocSig|Edit|Layout|LayoutComment|LineSplit|Lint|ParseRepair|Postprocess|Preprocess"
+	gone += "|Structure|SyntaxCheck|TsSource"
+	for path in paths + [path for path in documents if path.is_file()]:
+		for line, text in enumerate(path.read_text(encoding="utf-8").splitlines(), 1):
+			if re.search(rf"\b({gone})::[A-Za-z_]+", text):
+				problems.append(f"{path}:{line}: {text} は改名で消えた型名を引用して居る")
+	for problem in problems:
+		print(f"FAIL doc symbol: {problem}", file=sys.stderr)
+	print(f"doc symbols: {len(cited_types) + len(cited_members)} cited, {len(problems)} missing")
+	# 宣言の欠落に依る終了値の返戻
+	return int(bool(problems))
+
+sys.exit(main(Path(sys.argv[1])))
+PYTHON

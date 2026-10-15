@@ -8,3 +8,28 @@ rows = [ scheme,
   (m["path-abempty"] ||
    m["path-empty"]),
   query ]
+
+a = [1].map { |x| puts x; x } + [2]
+p a
+
+a = [1].map { |x| puts x; x }[0]
+p a
+
+LongVariableNameA=1
+LongVariableNameB=2
+a=[1].map{|x| x + LongVariableNameA + LongVariableNameB}[0]
+p a
+
+y = [(a
+b), 2]
+def f = (a
+b)
+BEGIN { a = 1
+ b = 2 }
+@files ||= (
+  shortest = []
+  rest = paths.each_with_object([]) { |path, result|
+    result << path
+  }
+  shortest.sort! | rest
+)

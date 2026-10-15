@@ -5,3 +5,6 @@
 <BR/><img src="x"/>
 <PRE>  keep
   spaces</PRE>
+<svg><foreignObject><span>a</span><br/><span>b</span></foreignObject></svg>
+<math><mtext><span>a</span><mglyph/><span>b</span></mtext></math>
+<math><annotation-xml encoding="text/html"><br/></annotation-xml></math>

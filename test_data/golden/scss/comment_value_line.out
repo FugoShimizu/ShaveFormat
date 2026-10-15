@@ -1,9 +1,0 @@
-.a {
-	color: //Z1 red;
-	background: blue; // Z2
-}
-
-.b {
-	// Z3
-	margin: 0;
-}

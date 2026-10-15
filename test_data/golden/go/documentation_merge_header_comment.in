@@ -5,3 +5,34 @@ func F(
 	w int) int {
 	return w
 }
+
+// G computes
+func G(
+// input
+x int,
+) int { return x }
+
+type HeaderReceiver int
+
+// M computes
+func (receiver HeaderReceiver) M(
+// method input
+x int,
+) int { return x }
+
+/* H computes */
+func H(
+/* block input */
+x int,
+) int { return x }
+
+func /* Hello */ HeaderDoc() {}
+
+/* LeadingDoc explains */ func LeadingDoc() {}
+
+func HeaderLineEnd( //nolint:revive
+value int,
+) int { return value }
+func ResultLineEnd(value int) ( // results
+int, error,
+) { return value, nil }

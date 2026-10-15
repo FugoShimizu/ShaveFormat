@@ -1,2 +1,6 @@
 10:1: Violation: Documentation is missing a summary
-13:4: Review: Use one sentence per logical comment line; verify documentation
+43:20: Violation: Documentation is missing a summary
+43:40: Violation: Documentation is missing a description for parameter 'a'
+51:1: Violation: Documentation is missing a return-value description
+61:1: Violation: Documentation is missing a return-value description
+71:1: Violation: Documentation is missing a return-value description

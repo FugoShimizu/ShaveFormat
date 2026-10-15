@@ -1,0 +1,19 @@
+"p\(aaaaaaaaa + bbbbbbbbb + ccccccccc + ddddddddd)q"
+
+#"p\#(aaaaaaaaa + bbbbbbbbb + ccccccccc + ddddddddd)q"#
+
+"""
+p\(
+	aaaaaaaaa + bbbbbbbbb +
+	ccccccccc + ddddddddd
+)q
+"""
+
+#"""
+p\#(
+	aaaaaaaaa + bbbbbbbbb +
+	ccccccccc + ddddddddd
+)q
+"""#
+
+"p\({ foo(); bar(); return 1 }())q"

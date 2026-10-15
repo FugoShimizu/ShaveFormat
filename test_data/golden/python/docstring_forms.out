@@ -1,0 +1,59 @@
+"""module""" " doc"
+
+def f(a: int) -> int:
+	""""""
+	return a
+
+def g(a: int) -> int:
+	"""   """
+	return a
+
+def h(a: int) -> int:
+	"""概要"""
+	return a
+
+def separated(a: int) -> int:
+	"""概要
+
+	別の段落
+	"""
+	# 値の返戻
+	return a
+
+def same_paragraph(a: int) -> int:
+	"""概要
+	引数：
+		a: 返す値
+	戻値：
+		引数の値
+	"""
+	# 値の返戻
+	return a
+
+def two_lines(a: int) -> int:
+	"""概要
+	続く説明
+	"""
+	# 値の返戻
+	return a
+
+def f(a):
+	"""概要"""
+	return a
+
+def g(a):
+	"""概要"""
+	return a
+
+x = """a\""""
+y = r'''a"'''
+z = """a\"\"\"b"""
+
+class DocShapes:
+	"""class""" " doc"
+
+	def method(self):
+		"""method"""
+
+	async def asynchronous(self):
+		"""async""" " doc"

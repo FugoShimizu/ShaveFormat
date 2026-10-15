@@ -1,7 +1,0 @@
-function f(cb = () => { a(); b(); }) { cb(); }
-function a() {}
-function b() {}
-
-function g(cb = (() => 2)) {}
-const [z = (() => 6)] = [];
-const { w = (() => 7) } = {};

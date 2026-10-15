@@ -1,0 +1,9 @@
+package p
+
+func f(c chan int) {
+	select {
+	case <-c:
+		/*line removed.go:12:4*/ ;
+	default:
+	}
+}

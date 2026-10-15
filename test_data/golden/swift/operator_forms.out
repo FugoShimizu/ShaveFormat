@@ -1,0 +1,152 @@
+/**
+ *
+ * - Parameter lhs:
+ * - Parameter rhs:
+ * - Returns:
+ */
+func ==(lhs: Int, rhs: Int) -> Bool {
+	return true
+}
+
+/**
+ *
+ * - Parameter lhs:
+ * - Parameter rhs:
+ * - Returns:
+ */
+func !=(lhs: Int, rhs: Int) -> Bool {
+	return false
+}
+
+/**
+ *
+ * - Parameter lhs:
+ * - Parameter rhs:
+ * - Returns:
+ */
+func +(lhs: Int, rhs: Int) -> Int {
+	return 0
+}
+
+/**
+ *
+ * - Parameter alpha:
+ * - Returns:
+ */
+func compute(alpha: Int) -> Int {
+	return alpha
+}
+
+let result = -a <> b
+let result = true ? 1 <> 2 : 3
+let result = -(a <> b)
+let x: UInt8 = (1 &<< 2) &>> 3
+
+/**
+ *
+ * - Returns:
+ */
+func r() -> String! {
+	return nil
+}
+
+var x: Int!
+
+/**
+ *
+ * - Parameter lhs:
+ * - Parameter rhs:
+ * - Returns:
+ */
+func < <each Element: Comparable>(lhs: (repeat each Element), rhs: (repeat each Element)) -> Bool {}
+
+/**
+ *
+ * - Parameter a:
+ * - Parameter b:
+ * - Returns:
+ */
+func == <T>(a: T, b: T) -> Bool {
+	return true
+}
+
+let h =
+aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa +
+-(y + 1)
+
+let a = Array(arr[..<(arr.count - 1)])
+let b = arr[(i + 1)...]
+let c = a..<(-x) + 1
+let d = 0...(-x) * 1
+let e = (i + 1)..<n
+let f = -y
+let g = !c
+let h = x + -(y + 1)
+let i = -y.z
+let j = -(-y)
+let k = -(y as Int)
+
+let l = {
+	1
+}
+
+let m = x + -y
+
+/**
+ *
+ * - Parameter a:
+ * - Parameter b:
+ * - Parameter c:
+ * - Returns:
+ */
+func f(_ a: Int, _ b: Int, _ c: Int) -> Int {
+	let m = ~(1 << b), n = -(a >> b), o = (a << b) << c, p = (a + b) << c, q = a << (b + c), r = a << b & c
+	return m + n + o + p + q + r
+}
+
+/**
+ *
+ * - Parameter alphaValue:
+ * - Parameter bravoValue:
+ * - Parameter charlieValue:
+ * - Parameter deltaValue:
+ * - Parameter echoValue:
+ * - Parameter foxtrotValue:
+ * - Returns:
+ */
+func compute(alphaValue: Int, bravoValue: Int, charlieValue: Int, deltaValue: Int, echoValue: Int, foxtrotValue: Int) -> Int {
+	let total =
+	alphaValue + bravoValue + charlieValue + deltaValue + echoValue + foxtrotValue + alphaValue + bravoValue + charlieValue +
+	deltaValue + echoValue + foxtrotValue
+	let flag =
+	alphaValue > 0 && bravoValue > 0 && charlieValue > 0 && deltaValue > 0 && echoValue > 0 && foxtrotValue > 0 && alphaValue > 0 &&
+	bravoValue > 0 && charlieValue > 0
+	let picked = flag ?
+	alphaValue + bravoValue + charlieValue + deltaValue + echoValue + foxtrotValue :
+	alphaValue + bravoValue + charlieValue + deltaValue + echoValue + total
+	return total + picked
+}
+
+v0 = a0 * b << c
+v1 = a1 * b << c
+v2 = a * b << c + d * e << f
+v3 = -a * b << c + d * e << f
+
+let boxType = Box<Int>.self
+let qualifiedValue = Namespace.Box<Int>.value
+let nestedType = Box<Array<Int>>.self
+let memberType = Outer<Int>.Inner<String>.self
+let tupleType = Box<(Int, String)>.self
+let memberResult = Box<Int>.make()
+let made = Array<Int>()
+let ordered = a < b
+let callProduct = 2.0 - maker(item) * 0.2
+let subscriptQuotient = 3.0 + items[index] / 0.4
+let chainedProduct = 4.0 - maker(item).part * 0.3
+let prefixProduct = 5.0 + -maker(item) * 0.5
+let groupedProduct = (6.0 - maker(item)) * 0.6
+let bareProduct = 7.0 - maker(item) * 0.7
+let commentedProduct = 8.0 - maker(/* item */ item) * 0.8
+let implicitProduct = (9.0 + .measure(item)) * 0.9
+let prefixSubscriptProduct = 10.0 + -items[index] * 0.4
+let prefixMemberProduct = 11.0 - -maker(item).part * 0.3

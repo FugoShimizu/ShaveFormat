@@ -1,3 +1,0 @@
-let hex = 0xff
-let hexFloat = 0x1p4
-let exp = 1e5

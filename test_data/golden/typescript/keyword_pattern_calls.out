@@ -1,0 +1,3 @@
+var { alpha: await } = { alpha: x => x };
+
+console.log(await(1));

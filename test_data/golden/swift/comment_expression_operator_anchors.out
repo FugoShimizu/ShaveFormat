@@ -1,0 +1,76 @@
+f(
+	[
+		// 成員の深さ
+		"first_collection_member_with_a_long_name": 1,
+		"second_collection_member_with_a_long_name": 2,
+		"third_collection_member_with_a_long_name": 3
+	]
+)
+
+let s = "\(a + /* c */ 1)"
+let t = "p +/* q"
+let r = #"x +/* y"#
+let u = y + /* first */ 1 + /* second */ 2
+let v = y + /* third */ 1 + /* fourth */ 2 + /* fifth */ 3
+let y = x /* m
+ * n */ + 1
+let z = x
+
+/* p
+ * q */ -1
+
+let a1 = x! /* a */ - /* b */ 1
+let a3 = y + /* b */ 1
+let a4 = y == /* b */ 1
+let a5 = /* b */ 1
+let a6 = y + 1 // b
+let a7 = y - /* b */ -1
+let a8 = y + /* a /* b */ c */ 1
+let b1 = y + /* c */ 1 + /* d */ 2
+let b2 = x! << 2
+
+/**
+ *
+ * - Returns:
+ */
+func f() -> Int {
+	let s = y + /* it"s */ 1, t = "p +/* q", b = y - /* two
+	 * lines */ 2, c = y * 3 // three
+	return s + /* four */ b + c + t.count
+}
+
+infix operator +•
+
+let u = x! +• 1
+let v = y +• /* c */ 1
+
+/**
+ *
+ */
+func CommentOperator() {
+	let y = 2
+	// *
+	bump()
+	// * doc
+	print(y, n)
+	let z = y + 1 // * c
+	return
+}
+
+let a = 1
+let b = 3
+let xs = [1, 2, 3]
+let c1 = /* c */ a..<b
+let c2 = /* c */ a..<b
+let c3 = /* z */ a..<3
+
+for i in 0...b /* n */ {
+	print(i)
+}
+
+let c4 = xs[1..<2 /* c */]
+// ========== ==== ==========
+// {@code A B}
+// {@literal A B}
+// (@dot A B @enddot)
+// (@f$ A B @f$)

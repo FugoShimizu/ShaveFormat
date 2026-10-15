@@ -1,9 +1,12 @@
-9:3: Review: Merge the conditions of these identical branch bodies; verify lifetime
-9:8: Review: Use a strict inequality with an equivalent adjusted boundary; verify type, value range
+9:3: Review: Merge the conditions of these identical branch bodies
+9:8: Review: Use a strict inequality with an equivalent adjusted boundary
 9:16: Violation: Add the required comment before this `return`
+10:8: Review: Use a strict inequality with an equivalent adjusted boundary
 10:23: Violation: Add the required comment before this `return`
+11:8: Review: Use a strict inequality with an equivalent adjusted boundary
 11:23: Violation: Add the required comment before this `return`
-12:8: Review: Use a strict inequality with an equivalent adjusted boundary; verify type, value range
+12:8: Review: Use a strict inequality with an equivalent adjusted boundary
 12:24: Violation: Add the required comment before this `return`
+13:8: Review: Use a strict inequality with an equivalent adjusted boundary
 13:14: Violation: Add the required comment before this `return`
 14:3: Violation: Add the required comment before this `return`

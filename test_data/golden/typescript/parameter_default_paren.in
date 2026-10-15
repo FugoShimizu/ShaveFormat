@@ -1,2 +1,0 @@
-function g(cb: () => number = (() => 2)) {}
-class K { m(f = (() => 1)) {} }

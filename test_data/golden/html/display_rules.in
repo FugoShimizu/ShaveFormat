@@ -1,0 +1,33 @@
+<p style="display: flex"><span>a</span>
+  <b>b</b></p>
+
+<style>@import "a.css";</style>
+<div><span>a</span>
+  <b>b</b></div>
+
+<link rel="stylesheet" href="a.css">
+<div><span>a</span>
+  <b>b</b></div>
+
+<style>div { white-space: pre }</style>
+<div><span>a</span>
+  <b>b</b></div>
+
+<html>
+  <head>
+    <link rel="stylesheet" href="a.css" />
+    <meta charset="utf-8" />
+    <style>div{display:flex}</style>
+    <script>console.log("x");</script>
+  </head>
+  <body>
+    <div style="display: inline">
+      <br /> <input type="text" />
+      <img
+        src="x.png"
+        alt="x"
+      />
+      <script>console.log("y");</script>
+    </div>
+  </body>
+</html>

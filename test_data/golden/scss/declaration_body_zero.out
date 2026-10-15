@@ -8,3 +8,32 @@
 }
 
 .empty {}
+
+.values {
+	--empty:;
+	--blank: ;
+	--color: red;
+	$value: 1;
+}
+
+.missing {
+	--empty:;
+}
+
+.space {
+	--blank: ;
+}
+
+.nested {
+	.inner {
+		--empty:;
+		--blank: ;
+	}
+}
+
+@media all {
+	.inner {
+		--empty:;
+		--blank: ;
+	}
+}

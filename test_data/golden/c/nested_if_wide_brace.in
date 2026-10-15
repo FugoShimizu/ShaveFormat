@@ -1,3 +1,6 @@
 void f() {
 	if (aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa > 0) if (bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb > 0) if (cccccccccccccccccccccccccccccccccccccc > 0) g();
 }
+
+/** 連鎖の見出を保つ */
+void chain(){for(int i=0;i<n;++i) while(b) act(first_argument_with_a_long_name, second_argument_with_a_long_name);return;}

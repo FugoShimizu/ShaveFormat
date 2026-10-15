@@ -1,0 +1,116 @@
+<?php
+
+/**
+ * 取得する
+ * @param int $id 識別子
+ * @param string $name 名前
+ * @return array 結果
+ */
+function fetch(int $id, string $name): array {
+	return [];
+}
+
+/**
+ * 合算する
+ * @param $a 左辺
+ * @param $b 右辺
+ * @return
+ */
+function sum($a, $b) {
+	return $a + $b;
+}
+
+class C {
+	/**
+	 * 値
+	 */
+	public const X = 1;
+}
+
+/**
+ * 足す
+ * @param array &$out 出力
+ * @param int ...$values 値
+ * @return int 合計
+ */
+function add(array &$out, int ...$values): int {
+	return 0;
+}
+
+/**
+ * Preserve descriptions
+ * @param int $old
+ * retained parameter
+ * @return int
+ * retained result
+ */
+function keepContinuations(): void {}
+
+/**
+ * 値を集める
+ * @param int &...$values 値
+ */
+function collect(int &...$values): void {
+	// 終了
+	return;
+}
+
+class A {
+	/**
+	 * 幅
+	 * TODO: 単位
+	 * @param $w
+	 * @param $h
+	 */
+	public function __construct(private int $w, private int $h) {}
+}
+
+/**
+ * First
+ * Second
+ * @param $a Alpha
+ */
+function docBoundary(int $a): void {}
+
+/**
+ * Summary
+ * @param int $a A
+ * @param int $b B
+ * @return
+ */ function inlineOrder(int $a, int $b): int {
+	return $a + $b;
+}
+
+function /**
+ * Hello
+ * @param $a
+ * @return
+ */ inlineFrame($a) {
+	return $a;
+}
+
+/**
+ * A
+ * ========== X ==========
+ * B
+ * @param $a A value
+ * @param $b B value
+ * @return
+ */
+function sectionDocs($a, $b) {
+	return $a + $b;
+}
+
+/**
+ * A
+ * ========== X ==========
+ * B
+ */
+function trailing(): void {}
+
+/**
+ * Header description
+ */
+class Header {
+	public $value;
+}

@@ -4,3 +4,10 @@ def compute(alpha_value, bravo_value, charlie_value, delta_value, echo_value, fo
   picked = flag ? alpha_value + bravo_value + charlie_value + delta_value + echo_value + foxtrot_value : alpha_value + bravo_value + charlie_value + delta_value + echo_value + total
   return total + picked
 end
+
+scope = FirstNamespaceWithANameLongEnoughToNeedReferenceWrappingAtDefaultWidth::SecondNamespaceWithANameLongEnoughToNeedReferenceWrappingAtDefaultWidth::Value
+absolute = ::FirstNamespaceWithANameLongEnoughToNeedReferenceWrappingAtDefaultWidth::SecondNamespaceWithANameLongEnoughToNeedReferenceWrappingAtDefaultWidth::Value
+method = first_receiver_with_a_name_long_enough_to_need_wrapping_at_default_width::second_method_with_a_name_long_enough_to_need_wrapping_at_default_width
+safe = first_receiver_with_a_name_long_enough_to_need_wrapping_at_default_width&.second_method_with_a_name_long_enough_to_need_wrapping_at_default_width&.last
+arguments = first_receiver_with_a_name_long_enough_to_need_wrapping_at_default_width&.second_method_with_a_name_long_enough_to_need_wrapping_at_default_width(first_argument, second_argument)
+first_receiver_with_a_name_long_enough_to_need_wrapping_at_default_width&.second_method_with_a_name_long_enough_to_need_wrapping_at_default_width = value

@@ -19,6 +19,7 @@ void h(void) {
  */
 void k(void) {
 	abort();
+	return;
 }
 
 /**
@@ -30,7 +31,323 @@ void e(void) {}
  * 起動する
  * @return 終了状態
  */
-int main(void) {
+int signed main(void) {
 	g(2);
 	return 0;
+}
+
+/**
+ * 後判定の本体で終える
+ * @param c 条件
+ */
+void postStop(int c) {
+	do return;
+	while(c);
+}
+
+_Noreturn int StopRequired();
+_Noreturn int FailRequired();
+int MaybeRequired();
+
+/**
+ * 評価に伴う終端を確かめる
+ */
+void RequiredCondition() {
+	if(StopRequired()) use();
+}
+
+/**
+ * 評価に伴う終端を確かめる
+ */
+void OrdinaryCondition() {
+	if(MaybeRequired()) use();
+	return;
+}
+
+/**
+ * 評価に伴う終端を確かめる
+ */
+void RequiredArgument() {
+	use(StopRequired());
+}
+
+/**
+ * 評価に伴う終端を確かめる
+ */
+void RequiredInitializer() {
+	const int n = StopRequired();
+	use(n);
+}
+
+/**
+ * 評価に伴う終端を確かめる
+ */
+void RequiredLoop() {
+	while(StopRequired()) use();
+}
+
+/**
+ * 評価に伴う終端を確かめる
+ * @param a 条件
+ */
+void ShortCircuit(int a) {
+	a && StopRequired();
+	return;
+}
+
+/**
+ * 評価に伴う終端を確かめる
+ * @param a 条件
+ */
+void BothBranches(int a) {
+	a ? StopRequired() : FailRequired();
+}
+
+/**
+ * 評価に伴う終端を確かめる
+ * @param a 条件
+ */
+void OneBranch(int a) {
+	a ? StopRequired() : 0;
+	return;
+}
+
+/**
+ * 評価に伴う終端を確かめる
+ */
+void UnevaluatedSize() {
+	sizeof(StopRequired());
+	return;
+}
+
+/**
+ * 条件枝の節を持つ切替
+ * @param x 条件
+ */
+void conditional_cases(int x) {
+	switch(x) {
+		#ifdef FLOW_CASE
+	case 1:
+		return;
+		#endif
+	default:
+		return;
+	}
+}
+
+/**
+ * 導入前の標準名は普通の呼出
+ */
+void UnintroducedExit(void) {
+	exit(0);
+	return;
+}
+
+void abort(void); // 標準と同形の宣言
+
+/**
+ * 標準と同形の宣言だけでは導入しない
+ */
+void UnintroducedDeclaration(void) {
+	abort();
+	return;
+}
+
+#include <stddef.h>
+
+/**
+ * 他の標準ヘッダだけでは終了の宣言を導入しない
+ */
+void UnrelatedHeader(void) {
+	exit(0);
+	return;
+}
+
+#include <stdlib.h>
+
+_Noreturn void IncludedStop(void);
+
+/**
+ * インクルード後の標準の終了
+ */
+void IncludedExit(void) {
+	exit(0);
+}
+
+/**
+ * インクルード後の非復帰の契約
+ */
+void IncludedContract(void) {
+	IncludedStop();
+}
+
+/**
+ * インクルード後の実引数の必須評価
+ */
+void IncludedArgument(void) {
+	use((abort(), 1));
+}
+
+/**
+ * 導入した標準の終了
+ */
+void IncludedAbort(void) {
+	abort();
+}
+
+void abort(void); // 標準と同形の宣言
+
+/**
+ * 標準の導入後の再宣言
+ */
+void RedeclaredAbort(void) {
+	abort();
+}
+
+/**
+ * 標準名を仮引数で隠す
+ * @param abort 復帰する呼出
+ */
+void ShadowedAbort(void (*abort)(void)) {
+	abort();
+	return;
+}
+
+#define abort() work()
+
+/**
+ * マクロ置換後の非復帰を仮定しない
+ */
+void ReplacedAbort(void) {
+	abort();
+}
+
+#undef abort
+
+/**
+ * マクロ取消後の標準の終了
+ */
+void RestoredAbort(void) {
+	abort();
+}
+
+void exit(signed int); // 標準と同形の宣言
+
+/**
+ * int 型の指定子も標準の再宣言として追跡する
+ */
+void RedeclaredExit(void) {
+	exit(0);
+}
+
+#define FlowMacro(x) use(x)
+
+#include <stddef.h>
+
+/**
+ * 未展開の呼出の効果は本文から推測しない
+ */
+void InputMacro(void) {
+	FlowMacro(1);
+}
+
+/**
+ * 未展開の実引数を必須評価と推測しない
+ */
+void MacroArgument(void) {
+	FlowMacro((abort(), 1));
+}
+
+#undef FlowMacro
+
+/**
+ * 取消後は通常の名前の呼出
+ */
+void CancelledMacro(void) {
+	FlowMacro(1);
+	return;
+}
+
+#if FLOW_CHOICE
+
+#define FlowConditional(x) use(x)
+
+#else
+
+#undef FlowConditional
+
+#endif
+
+/**
+ * 条件枝の合流後は置換が未確定
+ */
+void ConditionalMacro(void) {
+	FlowConditional(1);
+}
+
+enum { noreturn = 16 };
+
+__attribute__((aligned(noreturn))) void ArgumentTarget(void);
+
+/**
+ * 属性の契約を確認する
+ */
+void ArgumentToken(void) {
+	ArgumentTarget();
+	return;
+}
+
+void PostfixTarget(void) __attribute__((noreturn));
+
+/**
+ * 属性の契約を確認する
+ */
+void PostfixContract(void) {
+	PostfixTarget();
+}
+
+void PostfixAliasTarget(void) __attribute__((__noreturn__));
+
+/**
+ * 属性の契約を確認する
+ */
+void PostfixAliasContract(void) {
+	PostfixAliasTarget();
+}
+
+__attribute__((noreturn)) void PrefixTarget(void);
+
+/**
+ * 属性の契約を確認する
+ */
+void PrefixContract(void) {
+	PrefixTarget();
+}
+
+__attribute__((aligned(16))) void AlignedTarget(void);
+
+/**
+ * 属性の契約を確認する
+ */
+void OrdinaryAlignment(void) {
+	AlignedTarget();
+	return;
+}
+
+__declspec(noreturn) void MicrosoftTarget(void);
+
+/**
+ * 属性の契約を確認する
+ */
+void MicrosoftContract(void) {
+	MicrosoftTarget();
+}
+
+/**
+ * 標準名を関数ポインタの仮引数で隠す
+ * @param exit 復帰する呼出
+ */
+void ShadowedExit(void (*exit)(int)) {
+	exit(0);
+	return;
 }

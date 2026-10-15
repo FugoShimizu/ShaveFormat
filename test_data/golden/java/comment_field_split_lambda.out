@@ -1,8 +1,0 @@
-class A {
-	Runnable r = () -> {
-		// inside
-		g(); // tail
-	};
-
-	Runnable s = null;
-}

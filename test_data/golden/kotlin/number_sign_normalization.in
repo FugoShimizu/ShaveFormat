@@ -1,0 +1,22 @@
+val hex = 0xff
+val exp = 1.5e3
+val long = 1L
+val float = 1.5f
+
+fun f(a: Int, b: Boolean): Boolean {
+	return - -a > 0 && ! !b
+}
+
+fun f(c: Boolean, x: Int, y: Int): Boolean {
+	return !(!c) && -(-x) > y - (-1)
+}
+
+fun compute(alphaValue: Int, bravoValue: Int, charlieValue: Int, deltaValue: Int, echoValue: Int, foxtrotValue: Int): Int {
+	val total = alphaValue + bravoValue + charlieValue + deltaValue + echoValue + foxtrotValue + alphaValue + bravoValue + charlieValue + deltaValue + echoValue + foxtrotValue
+	val flag = alphaValue > 0 && bravoValue > 0 && charlieValue > 0 && deltaValue > 0 && echoValue > 0 && foxtrotValue > 0 && alphaValue > 0 && bravoValue > 0 && charlieValue > 0
+	val picked = if(flag) alphaValue + bravoValue + charlieValue + deltaValue + echoValue + foxtrotValue else alphaValue + bravoValue + charlieValue + deltaValue + echoValue + total
+	return total + picked
+}
+
+val NamedResult = firstNamedOperandForInfixOperatorBoundaryWidthMeasurement and
+secondNamedOperandForInfixOperatorBoundaryWidthMeasurement and thirdNamedOperandForInfixOperatorBoundaryWidthMeasurement

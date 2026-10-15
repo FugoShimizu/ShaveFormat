@@ -1,2 +1,75 @@
 const range = (document: any).selection.createRange();
 const n = (x: any) + 1;
+const privatePoints = "";
+
+type NestedKey = keyof keyof A;
+type ReadonlyKey = keyof readonly A[];
+type UnionKey = keyof A|B;
+type UnionRightKey = A|keyof B;
+type IntersectionKey = keyof A&B;
+type IntersectionRightKey = A&keyof B;
+type UnionReadonly = readonly A[]|B;
+type IntersectionReadonly = A&readonly B[];
+type LookupKey = A[keyof A];
+type LookupUnion = A["a"|"a"];
+type LookupConditional<X> = A[X extends A ? "a" : "a"];
+type RestReadonly = [...readonly A[]];
+type RestUnion = [...A[]|B[]];
+type RestIntersection = [...A[]&B[]];
+type KeepKey = keyof (A|B);
+type KeepArray = (keyof A)[];
+type KeepOptional = [(A|B)?];
+type KeepFunction = (() => A)|B;
+type KeepConstructor = (new () => A)&B;
+type KeepIntersection = A&(B&C);
+type KeepInfer<X> = X extends (() => infer R extends string) ? R : 0;
+type PrefixUnion = keyof readonly A[]|B;
+type PrefixIntersection = keyof readonly A[]&B;
+type PrefixConditional = keyof readonly A[] extends B ? A : C;
+type PrefixMany = keyof readonly A[]|B|C;
+type PrefixMiddle = C|keyof readonly A[]|B;
+type PrefixRight = B|keyof readonly A[];
+type PrefixTuple = keyof readonly [A, B]|C;
+type PrefixArray = (keyof readonly A[])[];
+type PrefixRawUnion = keyof readonly A[]|B;
+type PrefixRawArray = (keyof readonly A[])[];
+
+let prefixUnion: keyof readonly A[]|B;
+let prefixIntersection: keyof readonly A[]&B;
+let prefixConditional: keyof readonly A[] extends B ? A : C;
+let prefixMany: keyof readonly A[]|B|C;
+let prefixMiddle: C|keyof readonly A[]|B;
+let prefixRight: B|keyof readonly A[];
+let prefixTuple: keyof readonly [A, B]|C;
+let prefixArray: (keyof readonly A[])[];
+
+null as keyof readonly A[]|B;
+null as keyof readonly A[]&B;
+null as keyof readonly A[] extends B ? A : C;
+null as keyof readonly A[]|B|C;
+null as C|keyof readonly A[]|B;
+null as B|keyof readonly A[];
+null as keyof readonly [A, B]|C;
+null as (keyof readonly A[])[];
+
+const logicalConstructor = new (A || B)(1);
+const conditionalConstructor = new (c ? A : B)(1);
+const nullishConstructor = new (A ?? B);
+const bareConstructor = new (A || B);
+const memberConstructor = new (c ? A.x : B.x)(1).value;
+const awaitedConstructor = new (await load())(1);
+const calledConstructor = new (factory())(1);
+const plainConstructor = new A(1);
+const awaitedCast = (await r) as T;
+const awaitedSatisfies = (await r) satisfies T;
+const awaitedChain = (await r) as unknown as T;
+
+f((await r) as T);
+
+const awaitedInstance = await r instanceof A;
+const awaitedSum = await r + 1;
+const binaryCastNullish = p.x ?? (p.y as string);
+const binaryCheckOr = p.x || (p.y satisfies string);
+const arrayCastAnd = p.x && ([1] as number[]);
+const objectCheckEqual = p.x === ({ x: 1 } satisfies Record<string, number>);
+const assignedCast = target = p.y as string;

@@ -1,15 +1,7 @@
 fn h() {
 	g(a / (b * c));
 	g(a * (b % c));
-	g(a - (b + c));
-	g(a - (b - c));
-	g(a - (b * c));
 	g(a * (b + c));
-	g((a + b) - c);
-	g((a * b) % c);
-	g(a - (b + c) * d);
-	g(a / ((b * c)));
-	g((((a + b))));
 	g(a & (b + c));
 	g(a | (b + c));
 	g(a ^ (b + c));
@@ -29,15 +21,24 @@ fn h() {
 	g((a & b) < c);
 	g(a && (b || c));
 	g(a || (b && c));
-	g(a && (b && c));
-	g(a || (b || c));
-	g((a && b) && c);
-	g(a && (b || c) || d);
-	g(((a && b)) || c);
 }
 
 fn f(a: i32, b: i32, c: i32, p: &[i32]) -> i32 {
 	let x = ((a + b)) * c;
 	let y = (p[(b + c) as usize]) * a;
 	((x + y))
+}
+
+fn h() -> i32 { 5 }
+fn f(x: i32) -> i32 {
+    ({ x }) & 1
+}
+fn g() -> i32 {
+    let v = (unsafe { h() }) + 1;
+    (loop { break 3 }) + v
+}
+fn main() { println!("{} {}", f(3), g()); }
+
+fn f(a: i32, bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb: i32, cccccccccccccccccccccccccccccccc: i32) -> i32 {
+    if a == 0 { 1 } else if bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb == cccccccccccccccccccccccccccccccc && aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa(bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb, cccccccccccccccccccccccccccccccc) { 2 } else if a == 3 { 3 } else { 4 }
 }

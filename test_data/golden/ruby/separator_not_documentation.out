@@ -1,7 +1,0 @@
-# ========== Section ==========
-#
-# @param x
-# @return
-def f(x)
-	return x
-end

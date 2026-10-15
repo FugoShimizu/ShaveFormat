@@ -8,3 +8,11 @@ def f():
 	finally: # f
 		m()
 	return
+
+# ========== ASCII と日本語 ==========
+mixed_section = 1
+# 「ASCII と日本語」
+# 『Alpha Beta』
+# 【日本語と日本語】
+# ==========「ASCII と日本語」==========
+quoted_spacing = 2

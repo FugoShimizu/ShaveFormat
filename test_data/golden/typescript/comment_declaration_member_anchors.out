@@ -1,0 +1,69 @@
+class A {
+	accessor; // c
+	x = 1;
+	static z = 3; // e
+}
+
+push(
+	{
+		/**
+		 * release
+		 */
+		dispose(): void {
+			x();
+			return;
+		}
+	}
+);
+
+items.forEach(
+	item => { // 各要素を処理
+		console.log(item);
+		++count;
+	}
+);
+
+type A<K> = K extends symbol ? never : K;
+
+for(const x of xs) {
+	a();
+	b();
+} // c
+
+next();
+
+if(x) a(); // d
+
+class A {
+	/**
+	 *
+	 */
+	m() {}
+} // e
+
+// close bracket
+const a = [1];
+
+// call close
+f(1);
+
+/**
+ *
+ * @return
+ */
+function f() {
+	// b の説明
+	// c の説明
+	// d の説明
+	const a = g(), b = g(), c = g(), d = g(); // a
+	return [a, b, c, d];
+}
+
+/**
+ * Keep boundaries
+ */
+function emptyBoundary() {/* Read */ /* Return */}
+/**
+ * Keep boundaries
+ */
+function emptyBoundaryPair() {/* Read */ /* Return */}

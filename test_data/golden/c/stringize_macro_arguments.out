@@ -13,3 +13,83 @@ int main(void) {
 	puts(XSTR(c*d));
 	return 0;
 }
+
+#define Ignore(Value) "#Value"
+
+const char *Ignored = Ignore(1 + 2);
+
+#define Subject(Value) /* #Value */ Value
+
+const int Expanded = Subject(1 + 2);
+
+#undef STR
+
+#define STR(x) x
+
+const int Forward = XSTR(1 + 2);
+const int Direct = STR(1 + 2);
+
+#undef STR
+
+#define STR(x) #x
+
+const char *Again = XSTR(a+b);
+
+#if __STDC_HOSTED__
+
+#undef STR
+
+#define STR(x) #x
+
+#else
+
+#undef STR
+
+#define STR(x) x
+
+#endif
+
+const char *Conditional = XSTR(a+b);
+const char *Spacing = XSTR(alpha +beta);
+const char *Comment = XSTR(alpha /* note */ +beta);
+
+/**
+ * 条件の検査
+ * @param a
+ * @param b
+ */
+void Checked(int a, int b) {
+	assert(a +b);
+	assert(a /* note */ +b);
+	return;
+}
+
+#define ONLY_TEXT(Left, Right) #Right
+#define FLIP_TEXT(First, Second) ONLY_TEXT(Second, First)
+#define VAR_TEXT(...) #__VA_ARGS__
+
+const char *Selected = ONLY_TEXT(a + b, c+d);
+const char *Flipped = FLIP_TEXT(a+b, c + d);
+const char *Variadic = VAR_TEXT(a+b ,c+d);
+const char *Separated = ONLY_TEXT /* call */ (a + b, c+d);
+
+#define THIRD_TEXT(First, Second, Third) #Third
+
+const char *Partitioned = THIRD_TEXT((int[]){ 1, 2 }, alpha+beta);
+
+#define INNER_TEXT(Value) #Value
+#define PAIR_TEXT(Left, Right) #Left Right
+
+const char *Nested = PAIR_TEXT(a+b, INNER_TEXT(c+d));
+
+#define TOKEN_TEXT(Value) #Value
+
+/**
+ * マクロ実引数
+ */
+void TokenArguments(void) {
+	puts(TOKEN_TEXT(a+b));
+	puts(TOKEN_TEXT(c*d));
+	puts(TOKEN_TEXT /* call */ (e*f));
+	return;
+}

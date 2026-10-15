@@ -13,3 +13,5 @@ abstract class C { abstract m(): void
  n(): void }
 export default function () {}
 declare class D { m(): number, n(): string, }
+
+class EmptyDeclarations { ; a: number; ; }

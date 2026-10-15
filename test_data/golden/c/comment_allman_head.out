@@ -1,8 +1,0 @@
-/**
- * between
- * @param a
- * @return
- */
-int f(int a) {
-	return a;
-}

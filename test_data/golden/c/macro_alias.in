@@ -14,3 +14,20 @@ int main(void) {
 	printf("%d\n", x && (N > 2));
 	return 0;
 }
+
+#undef STR
+#define STR(x) x
+#undef M
+#define M 5
+#undef SWAP
+void SWAP(int a, int b);
+void rebound(int a, int b, int x) {
+	if(x) { SWAP(a, b); }
+	if(x) { SWAP2(a, b); }
+	x = x && (N > 2);
+	SS(a+b);
+}
+#define SWAP(a, b) a = b
+void redefined(int a, int b, int x) {
+	if(x) { SWAP2(a, b); }
+}

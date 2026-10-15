@@ -1,0 +1,13 @@
+package p
+
+// #define FIRST 1
+// #define SECOND 2
+// #define THIRD 3
+import "C"
+
+var x = 1
+// first note
+// second note
+// third note
+
+func F() {}

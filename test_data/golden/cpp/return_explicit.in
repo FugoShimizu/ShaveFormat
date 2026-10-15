@@ -31,3 +31,512 @@ auto f() -> void { g(); }
  * @param v 値
  */
 void t(int v) { switch(v) { case 1: return; default: throw 1; } }
+
+namespace ImportedExit {
+	namespace Other {
+		void exit(int);
+	}
+
+	namespace std = Other;
+
+	using Other::exit;
+
+	/**
+	 * 取込んだ呼出から戻る
+	 */
+	void Call() {
+		exit(0);
+		std::exit(0);
+	}
+}
+
+/**
+ * 後判定の本体で終える
+ * @param c 条件
+ */
+void postStop(bool c) {
+	do return;
+	while(c);
+}
+
+/**
+ * 異常終了を捕捉しない
+ */
+void abortInTry() { try { abort(); } catch(...) { work(); } }
+
+/**
+ * 返戻を捕捉しない
+ */
+void returnInTry() { try { return; } catch(...) { work(); } }
+
+/**
+ * 送出を捕捉して復帰する
+ */
+void catchThrow() { try { throw 1; } catch(...) { work(); } }
+
+/**
+ * 確保の送出を捕捉して復帰する
+ */
+void allocationInTry() { try { new int; abort(); } catch(...) { work(); } }
+
+#if defined(PAREN_ENTRY)
+/**
+ * 括弧内のエントリーポイント
+ * @return 終了番号
+ */
+int (main)() {}
+#else
+/**
+ * 後置の型のエントリーポイント
+ * @return 終了番号
+ */
+auto main() -> int {}
+#endif
+
+[[noreturn]] int StopRequired();
+[[noreturn]] int FailRequired();
+int MaybeRequired();
+
+/**
+ * 評価に伴う終端を確かめる
+ */
+void RequiredCondition() {
+	if(StopRequired()) use();
+}
+
+/**
+ * 評価に伴う終端を確かめる
+ */
+void OrdinaryCondition() {
+	if(MaybeRequired()) use();
+}
+
+/**
+ * 評価に伴う終端を確かめる
+ */
+void RequiredArgument() {
+	use(StopRequired());
+}
+
+/**
+ * 評価に伴う終端を確かめる
+ */
+void RequiredInitializer() {
+	const int n = StopRequired();
+	use(n);
+}
+
+/**
+ * 評価に伴う終端を確かめる
+ */
+void RequiredLoop() {
+	while(StopRequired()) use();
+}
+
+/**
+ * 評価に伴う終端を確かめる
+ * @param a 条件
+ */
+void ShortCircuit(bool a) {
+	a && StopRequired();
+}
+
+/**
+ * 評価に伴う終端を確かめる
+ * @param a 条件
+ */
+void BothBranches(bool a) {
+	a ? StopRequired() : FailRequired();
+}
+
+/**
+ * 評価に伴う終端を確かめる
+ * @param a 条件
+ */
+void OneBranch(bool a) {
+	a ? StopRequired() : 0;
+}
+
+/**
+ * 評価に伴う終端を確かめる
+ */
+void UnevaluatedSize() {
+	sizeof(StopRequired());
+}
+
+/**
+ * 受け手の終端を確かめる
+ * @param p 配列
+ */
+void RequiredReceiver(int *p) {
+	(abort(), p)[0];
+}
+
+/**
+ * 作成時の終端を確かめる
+ */
+void RequiredCapture() {
+	auto action = [x = StopRequired()] {};
+}
+
+/**
+ * 入口の終端を確かめる
+ */
+void RequiredEntry() {
+	if(StopRequired(); true) use();
+}
+
+/**
+ * 導入前の修飾名は普通の呼出
+ */
+void UnintroducedStandard() {
+	std::exit(0);
+}
+
+namespace EarlyImport {
+	using std::exit;
+
+	/**
+	 * 別名だけでは標準ヘッダを導入しない
+	 */
+	void Call() {
+		exit(0);
+	}
+}
+
+namespace EarlyNamespace = std;
+
+/**
+ * 名前空間の別名も供給元の導入を確認する
+ */
+void UnintroducedNamespaceAlias() {
+	EarlyNamespace::exit(0);
+}
+
+namespace EarlyNamespaceImport {
+	using EarlyNamespace::exit;
+
+	/**
+	 * 名前空間の別名を経る using の導入を確認する
+	 */
+	void Call() {
+		exit(0);
+	}
+}
+
+void exit(int); // 標準と同形の宣言
+
+/**
+ * 標準と同形の宣言だけでは導入しない
+ */
+void UnintroducedDeclaration() {
+	exit(0);
+}
+
+namespace UnintroducedGlobalImport {
+	using ::exit;
+
+	/**
+	 * 導入前のグローバルの再宣言は別名でも通常呼出
+	 */
+	void Call() {
+		exit(0);
+	}
+}
+
+#include <cstddef>
+
+/**
+ * 他の標準ヘッダだけでは終了の宣言を導入しない
+ */
+void UnrelatedHeader() {
+	std::abort();
+}
+
+#if TERMINAL_HEADER
+#include <cstdlib>
+#endif
+
+/**
+ * 条件付の標準の導入を確定しない
+ */
+void ConditionalStandard() {
+	std::exit(0);
+}
+
+#include <cstdlib>
+
+[[noreturn]] void IncludedStop();
+
+/**
+ * インクルード後の標準の終了
+ */
+void IncludedAbort() {
+	abort();
+}
+
+/**
+ * インクルード後の非復帰の契約
+ */
+void IncludedContract() {
+	IncludedStop();
+}
+
+/**
+ * 絶対修飾した標準の終了
+ */
+void IncludedGlobal() {
+	::exit(0);
+}
+
+/**
+ * 導入した標準の修飾呼出
+ */
+void IncludedQualified() {
+	::std::abort();
+}
+
+namespace StandardNamespace = std;
+
+/**
+ * 名前空間の別名も供給元の導入を確認する
+ */
+void IntroducedNamespaceAlias() {
+	StandardNamespace::exit(0);
+}
+
+namespace StandardNamespaceImport {
+	using StandardNamespace::exit;
+
+	/**
+	 * 名前空間の別名を経る using の導入を確認する
+	 */
+	void Call() {
+		exit(0);
+	}
+}
+
+namespace StandardImport {
+	using ::std::exit;
+
+	/**
+	 * 標準の導入を別名へ引き継ぐ
+	 */
+	void Call() {
+		exit(0);
+	}
+}
+
+/**
+ * 標準の値の別名から終了する
+ */
+void StandardAlias() {
+	void (*const Quit)(int) = std::exit;
+	Quit(0);
+}
+
+void Work(int); // 復帰する呼出
+
+void (*Quit)(int) = std::exit;
+
+namespace MutableImport {
+	using ::Quit;
+
+	/**
+	 * 可変の値への using は取得時の標準対象を固定しない
+	 */
+	void Call() {
+		Quit = Work;
+		Quit(0);
+	}
+}
+
+#define exit(x) work(x)
+
+/**
+ * 修飾名の末尾もマクロで置換する
+ */
+void ReplacedQualified() {
+	std::exit(0);
+}
+
+#undef exit
+
+/**
+ * マクロ取消後の標準の修飾呼出
+ */
+void RestoredQualified() {
+	std::exit(0);
+}
+
+#include <stdlib.h>
+
+void exit(int); // 標準と同形の宣言
+
+/**
+ * グローバルの標準の導入後の再宣言
+ */
+void RedeclaredGlobal() {
+	::exit(0);
+}
+
+namespace GlobalImport {
+	using ::exit;
+
+	/**
+	 * グローバルの標準の導入を別名へ引き継ぐ
+	 */
+	void Call() {
+		exit(0);
+	}
+}
+
+/**
+ * 絶対修飾はローカルの遮蔽を受けない
+ * @param exit 復帰する呼出
+ */
+void AbsoluteGlobal(void (*exit)(int)) {
+	::exit(0);
+}
+
+struct ImportedOperators : std::string {
+	using std::string::append;
+	using std::string::operator+=;
+	using std::string::operator[];
+
+	/**
+	 * 演算子の導入と普通の呼出
+	 */
+	void Run() { work(); }
+};
+
+enum { noreturn = 16 };
+
+__attribute__((aligned(noreturn))) void ArgumentTarget();
+
+/**
+ * 属性の契約を確認する
+ */
+void ArgumentToken() {
+	ArgumentTarget();
+	return;
+}
+
+void PostfixTarget() __attribute__((noreturn));
+
+/**
+ * 属性の契約を確認する
+ */
+void PostfixContract() {
+	PostfixTarget();
+}
+
+void PostfixAliasTarget() __attribute__((__noreturn__));
+
+/**
+ * 属性の契約を確認する
+ */
+void PostfixAliasContract() {
+	PostfixAliasTarget();
+}
+
+__attribute__((noreturn)) void PrefixTarget();
+
+/**
+ * 属性の契約を確認する
+ */
+void PrefixContract() {
+	PrefixTarget();
+}
+
+__attribute__((aligned(16))) void AlignedTarget();
+
+/**
+ * 属性の契約を確認する
+ */
+void OrdinaryAlignment() {
+	AlignedTarget();
+	return;
+}
+
+[[gnu::aligned(noreturn)]] void StandardArgumentTarget();
+
+/**
+ * 属性の契約を確認する
+ */
+void StandardArgumentToken() {
+	StandardArgumentTarget();
+	return;
+}
+
+[[vendor::noreturn]] void ForeignTarget();
+
+/**
+ * 属性の契約を確認する
+ */
+void ForeignNamespace() {
+	ForeignTarget();
+	return;
+}
+
+[[noreturn::unused]] void NamespaceTarget();
+
+/**
+ * 属性の契約を確認する
+ */
+void NamespaceToken() {
+	NamespaceTarget();
+	return;
+}
+
+[[noreturn]] void StandardTarget();
+
+/**
+ * 属性の契約を確認する
+ */
+void StandardContract() {
+	StandardTarget();
+}
+
+[[gnu::noreturn]] void GnuTarget();
+
+/**
+ * 属性の契約を確認する
+ */
+void GnuNamespaceContract() {
+	GnuTarget();
+}
+
+__declspec(noreturn) void MicrosoftTarget();
+
+/**
+ * 属性の契約を確認する
+ */
+void MicrosoftContract() {
+    MicrosoftTarget();
+}
+
+[[__gnu__::__noreturn__]] void GnuAliasTarget();
+
+/**
+ * 属性の契約を確認する
+ */
+void GnuAliasContract() {
+    GnuAliasTarget();
+}
+
+/**
+ * 標準名を関数ポインタの仮引数で隠す
+ * @param exit 復帰する呼出
+ */
+void ShadowedExit(void (*exit)(int)) {
+	exit(0);
+}
+
+/**
+ * パラメータパックの名前を通常の仮引数として扱う
+ * @param abort 渡す値
+ */
+template<class ...T> void ShadowedPack(T ...abort) {
+	use(abort...);
+}

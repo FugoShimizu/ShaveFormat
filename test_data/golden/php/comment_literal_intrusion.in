@@ -3,3 +3,7 @@ $a = // c1
   "x\t
 y";
 var_dump($a);
+echo
+__LINE__;
+echo
+__line__;

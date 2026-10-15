@@ -1,6 +1,0 @@
-package p
-
-// F
-func F(x int) int {
-	return x
-}

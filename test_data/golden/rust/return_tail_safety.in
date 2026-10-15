@@ -24,3 +24,30 @@ fn macro_scope(x: i32) -> i32 {
 
 #[rewrite]
 fn attributed(x: i32) -> i32 { x }
+
+#[allow(unused)]
+fn printed(x: i32) -> i32 { println!("{}", x); 2 }
+
+fn printed_return() -> i32 { println!("{}", { return 1; }); 2 }
+
+fn printed_try(x: Option<i32>) -> Option<i32> { println!("{}", x?); Some(0) }
+
+fn printed_opaque() -> i32 { println!("{}", opaque!()); 1 }
+
+fn printed_cfg() -> i32 { println!("{}", { #[cfg(feature = "x")] return 1; 2 }); 3 }
+
+fn indexed_group(x: [i32; 1]) -> i32 { (x)[0] }
+
+fn field_group(x: Data) -> i32 { (x).value }
+
+fn deref_group(x: &i32) -> i32 { *(x) }
+
+fn assign_group(x: &mut i32) -> () { *(x) = 1 }
+
+/**
+ * トークン列のマクロ
+ */
+fn opaque_tokens() {
+ m!(opaque ! (), opaque ! [], opaque ! {});
+ return;
+}

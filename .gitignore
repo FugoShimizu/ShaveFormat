@@ -3,6 +3,7 @@
 .DS_Store
 .claude/
 .env
+.tree-sitter-runtime/
 .vscode/
 __pycache__/
 build/

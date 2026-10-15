@@ -1,0 +1,60 @@
+# a
+# b
+class Foo end
+
+# Adds
+# @param x foo
+# @return
+def f(x)
+	return x
+end
+
+# 確かめる
+# @param value 値
+# @return [Integer] 値
+def check(value)
+	raise ArgumentError, "負" if value.negative?
+	return value
+end
+
+# First
+# Second
+# @param a Alpha
+# @return Value
+def doc_boundary(a)
+	return a
+end
+
+# First
+# Second
+# @param b Beta
+# @return Value
+# @overload doc_boundary(a)
+# @param a Alpha
+def doc_boundary(b)
+	return b
+end
+
+# First
+# Third
+# Fourth
+# @param a Alpha
+# @param a More
+# @return Value
+def header_docs(a)
+	return a
+end
+
+# A
+# @param a A value
+# ========== X ==========
+# B
+# @param b B value
+# @return Value
+def section_docs(a, b)
+	return a + b
+end
+
+#
+def normalized_empty
+end

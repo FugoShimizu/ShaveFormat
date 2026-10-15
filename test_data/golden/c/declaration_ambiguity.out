@@ -36,12 +36,12 @@ void Merge(void) {
  * @param c 第２の右辺
  */
 void Keep(int T, int b, int c) {
-	T *b;
-	T *c;
-	Item *b;
-	Item *c;
-	Global *b;
-	Global *c;
+	T * b;
+	T * c;
+	Item * b;
+	Item * c;
+	Global * b;
+	Global * c;
 	Unknown *b;
 	Unknown *c;
 	return;
@@ -63,5 +63,54 @@ void Scoped(void) {
  */
 void Stacked(void) {
 	int a = 1, b = 2;	// n		// n
+	return;
+}
+
+Alias (*TypedPointer);
+Alias (*TypedArray)[3];
+Alias (*InitializedPointer) = 0;
+
+/**
+ * 値と型の遮蔽を宣言位置と有効範囲で区別する
+ * @param Alias 外側の型を遮蔽する値
+ * @param Other 演算の右辺
+ */
+void Shadowed(int Alias, int Other) {
+	Alias * Other;
+	Alias & Other;
+	{
+		Alias * Other;
+		typedef int Alias;
+		Alias *Ptr;
+	}
+	Alias * Other;
+	return;
+}
+
+/**
+ * 見出の値の有効範囲の後で外側の型を使う
+ * @param Other 反復の上限と演算の右辺
+ */
+void HeaderScope(int Other) {
+	for(int Alias = 0; Alias < Other; ++Alias) Alias * Other;
+	Alias *Ptr;
+	return;
+}
+
+/**
+ * 型の名前を遮蔽する関数ポインタを呼ぶ
+ * @param Alias 呼出先
+ * @param Other 実引数
+ */
+void Called(void (*Alias)(int), int Other) {
+	Alias(Other);
+	return;
+}
+
+/**
+ * 型名から始まる括弧付宣言子を宣言として纏める
+ */
+void Parenthesized(void) {
+	Alias *First, (Second), ((Third)), (*Fourth), (Fifth)[2];
 	return;
 }

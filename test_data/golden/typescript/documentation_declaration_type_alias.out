@@ -1,2 +1,0 @@
-/** 別名 */
-export type Alias = string;

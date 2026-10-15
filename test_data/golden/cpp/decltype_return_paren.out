@@ -1,3 +1,6 @@
+int x = 0;
+int y = 0;
+
 /**
  * x と同じ型で返す
  * @return x

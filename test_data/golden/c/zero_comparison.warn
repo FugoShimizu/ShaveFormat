@@ -1,6 +1,12 @@
-7:5: Review: Describe the termination or returned value in the return comment; verify documentation, intent
-8:7: Review: Use the zero-test form required for this numeric type; verify type, value range
-10:10: Review: Use the zero-test form required for this numeric type; verify type, value range
-12:12: Review: Inline immediately returned variable Flag; verify type, binding, lifetime, intent
-13:5: Review: Describe the termination or returned value in the return comment; verify documentation, intent
-30:12: Review: Inline immediately returned variable Result; verify type, binding, lifetime, intent
+8:7: Review: Use the zero-test form required for this numeric type
+10:10: Review: Use the zero-test form required for this numeric type
+12:12: Review: Inline immediately returned variable Flag
+12:21: Review: Use the zero-test form required for this numeric type
+23:11: Review: Use the zero-test form required for this numeric type
+29:20: Review: Use the zero-test form required for this numeric type
+29:43: Review: Use the zero-test form required for this numeric type
+30:12: Review: Inline immediately returned variable Result
+30:27: Review: Use the zero-test form required for this numeric type
+41:11: Review: Use the zero-test form required for this numeric type
+52:11: Review: Use the zero-test form required for this numeric type
+80:2: Review: Merge the conditions of these identical branch bodies

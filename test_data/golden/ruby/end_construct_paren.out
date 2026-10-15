@@ -1,8 +1,0 @@
-h = {
-	a: if x then 1 end,
-	b: a + b
-}
-
-x = if a then b end + 1
-
-f(if a then b end, 2)

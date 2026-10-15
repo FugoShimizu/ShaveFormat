@@ -1,1 +1,3 @@
 32:2: Violation: Remove the unreachable trailing `return`
+74:15: Review: Replace this jump with structured control flow
+90:3: Review: Replace this jump with structured control flow

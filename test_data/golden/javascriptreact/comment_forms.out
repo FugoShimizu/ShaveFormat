@@ -1,0 +1,114 @@
+// own line
+// before div close
+const A = () => (<div>{/* keep */}{}{}</div>);
+const only = <div>{/* first */ /* second */ /* third */}</div>;
+const value = <div>{0 /* first */ /* second */}</div>;
+const A = () => (<div>{}<b>x</b></div>); // line comment // Two
+
+/**
+ * 値の取得関数
+ * @return 取得した値
+ */
+function escapedElement() {
+	const a = <span />;
+	return \u{61};
+}
+
+/**
+ * トークンの境界の照合
+ */
+function tokenBoundaries() {
+	if(a) z = x++ + y;
+	if(b) z = x + ++y;
+	if(a) z = x-- - y;
+	else if(b) z = x - --y;
+	if(a) {
+		z = x++ + y;
+		touch();
+	}
+	if(b) {
+		z = x + ++y;
+		touch();
+	}
+	if(a) {
+		z = x-- - y;
+		touch();
+	} else if(b) {
+		z = x - --y;
+		touch();
+	}
+	if(a) z = x + y;
+	else if(b) z = x + y;
+	// 終了
+	return;
+}
+
+x === null || x === \u0075ndefined;
+x == \u{75}ndefined || x == null;
+x !== null && x !== un\u0064efined;
+undefine\u0064 !== x && null !== x;
+\u0075ndefined == x || null == x;
+null != x && \u{75}ndefined != x;
+x === null || x === \u0075ndefinedExtra;
+x === \u0075ndefined || x === \u{75}ndefined;
+
+// number note
+const selfNumber = <A p={1} />;
+// before note
+const selfBefore = <A p={1} />;
+// block note
+const selfBlock = <A p={1} />;
+// ========== section note ==========
+const selfSection = <A p={1} />;
+// spread note
+const selfSpread = <A {...{ a: 1, b: 2 }} />;
+// nested note
+const selfNested = <Outer p={<A p={1} />} />;
+
+const selfFunction = <A
+	p={
+		() => {
+			// function note
+			f();
+			g();
+		}
+	}
+/>;
+
+// Before header
+function /**
+ * Header
+ * @return Result
+ */ headerDoc() {
+	return 1;
+}
+
+/**
+ * Summary
+ * @param a Value
+ */
+function defaultClass(a = class A {}) {}
+
+// "Read here" 日本語 ABC "Return now"
+// 'Read here' 甲，B '?Return now' 日本語 ABC '!Finish here'
+function /**
+ * Hello
+ * Next
+ */ inlineSentences() {
+	return;
+}
+
+/**
+ * A
+ * ========== X ==========
+ * B
+ */
+function trailing() {}
+/**
+ * Keep expression boundaries
+ */
+function emptyBoundary() {/* Read */ /* Return */}
+/**
+ * Keep expression boundaries
+ */
+function emptyBoundaryPair() {/* Read */ /* Return */}

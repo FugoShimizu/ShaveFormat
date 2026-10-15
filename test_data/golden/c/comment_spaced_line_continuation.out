@@ -1,0 +1,5 @@
+int F() {
+	int x = 0; // note \  
+	int y = 1;
+	return x;
+}

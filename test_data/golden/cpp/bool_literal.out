@@ -3,14 +3,43 @@ bool Second = false;
 int Count = 1;
 bool Kept = 2;
 bool Already = true;
+bool Paren(false);
+bool Braced { true };
+bool CopyList = { false };
+bool (Wrapped) = true;
+bool Matrix[2][2] = { { false, true }, { true, false } };
+bool *Pointers[2] = { 0, 0 };
+bool Empty {};
+bool Default(bool Flag = false, bool Ready = true, bool = true, bool *Ptr = 0, bool Values[1] = 0);
+
+auto Lambda = [](bool Flag = false) {
+	return Flag;
+};
+
+namespace N {
+	extern bool Flag;
+}
+
+bool N::Flag = false;
+
+template<class T> struct Box {
+	static bool Flag;
+};
+
+template<class T> bool Box<T>::Flag = true;
+
 bool G();
 
 /**
  *
  */
 void F() {
-	bool *Ptr = 0, &Ref = G(), Arr[2] = { 0 };
+	bool *Ptr = 0, &Ref = G(), Arr[2] = { false };
 	const bool Flag = true, Done = false;
+	if(G()) {
+		bool Local(false);
+		G();
+	}
 	return;
 }
 
@@ -18,6 +47,8 @@ class A {
 public:
 
 	bool Member = true;
+	bool Direct { false };
+	bool Copy = { true };
 	bool *MemberPtr = 0;
 	int Count = 1;
 };
@@ -28,8 +59,20 @@ struct S {
 	bool R = true;
 	bool *T = 0;
 	bool Bit : 1;
-	bool Arr[1] = { 0 };
+	bool Arr[1] = { false };
 	static bool Stat;
 };
 
-bool S::Stat = 1;
+bool S::Stat = true;
+
+#define true 0
+#define false 7
+
+bool MacroTrue = 1;
+bool MacroFalse = 0;
+
+#undef true
+#undef false
+
+bool BuiltinTrue = true;
+bool BuiltinFalse = false;

@@ -1,0 +1,32 @@
+const f2 = <p>a{// c
+" "}b</p>;
+const x = a/<p>a{" " /* m */}b</p>, y = 2;
+const z = cond ? <p>a{// d
+" "}b</p> : null;
+const many = <p>&amp;
+a
+b
+c</p>;
+const disputed = <p>a&#32;
+x</p>;
+const nested = <div><p>a&#32;
+x</p><b>q</b></div>;
+
+const a = <div><span /><p className="x" // t
+/></div>;
+const b = <p className="x" // s
+/>;
+
+const f = <p>
+	a{
+		/* a */ /* b */
+		" "}b
+</p>;
+const markers = "";
+const markerText = <p>{" "}</p>;
+const selfNumber = <A p={1
+// number note
+} />;
+const selfObject = <A p={{a: 1,
+/* object note */
+b: 2}} />;

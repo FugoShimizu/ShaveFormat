@@ -6,4 +6,6 @@ def f():
 		aaaa,
 		bbbb
 	)
-	return xxxx
+	return (
+		xxxx
+	)

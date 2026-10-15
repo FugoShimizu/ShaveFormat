@@ -1,0 +1,86 @@
+package p
+
+type A struct{}
+type B struct{}
+func F[T any](){}
+func G(){F[struct{A
+B}]();F[interface{Read() int
+Next() int}]()}
+
+func F[T any](){}
+func G(){F[struct{A int;B int}]()}
+
+type S struct{X struct{A int;B int} `json:"x"`}
+
+type M map[struct{A int;B int}]int
+
+func F(){_ = (struct{A int;B int})(struct{A int;B int}{})}
+
+type(A struct{X int;Y int};B struct{Z int})
+
+var(A = func()int{return 1};B=func()int{return 2})
+
+type Pair[ K comparable, V any ] struct {
+	Key K
+	Val V
+}
+
+func Map[ T any, U any ]( xs []T, f func( T ) U ) []U {
+	out := make( []U, 0, len( xs ) )
+	for _, x := range xs {
+		out = append( out, f( x ) )
+	}
+	return out
+}
+
+var x (int)
+var y [](*T)
+var z chan (<-chan int)
+var w *(chan int)
+var v chan (int)
+var u = (int)(x)
+var t = (*T)(nil)
+var s = ([]byte)("a")
+
+var c chan ((<-chan int))
+var x = ((interface{}))(nil)
+var y = ((*int))(nil)
+var z ((int))
+var r = *(*[]int)(p)
+var q = **(**[]int)(p)
+var o = *(*func())(p)
+
+type I interface{ M() }
+type E interface{}
+type S struct{ A int }
+type Z struct{}
+
+func main() {
+	ch := make(chan struct{})
+	ch <- struct{}{}
+	var v interface{ M() }
+	var u interface{}
+	w := []struct{ A int }{{1}}
+	_ = struct{ A int }(func() struct{ A int } { return S{} }())
+	_, _, _ = v, u, w
+}
+
+type Next interface{Next() int}
+type Reader interface{Read() int;Next}
+type Scalar interface{~int|~string;comparable}
+type Empty interface{}
+func Same[T Scalar](A,B T)bool{return A==B}
+func AsReader(Value any) interface{Read() int;Next}{
+// 型表明の返戻
+return Value.(interface{Read() int;Next})}
+
+type I interface {
+	M() (int, error)
+}
+
+var f func(int) (int, error)
+
+func main() {
+	h := func(x int) (int, error) { return x, nil }
+	_ = h
+}

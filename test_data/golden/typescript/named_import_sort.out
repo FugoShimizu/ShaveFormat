@@ -1,4 +1,20 @@
-import { StyleSheet, Text, View } from "react-native";
-import { useEffect, useState } from "react";
+import { Box, count, omega as alpha } from "./alpha";
+import { beta, type Gamma } from "./box";
 import { ant, zed } from "m";	// note		// note
 import { bee, cat, yak } from "n";	// note		// note			// note
+import { b as c, ba } from "alias-order";
+import { b as c, ba } from "reverse-alias-order";
+import { type A, b } from "type-order";
+
+/**
+ *
+ * @param x
+ * @return
+ */
+export function f(x: number): number {
+	return x;
+}
+
+const a = 1;
+
+export { a };

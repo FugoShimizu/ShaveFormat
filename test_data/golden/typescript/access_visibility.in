@@ -1,0 +1,109 @@
+abstract class Reverse  {
+    public A: number;
+    private B: number;
+}
+
+const Value: unknown = class  {
+    public A: number;
+    private B: number;
+};
+
+abstract class Forward  {
+    private A: number;
+    public B: number;
+}
+
+abstract class AbstractMethod  {
+    public abstract F(): void;
+
+    private B: number;
+}
+
+abstract class IndexSignature  {
+    [key: string]: unknown;
+
+    private B: string;
+}
+
+class Overload  {
+    public F(x: number): number;
+    public F(x: string): string;
+
+    /**
+     * 値の取得関数
+     * @param x 値
+     * @return 値
+     */
+    public F(x: unknown): unknown  {
+        // 値の返戻
+        return x;
+    }
+
+    private B: number;
+}
+
+declare class Signature  {
+    public F(x: number): number;
+
+    private B: number;
+}
+
+abstract class ReverseForward  {
+    private B: number;
+    public A: number;
+}
+
+const ValueForward: unknown = class  {
+    private B: number;
+    public A: number;
+};
+
+abstract class AbstractMethodForward  {
+    private B: number;
+
+    public abstract F(): void;
+}
+
+abstract class IndexSignatureForward  {
+    private B: string;
+
+    [key: string]: unknown;
+}
+
+class OverloadForward  {
+    private B: number;
+
+    public F(x: number): number;
+    public F(x: string): string;
+
+    /**
+     * 値の取得関数
+     * @param x 値
+     * @return 値
+     */
+    public F(x: unknown): unknown  {
+        // 値の返戻
+        return x;
+    }
+}
+
+declare class SignatureForward  {
+    private B: number;
+
+    public F(x: number): number;
+}
+
+class PrivateNameReverse {
+    public A: number;
+    #B: number;
+}
+
+class PrivateStaticReverse {
+    protected static A: number;
+    static #B: number;
+}
+
+class PrivateNameForward {
+    #B: number;
+    public A: number;
+}

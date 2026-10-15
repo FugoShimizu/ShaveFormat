@@ -1,4 +1,6 @@
-/// 可変性判定
+/**
+ * 可変性判定
+ */
 fn main() {
 	let mut tuple_value: i32 = 0;
 	(tuple_value,) = (1,);
@@ -42,20 +44,20 @@ fn main() {
 	return;
 }
 
-macro_rules! change {
-	($value:ident) => {
-		$value = 1
-	};
-}
+macro_rules! change { ($value: ident) => { $value = 1 }; }
 
-/// マクロ判定
+/**
+ * マクロ判定
+ */
 #[rewrite]
 fn attributed() {
 	let mut attribute_value: i32 = 0;
 	let _ = attribute_value;
 }
 
-/// マクロ判定
+/**
+ * マクロ判定
+ */
 fn main() {
 	let mut macro_value: i32 = 0;
 	change!(macro_value);
@@ -67,10 +69,11 @@ fn main() {
 	let _ = stringified;
 	let untouched: i32 = 0;
 	let _ = untouched;
-	return;
 }
 
-/// 識別子判定
+/**
+ * 識別子判定
+ */
 fn main() {
 	let mut K: i32 = 0;
 	K = 1;
@@ -79,6 +82,10 @@ fn main() {
 	return;
 }
 
+/**
+ *
+ * # Returns
+ */
 fn make() -> impl FnMut() {
 	let mut n = 0;
 	return move || {
@@ -87,6 +94,9 @@ fn make() -> impl FnMut() {
 	};
 }
 
+/**
+ *
+ */
 fn main() {
 	let mut f = make();
 	f();
@@ -95,4 +105,335 @@ fn main() {
 	v.extend::<[i32; 1]>([1]);
 	println!("{:?}", v);
 	return;
+}
+
+/**
+ *
+ */
+fn tuple_bindings() {
+	let (mut x, y) = (1, 2);
+	x = 3;
+	let _ = (x, y);
+	return;
+}
+
+/**
+ *
+ */
+fn tuple_writes() {
+	let (mut x, mut y) = (1, 2);
+	x = 3;
+	y = 4;
+	let _ = (x, y);
+	return;
+}
+
+/**
+ *
+ */
+fn captured_tuple() {
+	let (whole @(mut x, y), z) = ((1, 2), 3);
+	x = 4;
+	let _ = (whole, x, y, z);
+	return;
+}
+
+/**
+ *
+ */
+fn borrowed_tuple() {
+	let ref whole @(part,) = (1,);
+	let _ = (whole, part);
+	return;
+}
+
+/**
+ *
+ * # Returns
+ */
+fn f() -> i32 {
+	let mut r#x = 1;
+	x = 2;
+	let y = 3;
+	return x + r#y;
+}
+
+/**
+ *
+ * # Returns
+ */
+#[allow::rewrite]
+fn attribute_allow_relative() -> i32 {
+	let mut x: i32 = 1;
+	x
+}
+
+/**
+ *
+ * # Returns
+ */
+#[allow::tools::rewrite]
+fn attribute_allow_nested() -> i32 {
+	let mut x: i32 = 1;
+	x
+}
+
+/**
+ *
+ * # Returns
+ */
+#[::allow::rewrite]
+fn attribute_allow_absolute() -> i32 {
+	let mut x: i32 = 1;
+	x
+}
+
+/**
+ *
+ * # Returns
+ */
+#[cold::rewrite]
+fn attribute_cold_relative() -> i32 {
+	let mut x: i32 = 1;
+	x
+}
+
+/**
+ *
+ * # Returns
+ */
+#[cold::tools::rewrite]
+fn attribute_cold_nested() -> i32 {
+	let mut x: i32 = 1;
+	x
+}
+
+/**
+ *
+ * # Returns
+ */
+#[::cold::rewrite]
+fn attribute_cold_absolute() -> i32 {
+	let mut x: i32 = 1;
+	x
+}
+
+/**
+ *
+ * # Returns
+ */
+#[deny::rewrite]
+fn attribute_deny_relative() -> i32 {
+	let mut x: i32 = 1;
+	x
+}
+
+/**
+ *
+ * # Returns
+ */
+#[deny::tools::rewrite]
+fn attribute_deny_nested() -> i32 {
+	let mut x: i32 = 1;
+	x
+}
+
+/**
+ *
+ * # Returns
+ */
+#[::deny::rewrite]
+fn attribute_deny_absolute() -> i32 {
+	let mut x: i32 = 1;
+	x
+}
+
+/**
+ *
+ * # Returns
+ */
+#[deprecated::rewrite]
+fn attribute_deprecated_relative() -> i32 {
+	let mut x: i32 = 1;
+	x
+}
+
+/**
+ *
+ * # Returns
+ */
+#[deprecated::tools::rewrite]
+fn attribute_deprecated_nested() -> i32 {
+	let mut x: i32 = 1;
+	x
+}
+
+/**
+ *
+ * # Returns
+ */
+#[::deprecated::rewrite]
+fn attribute_deprecated_absolute() -> i32 {
+	let mut x: i32 = 1;
+	x
+}
+
+/**
+ *
+ * # Returns
+ */
+#[doc::rewrite]
+fn attribute_doc_relative() -> i32 {
+	let mut x: i32 = 1;
+	x
+}
+
+/**
+ *
+ * # Returns
+ */
+#[doc::tools::rewrite]
+fn attribute_doc_nested() -> i32 {
+	let mut x: i32 = 1;
+	x
+}
+
+/**
+ *
+ * # Returns
+ */
+#[::doc::rewrite]
+fn attribute_doc_absolute() -> i32 {
+	let mut x: i32 = 1;
+	x
+}
+
+/**
+ *
+ * # Returns
+ */
+#[forbid::rewrite]
+fn attribute_forbid_relative() -> i32 {
+	let mut x: i32 = 1;
+	x
+}
+
+/**
+ *
+ * # Returns
+ */
+#[forbid::tools::rewrite]
+fn attribute_forbid_nested() -> i32 {
+	let mut x: i32 = 1;
+	x
+}
+
+/**
+ *
+ * # Returns
+ */
+#[::forbid::rewrite]
+fn attribute_forbid_absolute() -> i32 {
+	let mut x: i32 = 1;
+	x
+}
+
+/**
+ *
+ * # Returns
+ */
+#[inline::rewrite]
+fn attribute_inline_relative() -> i32 {
+	let mut x: i32 = 1;
+	x
+}
+
+/**
+ *
+ * # Returns
+ */
+#[inline::tools::rewrite]
+fn attribute_inline_nested() -> i32 {
+	let mut x: i32 = 1;
+	x
+}
+
+/**
+ *
+ * # Returns
+ */
+#[::inline::rewrite]
+fn attribute_inline_absolute() -> i32 {
+	let mut x: i32 = 1;
+	x
+}
+
+/**
+ *
+ * # Returns
+ */
+#[must_use::rewrite]
+fn attribute_must_use_relative() -> i32 {
+	let mut x: i32 = 1;
+	x
+}
+
+/**
+ *
+ * # Returns
+ */
+#[must_use::tools::rewrite]
+fn attribute_must_use_nested() -> i32 {
+	let mut x: i32 = 1;
+	x
+}
+
+/**
+ *
+ * # Returns
+ */
+#[::must_use::rewrite]
+fn attribute_must_use_absolute() -> i32 {
+	let mut x: i32 = 1;
+	x
+}
+
+/**
+ *
+ * # Returns
+ */
+#[warn::rewrite]
+fn attribute_warn_relative() -> i32 {
+	let mut x: i32 = 1;
+	x
+}
+
+/**
+ *
+ * # Returns
+ */
+#[warn::tools::rewrite]
+fn attribute_warn_nested() -> i32 {
+	let mut x: i32 = 1;
+	x
+}
+
+/**
+ *
+ * # Returns
+ */
+#[::warn::rewrite]
+fn attribute_warn_absolute() -> i32 {
+	let mut x: i32 = 1;
+	x
+}
+
+/**
+ *
+ * # Returns
+ */
+#[allow(unused)]
+fn attribute_standard() -> i32 {
+	let x: i32 = 1;
+	return x;
 }

@@ -3,6 +3,21 @@ int Count = 1;
 bool Kept = 2;
 bool Already = true;
 
+bool Paren(0);
+bool Braced{1};
+bool CopyList = {0};
+bool (Wrapped) = 1;
+bool Matrix[2][2] = {{0,1},{1,0}};
+bool *Pointers[2] = {0,0};
+bool Empty{};
+bool Default(bool Flag=0, bool Ready=(1), bool =1, bool *Ptr=0, bool Values[1]=0);
+auto Lambda = [](bool Flag=0){return Flag;};
+
+namespace N { extern bool Flag; }
+bool N::Flag=0;
+template<class T> struct Box { static bool Flag; };
+template<class T> bool Box<T>::Flag=1;
+
 bool G();
 void F() {
 	bool *Ptr = 0;
@@ -10,11 +25,14 @@ void F() {
 	bool Arr[2] = {0};
 	const bool Flag = 1;
 	const bool Done = 0;
+	if(G()) { bool Local(0); G(); }
 }
 class A {
 public:
 
 	bool Member = 1;
+	bool Direct{0};
+	bool Copy = {1};
 	bool *MemberPtr = 0;
 	int Count = 1;
 };
@@ -27,3 +45,12 @@ struct S {
 	static bool Stat;
 };
 bool S::Stat = 1;
+
+#define true 0
+#define false 7
+bool MacroTrue=1;
+bool MacroFalse=0;
+#undef true
+#undef false
+bool BuiltinTrue=1;
+bool BuiltinFalse=0;

@@ -1,0 +1,58 @@
+export function g() {
+	let p = 1, q = 2;
+	let r = 3;
+	let s = 4;
+	let t = 5, u = 6;
+	++t;
+	return p + q + r + s + t + u;
+}
+export function h(r) {
+	let { a, b } = r, p = f(r);
+	let q = 1;
+	a = 2;
+	return a + b + p + q;
+}
+export function k(r) {
+	let [x, ...y] = r;
+	return x + y;
+}
+export function m(m) {
+	for (let [k, v] of m) { v = v + 1; g(k, v); }
+	for (let [k, v] of m) g(k, v);
+	for (let { x } of m) { x = 2; }
+}
+
+export function View() {
+	let fixed = 1;
+	let changed = 2;
+	++changed;
+	return <span>{fixed + changed}</span>;
+}
+
+export function loop(a) {
+	for (let i = 0, n = a.length; i < n; i++) g(a[i]);
+}
+export let total = 1, count = 2;
+count = 3;
+
+export function splitKeyword() {
+	let changed = read(), fixed = read();
+	changed = update();
+	return changed + fixed;
+}
+
+{
+	let b = 1;
+	({b} = o);
+	let c = 3;
+	console.log(b, c);
+}
+
+var let = {};
+globalThis.key = "k";
+(let)[key] = [5];
+for ((let).x of [3]);
+((let))[key] = [6];
+console.log(let.k, let.x);
+(let)[key]++;
+({}).x++;

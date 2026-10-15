@@ -16,5 +16,10 @@ constexpr unsigned long long operator""_inspect(const char *Text) {
  */
 unsigned long long InspectSpelling() {
 	// 字面に基付く合計値の返戻
-	return .5_inspect + 0xff_inspect + 1e2_inspect + 1'000_inspect;
+	return .5_inspect + 0xff_inspect + 1e2_inspect + 1'000_inspect + 0x1.p0_inspect;
 }
+
+int Line = __LINE__;
+int BuiltinLine = __builtin_LINE();
+int Column = __builtin_COLUMN();
+auto Location = std::source_location::current();

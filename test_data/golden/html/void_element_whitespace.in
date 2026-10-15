@@ -1,3 +1,4 @@
+<meta charset="utf-16be">
 <div>
 <p>a<br>b <i>c</i></p>
 <p>line1<br>
@@ -12,3 +13,12 @@ line2 <b>x</b><br> tail</p>
 <p>a
 <link rel="x">b</p>
 <p>a<meta name="m">b</p>
+<p>Line 1<br/>Line 2</p>
+<div><img src="a"/> caption</div>
+<br/>b
+<div><br/>
+text
+</div>
+<p>a<br/>&amp; b</p>
+<pre>a<br/>  b</pre>
+<svg><foreignObject>a<br/>b</foreignObject></svg>

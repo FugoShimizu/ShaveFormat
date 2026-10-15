@@ -1,0 +1,85 @@
+enum ReverseEnum {
+	public static var A: Int = 1
+	private static var B: Int = 2
+}
+
+class Nested0 {
+	public class N {}
+
+	private var B: Int = 2
+}
+
+class Nested1 {
+	public struct N {}
+
+	private var B: Int = 2
+}
+
+class Nested2 {
+	public enum N {}
+
+	private var B: Int = 2
+}
+
+class Implicit {
+	class N {}
+
+	private var B: Int = 2
+}
+
+class Setter {
+	internal private(set) var A: Int = 1
+	internal var B: Int = 2
+}
+
+enum Forward {
+	private static var A: Int = 1
+	internal static var B: Int = 2
+}
+
+class SetterSameVisibility {
+	/**
+	 * 操作関数
+	 */
+	internal func F() -> Void {}
+
+	internal private(set) var A: Int = 1
+}
+
+enum ReverseEnumForward {
+	private static var B: Int = 2
+	public static var A: Int = 1
+}
+
+class Nested0Forward {
+	private var B: Int = 2
+
+	public class N {}
+}
+
+class Nested1Forward {
+	private var B: Int = 2
+
+	public struct N {}
+}
+
+class Nested2Forward {
+	private var B: Int = 2
+
+	public enum N {}
+}
+
+class ImplicitForward {
+	private var B: Int = 2
+
+	class N {}
+}
+
+class SetterSameVisibilityForward {
+	internal private(set) var A: Int = 1
+
+	/**
+	 * 操作関数
+	 */
+	internal func F() -> Void {}
+}

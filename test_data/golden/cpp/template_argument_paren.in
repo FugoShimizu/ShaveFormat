@@ -16,4 +16,22 @@ template <int N = (1 < 2), typename T = X<(3 > 2)>> struct U {};
 void h() {
 	int v = (a > b);
 	f<(3 > 2)>(5);
+	f<(1+1)>(2);
+	f<1+1>(2);
+	f<(1&&1)>(2);
+	f<(1<<2)>(2);
+	f<((4>>1))>(2);
+	f<((1<2))>(2);
 }
+
+template <class T> class ExplicitBox {};
+template <class T> union ExplicitStorage {};
+namespace ExplicitInstantiation {
+	template <class T> struct Record {};
+}
+extern template class ExplicitBox< int >;
+template class ExplicitBox< int >;
+extern template struct ExplicitInstantiation::Record< ExplicitBox< int > >;
+template struct ExplicitInstantiation::Record< ExplicitBox< int > >;
+extern template union ExplicitStorage< int >;
+template union ExplicitStorage< int >;

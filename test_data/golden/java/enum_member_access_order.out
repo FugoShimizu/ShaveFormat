@@ -4,3 +4,135 @@ enum E {
 	public int a;
 	private int b;
 }
+
+record RecordReverse(int x) {
+	public static int A;
+	private static int B;
+}
+
+class Nested0 {
+	public class N {}
+
+	private int B;
+}
+
+class Nested1 {
+	public interface N {}
+
+	private int B;
+}
+
+class Nested2 {
+	public enum N {}
+
+	private int B;
+}
+
+class Nested3 {
+	public record N(int x) {}
+
+	private int B;
+}
+
+class Nested4 {
+	public @interface N {}
+
+	private int B;
+}
+
+class Anonymous {
+	private Object Value = new Object() {
+		public int A;
+		private int B;
+	};
+}
+
+interface ImplicitPublic {
+	void F();
+	/**
+	 * 終了関数
+	 */
+	private static void G() {}
+}
+
+interface InterfaceForward {
+	/**
+	 * 終了関数
+	 */
+	private static void G() {}
+	void F();
+}
+
+@interface AnnotationVisibility {
+	int X = 1;
+
+	public class N {}
+}
+
+record Compact(int x) {
+	/**
+	 * 初期化関数
+	 * @param x 値
+	 */
+	public Compact {}
+
+	private static int B;
+}
+
+record RecordReverseForward(int x) {
+	private static int B;
+	public static int A;
+}
+
+class Nested0Forward {
+	private int B;
+
+	public class N {}
+}
+
+class Nested1Forward {
+	private int B;
+
+	public interface N {}
+}
+
+class Nested2Forward {
+	private int B;
+
+	public enum N {}
+}
+
+class Nested3Forward {
+	private int B;
+
+	public record N(int x) {}
+}
+
+class Nested4Forward {
+	private int B;
+
+	public @interface N {}
+}
+
+class AnonymousForward {
+	private Object Value = new Object() {
+		private int B;
+		public int A;
+	};
+}
+
+@interface AnnotationVisibilityForward {
+	public class N {}
+
+	int X = 1;
+}
+
+record CompactForward(int x) {
+	private static int B;
+
+	/**
+	 * 初期化関数
+	 * @param x 値
+	 */
+	public CompactForward {}
+}

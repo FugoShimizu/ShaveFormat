@@ -11,5 +11,75 @@ func f() {
 		veryLongSecondParameter int,
 	)
 	use(alpha, beta)
+	var a int =
+	InitializeValueWithLengthyFunction(1)
+	var b int =
+	InitializeValueWithLengthyFunction(2)
+	use(a, b)
+	var c =
+	InitializeValueWithLengthyFunction(3)
+	var d =
+	InitializeValueWithLengthyFunction(4)
+	use(c, d)
+	e :=
+	InitializeValueWithLengthyFunction(5)
+	f :=
+	InitializeValueWithLengthyFunction(6)
+	use(e, f)
+	m :=
+	InitializeValueWithLengthyFunction(11)
+	n := 7
+	use(m, n)
+	var o =
+	InitializeValueWithLengthyFunction(12)
+	var p = 8
+	use(o, p)
+	var g int =
+	InitializeValueWithLengthyFunction(7)
+	var h int =
+	InitializeValueWithLengthyFunction(8)
+	use(g, h)
+	const alphaLongConstantName =
+	111111111111111111
+	const betaLongConstantName =
+	222222222222222222
+	use(
+		alphaLongConstantName,
+		betaLongConstantName,
+	)
+	i :=
+	InitializeValueWithLengthyFunction(9)
+	use(i)
+	j, k :=
+	InitializeValueWithLengthyFunction()
+	use(j, k)
+	ch <-
+	InitializeValueWithLengthyFunction(10)
+	r := <-ch
+	use(r)
+	var rx <-chan int
+	use(rx)
+	if value :=
+	InitializeValueWithLengthyFunction(1);
+	value > 0 {
+		use(value)
+	}
+	switch value :=
+	InitializeValueWithLengthyFunction(2);
+	value {
+	case 1:
+		use(value)
+	}
+	for value :=
+	InitializeValueWithLengthyFunction(3);
+	value > 0;
+	value-- {
+		use(value)
+	}
+	select {
+	case ch <-
+		InitializeValueWithLengthyFunction(4):
+		use(ch)
+	}
 	return
 }

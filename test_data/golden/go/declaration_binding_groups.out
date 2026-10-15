@@ -1,0 +1,100 @@
+package p
+
+// f は値を使う
+func f() {
+	a, _, b, _ := 1, 2, 3, 4
+	use(a, b)
+	return
+}
+
+// f は値を使う
+func f() {
+	a, _ := 1, 2
+	a, b := 3, 4
+	use(a, b)
+	return
+}
+
+// f は値を返す
+func f(ch <-chan int) int {
+	select {
+	case x := <-ch:
+		p := &x
+		_ = p
+		x, y := 2, 3
+		z := *p
+		// 値を返す
+		return y + z
+	default:
+		break
+	}
+	// 値を返す
+	return 0
+}
+
+// f は値を返す
+func f(xs ...int) int {
+	p := &xs
+	_ = p
+	xs, y := []int{ 7 }, 2
+	z := len(*p)
+	// 値を返す
+	return y + z
+}
+
+// f 短い変数宣言の統合
+func f(p int) int {
+	x, y := p + 1, "s" // 文字列
+	z, alphaValueWithLongName, bravoValueWithLongName := x * 2, computeSomethingWithLongName(1), computeSomethingWithLongName(2)
+	charlieValueWithLongName := computeSomethingWithLongName(3)
+	return x + len(y) + z + alphaValueWithLongName + bravoValueWithLongName + charlieValueWithLongName
+}
+
+// f 変数の統合
+func f() {
+	// 先頭
+	var a, b, c, d int // 二番目
+	var e, g string
+	var h = 1
+	use(a, b, c, d, e, g, h)
+	return
+}
+
+// constants 定数の統合
+func constants() {
+	const a, b = 1, 2
+	println(a, b)
+	return
+}
+
+// swap は並列の束縛を保つ
+func swap(first, second int) int {
+	{
+		first, second := second, first
+		return first * 10 + second
+	}
+}
+
+// shadowVar は初期値の外側の束縛を保つ
+func shadowVar(value int) int {
+	{
+		var value, other = 7, value
+		return value * 10 + other
+	}
+}
+
+const value = 4
+
+// shadowConst は初期値の外側の定数を保つ
+func shadowConst() int {
+	const value, other = 7, value
+	return value * 10 + other
+}
+
+// reassigned は既存の束縛を再代入する
+func reassigned(e error) {
+	var err error
+	number, err := 5, e
+	use(number, err)
+	return
+}

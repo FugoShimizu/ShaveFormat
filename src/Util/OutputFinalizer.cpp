@@ -1,170 +1,89 @@
 #include "OutputFinalizer.hpp"
-#include "../Core/SyntaxModel.hpp"
-#include "FormatLimitExceeded.hpp"
-#include <algorithm>
+#include "LayoutTypes.hpp"
 #include <cstddef>
 #include <cstdint>
-#include <ranges>
 #include <span>
 #include <string>
-#include <string_view>
-#include <vector>
 
-/** ========== 出力確定 ========== */
 /**
+ * ========== 出力確定 ==========
  * 出力確定関数（整形仕様 3.3, 6.7）
- * 合成で出力の順に並べたコメント行の列を，コードの断片と其の順に直列化して終端契約を満たす
+ * 合成で出力の順に並べたコメント行の列を，コードの断片と其の順にシリアライズして終端契約を満たす
  * 独立したコメント行を終える改行は出すが，空の物理行を生む改行は出さず，空行の断片を変更しない
- * 計算量：節点数 V，空のコードを持つ所有区画の数 R，子を含む字面の長さ N，割当の数 C に対し O(V + R log R + N + C)
- * @param Document コードとコメントの合成結果
- * @param VerbatimLines 逐語の中から始まる行の番号（０始まりの昇順，整形仕様 4.4 の所有区画を親の深さへ置く時に字下げを付けない行）の格納先（不要なら nullptr）
- * @return 最終字面（逐語の末尾データは其の終端を保ち，其の他は終端契約の改行に従う）
- * @throws FormatLimitExceeded コメントだけを持つ所有区画の開始タグを置いて居ない場合，子を含む出力が大きさの上限を超える場合
+ * 計算量：断片の数 F，テキストの長さ N，割当の数 C に対し O(F + N + C)
+ * @param Doc コードとコメントの合成結果
+ * @return 最終テキスト（逐語の末尾データは其の終端を保ち，其の他は終端契約の改行に従う）
+ * @throws std::bad_alloc テキスト・要素・作業列又は呼出先のメモリを確保出来ない場合
+ * @throws std::length_error テキスト・要素又は作業列が保持領域の最大長を超える場合
  */
-std::string OutputFinalizer::Finalize(const OutputDocument &Document, std::vector<uint32_t> *const VerbatimLines) {
-	// コード断片とコメント割当の取得及び出力領域の確保
-	const LaidOutCode &Code = Document.GetCode();
+std::string OutputFinalizer::Finalize(const OutputDocument &Doc) {
+	// コード断片とコメント割当の取得
+	const LaidOutCode &Code = Doc.GetCode();
 	const std::span<const CodeFragment> Fragments = Code.GetFragments();
-	const std::span<const CommentInsertion> Insertions = Document.GetComments().GetInsertions();
-	const AnchorPositionMap &Anchors = Code.GetAnchors();
-	const std::span<const OwnedRegionSpan> Owned =
-	Document.IncludesOwnedComments() ? std::span<const OwnedRegionSpan>(Anchors.OwnedRegions) : std::span<const OwnedRegionSpan>();
-	// コード行の無い子のコメントを開始タグの後へ差し込む位置
-	struct DeferredRegion {
-		const Core::OwnedRegion *Region; // コメントだけを持つ所有区画
-		uint32_t Fragment; // 開始タグの終わる断片
-		uint32_t Offset; // 開始タグの終わりの字面の位置
-		uint32_t Depth; // 区画の行の深さ
-	};
-	std::vector<DeferredRegion> Deferred;
-	if(Document.IncludesOwnedComments() && Anchors.Syntax->HasRegions()) {
-		for(Core::NodeId Node = 0; Node < Anchors.Syntax->NodeCount(); ++Node) {
-			const Core::OwnedRegion *const Region = Anchors.Syntax->RegionOf(Node);
-			if(!Region || !Region->CodeText.empty() || Region->Text.empty()) continue;
-			const Core::NodeId Parent = Anchors.Syntax->ParentOf(Node);
-			Core::NodeId Opening = Core::NoNode;
-			if(Parent != Core::NoNode) for(const Core::NodeId Child : Anchors.Syntax->ChildrenOf(Parent)) {
-				if(Anchors.Syntax->Is(Child, Core::Role::MarkupOpen)) Opening = Child;
-			}
-			if(Opening == Core::NoNode || !Anchors.Nodes[Opening].IsPlaced) {
-				throw FormatLimitExceeded("embedded comment has no opening boundary", FailureReason::FormatterDefect);
-			}
-			const NodeSpan &Span = Anchors.Nodes[Opening];
-			Deferred.push_back({ Region, Span.EndFragment, Span.End, Anchors.FragmentTabs[Span.EndFragment] + 1 });
-		}
-	}
-	std::stable_sort(
-		Deferred.begin(),
-		Deferred.end(),
-		[](const DeferredRegion &Left, const DeferredRegion &Right) -> bool {
-			return Left.Fragment != Right.Fragment ? Left.Fragment < Right.Fragment : Left.Offset < Right.Offset;
-		}
-	);
-	std::string Out;
-	Out.reserve(Document.GetSize() + 1);
+	const std::span<const CommentInsertion> Insertions = Doc.GetComments().GetInsertions();
+	// 合成時に受理済の正確な長さと終端契約から確保量を取得
+	const size_t Size = Doc.GetSize();
+	const bool HasEnding = Size && (Code.GetEnding().DoesEndWithNewline || Fragments.empty());
+	std::string Output;
+	Output.reserve(Size + HasEnding);
 	// 次に出す割当
 	size_t Next = 0;
 	// 次に出す割当が断片の配置枠の種類かの判定
 	const auto IsNextAt = [&Insertions, &Next](const uint32_t Fragment, const CommentSlotKind Kind) -> bool {
 		// 割当を出し終えた場合の返戻
 		if(Next >= Insertions.size()) return false;
-		const CommentSlotId &Slot = Insertions[Next].Slot;
+		const CommentSlotId &Slot = Insertions[Next].GetSlot();
 		// 断片と種類の一致の返戻
 		return Slot.Fragment == Fragment && Slot.Kind == Kind;
 	};
 	// 次の割当のコメント行の列の追記（行の間だけに改行を置く）
-	const auto AppendNext = [&Out, &Insertions, &Next]() -> void {
+	const auto AppendNext = [&Output, &Insertions, &Next]() -> void {
 		bool IsFirst = true;
-		for(const std::string &Line : Insertions[Next++].Comment.GetLines()) {
-			if(!IsFirst) Out += '\n';
-			Out += Line;
+		for(const std::string &Line : Insertions[Next++].GetComment().GetLines()) {
+			if(!IsFirst) Output += '\n';
+			Output += Line;
 			IsFirst = false;
 		}
+		// 終了
+		return;
 	};
-	// 逐語の中から始まる行の番号と，其の数え終えた字面の位置
-	const std::vector<uint8_t> &VerbatimBreaks = Code.GetAnchors().VerbatimBreaks;
-	if(VerbatimLines) VerbatimLines->clear();
-	uint32_t Line = 0;
-	size_t Counted = 0, NextOwned = 0, NextDeferred = 0;
-	// 子の最終字面の行を，親の所属深さで出す
-	const auto AppendOwned = [&Out](const Core::OwnedRegion &Region, const uint32_t Depth) -> void {
-		const std::string_view Child = Region.Text;
-		uint32_t RowNumber = 0;
-		for(size_t Cursor = 0; Cursor < Child.size(); ++RowNumber) {
-			const size_t End = std::min(Child.find('\n', Cursor), Child.size());
-			const std::string_view Row(Child.data() + Cursor, End - Cursor);
-			if(RowNumber) Out += '\n';
-			if(!Row.empty() && !std::ranges::binary_search(Region.VerbatimLines, RowNumber)) Out.append(Depth, '\t');
-			Out.append(Row);
-			Cursor = End + 1;
-		}
-		if(Out.size() > MaxInputBytes) throw FormatLimitExceeded("output exceeds size limit");
-	};
-	for(uint32_t Index = 0; Index < Fragments.size(); ++Index) {
-		const CodeFragment &Fragment = Fragments[Index];
-		// 断片の区切りの改行
-		if(Index) Out += '\n';
-		// 行の前の独立したコメント（行を終える改行を添える）
-		while(IsNextAt(Index, CommentSlotKind::BeforeLine)) {
-			AppendNext();
-			Out += '\n';
-		}
-		if(NextOwned < Owned.size() && Owned[NextOwned].FirstFragment == Index) {
-			const OwnedRegionSpan &Span = Owned[NextOwned++];
-			const Core::OwnedRegion &Region = *Anchors.Syntax->RegionOf(Span.Node);
-			uint32_t Depth = Anchors.FragmentTabs[Index];
-			for(uint32_t Row = Index; Row < Span.EndFragment; ++Row) if(!Fragments[Row].IsBlank) {
-				Depth = Anchors.FragmentTabs[Row];
-				break;
-			}
-			AppendOwned(Region, Depth);
-			Index = Span.EndFragment - 1;
-			while(IsNextAt(Index, CommentSlotKind::LineEnd)) AppendNext();
-			while(IsNextAt(Index, CommentSlotKind::OwnLine)) {
-				Out += '\n';
-				AppendNext();
-			}
+	for(uint32_t Idx = 0; Idx < Fragments.size(); ++Idx) {
+		const CodeFragment &Fragment = Fragments[Idx];
+		// 断片の区切の改行
+		if(Idx) Output += '\n';
+		// 此の行の割当が無ければ，種類毎に同じ配置先を照合せずコード行だけを出す
+		if(Next == Insertions.size() || Insertions[Next].GetSlot().Fragment != Idx) {
+			Fragment.AppendTo(0, Fragment.End - Fragment.Start, Output);
 			continue;
 		}
-		// 前の断片が逐語の中の改行で終わる行（生成部分と逐語部分の区別，整形仕様 3.2）
-		if(VerbatimLines && Index && Index <= VerbatimBreaks.size() && VerbatimBreaks[Index - 1] & AnchorPositionMap::NextInVerbatim) {
-			Line += static_cast<uint32_t>(std::count(Out.begin() + static_cast<std::ptrdiff_t>(Counted), Out.end(), '\n'));
-			Counted = Out.size();
-			VerbatimLines->push_back(Line);
+		// 行の前の独立したコメント（行を終える改行を添える）
+		while(IsNextAt(Idx, CommentSlotKind::BeforeLine)) {
+			AppendNext();
+			Output += '\n';
 		}
 		// 文中のコメントを位置順に差し込んだコード行
 		uint32_t Copied = Fragment.Start;
-		while(IsNextAt(Index, CommentSlotKind::Inline) || NextDeferred < Deferred.size() && Deferred[NextDeferred].Fragment == Index) {
-			const bool IsDeferred = NextDeferred < Deferred.size() && Deferred[NextDeferred].Fragment == Index &&
-			(!IsNextAt(Index, CommentSlotKind::Inline) || Deferred[NextDeferred].Offset <= Insertions[Next].Slot.Offset);
-			const uint32_t Offset = IsDeferred ? Deferred[NextDeferred].Offset : Insertions[Next].Slot.Offset;
-			Out.append(Fragment.Text, Copied - Fragment.Start, Offset - Copied);
+		while(IsNextAt(Idx, CommentSlotKind::Inline)) {
+			const uint32_t Offset = Insertions[Next].GetSlot().Offset;
+			Fragment.AppendTo(Copied - Fragment.Start, Offset - Copied, Output);
 			Copied = Offset;
-			if(IsDeferred) {
-				const DeferredRegion &Region = Deferred[NextDeferred++];
-				Out += '\n';
-				AppendOwned(*Region.Region, Region.Depth);
-				if(Offset < Fragment.End) {
-					Out += '\n';
-					Out.append(Region.Depth - 1, '\t');
-				}
-			} else AppendNext();
+			AppendNext();
 		}
-		Out.append(Fragment.Text, Copied - Fragment.Start, Fragment.End - Copied);
+		Fragment.AppendTo(Copied - Fragment.Start, Fragment.End - Copied, Output);
 		// 行末のコメントと後の独立した行のコメント
-		while(IsNextAt(Index, CommentSlotKind::LineEnd)) AppendNext();
-		while(IsNextAt(Index, CommentSlotKind::OwnLine)) {
-			Out += '\n';
+		while(IsNextAt(Idx, CommentSlotKind::LineEnd)) AppendNext();
+		while(IsNextAt(Idx, CommentSlotKind::OwnLine)) {
+			Output += '\n';
 			AppendNext();
 		}
 	}
-	// 文書の末尾の独立した行のコメント
+	// ドキュメントの末尾の独立した行のコメント
 	while(Next < Insertions.size()) {
-		if(!Out.empty()) Out += '\n';
+		if(!Output.empty()) Output += '\n';
 		AppendNext();
 	}
 	// コードが空でもコメントの行を終える改行を出す終端契約（整形仕様 6.7）
-	if(!Out.empty() && (Code.GetEnding().EndsWithNewline || Fragments.empty())) Out += '\n';
-	// 最終字面の返戻
-	return Out;
+	if(HasEnding) Output += '\n';
+	// 最終テキストの返戻
+	return Output;
 }

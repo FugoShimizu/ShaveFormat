@@ -1,0 +1,40 @@
+<?php
+
+/**
+ * 連鎖の見出を保つ
+ */
+function f(): void {
+	while($a && $b) if($c) {
+		act($first_argument, $second_argument);
+	}
+	return;
+}
+
+/**
+ * 三段の見出を保つ
+ */
+function g(): void {
+	while($a) while($b) if($c) {
+		act($first_argument, $second_argument);
+	}
+	return;
+}
+
+ReceiverWithANameLongEnoughForScopeReferences
+::make();
+
+$property =
+ReceiverWithANameLongEnoughForScopeReferences
+::$value;
+
+$constant =
+ReceiverWithANameLongEnoughForScopeReferences
+::VALUE;
+
+$type =
+ReceiverWithANameLongEnoughForScopeReferences
+::class;
+
+$dynamic =
+$receiverWithANameLongEnoughForScopeReferences
+::VALUE;

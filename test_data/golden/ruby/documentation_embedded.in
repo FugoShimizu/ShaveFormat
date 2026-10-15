@@ -27,3 +27,32 @@ when /^=end/
   end
 end
 x = 1
+
+=begin
+Single line
+=end
+class C
+end
+=begin
+Module line
+=end
+module M
+end
+=begin
+Constant line
+=end
+Y = 2
+=begin
+Reader line
+=end
+attr_reader :a
+=begin first
+Body
+=end last
+class Edges
+end
+=begin
+???
+=end
+class Symbols
+end

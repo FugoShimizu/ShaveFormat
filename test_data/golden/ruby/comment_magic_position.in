@@ -1,3 +1,7 @@
 # frozen_string_literal: true
 x = 1
 # frozen_string_literal: 説明。二文目
+# frozen_string_literal: false
+y = 1
+# frozen_string_literal: 説明。二文目 です
+z = 1

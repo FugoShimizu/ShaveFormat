@@ -1,8 +1,0 @@
-/**
- * 呼ぶ
- */
-void F() {
-	// @brief x
-	G();
-	return;
-}

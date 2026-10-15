@@ -1,3 +1,55 @@
 2:2: Violation: Documentation is missing a summary
-9:10: Violation: Documentation is missing a return-value description
-9:22: Violation: Documentation is missing a description for parameter 'a'
+11:10: Violation: Documentation is missing a return-value description
+11:22: Violation: Documentation is missing a description for parameter 'a'
+78:9: Violation: Documentation is missing a return-value description
+78:23: Violation: Documentation is missing a description for parameter 'x'
+88:9: Violation: Documentation is missing a return-value description
+88:24: Violation: Documentation is missing a description for parameter 'x'
+97:9: Violation: Documentation is missing a return-value description
+97:29: Violation: Documentation is missing a description for parameter 'x'
+101:2: Violation: Documentation is missing a summary
+105:2: Violation: Documentation is missing a summary
+109:2: Violation: Documentation is missing a summary
+113:2: Violation: Documentation is missing a summary
+120:2: Violation: Documentation is missing a summary
+125:2: Violation: Documentation is missing a return-value description
+125:21: Violation: Documentation is missing a description for parameter 'x'
+129:2: Violation: Documentation is missing a summary
+134:2: Violation: Documentation is missing a return-value description
+134:21: Violation: Documentation is missing a description for parameter 'x'
+138:2: Violation: Documentation is missing a summary
+143:2: Violation: Documentation is missing a return-value description
+143:23: Violation: Documentation is missing a description for parameter 'x'
+147:2: Violation: Documentation is missing a summary
+152:2: Violation: Documentation is missing a return-value description
+152:22: Violation: Documentation is missing a description for parameter 'x'
+156:2: Violation: Documentation is missing a summary
+161:2: Violation: Documentation is missing a return-value description
+161:20: Violation: Documentation is missing a description for parameter 'x'
+165:2: Violation: Documentation is missing a summary
+170:2: Violation: Documentation is missing a return-value description
+170:21: Violation: Documentation is missing a description for parameter 'x'
+174:2: Violation: Documentation is missing a summary
+179:2: Violation: Documentation is missing a return-value description
+179:20: Violation: Documentation is missing a description for parameter 'x'
+183:2: Violation: Documentation is missing a summary
+188:2: Violation: Documentation is missing a return-value description
+188:21: Violation: Documentation is missing a description for parameter 'x'
+192:2: Violation: Documentation is missing a summary
+200:2: Violation: Documentation is missing a return-value description
+200:22: Violation: Documentation is missing a description for parameter 'x'
+204:2: Violation: Documentation is missing a summary
+215:2: Violation: Documentation is missing a return-value description
+215:24: Violation: Documentation is missing a description for parameter 'x'
+219:2: Violation: Documentation is missing a summary
+227:2: Violation: Documentation is missing a return-value description
+227:21: Violation: Documentation is missing a description for parameter 'x'
+231:2: Violation: Documentation is missing a summary
+239:2: Violation: Documentation is missing a return-value description
+239:21: Violation: Documentation is missing a description for parameter 'x'
+243:2: Violation: Documentation is missing a summary
+254:2: Violation: Documentation is missing a return-value description
+254:22: Violation: Documentation is missing a description for parameter 'x'
+258:2: Violation: Documentation is missing a summary
+263:2: Violation: Documentation is missing a return-value description
+263:25: Violation: Documentation is missing a description for parameter 'x'

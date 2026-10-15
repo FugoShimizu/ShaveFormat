@@ -1,7 +1,6 @@
-int(*p);
-int(*a)[3];
-int(*q) = 0;
-
+int (*p);
+int (*a)[3];
+int (*q) = 0;
 int (*fp)(int);
 int (*gp)(int) = 0;
 
@@ -15,11 +14,184 @@ struct S {
  * @param h
  */
 void g(int x, int (*h)(int)) {
-	int (*r)(int) = h;
-	int y = x++;
+	int (*r)(int) = h, y = x++;
 	--x;
 	int z = x++ + y;
 	(void)r;
 	(void)z;
+	return;
+}
+
+/**
+ *
+ * @param IsFlag
+ * @param Left
+ * @param Right
+ */
+void Bind(bool IsFlag, int Left, int Right) {
+	int (&Reference) = IsFlag ? Left : Right;
+	Reference = 1;
+	return;
+}
+
+/**
+ *
+ * @param Left
+ * @param Right
+ */
+void Shadow(int Left, int Right) {
+	{
+		int (&Left) = Right;
+		Left = 1;
+	}
+	Consume(Left);
+	return;
+}
+
+typedef int Element;
+
+Element (*TypedPointer);
+Element (*TypedArray)[3];
+Element (*InitializedPointer) = 0;
+int (*EmptyFunction)();
+int (*InitializedFunction)() = nullptr;
+
+/**
+ *
+ */
+void RepairedFirst() {
+	int (*First), Second;
+	return;
+}
+
+/**
+ *
+ */
+void RepairedSecond() {
+	int First, (*Second);
+	return;
+}
+
+/**
+ *
+ */
+void SharedParentheses() {
+	int (First), (Second);
+	return;
+}
+
+/**
+ *
+ */
+void SharedArray() {
+	int (First)[2], Second;
+	return;
+}
+
+/**
+ *
+ * @param Value
+ */
+void SharedReference(int Value) {
+	int (&Reference) = Value, Other;
+	return;
+}
+
+/**
+ *
+ */
+void ReboundValue() {
+	int (Value) = 1;
+	Value * Other;
+	return;
+}
+
+/**
+ *
+ */
+void DeducedPointers() {
+	auto *Pointer = &Value;
+	Pointer * Value;
+	decltype(Value) *Other = &Value;
+	Other * Value;
+	return;
+}
+
+/**
+ *
+ */
+void ReferenceBindings() {
+	auto &[First, Second] = Pair();
+	First * Second;
+	auto &&[Left, Right] = Pair();
+	Left < Right > Value;
+	return;
+}
+
+/**
+ *
+ */
+void ShadowCatch() {
+	int Index = 0;
+	try {
+		Work();
+	} catch(Iterator &Index) {
+		Index++;
+	}
+	return;
+}
+
+/**
+ *
+ */
+void ShadowCondition() {
+	int Index = 0;
+	if(Iterator Index = Read(); true) Index++;
+	while(Iterator Index = Read()) Index++;
+	return;
+}
+
+/**
+ *
+ */
+void ShadowTuple() {
+	int Second = 0;
+	{
+		auto [First, Second] = Pair();
+		Second++;
+	}
+	return;
+}
+
+/**
+ *
+ */
+void ShadowAlias() {
+	size_t Value;
+	Value++;
+	return;
+}
+
+/**
+ *
+ */
+void InitializerScope() {
+	int Index = 0;
+	{
+		Iterator Index = (Index++, Read());
+	}
+	++Index;
+	return;
+}
+
+/**
+ *
+ */
+void LaterDeclarator() {
+	Iterator Index;
+	{
+		int Value = (Index++, 1), Index = 0;
+		++Index;
+	}
 	return;
 }

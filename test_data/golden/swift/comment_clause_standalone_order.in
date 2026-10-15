@@ -1,9 +1,0 @@
-func f() {
-	if c {
-		g()
-	} // d1
-	// own
-	else {
-		h()
-	}
-}

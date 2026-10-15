@@ -1,0 +1,339 @@
+class Registry {
+	/**
+	 *
+	 * @return
+	 */
+	[
+		someConfigurationObject.namespaceIdentifierWithAVeryLongName + someConfigurationObject.featureIdentifierWithAVeryLongName + "x"
+	]() {
+		return 3;
+	}
+
+	/**
+	 * note
+	 * @return
+	 */
+	[k]() {
+		return 4;
+	}
+}
+
+/**
+ * === rule_docgen_generate ===
+ * @param a
+ * @param b
+ * @return
+ */
+function add(a, b) {
+	return a + b;
+}
+
+/**
+ *
+ * @param message
+ */
+function logMessage(message) {
+	console.log(message);
+	return;
+}
+
+class Widget {
+	/**
+	 *
+	 * @param id
+	 */
+	constructor(id) {
+		this.id = id;
+		return;
+	}
+
+	/**
+	 *
+	 * @param key
+	 * @return
+	 */
+	find(key) {
+		return this.lookup(key);
+	}
+}
+
+/**
+ * === rule_docgen_reconcile ===
+ * 合計を求める
+ * @param a 第一項
+ * @param b
+ * @param c
+ * @param obsolete 余分な引数
+ * @return 合計
+ */
+function total(a, b, c) {
+	return a + b + c;
+}
+
+/**
+ *
+ * @return
+ */
+function h() {
+	const a = 1, b = 2; // x // b
+	/**
+	 *
+	 * @param p
+	 * @return
+	 */
+	function g(p) {
+		return p;
+	}
+	return g(a + b);
+}
+
+/**
+ * 生成する
+ * @return 生成物
+ */
+function make() {
+	// 生成物の返戻
+	return {
+		/**
+		 * 名前を返す
+		 * @return 名前
+		 */
+		name() {
+			// 名前の返戻
+			return "x";
+		}
+	};
+}
+
+const object = {
+	/**
+	 *
+	 * @param x
+	 * @return
+	 */
+	m(x) {
+		return x;
+	}
+};
+
+/**
+ * 設定する
+ * @param {Object} opts 設定
+ * @param {string} opts.name 名前
+ * @param {number} [count=1] 回数
+ * @param {number} step 刻み
+ * @return{number} 結果
+ */
+function set(opts, count, step) {
+	return count;
+}
+
+/**
+ * Overloaded
+ * @param value outer input
+ * @return outer result
+ * @overload
+ * @param {string} text
+ * @return {string}
+ * ```
+ * @returns example
+ * ```
+ * @overload
+ * @param {number} count inner input
+ * @return {number} inner result
+ */
+function overloaded(value) {
+	return value;
+}
+
+/**
+ * 面積
+ * 幅
+ * TODO: 単位
+ * @param w
+ * @param h
+ * @return
+ */
+function area(w, h) {
+	return w * h;
+}
+
+/**
+ * First
+ * Second
+ * @param a Alpha
+ * @return
+ */
+function docBoundary(a) {
+	return a;
+}
+
+/**
+ * Summary
+ * @param {{x: number}} opts Options
+ */
+function nestedRecord(opts) {}
+/**
+ * Summary
+ * @param {{x: number}} opts Options
+ */
+function nestedAlias(opts) {}
+/**
+ * Summary
+ * @param {Array<{x: number}>} opts Options
+ */
+function nestedArray(opts) {}
+/**
+ * Summary
+ * @param {function({x: number}): void} opts Options
+ */
+function nestedFunction(opts) {}
+/**
+ * Summary
+ * @param {{x: "}"}} opts Options
+ */
+function nestedQuote(opts) {}
+/**
+ * Summary
+ * @param {{x: "\"}"}} opts Options
+ */
+function escapedQuote(opts) {}
+
+/**
+ * Summary
+ * @param a A
+ * @param b B
+ * @return
+ */ function inlineOrder(a, b) {
+	return a + b;
+}
+
+function /**
+ * Hello
+ * @param a
+ * @return
+ */ inlineFrame(a) {
+	return a;
+}
+
+/**
+ * A
+ * ========== X ==========
+ * B
+ * @param a A value
+ * @param b B value
+ * @return
+ */
+function sectionDocs(a, b) {
+	return a + b;
+}
+
+/**
+ * A
+ * ========== X ==========
+ * B
+ */
+function trailing() {}
+
+/**
+ * Summary
+ * @param [out] Value
+ * @return
+ */
+function optionalOut(out) {
+	return out;
+}
+
+/**
+ * Summary
+ * @param [inout] Alpha，和文
+ * @return
+ */
+function optionalInout(inout) {
+	return inout;
+}
+
+/**
+ * Summary
+ * @param out Value
+ * @return Result
+ */
+function registeredAlias(out) {
+	return out;
+}
+
+/**
+ * \@param Ghost
+ * @param x
+ * @return
+ */
+function literalTag(x) {
+	return x;
+}
+
+/**
+ * @summary Only Summary
+ * @return
+ */
+function shortSummary() {
+	return 1;
+}
+
+/**
+ * Card
+ * @param {Object} props Properties
+ * @return {string} Title
+ */
+function card({ title, body }) {
+	return title;
+}
+
+/**
+ * Card properties
+ * @param {Object} props Properties
+ * @param {string} props.title Title
+ * @param {string} props.body Body
+ * @return {string} Title
+ */
+function cardProperties({ title, body }) {
+	return title;
+}
+
+/**
+ * Named root
+ * @param {Object} root0 Properties
+ * @param {string} root0.title Title
+ * @return {string} Title
+ */
+function namedRoot({ title, body }) {
+	return title;
+}
+
+/**
+ * Multiple parameters
+ * @param prefix Prefix
+ * @param {Object} props Properties
+ * @param {string} props.key Value
+ * @param {Array} entries Entries
+ * @return Result
+ */
+function multipleParameters(prefix, { key: value }, [tail]) {
+	return prefix + value + tail;
+}
+
+/**
+ * Header description
+ */
+class Header {
+	value = 1;
+}
+
+/**
+ * @description Adds
+ * @param a First
+ * @return Sum
+ * @returns: Literal tag
+ */
+function taggedSummary(a) {
+	return a;
+}

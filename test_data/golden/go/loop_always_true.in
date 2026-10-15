@@ -5,3 +5,34 @@ func f() {
 		g()
 	}
 }
+
+// emptyClause
+func emptyClause() {
+ for ; ; {
+  g()
+ }
+}
+
+// shadowParam
+func shadowParam(true bool) int {
+ n:=0
+ for true { n++; break }
+ return n
+}
+
+// shadowShort
+func shadowShort() int {
+ true:=false
+ n:=0
+ for true { n++; break }
+ return n
+}
+
+// shadowFalse
+func shadowFalse(false bool) bool { return false }
+
+// localScope
+func localScope() {
+ if true:=false; true { for true { break } }
+ for true { break }
+}
